@@ -17,7 +17,7 @@ export default new Router({
     },
     {
       // 个人中心
-      path: '/personal',
+      path: '/personal/:obj',
       name: 'personal',
       component: personal
     },
