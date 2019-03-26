@@ -16,6 +16,10 @@ export default {
             Personal:"我是个人中心"
         }
     },
+    created() {
+         this.routeParams = JSON.parse(this.$route.params.obj)
+         console.log(  this.routeParams )
+    },
     methods: {
         goToHome:function(){
 
