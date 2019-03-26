@@ -1,33 +1,29 @@
 <template>
-    <div>
-   <mt-header title="我的">
-      <router-link to="/" slot="left">
-        <mt-button icon="back">返回</mt-button>
-      </router-link>
-      <mt-button icon="more" slot="right"></mt-button>
-    </mt-header>
-    </div>
+  <div>
+    <x-header :right-options="{showMore: true}" @on-click-more="showMenus = true">我的</x-header>
+  </div>
 </template>
 <script>
+import { XHeader} from "vux";
 export default {
-    name:'personal',
-    data () {
-        return {
-            Personal:"我是个人中心"
-        }
-    },
-    created() {
-         this.routeParams = JSON.parse(this.$route.params.obj)
-         console.log(  this.routeParams )
-    },
-    methods: {
-        goToHome:function(){
-
-        }
-    },
-}
+  components: {
+    XHeader
+  },
+  name: "personal",
+  data() {
+    return {
+     
+    };
+  },
+  created() {
+    this.routeParams = JSON.parse(this.$route.params.obj);
+    console.log(this.routeParams);
+  },
+  methods: {
+    goToHome: function() {}
+  }
+};
 </script>
 <style scoped>
-    
 </style>
 

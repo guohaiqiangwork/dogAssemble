@@ -1,9 +1,8 @@
 import axios from 'axios'
-import MintUI from 'mint-ui'
 const config = require('../config/config.dev')
 // 创建axios实例
 const options = {
-  baseURL: 'http://192.168.1.39:8080/weChat',
+  baseURL: '/',
   timeout: 300000
 
 }
