@@ -6,10 +6,12 @@ import router from './router'
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 import fetch from "./bin/fetch";
+import  wxapi from "./bin/wxapi"
 
 Vue.config.productionTip = false
 Vue.use(MintUI);
 Vue.prototype.$fetch = fetch;
+Vue.prototype.wxapi = wxapi;
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
