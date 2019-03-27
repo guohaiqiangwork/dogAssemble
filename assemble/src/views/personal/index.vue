@@ -16,6 +16,7 @@ export default {
     };
   },
   created() {
+       settitle('我的')
     this.routeParams = JSON.parse(this.$route.params.obj);
     console.log(this.routeParams);
   },
