@@ -9,7 +9,7 @@ function resolve (dir) {
 }
  
  
- 
+const webpack = require('webpack')
 const vuxLoader = require('vux-loader')
 const webpackConfig = {
   context: path.resolve(__dirname, '../'),
@@ -30,6 +30,15 @@ const webpackConfig = {
       '@': resolve('src'),
     }
   },
+  // 添加代码
+plugins: [
+  new webpack.ProvidePlugin({
+    $: "jquery",
+    jQuery: "jquery",
+    jquery: "jquery",
+    "window.jQuery": "jquery"
+  })
+],
   module: {
     rules: [
       {

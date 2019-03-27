@@ -12,6 +12,7 @@ export default new Router({
   
     {
       path: '/',
+      // redirect:'', 指向组件
       name: 'home',
       meta: {
         title: '首页', //重点在meta的这里，其他的都是例子的
