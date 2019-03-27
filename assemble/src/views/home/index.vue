@@ -2,14 +2,14 @@
   <div>
     <!--  -->
     <x-header :right-options="{showMore: true}" @on-click-more="showMenus = true">首页</x-header>
-    <div  @click="goToPersonal"> 去我的</div>
+    <div @click="goToPersonal">去我的</div>
     <div @click="goToAssemble">去拼团</div>
   </div>
 </template>
 <script>
 import url from "../../bin/url";
 // 引入 vux tabbar 组件
-import { XHeader} from "vux";
+import { XHeader } from "vux";
 export default {
   components: {
     XHeader
@@ -24,7 +24,7 @@ export default {
   methods: {
     //   去个人中心
     goToPersonal(id) {
-      console.log(id)
+      console.log(id);
       this.$router.push({
         name: "personal",
         params: {
@@ -39,7 +39,6 @@ export default {
     },
     //   去拼团
     goToAssemble(id) {
-      alert('7897')
       this.$router.push({
         name: "Assemble",
         params: {
@@ -54,6 +53,7 @@ export default {
     }
   },
   created() {
+    settitle('我是调试页')
     // this.getCode();
   },
 

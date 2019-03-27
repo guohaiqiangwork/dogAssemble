@@ -40,6 +40,7 @@ export default {
     };
   },
   created() {
+        settitle('拼团')
     // this.getCode();
   },
   methods: {
@@ -129,10 +130,30 @@ export default {
     }
   },
   mounted() {
+    let that = this;
+    // 添加返回事件监听
+    window.addEventListener("popstate", function(e) {
+      that.isShowTestDiv = false;
+    }, false);
     // console.log(url);
     // console.log(this.$fetch);
     // this.wxapi.wxRegister(this.wxRegCallback);
-  }
+  },
+   watch: {
+    isShowTestDiv: function(newVal, oldVal) {
+      console.log(newVal)
+      if (newVal === true) {
+        this.pushHistory();
+      }
+    }
+  },
+    pushHistory() { // 修改history
+      var state = {
+        title: "",
+        url: "/two" // 这个url可以随便填，只是为了不让浏览器显示的url地址发生变化，对页面其实无影响
+      };
+      window.history.pushState(state, state.title, state.url);
+    },
 };
 </script>
 <style scoped>

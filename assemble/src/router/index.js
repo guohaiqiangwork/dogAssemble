@@ -13,18 +13,27 @@ export default new Router({
     {
       path: '/',
       name: 'home',
+      meta: {
+        title: '首页', //重点在meta的这里，其他的都是例子的
+      },
       component: home
     },
     {
       // 个人中心
       path: '/personal/:obj',
       name: 'personal',
+      meta: {
+        title: '我的', //重点在meta的这里，其他的都是例子的
+      },
       component: personal
     },
     {
       // 拼团
       path: '/Assemble/:obj',
       name: 'Assemble',
+      meta: {
+        title: '拼团', //重点在meta的这里，其他的都是例子的
+      },
       component: Assemble
     },
     {
