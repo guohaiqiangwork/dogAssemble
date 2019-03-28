@@ -1,7 +1,7 @@
 <template>
   <div>
     <!--  -->
-    <x-header :right-options="{showMore: true}" @on-click-more="showMenus = true">首页</x-header>
+    <!-- <x-header :right-options="{showMore: true}" @on-click-more="showMenus = true">首页</x-header> -->
     <div @click="goToPersonal">去我的</div>
     <div @click="goToAssemble">去拼团</div>
   </div>

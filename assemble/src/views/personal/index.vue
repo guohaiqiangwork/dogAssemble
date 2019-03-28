@@ -1,6 +1,6 @@
 <template>
   <div>
-    <x-header :right-options="{showMore: true}" @on-click-more="showMenus = true">我的</x-header>
+    <!-- <x-header :right-options="{showMore: true}" @on-click-more="showMenus = true">我的</x-header> -->
   </div>
 </template>
 <script>

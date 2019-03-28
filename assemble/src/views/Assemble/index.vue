@@ -1,11 +1,12 @@
 <template>
   <div>
-      <x-header :right-options="{showMore: true}" @on-click-more="showMenus = true">拼团</x-header>
+      <!-- <x-header :right-options="{showMore: true}" @on-click-more="showMenus = true">拼团</x-header> -->
     <!--  -->
     <div type="primary" @click="goToPersonal">去我的</div>
     <div type="primary" @click="getList">获取数据</div>
     <!-- 货物详情 -->
     <div>
+      <div class="click" @click="downApp">点击触发</div>
       <div>您已拼团成功，我们会尽快安排发货</div>
       <div style="display: flex">
         <div class="assemble_div_w">
@@ -44,6 +45,15 @@ export default {
     // this.getCode();
   },
   methods: {
+    downApp() {
+        let ua = navigator.userAgent.toLowerCase();
+         let isAndroid = ua.indexOf('Android') > -1 || ua.indexOf('Adr') > -1;  
+　　   //Ios终端
+        let isiOS = !!ua.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); 
+console.log(ua)
+       console.log(isAndroid)
+       console.log(isiOS)
+  },
     //   去个人中心
     goToPersonal(id) {
       this.$router.push({
@@ -130,10 +140,8 @@ export default {
     }
   },
   mounted() {
-
     // console.log(url);
     // console.log(this.$fetch);
-    // this.wxapi.wxRegister(this.wxRegCallback);
   },
 };
 </script>
