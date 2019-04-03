@@ -6,10 +6,11 @@ import router from './router'
 import fetch from "./bin/fetch";
 import  wxapi from "./bin/wxapi"
 import settitle from "./assets/Tool/settitle"
+import "./assets/css/public.css"
 Vue.config.productionTip = false
 Vue.prototype.$fetch = fetch;
 Vue.prototype.wxapi = wxapi;
-window.settitle = settitle
+window.settitle = settitle;
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

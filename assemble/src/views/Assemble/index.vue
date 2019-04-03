@@ -1,12 +1,18 @@
 <template>
   <div>
-      <!-- <x-header :right-options="{showMore: true}" @on-click-more="showMenus = true">拼团</x-header> -->
-    <!--  -->
-    <div type="primary" @click="goToPersonal">去我的</div>
-    <div type="primary" @click="getList">获取数据</div>
+    <!-- <div type="primary" @click="goToPersonal">去我的</div>
+    <div type="primary" @click="getList">获取数据</div>-->
+    <!-- 头部 -->
+    <div class="div_display_flex" style="margin-left: 11%;margin-top:3%">
+      <div class="div_left_border"></div>
+      <div>距结束</div>
+      <div class="div_left_border"></div>
+    </div>
+    <!-- 倒计时 -->
+  
     <!-- 货物详情 -->
-    <div>
-      <div class="click" @click="downApp">点击触发</div>
+
+    <!-- <div class="click" @click="downApp">点击触发</div>
       <div>您已拼团成功，我们会尽快安排发货</div>
       <div style="display: flex">
         <div class="assemble_div_w">
@@ -21,17 +27,17 @@
           <div>待发货</div>
           <div>*22</div>
         </div>
-      </div>
-    </div>
+    </div>-->
+    <!-- </div> -->
     <!-- 弹窗内容 -->
- 
   </div>
 </template>
 <script>
 import url from "../../bin/url";
-import { XHeader} from "vux";
+import { XHeader } from "vux";
+
 export default {
-   components: {
+  components: {
     XHeader
   },
   name: "Assemble",
@@ -41,19 +47,18 @@ export default {
     };
   },
   created() {
-        settitle('拼团')
+    settitle("拼团");
     // this.getCode();
   },
   methods: {
     downApp() {
-        let ua = navigator.userAgent.toLowerCase();
-         let isAndroid = ua.indexOf('Android') > -1 || ua.indexOf('Adr') > -1;  
-　　   //Ios终端
-        let isiOS = !!ua.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); 
-console.log(ua)
-       console.log(isAndroid)
-       console.log(isiOS)
-  },
+      let ua = navigator.userAgent.toLowerCase();
+      let isAndroid = ua.indexOf("Android") > -1 || ua.indexOf("Adr") > -1; //Ios终端
+      let isiOS = !!ua.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+      console.log(ua);
+      console.log(isAndroid);
+      console.log(isiOS);
+    },
     //   去个人中心
     goToPersonal(id) {
       this.$router.push({
@@ -137,20 +142,26 @@ console.log(ua)
       };
       // 将配置注入通用方法
       this.ShareTimeline(opstion);
-    }
+    } 
   },
   mounted() {
     // console.log(url);
     // console.log(this.$fetch);
-  },
+  }
 };
 </script>
 <style scoped>
-.model_width {
+/* .model_width {
   width: 80%;
   height: 40%;
 }
 .assemble_div_w{
   width: 32%;
+} */
+.div_left_border {
+  width: 22%;
+  border-top: 1px solid red;
+  height: 1px;
+  margin: 3% 8% 0 8%;
 }
 </style>
