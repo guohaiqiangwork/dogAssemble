@@ -33,7 +33,7 @@
           <span style="text-decoration:line-through">{{item.money}}</span>
         </div>
         <div>
-          <div class="assemble_specifications">选择规格</div>
+          <div class="assemble_specifications" @click="open_model">选择规格</div>
         </div>
       </div>
     </div>
@@ -52,17 +52,68 @@
       <div class="assemble_buttom_buy">去拼团</div>
     </div>
     <!-- <div class="click" @click="downApp">点击触发</div>-->
+    <!-- 弹出层 -->
+    <div v-transfer-dom>
+      <x-dialog
+        v-model="showDialogStyle"
+        hide-on-blur
+        :dialog-style="{'max-width': '100%', width: '100%', height: '50%', 'background-color': 'transparent'}"
+      >
+        <!-- <p style="color:#fff;text-align:center;" @click="showDialogStyle = false">
+          <span style="font-size:30px;">HELLO WORLD</span>
+          <br>
+          <br>
+          <x-icon type="ios-close-outline" style="fill:#fff;"></x-icon>
+        </p>-->
+        <div class="model_background_width">
+          <div>商品名称</div>
+          <div>
+            <div>规格一</div>
+            <div>
+              <span class="model_border_button">牛肉味</span>
+              <span class="model_border_button">牛肉味</span>
+              <span class="model_border_button">牛肉味</span>
+              <span class="model_border_button">牛肉味</span>
+            </div>
+            <div class="mode_button_border"></div>
+          </div>
+          <div class="div_display_flex">
+            <div>
+              <span>700.00</span>
+              <span style="text-decoration:line-through">900.00</span>
+            </div>
+            <div>
+              <div class="assemble_specifications">+加入购物车</div>
+            </div>
+          </div>
+        </div>
+      </x-dialog>
+    </div>
   </div>
 </template>
 <script>
 import url from "../../bin/url";
 import { XHeader } from "vux";
+import {
+  XDialog,
+  XButton,
+  Group,
+  XSwitch,
+  TransferDomDirective as TransferDom
+} from "vux";
 import countdown from "./time";
 
 export default {
+  directives: {
+    TransferDom
+  },
   components: {
     XHeader,
-    countdown
+    countdown,
+    XDialog,
+    XButton,
+    Group,
+    XSwitch
   },
   name: "Assemble",
   data() {
@@ -76,7 +127,8 @@ export default {
         { name: "天人计海鱼狗粮", prict: "300", money: "1000.00" },
         { name: "天人计海鱼狗粮", prict: "300", money: "1000.00" },
         { name: "全期深海鱼狗粮", prict: "1000", money: "400.00" }
-      ]
+      ],
+      showDialogStyle: false
     };
   },
   created() {
@@ -87,6 +139,10 @@ export default {
     // 倒计时回调函数
     callback(id) {
       console.log(id);
+    },
+    // 打开弹窗
+    open_model() {
+      this.showDialogStyle = true;
     },
     // 检测机型
     downApp() {
@@ -235,9 +291,29 @@ export default {
   line-height: 5;
   width: 30%;
 }
-.assemble_buttom_div{
-      position: fixed;
-      bottom: 0;
-      width: 100%
+.assemble_buttom_div {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+.model_border_button {
+  width: 50px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+  border: 1px solid;
+}
+.model_background_width {
+  background-color: #fff;
+  width: 95%;
+  margin-left: 2%;
+  border-radius: 8px;
+}
+.mode_button_border {
+  border-top: 1px solid #333;
+  width: 95%;
+  margin-left: 2%;
+  margin-top: 8%;
+  margin-bottom: 8%;
 }
 </style>
