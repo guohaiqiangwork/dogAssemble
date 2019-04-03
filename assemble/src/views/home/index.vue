@@ -1,9 +1,8 @@
 <template>
   <div>
-    <!--  -->
     <!-- <x-header :right-options="{showMore: true}" @on-click-more="showMenus = true">首页</x-header> -->
     <div @click="goToPersonal">去我的</div>
-    <div @click="goToAssemble">去拼团</div>
+    <div @click="getData">去拼团</div>
   </div>
 </template>
 <script>
@@ -22,6 +21,18 @@ export default {
     };
   },
   methods: {
+    getData () { 
+    var self = this 
+    $.ajax({ 
+      url: 'http://f.apiplus.cn/bj11x5.json', 
+      type: 'GET', 
+      dataType: 'JSONP', 
+      success: function (res) { 
+        self.data = res.data.slice(0, 3) 
+        self.opencode = res.data[0].opencode.split(',') 
+      } 
+    }) 
+  } ,
     //   去个人中心
     goToPersonal(id) {
       console.log(id);
