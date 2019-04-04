@@ -33,6 +33,9 @@
       style="margin-top:2%"
       v-for="(item,index) in lists"
     >
+    <!-- 产品内容 -->
+    <div @click="goToProduct" class="div_display_flex">
+      <!-- 产品图片 -->
       <div class="assemble_list_div">
         <img src="../../assets/logo.png" width="85%">
       </div>
@@ -65,6 +68,7 @@
           </div>
         </div>
       </div>
+       </div>
     </div>
     <!-- 购买 -->
     <div class="div_display_flex backgroun_color_fff assemble_buttom_div">
@@ -122,6 +126,19 @@
           </div>
         </div>
       </x-dialog>
+    </div>
+    <!-- 产品详情 -->
+    <div v-if="ProductFalg">
+      <!-- 标题 -->
+        <div class="div_display_flex" style="margin-left: 11%;padding-top:3%">
+        <div class="div_left_border"></div>
+        <div>产品详情</div>
+        <div class="div_left_border"></div>
+      </div>
+      <!--内容  -->
+      <div>
+        <img src="../../assets/logo.png" alt="">
+      </div>
     </div>
   </div>
 </template>
@@ -185,7 +202,8 @@ export default {
       showDialogStyle: false, //弹窗
       buyFalge: "", //样式
       showPrise: 99999, //显示购物数量
-      flag: false
+      flag: false,
+      ProductFalg:false//产品详情
     };
   },
   created() {
@@ -209,7 +227,12 @@ export default {
     afterEnter(el) {
       this.flag = !this.flag;
     },
-    // 倒计时回调函数
+    // 展示详情
+    goToProduct(id){
+      console.log(id)
+      // 获取详情接口
+    }, 
+     // 倒计时回调函数
     callback(id) {
       console.log(id);
     },
