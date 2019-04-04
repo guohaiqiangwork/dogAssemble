@@ -24,7 +24,9 @@
         <div class="header_border_circular"></div>
         <div class="header_border_circular"></div>
         <div class="header_border_circular"></div>
-        <div class="header_border_circular"></div>
+        <div class="header_border_circular" @click="goToOrder">
+          <img src="../../assets/logo.png" style="width:80%">
+        </div>
       </div>
     </div>
     <!-- 产品列表 -->
@@ -232,6 +234,20 @@ export default {
       console.log(id)
       // 获取详情接口
     }, 
+    // 去订单
+    goToOrder(){
+      this.$router.push({
+        name: "order",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: "我就是参数"
+            }
+          })
+        }
+      });
+    },
      // 倒计时回调函数
     callback(id) {
       console.log(id);
