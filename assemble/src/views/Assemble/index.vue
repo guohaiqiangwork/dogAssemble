@@ -3,6 +3,12 @@
     <!-- <div type="primary" @click="goToPersonal">去我的</div>
     <div type="primary" @click="getList">获取数据</div>-->
     <!-- 头部 -->
+
+    <input type="button" value="点我加入购物车" @click="flag=!flag">
+    <transition @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
+      <p class="circle" v-show="flag"></p>
+    </transition>
+
     <div class="backgroun_color_fff">
       <div class="div_display_flex" style="margin-left: 11%;padding-top:3%">
         <div class="div_left_border"></div>
@@ -22,7 +28,11 @@
       </div>
     </div>
     <!-- 产品列表 -->
-    <div class="div_display_flex backgroun_color_fff" style="margin-top:2%" v-for="item in lists">
+    <div
+      class="div_display_flex backgroun_color_fff"
+      style="margin-top:2%"
+      v-for="(item,index) in lists"
+    >
       <div class="assemble_list_div">
         <img src="../../assets/logo.png" width="85%">
       </div>
@@ -34,6 +44,25 @@
         </div>
         <div>
           <div class="assemble_specifications" @click="open_model">选择规格</div>
+          <!-- 点击添加 -->
+          <div class="buy_circular" v-if="showPrise != index" @click="assemble_buy_plus(index)">+</div>
+          <!-- 购买数量 -->
+          <div class="div_display_flex buy_circular_div" v-if="showPrise == index">
+            <div
+              class="buy_circular"
+              :class="{back_color :buyFalge==2 }"
+              @click="buy_minute(2,index)"
+            >-</div>
+            <div style="width:30px;    text-align: center;line-height:2">
+              <!-- <input class="input" v-model="item.buyNumber"> -->
+              {{item.buyNumber}}
+            </div>
+            <div
+              class="buy_circular"
+              :class="{ back_color :buyFalge==1 }"
+              @click="buyAdd(1,index)"
+            >+</div>
+          </div>
         </div>
       </div>
     </div>
@@ -68,8 +97,8 @@
         <div class="model_background_width">
           <div>商品名称</div>
           <div>
-            <div>规格一</div>
-            <div>
+            <div class="div_text_left">规格一</div>
+            <div class="div_text_left">
               <span class="model_border_button">牛肉味</span>
               <span class="model_border_button">牛肉味</span>
               <span class="model_border_button">牛肉味</span>
@@ -84,6 +113,11 @@
             </div>
             <div>
               <div class="assemble_specifications">+加入购物车</div>
+              <div>
+                <div>-</div>
+                <!-- {{number}} -->
+                <div>+</div>
+              </div>
             </div>
           </div>
         </div>
@@ -93,14 +127,7 @@
 </template>
 <script>
 import url from "../../bin/url";
-import { XHeader } from "vux";
-import {
-  XDialog,
-  XButton,
-  Group,
-  XSwitch,
-  TransferDomDirective as TransferDom
-} from "vux";
+import { XHeader, XDialog, TransferDomDirective as TransferDom } from "vux";
 import countdown from "./time";
 
 export default {
@@ -110,10 +137,7 @@ export default {
   components: {
     XHeader,
     countdown,
-    XDialog,
-    XButton,
-    Group,
-    XSwitch
+    XDialog
   },
   name: "Assemble",
   data() {
@@ -121,14 +145,47 @@ export default {
       popupVisible: false,
       time: "1554291380",
       lists: [
-        { name: "天人计划全期深海鱼狗粮", prict: "700", money: "900.00" },
-        { name: "天人计海鱼狗粮", prict: "300", money: "1000.00" },
-        { name: "天人计海鱼狗粮", prict: "300", money: "1000.00" },
-        { name: "天人计海鱼狗粮", prict: "300", money: "1000.00" },
-        { name: "天人计海鱼狗粮", prict: "300", money: "1000.00" },
-        { name: "全期深海鱼狗粮", prict: "1000", money: "400.00" }
+        {
+          name: "天人计划全期深海鱼狗粮",
+          prict: "700",
+          money: "900.00",
+          buyNumber: ""
+        },
+        {
+          name: "天人计海鱼狗粮",
+          prict: "300",
+          money: "1000.00",
+          buyNumber: 2
+        },
+        {
+          name: "天人计海鱼狗粮",
+          prict: "300",
+          money: "1000.00",
+          buyNumber: 0
+        },
+        {
+          name: "天人计海鱼狗粮",
+          prict: "300",
+          money: "1000.00",
+          buyNumber: 1
+        },
+        {
+          name: "天人计海鱼狗粮",
+          prict: "300",
+          money: "1000.00",
+          buyNumber: 1
+        },
+        {
+          name: "全期深海鱼狗粮",
+          prict: "1000",
+          money: "400.00",
+          buyNumber: 1
+        }
       ],
-      showDialogStyle: false
+      showDialogStyle: false, //弹窗
+      buyFalge: "", //样式
+      showPrise: 99999 ,//显示购物数量
+      flag: false
     };
   },
   created() {
@@ -136,6 +193,21 @@ export default {
     // this.getCode();
   },
   methods: {
+     beforeEnter(el){
+                    el.style.transform = "translate(0, 0)"
+                },
+                enter(el, done){
+                    // el.offsetWidth 强制html渲染动画
+                    // el.offsetWidth 这句话如何不写就不会有动画效果直接渲染的
+                    el.offsetWidth;
+                    el.style.transform = "translate(150px, 250px)";
+                    el.style.transition = "all 2s ease";
+                    console.log(done);
+                    done()
+                },
+                afterEnter(el){
+                    this.flag = !this.flag
+                },
     // 倒计时回调函数
     callback(id) {
       console.log(id);
@@ -143,6 +215,30 @@ export default {
     // 打开弹窗
     open_model() {
       this.showDialogStyle = true;
+    },
+    // 添加购物车显示
+    assemble_buy_plus(id) {
+      this.showPrise = id;
+      this.buyFalge = 1;
+      this.buyAdd(1, id);
+    },
+    // 增加购物
+    buyAdd(id, index) {
+      this.buyFalge = id;
+      var lists = this.lists;
+      var buyNumber = Number(lists[index].buyNumber);
+      buyNumber = buyNumber + 1;
+      lists[index].buyNumber = buyNumber;
+    },
+    // 减少购物
+    buy_minute(id, index) {
+      this.buyFalge = id;
+      var lists = this.lists;
+      var buyNumber = lists[index].buyNumber;
+      if (buyNumber > 0) {
+        buyNumber = buyNumber - 1;
+        lists[index].buyNumber = buyNumber;
+      }
     },
     // 检测机型
     downApp() {
@@ -315,5 +411,31 @@ export default {
   margin-left: 2%;
   margin-top: 8%;
   margin-bottom: 8%;
+}
+.buy_circular {
+  width: 30px;
+  height: 30px;
+  border: 1px solid;
+  border-radius: 50%;
+  font-size: 20px;
+  text-align: center;
+}
+.buy_circular_div {
+  border: 1px solid;
+  width: 90px;
+  height: 30px;
+  border-radius: 15px;
+}
+.back_color {
+  background-color: #ffe001;
+}
+
+/* 购物动效 */
+.circle {
+  border: solid 1px red;
+  background-color: red;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
 }
 </style>

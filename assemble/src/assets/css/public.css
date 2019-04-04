@@ -1,12 +1,19 @@
-.div_display_flex{
-    display:flex;
+.div_display_flex {
+  display: flex;
 }
-.backgroun_color_fff{
-    background-color: #ffffff
+
+.backgroun_color_fff {
+  background-color: #ffffff
 }
-.margin_top_div8{
-    margin-top: 8%;
+
+.margin_top_div8 {
+  margin-top: 8%;
 }
-.margin_top_div3{
-    margin-top: 3%;
+
+.margin_top_div3 {
+  margin-top: 3%;
+}
+
+.div_text_left {
+  text-align: left;
 }
