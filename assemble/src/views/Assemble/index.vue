@@ -14,6 +14,9 @@
         <div class="div_left_border"></div>
         <div>距结束</div>
         <div class="div_left_border"></div>
+        <div class="assemble_img_border" @click="goToPersonal">
+          <img src="../../assets/logo.png" style="width:100%">
+        </div>
       </div>
       <!-- 倒计时 -->
       <countdown :endTime="time" :callback="callback" endText="已经结束了"></countdown>
@@ -477,5 +480,12 @@ export default {
   border-radius: 50%;
   width: 50px;
   height: 50px;
+}
+.assemble_img_border{
+      width: 40px;
+    border: 1px solid;
+    border-radius: 50%;
+    height: 40px;
+    overflow:hidden 
 }
 </style>

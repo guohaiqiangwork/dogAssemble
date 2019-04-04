@@ -5,7 +5,9 @@
 .backgroun_color_fff {
   background-color: #ffffff
 }
-
+.backgroun_color_fe01 {
+  background-color: #ffe001
+}
 .margin_top_div8 {
   margin-top: 8%;
 }
@@ -16,4 +18,12 @@
 
 .div_text_left {
   text-align: left;
+}
+.order_bt_b {
+  width: 100px;
+  background-color: #ffe001;
+  height: 30px;
+  border-radius: 15px;
+  text-align: center;
+  line-height: 2;
 }

@@ -101,12 +101,5 @@ export default {
   border-radius: 50%;
   border: 1px solid;
 }
-.order_bt_b {
-  width: 100px;
-  background-color: #ffe001;
-  height: 30px;
-  border-radius: 15px;
-  text-align: center;
-  line-height: 2;
-}
+
 </style>
