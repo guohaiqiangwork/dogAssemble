@@ -5,6 +5,7 @@ import home from '@/views/home/index'
 import personal from '@/views/personal/index'
 import Assemble from '@/views/Assemble/index'
 import order from '@/views/order/index'
+import confirmationOfOrder from '@/views/confirmationOfOrder/index'
 
 Vue.use(Router)
 
@@ -46,6 +47,15 @@ export default new Router({
         title: '拼团', 
       },
       component: order
+    },
+    {
+      //去拼团
+      path: '/confirmationOfOrder/:obj',
+      name: 'confirmationOfOrder',
+      meta: {
+        title: '确认订单', 
+      },
+      component: confirmationOfOrder
     },
     {
       // 初始化

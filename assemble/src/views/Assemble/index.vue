@@ -87,7 +87,7 @@
         </div>
         <div>满N件包邮</div>
       </div>
-      <div class="assemble_buttom_buy">去拼团</div>
+      <div class="assemble_buttom_buy" @click="goToConfirmation">去拼团</div>
     </div>
     <!-- <div class="click" @click="downApp">点击触发</div>-->
     <!-- 弹出层 -->
@@ -241,6 +241,20 @@ export default {
     goToOrder(){
       this.$router.push({
         name: "order",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: "我就是参数"
+            }
+          })
+        }
+      });
+    },
+     // 去确认订单
+    goToConfirmation(){
+      this.$router.push({
+        name: "confirmationOfOrder",
         params: {
           obj: JSON.stringify({
             type: "profession",
