@@ -45,12 +45,12 @@
         <div>
           <div class="assemble_specifications" @click="open_model">选择规格</div>
           <!-- 点击添加 -->
-          <div class="buy_circular" v-if="showPrise != index" @click="assemble_buy_plus(index)">+</div>
+          <div class="buy_circular" v-if="!item.buyNumber" @click="assemble_buy_plus(index)">+</div>
           <!-- 购买数量 -->
-          <div class="div_display_flex buy_circular_div" v-if="showPrise == index">
+          <div class="div_display_flex buy_circular_div" v-if="item.buyNumber > 0">
             <div
               class="buy_circular"
-              :class="{back_color :buyFalge==2 }"
+              :class="{back_color :buyFalge==2  }"
               @click="buy_minute(2,index)"
             >-</div>
             <div style="width:30px;    text-align: center;line-height:2">
@@ -184,7 +184,7 @@ export default {
       ],
       showDialogStyle: false, //弹窗
       buyFalge: "", //样式
-      showPrise: 99999 ,//显示购物数量
+      showPrise: 99999, //显示购物数量
       flag: false
     };
   },
@@ -193,21 +193,22 @@ export default {
     // this.getCode();
   },
   methods: {
-     beforeEnter(el){
-                    el.style.transform = "translate(0, 0)"
-                },
-                enter(el, done){
-                    // el.offsetWidth 强制html渲染动画
-                    // el.offsetWidth 这句话如何不写就不会有动画效果直接渲染的
-                    el.offsetWidth;
-                    el.style.transform = "translate(150px, 250px)";
-                    el.style.transition = "all 2s ease";
-                    console.log(done);
-                    done()
-                },
-                afterEnter(el){
-                    this.flag = !this.flag
-                },
+    // 处理
+    beforeEnter(el) {
+      el.style.transform = "translate(200px, 100px)"; //起步位置
+    },
+    enter(el, done) {
+      // el.offsetWidth 强制html渲染动画
+      // el.offsetWidth 这句话如何不写就不会有动画效果直接渲染的
+      el.offsetWidth;
+      el.style.transform = "translate(-150px, 250px)";
+      el.style.transition = "all 2s ease";
+      console.log(done);
+      done();
+    },
+    afterEnter(el) {
+      this.flag = !this.flag;
+    },
     // 倒计时回调函数
     callback(id) {
       console.log(id);
@@ -218,7 +219,7 @@ export default {
     },
     // 添加购物车显示
     assemble_buy_plus(id) {
-      this.showPrise = id;
+      // this.showPrise = id;
       this.buyFalge = 1;
       this.buyAdd(1, id);
     },
