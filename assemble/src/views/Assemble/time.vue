@@ -88,9 +88,11 @@ export default {
   padding: 1% 2%;
   border-radius: 3px;
   background-color: #ffe001;
+  color: #101010;
+  font-size: 14px
 }
 .text_center {
   text-align: center;
-  margin-top: 8%;
+  margin-top: 26px;
 }
 </style>

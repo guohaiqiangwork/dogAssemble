@@ -27,3 +27,26 @@
   text-align: center;
   line-height: 2;
 }
+/* 字体 */
+.font_color_00{
+  color: #000
+}
+.font_size_16{
+  font-size: 16px
+}
+.font_size_18{
+  font-size:18px;
+}
+.font_size_11{
+  font-size: 11px
+}
+.font_color_99{
+  color: #999999
+}
+.font_size_13{
+  font-size: 13px
+}
+/* 字体删除线 */
+.font_text_decoration{
+  text-decoration:line-through;
+}

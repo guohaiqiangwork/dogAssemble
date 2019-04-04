@@ -1,21 +1,17 @@
 <template>
   <div>
-    <!-- <div type="primary" @click="goToPersonal">去我的</div>
-    <div type="primary" @click="getList">获取数据</div>-->
-    <!-- 头部 -->
-
-    <input type="button" value="点我加入购物车" @click="flag=!flag">
+    <!-- <input type="button" value="点我加入购物车" @click="flag=!flag">
     <transition @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
       <p class="circle" v-show="flag"></p>
-    </transition>
+    </transition>-->
 
     <div class="backgroun_color_fff">
-      <div class="div_display_flex" style="margin-left: 11%;padding-top:3%">
+      <div class="div_display_flex" style="margin-left:26%;padding-top:21px">
         <div class="div_left_border"></div>
-        <div>距结束</div>
+        <div class="font_color_00 font_size_16" style="margin: -8px 23px 0 23px;">距结束</div>
         <div class="div_left_border"></div>
         <div class="assemble_img_border" @click="goToPersonal">
-          <img src="../../assets/logo.png" style="width:100%">
+          <img src="../../assets/logo.png" style="width:80%">
         </div>
       </div>
       <!-- 倒计时 -->
@@ -27,65 +23,75 @@
         <div class="header_border_circular"></div>
         <div class="header_border_circular"></div>
         <div class="header_border_circular"></div>
-        <div class="header_border_circular" @click="goToOrder">
+        <div class="header_border_circular_g" @click="goToOrder">
           <img src="../../assets/logo.png" style="width:80%">
         </div>
       </div>
     </div>
     <!-- 产品列表 -->
+    <div style="padding-bottom:57px">
     <div
       class="div_display_flex backgroun_color_fff"
       style="margin-top:2%"
       v-for="(item,index) in lists"
     >
-    <!-- 产品内容 -->
-    <div @click="goToProduct" class="div_display_flex">
-      <!-- 产品图片 -->
-      <div class="assemble_list_div">
-        <img src="../../assets/logo.png" width="85%">
-      </div>
-      <div style="width:60%">
-        <div class="margin_top_div8">{{item.name}}</div>
-        <div class="margin_top_div3">
-          <span>¥{{item.prict}}</span>
-          <span style="text-decoration:line-through">{{item.money}}</span>
+      <!-- 产品内容 -->
+      <div @click="goToProduct" class="div_display_flex">
+        <!-- 产品图片 -->
+        <div class="assemble_list_div">
+          <img src="../../assets/logo.png" width="85%">
         </div>
-        <div>
-          <div class="assemble_specifications" @click="open_model">选择规格</div>
-          <!-- 点击添加 -->
-          <div class="buy_circular" v-if="!item.buyNumber" @click="assemble_buy_plus(index)">+</div>
-          <!-- 购买数量 -->
-          <div class="div_display_flex buy_circular_div" v-if="item.buyNumber > 0">
+        <div style="width:60%">
+          <div class="margin_top_div8 font_color_00 font_size_16" style="width:187px;">{{item.name}}</div>
+          <div class="margin_top_div8">
+            <span class="font_size_18 font_color_00">
+              ¥{{item.prict}}
+              <span class="font_size_11">起</span>
+            </span>
+            <span
+              style="text-decoration:line-through; margin-left: 6%;"
+              class="font_size_11"
+            >{{item.money}}</span>
+          </div>
+          <div v-if="item.ni == 1" style="margin-top: 6%;padding-left: 69%;">
+            <div class="assemble_specifications" @click="open_model">选择规格</div>
+          </div>
+          <div v-if="item.ni != 1" style="margin-top: 6%;padding-left: 69%;">
             <div
+              v-if="!item.buyNumber"
+              style="margin-left: 80%;"
               class="buy_circular"
-              :class="{back_color :buyFalge==2  }"
-              @click="buy_minute(2,index)"
-            >-</div>
-            <div style="width:30px;    text-align: center;line-height:2">
-              <!-- <input class="input" v-model="item.buyNumber"> -->
-              {{item.buyNumber}}
-            </div>
-            <div
-              class="buy_circular"
-              :class="{ back_color :buyFalge==1 }"
-              @click="buyAdd(1,index)"
+              @click="assemble_buy_plus(index)"
             >+</div>
           </div>
+          <div v-if="item.buyNumber > 0" style="margin-top: 6%;padding-left: 64%;">
+            <div class="div_display_flex buy_circular_div">
+              <!-- :class="{back_color :buyFalge==2  }" -->
+              <div class="buy_circular_n" style="border:1px solid #eee" @click="buy_minute(2,index)">-</div>
+              <div style="width:31px;text-align:center;line-height:1.8;font-size:13px">
+                <!-- <input class="input" v-model="item.buyNumber"> -->
+                {{item.buyNumber}}
+              </div>
+              <!-- :class="{ back_color :buyFalge==1 }" -->
+              <div class="buy_circular_n back_color" @click="buyAdd(1,index)">+</div>
+            </div>
+          </div>
+
         </div>
       </div>
-       </div>
+    </div>
     </div>
     <!-- 购买 -->
     <div class="div_display_flex backgroun_color_fff assemble_buttom_div">
-      <div style="width:20%">
+      <div class="bt_buy_img">
         <img src="../../assets/logo.png" alt width="100%">
       </div>
-      <div style="width:60%">
-        <div>
+      <div class="bt_buy_money">
+        <div style="margin:3%">
           <span>¥700</span>
-          <span>$720</span>
+          <span class="font_color_99 font_size_13 font_text_decoration">$720</span>
         </div>
-        <div>满N件包邮</div>
+        <div class="font_color_99 font_size_11" style="margin-left: 3%;margin-top: -2%;">满N件包邮</div>
       </div>
       <div class="assemble_buttom_buy" @click="goToConfirmation">去拼团</div>
     </div>
@@ -135,14 +141,14 @@
     <!-- 产品详情 -->
     <div v-if="ProductFalg">
       <!-- 标题 -->
-        <div class="div_display_flex" style="margin-left: 11%;padding-top:3%">
+      <div class="div_display_flex" style="margin-left: 11%;padding-top:3%">
         <div class="div_left_border"></div>
         <div>产品详情</div>
         <div class="div_left_border"></div>
       </div>
       <!--内容  -->
       <div>
-        <img src="../../assets/logo.png" alt="">
+        <img src="../../assets/logo.png" alt>
       </div>
     </div>
   </div>
@@ -165,50 +171,56 @@ export default {
   data() {
     return {
       popupVisible: false,
-      time: "1554291380",
+      time: "3554291380",
       lists: [
         {
           name: "天人计划全期深海鱼狗粮",
           prict: "700",
           money: "900.00",
-          buyNumber: ""
+          buyNumber: "",
+          ni: "1"
         },
         {
           name: "天人计海鱼狗粮",
           prict: "300",
           money: "1000.00",
-          buyNumber: 2
+          buyNumber: "",
+          ni: "2"
         },
         {
           name: "天人计海鱼狗粮",
           prict: "300",
           money: "1000.00",
-          buyNumber: 0
+          buyNumber: "",
+          ni: "1"
         },
         {
           name: "天人计海鱼狗粮",
           prict: "300",
           money: "1000.00",
-          buyNumber: 1
+          buyNumber: 1,
+          ni: "2"
         },
         {
           name: "天人计海鱼狗粮",
           prict: "300",
           money: "1000.00",
-          buyNumber: 1
+          buyNumber: 1,
+          ni: "2"
         },
         {
           name: "全期深海鱼狗粮",
           prict: "1000",
           money: "400.00",
-          buyNumber: 1
+          buyNumber: 1,
+          ni: "2"
         }
       ],
       showDialogStyle: false, //弹窗
       buyFalge: "", //样式
       showPrise: 99999, //显示购物数量
       flag: false,
-      ProductFalg:false//产品详情
+      ProductFalg: false //产品详情
     };
   },
   created() {
@@ -233,12 +245,12 @@ export default {
       this.flag = !this.flag;
     },
     // 展示详情
-    goToProduct(id){
-      console.log(id)
+    goToProduct(id) {
+      console.log(id);
       // 获取详情接口
-    }, 
+    },
     // 去订单
-    goToOrder(){
+    goToOrder() {
       this.$router.push({
         name: "order",
         params: {
@@ -251,8 +263,8 @@ export default {
         }
       });
     },
-     // 去确认订单
-    goToConfirmation(){
+    // 去确认订单
+    goToConfirmation() {
       this.$router.push({
         name: "confirmationOfOrder",
         params: {
@@ -265,7 +277,7 @@ export default {
         }
       });
     },
-     // 倒计时回调函数
+    // 倒计时回调函数
     callback(id) {
       console.log(id);
     },
@@ -398,56 +410,64 @@ export default {
 };
 </script>
 <style scoped>
-/* .model_width {
-  width: 80%;
-  height: 40%;
-}
-.assemble_div_w{
-  width: 32%;
-} */
 .div_left_border {
-  width: 22%;
+  width: 50px;
   border-top: 1px solid #ffe001;
-  height: 1px;
-  margin: 3% 8% 0 8%;
+  height: 2px;
+  /* margin: 3% 8% 0 8%; */
 }
 .header_border_circular {
-  width: 50px;
-  height: 50px;
-  border-radius: 25px;
-  border: 1px solid #ffe001;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 1px dashed #ffe001;
   margin-left: 6%;
+}
+.header_border_circular_g {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin-left: 6%;
+  border: 2px solid rgb(255, 224, 1);
+  overflow: hidden;
+  text-align: center;
+  line-height: 4.8;
 }
 .assemble_div_font {
   text-align: center;
-  margin-top: 8%;
+  margin-top: 22px;
+  color: #101010;
+  font-size: 14px;
 }
 .assemble_specifications {
-  width: 98px;
-  height: 30px;
+  width: 77px;
+  height: 22px;
   text-align: center;
   background-color: #ffe001;
   color: #333;
-  border-radius: 15px;
+  border-radius: 11px;
   line-height: 1.8;
-  margin-top: 3%;
-  margin-left: 58%;
+  /* margin-top: 3%; */
+  /* margin-left: 58%;s */
+  font-size: 12px;
 }
 .assemble_list_div {
-  width: 30%;
+  min-width: 30%;
+  max-width: 30%;
   margin-left: 1%;
   padding: 3%;
 }
 .assemble_buttom_buy {
   background-color: #ffe001;
   text-align: center;
-  line-height: 5;
-  width: 30%;
+  line-height: 3.5;
+  width: 100px;
 }
 .assemble_buttom_div {
   position: fixed;
   bottom: 0;
   width: 100%;
+  height: 54px;
 }
 .model_border_button {
   width: 50px;
@@ -470,18 +490,33 @@ export default {
   margin-bottom: 8%;
 }
 .buy_circular {
-  width: 30px;
-  height: 30px;
-  border: 1px solid;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
-  font-size: 20px;
   text-align: center;
+  background-color: #ffe001;
+  font-size: 18px;
+  color: #333;
+  margin-top: -1px;
+  line-height: 1.2;
+}
+.buy_circular_n {
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 18px;
+  color: #333;
+  margin-top: -1px;
+  line-height: 1.2;
+  background-color: #fff
 }
 .buy_circular_div {
   border: 1px solid;
-  width: 90px;
-  height: 30px;
-  border-radius: 15px;
+  width: 77px;
+  height: 22px;
+  border-radius: 11px;
+  border-color: #e5e5e5 #ffe001;
 }
 .back_color {
   background-color: #ffe001;
@@ -495,11 +530,31 @@ export default {
   width: 50px;
   height: 50px;
 }
-.assemble_img_border{
-      width: 40px;
-    border: 1px solid;
-    border-radius: 50%;
-    height: 40px;
-    overflow:hidden 
+.assemble_img_border {
+  width: 25px;
+  border-radius: 50%;
+  height: 25px;
+  overflow: hidden;
+  margin-left: 16%;
+  margin-top: -3%;
+  text-align: center;
+  background-color: #ffe001;
+  line-height: 2.4;
+}
+.btn_left_assemble {
+  margin-left: 70%;
+  margin-top: 3%;
+}
+/* 底部 */
+.bt_buy_img{
+  width: 66px;
+  height: 70px;
+  margin-top: -3%
+}
+.bt_buy_money{
+  background-color: #333;
+  color: #fff;
+  width: 60%;
+  font-size: 18px
 }
 </style>
