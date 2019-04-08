@@ -90,18 +90,25 @@
     </div>
     <!-- 购买 -->
     <div class="div_display_flex backgroun_color_fff assemble_buttom_div" style="z-index:5004">
-      <div class="buy_border_number">{{numberZ}}</div>
-      <div class="bt_buy_img">
-        <img src="../../assets/logo.png" alt width="100%">
-      </div>
-      <div class="bt_buy_money" @click="openModelProductL">
-        <div style="margin:3%">
-          <span>¥700</span>
-          <span class="font_color_99 font_size_13 font_text_decoration">$720</span>
+      <!-- 活动正常 -->
+      <div v-if="true">
+        <div class="buy_border_number">{{numberZ}}</div>
+        <div class="bt_buy_img">
+          <img src="../../assets/logo.png" alt width="100%">
         </div>
-        <div class="font_color_99 font_size_11" style="margin-left: 3%;margin-top: -2%;">满N件包邮</div>
+        <div class="bt_buy_money" @click="openModelProductL">
+          <div style="margin:3%">
+            <span>¥700</span>
+            <span class="font_color_99 font_size_13 font_text_decoration">$720</span>
+          </div>
+          <div class="font_color_99 font_size_11" style="margin-left: 3%;margin-top: -2%;">满N件包邮</div>
+        </div>
+        <div class="assemble_buttom_buy" @click="goToConfirmation">去拼团</div>
       </div>
-      <div class="assemble_buttom_buy" @click="goToConfirmation">去拼团</div>
+      <!-- 活动结束 邀请好友-->
+      <div v-if="false" style="width: 100%;">
+        <div class="assemble_j_s" @click="goToInvitation">邀请好友去拼团</div>
+      </div>
     </div>
     <!-- <div class="click" @click="downApp">点击触发</div>-->
     <!-- 弹出层 -->
@@ -190,13 +197,19 @@
         </div>
       </div>
     </div>
+    <!-- 邀请好友 -->
+    <div v-if="InvitationFalge">
+      <div class="model_background" @click="colseModelProductL">
+        <img src="../../assets/images/tupianjiazaishibai@3x.png" alt>
+      </div>
+    </div>
   </div>
 </template>
 <script>
 import url from "../../bin/url";
 import { XHeader, XDialog, TransferDomDirective as TransferDom } from "vux";
 import countdown from "./time";
-import { fail } from 'assert';
+import { fail } from "assert";
 
 export default {
   directives: {
@@ -215,6 +228,7 @@ export default {
       numberZ: "20",
       classA: "001",
       modelFalgez: false, //弹出层
+      InvitationFalge: false,
       tasteList: [
         { tasteName: "牛肉味", id: "001" },
         { tasteName: "番茄味", id: "002" },
@@ -462,9 +476,17 @@ export default {
     openModelProductL() {
       this.modelFalgez = true;
     },
-     // 点击购物车打开弹出层
+    // 点击购物车打开弹出层
     colseModelProductL() {
       this.modelFalgez = false;
+    },
+    // 邀请好友
+    goToInvitation() {
+      this.InvitationFalge = true;
+    },
+    // 邀请好友
+    closeToInvitation() {
+      this.InvitationFalge = false;
     }
   },
   mounted() {
@@ -701,5 +723,13 @@ export default {
   border-top: 1px solid #e5e5e5;
   width: 90%;
   margin-left: 5%;
+}
+.assemble_j_s {
+  background-color: #ffe001;
+  font-size: 16px;
+  color: #333;
+  height: 54px;
+  text-align: center;
+  line-height: 3;
 }
 </style>
