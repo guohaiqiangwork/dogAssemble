@@ -30,59 +30,66 @@
     </div>
     <!-- 产品列表 -->
     <div style="padding-bottom:57px">
-    <div
-      class="div_display_flex backgroun_color_fff"
-      style="margin-top:2%"
-      v-for="(item,index) in lists"
-    >
-      <!-- 产品内容 -->
-      <div @click="goToProduct" class="div_display_flex">
-        <!-- 产品图片 -->
-        <div class="assemble_list_div">
-          <img src="../../assets/logo.png" width="85%">
-        </div>
-        <div style="width:60%">
-          <div class="margin_top_div8 font_color_00 font_size_16" style="width:187px;">{{item.name}}</div>
-          <div class="margin_top_div8">
-            <span class="font_size_18 font_color_00">
-              ¥{{item.prict}}
-              <span class="font_size_11">起</span>
-            </span>
-            <span
-              style="text-decoration:line-through; margin-left: 6%;"
-              class="font_size_11"
-            >{{item.money}}</span>
+      <div
+        class="div_display_flex backgroun_color_fff"
+        style="margin-top:2%"
+        v-for="(item,index) in lists"
+      >
+        <!-- 产品内容 -->
+        <div @click="goToProduct" class="div_display_flex">
+          <!-- 产品图片 -->
+          <div class="assemble_list_div">
+            <img src="../../assets/logo.png" width="85%">
           </div>
-          <div v-if="item.ni == 1" style="margin-top: 6%;padding-left: 69%;">
-            <div class="assemble_specifications" @click="open_model">选择规格</div>
-          </div>
-          <div v-if="item.ni != 1" style="margin-top: 6%;padding-left: 69%;">
+          <div style="width:60%">
             <div
-              v-if="!item.buyNumber"
-              style="margin-left: 80%;"
-              class="buy_circular"
-              @click="assemble_buy_plus(index)"
-            >+</div>
-          </div>
-          <div v-if="item.buyNumber > 0" style="margin-top: 6%;padding-left: 64%;">
-            <div class="div_display_flex buy_circular_div">
-              <!-- :class="{back_color :buyFalge==2  }" -->
-              <div class="buy_circular_n" style="border:1px solid #eee" @click="buy_minute(2,index)">-</div>
-              <div style="width:31px;text-align:center;line-height:1.8;font-size:13px">
-                <!-- <input class="input" v-model="item.buyNumber"> -->
-                {{item.buyNumber}}
+              class="margin_top_div8 font_color_00 font_size_16"
+              style="width:187px;"
+            >{{item.name}}</div>
+            <div class="margin_top_div8">
+              <span class="font_size_18 font_color_00">
+                ¥{{item.prict}}
+                <span class="font_size_11">起</span>
+              </span>
+              <span
+                style="text-decoration:line-through; margin-left: 6%;"
+                class="font_size_11"
+              >{{item.money}}</span>
+            </div>
+            <div v-if="item.ni == 1" style="margin-top: 6%;padding-left: 69%;">
+              <div class="assemble_specifications" @click="open_model">选择规格</div>
+            </div>
+            <div v-if="item.ni != 1" style="margin-top: 6%;padding-left: 69%;">
+              <div
+                v-if="!item.buyNumber"
+                style="margin-left: 80%;"
+                class="buy_circular"
+                @click="assemble_buy_plus(index)"
+              >+</div>
+            </div>
+            <div v-if="item.buyNumber > 0" style="margin-top: 6%;padding-left: 64%;">
+              <div class="div_display_flex buy_circular_div">
+                <!-- :class="{back_color :buyFalge==2  }" -->
+                <div
+                  class="buy_circular_n"
+                  style="border:1px solid #eee"
+                  @click="buy_minute(2,index)"
+                >-</div>
+                <div style="width:31px;text-align:center;line-height:1.8;font-size:13px">
+                  <!-- <input class="input" v-model="item.buyNumber"> -->
+                  {{item.buyNumber}}
+                </div>
+                <!-- :class="{ back_color :buyFalge==1 }" -->
+                <div class="buy_circular_n back_color" @click="buyAdd(1,index)">+</div>
               </div>
-              <!-- :class="{ back_color :buyFalge==1 }" -->
-              <div class="buy_circular_n back_color" @click="buyAdd(1,index)">+</div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
-    </div>
     <!-- 购买 -->
     <div class="div_display_flex backgroun_color_fff assemble_buttom_div">
+      <div class="buy_border_number">{{numberZ}}</div>
       <div class="bt_buy_img">
         <img src="../../assets/logo.png" alt width="100%">
       </div>
@@ -172,6 +179,7 @@ export default {
     return {
       popupVisible: false,
       time: "3554291380",
+      numberZ: "20",
       lists: [
         {
           name: "天人计划全期深海鱼狗粮",
@@ -509,7 +517,7 @@ export default {
   color: #333;
   margin-top: -1px;
   line-height: 1.2;
-  background-color: #fff
+  background-color: #fff;
 }
 .buy_circular_div {
   border: 1px solid;
@@ -546,15 +554,28 @@ export default {
   margin-top: 3%;
 }
 /* 底部 */
-.bt_buy_img{
+.bt_buy_img {
   width: 66px;
   height: 70px;
-  margin-top: -3%
+  margin-top: -3%;
 }
-.bt_buy_money{
+.bt_buy_money {
   background-color: #333;
   color: #fff;
   width: 60%;
-  font-size: 18px
+  font-size: 18px;
+}
+.buy_border_number {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #fe5b4a;
+  color: #fff;
+  margin-top: -5%;
+  position: absolute;
+  margin-left: 12%;
+  font-size: 11px;
+  line-height: 1.7;
+  text-align: center;
 }
 </style>
