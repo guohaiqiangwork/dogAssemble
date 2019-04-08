@@ -108,38 +108,29 @@
       <x-dialog
         v-model="showDialogStyle"
         hide-on-blur
-        :dialog-style="{'max-width': '100%', width: '100%', height: '50%', 'background-color': 'transparent'}"
+        :dialog-style="{'max-width': '100%', width: '100%', height: '50%', 'background-color': 'transparent','overflow': 'auto'}"
       >
-        <!-- <p style="color:#fff;text-align:center;" @click="showDialogStyle = false">
-          <span style="font-size:30px;">HELLO WORLD</span>
-          <br>
-          <br>
-          <x-icon type="ios-close-outline" style="fill:#fff;"></x-icon>
-        </p>-->
+        <div class="model_colse_X" @click="showDialogStyle = false">X</div>
         <div class="model_background_width">
-          <div>商品名称</div>
+          <div class="model_title_font">商品名称</div>
           <div>
-            <div class="div_text_left">规格一</div>
-            <div class="div_text_left">
-              <span class="model_border_button">牛肉味</span>
-              <span class="model_border_button">牛肉味</span>
-              <span class="model_border_button">牛肉味</span>
-              <span class="model_border_button">牛肉味</span>
+            <div class="div_text_left font_color_33 font_size_14">规格一</div>
+            <div style="margin-left:-8%;height:100px;">
+              <div
+                class="model_border_button"
+                v-for="item in tasteList"
+                @click="get_taste(item.id)"
+              >{{item.tasteName}}</div>
             </div>
             <div class="mode_button_border"></div>
           </div>
           <div class="div_display_flex">
-            <div>
-              <span>700.00</span>
-              <span style="text-decoration:line-through">900.00</span>
+            <div class="model_buy_font_s">
+              <span style="margin-left:-12%">¥700.00</span>
+              <span style="text-decoration:line-through;font-size:11px" class="font_color_33">900.00</span>
             </div>
-            <div>
-              <div class="assemble_specifications">+加入购物车</div>
-              <div>
-                <div>-</div>
-                <!-- {{number}} -->
-                <div>+</div>
-              </div>
+            <div class="model_buy_font_sb">
+              <div class="model_assemble_specifications_w">+加入购物车</div>
             </div>
           </div>
         </div>
@@ -180,6 +171,14 @@ export default {
       popupVisible: false,
       time: "3554291380",
       numberZ: "20",
+      classA: "001",
+      tasteList: [
+        { tasteName: "牛肉味", id: "001" },
+        { tasteName: "番茄味", id: "002" },
+        { tasteName: "苦瓜味", id: "003" },
+        { tasteName: "猪肉味", id: "004" },
+        { tasteName: "驴肉味", id: "005" }
+      ],
       lists: [
         {
           name: "天人计划全期深海鱼狗粮",
@@ -289,9 +288,15 @@ export default {
     callback(id) {
       console.log(id);
     },
+
     // 打开弹窗
     open_model() {
       this.showDialogStyle = true;
+    },
+    // 弹窗选择
+    get_taste(id) {
+      console.log(id);
+      this.classA = id;
     },
     // 添加购物车显示
     assemble_buy_plus(id) {
@@ -478,11 +483,15 @@ export default {
   height: 54px;
 }
 .model_border_button {
-  width: 50px;
+  width: 16%;
   height: 20px;
   border-radius: 10px;
   background-color: #fff;
   border: 1px solid;
+  margin-left: 13%;
+  float: left;
+  margin-top: 3%;
+  margin-right: 3%;
 }
 .model_background_width {
   background-color: #fff;
@@ -577,5 +586,43 @@ export default {
   font-size: 11px;
   line-height: 1.7;
   text-align: center;
+}
+.model_title_font {
+  font-size: 16px;
+  color: #333;
+  padding-top: 16px;
+}
+.model_buy_font_s {
+  color: #020202;
+  font-size: 18px;
+  width: 45%;
+}
+.model_buy_font_sb {
+  width: 54%;
+  text-align: -webkit-right;
+  margin-right: 4%;
+  margin-bottom: 23px;
+}
+.model_assemble_specifications_w {
+  width: 81px;
+  height: 23px;
+  text-align: center;
+  background-color: #ffe001;
+  color: #333;
+  border-radius: 11px;
+  line-height: 1.8;
+  font-size: 12px;
+}
+.model_colse_X {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: #c5c5c5;
+  font-size: 13px;
+  background-color: #fff;
+  line-height: 2.6;
+  margin-left: 92%;
+  margin-top: -4%;
+  position: absolute;
 }
 </style>

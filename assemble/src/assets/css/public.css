@@ -18,6 +18,7 @@
 
 .div_text_left {
   text-align: left;
+  margin-left:4%
 }
 .order_bt_b {
   width: 100px;
@@ -37,18 +38,25 @@
 .font_color_66{
   color: #666
 }
-.font_size_16{
-  font-size: 16px
+.font_color_33{
+  color: #333
 }
-.font_size_18{
-  font-size:18px;
-}
+
 .font_size_11{
   font-size: 11px
 }
 
 .font_size_13{
   font-size: 13px
+}
+.font_size_14{
+  font-size: 14px
+}
+.font_size_16{
+  font-size: 16px
+}
+.font_size_18{
+  font-size:18px;
 }
 /* 字体删除线 */
 .font_text_decoration{
