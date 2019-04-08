@@ -5,9 +5,11 @@
 .backgroun_color_fff {
   background-color: #ffffff
 }
+
 .backgroun_color_fe01 {
   background-color: #ffe001
 }
+
 .margin_top_div8 {
   margin-top: 8%;
 }
@@ -15,14 +17,16 @@
 .margin_top_div3 {
   margin-top: 3%;
 }
-.margin_top_div5{
+
+.margin_top_div5 {
   margin-top: 5%;
 }
 
 .div_text_left {
   text-align: left;
-  margin-left:4%
+  margin-left: 4%
 }
+
 .order_bt_b {
   width: 100px;
   background-color: #ffe001;
@@ -31,40 +35,72 @@
   text-align: center;
   line-height: 2;
 }
+
 /* 字体 */
-.font_color_00{
+.font_color_00 {
   color: #000
 }
-.font_color_99{
+
+.font_color_99 {
   color: #999999
 }
-.font_color_66{
+
+.font_color_66 {
   color: #666
 }
-.font_color_33{
+
+.font_color_33 {
   color: #333
 }
 
-.font_size_11{
+.font_size_11 {
   font-size: 11px
 }
 
-.font_size_13{
+.font_size_13 {
   font-size: 13px
 }
-.font_size_14{
+
+.font_size_14 {
   font-size: 14px
 }
-.font_size_15{
+
+.font_size_15 {
   font-size: 15px
 }
-.font_size_16{
+
+.font_size_16 {
   font-size: 16px
 }
-.font_size_18{
-  font-size:18px;
+
+.font_size_18 {
+  font-size: 18px;
 }
+
 /* 字体删除线 */
-.font_text_decoration{
-  text-decoration:line-through;
+.font_text_decoration {
+  text-decoration: line-through;
+}
+
+/* 弹出层 */
+.model_background {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.model_center_n {
+  position: fixed;
+  display: table;
+  z-index: 5000;
+  width: 100%;
+  margin: auto;
+  background-color: #FFFFFF;
+  border-radius: 3px;
+  overflow: hidden;
+  bottom: 0;
 }

@@ -28,6 +28,7 @@
         </div>
       </div>
     </div>
+
     <!-- 产品列表 -->
     <div style="padding-bottom:57px">
       <div
@@ -88,12 +89,12 @@
       </div>
     </div>
     <!-- 购买 -->
-    <div class="div_display_flex backgroun_color_fff assemble_buttom_div">
+    <div class="div_display_flex backgroun_color_fff assemble_buttom_div" style="z-index:5004">
       <div class="buy_border_number">{{numberZ}}</div>
       <div class="bt_buy_img">
         <img src="../../assets/logo.png" alt width="100%">
       </div>
-      <div class="bt_buy_money">
+      <div class="bt_buy_money" @click="openModelProductL">
         <div style="margin:3%">
           <span>¥700</span>
           <span class="font_color_99 font_size_13 font_text_decoration">$720</span>
@@ -149,12 +150,53 @@
         <img src="../../assets/logo.png" alt>
       </div>
     </div>
+    <!-- 底部弹出层 -->
+    <div v-if="modelFalgez">
+      <div class="model_background" @click="colseModelProductL">
+        <div class="model_center_n">
+          <!-- 标题栏 -->
+          <div class="div_display_flex backgroun_color_fe01" style="height:35px;line-height:2">
+            <div class="font_size_15 font_color_33 buy_car">购物车</div>
+            <div class="div_display_flex" style=" margin-left: 11%;margin-top: 1%;">
+              <div style="width:13px;height:13px">
+                <img src="../../assets/images/delete@2x.png" style="width:100%">
+              </div>
+              <div class="font_size_15 font_color_66">清空购物车</div>
+            </div>
+          </div>
+          <!-- 列表 -->
+          <div v-for="item in [1,2,3,4]">
+            <div class="div_display_flex margin_top_div5">
+              <div class="model_bottn_font">天然计划全犬期深海鱼狗粮</div>
+              <div class="div_display_flex">
+                <div style="margin-right:10%">￥1245.3</div>
+                <div class="div_display_flex buy_circular_div">
+                  <!-- :class="{back_color :buyFalge==2  }" -->
+                  <div
+                    class="buy_circular_n"
+                    style="border:1px solid #eee"
+                    @click="buy_minute(2,index)"
+                  >-</div>
+                  <div style="width:31px;text-align:center;line-height:1.8;font-size:13px">8908</div>
+                  <div class="buy_circular_n back_color" @click="buyAdd(1,index)">+</div>
+                </div>
+              </div>
+            </div>
+            <div style="margin:4%">
+              <div class="model_botton_g">主食 | 牛肉味</div>
+            </div>
+            <div class="model_botton_border_d"></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
 import url from "../../bin/url";
 import { XHeader, XDialog, TransferDomDirective as TransferDom } from "vux";
 import countdown from "./time";
+import { fail } from 'assert';
 
 export default {
   directives: {
@@ -172,6 +214,7 @@ export default {
       time: "3554291380",
       numberZ: "20",
       classA: "001",
+      modelFalgez: false, //弹出层
       tasteList: [
         { tasteName: "牛肉味", id: "001" },
         { tasteName: "番茄味", id: "002" },
@@ -414,6 +457,14 @@ export default {
       };
       // 将配置注入通用方法
       this.ShareTimeline(opstion);
+    },
+    // 点击购物车打开弹出层
+    openModelProductL() {
+      this.modelFalgez = true;
+    },
+     // 点击购物车打开弹出层
+    colseModelProductL() {
+      this.modelFalgez = false;
     }
   },
   mounted() {
@@ -624,5 +675,31 @@ export default {
   margin-left: 92%;
   margin-top: -4%;
   position: absolute;
+}
+.buy_car {
+  width: 60%;
+  text-align: left;
+  margin-left: 3%;
+  margin-top: 1%;
+}
+.model_botton_g {
+  width: 85px;
+  height: 17px;
+  border-radius: 9px;
+  background-color: #ffe001;
+  font-size: 11px;
+  color: #333;
+  text-align: center;
+}
+.model_bottn_font {
+  font-size: 14px;
+  color: #000;
+  width: 54%;
+  margin-left: 4%;
+}
+.model_botton_border_d {
+  border-top: 1px solid #e5e5e5;
+  width: 90%;
+  margin-left: 5%;
 }
 </style>
