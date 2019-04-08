@@ -6,6 +6,7 @@ import personal from '@/views/personal/index'
 import Assemble from '@/views/Assemble/index'
 import order from '@/views/order/index'
 import confirmationOfOrder from '@/views/confirmationOfOrder/index'
+import addressManagement from '@/views/addressManagement/index'
 
 Vue.use(Router)
 
@@ -62,6 +63,12 @@ export default new Router({
       path: '/HelloWorld',
       name: 'HelloWorld',
       component: HelloWorld
+    },
+    {
+      // 初始化
+      path: '/addressManagement',
+      name: 'addressManagement',
+      component: addressManagement
     },
 
   ]

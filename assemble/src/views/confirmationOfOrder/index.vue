@@ -29,7 +29,11 @@
         <div class="margin_top_div5">
           <span class="font_size_13 font_color_00">所在地区：</span>
           <input type="text" placeholder="请选择您当前所在的地区" style=" width: 70%;">
-          <img src="../../assets/images/dingdan_weizhankai@3x.png" style="width:8%;">
+          <img
+            src="../../assets/images/dingdan_weizhankai@3x.png"
+            style="width:8%;"
+            @click="goToAddressManagement"
+          >
         </div>
         <div class="margin_top_div5">
           <span class="font_size_13 font_color_00">详细地址：</span>
@@ -131,6 +135,20 @@ export default {
     //   添加收获地址
     harvestAddress() {
       this.AddressFalge = true;
+    },
+    // 去地址管理
+    goToAddressManagement(id) {
+      this.$router.push({
+        name: "addressManagement",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: "我就是参数"
+            }
+          })
+        }
+      });
     }
   },
   created() {
