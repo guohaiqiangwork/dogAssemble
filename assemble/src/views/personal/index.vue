@@ -2,7 +2,7 @@
   <div>
     <div class="backgroun_color_fff">
       <!-- tab -->
-      <div class="div_display_flex backgroun_color_fe01">
+      <div class="div_display_flex backgroun_color_fe01 personal_title">
         <div
           class="personal_tab_width"
           v-for="(item,index) in  tabList"
@@ -14,65 +14,97 @@
       </div>
       <!-- 拼团中 -->
       <div v-if="switchFlage == '001'">
+        <!-- 产品列 -->
         <div>
-          <div class="div_display_flex">
+          <div class="div_display_flex personal_time_div">
             <div>2019-03-29</div>
-            <div>代发货</div>
+            <div class="personal_time_div_font">代发货</div>
           </div>
-          <div class="div_display_flex">
+          <div v-for="item in [1,3,4]" class="div_display_flex">
+            <!-- 产品图片 -->
             <div class="personal_list_div">
-              <img src="../../assets/logo.png" style="width: 80%;">
-            </div>
-            <div class="div_display_flex">
-              <div>天然计划全犬期深海鱼狗粮</div>
-              <div>¥700</div>
-            </div>
-          </div>
-          <div class="div_display_flex">
-            <div>
-              <div class="order_bt_b">
-                <span>主食</span>
-                <span>|</span>
-                <span>牛肉味</span>
+              <div class="personal_list_div_img">
+                <img src="../../assets/logo.png" style="width: 100%;">
               </div>
             </div>
-            <div>*1</div>
+            <!-- 产品详情 -->
+            <div class="margin_top_div5 font_color_00 font_size_14" style="width:80%">
+              <div class="div_display_flex">
+                <div style=" width: 80%;">天然计划全犬期深海鱼狗粮</div>
+                <div>¥700</div>
+              </div>
+              <!-- 胶囊 -->
+              <div class="div_display_flex margin_top_div5">
+                <div style="width:80%">
+                  <div class="personal_bt_b_w">
+                    <span>主食</span>
+                    <span>|</span>
+                    <span>牛肉味</span>
+                  </div>
+                </div>
+                <div>*1</div>
+              </div>
+              <!-- 边线 -->
+              <div class="personal_border_bottom_1"></div>
+            </div>
+          </div>
+        </div>
+        <!-- 总加 -->
+        <div class="margin_top_div5">
+          <div class="personal_z_j font_size_15 font_colo_33">共N件商品 合计:￥230.0(含运费45.0)</div>
+          <div class="div_display_flex" style="margin-left: 54%;margin-top: 5%;padding-bottom: 3%;">
+            <div class="personal_c_x_z" style="margin-right: 15px;">放弃支付</div>
+            <div class="personal_c_x_z backgroun_color_fe01" style="color:#333;border:none">重新支付</div>
           </div>
         </div>
       </div>
       <!-- 已完成 -->
       <div v-if="switchFlage == '002'">
         <div>
-          <div class="div_display_flex">
-            <div>2019-03-29</div>
-            <div>代发货</div>
-          </div>
-          <div v-for="item in [1,2]">
-            <div class="div_display_flex">
-              <div class="personal_list_div">
-                <img src="../../assets/logo.png" style="width: 80%;">
-              </div>
-              <div class="div_display_flex">
-                <div>天然计划全犬期深海鱼狗粮</div>
-                <div>¥700</div>
-              </div>
+          <!-- 产品列 -->
+          <div>
+            <div class="div_display_flex personal_time_div">
+              <div>2019-03-29</div>
+              <div class="personal_time_div_font">代发货</div>
             </div>
-            <div class="div_display_flex">
-              <div>
-                <div class="order_bt_b">
-                  <span>主食</span>
-                  <span>|</span>
-                  <span>牛肉味</span>
+            <div v-for="item in [1,3,4]" class="div_display_flex">
+              <!-- 产品图片 -->
+              <div class="personal_list_div">
+                <div class="personal_list_div_img">
+                  <img src="../../assets/logo.png" style="width: 100%;">
                 </div>
               </div>
-              <div>*1</div>
+              <!-- 产品详情 -->
+              <div class="margin_top_div5 font_color_00 font_size_14" style="width:80%">
+                <div class="div_display_flex">
+                  <div style=" width: 80%;">天然计划全犬期深海鱼狗粮</div>
+                  <div>¥700</div>
+                </div>
+                <!-- 胶囊 -->
+                <div class="div_display_flex margin_top_div5">
+                  <div style="width:80%">
+                    <div class="personal_bt_b_w">
+                      <span>主食</span>
+                      <span>|</span>
+                      <span>牛肉味</span>
+                    </div>
+                  </div>
+                  <div>*1</div>
+                </div>
+                <!-- 边线 -->
+                <div class="personal_border_bottom_1"></div>
+              </div>
             </div>
           </div>
-          <div>
-            <div>共N件商品 合计：¥230.0（含运费455.0）</div>
-            <div class="div_display_flex">
-              <div class="personal_btn_d">删除订单</div>
-              <div class="personal_btn_d backgroun_color_fe01">查看物流</div>
+          <!-- 总加 -->
+          <div class="margin_top_div5">
+            <div class="personal_z_j font_size_15 font_colo_33">共N件商品 合计:￥230.0(含运费45.0)</div>
+            <div
+              class="div_display_flex"
+              style="margin-left: 54%;margin-top: 5%;padding-bottom: 3%;"
+            >
+              <div class="personal_c_x_z" style="margin-right: 15px;">删除订单</div>
+              <div class="personal_c_x_z backgroun_color_fe01" style="color:#333;border:none">查看物流</div>
             </div>
           </div>
         </div>
@@ -80,36 +112,50 @@
       <!-- 全部 -->
       <div v-if="switchFlage == '003'">
         <div>
-          <div class="div_display_flex">
-            <div>2019-03-29</div>
-            <div>代发货</div>
-          </div>
-          <div v-for="item in [1,2]">
-            <div class="div_display_flex">
-              <div class="personal_list_div">
-                <img src="../../assets/logo.png" style="width: 80%;">
-              </div>
-              <div class="div_display_flex">
-                <div>天然计划全犬期深海鱼狗粮</div>
-                <div>¥700</div>
-              </div>
+          <!-- 产品列 -->
+          <div>
+            <div class="div_display_flex personal_time_div">
+              <div>2019-03-29</div>
+              <div class="personal_time_div_font">代发货</div>
             </div>
-            <div class="div_display_flex">
-              <div>
-                <div class="order_bt_b">
-                  <span>主食</span>
-                  <span>|</span>
-                  <span>牛肉味</span>
+            <div v-for="item in [1,3,4]" class="div_display_flex">
+              <!-- 产品图片 -->
+              <div class="personal_list_div">
+                <div class="personal_list_div_img">
+                  <img src="../../assets/logo.png" style="width: 100%;">
                 </div>
               </div>
-              <div>*1</div>
+              <!-- 产品详情 -->
+              <div class="margin_top_div5 font_color_00 font_size_14" style="width:80%">
+                <div class="div_display_flex">
+                  <div style=" width: 80%;">天然计划全犬期深海鱼狗粮</div>
+                  <div>¥700</div>
+                </div>
+                <!-- 胶囊 -->
+                <div class="div_display_flex margin_top_div5">
+                  <div style="width:80%">
+                    <div class="personal_bt_b_w">
+                      <span>主食</span>
+                      <span>|</span>
+                      <span>牛肉味</span>
+                    </div>
+                  </div>
+                  <div>*1</div>
+                </div>
+                <!-- 边线 -->
+                <div class="personal_border_bottom_1"></div>
+              </div>
             </div>
           </div>
-          <div>
-            <div>共N件商品 合计：¥230.0（含运费455.0）</div>
-            <div class="div_display_flex">
-              <div class="personal_btn_d" @click="out_pay">放弃支付</div>
-              <div class="personal_btn_d backgroun_color_fe01" @click="open_model">查看物流</div>
+          <!-- 总加 -->
+          <div class="margin_top_div5">
+            <div class="personal_z_j font_size_15 font_colo_33">共N件商品 合计:￥230.0(含运费45.0)</div>
+            <div
+              class="div_display_flex"
+              style="margin-left: 54%;margin-top: 5%;padding-bottom: 3%;"
+            >
+              <div class="personal_c_x_z" style="margin-right: 15px;">放弃支付</div>
+              <div class="personal_c_x_z backgroun_color_fe01" style="color:#333;border:none">重新支付</div>
             </div>
           </div>
         </div>
@@ -203,13 +249,13 @@ export default {
     onCancel() {
       console.log("on cancel");
     },
-    // 放弃支付确认 
+    // 放弃支付确认
     onConfirm(msg) {
       console.log("on confirm");
       if (msg) {
         alert(msg);
       }
-    }
+    },
   }
 };
 </script>
@@ -219,13 +265,14 @@ export default {
   text-align: center;
 }
 .switchBorder {
-  border-top: 1px solid red;
-  height: 1px;
-  width: 40%;
-  margin-left: 28%;
+  border-top: 1px solid #000;
+  width: 45%;
+  margin-left: 26%;
+  border-top-width: 2px;
+  margin-top: -5%;
 }
 .personal_list_div {
-  width: 30%;
+  width: 20%;
   margin-left: 1%;
   padding: 3%;
 }
@@ -239,6 +286,55 @@ export default {
 .personal_model_w {
   width: 95%;
   margin-left: 2%;
+}
+.personal_title {
+  height: 48px;
+  font-size: 17px;
+  line-height: 3;
+}
+.personal_time_div {
+  height: 42px;
+  line-height: 3;
+  padding-left: 4%;
+  border-bottom: 1px solid #e5e5e5;
+}
+.personal_time_div_font {
+  margin-left: 53%;
+  color: #fe5b4a;
+}
+.personal_list_div_img {
+  width: 64px;
+  height: 74px;
+  overflow: hidden;
+}
+.personal_bt_b_w {
+  width: 85px;
+  height: 17px;
+  border-radius: 8px;
+  font-size: 11px;
+  color: #333;
+  background-color: #ffe001;
+  text-align: center;
+}
+.personal_z_j {
+  text-align: right;
+  margin-right: 4%;
+}
+.personal_c_x_z {
+  width: 77px;
+  height: 22px;
+  border-radius: 11px;
+  border: 1px solid #999999;
+  text-align: center;
+  font-size: 12px;
+  line-height: 2;
+  color: #666666;
+}
+.personal_border_bottom_1 {
+  border-top: 1px solid #e5e5e5;
+  width: 120%;
+  margin-left: -29%;
+  margin-top: 6%;
 }
 </style>
 
