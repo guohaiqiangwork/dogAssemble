@@ -106,9 +106,9 @@
         <div class="assemble_buttom_buy" @click="goToConfirmation">去拼团</div>
       </div>
       <!-- 活动结束 邀请好友-->
-      <!-- <div v-if="false" style="width: 100%;">
+      <div v-if="false" style="width: 100%;">
         <div class="assemble_j_s" @click="goToInvitation">邀请好友去拼团</div>
-      </div> -->
+      </div>
     </div>
     <!-- <div class="click" @click="downApp">点击触发</div>-->
     <!-- 弹出层 -->
