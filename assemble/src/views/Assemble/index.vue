@@ -1,30 +1,32 @@
 <template>
-  <div>
+  <div :class="[disscroll ? 'box_disscroll' : '','bgcolor']">
     <!-- <input type="button" value="点我加入购物车" @click="flag=!flag">
     <transition @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
       <p class="circle" v-show="flag"></p>
     </transition>-->
 
     <div class="backgroun_color_fff">
-      <div class="div_display_flex" style="margin-left:26%;padding-top:21px">
-        <div class="div_left_border"></div>
-        <div class="font_color_00 font_size_16" style="margin: -8px 23px 0 23px;">距结束</div>
-        <div class="div_left_border"></div>
+      <div class="div_display_flex flex_box" style="padding-top:21px">
+        <!-- <div class="div_left_border"></div> -->
+        <div class="font_color_00 font_size_16 mx-0 end_title" >距结束</div>
+        <!-- <div class="div_left_border"></div> -->
         <div class="assemble_img_border" @click="goToPersonal">
-          <img src="../../assets/logo.png" style="width:80%">
+          <img src="../../assets/logo.png" style="width:80%;vertical-align:middle;">
         </div>
       </div>
       <!-- 倒计时 -->
       <countdown :endTime="time" :callback="callback" endText="已经结束了"></countdown>
       <div class="assemble_div_font">N 人成团，当前已有N人参团</div>
       <!-- 参团人员 -->
-      <div class="div_display_flex" style="margin-top:4%;padding-bottom: 4%;">
-        <div class="header_border_circular"></div>
+      <div class="div_display_flex avatar_box">
+        <div class="header_border_circular">
+          <img src="" alt="">
+        </div>
         <div class="header_border_circular"></div>
         <div class="header_border_circular"></div>
         <div class="header_border_circular"></div>
         <div class="header_border_circular_g" @click="goToOrder">
-          <img src="../../assets/logo.png" style="width:80%">
+          <img src="../../assets/images/more@2x.png" style="width:100%">
         </div>
       </div>
     </div>
@@ -35,14 +37,15 @@
         class="div_display_flex backgroun_color_fff"
         style="margin-top:2%"
         v-for="(item,index) in lists"
+        :key="index"
       >
         <!-- 产品内容 -->
-        <div @click="goToProduct" class="div_display_flex">
+        <div @click="goToProduct" class="div_display_flex" style="width:100%;"> 
           <!-- 产品图片 -->
           <div class="assemble_list_div">
-            <img src="../../assets/logo.png" width="85%">
+            <img src="../../assets/logo.png" width="105px">
           </div>
-          <div style="width:60%">
+          <div style="width:60%;">
             <div
               class="margin_top_div8 font_color_00 font_size_16"
               style="width:187px;"
@@ -57,10 +60,10 @@
                 class="font_size_11"
               >{{item.money}}</span>
             </div>
-            <div v-if="item.ni == 1" style="margin-top: 6%;padding-left: 69%;">
-              <div class="assemble_specifications" @click="open_model">选择规格</div>
+            <div class="flex_end" v-if="item.ni == 1" style="margin-top: 6%;">
+              <div class="assemble_specifications" @click="open_model(item,index)">选择规格</div>
             </div>
-            <div v-if="item.ni != 1" style="margin-top: 6%;padding-left: 69%;">
+            <div  class="flex_end tyr" v-if="item.ni != 1" style="margin-top: 6%;" >
               <div
                 v-if="!item.buyNumber"
                 style="margin-left: 80%;"
@@ -68,12 +71,11 @@
                 @click="assemble_buy_plus(index)"
               >+</div>
             </div>
-            <div v-if="item.buyNumber > 0" style="margin-top: 6%;padding-left: 64%;">
+            <div class="flex_end" v-if="item.buyNumber > 0 && item.ni != 1" >
               <div class="div_display_flex buy_circular_div">
                 <!-- :class="{back_color :buyFalge==2  }" -->
                 <div
-                  class="buy_circular_n"
-                  style="border:1px solid #eee"
+                  class="buy_circular_n bd_color"
                   @click="buy_minute(2,index)"
                 >-</div>
                 <div style="width:31px;text-align:center;line-height:1.8;font-size:13px">
@@ -81,7 +83,7 @@
                   {{item.buyNumber}}
                 </div>
                 <!-- :class="{ back_color :buyFalge==1 }" -->
-                <div class="buy_circular_n back_color" @click="buyAdd(1,index)">+</div>
+                <div class="buy_circular_n back_color dischoice" @click="buyAdd(1,index)">+</div>
               </div>
             </div>
           </div>
@@ -92,16 +94,31 @@
     <div class="div_display_flex backgroun_color_fff assemble_buttom_div" style="z-index:5004">
       <!-- 活动正常 -->
       <div style="width: 100%;display: flex;" v-if="true">
-        <div class="buy_border_number">{{numberZ}}</div>
+        
         <div class="bt_buy_img">
+          <div class="buy_border_number">{{numberZ}}</div>
           <img src="../../assets/logo.png" alt width="100%">
         </div>
+          <!-- <div v-transfer-dom>
+      <popup v-model="modelFalgez">
+        <popup-header
+        :left-text="('cancel')"
+        :right-text="('done')"
+        :title="('Please select your card')"
+        :show-bottom-border="false"
+        @on-click-left="show1 = false"
+        @on-click-right="show1 = false"></popup-header>
+        <group gutter="0">
+          <radio :options="[('Card 1'), ('Card 2'), ('Card 3'), ('Card 4')]"></radio>
+        </group>
+      </popup>
+    </div> -->
         <div class="bt_buy_money" @click="openModelProductL">
           <div style="margin:3%">
-            <span>¥700</span>
-            <span class="font_color_99 font_size_13 font_text_decoration">$720</span>
+            <span style="margin-left:0.3rem">¥700.0</span>
+            <span class="font_color_99 font_size_13 font_text_decoration" style="margin-left:10px">￥720.0</span>
           </div>
-          <div class="font_color_99 font_size_11" style="margin-left: 3%;margin-top: -2%;">满N件包邮</div>
+          <div class="font_color_99 font_size_11" style="margin-left: 0.6rem;margin-top: -2%;">满N件包邮</div>
         </div>
         <div class="assemble_buttom_buy" @click="goToConfirmation">去拼团</div>
       </div>
@@ -114,31 +131,48 @@
     <!-- 弹出层 -->
     <div v-transfer-dom>
       <x-dialog
-        v-model="showDialogStyle"
+        v-model="opstion.show"
         hide-on-blur
         :dialog-style="{'max-width': '100%', width: '100%', height: '50%', 'background-color': 'transparent','overflow': 'auto'}"
       >
-        <div class="model_colse_X" @click="showDialogStyle = false">X</div>
-        <div class="model_background_width">
+        <div class="model_colse_X" @click="opstion.show = false">X</div>
+        <div class="model_background_width" v-if="opstion.show">
           <div class="model_title_font">商品名称</div>
           <div>
             <div class="div_text_left font_color_33 font_size_14">规格一</div>
             <div style="margin-left:-8%;height:100px;">
               <div
-                class="model_border_button"
-                v-for="item in tasteList"
+              
+                v-for="(item,index) in tasteList"
                 @click="get_taste(item.id)"
+                :class="['model_border_button',item.id ==opstion.flag? 'color' : '' ]"
+                :key="index"
               >{{item.tasteName}}</div>
             </div>
             <div class="mode_button_border"></div>
           </div>
           <div class="div_display_flex">
             <div class="model_buy_font_s">
-              <span style="margin-left:-12%">¥700.00</span>
-              <span style="text-decoration:line-through;font-size:11px" class="font_color_33">900.00</span>
+              <span style="margin-left:-12%">¥700.0</span>
+              <span style="text-decoration:line-through;font-size:11px" class="font_color_33">900.0</span>
             </div>
             <div class="model_buy_font_sb">
-              <div class="model_assemble_specifications_w">+加入购物车</div>
+              <div class="model_assemble_specifications_w" @click="addCount()" v-if="!opstion.buyNumber">+ 加入购物车</div>
+              <div class="flex_end" v-if="opstion.buyNumber" >
+              <div class="div_display_flex buy_circular_div">
+                <!-- :class="{back_color :buyFalge==2  }" -->
+                <div
+                  class="buy_circular_n dischoice bd_color"
+                  @click="disCount()"
+                >-</div>
+                <div style="width:31px;text-align:center;line-height:1.8;font-size:13px">
+                  <!-- <input class="input" v-model="item.buyNumber"> -->
+                  {{opstion.buyNumber}}
+                </div>
+                <!-- :class="{ back_color :buyFalge==1 }" -->
+                <div class="buy_circular_n back_color dischoice" @click="addCount()">+</div>
+              </div>
+            </div>
             </div>
           </div>
         </div>
@@ -159,39 +193,50 @@
     </div>
     <!-- 底部弹出层 -->
     <div v-if="modelFalgez">
-      <div class="model_background" @click="colseModelProductL">
-        <div class="model_center_n">
-          <!-- 标题栏 -->
+      <div class="model_background"  @click="close($event)">
+        <div class="model_center_n"  ref="msk">
+         
           <div class="div_display_flex backgroun_color_fe01" style="height:35px;line-height:2">
             <div class="font_size_15 font_color_33 buy_car">购物车</div>
             <div class="div_display_flex" style=" margin-left: 11%;margin-top: 1%;">
               <div style="width:13px;height:13px">
-                <img src="../../assets/images/delete@2x.png" style="width:100%">
+                <img src="../../assets/images/delete@2x.png" style="vertical-align:-3px;" width="20px" height="20px">
               </div>
-              <div class="font_size_15 font_color_66">清空购物车</div>
+              <div class="font_size_15 font_color_66 ml-3">清空购物车</div>
             </div>
           </div>
-          <!-- 列表 -->
-          <div v-for="item in [1,2,3,4]">
-            <div class="div_display_flex margin_top_div5">
-              <div class="model_bottn_font">天然计划全犬期深海鱼狗粮</div>
-              <div class="div_display_flex">
-                <div style="margin-right:10%">￥1245.3</div>
-                <div class="div_display_flex buy_circular_div">
-                  <!-- :class="{back_color :buyFalge==2  }" -->
-                  <div
-                    class="buy_circular_n"
-                    style="border:1px solid #eee"
+         
+          <div v-for="(item,index) in [1,2,3,4]">
+            <div class="div_display_flex margin_top_div5 flex-between">
+              <div class="model_bottn_font">
+                <p class="ml-10">天然计划全犬期深海鱼狗粮</p> 
+
+
+                <div style="margin:4%;margin-left:10%;">
+              <div class="model_botton_g">主食 | 牛肉味</div>
+            </div>
+              </div>
+              <div :class="['price_box','center_judge']">
+               <p>￥1245.3</p> 
+              <div class=" buy_circular_div div_display_flex">
+                   
+                   
+
+
+                     <div
+                    class="buy_circular_n dischoice bd_color"
                     @click="buy_minute(2,index)"
                   >-</div>
                   <div style="width:31px;text-align:center;line-height:1.8;font-size:13px">8908</div>
-                  <div class="buy_circular_n back_color" @click="buyAdd(1,index)">+</div>
+                  <div class="buy_circular_n back_color dischoice" @click="buyAdd(1,index)">+</div>
                 </div>
-              </div>
+                   
+                  
             </div>
-            <div style="margin:4%">
+            </div>
+            <!-- <div style="margin:4%">
               <div class="model_botton_g">主食 | 牛肉味</div>
-            </div>
+            </div> -->
             <div class="model_botton_border_d"></div>
           </div>
         </div>
@@ -203,22 +248,26 @@
         <img src="../../assets/images/tupianjiazaishibai@3x.png" alt>
       </div>
     </div>
+
+      
   </div>
 </template>
 <script>
 import url from "../../bin/url";
-import { XHeader, XDialog, TransferDomDirective as TransferDom } from "vux";
+import { XHeader, XDialog , PopupHeader, Popup, Group, XSwitch, Radio, TransferDomDirective as TransferDom } from "vux";
 import countdown from "./time";
 import { fail } from "assert";
 
 export default {
   directives: {
-    TransferDom
+    TransferDom,
+    
   },
   components: {
     XHeader,
     countdown,
-    XDialog
+    XDialog,
+    PopupHeader, Popup, TransferDom, Group, XSwitch, Radio
   },
   name: "Assemble",
   data() {
@@ -229,6 +278,8 @@ export default {
       classA: "001",
       modelFalgez: false, //弹出层
       InvitationFalge: false,
+      disscroll:false,
+      opstion:{},
       tasteList: [
         { tasteName: "牛肉味", id: "001" },
         { tasteName: "番茄味", id: "002" },
@@ -239,45 +290,65 @@ export default {
       lists: [
         {
           name: "天人计划全期深海鱼狗粮",
-          prict: "700",
-          money: "900.00",
-          buyNumber: "",
-          ni: "1"
+          prict: "700.0",
+          money: "900.0",
+          buyNumber: 0,
+          ni: "1",
+          show:false,
+          flag:'001'
         },
         {
           name: "天人计海鱼狗粮",
-          prict: "300",
-          money: "1000.00",
-          buyNumber: "",
-          ni: "2"
+          prict: "300.0",
+          money: "1000.0",
+          buyNumber: 0,
+          ni: "2",
+          show:false,
+          
+
         },
         {
           name: "天人计海鱼狗粮",
-          prict: "300",
-          money: "1000.00",
-          buyNumber: "",
-          ni: "1"
+          prict: "300.0",
+          money: "1000.0",
+          buyNumber: 0,
+          ni: "1",
+          show:false,
+          flag:'001'
+
+
         },
         {
           name: "天人计海鱼狗粮",
-          prict: "300",
-          money: "1000.00",
+          prict: "300.0",
+          money: "1000.0",
           buyNumber: 1,
-          ni: "2"
+          ni: "2",
+          show:false,
+        
+
+
         },
         {
           name: "天人计海鱼狗粮",
-          prict: "300",
-          money: "1000.00",
+          prict: "300.0",
+          money: "1000.0",
           buyNumber: 1,
-          ni: "2"
+          ni: "2",
+          show:false,
+         
+
+
         },
         {
           name: "全期深海鱼狗粮",
-          prict: "1000",
-          money: "400.00",
+          prict: "1000.0",
+          money: "400.0",
           buyNumber: 1,
-          ni: "2"
+          ni: "2",
+          show:false,
+
+
         }
       ],
       showDialogStyle: false, //弹窗
@@ -291,7 +362,22 @@ export default {
     settitle("拼团");
     // this.getCode();
   },
+  // computed:{
+  //   open_model(item,index){
+  //     var _this =this;
+  //     return (function (){
+  //       item.show = true;
+  //       return _this.lists[index]
+  //     }())
+  //   }
+  // },
   methods: {
+    close(ev){
+      if (!this.$refs.msk.contains(ev.target)) {
+            this.disscroll = false;
+　　　　　　this.modelFalgez = false;
+　　　　}
+    },
     // 处理
     beforeEnter(el) {
       el.style.transform = "translate(200px, 100px)"; //起步位置
@@ -347,19 +433,29 @@ export default {
     },
 
     // 打开弹窗
-    open_model() {
-      this.showDialogStyle = true;
+    open_model(item,index) {
+      // this.showDialogStyle = true;
+      this.opstion = this.lists[index];
+      item.show = true;
     },
     // 弹窗选择
     get_taste(id) {
-      console.log(id);
-      this.classA = id;
+      // console.log(flag);
+      // this.classA = id;
+      this.opstion.flag = id;
+      // console.log(id,flag.flag);
     },
     // 添加购物车显示
     assemble_buy_plus(id) {
       // this.showPrise = id;
       this.buyFalge = 1;
       this.buyAdd(1, id);
+    },
+    addCount(){
+      this.opstion.buyNumber++;
+    },
+    disCount(){
+      this.opstion.buyNumber--;
     },
     // 增加购物
     buyAdd(id, index) {
@@ -473,12 +569,15 @@ export default {
       this.ShareTimeline(opstion);
     },
     // 点击购物车打开弹出层
-    openModelProductL() {
+    colseModelProductL(e) {
+    
       this.modelFalgez = true;
     },
-    // 点击购物车打开弹出层
-    colseModelProductL() {
-      this.modelFalgez = false;
+    openModelProductL(e){
+      this.modelFalgez = !this.modelFalgez;
+      this.disscroll = this.modelFalgez == true ? true : false;
+      console.log(this.modelFalge)
+      
     },
     // 邀请好友
     goToInvitation() {
@@ -496,6 +595,64 @@ export default {
 };
 </script>
 <style scoped>
+.ml-3{
+  margin-left: 0.3rem;
+}
+
+.end_title:before{
+  margin-right: 22px;
+}
+.end_title:after{
+  margin-left: 22px;
+}
+.end_title:before, .end_title:after{
+  content: "";
+  width: 50px;
+  border-top: 1px solid #FFE31A;
+  display:inline-block;
+  vertical-align: middle;
+}
+.mx-0{
+  margin: 0 auto;
+}
+.flex_box{
+  position: relative;
+}
+.avatar_box{
+  display: flex;
+  justify-content: space-between;
+  width: 92%;
+  margin: 0 auto;
+  margin-top:4%;
+  padding-bottom: 4%;
+}
+.ml-10{
+  margin-left: 10%;
+}
+.flex_end{
+  display: flex;
+  justify-content: flex-end;
+}
+.center_judge{
+  align-items: center;
+}
+.pl-4{
+  padding-left: 4%;
+}
+.flex-around{
+  justify-content: space-around;
+}
+.flex-between{
+  justify-content: space-between;
+}
+p{
+  white-space: nowrap;
+}
+.price_box{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
 .div_left_border {
   width: 50px;
   border-top: 1px solid #ffe001;
@@ -507,14 +664,14 @@ export default {
   height: 45px;
   border-radius: 50%;
   border: 1px dashed #ffe001;
-  margin-left: 6%;
+  /* margin-left: 6%; */
 }
 .header_border_circular_g {
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  margin-left: 6%;
-  border: 2px solid rgb(255, 224, 1);
+  /* margin-left: 6%; */
+  /* border: 2px solid rgb(255, 224, 1); */
   overflow: hidden;
   text-align: center;
   line-height: 4.8;
@@ -532,7 +689,7 @@ export default {
   background-color: #ffe001;
   color: #333;
   border-radius: 11px;
-  line-height: 1.8;
+  line-height: 22px;
   /* margin-top: 3%; */
   /* margin-left: 58%;s */
   font-size: 12px;
@@ -560,46 +717,60 @@ export default {
   height: 20px;
   border-radius: 10px;
   background-color: #fff;
-  border: 1px solid;
+  /* border: 1px solid; */
   margin-left: 13%;
   float: left;
   margin-top: 3%;
   margin-right: 3%;
+  font-size: 12px;
+  line-height: 20px;
+  
+box-shadow:0 2px 13px 1px rgba(97,98,98,0.13);
+}
+.color{
+  background:rgba(255,224,1,1);
 }
 .model_background_width {
   background-color: #fff;
-  width: 95%;
-  margin-left: 2%;
+  width: 90%;
+  margin-left: 5%;
   border-radius: 8px;
 }
 .mode_button_border {
-  border-top: 1px solid #333;
-  width: 95%;
-  margin-left: 2%;
-  margin-top: 8%;
-  margin-bottom: 8%;
+  border-top: 1px solid #e5e5e5;
+  width: calc(100% - 30px);
+  margin: 4% auto;
+ 
 }
 .buy_circular {
-  width: 24px;
-  height: 24px;
+  width: 25px;
+  height: 25px;
+  /* border: 4px solid #fff; */
   border-radius: 50%;
   text-align: center;
   background-color: #ffe001;
   font-size: 18px;
   color: #333;
   margin-top: -1px;
-  line-height: 1.2;
+  /* display: flex;
+  align-items: center; */
+  /* justify-content: space-around; */
+  line-height: 25px;
 }
 .buy_circular_n {
   width: 23px;
   height: 23px;
   border-radius: 50%;
+  /* border: 1px solid #ffe001; */
+  padding: 1px;
   text-align: center;
   font-size: 18px;
   color: #333;
   margin-top: -1px;
-  line-height: 1.2;
+  line-height: 23px;
   background-color: #fff;
+ 
+  /* justify-content: space-around; */
 }
 .buy_circular_div {
   border: 1px solid;
@@ -607,6 +778,7 @@ export default {
   height: 22px;
   border-radius: 11px;
   border-color: #e5e5e5 #ffe001;
+  border-left: #fff;
 }
 .back_color {
   background-color: #ffe001;
@@ -621,15 +793,17 @@ export default {
   height: 50px;
 }
 .assemble_img_border {
+  position: absolute;
+  right: 4%;
   width: 25px;
   border-radius: 50%;
   height: 25px;
   overflow: hidden;
-  margin-left: 16%;
-  margin-top: -3%;
+  /* margin-left: 16%;
+  margin-top: -3%; */
   text-align: center;
   background-color: #ffe001;
-  line-height: 2.4;
+  line-height: 25px;
 }
 .btn_left_assemble {
   margin-left: 70%;
@@ -637,6 +811,7 @@ export default {
 }
 /* 底部 */
 .bt_buy_img {
+  position: relative;
   width: 66px;
   height: 70px;
   margin-top: -3%;
@@ -655,7 +830,8 @@ export default {
   color: #fff;
   margin-top: -5%;
   position: absolute;
-  margin-left: 12%;
+  right: -12px;
+  /* margin-left: 12%; */
   font-size: 11px;
   line-height: 1.7;
   text-align: center;
@@ -694,7 +870,7 @@ export default {
   font-size: 13px;
   background-color: #fff;
   line-height: 2.6;
-  margin-left: 92%;
+  margin-left: 90%;
   margin-top: -4%;
   position: absolute;
 }
@@ -714,10 +890,9 @@ export default {
   text-align: center;
 }
 .model_bottn_font {
+  width: 100%;
   font-size: 14px;
   color: #000;
-  width: 54%;
-  margin-left: 4%;
 }
 .model_botton_border_d {
   border-top: 1px solid #e5e5e5;
@@ -731,5 +906,12 @@ export default {
   height: 54px;
   text-align: center;
   line-height: 3;
+}
+.box_disscroll{
+  height: 100%;
+  overflow: hidden;
+}
+.bd_color{
+  border: 1px solid #e5e5e5;
 }
 </style>

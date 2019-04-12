@@ -1,12 +1,13 @@
 <template>
-  <div>
-    <div class="backgroun_color_fff">
+  <div style="width:100%;height:100%;">
+    <div class="backgroun_color_fff" v-if="true">
       <!-- tab -->
       <div class="div_display_flex backgroun_color_fe01 personal_title">
         <div
           class="personal_tab_width"
           v-for="(item,index) in  tabList"
           @click="tabSwitch(item.id)"
+          :key="index"
         >
           <div>{{item.name}}</div>
           <div class="switchBorder" v-if="switchFlage == item.id"></div>
@@ -16,9 +17,9 @@
       <div v-if="switchFlage == '001'">
         <!-- 产品列 -->
         <div>
-          <div class="div_display_flex personal_time_div">
-            <div>2019-03-29</div>
-            <div class="personal_time_div_font">代发货</div>
+          <div class="div_display_flex personal_time_div flex_between">
+            <div>2019-03-29 12:00</div>
+            <div class="personal_time_div_font">待发货</div>
           </div>
           <div v-for="item in [1,3,4]" class="div_display_flex">
             <!-- 产品图片 -->
@@ -42,7 +43,7 @@
                     <span>牛肉味</span>
                   </div>
                 </div>
-                <div>*1</div>
+                <div class="num_color">*1</div>
               </div>
               <!-- 边线 -->
               <div class="personal_border_bottom_1"></div>
@@ -52,7 +53,7 @@
         <!-- 总加 -->
         <div class="margin_top_div5">
           <div class="personal_z_j font_size_15 font_colo_33">共N件商品 合计:￥230.0(含运费45.0)</div>
-          <div class="div_display_flex" style="margin-left: 54%;margin-top: 5%;padding-bottom: 3%;">
+          <div class="div_display_flex" style="margin-right: 4%;margin-top: 5%;padding-bottom: 3%;justify-content:flex-end;">
             <div class="personal_c_x_z" style="margin-right: 15px;">放弃支付</div>
             <div class="personal_c_x_z backgroun_color_fe01" style="color:#333;border:none">重新支付</div>
           </div>
@@ -63,9 +64,9 @@
         <div>
           <!-- 产品列 -->
           <div>
-            <div class="div_display_flex personal_time_div">
+            <div class="div_display_flex personal_time_div flex_between">
               <div>2019-03-29</div>
-              <div class="personal_time_div_font">代发货</div>
+              <div class="personal_time_div_font">待发货</div>
             </div>
             <div v-for="item in [1,3,4]" class="div_display_flex">
               <!-- 产品图片 -->
@@ -89,7 +90,7 @@
                       <span>牛肉味</span>
                     </div>
                   </div>
-                  <div>*1</div>
+                  <div class="num_color">*1</div>
                 </div>
                 <!-- 边线 -->
                 <div class="personal_border_bottom_1"></div>
@@ -101,7 +102,7 @@
             <div class="personal_z_j font_size_15 font_colo_33">共N件商品 合计:￥230.0(含运费45.0)</div>
             <div
               class="div_display_flex"
-              style="margin-left: 54%;margin-top: 5%;padding-bottom: 3%;"
+              style="margin-right: 4%;margin-top: 5%;padding-bottom: 3%;justify-content:flex-end;"
             >
               <div class="personal_c_x_z" style="margin-right: 15px;">删除订单</div>
               <div class="personal_c_x_z backgroun_color_fe01" style="color:#333;border:none">查看物流</div>
@@ -114,9 +115,9 @@
         <div>
           <!-- 产品列 -->
           <div>
-            <div class="div_display_flex personal_time_div">
+            <div class="div_display_flex personal_time_div flex_between">
               <div>2019-03-29</div>
-              <div class="personal_time_div_font">代发货</div>
+              <div class="personal_time_div_font">待发货</div>
             </div>
             <div v-for="item in [1,3,4]" class="div_display_flex">
               <!-- 产品图片 -->
@@ -140,7 +141,7 @@
                       <span>牛肉味</span>
                     </div>
                   </div>
-                  <div>*1</div>
+                  <div class="num_color">*1</div>
                 </div>
                 <!-- 边线 -->
                 <div class="personal_border_bottom_1"></div>
@@ -152,7 +153,7 @@
             <div class="personal_z_j font_size_15 font_colo_33">共N件商品 合计:￥230.0(含运费45.0)</div>
             <div
               class="div_display_flex"
-              style="margin-left: 54%;margin-top: 5%;padding-bottom: 3%;"
+              style="margin-right: 4%;margin-top: 5%;padding-bottom: 3%;justify-content:flex-end;"
             >
               <div class="personal_c_x_z" style="margin-right: 15px;">放弃支付</div>
               <div class="personal_c_x_z backgroun_color_fe01" style="color:#333;border:none">重新支付</div>
@@ -182,6 +183,11 @@
       >
         <div style="text-align:center;">放弃当前订单？</div>
       </confirm>
+    </div>
+    <div class="nodata" v-else>
+
+      <img  class="mt-50"  src="../../assets/images/mynull@2x.png"/>
+     <p> 主人~快去参与拼团吧~</p>
     </div>
   </div>
 </template>
@@ -222,7 +228,6 @@ export default {
   },
   created() {
     settitle("我的");
-    console.log($);
     this.routeParams = JSON.parse(this.$route.params.obj);
     console.log(this.routeParams);
   },
@@ -260,6 +265,9 @@ export default {
 };
 </script>
 <style scoped>
+.num_color{
+  color: #666;
+}
 .personal_tab_width {
   width: 30%;
   text-align: center;
@@ -291,15 +299,22 @@ export default {
   height: 48px;
   font-size: 17px;
   line-height: 3;
+  display: flex;
+  justify-content: space-around;
+}
+
+.flex_between{
+  display: flex;
+  justify-content: space-between;
 }
 .personal_time_div {
   height: 42px;
   line-height: 3;
-  padding-left: 4%;
+  padding:0 4%;
   border-bottom: 1px solid #e5e5e5;
 }
 .personal_time_div_font {
-  margin-left: 53%;
+  /* margin-left: 53%; */
   color: #fe5b4a;
 }
 .personal_list_div_img {
@@ -310,7 +325,8 @@ export default {
 .personal_bt_b_w {
   width: 85px;
   height: 17px;
-  border-radius: 8px;
+  border-radius: 16px;
+  padding: 0.1rem;
   font-size: 11px;
   color: #333;
   background-color: #ffe001;
@@ -327,7 +343,7 @@ export default {
   border: 1px solid #999999;
   text-align: center;
   font-size: 12px;
-  line-height: 2;
+  line-height: 22px;
   color: #666666;
 }
 .personal_border_bottom_1 {
@@ -336,5 +352,6 @@ export default {
   margin-left: -29%;
   margin-top: 6%;
 }
+
 </style>
 

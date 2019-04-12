@@ -7,20 +7,21 @@ import Assemble from '@/views/Assemble/index'
 import order from '@/views/order/index'
 import confirmationOfOrder from '@/views/confirmationOfOrder/index'
 import addressManagement from '@/views/addressManagement/index'
+import is404 from '@/views/page/is404'
+import notfound from '@/views/page/notfound'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
-  
     {
+      // 拼团
       path: '/',
-      // redirect:'', 指向组件
-      name: 'home',
+      name: 'Assemble',
       meta: {
-        title: '首页', //重点在meta的这里，其他的都是例子的
+        title: '拼团', 
       },
-      component: home
+      component: Assemble
     },
     {
       // 个人中心
@@ -70,6 +71,13 @@ export default new Router({
       name: 'addressManagement',
       component: addressManagement
     },
-
+    {
+      path:'/404',
+      component: is404
+    },
+    {
+      path:'/notfound',
+      component: notfound
+    }
   ]
 })
