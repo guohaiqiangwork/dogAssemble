@@ -164,7 +164,7 @@
                :class="['model_border_button',iten.flag == ind? 'color' : '' ]"
                :key="ind"
                 
-              >{{iten.name}}</div>
+              >{{iten.name+'1'}}</div>
                <!-- @click="get_taste(item.id)" -->
                <!-- :class="['model_border_button',item.id ==opstion.flag? 'color' : '' ]" -->
             </div>
@@ -176,15 +176,15 @@
               <span style="text-decoration:line-through;font-size:13px" class="font_color_33">￥900.0</span>
             </div>
             <div class="model_buy_font_sb">
-              <div class="model_assemble_specifications_w" @click="addCount($event)" v-if="!opstion.buyNumber">+ 加入购物车</div>
+              <div class="model_assemble_specifications_w" @click="addCount($event)" v-if="!attrValue.buyNumber">+ 加入购物车</div>
              
-            <div :class=" ['buy_circular_div','div_display_flex',opstion.buyNumber>0? 'show_circle' :'border_white']" v-show="opstion.buyNumber">
+            <div :class=" ['buy_circular_div','div_display_flex',attrValue.buyNumber? 'show_circle' :'border_white']" v-show="attrValue.buyNumber">
                
                 
-               <div class="flex_end box_content" v-show="opstion.buyNumber > 0" >
-                 <img src="../../assets/images/addicon.png" alt="" :class="['buy_circular',opstion.buyNumber>0?'color_bd': 'back_color', 'addStyle']"
+               <div class="flex_end box_content" v-show="attrValue.buyNumber > 0" >
+                 <img src="../../assets/images/addicon.png" alt="" :class="['buy_circular',attrValue.buyNumber>0?'color_bd': 'back_color', 'addStyle']"
                 @click.stop="addCount($event)">
-                    <span class="box_content">{{opstion.buyNumber}}</span>
+                    <span class="box_content">{{attrValue.buyNumber}}</span>
                     <img src="../../assets/images/del.png" alt="" class="buy_circular   bd_color delStyle"
                   @click.stop="disCount($event)">
              </div>
@@ -325,6 +325,7 @@ export default {
       disscroll:false,
       opstion:{},
       bageNum:0,
+      attrValue:{},
       spec:[],
       tasteList: [
         { tasteName: "牛肉味", id: "001" },
@@ -348,7 +349,8 @@ export default {
       buyFalge: "", //样式
       showPrise: 99999, //显示购物数量
       flag: false,
-      ProductFalg: false //产品详情
+      ProductFalg: false,//产品详情
+      strBuffer:[]
     };
   },
   created() {
@@ -416,8 +418,13 @@ export default {
   methods: {
       getArray(){
         let a =this.opstion.goodsSpeList.map((e,index) => {
-         return  e.attrValue.split(',')
+          console.log(e,'yiuyi');
+        //  return  e.attrValue.split(',')  || []
+        return   e.attrValue.split(',') 
         })
+        if(!a.length){
+          return
+        }
         a.forEach((e,inde) =>{
       
           e.forEach(i =>{
@@ -429,14 +436,12 @@ export default {
         
         })
         a.forEach((e,index) =>{
-          console.log( e,'sdadad')
-          console.log(typeof e,'sdadad')
           e.splice(0,e.length/2);
           if(typeof(e) == 'string'){
             
           }
         })
-       console.log(a,'fty')
+      //  console.log(a,'fty')
         return a
       // }
       
@@ -502,21 +507,20 @@ export default {
 　　　　}
     },
     // 处理
-    beforeEnter(el) {
-      el.style.transform = "translate(200px, 100px)"; //起步位置
-    },
-    enter(el, done) {
-      // el.offsetWidth 强制html渲染动画
-      // el.offsetWidth 这句话如何不写就不会有动画效果直接渲染的
-      el.offsetWidth;
-      el.style.transform = "translate(-150px, 250px)";
-      el.style.transition = "all 2s ease";
-      console.log(done);
-      done();
-    },
-    afterEnter(el) {
-      this.flag = !this.flag;
-    },
+    // beforeEnter(el) {
+    //   el.style.transform = "translate(200px, 100px)"; //起步位置
+    // },
+    // enter(el, done) {
+    //   // el.offsetWidth 强制html渲染动画
+    //   // el.offsetWidth 这句话如何不写就不会有动画效果直接渲染的
+    //   el.offsetWidth;
+    //   el.style.transform = "translate(-150px, 250px)";
+    //   el.style.transition = "all 2s ease";
+    //   done();
+    // },
+    // afterEnter(el) {
+    //   this.flag = !this.flag;
+    // },
     // 展示详情
     goToProduct(id) {
       console.log(id);
@@ -560,11 +564,26 @@ export default {
 
     // 打开弹窗
     open_model(item,index) {
-      // this.showDialogStyle = true;
       this.opstion = this.lists[index];
       item.show = true;
-      this.spec =this.getArray();
-      console.log(this.spec,'kj')
+      
+      if(!item.lalc){ 
+        this.spec =this.getArray();
+        this.opstion.goodsSpeList.forEach(e =>{
+        console.log(e,'yiyuiyuiy');
+        // if(typeof e.attrattrValue =='string'){
+        var arr =e.attrValue.split(',');
+        this.strBuffer.push(arr[0])
+        // }
+       
+        })
+      }
+     
+      item.lalc =1;
+     
+     
+      console.log(this.opstion);
+    
     },
     kind(index,iten,ind){
         var str =this.opstion.goodsSpeList[index].attrValue;
@@ -578,6 +597,18 @@ export default {
         e.flag=null
       })
       iten.flag =ind;
+      // var arr =this.strBuffer.splice(index,1,iten.name);
+      // console.log(arr,'kjkljlkjlkjl')
+      this.strBuffer[index]=iten.name;
+      var str =this.strBuffer.join(',');
+      var pos =this.opstion.goodsinfoList.findIndex(e =>{
+       
+        return e.typeSize == str;
+      });
+       console.log(this.opstion.goodsinfoList)
+      console.log(this.strBuffer)
+     this.attrValue=this.opstion.goodsinfoList[pos];
+      console.log(this.attrValue,'gj')
       this.$set(this.spec[index],'iten.flag',ind)
     },
 
@@ -661,9 +692,9 @@ export default {
       let ua = navigator.userAgent.toLowerCase();
       let isAndroid = ua.indexOf("Android") > -1 || ua.indexOf("Adr") > -1; //Ios终端
       let isiOS = !!ua.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
-      console.log(ua);
-      console.log(isAndroid);
-      console.log(isiOS);
+      // console.log(ua);
+      // console.log(isAndroid);
+      // console.log(isiOS);
     },
     //   去个人中心
     goToPersonal(id) {
@@ -683,12 +714,12 @@ export default {
     getList() {
       const _param = `?_=${new Date().getTime()}`;
       const a = "/" + "1";
-      console.log(_param);
+      // console.log(_param);
       const _obj = {
         buttonType: "2"
       };
       this.$fetch.post(url.wei + a, _obj).then(data => {
-        console.log(data);
+        // console.log(data);
         if (data) {
           this.total = data.Total || 0;
           this.searchData = data;
@@ -784,7 +815,6 @@ export default {
               return Number(a.price) > Number(b.price)
             }),
             len = minGroupPrice.length - 1;
-            console.log(minGroupPrice,2222);
             this.lists.push({
               name: e.goods.name,
               groupPrice:e.goodsinfoList.length ? minGroupPrice[0].groupPrice  : this.toNumber(e.groupPrice),
