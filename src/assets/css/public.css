@@ -87,7 +87,7 @@
 /* 弹出层 */
 .model_background {
   position: fixed;
-  z-index: 1000;
+  z-index: 10;
   top: 0;
   right: 0;
   left: 0;
@@ -98,7 +98,7 @@
 .model_center_n {
   position: fixed;
   display: block;
-  z-index: 5000;
+  z-index: 10;
   width: 100%;
   max-height: 388px;
   margin: auto;

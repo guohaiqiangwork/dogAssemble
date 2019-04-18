@@ -10,24 +10,24 @@
         2710
       </div>
       <div class="div_display_flex margin_top_div5" style="padding:0 5% 5% 4%;justify-content:space-between;">
-        <div style="width:30%">
-          <check-icon :value.sync="demo1" size='12px'></check-icon>
-          <span style="font-size:12px;color:#666"> 默认地址</span>
+        <div style="width:30%;display:flex;align-items:center;">
+          <check-icon :value.sync="demo1" size='20px' style="display:flex;align-items:center;"></check-icon>
+          <span style="font-size:14px;color:#666"> 默认地址</span>
         </div>
         <div  class="div_display_flex operat_box">
-          <div class="div_display_flex">
-            <img src="../../assets/images/edit@2x.png" width="18px" height="18px" class="middle">
-            <div style="font-size:12px;color:#666">编辑</div>
+          <div class="div_display_flex" @click="editAddress">
+            <img src="../../assets/images/edit@2x.png" width="20px" height="20px" class="middle">
+            <div style="font-size:14px;color:#666">编辑</div>
           </div>
-          <div class="div_display_flex">
-            <img src="../../assets/images/delete@2x.png" width="18px" height="18px" class="middle">
-            <div style="font-size:12px;color:#666">删除</div>
+          <div class="div_display_flex" @click="delAddress">
+            <img src="../../assets/images/delete@2x.png" width="20px" height="20px" class="middle">
+            <div style="font-size:14px;color:#666">删除</div>
           </div>
         </div>
       </div>
     </div>
     <div style="margin-left: 20%; margin-top: 10%;">
-      <div class="a_m_b backgroun_color_fe01" @click="openAddressM">+添加新的地址</div>
+      <div class="a_m_b backgroun_color_fe01" @click="openAddressM">+ 新增收货地址</div>
     </div>
     <!-- 新增地址 -->
         <!-- <div v-if="AddressMFalge" class="ofo_address_w">
@@ -62,18 +62,18 @@
     <div v-if="AddressMFalge">
       <div class="model_background" @click="closeAddressMFalge($event)">
         <div class="model_a_m" id="card">
-          <div style="padding:1.2rem;">
+          <div style="padding:0.8rem;">
               <div class="div_display_flex" style="width:100%;align-items:center;">
-          <div class="" style="margin-right:2%;display:flex;align-items:center;">
+          <div class="" style="margin-left:0.2rem;display:flex;align-items:center;">
             <span class="font_size_13 font_color_00">联系人:</span>
-            <input  placeholder="请输入您的名字" style="margin-left:6px;width: calc(100% -  54px);vertical-align: middle;">
+            <input  placeholder="请输入您的名字" style="width: calc(100% -  54px);vertical-align: middle;">
           </div>
-          <div class=""  style="margin-left:2%;">
+          <div class=""  style="margin-left:0.2rem;">
             <span class="font_size_13 font_color_00">手机号:</span>
-            <input type="text" placeholder="请输入手机号 "  style="margin-left:6px;width: calc(100% -  54px)">
+            <input type="text" placeholder="请输入手机号 "  style="width: calc(100% -  54px)">
           </div>
         </div>
-        <div class="margin_top_div5">
+        <div class="margin_top_div5 address_box">
           <span class="font_size_13 font_color_00">所在地区：</span>
           <input type="text" placeholder="请选择您当前所在的地区" :style="{'width': '66%',color: address ? '#101010' : ''}" v-model="address" disabled>
           <img
@@ -119,30 +119,51 @@
         </div>
       </div>
     </div>
+    <confirm
+        v-model="outPayFalge"
+        title
+        @on-cancel="onCancel"
+        @on-confirm="onConfirm"
+  
+      >
+        <div style="text-align:center;font-size:18px;">删除当前地址？</div>
+      </confirm>
   </div>
 </template>
 <script>
 // import url from "../../bin/url";
-import { CheckIcon,XAddress,ChinaAddressV4Data ,Value2nameFilter as value2name,TransferDomDirective as TransferDom  } from "vux";
+import { CheckIcon,Confirm,XAddress,ChinaAddressV4Data ,Value2nameFilter as value2name,TransferDomDirective as TransferDom  } from "vux";
 export default {
   directives: {
     TransferDom
   },
   components: {
-    CheckIcon,XAddress,
+    CheckIcon,XAddress,Confirm
   },
   name: "addressManagement",
   data() {
     return {
       showAddress:false,
       addressValue:[],
-       addressData: ChinaAddressV4Data,
-       address:'',
+      addressData: ChinaAddressV4Data,
+      address:'',
       demo1: false, //默认
+      outPayFalge:false,
       AddressMFalge: false //添加地址
     };
   },
   methods: {
+    onCancel(){},
+    onConfirm(){},
+
+    //删除地址
+    delAddress(){
+      this.outPayFalge =true;
+    },
+    //编辑地址
+    editAddress(){
+      this.AddressMFalge =true;
+    },
       //  地址点击完成时
     logHide (str) {
       if(str){
@@ -183,9 +204,13 @@ export default {
 </script>
 <style >
   .weui-icon-success,.weui-icon-circle{
-    font-size: 12px !important;
+    font-size: 16px !important;
   }
+  .weui-dialog__btn_primary{
+  color: #ffe001 !important;
+}
 </style>
+
 <style scoped>
 input{
   outline: none;
@@ -199,10 +224,16 @@ input{
 }
 .operat_box{
   width: 120px;
+  line-height: 21px;
   justify-content: space-between;
   align-items: center;
 }
-
+.address_box{
+      display: flex;
+    justify-content: space-between;
+    height: 1.6rem;
+    align-items: center;
+}
 .middle{
   vertical-align: middle;
 }
@@ -211,12 +242,12 @@ input{
 }
 .a_m_w {
   width: 90%;
-  margin-top: 8%;
+  margin-top: 5%;
   margin-left: 5%;
 }
 .a_m_m {
   margin-left: 4%;
-  padding-top: 8%;
+  padding-top: 4%;
 }
 .a_m_b {
   width: 250px;
@@ -236,9 +267,8 @@ input{
   background-color: #ffffff;
   border-radius: 3px;
   overflow: hidden;
-  top: 50%;
+  top: 25%;
   margin-left: 5%;
-  transform: translateY(-50%);
 }
 .ofo_b_c_d {
   width: 89px;

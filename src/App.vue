@@ -14,6 +14,8 @@ export default {
  
  font-family: PingFang-SC-Medium;
  font-weight: 500;
+   -webkit-tap-highlight-color:rgba(255,255,255,0);
+   -webkit-appearance:none;
  }
  [v-cloak]{ display:none}
 </style>

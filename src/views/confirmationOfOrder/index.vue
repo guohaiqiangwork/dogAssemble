@@ -26,7 +26,7 @@
             <input type="text" placeholder="请输入手机号 "  style="margin-left:6px;width: calc(100% -  54px)">
           </div>
         </div>
-        <div class="margin_top_div5">
+        <div class="margin_top_div5" style="display:flex;justify-content:space-between;height:1.6rem;align-items:center;">
           <span class="font_size_13 font_color_00">所在地区：</span>
           <input type="text" placeholder="请选择您当前所在的地区" :style="{'width': '66%',color: address ? '#101010' : ''}" v-model="address" disabled>
           <img
@@ -40,15 +40,15 @@
           <span class="font_size_13 font_color_00">详细地址：</span>
           <input type="text" placeholder="请输入您的详细地址">
         </div>
-        <div style="padding-bottom: 8%;">
+        <div style="padding-bottom: 1%;">
           <div class="ofo_b_c_d" @click="saveAddress">保存地址</div>
         </div>
       </div>
       <!-- 默认地址 -->
       <div class="div_display_flex" v-if="showMenus">
-        <div style="width:20% ;margin-left: 12%; margin-top: 3%;">
+        <div style="width:10% ;margin-left: 4%; margin-top: 3%;">
           <div class="ofo_d_z_d">
-            <img src="../../assets/images/local@3x.png" style="width:100%">
+            <img src="../../assets/images/local@3x.png" style="width:100%;height:30px;">
           </div>
         </div>
         <div>
@@ -59,7 +59,7 @@
           <div @click="redirectPath">
             <img
               src="../../assets/images/dingdan_weizhankai@3x.png"
-              style="width: 15%;float: right;margin-top: -7%;"
+              style="width: 8%;float: right;margin-top: -3%;margin-left: 2%;"
             >
           </div>
           <div
@@ -242,7 +242,10 @@ export default {
 };
 </script>
 <style>
-
+.weui-panel__hd:after{
+  content: "";
+  left: 0 !important;
+}
 /* .weui-panel{
   margin-top: 0;
 } */
@@ -264,7 +267,7 @@ export default {
 
 <style scoped>
 .pb-2{
-  padding-bottom: 1.8rem;
+  padding-bottom: 1.2rem;
 }
 .mb-9{
   margin-bottom: 0.9rem;
@@ -367,7 +370,7 @@ input:disabled{
   font-size: 11px;
   text-align: center;
   color: #333;
-  line-height: 2;
+  line-height: 22px;
   margin-left: 76%;
   margin-top: 5%;
   margin-bottom: 5%;
@@ -399,10 +402,11 @@ input:disabled{
   height: 17px;
   border-radius: 9px;
   text-align: center;
+  line-height: 17px;
 }
 .ofo_address_w {
-  width: 90%;
-  margin-left: 5%;
+  width: 94%;
+  margin-left: 3%;
   /* background:rgba(255,255,255,1); */
 box-shadow:0 8px 32px 3px rgba(132,148,168,0.21);
     padding: 1rem;
@@ -417,8 +421,9 @@ box-shadow:0 8px 32px 3px rgba(132,148,168,0.21);
   text-align: center;
   font-size: 13px;
   line-height: 2;
+  margin:  0 auto;
   margin-top: 8%;
-  margin-left: 40%;
+  /* margin-left: 40%; */
 }
 .ofo_d_z_d {
   width: 24px;

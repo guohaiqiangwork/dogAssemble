@@ -54,8 +54,8 @@
         <div class="margin_top_div5">
           <div class="personal_z_j font_size_15 font_colo_33">共N件商品 合计:￥230.0(含运费45.0)</div>
           <div class="div_display_flex" style="margin-right: 4%;margin-top: 5%;padding-bottom: 3%;justify-content:flex-end;">
-            <div class="personal_c_x_z" style="margin-right: 15px;">放弃支付</div>
-            <div class="personal_c_x_z backgroun_color_fe01" style="color:#333;border:none">重新支付</div>
+            <div class="personal_c_x_z" style="margin-right: 15px;"  @click="outPay('放弃当前订单？')">放弃支付</div>
+            <div class="personal_c_x_z backgroun_color_fe01" style="color:#333;border:1px solid #ffe001">重新支付</div>
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@
           <!-- 产品列 -->
           <div>
             <div class="div_display_flex personal_time_div flex_between">
-              <div>2019-03-29</div>
+              <div>2019-03-29 12:00</div>
               <div class="personal_time_div_font">待发货</div>
             </div>
             <div v-for="item in [1,3,4]" class="div_display_flex">
@@ -104,8 +104,8 @@
               class="div_display_flex"
               style="margin-right: 4%;margin-top: 5%;padding-bottom: 3%;justify-content:flex-end;"
             >
-              <div class="personal_c_x_z" style="margin-right: 15px;">删除订单</div>
-              <div class="personal_c_x_z backgroun_color_fe01" style="color:#333;border:none">查看物流</div>
+              <div class="personal_c_x_z" style="margin-right: 15px;" @click="outPay('删除当前订单？')">删除订单</div>
+              <div class="personal_c_x_z backgroun_color_fe01" style="color:#333;border:1px solid #ffe001">查看物流</div>
             </div>
           </div>
         </div>
@@ -116,7 +116,7 @@
           <!-- 产品列 -->
           <div>
             <div class="div_display_flex personal_time_div flex_between">
-              <div>2019-03-29</div>
+              <div>2019-03-29 12:00</div>
               <div class="personal_time_div_font">待发货</div>
             </div>
             <div v-for="item in [1,3,4]" class="div_display_flex">
@@ -136,7 +136,7 @@
                 <div class="div_display_flex margin_top_div5">
                   <div style="width:80%">
                     <div class="personal_bt_b_w">
-                      <span>主食</span>
+                      <span @click="outPay">主食</span>
                       <span>|</span>
                       <span>牛肉味</span>
                     </div>
@@ -155,8 +155,8 @@
               class="div_display_flex"
               style="margin-right: 4%;margin-top: 5%;padding-bottom: 3%;justify-content:flex-end;"
             >
-              <div class="personal_c_x_z" style="margin-right: 15px;">放弃支付</div>
-              <div class="personal_c_x_z backgroun_color_fe01" style="color:#333;border:none">重新支付</div>
+              <div class="personal_c_x_z" style="margin-right: 15px;" @click="outPay('放弃当前订单？')">放弃支付</div>
+              <div class="personal_c_x_z backgroun_color_fe01" style="color:#333;border:1px solid #ffe001" @click="console.log(13213)">重新支付</div>
             </div>
           </div>
         </div>
@@ -181,7 +181,7 @@
         @on-show="onShow"
         @on-hide="onHide"
       >
-        <div style="text-align:center;">放弃当前订单？</div>
+        <div style="text-align:center;font-size:18px;">{{title}}</div>
       </confirm>
     </div>
     <div class="nodata" v-else>
@@ -223,7 +223,8 @@ export default {
       ],
       switchFlage: "001",
       showDialogStyle: false, //弹窗
-      outPayFalge: false
+      outPayFalge: false,
+      title:''
     };
   },
   created() {
@@ -241,14 +242,15 @@ export default {
       this.showDialogStyle = true;
     },
     // 放弃支付
-    out_pay() {
+    outPay(e) {
+      this.title =e;
       this.outPayFalge = true;
     },
     onHide() {
-      console.log("on hide");
+      
     },
     onShow() {
-      console.log("on show");
+      
     },
     // 取消
     onCancel() {
@@ -264,6 +266,13 @@ export default {
   }
 };
 </script>
+<style>
+
+.weui-dialog__btn_primary{
+  color: #ffe001 !important;
+}
+</style>
+
 <style scoped>
 .num_color{
   color: #666;
@@ -331,6 +340,7 @@ export default {
   color: #333;
   background-color: #ffe001;
   text-align: center;
+  line-height: 17px;
 }
 .personal_z_j {
   text-align: right;
@@ -348,7 +358,7 @@ export default {
 }
 .personal_border_bottom_1 {
   border-top: 1px solid #e5e5e5;
-  width: 120%;
+  width: 123%;
   margin-left: -29%;
   margin-top: 6%;
 }
