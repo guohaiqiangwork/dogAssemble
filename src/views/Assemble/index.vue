@@ -58,7 +58,7 @@
               <span
                 style="text-decoration:line-through; margin-left: 6%;"
                 class="font_size_11"
-              >{{item.money}}</span>
+              >￥{{item.price}}</span>
             </div>
             <div class="flex_end" v-if="item.ni == 1" style="margin-top: 6%;">
               <div class="assemble_specifications" @click="open_model(item,index)">选择规格</div>
@@ -73,12 +73,12 @@
             </div> -->
              <div :class=" ['buy_circular_div','div_display_flex',item.buyNumber>0? 'show_circle' :'border_white']">
                <img src="../../assets/images/addicon.png" alt="" :class="['buy_circular',item.buyNumber>0?'color_bd': 'back_color', 'addStyle']"
-                @click.stop="buyAdd(1,index,$event)">
+                @click.stop="buyAdd(item,index,$event)">
                 
               <div class="flex_end box_content" v-show="item.buyNumber > 0 && item.ni != 1" >
                     <span class="box_content">{{item.buyNumber}}</span>
                     <img src="../../assets/images/del.png" alt="" class="buy_circular   bd_color delStyle"
-                  @click.stop="buy_minute(1,index)">
+                  @click.stop="buy_minute(item,index)">
               </div>
             </div>
           
@@ -122,8 +122,8 @@
     </div> -->
         <div class="bt_buy_money" @click="openModelProductL">
           <div style="margin:3%">
-            <span style="margin-left:0.4rem" :class="{'font_color_99' : bageNum ? '' : true}">¥700.0</span>
-            <span class="font_color_99 font_size_13 font_text_decoration" style="margin-left:0.2rem">￥720.0</span>
+            <span style="margin-left:0.4rem" :class="{'font_color_99' : bageNum ? '' : true}">￥{{groupPrice}}</span>
+            <span class="font_color_99 font_size_13 font_text_decoration" style="margin-left:0.2rem">￥{{disPrice}}</span>
           </div>
           <div class="font_color_99 font_size_11" style="margin-left: 0.8rem;margin-top: -2%;">满N件包邮</div>
         </div>
@@ -151,20 +151,20 @@
         :dialog-style="{'max-width': '100%', width: '100%', height: '50%', 'background-color': 'transparent','overflow': 'auto'}"
       >
         <div class="model_colse_X" @click="opstion.show = false">X</div>
-        <div class="model_background_width" v-if="opstion.show">
+        <div class="model_background_width" v-show="opstion.show">
           <div class="model_title_font">商品名称</div>
           <div v-for="(item,index) in opstion.goodsSpeList" :key="index">
             <div class="div_text_left font_color_33 font_size_14">{{item.specification.name}}</div>
             <div style="height:90px;">
               <div
               
-                v-for="(iten,ind) in spec[index]"
+                v-for="(iten,ind) in opstion.spec[index]"
                
                @click="get_taste(index,iten,ind)"
                :class="['model_border_button',iten.flag == ind? 'color' : '' ]"
                :key="ind"
                 
-              >{{iten.name+'1'}}</div>
+              >{{iten.name}}</div>
                <!-- @click="get_taste(item.id)" -->
                <!-- :class="['model_border_button',item.id ==opstion.flag? 'color' : '' ]" -->
             </div>
@@ -172,26 +172,28 @@
           </div>
           <div class="div_display_flex">
             <div class="model_buy_font_s">
-              <span style="-0.9rem">¥700.0</span>
-              <span style="text-decoration:line-through;font-size:13px" class="font_color_33">￥900.0</span>
+              <span style="-0.9rem">￥{{attrValue.groupPrice}}</span>
+              <span style="text-decoration:line-through;font-size:13px" class="font_color_33">￥{{attrValue.price}} </span>
             </div>
-            <div class="model_buy_font_sb">
-              <div class="model_assemble_specifications_w" @click="addCount($event)" v-if="!attrValue.buyNumber">+ 加入购物车</div>
-             
-            <div :class=" ['buy_circular_div','div_display_flex',attrValue.buyNumber? 'show_circle' :'border_white']" v-show="attrValue.buyNumber">
-               
-                
-               <div class="flex_end box_content" v-show="attrValue.buyNumber > 0" >
-                 <img src="../../assets/images/addicon.png" alt="" :class="['buy_circular',attrValue.buyNumber>0?'color_bd': 'back_color', 'addStyle']"
-                @click.stop="addCount($event)">
-                    <span class="box_content">{{attrValue.buyNumber}}</span>
-                    <img src="../../assets/images/del.png" alt="" class="buy_circular   bd_color delStyle"
-                  @click.stop="disCount($event)">
-             </div>
-            
+            <!-- <div >  -->
               
-            </div>
-            </div>
+              <div v-for="(pop,index) in opstion.goodsinfoList" :key="index" :class="{'model_buy_font_sb':pop.id == attrValue.id}"  v-show="pop.id==attrValue.id">
+                <div class="model_assemble_specifications_w" @click="addCount($event,pop,index)" v-if="!Number(pop.buyNumber)">+ 加入购物车</div>
+                
+                <div :class=" ['buy_circular_div','div_display_flex',pop.buyNumber >0? 'show_circle' :'border_white']" v-if="pop.buyNumber>0">
+                  
+                    
+                  <div class="flex_end box_content"  >
+                    <img src="../../assets/images/addicon.png" alt="" :class="['buy_circular',pop.buyNumber>0?'color_bd': 'back_color', 'addStyle']"
+                    @click.stop="addCount($event,pop,index)">
+                        <span class="box_content">{{pop.buyNumber}}</span>
+                        <img src="../../assets/images/del.png" alt="" class="buy_circular   bd_color delStyle"
+                      @click.stop="disCount($event,pop)">
+                  </div>
+                </div>
+              </div>
+            <!-- </div> -->
+
           </div>
         </div>
       </x-dialog>
@@ -230,19 +232,19 @@
                 <p class="ml-10">{{item.name}}</p> 
 
 
-                <div style="margin:4%;margin-left:10%;">
-              <div class="model_botton_g">主食 | 牛肉味</div>
+              <div style="margin:4%;margin-left:10%;" v-if="item.typeSize">
+              <div class="model_botton_g">{{item.typeSize.replace(/,/g,' | ')}}</div>
             </div>
               </div>
               <div :class="['price_box','center_judge']">
-               <p>{{item.money}}</p> 
+               <p>￥{{item.groupPrice}}</p> 
                <div :class=" ['buy_circular_div','div_display_flex',item.buyNumber>0? 'show_circle' :'border_white']">
                <img src="../../assets/images/addicon.png" alt="" :class="['buy_circular',item.buyNumber>0?'color_bd': 'back_color', 'addStyle']"
-                @click.stop="btm_add(index,$event)">
+                @click.stop="btm_add(index,$event,item)">
               <div class="flex_end box_content" v-show="item.buyNumber > 0" >
                     <span class="box_content">{{item.buyNumber}}</span>
                     <img src="../../assets/images/del.png" alt="" class="buy_circular   bd_color delStyle"
-                  @click.stop="btm_dis(index)">
+                  @click.stop="btm_dis(index,item)">
               </div>
             </div>
               <!-- <div class=" buy_circular_div div_display_flex">
@@ -298,14 +300,36 @@ export default {
     PopupHeader, Popup, TransferDom, Group, XSwitch, Radio
   },
   name: "Assemble",
-  // watch: {
+  watch: {
   //   // 如果 `question` 发生改变，这个函数就会运行
   //   spec: function (newQuestion, oldQuestion) {
   //     console.log('yuiyiyuiyuiyius')
   //     // oldQuestion = newQuestion;
   //   },
   //   // deep:true
-  // },
+    filtArrray:{
+      handler(oldValue,newValue){
+        // this.filtArrray();
+        // console.log('我改变了',newValue)
+      },
+     
+    }, 
+    opstion:{
+      handler(oldValue,newValue){
+        // this.filtArrray();
+        var index =this.lists.indexOf(oldValue)
+        this.$set(this.lists[index],newValue);
+        oldValue =newValue
+        // console.log('我改变了',newValue)
+      },
+     deep:true
+    },
+    deep:true
+  },
+  beforeRouteLeave(to, from, next){
+    console.log(to,'aaaaa');
+    next(false)
+  },
   data() {
     return {
             //小球 设为3个
@@ -326,7 +350,8 @@ export default {
       opstion:{},
       bageNum:0,
       attrValue:{},
-      spec:[],
+      totalPrice:0,
+      totalDis:0,
       tasteList: [
         { tasteName: "牛肉味", id: "001" },
         { tasteName: "番茄味", id: "002" },
@@ -346,7 +371,7 @@ export default {
         // }
       ],
       showDialogStyle: false, //弹窗
-      buyFalge: "", //样式
+      // buyFalge: "", //样式
       showPrise: 99999, //显示购物数量
       flag: false,
       ProductFalg: false,//产品详情
@@ -358,68 +383,44 @@ export default {
     // this.getCode();
   },
   computed:{
+    groupPrice(){
+      return this.totalPrice.toFixed(1);
+    },
+    disPrice(){
+      return this.totalDis.toFixed(1);
+    },
     filtArrray(){
-     let a =this.lists.filter(function(e){
-       return e.buyNumber>0;
+      let arr1 =[];
+      let arr2 =[];
+     this.lists.map(function(e){
+      
+
+      if(e.goodsinfoList.length){
+        e.goodsinfoList.forEach(item =>{
+          if(item && item.buyNumber>0){
+            item.name =e.name;
+            arr1.push(item);
+          }
+          
+        })
+      }
+          
      });
-       return a 
+  
+    arr2 =this.lists.filter(e =>{
+      return e.buyNumber >0
+    })
+    var a =[...arr1,...arr2]
+       return   a
     },
     token(){
      return JSON.parse(localStorage.getItem('user'));
     
     },
-    // spec(){
-    //   console.log(this.opstion,'opo')
-    //   // if(this.opstion){
-    //     let arr =[];
-    //     var obj ={}
-    //     let a =this.opstion.goodsSpeList.map((e,index) => {
-    //       // console.log( e.attrValue.split(','))
-    //       e.flag =0;
-    //       // var add =e.attrValue.split(',');
-            
-    //       // this.opstion.goodsSpeList[index]
-    //       // arr = e.attrValue.split(',')
-    //      return  e.attrValue.split(',')
-    //     })
-    //     arr.push(Array(3),Array(2))
-    //     // arr =Array.from(a.length)
-    //     a.forEach((e,inde) =>{
-    //     //   console.log(e,88888)
-    //     //  e.splice(0,e.length/2);
-    //       e.forEach(i =>{
-             
-
-    //         e.push({
-    //           name:i,
-    //           flag:0
-    //         }) 
-    //         console.log(e[inde],88)
-    //       })
-        
-    //     })
-    //     // console.log(obj)s
-    //     a.forEach((e,index) =>{
-    //       console.log( e,'sdadad')
-    //       console.log(typeof e,'sdadad')
-    //       e.splice(0,e.length/2);
-    //       if(typeof(e) == 'string'){
-            
-    //       }
-    //     })
-     
-    //    console.log(a,'fty')
-    //     return a ||[]
-    //   // }
-      
-    // }
-  
   },
   methods: {
       getArray(){
         let a =this.opstion.goodsSpeList.map((e,index) => {
-          console.log(e,'yiuyi');
-        //  return  e.attrValue.split(',')  || []
         return   e.attrValue.split(',') 
         })
         if(!a.length){
@@ -441,10 +442,7 @@ export default {
             
           }
         })
-      //  console.log(a,'fty')
-        return a
-      // }
-      
+        return a  
     },
        drop(el){ //抛物  
                     for(let i=0;i<this.balls.length;i++){  
@@ -501,7 +499,7 @@ export default {
                               }  
                      },
     close(ev){
-      if (this.$refs.msk || !this.$refs.msk.contains(ev.target)) {
+      if (this.$refs.msk && !this.$refs.msk.contains(ev.target)) {
             this.disscroll = false;
 　　　　　　this.modelFalgez = false;
 　　　　}
@@ -566,24 +564,27 @@ export default {
     open_model(item,index) {
       this.opstion = this.lists[index];
       item.show = true;
-      
+      var arr;
       if(!item.lalc){ 
-        this.spec =this.getArray();
+        item.spec =this.getArray();
         this.opstion.goodsSpeList.forEach(e =>{
-        console.log(e,'yiyuiyuiy');
-        // if(typeof e.attrattrValue =='string'){
-        var arr =e.attrValue.split(',');
-        this.strBuffer.push(arr[0])
-        // }
-       
+         arr =e.attrValue.split(',');
+        item.strBuffer.push(arr[0])
         })
       }
      
       item.lalc =1;
-     
-     
-      console.log(this.opstion);
-    
+      var str =item.strBuffer.join(',');
+      var pos =item.goodsinfoList.findIndex(e =>{
+       
+        return e.typeSize == str;
+      });
+     this.attrValue=this.opstion.goodsinfoList[pos];
+    //  console.log(str);
+    //  console.log(pos,'pos')
+    // console.log(item,'item');
+    // console.log(this.opstion.goodsinfoList)
+    //   console.log(this.attrValue,'sddadadsaddasdasdadasda11111111111');
     },
     kind(index,iten,ind){
         var str =this.opstion.goodsSpeList[index].attrValue;
@@ -593,23 +594,20 @@ export default {
     },
     // 弹窗选择
     get_taste(index,iten,ind) {
-      this.spec[index].forEach(e =>{
+      this.opstion.spec[index].forEach(e =>{
         e.flag=null
       })
       iten.flag =ind;
-      // var arr =this.strBuffer.splice(index,1,iten.name);
-      // console.log(arr,'kjkljlkjlkjl')
-      this.strBuffer[index]=iten.name;
-      var str =this.strBuffer.join(',');
+      this.opstion.strBuffer[index]=iten.name;
+      var str =this.opstion.strBuffer.join(',');
       var pos =this.opstion.goodsinfoList.findIndex(e =>{
        
         return e.typeSize == str;
       });
-       console.log(this.opstion.goodsinfoList)
-      console.log(this.strBuffer)
-     this.attrValue=this.opstion.goodsinfoList[pos];
-      console.log(this.attrValue,'gj')
-      this.$set(this.spec[index],'iten.flag',ind)
+      
+    this.attrValue=this.opstion.goodsinfoList[pos];
+     
+    this.$set(this.opstion.spec[index],'iten.flag',ind)
     },
 
 
@@ -619,65 +617,79 @@ export default {
       this.modelFalgez =false;
         this.disscroll =false;
       this.bageNum = 0;
+      this.totalPrice =0;
       this.lists.map(e =>{
-        e.buyNumber = 0;
+       
+        if(e.goodsinfoList.length){
+          e.goodsinfoList.forEach(item =>{
+            item.buyNumber =0;
+          })
+        }else{
+           e.buyNumber = 0;
+        }
       });
      this.modelFalgez = false;
     },
     // 添加购物车显示
-    assemble_buy_plus(id,e) {
+    // assemble_buy_plus(id,e) {
      
-      // this.showPrise = id;
-      this.buyFalge = 1;
-      this.buyAdd(1, id,e);
-    },
+    //   // this.showPrise = id;
+    //   this.buyFalge = 1;
+    //   this.buyAdd(1, id,e);
+    // },
     //选择规格 购物车数量
-    addCount(event){
+    addCount(event,num,index){
+      this.totalPrice+=Number(num.groupPrice);
+      this.totalDis+=Number(num.price);
       this.drop(event.target);
-      // this.bageNum++;
-      this.opstion.buyNumber++;
+      var a = num.buyNumber++;
+    
+      this.$set(this.lists,this.opstion.goodsinfoList[index],num)
     },
-    disCount(event){
+    disCount(event,num){
 
       this.bageNum--;
-      this.opstion.buyNumber--;
+      num.buyNumber--;
+      this.totalPrice-=num.groupPrice;
+      this.totalDis-=Number(num.price);
       if(!this.bageNum){
         this.clearCart();
       }
       
     },
     //点击底部购物车 购物数量
-    btm_add(index,event){
+    btm_add(index,event,item){
       this.drop(event.target);
-
+      this.totalPrice+=Number(item.groupPrice);
+      this.totalDis+=Number(item.price);
       this.filtArrray[index].buyNumber++;
     },
-    btm_dis(index){
+    btm_dis(index,item){
       this.bageNum--;
+      this.totalPrice-=item.groupPrice;
+      this.totalDis-=item.price;
       if(!this.bageNum){
-        
-        
         this.clearCart()
       }
       this.filtArrray[index].buyNumber--;
 
     },
     // 增加购物
-    buyAdd(id, index,event) {
+    buyAdd(item, index,event) {
+      this.totalPrice+=Number(item.groupPrice);
+      this.totalDis+=Number(item.price);
       this.drop(event.target);
-       
-      this.buyFalge = id;
       var lists = this.lists;
       var buyNumber = Number(lists[index].buyNumber);
-      buyNumber = buyNumber + 1;
+      buyNumber += 1;
       lists[index].buyNumber = buyNumber;
        
     },
     // 减少购物
-    buy_minute(id, index) {
-       
-      this.buyFalge = id;
+    buy_minute(item, index) {
       var lists = this.lists;
+      this.totalPrice -=item.groupPrice;
+      this.totalDis -=item.price;
       var buyNumber = lists[index].buyNumber;
       if (buyNumber > 0) {
         this.bageNum--;
@@ -802,6 +814,12 @@ export default {
     closeToInvitation() {
       this.InvitationFalge = false;
     },
+    fun(){
+    alert(111)
+    
+    console.log("监听到了");
+  
+    },
     getMsg(){
       
       this.$fetch.post('weChat/index/getActivity?activityId='+this.token.activityId).then(
@@ -818,7 +836,7 @@ export default {
             this.lists.push({
               name: e.goods.name,
               groupPrice:e.goodsinfoList.length ? minGroupPrice[0].groupPrice  : this.toNumber(e.groupPrice),
-              money:e.goodsinfoList.length ? '￥'+minPrice[0].price+'起':'￥'+this.toNumber(e.price),
+              price:e.goodsinfoList.length ? minPrice[0].price+'起':this.toNumber(e.price),
               hasWord:e.goodsinfoList.length ? minGroupPrice[0].groupPrice == minGroupPrice[len].groupPrice ?false : true : null,
               avatar:e.goods.imgList,
               buyNumber: e.buyNumber,
@@ -826,7 +844,9 @@ export default {
               show:false,
               flag:0,
               goodsSpeList:e.goods.goodsSpeList,
-              goodsinfoList:e.goodsinfoList
+              goodsinfoList:e.goodsinfoList,
+              spec:[],
+              strBuffer:[]
             })
           });
 
@@ -838,7 +858,7 @@ export default {
   created(){
     // window.location.href
     var href =window.location.href;
-    console.log(window.location.href)
+    // console.log(window.location.href)
     function test(){
       var obj ={}
       href=href.split('?');
@@ -858,10 +878,21 @@ export default {
   },
   mounted() {
     this.getMsg();
+     if (window.history && window.history.pushState) {
+    history.pushState(null, null, document.URL);
+    window.addEventListener('popstate', this.fun, false);//false阻止默认事件
+  }
+
+// window.addEventListener("popstate", function(e){
+//         console.log(e,'小敏哥很帅！！！');
+// },false)
     // console.log(this.token,878)
     // console.log(this.$route);
-    console.log(this.$fetch,'999999');
-  }
+    // console.log(this.$fetch,'999999');
+  },
+  destroyed(){
+  window.removeEventListener('popstate', this.fun, false);//false阻止默认事件
+},
 };
 </script>
 <style>
