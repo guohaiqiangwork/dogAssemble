@@ -15,16 +15,18 @@
         </div>
       </div>
       <!-- 倒计时 -->
-      <countdown :endTime="time" :callback="callback" endText="已经结束了"></countdown>
-      <div class="assemble_div_font">N 人成团，当前已有N人参团</div>
+      <countdown  :endTime="time" :callback="callback" endText="已经结束了"></countdown>
+      <div class="assemble_div_font">{{`${groupNum}人成团，当前已有${nowCount}人参团`}}</div>
       <!-- 参团人员 -->
       <div class="div_display_flex avatar_box">
         <div class="header_border_circular" style="position:relative">
           <img src="../../assets/images/team@2x.png" alt class="tag_team">
         </div>
-        <div class="header_border_circular"></div>
-        <div class="header_border_circular"></div>
-        <div class="header_border_circular"></div>
+        <div v-for="(item,index) in avatarList" :key="index">
+            <img class="header_border_circular" :src="item.headimgurl?item.headimgurl: index ==1 ? require('../../assets/images/cat@2x.png') : require('../../assets/images/dog@2x.png')" alt="" width="45" height="45" >
+        </div>
+        <!-- <div class="header_border_circular"></div>
+        <div class="header_border_circular"></div> -->
         <div class="header_border_circular_g" @click="goToOrder">
           <img src="../../assets/images/more@2x.png" style="width:100%">
         </div>
@@ -38,12 +40,13 @@
         style="margin-top:2%"
         v-for="(item,index) in lists"
         :key="index"
+        @click="postman(index)"
       >
         <!-- 产品内容 -->
         <div @click="goToProduct" class="div_display_flex" style="width:100%;">
           <!-- 产品图片 -->
           <div class="assemble_list_div">
-            <img src="../../assets/logo.png" width="105px">
+            <img :src="baseURL + 'sys/attachment/showPic?downloadToken=' + item.avatar + '6210e537ab7425ada8f8cd2430ccb36f'" width="105px">
           </div>
           <div style="width:60%;">
             <div
@@ -115,7 +118,7 @@
     <!-- 购买 -->
     <div class="div_display_flex backgroun_color_fff assemble_buttom_div" style="z-index:12">
       <!-- 活动正常 -->
-      <div style="width: 100%;display: flex;" v-if="true">
+      <div style="width: 100%;display: flex;" v-if="!isJoin">
         <div class="bt_buy_img">
           <div class="buy_border_number" v-show="bageNum">{{bageNum}}</div>
           <img src="../../assets/images/shopping@2x.png" alt width="100%" height="76px">
@@ -153,11 +156,11 @@
         >去拼团</div>
       </div>
       <!-- 活动结束 邀请好友-->
-      <div v-if="false" style="width: 100%;">
+      <div v-if="isJoin && !isActive || isShow" style="width: 100%;">
         <div class="assemble_j_s" @click="goToInvitation">{{ bottom_title }}</div>
         <!-- 改变bottom_title 的值为 更多拼团   活动已结束  敬请期待-->
       </div>
-      <div v-if="false" style="width: 100%;" class="bottom_box">
+      <div v-if="isJoin && isActive" style="width: 100%;" class="bottom_box">
         <div class="wid_70" @click="goToInvitation">
           <span class="wid_100">邀请好友去拼团</span>
         </div>
@@ -343,7 +346,9 @@
     </div>
   </div>
 </template>
+
 <script>
+import config from '../../config/config.dev.js'
 import url from "../../bin/url";
 import {
   XHeader,
@@ -381,12 +386,14 @@ export default {
     //     // oldQuestion = newQuestion;
     //   },
     //   // deep:true
-    filtArrray: {
-      handler(oldValue, newValue) {
-        // this.filtArrray();
-        // console.log('我改变了',newValue)
-      }
-    },
+    
+    // time: {
+    //   handler(oldValue, newValue) {
+    //     console.log(oldValue,'kjljljlk')
+    //     // this.filtArrray();
+    //     // console.log('我改变了',newValue)
+    //   }
+    // },
     opstion: {
       handler(oldValue, newValue) {
         // this.filtArrray();
@@ -397,7 +404,6 @@ export default {
       },
       deep: true
     },
-    deep: true
   },
   // beforeRouteLeave(to, from, next) {
   //   console.log(to, "aaaaa");
@@ -410,18 +416,24 @@ export default {
       dropBalls: [],
       bottom_title: "邀请好友去拼团",
       popupVisible: false,
-      time: "3554291380",
+      time: "",
       numberZ: "20",
       classA: "001",
       modelFalgez: false, //弹出层
       InvitationFalge: false,
       disscroll: false,
+      isJoin:null,
+      isActive:null,
       opstion: {},
       bageNum: 0,
       operaType:'goodsActivityId',
       attrValue: {},
       totalPrice: 0,
       totalDis: 0,
+      groupNum:0,
+      nowCount:0,
+      isShow : false,
+      avatarList:[1,2,3],
       tasteList: [
         { tasteName: "牛肉味", id: "001" },
         { tasteName: "番茄味", id: "002" },
@@ -453,6 +465,12 @@ export default {
     // this.getCode();
   },
   computed: {
+    goodsDetail(){
+
+    },
+    baseURL(){
+      return config.baseURL
+    },
     groupPrice() {
       return this.totalPrice.toFixed(1);
     },
@@ -466,17 +484,19 @@ export default {
         if (e.goodsinfoList.length) {
           e.goodsinfoList.forEach(item => {
             if (item && item.buyNumber > 0) {
-              item.operaType ='goodsinfoId',
+              item.operaType ='goodsinfoId',                                  
               item.name = e.name;
               arr1.push(item);
+             
             }
           });
         }
       });
-
+      
       arr2 = this.lists.filter(e => {
         return e.buyNumber > 0;
       });
+       console.log(arr2,'arr1');
       var a = [...arr1, ...arr2];
       return a;
     },
@@ -485,6 +505,10 @@ export default {
     }
   },
   methods: {
+    postman(index){
+      console.log(this.lists[index],121);
+      
+    },
     getArray() {
       let a = this.opstion.goodsSpeList.map((e, index) => {
         return e.attrValue.split(",");
@@ -497,7 +521,7 @@ export default {
           e.push({
             name: i,
             flag: 0,
-            operaType:'goodsinfoId'
+            // operaType:'goodsinfoId'
           });
         });
       });
@@ -658,7 +682,7 @@ export default {
     // 弹窗选择
     get_taste(index, iten, ind) {
       this.opstion.spec[index].forEach(e => {
-        e.operaType ='goodsinfoId',
+        // e.operaType ='goodsinfoId',
         e.flag = null;
       });
       iten.flag = ind;
@@ -689,7 +713,9 @@ export default {
         }
       });
       this.modelFalgez = false;
+      this.clearQuest();
     },
+   
     // 添加购物车显示
     // assemble_buy_plus(id,e) {
 
@@ -699,7 +725,9 @@ export default {
     // },
     //选择规格 购物车数量
     addCount(event, num, index) {
-      console.log(num,'1325443')
+      console.log(num,'999999')
+      console.log(num.operaType,'1325443')
+      num.operaType='goodsinfoId'
       this.totalPrice += Number(num.groupPrice);
       this.totalDis += Number(num.price);
       this.drop(event.target);
@@ -881,11 +909,50 @@ export default {
 
       console.log("监听到了");
     },
+    //获取参团头像
+    getAvatar(){
+      this.$fetch.post("/weChat/personal/getPersonalInfo/"+this.token.activityId).then(
+        res=>{
+          console.log(res,'hjkkhkh,,avatarList')
+          if(res.obj.records[0].orderList){
+            res.obj.records[0].orderList.forEach((e,i) =>{
+            if(i<4){
+              // this.avatarList.push(e.employee);
+              console.log(e);
+            }
+          })
+          
+          }
+        }
+      )
+    },
+    //获取商品列表信息
     getMsg() {
+      let arr =[];
+      let num =0;
+      let qsTime = new Date().getTime();
+     
       this.$fetch
         .post("weChat/index/getActivity?activityId=" + this.token.activityId)
         .then(res => {
-          console.log(res.obj);
+           console.log(res,'tttttt')
+         
+         if(qsTime > res.obj.endTime){
+            this.isShow = true;
+           if(this.isActive){
+             this.bottom_title ='更多拼团';
+           }else{
+              this.bottom_title ='活动已结束'
+           }
+         }else if(qsTime< res.obj.startTime){
+           this.bottom_title ='敬请期待';
+           this.isShow = true;
+         }
+         this.isJoin =res.attributes.orderPayCount;
+         this.isActive = res.obj.activityId;
+         this.time = res.obj.endTime + "";
+         this.groupNum = res.obj.groupNum;
+         this.nowCount = res.obj.nowCount;
           res.obj.goodsActivityList.forEach(e => {
             var minGroupPrice = e.goodsinfoList.sort(function(a, b) {
                 return Number(a.groupPrice) > Number(b.groupPrice);
@@ -907,7 +974,7 @@ export default {
                   ? false
                   : true
                 : null,
-              avatar: e.goods.imgList,
+              avatar: e.goods.imgList[0],
               id:e.id,
               buyNumber: e.buyNumber,
               ni: e.goodsinfoList.length ? "1" : "2",
@@ -919,14 +986,59 @@ export default {
               spec: [],
               strBuffer: []
             });
+           
+            if(e.goodsinfoList.length){
+              console.log('4545')
+            //   
+              let a = e.goodsinfoList.filter(item =>{
+                return item.buyNumber >0
+              })
+               
+              arr.push(a[0]);
+             
+            }else{
+              e.buyNumber = Number(e.buyNumber);
+              e.price =Number(e.price);
+              e.groupPrice = Number(e.groupPrice);
+              this.bageNum+=  e.buyNumber;
+              this.totalPrice += e.groupPrice *  e.buyNumber;
+              this.totalDis += e.price * e.buyNumber;
+            }
           });
+             arr.forEach(e =>{
+              e.buyNumber = Number(e.buyNumber);
+              e.price = Number(e.price);
+              e.groupPrice = Number(e.groupPrice);
+              this.totalPrice += e.groupPrice;
+              this.totalDis += e.price;
+              this.bageNum +=e.buyNumber;
+            })
         });
+      
+            
     },
+    chartQuest(){
+      this.$fetch.post('weChat/index/getShoppingcart/'+this.token.employeeId+'/'+this.token.activityId).then(res =>{
+        console.log(res,'jkj');
+        // if(res.obj.length){
 
+        // }else{
+          
+        // }
+      })
+    },
+    //清空购物车请求
+      clearQuest(){
+        this.$fetch.post('weChat/shoppingcart/getShoppingcartDel/'+this.token.employeeId+'/'+this.token.activityId).then(e =>{
+          console.log(e);
+        })
+    },
     //点击加号
     addQuest(id,type){
+      console.log(type,'sdddasdas');
       this.$fetch.post('/weChat/shoppingcart/getShoppingcartAdd/'+this.token.employeeId+'/'+this.token.activityId +'?'+type+'='+id).then(
         e =>{
+          console.log(11,e)
           // console.log(e);
         }
       )
@@ -963,6 +1075,8 @@ export default {
   },
   mounted() {
     this.getMsg();
+    this.getAvatar();
+    this.chartQuest();
     if (window.history && window.history.pushState) {
       history.pushState(null, null, document.URL);
       window.addEventListener("popstate", this.fun, false); //false阻止默认事件

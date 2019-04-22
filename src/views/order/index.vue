@@ -3,7 +3,7 @@
     <!-- 订单列表 -->
     <div
       class="div_display_flex backgroun_color_fff"
-      v-for="(item,index) in orderList"
+      v-for="(item,index) in orderList" :key="index"
       style="margin-bottom :3%"
     >
       <div class="order_heder_img_w">
@@ -80,6 +80,11 @@ export default {
       ]
     };
   },
+  computed: {
+     token() {
+      return JSON.parse(localStorage.getItem("user"));
+    }
+  },
   methods: {
     openListDetails(index) {
       this.orderList[index].orderFalge = !this.orderList[index].orderFalge;
@@ -92,7 +97,24 @@ export default {
       //   this.orderFalge = false;
       //   this.moreLFalg = false;
       // }
-    }
+    },
+    //获取参团头像
+    getAvatar(){
+      this.$fetch.post("/weChat/personal/getPersonalInfo/"+this.token.activityId).then(
+        res=>{
+          console.log(res,'hjkkhkh,,avatarList')
+          if(res.obj.records[0].orderList){
+            res.obj.records[0].orderList.forEach((e,i) =>{
+            if(i<4){
+              // this.avatarList.push(e.employee);
+              console.log(e);
+            }
+          })
+          
+          }
+        }
+      )
+    },
   },
   created() {
     settitle("拼团");
@@ -101,6 +123,8 @@ export default {
   },
 
   mounted() {
+    this.getAvatar();
+    console.log(11111);
     // console.log(url);
     // console.log(this.$fetch);
   }

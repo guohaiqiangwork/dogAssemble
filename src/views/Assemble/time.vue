@@ -1,5 +1,5 @@
 <template>
-  <div :endTime="endTime" :callback="callback" :endText="endText" class="text_center">
+  <div class="text_center">
     <slot>
       <!-- {{content}} -->
       <span class="time_span">{{day}}</span> :
@@ -35,14 +35,22 @@ export default {
     }
   },
   mounted() {
-    this.countdowm(this.endTime);
+    this.countdowm(this.newValue);
+  },
+  watch: {
+    endTime:{
+      handler(newValue,oldVal){
+        this.countdowm(newValue);
+        oldVal =newValue;
+      }
+    }
   },
   methods: {
     countdowm(timestamp) {
       let self = this;
       let timer = setInterval(function() {
         let nowTime = new Date();
-        let endTime = new Date(timestamp * 1000);
+        let endTime = new Date(timestamp*1);
         let t = endTime.getTime() - nowTime.getTime();
         if (t > 0) {
           let day = Math.floor(t / 86400000);
@@ -94,5 +102,6 @@ export default {
 .text_center {
   text-align: center;
   margin-top: 26px;
+  overflow: hidden;
 }
 </style>
