@@ -8,7 +8,7 @@
     <div class="backgroun_color_fff">
       <div class="div_display_flex flex_box" style="padding-top:21px">
         <!-- <div class="div_left_border"></div> -->
-        <div class="font_color_00 font_size_16 mx-0 end_title" >距结束</div>
+        <div class="font_color_00 font_size_16 mx-0 end_title">距结束</div>
         <!-- <div class="div_left_border"></div> -->
         <div class="assemble_img_border" @click="goToPersonal">
           <img src="../../assets/images/my@2x.png" style="width:100%;">
@@ -20,7 +20,7 @@
       <!-- 参团人员 -->
       <div class="div_display_flex avatar_box">
         <div class="header_border_circular" style="position:relative">
-          <img src="../../assets/images/team@2x.png" alt="" class="tag_team">
+          <img src="../../assets/images/team@2x.png" alt class="tag_team">
         </div>
         <div class="header_border_circular"></div>
         <div class="header_border_circular"></div>
@@ -40,7 +40,7 @@
         :key="index"
       >
         <!-- 产品内容 -->
-        <div @click="goToProduct" class="div_display_flex" style="width:100%;"> 
+        <div @click="goToProduct" class="div_display_flex" style="width:100%;">
           <!-- 产品图片 -->
           <div class="assemble_list_div">
             <img src="../../assets/logo.png" width="105px">
@@ -63,50 +63,64 @@
             <div class="flex_end" v-if="item.ni == 1" style="margin-top: 6%;">
               <div class="assemble_specifications" @click="open_model(item,index)">选择规格</div>
             </div>
-            <div  class="flex_end" v-if="item.ni != 1" style="margin-top: 6%;" >
+            <div class="flex_end" v-if="item.ni != 1" style="margin-top: 6%;">
               <!-- <div
              
                 style="margin-left: 80%;"
                 class="buy_circular back_color"
                 @click.stop="buyAdd(1,index,$event)"
               >+</div>
-            </div> -->
-             <div :class=" ['buy_circular_div','div_display_flex',item.buyNumber>0? 'show_circle' :'border_white']">
-               <img src="../../assets/images/addicon.png" alt="" :class="['buy_circular',item.buyNumber>0?'color_bd': 'back_color', 'addStyle']"
-                @click.stop="buyAdd(item,index,$event)">
-                
-              <div class="flex_end box_content" v-show="item.buyNumber > 0 && item.ni != 1" >
-                    <span class="box_content">{{item.buyNumber}}</span>
-                    <img src="../../assets/images/del.png" alt="" class="buy_circular   bd_color delStyle"
-                  @click.stop="buy_minute(item,index)">
+              </div>-->
+              <div
+                :class=" ['buy_circular_div','div_display_flex',item.buyNumber>0? 'show_circle' :'border_white']"
+              >
+                <img
+                  src="../../assets/images/addicon.png"
+                  alt
+                  :class="['buy_circular',item.buyNumber>0?'color_bd': 'back_color', 'addStyle']"
+                  @click.stop="buyAdd(item,index,$event)"
+                >
+
+                <div class="flex_end box_content" v-show="item.buyNumber > 0 && item.ni != 1">
+                  <span class="box_content">{{item.buyNumber}}</span>
+                  <img
+                    src="../../assets/images/del.png"
+                    alt
+                    class="buy_circular bd_color delStyle"
+                    @click.stop="buy_minute(item,index)"
+                  >
+                </div>
               </div>
             </div>
-          
           </div>
         </div>
       </div>
     </div>
+    <div class="cart" style></div>
+    <div class="ball-container">
+      <!--小球 -->
+      <div v-for="(ball,ballindex) in balls" :key="ballindex">
+        <transition
+          name="drop"
+          @before-enter="beforeDrop"
+          @enter="dropping"
+          @after-enter="afterDrop"
+        >
+          <div class="ball" v-show="ball.show">
+            <div class="inner inner-hook"></div>
+          </div>
+        </transition>
+      </div>
     </div>
-           <div class="cart" style=""></div>
-                   <div class="ball-container"><!--小球 --> 
-      <div v-for="(ball,ballindex) in balls" :key="ballindex">  
-          <transition name="drop"  @before-enter="beforeDrop" @enter="dropping" @after-enter="afterDrop">  
-               <div class="ball" v-show="ball.show">  
-                     <div class="inner inner-hook"></div>  
-               </div>  
-          </transition>  
-     </div>  
-   </div> 
     <!-- 购买 -->
     <div class="div_display_flex backgroun_color_fff assemble_buttom_div" style="z-index:12">
       <!-- 活动正常 -->
       <div style="width: 100%;display: flex;" v-if="true">
-        
         <div class="bt_buy_img">
           <div class="buy_border_number" v-show="bageNum">{{bageNum}}</div>
           <img src="../../assets/images/shopping@2x.png" alt width="100%" height="76px">
         </div>
-          <!-- <div v-transfer-dom>
+        <!-- <div v-transfer-dom>
       <popup v-model="modelFalgez">
         <popup-header
         :left-text="('cancel')"
@@ -119,19 +133,29 @@
           <radio :options="[('Card 1'), ('Card 2'), ('Card 3'), ('Card 4')]"></radio>
         </group>
       </popup>
-    </div> -->
+        </div>-->
         <div class="bt_buy_money" @click="openModelProductL">
           <div style="margin:3%">
-            <span style="margin-left:0.4rem" :class="{'font_color_99' : bageNum ? '' : true}">￥{{groupPrice}}</span>
-            <span class="font_color_99 font_size_13 font_text_decoration" style="margin-left:0.2rem">￥{{disPrice}}</span>
+            <span
+              style="margin-left:0.4rem"
+              :class="{'font_color_99' : bageNum ? '' : true}"
+            >￥{{groupPrice}}</span>
+            <span
+              class="font_color_99 font_size_13 font_text_decoration"
+              style="margin-left:0.2rem"
+            >￥{{disPrice}}</span>
           </div>
           <div class="font_color_99 font_size_11" style="margin-left: 0.8rem;margin-top: -2%;">满N件包邮</div>
         </div>
-        <div :class="['assemble_buttom_buy',bageNum?'':'font_color_99']" @click="goToConfirmation">去拼团</div>
+        <div
+          :class="['assemble_buttom_buy',bageNum?'':'font_color_99']"
+          @click="goToConfirmation"
+        >去拼团</div>
       </div>
       <!-- 活动结束 邀请好友-->
       <div v-if="false" style="width: 100%;">
-        <div class="assemble_j_s" @click="goToInvitation">{{ bottom_title }}</div> <!-- 改变bottom_title 的值为 更多拼团   活动已结束  敬请期待-->
+        <div class="assemble_j_s" @click="goToInvitation">{{ bottom_title }}</div>
+        <!-- 改变bottom_title 的值为 更多拼团   活动已结束  敬请期待-->
       </div>
       <div v-if="false" style="width: 100%;" class="bottom_box">
         <div class="wid_70" @click="goToInvitation">
@@ -153,47 +177,71 @@
         <div class="model_colse_X" @click="opstion.show = false">X</div>
         <div class="model_background_width" v-show="opstion.show">
           <div class="model_title_font">商品名称</div>
-          <div v-for="(item,index) in opstion.goodsSpeList" :key="index">
+          <div v-for="(item,index) in opstion.goodsSpeList" :key="index" style="height:100%">
             <div class="div_text_left font_color_33 font_size_14">{{item.specification.name}}</div>
-            <div style="height:90px;">
+            <div :style="{'height':'50px'}">
               <div
-              
                 v-for="(iten,ind) in opstion.spec[index]"
-               
-               @click="get_taste(index,iten,ind)"
-               :class="['model_border_button',iten.flag == ind? 'color' : '' ]"
-               :key="ind"
-                
+                @click="get_taste(index,iten,ind)"
+                :class="['model_border_button',iten.flag == ind? 'color' : '' ]"
+                :key="ind"
               >{{iten.name}}</div>
-               <!-- @click="get_taste(item.id)" -->
-               <!-- :class="['model_border_button',item.id ==opstion.flag? 'color' : '' ]" -->
+              <!-- <div
+                v-for="(iten,ind) in opstion.spec[index]"
+                @click="get_taste(index,iten,ind)"
+                :class="['model_border_button',iten.flag == ind? 'color' : '' ]"
+                :key="ind"
+              >{{iten.name}}</div> -->
+              <!-- @click="get_taste(item.id)" -->
+              <!-- :class="['model_border_button',item.id ==opstion.flag? 'color' : '' ]" -->
             </div>
-            <div class="mode_button_border"></div>
+             <div class="mode_button_border"></div>
+           
           </div>
           <div class="div_display_flex">
             <div class="model_buy_font_s">
               <span style="-0.9rem">￥{{attrValue.groupPrice}}</span>
-              <span style="text-decoration:line-through;font-size:13px" class="font_color_33">￥{{attrValue.price}} </span>
+              <span
+                style="text-decoration:line-through;font-size:13px"
+                class="font_color_33"
+              >￥{{attrValue.price}}</span>
             </div>
             <!-- <div >  -->
-              
-              <div v-for="(pop,index) in opstion.goodsinfoList" :key="index" :class="{'model_buy_font_sb':pop.id == attrValue.id}"  v-show="pop.id==attrValue.id">
-                <div class="model_assemble_specifications_w" @click="addCount($event,pop,index)" v-if="!Number(pop.buyNumber)">+ 加入购物车</div>
-                
-                <div :class=" ['buy_circular_div','div_display_flex',pop.buyNumber >0? 'show_circle' :'border_white']" v-if="pop.buyNumber>0">
-                  
-                    
-                  <div class="flex_end box_content"  >
-                    <img src="../../assets/images/addicon.png" alt="" :class="['buy_circular',pop.buyNumber>0?'color_bd': 'back_color', 'addStyle']"
-                    @click.stop="addCount($event,pop,index)">
-                        <span class="box_content">{{pop.buyNumber}}</span>
-                        <img src="../../assets/images/del.png" alt="" class="buy_circular   bd_color delStyle"
-                      @click.stop="disCount($event,pop)">
-                  </div>
+
+            <div
+              v-for="(pop,index) in opstion.goodsinfoList"
+              :key="index"
+              :class="{'model_buy_font_sb':pop.id == attrValue.id}"
+              v-show="pop.id==attrValue.id"
+            >
+              <div
+                class="model_assemble_specifications_w"
+                @click="addCount($event,pop,index)"
+                v-if="!Number(pop.buyNumber)"
+              >+ 加入购物车</div>
+
+              <div
+                :class=" ['buy_circular_div','div_display_flex',pop.buyNumber >0? 'show_circle' :'border_white']"
+                v-if="pop.buyNumber>0"
+              >
+                <div class="flex_end box_content">
+                  <img
+                    src="../../assets/images/addicon.png"
+                    alt
+                    :class="['buy_circular',pop.buyNumber>0?'color_bd': 'back_color', 'addStyle']"
+                    @click.stop="addCount($event,pop,index)"
+                  >
+                  <span class="box_content">{{pop.buyNumber}}</span>
+                  <img
+                    src="../../assets/images/del.png"
+                    alt
+                    class="buy_circular bd_color delStyle"
+                    @click.stop="disCount($event,pop)"
+                  >
                 </div>
               </div>
+            </div>
             <!-- </div> -->
-
           </div>
         </div>
       </x-dialog>
@@ -213,41 +261,58 @@
     </div>
     <!-- 底部弹出层 -->
     <div v-if="modelFalgez">
-      <div class="model_background"  @click="close($event)">
-        <div class="model_center_n"  ref="msk">
-         
+      <div class="model_background" @click="close($event)">
+        <div class="model_center_n" ref="msk">
           <div class="div_display_flex backgroun_color_fe01" style="height:35px;line-height:2">
             <div class="font_size_15 font_color_33 buy_car">购物车</div>
-            <div class="div_display_flex" style=" margin-left: 8%;margin-top: 1%;" @click="clearCart">
+            <div
+              class="div_display_flex"
+              style=" margin-left: 8%;margin-top: 1%;"
+              @click="clearCart"
+            >
               <div>
-                <img src="../../assets/images/delete@2x.png" style="vertical-align:-3px;" width="20px" height="20px">
+                <img
+                  src="../../assets/images/delete@2x.png"
+                  style="vertical-align:-3px;"
+                  width="20px"
+                  height="20px"
+                >
               </div>
               <div class="font_size_15 font_color_66 ml-3">清空购物车</div>
             </div>
           </div>
-         
+
           <div v-for="(item,index) in filtArrray" :key="index">
             <div class="div_display_flex margin_top_div5 flex-between" style="margin-bottom:10px;">
               <div class="model_bottn_font">
-                <p class="ml-10">{{item.name}}</p> 
+                <p class="ml-10">{{item.name}}</p>
 
-
-              <div style="margin:4%;margin-left:10%;" v-if="item.typeSize">
-              <div class="model_botton_g">{{item.typeSize.replace(/,/g,' | ')}}</div>
-            </div>
+                <div style="margin:4%;margin-left:10%;" v-if="item.typeSize">
+                  <div class="model_botton_g">{{item.typeSize.replace(/,/g,' | ')}}</div>
+                </div>
               </div>
               <div :class="['price_box','center_judge']">
-               <p>￥{{item.groupPrice}}</p> 
-               <div :class=" ['buy_circular_div','div_display_flex',item.buyNumber>0? 'show_circle' :'border_white']">
-               <img src="../../assets/images/addicon.png" alt="" :class="['buy_circular',item.buyNumber>0?'color_bd': 'back_color', 'addStyle']"
-                @click.stop="btm_add(index,$event,item)">
-              <div class="flex_end box_content" v-show="item.buyNumber > 0" >
+                <p>￥{{item.groupPrice}}</p>
+                <div
+                  :class=" ['buy_circular_div','div_display_flex',item.buyNumber>0? 'show_circle' :'border_white']"
+                >
+                  <img
+                    src="../../assets/images/addicon.png"
+                    alt
+                    :class="['buy_circular',item.buyNumber>0?'color_bd': 'back_color', 'addStyle']"
+                    @click.stop="btm_add(index,$event,item)"
+                  >
+                  <div class="flex_end box_content" v-show="item.buyNumber > 0">
                     <span class="box_content">{{item.buyNumber}}</span>
-                    <img src="../../assets/images/del.png" alt="" class="buy_circular   bd_color delStyle"
-                  @click.stop="btm_dis(index,item)">
-              </div>
-            </div>
-              <!-- <div class=" buy_circular_div div_display_flex">
+                    <img
+                      src="../../assets/images/del.png"
+                      alt
+                      class="buy_circular bd_color delStyle"
+                      @click.stop="btm_dis(index,item)"
+                    >
+                  </div>
+                </div>
+                <!-- <div class=" buy_circular_div div_display_flex">
                    
                    
 
@@ -259,14 +324,12 @@
                   <div style="width:31px;text-align:center;line-height:1.4rem;font-size:13px;position:absolute;left:24px">8908</div>
                   <div class="buy_circular_n back_color dischoice addStyle" @click="buyAdd(1,index,$event)">
                     <span>+</span></div>
-                </div> -->
-                   
-                  
-            </div>
+                </div>-->
+              </div>
             </div>
             <!-- <div style="margin:4%">
               <div class="model_botton_g">主食 | 牛肉味</div>
-            </div> -->
+            </div>-->
             <div class="model_botton_border_d"></div>
           </div>
         </div>
@@ -278,80 +341,87 @@
         <img src="../../assets/images/tupianjiazaishibai@3x.png" alt>
       </div>
     </div>
-
-      
   </div>
 </template>
 <script>
 import url from "../../bin/url";
-import { XHeader, XDialog , PopupHeader, Popup, Group, XSwitch, Radio, TransferDomDirective as TransferDom } from "vux";
+import {
+  XHeader,
+  XDialog,
+  PopupHeader,
+  Popup,
+  Group,
+  XSwitch,
+  Radio,
+  TransferDomDirective as TransferDom
+} from "vux";
 import countdown from "./time";
 import { fail } from "assert";
 
 export default {
   directives: {
-    TransferDom,
-    
+    TransferDom
   },
   components: {
     XHeader,
     countdown,
     XDialog,
-    PopupHeader, Popup, TransferDom, Group, XSwitch, Radio
+    PopupHeader,
+    Popup,
+    TransferDom,
+    Group,
+    XSwitch,
+    Radio
   },
   name: "Assemble",
   watch: {
-  //   // 如果 `question` 发生改变，这个函数就会运行
-  //   spec: function (newQuestion, oldQuestion) {
-  //     console.log('yuiyiyuiyuiyius')
-  //     // oldQuestion = newQuestion;
-  //   },
-  //   // deep:true
-    filtArrray:{
-      handler(oldValue,newValue){
+    //   // 如果 `question` 发生改变，这个函数就会运行
+    //   spec: function (newQuestion, oldQuestion) {
+    //     console.log('yuiyiyuiyuiyius')
+    //     // oldQuestion = newQuestion;
+    //   },
+    //   // deep:true
+    filtArrray: {
+      handler(oldValue, newValue) {
         // this.filtArrray();
         // console.log('我改变了',newValue)
-      },
-     
-    }, 
-    opstion:{
-      handler(oldValue,newValue){
-        // this.filtArrray();
-        var index =this.lists.indexOf(oldValue)
-        this.$set(this.lists[index],newValue);
-        oldValue =newValue
-        // console.log('我改变了',newValue)
-      },
-     deep:true
+      }
     },
-    deep:true
+    opstion: {
+      handler(oldValue, newValue) {
+        // this.filtArrray();
+        var index = this.lists.indexOf(oldValue);
+        this.$set(this.lists[index], newValue);
+        oldValue = newValue;
+        // console.log('我改变了',newValue)
+      },
+      deep: true
+    },
+    deep: true
   },
-  beforeRouteLeave(to, from, next){
-    console.log(to,'aaaaa');
-    next(false)
-  },
+  // beforeRouteLeave(to, from, next) {
+  //   console.log(to, "aaaaa");
+  //   // next(false);
+  // },
   data() {
     return {
-            //小球 设为3个
-                balls: [ 
-                  { show: false },  
-                  { show: false },  
-                  { show: false }, 
-                ],  
-               dropBalls:[],
-      bottom_title:'邀请好友去拼团',
+      //小球 设为3个
+      balls: [{ show: false }, { show: false }, { show: false }],
+      dropBalls: [],
+      bottom_title: "邀请好友去拼团",
       popupVisible: false,
       time: "3554291380",
       numberZ: "20",
       classA: "001",
       modelFalgez: false, //弹出层
       InvitationFalge: false,
-      disscroll:false,
-      opstion:{},
-      bageNum:0,
-      attrValue:{},
-      totalPrice:0,
-      totalDis:0,
+      disscroll: false,
+      opstion: {},
+      bageNum: 0,
+      operaType:'goodsActivityId',
+      attrValue: {},
+      totalPrice: 0,
+      totalDis: 0,
       tasteList: [
         { tasteName: "牛肉味", id: "001" },
         { tasteName: "番茄味", id: "002" },
@@ -374,135 +444,130 @@ export default {
       // buyFalge: "", //样式
       showPrise: 99999, //显示购物数量
       flag: false,
-      ProductFalg: false,//产品详情
-      strBuffer:[]
+      ProductFalg: false, //产品详情
+      strBuffer: []
     };
   },
   created() {
     settitle("拼团");
     // this.getCode();
   },
-  computed:{
-    groupPrice(){
+  computed: {
+    groupPrice() {
       return this.totalPrice.toFixed(1);
     },
-    disPrice(){
+    disPrice() {
       return this.totalDis.toFixed(1);
     },
-    filtArrray(){
-      let arr1 =[];
-      let arr2 =[];
-     this.lists.map(function(e){
-      
+    filtArrray() {
+      let arr1 = [];
+      let arr2 = [];
+      this.lists.map(function(e) {
+        if (e.goodsinfoList.length) {
+          e.goodsinfoList.forEach(item => {
+            if (item && item.buyNumber > 0) {
+              item.operaType ='goodsinfoId',
+              item.name = e.name;
+              arr1.push(item);
+            }
+          });
+        }
+      });
 
-      if(e.goodsinfoList.length){
-        e.goodsinfoList.forEach(item =>{
-          if(item && item.buyNumber>0){
-            item.name =e.name;
-            arr1.push(item);
-          }
-          
-        })
-      }
-          
-     });
-  
-    arr2 =this.lists.filter(e =>{
-      return e.buyNumber >0
-    })
-    var a =[...arr1,...arr2]
-       return   a
+      arr2 = this.lists.filter(e => {
+        return e.buyNumber > 0;
+      });
+      var a = [...arr1, ...arr2];
+      return a;
     },
-    token(){
-     return JSON.parse(localStorage.getItem('user'));
-    
-    },
+    token() {
+      return JSON.parse(localStorage.getItem("user"));
+    }
   },
   methods: {
-      getArray(){
-        let a =this.opstion.goodsSpeList.map((e,index) => {
-        return   e.attrValue.split(',') 
-        })
-        if(!a.length){
-          return
+    getArray() {
+      let a = this.opstion.goodsSpeList.map((e, index) => {
+        return e.attrValue.split(",");
+      });
+      if (!a.length) {
+        return;
+      }
+      a.forEach((e, inde) => {
+        e.forEach(i => {
+          e.push({
+            name: i,
+            flag: 0,
+            operaType:'goodsinfoId'
+          });
+        });
+      });
+      a.forEach((e, index) => {
+        e.splice(0, e.length / 2);
+        if (typeof e == "string") {
         }
-        a.forEach((e,inde) =>{
-      
-          e.forEach(i =>{
-            e.push({
-              name:i,
-              flag:0
-            }) 
-          })
-        
-        })
-        a.forEach((e,index) =>{
-          e.splice(0,e.length/2);
-          if(typeof(e) == 'string'){
-            
-          }
-        })
-        return a  
+      });
+      return a;
     },
-       drop(el){ //抛物  
-                    for(let i=0;i<this.balls.length;i++){  
-                    let ball= this.balls[i]; 
-                   
-                 
-                    if(!ball.show){
-                          ball.show = true;
-                          ball.el=el;  
-                          this.dropBalls.push(ball);  
-                          
-                          return;  
-                       }  
-                    }  
-                },  
-              beforeDrop(el,event) {/* 购物车小球动画实现 */  
-             
-              
-               
-                       let count = this.balls.length;  
-                       while (count--) {  
-                       let ball = this.balls[count];  
-                       if (ball.show) {  
-                             let rect = ball.el.getBoundingClientRect(); //元素相对于视口的位置  
-                             let x = rect.left - 54;  
-                             let y = -(window.innerHeight - rect.top - 70);  //获取y  
-                            //  let y = 100;
-                             el.style.display = '';  
-                             el.style.webkitTransform = 'translateY('+y+'px)';  //translateY  
-                             el.style.transform = 'translateY('+y+'px)';  
-                             let inner = el.getElementsByClassName('inner-hook')[0];  
-                             inner.style.webkitTransform = 'translateX('+x+'px)';  
-                             inner.style.transform = 'translateX('+x+'px)';  
-                         }  
-                   } 
-           
-            },  
-            dropping(el, done) { /*重置小球数量  样式重置*/  
-            
-                          let rf = el.offsetHeight;  
-                          el.style.webkitTransform = 'translate3d(0,0,0)';  
-                          el.style.transform = 'translate3d(0,0,0)';  
-                          let inner = el.getElementsByClassName('inner-hook')[0];  
-                          inner.style.webkitTransform = 'translate3d(0,0,0)';  
-                          inner.style.transform = 'translate3d(0,0,0)';  
-                          el.addEventListener('transitionend', done);  
-                      },  
-                      afterDrop(el) { /*初始化小球*/  
-                      this.bageNum++;
-                       let ball = this.dropBalls.shift();  
-                             if (ball) {  
-                                     ball.show=false;  
-                                    el.style.display = 'none';  
-                              }  
-                     },
-    close(ev){
+    drop(el) {
+      //抛物
+      for (let i = 0; i < this.balls.length; i++) {
+        let ball = this.balls[i];
+
+        if (!ball.show) {
+          ball.show = true;
+          ball.el = el;
+          this.dropBalls.push(ball);
+
+          return;
+        }
+      }
+    },
+    beforeDrop(el, event) {
+      /* 购物车小球动画实现 */
+
+      let count = this.balls.length;
+      while (count--) {
+        let ball = this.balls[count];
+        if (ball.show) {
+          let rect = ball.el.getBoundingClientRect(); //元素相对于视口的位置
+          let x = rect.left - 54;
+          let y = -(window.innerHeight - rect.top - 70); //获取y
+          //  let y = 100;
+          el.style.display = "";
+          el.style.webkitTransform = "translateY(" + y + "px)"; //translateY
+          el.style.transform = "translateY(" + y + "px)";
+          let inner = el.getElementsByClassName("inner-hook")[0];
+          inner.style.webkitTransform = "translateX(" + x + "px)";
+          inner.style.transform = "translateX(" + x + "px)";
+        }
+      }
+    },
+    dropping(el, done) {
+      /*重置小球数量  样式重置*/
+
+      let rf = el.offsetHeight;
+      el.style.webkitTransform = "translate3d(0,0,0)";
+      el.style.transform = "translate3d(0,0,0)";
+      let inner = el.getElementsByClassName("inner-hook")[0];
+      inner.style.webkitTransform = "translate3d(0,0,0)";
+      inner.style.transform = "translate3d(0,0,0)";
+      el.addEventListener("transitionend", done);
+    },
+    afterDrop(el) {
+      /*初始化小球*/
+
+      this.bageNum++;
+      let ball = this.dropBalls.shift();
+      if (ball) {
+        ball.show = false;
+        el.style.display = "none";
+      }
+    },
+    close(ev) {
       if (this.$refs.msk && !this.$refs.msk.contains(ev.target)) {
-            this.disscroll = false;
-　　　　　　this.modelFalgez = false;
-　　　　}
+        this.disscroll = false;
+        this.modelFalgez = false;
+      }
     },
     // 处理
     // beforeEnter(el) {
@@ -521,7 +586,7 @@ export default {
     // },
     // 展示详情
     goToProduct(id) {
-      console.log(id);
+      // console.log(id);
       // 获取详情接口
     },
     // 去订单
@@ -540,20 +605,19 @@ export default {
     },
     // 去确认订单
     goToConfirmation() {
-      if(this.bageNum){
+      if (this.bageNum) {
         this.$router.push({
-        name: "confirmationOfOrder",
-        params: {
-          obj: JSON.stringify({
-            type: "profession",
-            data: {
-              id: "我就是参数"
-            }
-          })
-        }
-      });
+          name: "confirmationOfOrder",
+          params: {
+            obj: JSON.stringify({
+              type: "profession",
+              data: {
+                id: "我就是参数"
+              }
+            })
+          }
+        });
       }
-      
     },
     // 倒计时回调函数
     callback(id) {
@@ -561,143 +625,142 @@ export default {
     },
 
     // 打开弹窗
-    open_model(item,index) {
+    open_model(item, index) {
       this.opstion = this.lists[index];
       item.show = true;
       var arr;
-      if(!item.lalc){ 
-        item.spec =this.getArray();
-        this.opstion.goodsSpeList.forEach(e =>{
-         arr =e.attrValue.split(',');
-        item.strBuffer.push(arr[0])
-        })
+      if (!item.lalc) {
+        item.spec = this.getArray();
+        this.opstion.goodsSpeList.forEach(e => {
+          arr = e.attrValue.split(",");
+          item.strBuffer.push(arr[0]);
+        });
       }
-     
-      item.lalc =1;
-      var str =item.strBuffer.join(',');
-      var pos =item.goodsinfoList.findIndex(e =>{
-       
+
+      item.lalc = 1;
+      var str = item.strBuffer.join(",");
+      var pos = item.goodsinfoList.findIndex(e => {
         return e.typeSize == str;
       });
-     this.attrValue=this.opstion.goodsinfoList[pos];
-    //  console.log(str);
-    //  console.log(pos,'pos')
-    // console.log(item,'item');
-    // console.log(this.opstion.goodsinfoList)
-    //   console.log(this.attrValue,'sddadadsaddasdasdadasda11111111111');
+      this.attrValue = this.opstion.goodsinfoList[pos];
+      //  console.log(str);
+      //  console.log(pos,'pos')
+      // console.log(item,'item');
+      // console.log(this.opstion.goodsinfoList)
+      //   console.log(this.attrValue,'sddadadsaddasdasdadasda11111111111');
     },
-    kind(index,iten,ind){
-        var str =this.opstion.goodsSpeList[index].attrValue;
-      str =str.split(',')
-      var t =str.indexOf(iten)
-      return t
+    kind(index, iten, ind) {
+      var str = this.opstion.goodsSpeList[index].attrValue;
+      str = str.split(",");
+      var t = str.indexOf(iten);
+      return t;
     },
     // 弹窗选择
-    get_taste(index,iten,ind) {
-      this.opstion.spec[index].forEach(e =>{
-        e.flag=null
-      })
-      iten.flag =ind;
-      this.opstion.strBuffer[index]=iten.name;
-      var str =this.opstion.strBuffer.join(',');
-      var pos =this.opstion.goodsinfoList.findIndex(e =>{
-       
+    get_taste(index, iten, ind) {
+      this.opstion.spec[index].forEach(e => {
+        e.operaType ='goodsinfoId',
+        e.flag = null;
+      });
+      iten.flag = ind;
+      this.opstion.strBuffer[index] = iten.name;
+      var str = this.opstion.strBuffer.join(",");
+      var pos = this.opstion.goodsinfoList.findIndex(e => {
         return e.typeSize == str;
       });
-      
-    this.attrValue=this.opstion.goodsinfoList[pos];
-     
-    this.$set(this.opstion.spec[index],'iten.flag',ind)
+
+      this.attrValue = this.opstion.goodsinfoList[pos];
+
+      this.$set(this.opstion.spec[index], "iten.flag", ind);
     },
 
-
-
     //清空购物车
-    clearCart(){
-      this.modelFalgez =false;
-        this.disscroll =false;
+    clearCart() {
+      this.modelFalgez = false;
+      this.disscroll = false;
       this.bageNum = 0;
-      this.totalPrice =0;
-      this.lists.map(e =>{
-       
-        if(e.goodsinfoList.length){
-          e.goodsinfoList.forEach(item =>{
-            item.buyNumber =0;
-          })
-        }else{
-           e.buyNumber = 0;
+      this.totalPrice = 0;
+      this.lists.map(e => {
+        if (e.goodsinfoList.length) {
+          e.goodsinfoList.forEach(item => {
+            item.buyNumber = 0;
+          });
+        } else {
+          e.buyNumber = 0;
         }
       });
-     this.modelFalgez = false;
+      this.modelFalgez = false;
     },
     // 添加购物车显示
     // assemble_buy_plus(id,e) {
-     
+
     //   // this.showPrise = id;
     //   this.buyFalge = 1;
     //   this.buyAdd(1, id,e);
     // },
     //选择规格 购物车数量
-    addCount(event,num,index){
-      this.totalPrice+=Number(num.groupPrice);
-      this.totalDis+=Number(num.price);
+    addCount(event, num, index) {
+      console.log(num,'1325443')
+      this.totalPrice += Number(num.groupPrice);
+      this.totalDis += Number(num.price);
       this.drop(event.target);
       var a = num.buyNumber++;
-    
-      this.$set(this.lists,this.opstion.goodsinfoList[index],num)
+      this.$set(this.lists, this.opstion.goodsinfoList[index], num);
+      this.addQuest(num.id,num.operaType);
     },
-    disCount(event,num){
-
+    disCount(event, num) {
       this.bageNum--;
       num.buyNumber--;
-      this.totalPrice-=num.groupPrice;
-      this.totalDis-=Number(num.price);
-      if(!this.bageNum){
+      this.totalPrice -= num.groupPrice;
+      this.totalDis -= Number(num.price);
+      if (!this.bageNum) {
         this.clearCart();
       }
-      
     },
     //点击底部购物车 购物数量
-    btm_add(index,event,item){
+    btm_add(index, event, item) {
+      console.log(item,'ddddddd');
       this.drop(event.target);
-      this.totalPrice+=Number(item.groupPrice);
-      this.totalDis+=Number(item.price);
+      this.totalPrice += Number(item.groupPrice);
+      this.totalDis += Number(item.price);
       this.filtArrray[index].buyNumber++;
+      this.addQuest(item.id,item.operaType);
     },
-    btm_dis(index,item){
+    btm_dis(index, item) {
       this.bageNum--;
-      this.totalPrice-=item.groupPrice;
-      this.totalDis-=item.price;
-      if(!this.bageNum){
-        this.clearCart()
+      this.totalPrice -= item.groupPrice;
+      this.totalDis -= item.price;
+      if (!this.bageNum) {
+        this.clearCart();
       }
       this.filtArrray[index].buyNumber--;
-
     },
     // 增加购物
-    buyAdd(item, index,event) {
-      this.totalPrice+=Number(item.groupPrice);
-      this.totalDis+=Number(item.price);
+    buyAdd(item, index, event) {
+      this.totalPrice += Number(item.groupPrice);
+      this.totalDis += Number(item.price);
       this.drop(event.target);
       var lists = this.lists;
       var buyNumber = Number(lists[index].buyNumber);
       buyNumber += 1;
       lists[index].buyNumber = buyNumber;
-       
+      console.log(item)
+      this.addQuest(item.id,item.operaType);
     },
     // 减少购物
     buy_minute(item, index) {
+      this.delQuest(item.id,item.operaType)
       var lists = this.lists;
-      this.totalPrice -=item.groupPrice;
-      this.totalDis -=item.price;
+      this.totalPrice -= item.groupPrice;
+      this.totalDis -= item.price;
       var buyNumber = lists[index].buyNumber;
       if (buyNumber > 0) {
         this.bageNum--;
         buyNumber = buyNumber - 1;
         lists[index].buyNumber = buyNumber;
-      }else{
+      } else {
         this.clearCart();
       }
+
     },
     // 检测机型
     downApp() {
@@ -794,17 +857,14 @@ export default {
     },
     // 点击购物车打开弹出层
     colseModelProductL(e) {
-    
       this.modelFalgez = true;
     },
-    openModelProductL(e){
-      if(!this.bageNum){
-        return
+    openModelProductL(e) {
+      if (!this.bageNum) {
+        return;
       }
       this.modelFalgez = !this.modelFalgez;
       this.disscroll = this.modelFalgez == true ? true : false;
-     
-      
     },
     // 邀请好友
     goToInvitation() {
@@ -814,230 +874,252 @@ export default {
     closeToInvitation() {
       this.InvitationFalge = false;
     },
-    fun(){
-    alert(111)
-    
-    console.log("监听到了");
-  
+    fun() {
+      alert(111);
+
+      console.log("监听到了");
     },
-    getMsg(){
-      
-      this.$fetch.post('weChat/index/getActivity?activityId='+this.token.activityId).then(
-        res =>{
+    getMsg() {
+      this.$fetch
+        .post("weChat/index/getActivity?activityId=" + this.token.activityId)
+        .then(res => {
           console.log(res.obj);
           res.obj.goodsActivityList.forEach(e => {
-           var minGroupPrice = e.goodsinfoList.sort(function (a,b) {
-              return Number(a.groupPrice) > Number(b.groupPrice)
-            }),
-            minPrice = e.goodsinfoList.sort(function (a,b) {
-              return Number(a.price) > Number(b.price)
-            }),
-            len = minGroupPrice.length - 1;
+            var minGroupPrice = e.goodsinfoList.sort(function(a, b) {
+                return Number(a.groupPrice) > Number(b.groupPrice);
+              }),
+              minPrice = e.goodsinfoList.sort(function(a, b) {
+                return Number(a.price) > Number(b.price);
+              }),
+              len = minGroupPrice.length - 1;
             this.lists.push({
               name: e.goods.name,
-              groupPrice:e.goodsinfoList.length ? minGroupPrice[0].groupPrice  : this.toNumber(e.groupPrice),
-              price:e.goodsinfoList.length ? minPrice[0].price+'起':this.toNumber(e.price),
-              hasWord:e.goodsinfoList.length ? minGroupPrice[0].groupPrice == minGroupPrice[len].groupPrice ?false : true : null,
-              avatar:e.goods.imgList,
+              groupPrice: e.goodsinfoList.length
+                ? minGroupPrice[0].groupPrice
+                : this.toNumber(e.groupPrice),
+              price: e.goodsinfoList.length
+                ? minPrice[0].price + "起"
+                : this.toNumber(e.price),
+              hasWord: e.goodsinfoList.length
+                ? minGroupPrice[0].groupPrice == minGroupPrice[len].groupPrice
+                  ? false
+                  : true
+                : null,
+              avatar: e.goods.imgList,
+              id:e.id,
               buyNumber: e.buyNumber,
-              ni: e.goodsinfoList.length ? '1' : '2',                              
-              show:false,
-              flag:0,
-              goodsSpeList:e.goods.goodsSpeList,
-              goodsinfoList:e.goodsinfoList,
-              spec:[],
-              strBuffer:[]
-            })
+              ni: e.goodsinfoList.length ? "1" : "2",
+              show: false,
+              flag: 0,
+              goodsSpeList: e.goods.goodsSpeList,
+              goodsinfoList: e.goodsinfoList,
+              operaType:'goodsActivityId',
+              spec: [],
+              strBuffer: []
+            });
           });
+        });
+    },
 
-
+    //点击加号
+    addQuest(id,type){
+      this.$fetch.post('/weChat/shoppingcart/getShoppingcartAdd/'+this.token.employeeId+'/'+this.token.activityId +'?'+type+'='+id).then(
+        e =>{
+          console.log(e);
+        }
+      )
+    },
+    //点击减号 
+    delQuest(id,type){
+      this.$fetch.post("/weChat/shoppingcart/getShoppingcartSub/"+this.token.employeeId+'/'+this.token.activityId +'?'+type+'='+id).then(
+        e =>{
+          console.log(e);
         }
       )
     }
   },
-  created(){
+  created() {
     // window.location.href
-    var href =window.location.href;
+    var href = window.location.href;
     // console.log(window.location.href)
-    function test(){
-      var obj ={}
-      href=href.split('?');
+    function test() {
+      var obj = {};
+      href = href.split("?");
       if (href.length > 1) {
-        var reg =/#\//g;
-        href = href[1].split("&");//分割参数
+        var reg = /#\//g;
+        href = href[1].split("&"); //分割参数
         for (var i = 0; i < href.length; i++) {
-            var tem = href[i].split("="); //分割参数名和参数内容
-            obj[tem[0]] = tem[1];
-            obj[tem[0]] = obj[tem[0]].replace(reg,'');
+          var tem = href[i].split("="); //分割参数名和参数内容
+          obj[tem[0]] = tem[1];
+          obj[tem[0]] = obj[tem[0]].replace(reg, "");
         }
       }
-      obj = JSON.stringify(obj)
-      localStorage.setItem('user',obj)
+      obj = JSON.stringify(obj);
+      localStorage.setItem("user", obj);
     }
-    test()
+    test();
   },
   mounted() {
     this.getMsg();
-     if (window.history && window.history.pushState) {
-    history.pushState(null, null, document.URL);
-    window.addEventListener('popstate', this.fun, false);//false阻止默认事件
-  }
+    if (window.history && window.history.pushState) {
+      history.pushState(null, null, document.URL);
+      window.addEventListener("popstate", this.fun, false); //false阻止默认事件
+    }
 
-// window.addEventListener("popstate", function(e){
-//         console.log(e,'小敏哥很帅！！！');
-// },false)
+    // window.addEventListener("popstate", function(e){
+    //         console.log(e,'小敏哥很帅！！！');
+    // },false)
     // console.log(this.token,878)
     // console.log(this.$route);
     // console.log(this.$fetch,'999999');
   },
-  destroyed(){
-  window.removeEventListener('popstate', this.fun, false);//false阻止默认事件
-},
+  destroyed() {
+    window.removeEventListener("popstate", this.fun, false); //false阻止默认事件
+  }
 };
 </script>
 <style>
-.vux-x-dialog .weui-mask{
+.vux-x-dialog .weui-mask {
   z-index: 10;
 }
-.vux-x-dialog .weui-dialog{
+.vux-x-dialog .weui-dialog {
   z-index: 10;
 }
 </style>
 
 <style scoped>
-  .ball{  
-       position: fixed;  
-       left: 54px;  
-       bottom: 48px;  
-       z-index: 12;  
-       transition: all 0.4s cubic-bezier(0.49, -0.29, 0.75, 0.41); /*贝塞尔曲线*/  
-      /* z-index: 10000000000; */
-
-    } 
-.cart{  
-      position: fixed;  
-      bottom: 22px;  
-      left: 32px;  
-      width: 30px;  
-      height: 30px;  
-      /* background-color: rgb(0,160,220);   */
-      color: rgb(255,255,255);  
-      /* z-index: 10000000000; */
-    } 
-    .inner{  
-       width: 20px;  
-       height: 20px;  
-       border-radius: 50%;  
-       background-color: #fe5b4a; 
-       transition: all 0.4s linear;  
-    } 
-    .box_content{
-      width: 100%;
-      text-align: center;
-    }
-.ml-3{
+.ball {
+  position: fixed;
+  left: 54px;
+  bottom: 48px;
+  z-index: 12;
+  transition: all 0.4s cubic-bezier(0.49, -0.29, 0.75, 0.41); /*贝塞尔曲线*/
+  /* z-index: 10000000000; */
+}
+.cart {
+  position: fixed;
+  bottom: 22px;
+  left: 32px;
+  width: 30px;
+  height: 30px;
+  /* background-color: rgb(0,160,220);   */
+  color: rgb(255, 255, 255);
+  /* z-index: 10000000000; */
+}
+.inner {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #fe5b4a;
+  transition: all 0.4s linear;
+}
+.box_content {
+  width: 100%;
+  text-align: center;
+}
+.ml-3 {
   margin-left: 0.2em;
 }
-.tag_team{
+.tag_team {
   position: absolute;
   bottom: -0.2rem;
   left: 50%;
   width: 3.6rem;
   transform: translateX(-1.8rem);
-  
 }
-.bottom_box{
+.bottom_box {
   display: flex;
   justify-content: flex-start;
 }
-.border_white{
+.border_white {
   border: 1px solid #fff;
 }
-.wid_70{
+.wid_70 {
   display: flex;
   align-items: center;
   text-align: center;
   width: 70%;
   height: 100%;
-  color: #FFE001;
+  color: #ffe001;
   background: #333;
 }
-.wid_30{
+.wid_30 {
   display: flex;
   align-items: center;
   text-align: center;
   height: 100%;
   width: 30%;
-  background: #FFE001;
+  background: #ffe001;
 }
-.wid_100{
+.wid_100 {
   width: 100%;
 }
-.addStyle{
+.addStyle {
   position: absolute;
   right: -2px;
   top: -1px;
 }
-.delStyle{
+.delStyle {
   position: absolute;
   left: 0;
   top: -1px;
 }
-.end_title:before{
+.end_title:before {
   margin-right: 22px;
 }
-.end_title:after{
+.end_title:after {
   margin-left: 22px;
 }
-.end_title:before, .end_title:after{
+.end_title:before,
+.end_title:after {
   content: "";
   width: 50px;
-  border-top: 1px solid #FFE31A;
-  display:inline-block;
+  border-top: 1px solid #ffe31a;
+  display: inline-block;
   vertical-align: middle;
 }
-.mx-0{
+.mx-0 {
   margin: 0 auto;
 }
-.flex_box{
+.flex_box {
   position: relative;
 }
-.avatar_box{
+.avatar_box {
   display: flex;
   justify-content: space-between;
   width: 92%;
   margin: 0 auto;
-  margin-top:4%;
+  margin-top: 4%;
   padding-bottom: 4%;
 }
-.ml-10{
+.ml-10 {
   margin-left: 10%;
 }
-.flex_end{
+.flex_end {
   display: flex;
   justify-content: flex-end;
 }
-.center_judge{
+.center_judge {
   align-items: center;
 }
-.pl-4{
+.pl-4 {
   padding-left: 4%;
 }
-.flex-around{
+.flex-around {
   justify-content: space-around;
 }
-.flex-between{
+.flex-between {
   justify-content: space-between;
 }
-p{
+p {
   white-space: nowrap;
 }
-.price_box{
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
+.price_box {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
 }
-.color_bd{
+.color_bd {
   border: 1px solid #ffe001;
 }
 .div_left_border {
@@ -1111,11 +1193,11 @@ p{
   margin-right: 3%;
   font-size: 12px;
   line-height: 20px;
-  
-box-shadow:0 2px 13px 1px rgba(97,98,98,0.13);
+
+  box-shadow: 0 2px 13px 1px rgba(97, 98, 98, 0.13);
 }
-.color{
-  background:rgba(255,224,1,1);
+.color {
+  background: rgba(255, 224, 1, 1);
 }
 .model_background_width {
   background-color: #fff;
@@ -1126,27 +1208,24 @@ box-shadow:0 2px 13px 1px rgba(97,98,98,0.13);
 .mode_button_border {
   border-top: 1px solid #e5e5e5;
   width: calc(100% - 30px);
-  margin:0 auto 4% auto;
- 
+  margin: 0 auto 4% auto;
 }
 .buy_circular {
   width: 1.4rem;
   height: 1.4rem;
   border-radius: 50%;
-
 }
 
-
-.position_add{
-    position: absolute;
-    right: -1px;
-    top: -1px;
+.position_add {
+  position: absolute;
+  right: -1px;
+  top: -1px;
 }
-.position_del{
-    position: absolute;
-    left: -1px;
-    top: -1px;
-    border-color: #fff;
+.position_del {
+  position: absolute;
+  left: -1px;
+  top: -1px;
+  border-color: #fff;
 }
 .buy_circular_n {
   width: 1.4rem;
@@ -1156,12 +1235,11 @@ box-shadow:0 2px 13px 1px rgba(97,98,98,0.13);
 }
 .buy_circular_div {
   position: relative;
-  
+
   width: 77px;
   height: 1.4rem;
- 
 }
-.show_circle{
+.show_circle {
   border: 1px solid;
   border-color: #e5e5e5 #ffe001;
   border-radius: 11px;
@@ -1253,7 +1331,7 @@ box-shadow:0 2px 13px 1px rgba(97,98,98,0.13);
   background-color: #ffe001;
   color: #333;
   border-radius: 11px;
-  line-height:  23px;
+  line-height: 23px;
   font-size: 12px;
   border: 1px solid #ffe001;
 }
@@ -1302,11 +1380,11 @@ box-shadow:0 2px 13px 1px rgba(97,98,98,0.13);
   text-align: center;
   line-height: 3;
 }
-.box_disscroll{
+.box_disscroll {
   height: 100%;
   overflow: hidden;
 }
-.bd_color{
+.bd_color {
   border: 1px solid #e5e5e5;
 }
 </style>

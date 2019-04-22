@@ -18,6 +18,7 @@ service
   .request
   .use(request => {
     request.headers.common["Access-Control-Allow-Origin"]="*"
+    console.log(request,'pp')
     return request
   }, error => {
     Promise.reject(error)
@@ -31,6 +32,7 @@ service
     /**
      * code为非200是错误的请求
      */
+    console.log(response,'ssss')
     if (response.status !== 200) {
       return Promise.reject('error')
     } else {
