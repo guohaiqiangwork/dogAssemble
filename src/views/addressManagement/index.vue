@@ -1,20 +1,38 @@
 <template>
   <div>
-    <div class="backgroun_color_fff a_m_w">
+    <div class="backgroun_color_fff a_m_w" v-for="(item,index) in addressList">
       <div class="font_size_14 font_color_66 a_m_m">
-        <span>王佳宇</span>
-        13654550023
+        <span>{{item.receiver}}</span>
+        {{item.phone}}
       </div>
-      <div class="margin_top_div3 font_size_14 font_color_33" style="margin-left:4%">
-        内蒙古包头市青山区青山区区包头商会大厦27楼
-        2710
-      </div>
-      <div class="div_display_flex margin_top_div5" style="padding:0 5% 5% 4%;justify-content:space-between;">
+      <div
+        class="margin_top_div3 font_size_14 font_color_33"
+        style="margin-left:4%"
+      >{{item.province}}{{item.city}}{{item.area}}{{item.receiveAddress}}</div>
+      <div
+        class="div_display_flex margin_top_div5"
+        style="padding:0 5% 5% 4%;justify-content:space-between;"
+      >
         <div style="width:30%;display:flex;align-items:center;">
-          <check-icon :value.sync="demo1" size='20px' style="display:flex;align-items:center;"></check-icon>
-          <span style="font-size:14px;color:#666"> 默认地址</span>
+          <!-- <check-icon
+            :value.sync="item.isDefault"
+            size="20px"
+            style="display:flex;align-items:center;"
+            @click="getUpdateIsDefault"
+          ></check-icon>-->
+           <span class="radio" :class="{'on':item.isDelete}"></span>
+          <input
+            v-model="item.isDelete"
+            :value="1"
+            class="input-radio"
+            :checked="item.isDelete"
+            @click="checkAddress(index,item.id)"
+            type="radio"
+          >
+          <!-- /weChat/order/updateIsDefault/{addressId}/{employeeId} -->
+          <span style="font-size:14px;color:#666">默认地址</span>
         </div>
-        <div  class="div_display_flex operat_box">
+        <div class="div_display_flex operat_box">
           <div class="div_display_flex" @click="editAddress">
             <img src="../../assets/images/edit@2x.png" width="20px" height="20px" class="middle">
             <div style="font-size:14px;color:#666">编辑</div>
@@ -30,7 +48,7 @@
       <div class="a_m_b backgroun_color_fe01" @click="openAddressM">+ 新增收货地址</div>
     </div>
     <!-- 新增地址 -->
-        <!-- <div v-if="AddressMFalge" class="ofo_address_w">
+    <!-- <div v-if="AddressMFalge" class="ofo_address_w">
         <div class="div_display_flex" style="width:100%;align-items:center;">
           <div class="" style="margin-right:2%;display:flex;align-items:center;">
             <span class="font_size_13 font_color_00">联系人:</span>
@@ -58,38 +76,61 @@
         <div style="padding-bottom: 8%;">
           <div class="ofo_b_c_d" @click="saveAddress">保存地址</div>
         </div>
-      </div> -->
+    </div>-->
     <div v-if="AddressMFalge">
       <div class="model_background" @click="closeAddressMFalge($event)">
         <div class="model_a_m" id="card">
           <div style="padding:0.8rem;">
-              <div class="div_display_flex" style="width:100%;align-items:center;">
-          <div class="" style="margin-left:0.2rem;display:flex;align-items:center;">
-            <span class="font_size_13 font_color_00">联系人:</span>
-            <input  placeholder="请输入您的名字" style="width: calc(100% -  54px);vertical-align: middle;">
-          </div>
-          <div class=""  style="margin-left:0.2rem;">
-            <span class="font_size_13 font_color_00">手机号:</span>
-            <input type="text" placeholder="请输入手机号 "  style="width: calc(100% -  54px)">
-          </div>
-        </div>
-        <div class="margin_top_div5 address_box">
-          <span class="font_size_13 font_color_00">所在地区：</span>
-          <input type="text" placeholder="请选择您当前所在的地区" :style="{'width': '66%',color: address ? '#101010' : ''}" v-model="address" disabled>
-          <img
-            src="../../assets/images/dingdan_weizhankai@3x.png"
-            style="width:8%;vertical-align: middle;"
-            @click.stop="goToAddressManagement"
-          >
-          <x-address style="display:none" @on-hide="logHide"  title="title" v-model="addressValue" :list="addressData" placeholder="请选择地址" :show.sync="showAddress"></x-address>
-        </div>
-        <div class="margin_top_div5">
-          <span class="font_size_13 font_color_00">详细地址：</span>
-          <input type="text" placeholder="请输入您的详细地址">
-        </div>
-        <div>
-          <div class="ofo_b_c_d" @click="saveAddress">保存地址</div>
-        </div>
+            <div class="div_display_flex" style="width:100%;align-items:center;">
+              <div class style="margin-left:0.2rem;display:flex;align-items:center;">
+                <span class="font_size_13 font_color_00">联系人:</span>
+                <input
+                  placeholder="请输入您的名字"
+                  style="width: calc(100% -  54px);vertical-align: middle;"
+                  v-model="name"
+                >
+              </div>
+              <div class style="margin-left:0.2rem;">
+                <span class="font_size_13 font_color_00">手机号:</span>
+                <input
+                  type="text"
+                  placeholder="请输入手机号 "
+                  style="width: calc(100% -  54px)"
+                  v-model="phoneNumber"
+                >
+              </div>
+            </div>
+            <div class="margin_top_div5 address_box">
+              <span class="font_size_13 font_color_00">所在地区：</span>
+              <input
+                type="text"
+                placeholder="请选择您当前所在的地区"
+                :style="{'width': '66%',color: address ? '#101010' : ''}"
+                v-model="address"
+                disabled
+              >
+              <img
+                src="../../assets/images/dingdan_weizhankai@3x.png"
+                style="width:8%;vertical-align: middle;"
+                @click.stop="goToAddressManagement"
+              >
+              <x-address
+                style="display:none"
+                @on-hide="logHide"
+                title="title"
+                v-model="addressValue"
+                :list="addressData"
+                placeholder="请选择地址"
+                :show.sync="showAddress"
+              ></x-address>
+            </div>
+            <div class="margin_top_div5">
+              <span class="font_size_13 font_color_00">详细地址：</span>
+              <input type="text" placeholder="请输入您的详细地址" v-model="detailedAddress">
+            </div>
+            <div>
+              <div class="ofo_b_c_d" @click="saveAddress">保存地址</div>
+            </div>
             <!-- <div class="div_display_flex a_m_left4 margin_top_div5">
               <div class="ofo_w_50 ">
                 <span class="font_size_13 font_color_00">联系人:</span>
@@ -114,79 +155,177 @@
             </div>
             <div style="padding-bottom: 8%;">
               <div class="ofo_b_c_d">保存地址</div>
-            </div> -->
+            </div>-->
           </div>
         </div>
       </div>
     </div>
-    <confirm
-        v-model="outPayFalge"
-        title
-        @on-cancel="onCancel"
-        @on-confirm="onConfirm"
-  
-      >
-        <div style="text-align:center;font-size:18px;">删除当前地址？</div>
-      </confirm>
+    <confirm v-model="outPayFalge" title @on-cancel="onCancel" @on-confirm="onConfirm">
+      <div style="text-align:center;font-size:18px;">删除当前地址？</div>
+    </confirm>
   </div>
 </template>
 <script>
-// import url from "../../bin/url";
-import { CheckIcon,Confirm,XAddress,ChinaAddressV4Data ,Value2nameFilter as value2name,TransferDomDirective as TransferDom  } from "vux";
+import url from "../../bin/url";
+import {
+  CheckIcon,
+  Confirm,
+  XAddress,
+  ChinaAddressV4Data,
+  Value2nameFilter as value2name,
+  TransferDomDirective as TransferDom
+} from "vux";
 export default {
   directives: {
     TransferDom
   },
   components: {
-    CheckIcon,XAddress,Confirm
+    CheckIcon,
+    XAddress,
+    Confirm
   },
   name: "addressManagement",
   data() {
     return {
-      showAddress:false,
-      addressValue:[],
+      showAddress: false,
+      addressValue: [],
       addressData: ChinaAddressV4Data,
-      address:'',
+      address: "",
       demo1: false, //默认
-      outPayFalge:false,
-      AddressMFalge: false //添加地址
+      outPayFalge: false,
+      AddressMFalge: false, //添加地址
+      addressList: [],
+      name: "", //联系人姓名
+      detailedAddress: "", //详细地址
+      phoneNumber: "", //手机号码
+      aemployeeId: "", //会员编码
     };
   },
   methods: {
-    onCancel(){},
-    onConfirm(){},
+    onCancel() {},
+    onConfirm() {},
 
     //删除地址
-    delAddress(){
-      this.outPayFalge =true;
+    delAddress() {
+      this.outPayFalge = true;
     },
     //编辑地址
-    editAddress(){
-      this.AddressMFalge =true;
+    editAddress() {
+      this.AddressMFalge = true;
     },
-      //  地址点击完成时
-    logHide (str) {
-      if(str){
+    //  地址点击完成时
+    logHide(str) {
+      if (str) {
         var name = value2name(this.addressValue, ChinaAddressV4Data);
+        this.addressF = name.trim().split(" ");
         this.address = name;
       }
     },
-   saveAddress(){},
+    saveAddress() {},
     //  新增地址
     openAddressM() {
       this.AddressMFalge = true;
     },
-    goToAddressManagement(){
+    goToAddressManagement() {
       this.showAddress = true;
     },
     //   关闭
     closeAddressMFalge(e) {
       // console.log(e.target.offsetParent.id);
-      if(!e.target.offsetParent){
+      if (!e.target.offsetParent) {
         this.AddressMFalge = false;
         this.showAddress = false;
       }
       // this.AddressMFalge = false;
+    },
+    // 获取地址列表
+    getAddressList() {
+      this.$fetch
+        .post(
+          "weChat/order/getAddressList/" + "20190103150524685973383762793795"
+        )
+        .then(data => {
+          if (data.success) {
+            this.addressList = data.obj;
+            this.addressList.forEach((e, index) => {
+              if (e.isDefault == 1) {
+                e.isDefault = true;
+              } else {
+                e.isDefault = false;
+              }
+            });
+          }
+        });
+    },
+    // 地址保存
+    saveAddress() {
+      //  console.log( name1.trim().split(" "));
+      this.AddressFalge = false;
+      this.showMenus = true;
+      this.$fetch
+        .post(
+          "weChat/order/saveAddress/" +
+            this.aemployeeId +
+            "/" +
+            this.name +
+            "/" +
+            this.phoneNumber +
+            "/" +
+            this.detailedAddress +
+            "/" +
+            this.addressF[0] +
+            "/" +
+            this.addressF[1] +
+            "/" +
+            this.addressF[2]
+        )
+        .then(data => {
+          if (data.success) {
+            this.AddressMFalge = false;
+            this.getAddressList();
+          }
+        });
+    },
+    // 默认地址设置
+    getUpdateIsDefault(id) {
+      console.log("67868");
+      console.log(id);
+      this.$fetch
+        .post(
+          "weChat/order/updateIsDefault/" +
+            this.aemployeeId +
+            "/" +
+            this.aemployeeId
+        )
+        .then(data => {
+          if (data.success) {
+            this.AddressMFalge = false;
+            this.getAddressList();
+          }
+        });
+    },
+    checkAddress(index,id) {
+      // 先取消所有选中项
+      this.addressList.forEach(item => {
+        item.isDelete = 2;
+      });
+      //再设置当前点击项选中
+      this.radio = this.addressList[index].isDelete;
+      // 设置值，以供传递
+      // this.addressList[index].isDelete = true;
+      console.log(this.radio);
+       this.$fetch
+        .post(
+          "weChat/order/updateIsDefault/" +
+            id +
+            "/" +
+            this.aemployeeId
+        )
+        .then(data => {
+          if (data.success) {
+           
+          }
+        });
     }
   },
   created() {
@@ -197,47 +336,51 @@ export default {
   },
 
   mounted() {
+    this.aemployeeId = "20190103150524685973383762793795";
+    // 获取地址列表
+    this.getAddressList();
     // console.log(url);
     // console.log(this.$fetch);
   }
 };
 </script>
 <style >
-  .weui-icon-success,.weui-icon-circle{
-    font-size: 16px !important;
-  }
-  .weui-dialog__btn_primary{
+.weui-icon-success,
+.weui-icon-circle {
+  font-size: 16px !important;
+}
+.weui-dialog__btn_primary {
   color: #ffe001 !important;
 }
 </style>
 
 <style scoped>
-input{
+input {
   outline: none;
   border: none;
   background-color: #fff;
   font-size: 13px;
-  font-family:PingFang-SC-Medium;
+  font-family: PingFang-SC-Medium;
 }
-.space_round{
+.space_round {
   justify-content: space-around;
 }
-.operat_box{
+.operat_box {
   width: 120px;
   line-height: 21px;
   justify-content: space-between;
   align-items: center;
 }
-.address_box{
-      display: flex;
-    justify-content: space-between;
-    height: 1.6rem;
-    align-items: center;
+.address_box {
+  display: flex;
+  justify-content: space-between;
+  height: 1.6rem;
+  align-items: center;
 }
-.middle{
+.middle {
   vertical-align: middle;
 }
-.model_background{
+.model_background {
   z-index: 10;
 }
 .a_m_w {
@@ -285,7 +428,7 @@ input{
 .ofo_w_50 {
   width: 50%;
 }
-.a_m_left4{
-    margin-left:4%
+.a_m_left4 {
+  margin-left: 4%;
 }
 </style>
