@@ -712,6 +712,7 @@ export default {
       num.buyNumber--;
       this.totalPrice -= num.groupPrice;
       this.totalDis -= Number(num.price);
+      this.delQuest(num.id,num.operaType);
       if (!this.bageNum) {
         this.clearCart();
       }
@@ -733,6 +734,7 @@ export default {
         this.clearCart();
       }
       this.filtArrray[index].buyNumber--;
+      this.delQuest(item.id,item.operaType);
     },
     // 增加购物
     buyAdd(item, index, event) {
@@ -925,7 +927,7 @@ export default {
     addQuest(id,type){
       this.$fetch.post('/weChat/shoppingcart/getShoppingcartAdd/'+this.token.employeeId+'/'+this.token.activityId +'?'+type+'='+id).then(
         e =>{
-          console.log(e);
+          // console.log(e);
         }
       )
     },
@@ -933,7 +935,7 @@ export default {
     delQuest(id,type){
       this.$fetch.post("/weChat/shoppingcart/getShoppingcartSub/"+this.token.employeeId+'/'+this.token.activityId +'?'+type+'='+id).then(
         e =>{
-          console.log(e);
+          // console.log(e);
         }
       )
     }
