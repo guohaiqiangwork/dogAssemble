@@ -17,28 +17,54 @@
       </div>
       <div v-if="AddressFalge" class="ofo_address_w">
         <div class="div_display_flex" style="width:100%;align-items:center;">
-          <div class="" style="margin-right:2%;display:flex;align-items:center;">
+          <div class style="margin-right:2%;display:flex;align-items:center;">
             <span class="font_size_13 font_color_00">联系人:</span>
-            <input  placeholder="请输入您的名字" style="margin-left:6px;width: calc(100% -  54px);vertical-align: middle;">
+            <input
+              placeholder="请输入您的名字"
+              v-model="name"
+              style="margin-left:6px;width: calc(100% -  54px);vertical-align: middle;"
+            >
           </div>
-          <div class=""  style="margin-left:2%;">
+          <div class style="margin-left:2%;">
             <span class="font_size_13 font_color_00">手机号:</span>
-            <input type="text" placeholder="请输入手机号 "  style="margin-left:6px;width: calc(100% -  54px)">
+            <input
+              type="text"
+              placeholder="请输入手机号 "
+              v-model="phoneNumber"
+              style="margin-left:6px;width: calc(100% -  54px)"
+            >
           </div>
         </div>
-        <div class="margin_top_div5" style="display:flex;justify-content:space-between;height:1.6rem;align-items:center;">
+        <div
+          class="margin_top_div5"
+          style="display:flex;justify-content:space-between;height:1.6rem;align-items:center;"
+        >
           <span class="font_size_13 font_color_00">所在地区：</span>
-          <input type="text" placeholder="请选择您当前所在的地区" :style="{'width': '66%',color: address ? '#101010' : ''}" v-model="address" disabled>
+          <input
+            type="text"
+            placeholder="请选择您当前所在的地区"
+            :style="{'width': '66%',color: address ? '#101010' : ''}"
+            v-model="address"
+            disabled
+          >
           <img
             src="../../assets/images/dingdan_weizhankai@3x.png"
             style="width:8%;vertical-align: middle;"
             @click="goToAddressManagement"
           >
-          <x-address style="display:none" @on-hide="logHide"  title="title" v-model="addressValue" :list="addressData" placeholder="请选择地址" :show.sync="showAddress"></x-address>
+          <x-address
+            style="display:none"
+            @on-hide="logHide"
+            title="title"
+            v-model="addressValue"
+            :list="addressData"
+            placeholder="请选择地址"
+            :show.sync="showAddress"
+          ></x-address>
         </div>
         <div class="margin_top_div5">
           <span class="font_size_13 font_color_00">详细地址：</span>
-          <input type="text" placeholder="请输入您的详细地址">
+          <input type="text" v-model="detailedAddress" placeholder="请输入您的详细地址">
         </div>
         <div style="padding-bottom: 1%;">
           <div class="ofo_b_c_d" @click="saveAddress">保存地址</div>
@@ -53,8 +79,8 @@
         </div>
         <div>
           <div class="font_size_14 font_color_66">
-            王佳宇
-            <span>13654550023</span>
+            {{defaultReceiver.receiver}}
+            <span> {{defaultReceiver.phone}}</span>
           </div>
           <div @click="redirectPath">
             <img
@@ -67,8 +93,7 @@
             style="margin-bottom: 3%;width: 90%;"
           >
             <span style="color:#128DED">[默认]</span>
-            内蒙古包头市青山区青山区包头
-            商会大厦2710
+           {{defaultReceiver.province}}{{defaultReceiver.city}}{{defaultReceiver.area}}{{defaultReceiver.receiveAddress}}
           </div>
         </div>
       </div>
@@ -81,7 +106,7 @@
           </div>
         </div>
         <div class="ofo_w_m">
-          <div class="div_display_flex" >
+          <div class="div_display_flex">
             <div class="ofo_w_78">天然计划全犬期深海鱼狗粮</div>
             <div>￥700.0</div>
           </div>
@@ -117,19 +142,24 @@
     </div>
     <div class="ofo_w_Z">微信支付</div>
 
-      <div v-transfer-dom>
-      <x-dialog v-model="show" class="dialog-demo dialog_pos" hide-on-blur :dialog-style="{width: '90%','max-width': '90%','border-radius':'0.6rem'}">
+    <div v-transfer-dom>
+      <x-dialog
+        v-model="show"
+        class="dialog-demo dialog_pos"
+        hide-on-blur
+        :dialog-style="{width: '90%','max-width': '90%','border-radius':'0.6rem'}"
+      >
         <div class="close_dialog" @click="show = false">X</div>
-          <card  :header="{title: '查看套餐'}" class="card_title">
-            <div  slot="content" class="card-demo-flex card-demo-content01 mb-9">
-              <div class="vux-1px-r" v-for="(item,index) in mealList" :key="index">
-                <div class="flex_box">
-                  <p>{{ item.singletitle }}</p>
-                  <p>x{{ item.num }}</p>
-                </div>
+        <card :header="{title: '查看套餐'}" class="card_title">
+          <div slot="content" class="card-demo-flex card-demo-content01 mb-9">
+            <div class="vux-1px-r" v-for="(item,index) in mealList" :key="index">
+              <div class="flex_box">
+                <p>{{ item.singletitle }}</p>
+                <p>x{{ item.num }}</p>
+              </div>
             </div>
-            </div>
-          </card>
+          </div>
+        </card>
       </x-dialog>
     </div>
   </div>
@@ -137,13 +167,24 @@
 <script>
 import url from "../../bin/url";
 // 引入 vux tabbar 组件
-import {  XInput,XAddress,XDialog,Card ,ChinaAddressV4Data ,Value2nameFilter as value2name,TransferDomDirective as TransferDom } from "vux";
+import {
+  XInput,
+  XAddress,
+  XDialog,
+  Card,
+  ChinaAddressV4Data,
+  Value2nameFilter as value2name,
+  TransferDomDirective as TransferDom
+} from "vux";
 export default {
   directives: {
     TransferDom
   },
   components: {
-    XInput,XAddress,XDialog,Card
+    XInput,
+    XAddress,
+    XDialog,
+    Card
   },
   name: "confirmationOfOrder",
   data() {
@@ -151,56 +192,81 @@ export default {
       select: "Home",
       showMenus: false,
       AddressFalge: false, //收货地址
-      showAddress:false,
-      addressValue:[],
-       addressData: ChinaAddressV4Data,
-       address:'',
-       show:false,
-      mealList:[
+      showAddress: false,
+      addressValue: [],
+      addressData: ChinaAddressV4Data,
+      address: "",
+      show: false,
+      name: "", //联系人姓名
+      detailedAddress: "", //详细地址
+      phoneNumber: "", //手机号码
+      mealList: [
         {
-          singletitle:'风味猫粮风味猫粮风味猫粮风味',
-          num:1
-
+          singletitle: "风味猫粮风味猫粮风味猫粮风味",
+          num: 1
         },
         {
-          singletitle:'风味猫粮',
-          num:1
-
+          singletitle: "风味猫粮",
+          num: 1
         },
         {
-          singletitle:'风味猫粮',
-          num:1
-
+          singletitle: "风味猫粮",
+          num: 1
         },
         {
-          singletitle:'风味猫粮似懂非懂如风达说啥呢',
-          num:1
-
+          singletitle: "风味猫粮似懂非懂如风达说啥呢",
+          num: 1
         }
-      ]
+      ],
+      defaultReceiver:''
     };
   },
   methods: {
-    saveAddress(){
-      this.AddressFalge =false;
+    // 地址保存
+    saveAddress() {
+      console.log(this.address);
+      //  console.log( name1.trim().split(" "));
+      this.AddressFalge = false;
       this.showMenus = true;
+      var a = "20190103150524685973383762793795";
+      this.$fetch
+        .post(
+          "weChat/order/saveAddress/" +
+            a +
+            "/" +
+            this.name +
+            "/" +
+            this.phoneNumber +
+            "/" +
+            this.detailedAddress +
+            "/" +
+            this.addressF[0] +
+            "/" +
+            this.addressF[1] +
+            "/" +
+            this.addressF[2]
+        )
+        .then(data => {
+          console.log(res.obj);
+        });
     },
-     dialogShow(){
-       this.show = true;
-     },
+    dialogShow() {
+      this.show = true;
+    },
     //  地址点击完成时
-    logHide (str) {
-      if(str){
+    logHide(str) {
+      if (str) {
         var name = value2name(this.addressValue, ChinaAddressV4Data);
+        this.addressF = name.trim().split(" ");
         this.address = name;
       }
     },
-   
+
     //   添加收获地址
     harvestAddress() {
       this.AddressFalge = true;
     },
-    
+
     goToAddressManagement(id) {
       this.showAddress = true;
       // this.$router.push({
@@ -215,9 +281,9 @@ export default {
       //   }
       // });
     },
-     // 去地址管理
-  redirectPath(){
-    this.$router.push({
+    // 去地址管理
+    redirectPath() {
+      this.$router.push({
         name: "addressManagement",
         params: {
           obj: JSON.stringify({
@@ -228,54 +294,77 @@ export default {
           })
         }
       });
+    },
+    // 获取地址列表
+    getAddressList() {
+      this.$fetch
+        .post(
+          "weChat/order/getAddressList/" + "20190103150524685973383762793795"
+        )
+        .then(data => {
+          if (data.success) {
+            this.addressList = data.obj;
+            if (data.obj.length > 0) {
+              this.showMenus = true;
+              this.AddressFalge = false;
+              this.addressList.forEach((e, index) => {
+                if(e.isDefault == 1){
+                  this.defaultReceiver = e
+                  return
+                }
+              });
+            }
+          }
+        });
+    }
   },
-  },
- 
+
   created() {
     settitle("确认订单");
   },
 
   mounted() {
+    this.getAddressList();
     // console.log(url);
     // console.log(this.$fetch);
   }
 };
 </script>
 <style>
-.weui-panel__hd:after{
+.weui-panel__hd:after {
   content: "";
   left: 0 !important;
 }
 /* .weui-panel{
   margin-top: 0;
 } */
-.weui-dialog{
+.weui-dialog {
   overflow: visible !important;
 }
-.weui-dialog  .weui-panel__hd{
+.weui-dialog .weui-panel__hd {
   font-size: 15px;
   font-weight: 700;
   color: #333;
   text-align: left;
 }
 
-.weui-panel{
-  margin-top: 0  !important;
+.weui-panel {
+  margin-top: 0 !important;
   border-radius: 0.6rem !important;
 }
 </style>
 
 <style scoped>
-.pb-2{
+.pb-2 {
   padding-bottom: 1.2rem;
 }
-.mb-9{
+.mb-9 {
   margin-bottom: 0.9rem;
 }
-.dialog_pos{
+.dialog_pos {
   position: relative;
 }
-.close_dialog{
+.close_dialog {
   width: 32px;
   height: 32px;
   position: absolute;
@@ -286,10 +375,10 @@ export default {
   line-height: 32px;
   border: 1px;
   z-index: 1000;
-  color: #C5C5C5;
+  color: #c5c5c5;
   font-size: 13px;
 }
-.flex_box{
+.flex_box {
   display: flex;
   justify-content: space-between;
   margin-top: 0.8rem;
@@ -297,14 +386,14 @@ export default {
   color: #666;
   font-size: 14px;
 }
-input{
+input {
   outline: none;
   border: none;
   background-color: #fff;
   font-size: 13px;
-  font-family:PingFang-SC-Medium;
+  font-family: PingFang-SC-Medium;
 }
-input:disabled{
+input:disabled {
   color: #101010;
 }
 .overwrite-title-demo {
@@ -360,8 +449,8 @@ input:disabled{
   color: #000;
 }
 .ofo_n_w {
-    display: flex;
-    justify-content: flex-end
+  display: flex;
+  justify-content: flex-end;
 }
 .ofo_t_c {
   width: 77px;
@@ -408,9 +497,9 @@ input:disabled{
   width: 94%;
   margin-left: 3%;
   /* background:rgba(255,255,255,1); */
-box-shadow:0 8px 32px 3px rgba(132,148,168,0.21);
-    padding: 1rem;
-    box-sizing: border-box;
+  box-shadow: 0 8px 32px 3px rgba(132, 148, 168, 0.21);
+  padding: 1rem;
+  box-sizing: border-box;
 }
 .ofo_b_c_d {
   width: 89px;
@@ -421,7 +510,7 @@ box-shadow:0 8px 32px 3px rgba(132,148,168,0.21);
   text-align: center;
   font-size: 13px;
   line-height: 2;
-  margin:  0 auto;
+  margin: 0 auto;
   margin-top: 8%;
   /* margin-left: 40%; */
 }
