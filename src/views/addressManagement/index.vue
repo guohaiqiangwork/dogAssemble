@@ -14,13 +14,14 @@
         style="padding:0 5% 5% 4%;justify-content:space-between;"
       >
         <div style="width:30%;display:flex;align-items:center;">
-          <!-- <check-icon
-            :value.sync="item.isDefault"
-            size="20px"
-            style="display:flex;align-items:center;"
-            @click="getUpdateIsDefault"
-          ></check-icon>-->
-           <span class="radio" :class="{'on':item.isDelete}"></span>
+          <div @click="checkBtn(index,item.id)" :checked="item.isDefault">
+            <check-icon
+              :value.sync="item.isDefault"
+              size="20px"
+              style="display:flex;align-items:center;"
+            ></check-icon>
+          </div>
+          <!-- <span class="radio" :class="{'on':item.isDelete}"></span>
           <input
             v-model="item.isDelete"
             :value="1"
@@ -28,12 +29,12 @@
             :checked="item.isDelete"
             @click="checkAddress(index,item.id)"
             type="radio"
-          >
+          >-->
           <!-- /weChat/order/updateIsDefault/{addressId}/{employeeId} -->
           <span style="font-size:14px;color:#666">默认地址</span>
         </div>
         <div class="div_display_flex operat_box">
-          <div class="div_display_flex" @click="editAddress">
+          <div class="div_display_flex" @click="openAddressM(item)">
             <img src="../../assets/images/edit@2x.png" width="20px" height="20px" class="middle">
             <div style="font-size:14px;color:#666">编辑</div>
           </div>
@@ -198,21 +199,15 @@ export default {
       name: "", //联系人姓名
       detailedAddress: "", //详细地址
       phoneNumber: "", //手机号码
-      aemployeeId: "", //会员编码
+      aemployeeId: "" //会员编码
     };
   },
   methods: {
+    // 地址删除取消
     onCancel() {},
+    // 地址删除确认
     onConfirm() {},
 
-    //删除地址
-    delAddress() {
-      this.outPayFalge = true;
-    },
-    //编辑地址
-    editAddress() {
-      this.AddressMFalge = true;
-    },
     //  地址点击完成时
     logHide(str) {
       if (str) {
@@ -222,13 +217,33 @@ export default {
       }
     },
     saveAddress() {},
-    //  新增地址
-    openAddressM() {
+    //  新增地址 编辑地址
+    openAddressM(item) {
+      console.log(item);
+      if (item.receiver) {
+        this.name = item.receiver;
+        this.address = item.province + "" + item.city + "" + item.area;
+        this.phoneNumber = item.receiver;
+        this.detailedAddress = item.receiveAddress;
+        this.addressF = this.address.trim().split(" ");
+        this.addressF[0] = item.province;
+        this.addressF[1] = item.city;
+        this.addressF[2] = item.area;
+      }
       this.AddressMFalge = true;
     },
     goToAddressManagement() {
       this.showAddress = true;
     },
+    //删除地址
+    delAddress() {
+      this.outPayFalge = true;
+    },
+    //编辑地址
+    // editAddress(item) {
+    //   console.log(item);
+    //   this.AddressMFalge = true;
+    // },
     //   关闭
     closeAddressMFalge(e) {
       // console.log(e.target.offsetParent.id);
@@ -287,43 +302,39 @@ export default {
         });
     },
     // 默认地址设置
-    getUpdateIsDefault(id) {
-      console.log("67868");
-      console.log(id);
-      this.$fetch
-        .post(
-          "weChat/order/updateIsDefault/" +
-            this.aemployeeId +
-            "/" +
-            this.aemployeeId
-        )
-        .then(data => {
-          if (data.success) {
-            this.AddressMFalge = false;
-            this.getAddressList();
-          }
-        });
-    },
-    checkAddress(index,id) {
+    // checkAddress(index, id) {
+    //   // 先取消所有选中项
+    //   this.addressList.forEach(item => {
+    //     item.isDelete = 2;
+    //   });
+    //   //再设置当前点击项选中
+    //   this.radio = this.addressList[index].isDelete;
+    //   // 设置值，以供传递
+    //   // this.addressList[index].isDelete = true;
+    //   console.log(this.radio);
+    //   this.$fetch
+    //     .post("weChat/order/updateIsDefault/" + id + "/" + this.aemployeeId)
+    //     .then(data => {
+    //       if (data.success) {
+    //       }
+    //     });
+    // },
+    // 选择框处理
+    checkBtn(index, id) {
       // 先取消所有选中项
       this.addressList.forEach(item => {
-        item.isDelete = 2;
+        item.isDefault = false;
       });
       //再设置当前点击项选中
-      this.radio = this.addressList[index].isDelete;
+      this.radio = this.addressList[index].value;
       // 设置值，以供传递
-      // this.addressList[index].isDelete = true;
+      this.addressList[index].isDefault = true;
       console.log(this.radio);
-       this.$fetch
-        .post(
-          "weChat/order/updateIsDefault/" +
-            id +
-            "/" +
-            this.aemployeeId
-        )
+      this.$fetch
+        .post("weChat/order/updateIsDefault/" + id + "/" + this.aemployeeId)
         .then(data => {
           if (data.success) {
-           
+            this.getAddressList();
           }
         });
     }
