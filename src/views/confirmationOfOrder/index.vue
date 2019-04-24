@@ -1,5 +1,6 @@
 <template>
-  <div style="height:100%;overflow:hidden;">
+  <!-- style="height:100%;overflow:hidden;" -->
+  <div>
     <div class="div_display_flex backgroun_color_fff" style="padding-bottom: 4%;">
       <div class="ofo_img_header">
         <img src="../../assets/images/logo@3x.png" style="width:100%">
@@ -80,7 +81,7 @@
         <div style="width:100%">
           <div class="font_size_14 font_color_66">
             {{defaultReceiver.receiver}}
-            <span> {{defaultReceiver.phone}}</span>
+            <span>{{defaultReceiver.phone}}</span>
           </div>
           <div @click="redirectPath">
             <img
@@ -93,37 +94,48 @@
             style="margin-bottom: 3%;width: 90%;"
           >
             <span style="color:#128DED">[默认]</span>
-           {{defaultReceiver.province}}{{defaultReceiver.city}}{{defaultReceiver.area}}{{defaultReceiver.receiveAddress}}
+            {{defaultReceiver.province}}{{defaultReceiver.city}}{{defaultReceiver.area}}{{defaultReceiver.receiveAddress}}
           </div>
         </div>
       </div>
     </div>
     <div class="backgroun_color_fff margin_top_div3">
-      <div class="div_display_flex" style="justify-content:space-between;">
+      <div
+        class="div_display_flex"
+        style="justify-content:space-between;"
+        v-for="(item,index) in setMealList"
+      >
         <div style="width:auto;margin-top:5%;">
           <div class="ofo_img_w">
-            <img src="../../assets/images/404@2x.png" style="width:100%">
+            <!-- <img src="../../assets/images/404@2x.png" style="width:100%"> -->
+            <img
+              :src="baseURL + 'sys/attachment/showPic?downloadToken=' + item.goods.imgList[0] + '6210e537ab7425ada8f8cd2430ccb36f'"
+              style="width:100%"
+            >
           </div>
         </div>
         <div class="ofo_w_m">
           <div class="div_display_flex">
-            <div class="ofo_w_78">天然计划全犬期深海鱼狗粮</div>
-            <div>￥700.0</div>
+            <div class="ofo_w_78">{{item.goods.name}}</div>
+            <div v-if="item.goodsinfo">{{item.goodsinfo.price}}</div>
+            <div v-if="item.goodsActivity">{{item.goodsActivity.price}}</div>
           </div>
           <div class="div_display_flex margin_top_div5">
-            <div style="width:80%">
-              <div class="ofo_g_g backgroun_color_fe01 font_size_11 font_color_33">主食 | 牛肉味</div>
+            <div style="width:80%" v-if="item.goodsinfo">
+              <div
+                class="ofo_g_g backgroun_color_fe01 font_size_11 font_color_33"
+              >{{item.goodsinfo.typeSize.replace(/,/g,' | ')}}</div>
             </div>
-            <div class="ofo_n_w font_size_14 font_color_66" style="   width:20%">*1</div>
+            <div style="width:80%" v-if="!item.goodsinfo"></div>
+            <div class="ofo_n_w font_size_14 font_color_66" style="   width:20%">*{{item.count}}</div>
           </div>
-
           <div class="ofo_n_w">
-            <div class="ofo_t_c backgroun_color_fe01" @click="dialogShow">套餐明细</div>
+            <div class="ofo_t_c backgroun_color_fe01" @click="dialogShow(index)">套餐明细</div>
           </div>
         </div>
       </div>
     </div>
-    <div class="backgroun_color_fff margin_top_div3" style="height:100%;">
+    <div class="backgroun_color_fff margin_top_div3" style=" padding-bottom: 30%;">
       <div class="div_display_flex">
         <div class="ofo_s_z ofo_w_50 font_size_13 font_color_00">商品总价</div>
         <div class="ofo_j_z ofo_s_z ofo_w_50 font_size_14 font_color_010">￥48.0</div>
@@ -154,8 +166,8 @@
           <div slot="content" class="card-demo-flex card-demo-content01 mb-9">
             <div class="vux-1px-r" v-for="(item,index) in mealList" :key="index">
               <div class="flex_box">
-                <p>{{ item.singletitle }}</p>
-                <p>x{{ item.num }}</p>
+                <p>{{ item.name }}</p>
+                <p>{{ item.remark }}</p>
               </div>
             </div>
           </div>
@@ -165,6 +177,7 @@
   </div>
 </template>
 <script>
+import config from "../../config/config.dev.js";
 import url from "../../bin/url";
 // 引入 vux tabbar 组件
 import {
@@ -200,25 +213,9 @@ export default {
       name: "", //联系人姓名
       detailedAddress: "", //详细地址
       phoneNumber: "", //手机号码
-      mealList: [
-        {
-          singletitle: "风味猫粮风味猫粮风味猫粮风味",
-          num: 1
-        },
-        {
-          singletitle: "风味猫粮",
-          num: 1
-        },
-        {
-          singletitle: "风味猫粮",
-          num: 1
-        },
-        {
-          singletitle: "风味猫粮似懂非懂如风达说啥呢",
-          num: 1
-        }
-      ],
-      defaultReceiver:''
+      mealList: [],
+      defaultReceiver: "",
+      setMealList: []
     };
   },
   methods: {
@@ -250,7 +247,8 @@ export default {
           console.log(res.obj);
         });
     },
-    dialogShow() {
+    dialogShow(index) {
+      this.mealList = this.setMealList[index].goods.setmealList;
       this.show = true;
     },
     //  地址点击完成时
@@ -266,7 +264,6 @@ export default {
     harvestAddress() {
       this.AddressFalge = true;
     },
-
     goToAddressManagement(id) {
       this.showAddress = true;
       // this.$router.push({
@@ -307,13 +304,30 @@ export default {
             if (data.obj.length > 0) {
               this.showMenus = true;
               this.AddressFalge = false;
+              if (this.addressList.length == 1) {
+                  this.defaultReceiver = this.addressList[0];
+                }
               this.addressList.forEach((e, index) => {
-                if(e.isDefault == 1){
-                  this.defaultReceiver = e
-                  return
+                if (e.isDefault == 1) {
+                  this.defaultReceiver = e;
+                  return;
                 }
               });
             }
+          }
+        });
+    },
+    // 获取购物车详情
+    getShopCar() {
+      this.$fetch
+        .post(
+          "weChat/index/getShoppingcart/" +
+            "20190103150524685973383762793795" +
+            "/bbb9e822bfd14cdcb884da29c56c4cd3"
+        )
+        .then(data => {
+          if (data.success) {
+            this.setMealList = data.obj;
           }
         });
     }
@@ -325,8 +339,14 @@ export default {
 
   mounted() {
     this.getAddressList();
+    this.getShopCar();
     // console.log(url);
     // console.log(this.$fetch);
+  },
+  computed: {
+    baseURL() {
+      return config.baseURL;
+    }
   }
 };
 </script>
