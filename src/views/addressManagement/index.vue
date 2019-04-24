@@ -203,7 +203,9 @@ export default {
     };
   },
   methods: {
+    // 地址删除取消
     onCancel() {},
+    // 地址删除确认
     onConfirm() {},
 
     //  地址点击完成时
@@ -217,10 +219,10 @@ export default {
     saveAddress() {},
     //  新增地址 编辑地址
     openAddressM(item) {
-      console.log(item)
+      console.log(item);
       if (item.receiver) {
         this.name = item.receiver;
-        this.address = item.province + '' + item.city + '' + item.area;
+        this.address = item.province + "" + item.city + "" + item.area;
         this.phoneNumber = item.receiver;
         this.detailedAddress = item.receiveAddress;
         this.addressF = this.address.trim().split(" ");
