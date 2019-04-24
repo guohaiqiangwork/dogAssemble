@@ -1,6 +1,6 @@
-<template>   
-<!-- style="height:100%;overflow:hidden;" -->
-  <div >
+<template>
+  <!-- style="height:100%;overflow:hidden;" -->
+  <div>
     <div class="div_display_flex backgroun_color_fff" style="padding-bottom: 4%;">
       <div class="ofo_img_header">
         <img src="../../assets/images/logo@3x.png" style="width:100%">
@@ -110,7 +110,7 @@
             <!-- <img src="../../assets/images/404@2x.png" style="width:100%"> -->
             <img
               :src="baseURL + 'sys/attachment/showPic?downloadToken=' + item.goods.imgList[0] + '6210e537ab7425ada8f8cd2430ccb36f'"
-             style="width:100%"
+              style="width:100%"
             >
           </div>
         </div>
@@ -122,11 +122,11 @@
           </div>
           <div class="div_display_flex margin_top_div5">
             <div style="width:80%" v-if="item.goodsinfo">
-              <div class="ofo_g_g backgroun_color_fe01 font_size_11 font_color_33">{{item.goodsinfo.typeSize.replace(/,/g,' | ')}}</div>
+              <div
+                class="ofo_g_g backgroun_color_fe01 font_size_11 font_color_33"
+              >{{item.goodsinfo.typeSize.replace(/,/g,' | ')}}</div>
             </div>
-             <div style="width:80%" v-if="!item.goodsinfo">
-             
-            </div>
+            <div style="width:80%" v-if="!item.goodsinfo"></div>
             <div class="ofo_n_w font_size_14 font_color_66" style="   width:20%">*{{item.count}}</div>
           </div>
           <div class="ofo_n_w">
@@ -177,7 +177,7 @@
   </div>
 </template>
 <script>
-import config from '../../config/config.dev.js'
+import config from "../../config/config.dev.js";
 import url from "../../bin/url";
 // 引入 vux tabbar 组件
 import {
@@ -248,7 +248,7 @@ export default {
         });
     },
     dialogShow(index) {
-      this.mealList = this.setMealList[index].goods.setmealList
+      this.mealList = this.setMealList[index].goods.setmealList;
       this.show = true;
     },
     //  地址点击完成时
@@ -304,6 +304,9 @@ export default {
             if (data.obj.length > 0) {
               this.showMenus = true;
               this.AddressFalge = false;
+              if (this.addressList.length == 1) {
+                  this.defaultReceiver = this.addressList[0];
+                }
               this.addressList.forEach((e, index) => {
                 if (e.isDefault == 1) {
                   this.defaultReceiver = e;
@@ -341,7 +344,7 @@ export default {
     // console.log(this.$fetch);
   },
   computed: {
-      baseURL() {
+    baseURL() {
       return config.baseURL;
     }
   }
