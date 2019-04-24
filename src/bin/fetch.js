@@ -1,7 +1,6 @@
 import axios from 'axios'
 const config = require('../config/config.dev')
 // 创建axios实例
-console.log(axios);
 const options = {
   baseURL: config.baseURL,
   timeout: 300000,

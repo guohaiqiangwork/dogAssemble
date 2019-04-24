@@ -1,5 +1,5 @@
 <template>
-  <div class="text_center">
+  <div class="text_center" v-if="timeShow">
     <slot>
       <!-- {{content}} -->
       <span class="time_span">{{day}}</span> :
@@ -21,6 +21,10 @@ export default {
     };
   },
   props: {
+    timeShow:{
+      type:Boolean,
+      default:true
+    },
     endTime: {
       type: String,
       default: ""
@@ -41,6 +45,12 @@ export default {
     endTime:{
       handler(newValue,oldVal){
         this.countdowm(newValue);
+        oldVal =newValue;
+      }
+    },
+    timeShow:{
+      handler(newValue,oldVal){
+        this.timeShow = newValue;
         oldVal =newValue;
       }
     }
@@ -88,6 +98,9 @@ export default {
         this.callback(...this);
       }
     }
+  },
+  mounted(){
+    console.log(this.value,'vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv');
   }
 };
 </script>

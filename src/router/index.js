@@ -5,6 +5,7 @@ import home from '@/views/home/index'
 import personal from '@/views/personal/index'
 import Assemble from '@/views/Assemble/index'
 import order from '@/views/order/index'
+import detail from '@/views/detail/detail.vue'
 import confirmationOfOrder from '@/views/confirmationOfOrder/index'
 import addressManagement from '@/views/addressManagement/index'
 import is404 from '@/views/page/is404'
@@ -22,6 +23,15 @@ export default new Router({
         title: '拼团', 
       },
       component: Assemble
+    },
+    {
+      // 详情
+      path: '/detail/',
+      name: 'detail',
+      meta: {
+        title: '拼团', 
+      },
+      component: detail
     },
     {
       // 个人中心

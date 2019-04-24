@@ -72,12 +72,12 @@
       </div>
       <!-- 默认地址 -->
       <div class="div_display_flex" v-if="showMenus">
-        <div style="width:10% ;margin-left: 4%; margin-top: 3%;">
+        <div style="width:2rem ;margin-left: 4%; margin-top: 3%;">
           <div class="ofo_d_z_d">
             <img src="../../assets/images/local@3x.png" style="width:100%;height:30px;">
           </div>
         </div>
-        <div>
+        <div style="width:100%">
           <div class="font_size_14 font_color_66">
             {{defaultReceiver.receiver}}
             <span> {{defaultReceiver.phone}}</span>

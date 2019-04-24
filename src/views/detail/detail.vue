@@ -6,25 +6,27 @@
     </transition>-->
 
     <div class="backgroun_color_fff">
-      <div class="div_display_flex flex_box" style="padding-top:21px">
+      <div class="div_display_flex flex_box" style="padding-top:21px;height:25px;line-height:25px;">
         <!-- <div class="div_left_border"></div> -->
-        <div class="font_color_00 font_size_16 mx-0 end_title">距结束</div>
+        <div class="font_color_00 font_size_16 mx-0 end_title">{{msg.title}}</div>
         <!-- <div class="div_left_border"></div> -->
         <div class="assemble_img_border" @click="goToPersonal">
           <img src="../../assets/images/my@2x.png" style="width:100%;">
         </div>
       </div>
       <!-- 倒计时 -->
-      <countdown :endTime="time" :callback="callback" endText="已经结束了"></countdown>
-      <div class="assemble_div_font">N 人成团，当前已有N人参团</div>
+      <countdown  :endTime="msg.time" :callback="callback" endText="已经结束了" :timeShow="msg.timeShow"></countdown>
+      <div class="assemble_div_font">{{`${msg.groupNum}人成团，当前已有${msg.nowCount}人参团`}}</div>
       <!-- 参团人员 -->
       <div class="div_display_flex avatar_box">
         <div class="header_border_circular" style="position:relative">
           <img src="../../assets/images/team@2x.png" alt class="tag_team">
         </div>
-        <div class="header_border_circular"></div>
-        <div class="header_border_circular"></div>
-        <div class="header_border_circular"></div>
+        <div v-for="(item,index) in msg.avatarList" :key="index">
+            <img class="header_border_circular" :src="item.headimgurl?item.headimgurl: index ==1 ? require('../../assets/images/cat@2x.png') : require('../../assets/images/dog@2x.png')" alt="" width="45" height="45" >
+        </div>
+        <!-- <div class="header_border_circular"></div>
+        <div class="header_border_circular"></div> -->
         <div class="header_border_circular_g" @click="goToOrder">
           <img src="../../assets/images/more@2x.png" style="width:100%">
         </div>
@@ -32,71 +34,73 @@
     </div>
 
     <!-- 产品列表 -->
-    <div style="padding-bottom:57px">
-      <div
-        class="div_display_flex backgroun_color_fff"
-        style="margin-top:2%"
-        v-for="(item,index) in lists"
-        :key="index"
-      >
-        <!-- 产品内容 -->
-        <div @click="goToProduct" class="div_display_flex" style="width:100%;">
-          <!-- 产品图片 -->
+    <div style="margin-top:2%" class="div_display_flex backgroun_color_fff"
+       >
+       <div class="div_display_flex" style="width:100%;">
+           <!-- 产品图片  -->
           <div class="assemble_list_div">
-            <img src="../../assets/logo.png" width="105px">
+            <img :src="baseURL + 'sys/attachment/showPic?downloadToken=' + singlegood.avatar + '6210e537ab7425ada8f8cd2430ccb36f'" width="105px" style="max-height:6.5rem">
           </div>
           <div style="width:60%;">
             <div
               class="margin_top_div8 font_color_00 font_size_16"
               style="width:187px;"
-            >{{item.name}}</div>
+            >{{singlegood.name}}</div>
             <div class="margin_top_div8">
               <span class="font_size_18 font_color_00">
-                ¥{{item.groupPrice}}
-                <span class="font_size_11" v-show="item.hasWord">起</span>
+                ¥{{msg.groupPrice}}
+                <span class="font_size_11" v-show="msg.hasWord">起</span>
               </span>
               <span
                 style="text-decoration:line-through; margin-left: 6%;"
                 class="font_size_11"
-              >￥{{item.price}}</span>
+              >￥{{msg.price}}</span>
             </div>
-            <div class="flex_end" v-if="item.ni == 1" style="margin-top: 6%;">
-              <div class="assemble_specifications" @click="open_model(item,index)">选择规格</div>
+            <div class="flex_end" style="margin-top: 6%;" v-if="singlegood.ni == 1"><!-- -->
+              <div class="assemble_specifications" @click="open_model(singlegood)">选择规格</div>
             </div>
-            <div class="flex_end" v-if="item.ni != 1" style="margin-top: 6%;">
-              <!-- <div
-             
-                style="margin-left: 80%;"
-                class="buy_circular back_color"
-                @click.stop="buyAdd(1,index,$event)"
-              >+</div>
-              </div>-->
+            <div class="flex_end"  style="margin-top: 6%;" v-if="singlegood.ni != 1"><!---->
+              
               <div
-                :class=" ['buy_circular_div','div_display_flex',item.buyNumber>0? 'show_circle' :'border_white']"
+                :class=" ['buy_circular_div','div_display_flex',singlegood.buyNumber>0? 'show_circle' :'border_white']"
               >
                 <img
                   src="../../assets/images/addicon.png"
                   alt
-                  :class="['buy_circular',item.buyNumber>0?'color_bd': 'back_color', 'addStyle']"
-                  @click.stop="buyAdd(item,index,$event)"
+                  :class="['buy_circular',singlegood.buyNumber>0?'color_bd': 'back_color', 'addStyle']"
+                  @click.stop="buyAdd(singlegood,$event)"
                 >
 
-                <div class="flex_end box_content" v-show="item.buyNumber > 0 && item.ni != 1">
-                  <span class="box_content">{{item.buyNumber}}</span>
+                <div class="flex_end box_content" v-show="singlegood.buyNumber > 0 && singlegood.ni != 1">
+                  <span class="box_content">{{singlegood.buyNumber}}</span>
                   <img
                     src="../../assets/images/del.png"
                     alt
                     class="buy_circular bd_color delStyle"
-                    @click.stop="buy_minute(item,index)"
+                    @click.stop="buy_minute(singlegood)"
                   >
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
     </div>
-    <div class="cart" style></div>
+    <!-- 宝贝详情 -->
+    <div class="item_details">
+      <div class="detail_title">
+        <span class="border_tit">
+          <span class="radius_tit">宝贝详情</span>
+          
+        </span>
+      </div>
+      <div class="photo_box" v-for="(item,index) in detailList" :key="index">
+
+        <img :src="baseURL + 'sys/attachment/showPic?downloadToken=' + item + '6210e537ab7425ada8f8cd2430ccb36f'" alt="" style="width:100%;display:block;">
+      </div>
+
+    </div>
+
+    <div class="cart"></div>
     <div class="ball-container">
       <!--小球 -->
       <div v-for="(ball,ballindex) in balls" :key="ballindex">
@@ -115,9 +119,10 @@
     <!-- 购买 -->
     <div class="div_display_flex backgroun_color_fff assemble_buttom_div" style="z-index:12">
       <!-- 活动正常 -->
-      <div style="width: 100%;display: flex;" v-if="true">
+      <div style="width: 100%;display: flex;">
         <div class="bt_buy_img">
-          <div class="buy_border_number" v-show="bageNum">{{bageNum}}</div>
+          <div class="buy_border_number" v-show="bageNum">{{bageNum}}
+          </div>
           <img src="../../assets/images/shopping@2x.png" alt width="100%" height="76px">
         </div>
         <!-- <div v-transfer-dom>
@@ -139,11 +144,11 @@
             <span
               style="margin-left:0.4rem"
               :class="{'font_color_99' : bageNum ? '' : true}"
-            >￥{{groupPrice}}</span>
+            >￥{{singlegood.sumPrice}}</span>
             <span
               class="font_color_99 font_size_13 font_text_decoration"
               style="margin-left:0.2rem"
-            >￥{{disPrice}}</span>
+            >￥{{singlegood.sumDisprice}}</span>
           </div>
           <div class="font_color_99 font_size_11" style="margin-left: 0.8rem;margin-top: -2%;">满N件包邮</div>
         </div>
@@ -153,47 +158,47 @@
         >去拼团</div>
       </div>
       <!-- 活动结束 邀请好友-->
-      <div v-if="false" style="width: 100%;">
-        <div class="assemble_j_s" @click="goToInvitation">{{ bottom_title }}</div>
+      <!-- <div v-if="msg.isJoin && !msg.isActive || isShow" style="width: 100%;">
+        <div class="assemble_j_s" @click="goToInvitation">{{ bottom_title }}</div> -->
         <!-- 改变bottom_title 的值为 更多拼团   活动已结束  敬请期待-->
-      </div>
-      <div v-if="false" style="width: 100%;" class="bottom_box">
+      <!-- </div> -->
+      <!-- <div v-if="msg.isJoin && msg.isActive" style="width: 100%;" class="bottom_box">
         <div class="wid_70" @click="goToInvitation">
           <span class="wid_100">邀请好友去拼团</span>
         </div>
         <div class="wid_30">
           <span class="wid_100">更多拼团</span>
         </div>
-      </div>
+      </div> -->
     </div>
     <!-- <div class="click" @click="downApp">点击触发</div>-->
     <!-- 弹出层 -->
     <div v-transfer-dom>
       <x-dialog
-        v-model="opstion.show"
+        v-model="singlegood.show"
         hide-on-blur
         :dialog-style="{'max-width': '100%', width: '100%', height: '50%', 'background-color': 'transparent','overflow': 'auto'}"
       >
-        <div class="model_colse_X" @click="opstion.show = false">X</div>
-        <div class="model_background_width" v-show="opstion.show">
+        <div class="model_colse_X" @click="singlegood.show = false">X</div>
+        <div class="model_background_width" v-show="singlegood.show">
           <div class="model_title_font">商品名称</div>
-          <div v-for="(item,index) in opstion.goodsSpeList" :key="index" style="height:100%">
+          <div v-for="(item,index) in singlegood.goodsSpeList" :key="index" style="height:100%">
             <div class="div_text_left font_color_33 font_size_14">{{item.specification.name}}</div>
             <div :style="{'height':'50px'}">
               <div
-                v-for="(iten,ind) in opstion.spec[index]"
+                v-for="(iten,ind) in singlegood.spec[index]"
                 @click="get_taste(index,iten,ind)"
                 :class="['model_border_button',iten.flag == ind? 'color' : '' ]"
                 :key="ind"
               >{{iten.name}}</div>
               <!-- <div
-                v-for="(iten,ind) in opstion.spec[index]"
+                v-for="(iten,ind) in singlegood.spec[index]"
                 @click="get_taste(index,iten,ind)"
                 :class="['model_border_button',iten.flag == ind? 'color' : '' ]"
                 :key="ind"
               >{{iten.name}}</div> -->
               <!-- @click="get_taste(item.id)" -->
-              <!-- :class="['model_border_button',item.id ==opstion.flag? 'color' : '' ]" -->
+              <!-- :class="['model_border_button',item.id ==singlegood.flag? 'color' : '' ]" -->
             </div>
              <div class="mode_button_border"></div>
            
@@ -209,7 +214,7 @@
             <!-- <div >  -->
 
             <div
-              v-for="(pop,index) in opstion.goodsinfoList"
+              v-for="(pop,index) in singlegood.goodsinfoList"
               :key="index"
               :class="{'model_buy_font_sb':pop.id == attrValue.id}"
               v-show="pop.id==attrValue.id"
@@ -227,16 +232,16 @@
                 <div class="flex_end box_content">
                   <img
                     src="../../assets/images/addicon.png"
-                    alt
+                   
                     :class="['buy_circular',pop.buyNumber>0?'color_bd': 'back_color', 'addStyle']"
                     @click.stop="addCount($event,pop,index)"
                   >
                   <span class="box_content">{{pop.buyNumber}}</span>
                   <img
                     src="../../assets/images/del.png"
-                    alt
+                   
                     class="buy_circular bd_color delStyle"
-                    @click.stop="disCount($event,pop)"
+                    @click.stop="disCount($event,pop,index)"
                   >
                 </div>
               </div>
@@ -247,18 +252,18 @@
       </x-dialog>
     </div>
     <!-- 产品详情 -->
-    <div v-if="ProductFalg">
-      <!-- 标题 -->
+    <!-- <div v-if="ProductFalg">
+     
       <div class="div_display_flex" style="margin-left: 11%;padding-top:3%">
         <div class="div_left_border"></div>
         <div>产品详情</div>
         <div class="div_left_border"></div>
       </div>
-      <!--内容  -->
+    
       <div>
         <img src="../../assets/logo.png" alt>
       </div>
-    </div>
+    </div> -->
     <!-- 底部弹出层 -->
     <div v-if="modelFalgez">
       <div class="model_background" @click="close($event)">
@@ -336,14 +341,16 @@
       </div>
     </div>
     <!-- 邀请好友 -->
-    <div v-if="InvitationFalge">
+    <!-- <div v-if="InvitationFalge">
       <div class="model_background" @click="colseModelProductL">
         <img src="../../assets/images/tupianjiazaishibai@3x.png" alt>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
+
 <script>
+import config from '../../config/config.dev.js'
 import url from "../../bin/url";
 import {
   XHeader,
@@ -355,18 +362,12 @@ import {
   Radio,
   TransferDomDirective as TransferDom
 } from "vux";
-import countdown from "./time";
+import countdown from "../Assemble/time";
 import { fail } from "assert";
 
 export default {
   directives: {
     TransferDom
-  },
-  props:{
-      goodsDetail:{
-          type:Object,
-          default:{}
-      }
   },
   components: {
     XHeader,
@@ -381,29 +382,12 @@ export default {
   },
   name: "Assemble",
   watch: {
-    //   // 如果 `question` 发生改变，这个函数就会运行
-    //   spec: function (newQuestion, oldQuestion) {
-    //     console.log('yuiyiyuiyuiyius')
-    //     // oldQuestion = newQuestion;
-    //   },
-    //   // deep:true
-    filtArrray: {
-      handler(oldValue, newValue) {
-        // this.filtArrray();
-        // console.log('我改变了',newValue)
-      }
-    },
-    opstion: {
-      handler(oldValue, newValue) {
-        // this.filtArrray();
-        var index = this.lists.indexOf(oldValue);
-        this.$set(this.lists[index], newValue);
-        oldValue = newValue;
-        // console.log('我改变了',newValue)
+    'singlegood.goodsinfoList':{
+      handler(newVal,oldVal){
+        console.log(' 我改变了')
       },
-      deep: true
-    },
-    deep: true
+      deep:true
+    }
   },
   // beforeRouteLeave(to, from, next) {
   //   console.log(to, "aaaaa");
@@ -414,44 +398,27 @@ export default {
       //小球 设为3个
       balls: [{ show: false }, { show: false }, { show: false }],
       dropBalls: [],
-      bottom_title: "邀请好友去拼团",
-      popupVisible: false,
-      time: "3554291380",
-      numberZ: "20",
-      classA: "001",
+      // bottom_title: "邀请好友去拼团",
+      time: "",
+      msg:{},
+      detailList:[],
+      goodId:null,
+      singlegood:{},
+      filtArrray:[],
       modelFalgez: false, //弹出层
-      InvitationFalge: false,
+      // InvitationFalge: false,
       disscroll: false,
-      opstion: {},
+      // isJoin:null,
+      // isActive:null,
+      singlegood: {},
       bageNum: 0,
-      operaType:'goodsActivityId',
       attrValue: {},
       totalPrice: 0,
       totalDis: 0,
-      tasteList: [
-        { tasteName: "牛肉味", id: "001" },
-        { tasteName: "番茄味", id: "002" },
-        { tasteName: "苦瓜味", id: "003" },
-        { tasteName: "猪肉味", id: "004" },
-        { tasteName: "驴肉味", id: "005" }
-      ],
-      lists: [
-        // {
-        //   name: "天人计划全期深海鱼狗粮",
-        //   groupPrice: "700.0",
-        //   money: "￥900.0",
-        //   buyNumber: 0,
-        //   ni: "1",
-        //   show:false,
-        //   flag:'001'
-        // }
-      ],
-      showDialogStyle: false, //弹窗
-      // buyFalge: "", //样式
-      showPrise: 99999, //显示购物数量
-      flag: false,
-      ProductFalg: false, //产品详情
-      strBuffer: []
+      isShow : false,
+      lists: [],
+      // ProductFalg: false, //产品详情
+      // strBuffer: []
     };
   },
   created() {
@@ -459,40 +426,48 @@ export default {
     // this.getCode();
   },
   computed: {
+    goodsDetail(){
+
+    },
+    baseURL(){
+      return config.baseURL
+    },
     groupPrice() {
       return this.totalPrice.toFixed(1);
     },
     disPrice() {
       return this.totalDis.toFixed(1);
     },
-    filtArrray() {
-      let arr1 = [];
-      let arr2 = [];
-      this.lists.map(function(e) {
-        if (e.goodsinfoList.length) {
-          e.goodsinfoList.forEach(item => {
-            if (item && item.buyNumber > 0) {
-              item.operaType ='goodsinfoId',
-              item.name = e.name;
-              arr1.push(item);
-            }
-          });
-        }
-      });
-
-      arr2 = this.lists.filter(e => {
-        return e.buyNumber > 0;
-      });
-      var a = [...arr1, ...arr2];
-      return a;
-    },
+    // filtArrray() {
+    //   let arr1 = [];
+    //   let arr2 = [];
+    //   this.lists.map(function(e) {
+    //     if (e.goodsinfoList.length) {
+    //       e.goodsinfoList.forEach(item => {
+    //         if (item && item.buyNumber > 0) {
+    //           item.operaType ='goodsinfoId',                                  
+    //           item.name = e.name;
+    //           arr1.push(item);
+             
+    //         }
+    //       });
+    //     }
+    //   });
+      
+    //   arr2 = this.lists.filter(e => {
+    //     return e.buyNumber > 0;
+    //   });
+    //    console.log(arr2,'arr1');
+    //   var a = [...arr1, ...arr2];
+    //   return a;
+    // },
     token() {
       return JSON.parse(localStorage.getItem("user"));
-    }
+    },
   },
   methods: {
     getArray() {
-      let a = this.opstion.goodsSpeList.map((e, index) => {
+      let a = this.singlegood.goodsSpeList.map((e, index) => {
         return e.attrValue.split(",");
       });
       if (!a.length) {
@@ -503,7 +478,7 @@ export default {
           e.push({
             name: i,
             flag: 0,
-            operaType:'goodsinfoId'
+            // operaType:'goodsinfoId'
           });
         });
       });
@@ -550,7 +525,6 @@ export default {
     },
     dropping(el, done) {
       /*重置小球数量  样式重置*/
-
       let rf = el.offsetHeight;
       el.style.webkitTransform = "translate3d(0,0,0)";
       el.style.transform = "translate3d(0,0,0)";
@@ -574,26 +548,6 @@ export default {
         this.disscroll = false;
         this.modelFalgez = false;
       }
-    },
-    // 处理
-    // beforeEnter(el) {
-    //   el.style.transform = "translate(200px, 100px)"; //起步位置
-    // },
-    // enter(el, done) {
-    //   // el.offsetWidth 强制html渲染动画
-    //   // el.offsetWidth 这句话如何不写就不会有动画效果直接渲染的
-    //   el.offsetWidth;
-    //   el.style.transform = "translate(-150px, 250px)";
-    //   el.style.transition = "all 2s ease";
-    //   done();
-    // },
-    // afterEnter(el) {
-    //   this.flag = !this.flag;
-    // },
-    // 展示详情
-    goToProduct(id) {
-      // console.log(id);
-      // 获取详情接口
     },
     // 去订单
     goToOrder() {
@@ -632,12 +586,13 @@ export default {
 
     // 打开弹窗
     open_model(item, index) {
-      this.opstion = this.lists[index];
+      // this.singlegood = this.lists[index];
       item.show = true;
+      console.log(item);
       var arr;
       if (!item.lalc) {
         item.spec = this.getArray();
-        this.opstion.goodsSpeList.forEach(e => {
+        item.goodsSpeList.forEach(e => {
           arr = e.attrValue.split(",");
           item.strBuffer.push(arr[0]);
         });
@@ -648,35 +603,35 @@ export default {
       var pos = item.goodsinfoList.findIndex(e => {
         return e.typeSize == str;
       });
-      this.attrValue = this.opstion.goodsinfoList[pos];
+      this.attrValue = item.goodsinfoList[pos];
       //  console.log(str);
       //  console.log(pos,'pos')
       // console.log(item,'item');
-      // console.log(this.opstion.goodsinfoList)
+      // console.log(this.singlegood.goodsinfoList)
       //   console.log(this.attrValue,'sddadadsaddasdasdadasda11111111111');
     },
     kind(index, iten, ind) {
-      var str = this.opstion.goodsSpeList[index].attrValue;
+      var str = this.singlegood.goodsSpeList[index].attrValue;
       str = str.split(",");
       var t = str.indexOf(iten);
       return t;
     },
     // 弹窗选择
     get_taste(index, iten, ind) {
-      this.opstion.spec[index].forEach(e => {
+      this.singlegood.spec[index].forEach(e => {
         e.operaType ='goodsinfoId',
         e.flag = null;
       });
       iten.flag = ind;
-      this.opstion.strBuffer[index] = iten.name;
-      var str = this.opstion.strBuffer.join(",");
-      var pos = this.opstion.goodsinfoList.findIndex(e => {
+      this.singlegood.strBuffer[index] = iten.name;
+      var str = this.singlegood.strBuffer.join(",");
+      var pos = this.singlegood.goodsinfoList.findIndex(e => {
         return e.typeSize == str;
       });
 
-      this.attrValue = this.opstion.goodsinfoList[pos];
+      this.attrValue = this.singlegood.goodsinfoList[pos];
 
-      this.$set(this.opstion.spec[index], "iten.flag", ind);
+      this.$set(this.singlegood.spec[index], "iten.flag", ind);
     },
 
     //清空购物车
@@ -697,89 +652,117 @@ export default {
       this.modelFalgez = false;
       this.clearQuest();
     },
-   
-    // 添加购物车显示
-    // assemble_buy_plus(id,e) {
-
-    //   // this.showPrise = id;
-    //   this.buyFalge = 1;
-    //   this.buyAdd(1, id,e);
-    // },
     //选择规格 购物车数量
     addCount(event, num, index) {
-      console.log(num,'1325443')
-      this.totalPrice += Number(num.groupPrice);
-      this.totalDis += Number(num.price);
+      console.log(num,'999999')
+      console.log(num.operaType,'1325443')
+      num.buyNumber++;
+      num.operaType='goodsinfoId';
+      num.name = this.singlegood.name;
+      this.singlegood.sumPrice += Number(num.groupPrice);
+      this.singlegood.sumDisprice += Number(num.price);
       this.drop(event.target);
-      var a = num.buyNumber++;
-      this.$set(this.lists, this.opstion.goodsinfoList[index], num);
+     
+      let pos = this.filtArrray.findIndex(e =>{
+        return num.id == e.id;
+      })
+      console.log(pos)
+      console.log(!pos)
+      if(pos >= 0){
+          this.$set(this.filtArrray,pos,num);
+        //  this.filtArrray[pos].buyNumber++;
+      }else{
+        this.filtArrray.push(num);
+        console.log(1111111111111111111)
+       
+      }
+      
+      // this.$set(this.lists, this.singlegood.goodsinfoList[index], num);
       this.addQuest(num.id,num.operaType);
     },
-    disCount(event, num) {
+    disCount(event, num,index) {
+      num.operaType='goodsinfoId';
+      num.name = this.singlegood.name;
       this.bageNum--;
+      num.buyNumber = num.buyNumber *1;
       num.buyNumber--;
-      this.totalPrice -= num.groupPrice;
-      this.totalDis -= Number(num.price);
+      this.singlegood.buyNumber--;
+      this.singlegood.sumPrice -= num.groupPrice;
+      this.singlegood.sumDisprice -= Number(num.price);
+      if (!num.buyNumber){
+       let pos =this.filtArrray.findIndex(e =>{
+         return num.id == e.id;
+       });
+       this.filtArrray.splice(pos,1);
+      }
       this.delQuest(num.id,num.operaType);
       if (!this.bageNum) {
         this.clearCart();
       }
+      // this.$set(this.singlegood.goodsinfoList,index,num);
     },
     //点击底部购物车 购物数量
     btm_add(index, event, item) {
       console.log(item,'ddddddd');
+      console.log(this.singlegood.goodsinfoList,'aaaaaa');
       this.drop(event.target);
-      this.totalPrice += Number(item.groupPrice);
-      this.totalDis += Number(item.price);
+      this.singlegood.sumPrice += Number(item.groupPrice);
+      this.singlegood.sumDisprice += Number(item.price);
+      console.log(item.sumPrice,'kkkkkkkkkkkkkkkkk');
       this.filtArrray[index].buyNumber++;
       this.addQuest(item.id,item.operaType);
+      let pos = this.singlegood.goodsinfoList.findIndex(e =>{
+        return item.id == e.id
+      })
+      this.$set(this.singlegood.goodsinfoList,pos,item);
+
     },
     btm_dis(index, item) {
+      console.log(item,'uuuuuuu')
       this.bageNum--;
-      this.totalPrice -= item.groupPrice;
-      this.totalDis -= item.price;
+      this.singlegood.sumPrice -= Number(item.groupPrice);
+      this.singlegood.sumDisprice -= Number(item.price);
+      this.filtArrray[index].buyNumber--;
       if (!this.bageNum) {
         this.clearCart();
-      }
-      this.filtArrray[index].buyNumber--;
+      };
+      if (!this.filtArrray[index].buyNumber){
+        this.filtArrray.splice(index,1);
+      };
+      let pos = this.singlegood.goodsinfoList.findIndex(e =>{
+        return item.id == e.id
+      })
+      this.$set(this.singlegood.goodsinfoList,pos,item);
       this.delQuest(item.id,item.operaType);
     },
     // 增加购物
-    buyAdd(item, index, event) {
-      this.totalPrice += Number(item.groupPrice);
-      this.totalDis += Number(item.price);
+    buyAdd(item, event) {
+      item.sumPrice += Number(item.groupPrice);
+      item.sumDisprice += Number(item.price);
+      console.log(item,'lllllllllllllllllll');
       this.drop(event.target);
-      var lists = this.lists;
-      var buyNumber = Number(lists[index].buyNumber);
+      // var lists = this.lists;
+      var buyNumber = Number(item.buyNumber);
       buyNumber += 1;
-      lists[index].buyNumber = buyNumber;
+      item.buyNumber = buyNumber;
       console.log(item)
       this.addQuest(item.id,item.operaType);
     },
     // 减少购物
     buy_minute(item, index) {
       this.delQuest(item.id,item.operaType)
-      var lists = this.lists;
-      this.totalPrice -= item.groupPrice;
-      this.totalDis -= item.price;
-      var buyNumber = lists[index].buyNumber;
+      // var lists = this.lists;
+      item.sumPrice -= item.groupPrice;
+      item.sumDisprice -= item.price;
+      var buyNumber = item.buyNumber;
       if (buyNumber > 0) {
         this.bageNum--;
         buyNumber = buyNumber - 1;
-        lists[index].buyNumber = buyNumber;
+        item.buyNumber = buyNumber;
       } else {
         this.clearCart();
       }
 
-    },
-    // 检测机型
-    downApp() {
-      let ua = navigator.userAgent.toLowerCase();
-      let isAndroid = ua.indexOf("Android") > -1 || ua.indexOf("Adr") > -1; //Ios终端
-      let isiOS = !!ua.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
-      // console.log(ua);
-      // console.log(isAndroid);
-      // console.log(isiOS);
     },
     //   去个人中心
     goToPersonal(id) {
@@ -795,22 +778,7 @@ export default {
         }
       });
     },
-    // 获取接口
-    getList() {
-      const _param = `?_=${new Date().getTime()}`;
-      const a = "/" + "1";
-      // console.log(_param);
-      const _obj = {
-        buttonType: "2"
-      };
-      this.$fetch.post(url.wei + a, _obj).then(data => {
-        // console.log(data);
-        if (data) {
-          this.total = data.Total || 0;
-          this.searchData = data;
-        }
-      });
-    },
+
     // 获取微信
     getCode() {
       // 非静默授权，第一次有弹框
@@ -850,7 +818,7 @@ export default {
      * [wxShareTimeline 微信自定义分享到朋友圈]
      */
     wxShareTimeline() {
-      let opstion = {
+      let singlegood = {
         title: "拼团", // 分享标题
         link: "http://www.jzdlink.com", // 分享链接
         imgUrl:
@@ -863,7 +831,7 @@ export default {
         }
       };
       // 将配置注入通用方法
-      this.ShareTimeline(opstion);
+      this.ShareTimeline(singlegood);
     },
     // 点击购物车打开弹出层
     colseModelProductL(e) {
@@ -876,68 +844,31 @@ export default {
       this.modelFalgez = !this.modelFalgez;
       this.disscroll = this.modelFalgez == true ? true : false;
     },
-    // 邀请好友
-    goToInvitation() {
-      this.InvitationFalge = true;
-    },
-    // 邀请好友
-    closeToInvitation() {
-      this.InvitationFalge = false;
-    },
+    // // 邀请好友
+    // goToInvitation() {
+    //   this.InvitationFalge = true;
+    // },
+    // // 邀请好友
+    // closeToInvitation() {
+    //   this.InvitationFalge = false;
+    // },
     fun() {
       alert(111);
 
       console.log("监听到了");
     },
-    getMsg() {
-      this.$fetch
-        .post("weChat/index/getActivity?activityId=" + this.token.activityId)
-        .then(res => {
-          console.log(res.obj);
-          res.obj.goodsActivityList.forEach(e => {
-            var minGroupPrice = e.goodsinfoList.sort(function(a, b) {
-                return Number(a.groupPrice) > Number(b.groupPrice);
-              }),
-              minPrice = e.goodsinfoList.sort(function(a, b) {
-                return Number(a.price) > Number(b.price);
-              }),
-              len = minGroupPrice.length - 1;
-            this.lists.push({
-              name: e.goods.name,
-              groupPrice: e.goodsinfoList.length
-                ? minGroupPrice[0].groupPrice
-                : this.toNumber(e.groupPrice),
-              price: e.goodsinfoList.length
-                ? minPrice[0].price + "起"
-                : this.toNumber(e.price),
-              hasWord: e.goodsinfoList.length
-                ? minGroupPrice[0].groupPrice == minGroupPrice[len].groupPrice
-                  ? false
-                  : true
-                : null,
-              avatar: e.goods.imgList,
-              id:e.id,
-              buyNumber: e.buyNumber,
-              ni: e.goodsinfoList.length ? "1" : "2",
-              show: false,
-              flag: 0,
-              goodsSpeList: e.goods.goodsSpeList,
-              goodsinfoList: e.goodsinfoList,
-              operaType:'goodsActivityId',
-              spec: [],
-              strBuffer: []
-            });
-          });
-        });
+    //获取参团头像
+    getAvatar(){
+      
     },
     chartQuest(){
       this.$fetch.post('weChat/index/getShoppingcart/'+this.token.employeeId+'/'+this.token.activityId).then(res =>{
-        console.log(e,'jkj');
-        if(res.obj.length){
+        console.log(res,'jkj');
+        // if(res.obj.length){
 
-        }else{
+        // }else{
           
-        }
+        // }
       })
     },
     //清空购物车请求
@@ -948,8 +879,10 @@ export default {
     },
     //点击加号
     addQuest(id,type){
+      console.log(type,'sdddasdas');
       this.$fetch.post('/weChat/shoppingcart/getShoppingcartAdd/'+this.token.employeeId+'/'+this.token.activityId +'?'+type+'='+id).then(
         e =>{
+          console.log(11,e)
           // console.log(e);
         }
       )
@@ -961,36 +894,51 @@ export default {
           // console.log(e);
         }
       )
-    }
-  },
-  created() {
-    // window.location.href
-    var href = window.location.href;
-    // console.log(window.location.href)
-    function test() {
-      var obj = {};
-      href = href.split("?");
-      if (href.length > 1) {
-        var reg = /#\//g;
-        href = href[1].split("&"); //分割参数
-        for (var i = 0; i < href.length; i++) {
-          var tem = href[i].split("="); //分割参数名和参数内容
-          obj[tem[0]] = tem[1];
-          obj[tem[0]] = obj[tem[0]].replace(reg, "");
+    },
+    getGood(){
+      this.bageNum = this.msg.bageNum;
+      this.$fetch.post("/weChat/index/getGoodsActivity?goodsActivityId="+this.goodId+'&employeeId='+this.token.employeeId).then(
+        res=>{
+          console.log(res,'9999');
+          this.singlegood={
+              name: res.obj.goods.name,
+              avatar: res.obj.goods.imgList[0],
+              id:res.obj.id,
+              buyNumber: res.obj.buyNumber,
+              ni: res.obj.goodsinfoList.length ? "1" : "2",
+              show: false,
+              flag: 0,
+              price:this.msg.price,
+              groupPrice:this.msg.groupPrice,
+              goodsSpeList: res.obj.goods.goodsSpeList,
+              goodsinfoList: res.obj.goodsinfoList,
+              operaType:'goodsActivityId',
+              spec: [],
+              strBuffer: [],
+              sumPrice:Number(this.msg.sumPrice),
+              sumDisprice:Number(this.msg.sumDisprice)
+          }
+          res.obj.goods.imgXiangList.forEach(e => {
+            this.detailList.push(e);
+
+          })
+         
         }
-      }
-      obj = JSON.stringify(obj);
-      localStorage.setItem("user", obj);
+      )
     }
-    test();
   },
   mounted() {
-    this.getMsg();
+    var arr = JSON.parse(this.$route.query.cartList);
+    this.filtArrray =arr;
+    this.goodId=this.$route.query.goodId;
+    this.msg =JSON.parse(this.$route.query.msg)
+    console.log(this.goodId,'llllllllllllllll');
+    this.getGood();
     this.chartQuest();
-    if (window.history && window.history.pushState) {
-      history.pushState(null, null, document.URL);
-      window.addEventListener("popstate", this.fun, false); //false阻止默认事件
-    }
+    // if (window.history && window.history.pushState) {
+    //   history.pushState(null, null, document.URL);
+    //   window.addEventListener("popstate", this.fun, false); //false阻止默认事件
+    // }
 
     // window.addEventListener("popstate", function(e){
     //         console.log(e,'小敏哥很帅！！！');
@@ -1000,7 +948,7 @@ export default {
     // console.log(this.$fetch,'999999');
   },
   destroyed() {
-    window.removeEventListener("popstate", this.fun, false); //false阻止默认事件
+    // window.removeEventListener("popstate", this.fun, false); //false阻止默认事件
   }
 };
 </script>
@@ -1014,6 +962,70 @@ export default {
 </style>
 
 <style scoped>
+.photo_box{
+  height: 100%;
+  overflow-x: hidden;
+}
+.item_details{
+  margin-top: 2%;
+  margin-bottom: 54px;
+  background: #fff;
+  width: 100%;
+  height: calc(100% - 54px);
+  overflow-x: hidden;
+}
+.detail_title{
+  height: 2rem;
+  text-align: center;
+  line-height: 2rem;
+}
+.border_tit{
+  position: relative;
+}
+.border_tit::before{
+    content: "";
+    width: 1rem;
+    margin-right: 10px;
+    border-top: 1px solid #ffe31a;
+    display: inline-block;
+    vertical-align: middle;
+}
+.border_tit::after{
+    content: "";
+    width: 1rem;
+    margin-left: 10px;
+    border-top: 1px solid #ffe31a;
+    display: inline-block;
+    vertical-align: middle;
+}
+.radius_tit::before{
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 13px;
+    width: 4px;
+    height: 4px;
+    /* margin-left: 8px; */
+    border-radius:50%;
+    background:  #ffe31a;
+    border-top: 1px solid #ffe31a;
+    display: inline-block;
+    vertical-align: middle;
+}
+.radius_tit::after{
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 13px;
+    width: 4px;
+    height: 4px;
+    /* margin-left: 8px; */
+    border-radius:50%;
+    background:  #ffe31a;
+    border-top: 1px solid #ffe31a;
+    display: inline-block;
+    vertical-align: middle;
+}
 .ball {
   position: fixed;
   left: 54px;
@@ -1192,6 +1204,7 @@ p {
 .assemble_list_div {
   min-width: 30%;
   max-width: 30%;
+  height: 6.5rem;
   margin-left: 1%;
   padding: 3%;
 }

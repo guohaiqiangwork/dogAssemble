@@ -7,44 +7,46 @@
       style="margin-bottom :3%"
     >
       <div class="order_heder_img_w">
-        <div class="order_header_border">
-          <img src="../../assets/logo.png" style="width:100%">
+        <div >
+          <img class="order_header_border" :src="item.headimgurl">
         </div>
       </div>
 
       <div class="order_headr_font_w">
         <div class="order_font_j font_color_00">
-          <span>共N件</span>
-          <span>总金额¥{{item.money}}</span>
+          <span>共{{item.count}}件</span>
+          <span>总金额¥{{item.price}}</span>
         </div>
-        <div :class="['div_display_flex','order_font_js','font_color_66',item.orderFalge ? 'down_arraw' :'goods_content']"  @click="openListDetails(index)">
-          <div class="goods_name">风味猫粮风味猫粮</div>
+        <div :class="['div_display_flex','order_font_js','font_color_66',item.orderGoodsList.length >1 ? item.orderFalge ? 'down_arraw' :'goods_content' : '']"  @click="openListDetails(index)" >
+          <div class="goods_name">{{item.orderGoodsList[0].goods.name}}</div>
           <!-- <div v-if="!moreLFalg" @click="openListDetails(1)" style="    margin-left: 52%;">></div>
           <div v-if="moreLFalg" @click="openListDetails" style="    margin-left: 52%;">>></div> -->
         </div>
-        <div class="number_font_Order">*68</div>
+        <div class="number_font_Order">*{{item.orderGoodsList[0].specificationValueCount}}</div>
         <div style="margin-bottom: 13px;">
           <div class="order_bt_btn">
-            <span>主食</span>
-            <span>|</span>
-            <span>牛肉味</span>
+            <span>{{item.orderGoodsList[0].specificationValue}}</span>
           </div>
         </div>
 
         <!-- 隐藏内容 -->
-        <div v-if="item.orderFalge">
-          <div class="order_font_js font_color_66">
-            <div>风味猫粮风味猫粮</div>
-            <div style="margin-right: 16%;float:right">*1</div>
-          </div>
-          <div style="margin-bottom: 30px;">
-            <div class="order_bt_btn">
-              <span>主食</span>
-              <span>|</span>
-              <span>牛肉味</span>
+        <template v-if="item.orderFalge">
+          <div  v-for="(ite,ind) in item.orderGoodsList" :key="ind">
+            <template v-if="ind>0">
+              
+           
+            <div class="order_font_js font_color_66">
+              <div>{{ite.goods.name}}</div>
+              <div style="margin-right: 16%;float:right">*{{ite.specificationValueCount}}</div>
             </div>
+            <div style="margin-bottom: 30px;">
+              <div class="order_bt_btn">
+                <span>{{ite.specificationValue}}</span>
+              </div>
+            </div>
+            </template>
           </div>
-        </div>
+        </template>
       </div>
     </div>
   </div>
@@ -59,24 +61,25 @@ export default {
     return {
       orderFalge: false,
       moreLFalg: false,
+      goodsInfo:{},
       orderList: [
-        {
-          money: "78977",
-          orderFalge:false
-        },
+        // {
+        //   money: "78977",
+        //   orderFalge:false
+        // },
 
-        {
-          money: "78977",
-          orderFalge:false
-        },
-        {
-          money: "78977",
-          orderFalge:false
-        },
-        {
-          money: "78977",
-          orderFalge:false
-        }
+        // {
+        //   money: "78977",
+        //   orderFalge:false
+        // },
+        // {
+        //   money: "78977",
+        //   orderFalge:false
+        // },
+        // {
+        //   money: "78977",
+        //   orderFalge:false
+        // }
       ]
     };
   },
@@ -103,14 +106,29 @@ export default {
       this.$fetch.post("/weChat/personal/getPersonalInfo/"+this.token.activityId).then(
         res=>{
           console.log(res,'hjkkhkh,,avatarList')
-          if(res.obj.records[0].orderList){
-            res.obj.records[0].orderList.forEach((e,i) =>{
-            if(i<4){
-              // this.avatarList.push(e.employee);
-              console.log(e);
-            }
-          })
+          var reg =/,/g;
+         
           
+          if(res.obj.records[0].orderList){
+            var arr = [...res.obj.records[0].orderList];
+            res.obj.records[0].orderList.forEach((e,i) =>{
+              e.orderFalge =false;
+              e.orderGoodsList.forEach(item => {
+                item.specificationValue=item.specificationValue.replace(reg,' | ' );
+              })
+              
+              // this.goodsInfo ={
+              //   headimgurl:e.employee.headimgurl,
+              //   orderList:[...e.orderGoodsList]
+              // }
+              // console.log(e.employeeId == e.employeeId)
+              // if(){}
+              // arr.filter()
+             
+              // if
+              this.orderList.push(e);
+          })
+          // this.orderList = [...res.obj.records[0].orderList];
           }
         }
       )
