@@ -654,8 +654,6 @@ export default {
     },
     //选择规格 购物车数量
     addCount(event, num, index) {
-      console.log(num,'999999')
-      console.log(num.operaType,'1325443')
       num.buyNumber++;
       num.operaType='goodsinfoId';
       num.name = this.singlegood.name;
@@ -666,14 +664,12 @@ export default {
       let pos = this.filtArrray.findIndex(e =>{
         return num.id == e.id;
       })
-      console.log(pos)
-      console.log(!pos)
       if(pos >= 0){
           this.$set(this.filtArrray,pos,num);
         //  this.filtArrray[pos].buyNumber++;
       }else{
         this.filtArrray.push(num);
-        console.log(1111111111111111111)
+       
        
       }
       
@@ -703,22 +699,22 @@ export default {
     },
     //点击底部购物车 购物数量
     btm_add(index, event, item) {
-      console.log(item,'ddddddd');
-      console.log(this.singlegood.goodsinfoList,'aaaaaa');
       this.drop(event.target);
       this.singlegood.sumPrice += Number(item.groupPrice);
       this.singlegood.sumDisprice += Number(item.price);
-      console.log(item.sumPrice,'kkkkkkkkkkkkkkkkk');
       this.filtArrray[index].buyNumber++;
-      this.addQuest(item.id,item.operaType);
-      let pos = this.singlegood.goodsinfoList.findIndex(e =>{
+      if(item.operaType == 'goodsinfoId'){
+        let pos = this.singlegood.goodsinfoList.findIndex(e =>{
         return item.id == e.id
       })
       this.$set(this.singlegood.goodsinfoList,pos,item);
-
+      }else if(item.operaType == 'goodsActivityId'){
+        this.singlegood.buyNumber = this.filtArrray[index].buyNumber;
+      }
+      
+      this.addQuest(item.id,item.operaType);
     },
     btm_dis(index, item) {
-      console.log(item,'uuuuuuu')
       this.bageNum--;
       this.singlegood.sumPrice -= Number(item.groupPrice);
       this.singlegood.sumDisprice -= Number(item.price);
@@ -729,23 +725,38 @@ export default {
       if (!this.filtArrray[index].buyNumber){
         this.filtArrray.splice(index,1);
       };
-      let pos = this.singlegood.goodsinfoList.findIndex(e =>{
+      if(item.operaType == 'goodsinfoId'){
+        let pos = this.singlegood.goodsinfoList.findIndex(e =>{
         return item.id == e.id
       })
       this.$set(this.singlegood.goodsinfoList,pos,item);
+      }else if(item.operaType == 'goodsActivityId'){
+        this.singlegood.buyNumber = this.filtArrray[index]&&this.filtArrray[index].buyNumber || 0;
+      }
+      // let pos = this.singlegood.goodsinfoList.findIndex(e =>{
+      //   return item.id == e.id
+      // })
+      // this.$set(this.singlegood.goodsinfoList,pos,item);
       this.delQuest(item.id,item.operaType);
     },
     // 增加购物
     buyAdd(item, event) {
       item.sumPrice += Number(item.groupPrice);
       item.sumDisprice += Number(item.price);
-      console.log(item,'lllllllllllllllllll');
       this.drop(event.target);
       // var lists = this.lists;
       var buyNumber = Number(item.buyNumber);
       buyNumber += 1;
       item.buyNumber = buyNumber;
-      console.log(item)
+      let pos = this.filtArrray.findIndex(e =>{
+        return item.id == e.id;
+      })
+      if(pos >= 0){
+          this.$set(this.filtArrray,pos,item);
+        //  this.filtArrray[pos].buyNumber++;
+      }else{
+        this.filtArrray.push(item);
+      }
       this.addQuest(item.id,item.operaType);
     },
     // 减少购物
@@ -754,14 +765,24 @@ export default {
       // var lists = this.lists;
       item.sumPrice -= item.groupPrice;
       item.sumDisprice -= item.price;
-      var buyNumber = item.buyNumber;
-      if (buyNumber > 0) {
-        this.bageNum--;
-        buyNumber = buyNumber - 1;
-        item.buyNumber = buyNumber;
-      } else {
-        this.clearCart();
+      this.bageNum--;
+      item.buyNumber -= 1;
+      let pos = this.filtArrray.findIndex(e =>{
+        return item.id == e.id;
+      })
+      if(pos >= 0){
+          this.$set(this.filtArrray,pos,item);
+        //  this.filtArrray[pos].buyNumber++;
+      }else{
+        this.filtArrray.push(item);
       }
+      // if (buyNumber > 0) {
+      //   this.bageNum--;
+      //  
+      //   item.buyNumber -= 1;
+      // } else {
+      //   // this.clearCart();
+      // }
 
     },
     //   去个人中心
@@ -882,7 +903,7 @@ export default {
       console.log(type,'sdddasdas');
       this.$fetch.post('/weChat/shoppingcart/getShoppingcartAdd/'+this.token.employeeId+'/'+this.token.activityId +'?'+type+'='+id).then(
         e =>{
-          console.log(11,e)
+          // console.log(11,e)
           // console.log(e);
         }
       )

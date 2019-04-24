@@ -6,7 +6,7 @@
     </transition>-->
 
     <div class="backgroun_color_fff">
-      <div class="div_display_flex flex_box" style="padding-top:21px">
+      <div class="div_display_flex flex_box" style="padding-top:21px;height:25px;line-height:25px;">
         <!-- <div class="div_left_border"></div> -->
         <div class="font_color_00 font_size_16 mx-0 end_title">{{title}}</div>
         <!-- <div class="div_left_border"></div> -->
