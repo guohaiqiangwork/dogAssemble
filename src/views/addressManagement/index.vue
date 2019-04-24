@@ -34,7 +34,7 @@
           <span style="font-size:14px;color:#666">默认地址</span>
         </div>
         <div class="div_display_flex operat_box">
-          <div class="div_display_flex" @click="editAddress">
+          <div class="div_display_flex" @click="openAddressM(item)">
             <img src="../../assets/images/edit@2x.png" width="20px" height="20px" class="middle">
             <div style="font-size:14px;color:#666">编辑</div>
           </div>
@@ -206,14 +206,6 @@ export default {
     onCancel() {},
     onConfirm() {},
 
-    //删除地址
-    delAddress() {
-      this.outPayFalge = true;
-    },
-    //编辑地址
-    editAddress() {
-      this.AddressMFalge = true;
-    },
     //  地址点击完成时
     logHide(str) {
       if (str) {
@@ -223,13 +215,33 @@ export default {
       }
     },
     saveAddress() {},
-    //  新增地址
-    openAddressM() {
+    //  新增地址 编辑地址
+    openAddressM(item) {
+      console.log(item)
+      if (item.receiver) {
+        this.name = item.receiver;
+        this.address = item.province + '' + item.city + '' + item.area;
+        this.phoneNumber = item.receiver;
+        this.detailedAddress = item.receiveAddress;
+        this.addressF = this.address.trim().split(" ");
+        this.addressF[0] = item.province;
+        this.addressF[1] = item.city;
+        this.addressF[2] = item.area;
+      }
       this.AddressMFalge = true;
     },
     goToAddressManagement() {
       this.showAddress = true;
     },
+    //删除地址
+    delAddress() {
+      this.outPayFalge = true;
+    },
+    //编辑地址
+    // editAddress(item) {
+    //   console.log(item);
+    //   this.AddressMFalge = true;
+    // },
     //   关闭
     closeAddressMFalge(e) {
       // console.log(e.target.offsetParent.id);
@@ -306,7 +318,7 @@ export default {
     //     });
     // },
     // 选择框处理
-    checkBtn(index,id) {
+    checkBtn(index, id) {
       // 先取消所有选中项
       this.addressList.forEach(item => {
         item.isDefault = false;
@@ -316,15 +328,14 @@ export default {
       // 设置值，以供传递
       this.addressList[index].isDefault = true;
       console.log(this.radio);
-        this.$fetch
+      this.$fetch
         .post("weChat/order/updateIsDefault/" + id + "/" + this.aemployeeId)
         .then(data => {
           if (data.success) {
-             this.getAddressList();
+            this.getAddressList();
           }
         });
     }
-    
   },
   created() {
     console.log(this);
