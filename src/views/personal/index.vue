@@ -104,7 +104,7 @@
               class="div_display_flex"
               style="margin-right: 4%;margin-top: 5%;padding-bottom: 3%;justify-content:flex-end;"
             >
-              <div class="personal_c_x_z" style="margin-right: 15px;" @click="outPay('删除当前订单？')">删除订单</div>
+              <div class="personal_c_x_z" style="margin-right: 15px;" @click="outPay('删除当前订单？','del')">删除订单</div>
               <div class="personal_c_x_z backgroun_color_fe01" style="color:#333;border:1px solid #ffe001">查看物流</div>
             </div>
           </div>
@@ -155,7 +155,7 @@
               class="div_display_flex"
               style="margin-right: 4%;margin-top: 5%;padding-bottom: 3%;justify-content:flex-end;"
             >
-              <div class="personal_c_x_z" style="margin-right: 15px;" @click="outPay('放弃当前订单？')">放弃支付</div>
+              <div class="personal_c_x_z" style="margin-right: 15px;" @click="outPay('放弃当前订单？','aba')">放弃支付</div>
               <div class="personal_c_x_z backgroun_color_fe01" style="color:#333;border:1px solid #ffe001" @click="console.log(13213)">重新支付</div>
             </div>
           </div>
@@ -224,6 +224,7 @@ export default {
       switchFlage: "001",
       showDialogStyle: false, //弹窗
       outPayFalge: false,
+      payClass:'',
       title:''
     };
   },
@@ -232,17 +233,35 @@ export default {
     this.routeParams = JSON.parse(this.$route.params.obj);
     console.log(this.routeParams);
   },
+  computed:{
+    token(){
+      return localStorage.getItem('user');
+    }
+  },
   methods: {
     // tab 切换
     tabSwitch: function(id) {
       this.switchFlage = id;
+      var obj ={
+        '001':'',
+        '002':4,
+        '003': ''
+      }
+      this.getList(obj.id);
+      
+    },
+    // 获取列表数据
+    getList(state){
+      this.$fetch.post("weChat/order/getMyOrderList/"+this.token.activityId+'/'+ this.token.employeeId + '/'+state).then(res => {
+        console.log(res)
+      })
     },
     // 打开弹窗
     open_model() {
       this.showDialogStyle = true;
     },
     // 放弃支付
-    outPay(e) {
+    outPay(e,tit) {
       this.title =e;
       this.outPayFalge = true;
     },
@@ -259,10 +278,19 @@ export default {
     // 放弃支付确认
     onConfirm(msg) {
       console.log("on confirm");
-      if (msg) {
-        alert(msg);
+      let obj = {
+        'aba':'weChat/mineOrder/giveUpOrder/',
+        'del':'weChat/mineOrder/invisibleOrder/'
       }
+      this.$fetch.post(obj[this.payClass] + this.token.employeeId +'/'+'orderId').then(res =>{
+        console.log(res);
+      })
+      
     },
+    GiveUpOrder(){
+      
+    },
+    DeleteOrder(){},
   }
 };
 </script>

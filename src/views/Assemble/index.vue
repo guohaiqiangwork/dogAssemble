@@ -150,7 +150,7 @@
               style="margin-left:0.2rem"
             >￥{{disPrice}}</span>
           </div>
-          <div class="font_color_99 font_size_11" style="margin-left: 0.8rem;margin-top: -2%;">满N件包邮</div>
+          <div class="font_color_99 font_size_11" style="margin-left: 0.8rem;margin-top: -2%;">{{`满${postageNum}件包邮`}}</div>
         </div>
         <div
           :class="['assemble_buttom_buy',bageNum?'':'font_color_99']"
@@ -419,7 +419,9 @@ export default {
       bottom_title: "邀请好友去拼团",
       title:' 距结束',
       popupVisible: false,
-      time: "",
+      time: "",//活动结束时间
+      startTime:'',
+      tipTitle:'',
       numberZ: "20",
       classA: "001",
       modelFalgez: false, //弹出层
@@ -435,6 +437,7 @@ export default {
       totalDis: 0,
       groupNum:0,
       nowCount:0,
+      postageNum:null,
       isShow : false,
       timeShow:true,
       avatarList:[1,2,3],
@@ -469,8 +472,17 @@ export default {
   //   // this.getCode();
   // },
   computed: {
-    goodsDetail(){
-
+    clickInterception(){
+      let qsTime = new Date().getTime();
+      if(qsTime - this.startTime < 500){
+        this.tipTitle='活动尚未开始'
+        return false
+      }else if(qsTime - this.time > 500){
+        this.tipTitle='活动已结束'
+        return false
+      }else{
+        return true
+      }
     },
     baseURL(){
       return config.baseURL
@@ -509,7 +521,19 @@ export default {
     }
   },
   methods: {
+    // clickInterception(){
+
+    // },
     gotoDetail(item){
+      if(!this.clickInterception){
+          this.$vux.toast.show({
+          text:this.tipTitle,
+          position:'middle',
+          type:'text'
+        });
+        return
+      }
+      
      var obj={
            title:this.title,
            groupNum:this.groupNum,
@@ -522,6 +546,7 @@ export default {
            groupPrice:item.groupPrice,
            price:item.price,
            sumPrice:this.groupPrice,
+           postageNum:this.postageNum,
            sumDisprice:this.disPrice
          }
       this.$router.push('/detail?cartList='+ JSON.stringify(this.filtArrray) +'&goodId='+item.id +'&msg='+JSON.stringify(obj));
@@ -668,6 +693,14 @@ export default {
 
     // 打开弹窗
     open_model(item, index) {
+      if(!this.clickInterception){
+          this.$vux.toast.show({
+          text:this.tipTitle,
+          position:'middle',
+          type:'text'
+        });
+        return
+      }
       // groupPrice
       this.opstion = this.lists[index];
       item.show = true;
@@ -783,6 +816,14 @@ export default {
     },
     // 增加购物
     buyAdd(item, index, event) {
+      if(!this.clickInterception){
+          this.$vux.toast.show({
+          text:this.tipTitle,
+          position:'middle',
+          type:'text'
+        });
+        return
+      }
       this.totalPrice += Number(item.groupPrice);
       this.totalDis += Number(item.price);
       this.drop(event.target);
@@ -914,6 +955,9 @@ export default {
     },
     // 邀请好友
     goToInvitation() {
+      if(!this.clickInterception){
+        return
+      }
       this.InvitationFalge = true;
     },
     // 邀请好友
@@ -967,8 +1011,10 @@ export default {
          this.isJoin =res.attributes.orderPayCount;
          this.isActive = res.obj.activityId;
          this.time = res.obj.endTime + "";
+         this.startTime = res.obj.startTime +"";
          this.groupNum = res.obj.groupNum;
          this.nowCount = res.obj.nowCount;
+         this.postageNum = res.obj.postageNum;
           res.obj.goodsActivityList.forEach(e => {
             var minGroupPrice = e.goodsinfoList.sort(function(a, b) {
                 return Number(a.groupPrice) > Number(b.groupPrice);

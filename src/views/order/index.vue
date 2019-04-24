@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="orderList.length">
     <!-- 订单列表 -->
     <div
       class="div_display_flex backgroun_color_fff"
@@ -49,7 +49,13 @@
         </template>
       </div>
     </div>
+    
   </div>
+  <div class="nodata" v-else>
+
+      <img  class="mt-50"  src="../../assets/images/mynull@2x.png"/>
+     <p> 主人~快去参与拼团吧~</p>
+    </div>
 </template>
 <script>
 // import url from "../../bin/url";

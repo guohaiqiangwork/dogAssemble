@@ -7,6 +7,10 @@ import service from "./bin/fetch";
 import  wxapi from "./bin/wxapi"
 import settitle from "./assets/Tool/settitle"
 import "./assets/css/public.css"
+import  { ToastPlugin } from 'vux'
+// Vue.use(ToastPlugin);
+
+Vue.use(ToastPlugin, {position:'middle'})
 Vue.config.productionTip = false
 Vue.prototype.$fetch = service;
 Vue.prototype.wxapi = wxapi;

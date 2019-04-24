@@ -150,7 +150,7 @@
               style="margin-left:0.2rem"
             >￥{{singlegood.sumDisprice}}</span>
           </div>
-          <div class="font_color_99 font_size_11" style="margin-left: 0.8rem;margin-top: -2%;">满N件包邮</div>
+          <div class="font_color_99 font_size_11" style="margin-left: 0.8rem;margin-top: -2%;">{{`满${msg.postageNum}件包邮`}}</div>
         </div>
         <div
           :class="['assemble_buttom_buy',bageNum?'':'font_color_99']"
@@ -639,16 +639,17 @@ export default {
       this.modelFalgez = false;
       this.disscroll = false;
       this.bageNum = 0;
-      this.totalPrice = 0;
-      this.lists.map(e => {
-        if (e.goodsinfoList.length) {
-          e.goodsinfoList.forEach(item => {
+      this.singlegood.sumPrice = 0;
+      this.singlegood.sumDisprice = 0;
+      // this.lists.map(e => {
+        if (this.singlegood.goodsinfoList.length) {
+          this.singlegood.goodsinfoList.forEach(item => {
             item.buyNumber = 0;
           });
         } else {
-          e.buyNumber = 0;
+          this.singlegood.buyNumber = 0;
         }
-      });
+      // });
       this.modelFalgez = false;
       this.clearQuest();
     },
