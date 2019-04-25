@@ -145,14 +145,14 @@
           邮费
           <span class="font-size_11 font_color_99" v-if="!postagePrice.fee">(不包邮)</span>
         </div>
-        <div class="ofo_j_z ofo_s_z ofo_w_50 font_size_14 font_color_010">￥{{postagePrice.fee}}</div>
+        <div class="ofo_j_z ofo_s_z ofo_w_50 font_size_14 font_color_010">￥{{postagePrice.fee}} 接口获取</div>
       </div>
       <div class="div_display_flex">
         <div class="ofo_s_z ofo_w_50 font_size_13 font_color_00">订单总价</div>
         <div class="ofo_j_z ofo_s_z ofo_w_50 font_size_14 font_color_010">￥{{postagePrice.sumMoney}}</div>
       </div>
     </div>
-    <div class="ofo_w_Z">微信支付</div>
+    <div class="ofo_w_Z" @click="goToBuy">微信支付</div>
 
     <div v-transfer-dom>
       <x-dialog
@@ -216,7 +216,10 @@ export default {
       mealList: [],
       defaultReceiver: "",
       setMealList: [],
-      postagePrice:''
+      postagePrice: {
+        pricr:''
+      },
+      orderId: ""
     };
   },
   methods: {
@@ -226,7 +229,7 @@ export default {
       //  console.log( name1.trim().split(" "));
       this.AddressFalge = false;
       this.showMenus = true;
-    
+
       this.$fetch
         .post(
           "weChat/order/saveAddress/" +
@@ -245,9 +248,9 @@ export default {
             this.addressF[2]
         )
         .then(data => {
-         if(data.success){
-           this.getAddressList()
-         }
+          if (data.success) {
+            this.getAddressList();
+          }
         });
     },
     dialogShow(index) {
@@ -298,9 +301,7 @@ export default {
     // 获取地址列表
     getAddressList() {
       this.$fetch
-        .post(  
-          "weChat/order/getAddressList/" + this.token.employeeId
-        )
+        .post("weChat/order/getAddressList/" + this.token.employeeId)
         .then(data => {
           if (data.success) {
             this.addressList = data.obj;
@@ -308,8 +309,8 @@ export default {
               this.showMenus = true;
               this.AddressFalge = false;
               if (this.addressList.length == 1) {
-                  this.defaultReceiver = this.addressList[0];
-                }
+                this.defaultReceiver = this.addressList[0];
+              }
               this.addressList.forEach((e, index) => {
                 if (e.isDefault == 1) {
                   this.defaultReceiver = e;
@@ -324,25 +325,56 @@ export default {
     getShopCar() {
       this.$fetch
         .post(
-          "weChat/index/getShoppingcart/" +this.token.employeeId+'/'+this.token.activityId
+          "weChat/index/getShoppingcart/" +
+            this.token.employeeId +
+            "/" +
+            this.token.activityId
         )
         .then(data => {
           if (data.success) {
+            console.log(data.obj);
+            var sumMoneyZH = 0;
             this.setMealList = data.obj;
+            this.setMealList.forEach(item => {
+              if (item.goodsinfo) {
+                sumMoneyZH += item.goodsinfo.price * item.count;
+              }
+              if(item.goodsActivity){
+                  sumMoneyZH += item.goodsActivity.price * item.count;
+              }
+            });
+          this.postagePrice.price = sumMoneyZH
           }
         });
     },
-    // 获取邮费/weChat/order/CreateOrder/{employeeId}/{activityId}
-    getCreateOrder(){
-       this.$fetch
+    // 获取邮费
+    getCreateOrder() {
+      this.$fetch
         .post(
           "weChat/order/CreateOrder/" +
-         this.token.employeeId+'/'+this.token.activityId
+            this.token.employeeId +
+            "/" +
+            this.token.activityId
         )
         .then(data => {
           if (data.success) {
-         console.log(data.obj)
-         this.postagePrice = data.obj
+            console.log(data.obj);
+            // this.postagePrice = data.obj;
+          }
+        });
+    },
+    // 去支付
+    goToBuy() {
+      this.$fetch
+        .post(
+          "weChat/order/CreateOrder/" +
+            this.token.employeeId +
+            "/" +
+            this.token.activityId
+        )
+        .then(data => {
+          if (data.success) {
+            this.orderId = data.obj.id;
           }
         });
     }
@@ -355,7 +387,7 @@ export default {
   mounted() {
     this.getAddressList();
     this.getShopCar();
-    this.getCreateOrder();
+    // this.getCreateOrder();
     // console.log(url);
     // console.log(this.$fetch);
   },
@@ -363,7 +395,7 @@ export default {
     baseURL() {
       return config.baseURL;
     },
- token() {
+    token() {
       return JSON.parse(localStorage.getItem("user"));
     }
   }
