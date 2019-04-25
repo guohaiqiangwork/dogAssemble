@@ -138,18 +138,18 @@
     <div class="backgroun_color_fff margin_top_div3" style=" padding-bottom: 30%;">
       <div class="div_display_flex">
         <div class="ofo_s_z ofo_w_50 font_size_13 font_color_00">商品总价</div>
-        <div class="ofo_j_z ofo_s_z ofo_w_50 font_size_14 font_color_010">￥48.0</div>
+        <div class="ofo_j_z ofo_s_z ofo_w_50 font_size_14 font_color_010">￥{{postagePrice.price}}</div>
       </div>
       <div class="div_display_flex">
         <div class="ofo_s_z ofo_w_50 font_size_13 font_color_00">
           邮费
-          <span class="font-size_11 font_color_99">(不包邮)</span>
+          <span class="font-size_11 font_color_99" v-if="!postagePrice.fee">(不包邮)</span>
         </div>
-        <div class="ofo_j_z ofo_s_z ofo_w_50 font_size_14 font_color_010">￥0.0</div>
+        <div class="ofo_j_z ofo_s_z ofo_w_50 font_size_14 font_color_010">￥{{postagePrice.fee}}</div>
       </div>
       <div class="div_display_flex">
         <div class="ofo_s_z ofo_w_50 font_size_13 font_color_00">订单总价</div>
-        <div class="ofo_j_z ofo_s_z ofo_w_50 font_size_14 font_color_010">￥48.0</div>
+        <div class="ofo_j_z ofo_s_z ofo_w_50 font_size_14 font_color_010">￥{{postagePrice.sumMoney}}</div>
       </div>
     </div>
     <div class="ofo_w_Z">微信支付</div>
@@ -215,7 +215,8 @@ export default {
       phoneNumber: "", //手机号码
       mealList: [],
       defaultReceiver: "",
-      setMealList: []
+      setMealList: [],
+      postagePrice:''
     };
   },
   methods: {
@@ -225,11 +226,11 @@ export default {
       //  console.log( name1.trim().split(" "));
       this.AddressFalge = false;
       this.showMenus = true;
-      var a = "20190103150524685973383762793795";
+    
       this.$fetch
         .post(
           "weChat/order/saveAddress/" +
-            a +
+            this.token.employeeId +
             "/" +
             this.name +
             "/" +
@@ -295,8 +296,8 @@ export default {
     // 获取地址列表
     getAddressList() {
       this.$fetch
-        .post(
-          "weChat/order/getAddressList/" + "20190103150524685973383762793795"
+        .post(  
+          "weChat/order/getAddressList/" + this.token.employeeId
         )
         .then(data => {
           if (data.success) {
@@ -321,13 +322,25 @@ export default {
     getShopCar() {
       this.$fetch
         .post(
-          "weChat/index/getShoppingcart/" +
-            "20190103150524685973383762793795" +
-            "/bbb9e822bfd14cdcb884da29c56c4cd3"
+          "weChat/index/getShoppingcart/" +this.token.employeeId+'/'+this.token.activityId
         )
         .then(data => {
           if (data.success) {
             this.setMealList = data.obj;
+          }
+        });
+    },
+    // 获取邮费/weChat/order/CreateOrder/{employeeId}/{activityId}
+    getCreateOrder(){
+       this.$fetch
+        .post(
+          "weChat/order/CreateOrder/" +
+         this.token.employeeId+'/'+this.token.activityId
+        )
+        .then(data => {
+          if (data.success) {
+         console.log(data.obj)
+         this.postagePrice = data.obj
           }
         });
     }
@@ -340,12 +353,16 @@ export default {
   mounted() {
     this.getAddressList();
     this.getShopCar();
+    this.getCreateOrder();
     // console.log(url);
     // console.log(this.$fetch);
   },
   computed: {
     baseURL() {
       return config.baseURL;
+    },
+ token() {
+      return JSON.parse(localStorage.getItem("user"));
     }
   }
 };
