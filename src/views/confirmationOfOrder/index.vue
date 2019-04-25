@@ -245,7 +245,9 @@ export default {
             this.addressF[2]
         )
         .then(data => {
-          console.log(res.obj);
+         if(data.success){
+           this.getAddressList()
+         }
         });
     },
     dialogShow(index) {

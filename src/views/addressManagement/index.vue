@@ -46,7 +46,7 @@
       </div>
     </div>
     <div style="margin-left: 20%; margin-top: 10%;">
-      <div class="a_m_b backgroun_color_fe01" @click="openAddressM('',item.id)">+ 新增收货地址</div>
+      <div class="a_m_b backgroun_color_fe01" @click="openAddressM">+ 新增收货地址</div>
     </div>
     <!-- 新增地址 -->
     <!-- <div v-if="AddressMFalge" class="ofo_address_w">
@@ -202,7 +202,7 @@ export default {
       phoneNumber: "", //手机号码
       aemployeeId: "", //会员编码
       addressId: "", //地址id
-      editFalg: false //是否编辑
+      editFalg: false, //是否编辑
     };
   },
   methods: {
@@ -244,10 +244,11 @@ export default {
         this.addressF[1] = item.city;
         this.addressF[2] = item.area;
         this.editFalg = true;
+        this.addressId = id;
       } else {
         this.editFalg = false;
       }
-      this.addressId = id;
+
       this.AddressMFalge = true;
     },
     goToAddressManagement() {
@@ -313,7 +314,10 @@ export default {
     // 编辑保存
     editAddressD() {
       this.$fetch
-        .post("weChat/order/editAddress/" + this.addressId + "/" +
+        .post(
+          "weChat/order/editAddress/" +
+            this.addressId +
+            "/" +
             this.name +
             "/" +
             this.phoneNumber +
@@ -324,7 +328,8 @@ export default {
             "/" +
             this.addressF[1] +
             "/" +
-            this.addressF[2])
+            this.addressF[2]
+        )
         .then(data => {
           if (data.success) {
             this.AddressMFalge = false;
