@@ -128,21 +128,22 @@ export default {
       this.page =1;
       this.orderList=[];
       this.getAvatar();
-      this.$nextTick(() => {
-        this.$refs.scrollerBottom.donePulldown()
-        this.$refs.scrollerBottom.reset({top: 0})
-                  // this.$refs.scrollerBottom.reset()//{top: 0}
-              })
       this.$refs.scrollerBottom.enablePullup()
+        this.$refs.scrollerBottom.donePulldown()
+      // this.$nextTick(() => {
+      //   this.$refs.scrollerBottom.donePulldown()
+      //   this.$refs.scrollerBottom.reset({top: 0})
+      //             // this.$refs.scrollerBottom.reset()//{top: 0}
+      //         })
+      // this.$refs.scrollerBottom.enablePullup()
     },
     loadMore(){
 console.log(45)
       this.page +=1;
       this.getAvatar();
-      // this.$refs.scrollerBottom.reset()
-      // this.list = this.list.concat(data.list)
-
-      this.$refs.scrollerBottom.donePullup()
+      // this.list =1;
+        this.$refs.scrollerBottom.donePullup()
+      // this.$refs.scrollerBottom.donePullup()
       //  this.$refs.scrollerBottom.enablePulldown()
     },
     pull(e){
@@ -169,6 +170,10 @@ console.log(45)
       console.log(this.page,'ggggggg')
       this.$fetch.post("/weChat/personal/getPersonalInfo/"+this.token.activityId+'?page.current='+this.page).then(
         res=>{
+          // this.$nextTick(() => {
+          
+         
+        // })
           console.log(res,'hjkkhkh,,avatarList')
           var reg =/,/g;
           if(res.obj.records.length){
@@ -185,7 +190,7 @@ console.log(45)
                   
                 })
               // }
-              
+              this.$refs.scrollerBottom.reset({top: 0})
               
               // this.goodsInfo ={
               //   headimgurl:e.employee.headimgurl,
@@ -274,7 +279,7 @@ console.log(45)
 .order_bt_btn {
       font-size: 11px;
     color: #333333;
-    line-height: 17px !important;
+    /* line-height: 17px !important; */
     /* padding: 1%; */
     background-color: #ffe001;
 
@@ -283,7 +288,7 @@ console.log(45)
     height: 17px;
     border-radius: 9px;
     text-align: center;
-    /* line-height: 17px; */
+    line-height: 18px;
 }
 .number_font_Order {
   font-size: 14px;
@@ -300,8 +305,9 @@ console.log(45)
   margin-left: 3%;
 }
 .order_headr_font_w {
-  width: 78%;
+  width: 73%;
   margin-top: 5%;
-  margin-left: -2%;
+  margin-left: 3%;
+  /* margin-left: -2%; */
 }
 </style>

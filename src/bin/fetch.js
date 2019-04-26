@@ -5,7 +5,7 @@ const options = {
   baseURL: config.baseURL,
   timeout: 300000,
   headers:{
-    'Content-Type': 'application/x-www-form-urlencoded;',
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
   }
 
 }
@@ -16,10 +16,13 @@ service
   .interceptors
   .request
   .use(request => {
-    request.headers.common["Access-Control-Allow-Origin"]="*"
+  
+    // request.headers.common["Access-Control-Allow-Origin"]="*"
     return request
   }, error => {
+    alert(error)
     Promise.reject(error)
+    
   })
 
 // respone拦截器

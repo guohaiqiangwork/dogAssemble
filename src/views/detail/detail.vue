@@ -119,7 +119,7 @@
     <!-- 购买 -->
     <div class="div_display_flex backgroun_color_fff assemble_buttom_div" style="z-index:12">
       <!-- 活动正常 -->
-      <div style="width: 100%;display: flex;">
+      <div style="width: 100%;display: flex;" v-if="!msg.isJoin">
         <div class="bt_buy_img">
           <div class="buy_border_number" v-show="bageNum">{{bageNum}}
           </div>
@@ -156,6 +156,19 @@
           :class="['assemble_buttom_buy',bageNum?'':'font_color_99']"
           @click="goToConfirmation"
         >去拼团</div>
+      </div>
+      <!-- 活动结束 邀请好友-->
+      <div v-if="msg.isJoin && !msg.isActive" style="width: 100%;">
+        <div class="assemble_j_s" @click="goToInvitation">{{ '邀请好友去拼团' }}</div>
+        <!-- 改变bottom_title 的值为 更多拼团   活动已结束  敬请期待-->
+      </div>
+      <div v-if="msg.isJoin && msg.isActive" style="width: 100%;" class="bottom_box">
+        <div class="wid_70" @click="goToInvitation">
+          <span class="wid_100">邀请好友去拼团</span>
+        </div>
+        <div class="wid_30">
+          <span class="wid_100">更多拼团</span>
+        </div>
       </div>
       <!-- 活动结束 邀请好友-->
       <!-- <div v-if="msg.isJoin && !msg.isActive || isShow" style="width: 100%;">
@@ -466,6 +479,7 @@ export default {
     },
   },
   methods: {
+    goToInvitation(){},
     getArray() {
       let a = this.singlegood.goodsSpeList.map((e, index) => {
         return e.attrValue.split(",");
@@ -655,6 +669,9 @@ export default {
     },
     //选择规格 购物车数量
     addCount(event, num, index) {
+      if(this.msg.isJoin){
+        return
+      }
       num.buyNumber++;
       num.operaType='goodsinfoId';
       num.name = this.singlegood.name;
@@ -678,6 +695,9 @@ export default {
       this.addQuest(num.id,num.operaType);
     },
     disCount(event, num,index) {
+      if(this.msg.isJoin){
+        return
+      }
       num.operaType='goodsinfoId';
       num.name = this.singlegood.name;
       this.bageNum--;
@@ -742,6 +762,9 @@ export default {
     },
     // 增加购物
     buyAdd(item, event) {
+      if(this.msg.isJoin){
+        return
+      }
       item.sumPrice += Number(item.groupPrice);
       item.sumDisprice += Number(item.price);
       this.drop(event.target);
@@ -762,6 +785,9 @@ export default {
     },
     // 减少购物
     buy_minute(item, index) {
+      if(this.msg.isJoin){
+        return
+      }
       this.delQuest(item.id,item.operaType)
       // var lists = this.lists;
       item.sumPrice -= item.groupPrice;

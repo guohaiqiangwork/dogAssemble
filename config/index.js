@@ -11,13 +11,13 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/':{
-        target:'http://192.168.3.2:8085/weChat/',
-        chageOrigin:true,
-        pathRewrite:{
-          '^/':''
-        }
-      }
+      // '/':{
+      //   target:'http://192.168.3.2:8085/weChat/',
+      //   chageOrigin:true,
+      //   pathRewrite:{
+      //     '^/':''
+      //   }
+      // }
     },
 
     // Various Dev Server settings

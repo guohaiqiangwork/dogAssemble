@@ -58,7 +58,7 @@
             <div class="personal_c_x_z" style="margin-right: 15px;"  @click="outPay('放弃当前订单？',ele.id,ele.state)" v-if="ele.state == 1">放弃支付</div>
             <div class="personal_c_x_z" style="margin-right: 15px;"  @click="outPay('删除当前订单？',ele.id,ele.state)" v-if="ele.state == 7 || ele.state ==4 || ele.state ==5">删除订单</div>
             <div class="personal_c_x_z backgroun_color_fe01" style="color:#333;border:1px solid #ffe001" v-if="ele.state == 1">重新支付</div>
-            <div class="personal_c_x_z backgroun_color_fe01" style="color:#333;border:1px solid #ffe001" @click="CheckGoods(ele.stateTitle,ele.id)" >查看物流</div>
+            <div class="personal_c_x_z backgroun_color_fe01" style="color:#333;border:1px solid #ffe001" @click="CheckGoods(ele.stateTitle,ele.id)"  v-if="ele.state == 3 || ele.state == 4 ||ele.state ==6">查看物流</div>
             <!-- v-if="ele.state == 3 || ele.state == 4 ||ele.state ==6" -->
           </div>
         </div>
@@ -71,7 +71,7 @@
       
        <div class="nodata" v-else>
 
-      <img  class="mt-50"  src="../../assets/images/mynull@2x.png"/>
+      <img  class="picture"  src="../../assets/images/mynull@2x.png" />
      <p> 主人~快去参与拼团吧~</p>
     </div>
       <!-- 弹出层 -->
@@ -91,8 +91,8 @@
             <div class="msg_timeline">
               <timeline>
 			<timeline-item v-for="(item,index) in msgList" :key="index">
-				<h4 :class="[index === 0 ? 'recent' : '']">【广东】 广州市 已发出</h4>
-				<p :class="[index === 0 ? 'recent' : '']">2016-04-17 12:00:00</p>
+				<h4 :class="[index === 0 ? 'recent' : '']">{{item.str}}</h4>
+				<p :class="[index === 0 ? 'recent' : '']">{{item.operateTime}}</p>
 			</timeline-item>
       <!-- <timeline-item>
 				<h4> 申通快递员 广东广州 收件员 xxx 已揽件</h4>
@@ -290,11 +290,44 @@ export default {
         '132':"揽件滞留"
       };
       this.showDialogStyle =true;
-      id = 'b145ca639ece4327b5fb565d5d5fc9ce';
+      // id = 'b145ca639ece4327b5fb565d5d5fc9ce';
       this.$fetch.post('weChat/mineOrder/getTraceByOrderId/'+ id).then(res =>{
         console.log(res);
         res.obj.forEach(item => {
-          item.operateType =obj[item.operateType];
+          // item.operateType =obj[item.operateType];
+          switch (item.operateType){
+            case '0':
+            case '1':
+              item.str =`【${item.operateOrg}】 ${obj[item.operateType]} , 操作员：【${item.operator}】`;
+              break
+            case '3':
+              item.str =`【${item.operateOrg}】 ${obj[item.operateType]} ,下一站：【】,操作员：【${item.operator}】`
+              break
+            case '9':
+              item.str =`【${item.operateOrg}】 派件中 ,快递员：【${item.courier}】，电话：【${item.courierTel}】 `
+              break
+            case '11':
+              item.str =`【${item.operateOrg}】签收扫描,签收人：【${item.signMan}】`
+              break
+            case '13':
+              item.str =`【${item.operateOrg}】 ${obj[item.operateType]} ,原因：【${item.exceptionReason}】, 操作员：【${item.operator}】`
+              break
+            case '14':
+              item.str =`【${item.operateOrg}】 ${obj[item.operateType]} ,下一站：【】,操作员：【${item.operator}】`
+              break
+            case '43':
+              item.str =`运单丢失，丢失原因：【${item.exceptionReason}】`
+              break
+            case '44':
+              item.str =`归班审核`
+              break
+            case  '34':
+              item.str = '拒收'
+              break
+            case '15':
+              item.str =`【${item.operateOrg}】异常扫描，原因：【${item.exceptionReason}】，操作员：【${item.operator}】`
+              break
+          }
           // this.msgList.push({
           //   operateType: obj[item.operateType],
 
@@ -317,9 +350,16 @@ export default {
 .weui-dialog__btn_primary{
   color: #ffe001 !important;
 }
+.msg_timeline .weui-icon-success-no-circle{
+  /* font-size: 1rem !important; */
+}
 </style>
 
 <style scoped>
+.picture{
+  width: 5rem;
+  height: 7rem;
+}
 .mask_box{
   position: fixed;
   top: 0;
@@ -338,7 +378,6 @@ export default {
   background: rgba(238,238,238,1);
   /* background:rgba(248,248,248,1); */
   box-shadow:0rem 0rem 1rem 0rem rgba(132,148,168,0.21);
- 
 }
 .goods_head{
   /* height: 100%; */
@@ -399,12 +438,16 @@ line-height:0.93rem;
   color:rgba(136,136,136,1);
 }
 .msg_timeline p {
-		color: #888;
-		font-size: 0.8rem;
-	}
+		font-size:0.56rem;
+    font-family:PingFang-SC-Medium;
+    font-weight:500;
+    color:rgba(170,170,170,1);
+  }
 	.msg_timeline h4 {
-		color: #666;
-		font-weight: normal;
+		font-size:0.7rem;
+    font-family:PingFang-SC-Medium;
+    font-weight:500;
+    color:rgba(136,136,136,1);
 	}
 	.msg_timeline .recent {
 		color: rgb(4, 190, 2)

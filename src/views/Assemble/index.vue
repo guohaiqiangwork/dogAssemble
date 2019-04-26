@@ -481,7 +481,8 @@ export default {
       }else if(qsTime - this.time > 500){
         this.tipTitle='活动已结束'
         return false
-      }else{
+      }
+      else{
         return true
       }
     },
@@ -548,6 +549,8 @@ export default {
            price:item.price,
            sumPrice:this.groupPrice,
            postageNum:this.postageNum,
+           isJoin:this.isJoin,
+           isActive:this.isActive,
            sumDisprice:this.disPrice
          }
       this.$router.push('/detail?cartList='+ JSON.stringify(this.filtArrray) +'&goodId='+item.id +'&msg='+JSON.stringify(obj));
@@ -694,12 +697,13 @@ export default {
 
     // 打开弹窗
     open_model(item, index) {
-      if(!this.clickInterception){
+      if(!this.clickInterception || this.isJoin){
           this.$vux.toast.show({
-          text:this.tipTitle,
+          text:this.tipTitle || '您已经参与了本次活动',
           position:'middle',
           type:'text'
         });
+
         return
       }
       // groupPrice
@@ -817,9 +821,9 @@ export default {
     },
     // 增加购物
     buyAdd(item, index, event) {
-      if(!this.clickInterception){
+      if(!this.clickInterception || this.isJoin){
           this.$vux.toast.show({
-          text:this.tipTitle,
+          text:this.tipTitle || '您已经参与了本次活动',
           position:'middle',
           type:'text'
         });
@@ -836,6 +840,14 @@ export default {
     },
     // 减少购物
     buy_minute(item, index) {
+      if(!this.clickInterception || this.isJoin){
+          this.$vux.toast.show({
+          text:this.tipTitle || '您已经参与了本次活动',
+          position:'middle',
+          type:'text'
+        });
+        return
+      }
       this.delQuest(item.id,item.operaType)
       var lists = this.lists;
       this.totalPrice -= item.groupPrice;
@@ -996,6 +1008,7 @@ export default {
     },
     //获取商品列表信息
     getMsg() {
+     
       let arr =[];
       let num =0;
       let qsTime = new Date().getTime();
@@ -1093,7 +1106,11 @@ export default {
             })
           }
              
-        });
+        }).catch(
+          err =>{
+            
+          }
+        );
       
             
     },
