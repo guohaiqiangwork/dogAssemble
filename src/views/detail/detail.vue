@@ -150,7 +150,7 @@
               style="margin-left:0.2rem"
             >￥{{singlegood.sumDisprice}}</span>
           </div>
-          <div class="font_color_99 font_size_11" style="margin-left: 0.8rem;margin-top: -2%;">{{`满${msg.postageNum}件包邮`}}</div>
+          <div class="font_color_99 font_size_11" style="margin-left: 0.8rem;margin-top: -2%;">{{msg.postageNum}}</div>
         </div>
         <div
           :class="['assemble_buttom_buy',bageNum?'':'font_color_99']"
@@ -588,7 +588,7 @@ export default {
     open_model(item, index) {
       // this.singlegood = this.lists[index];
       item.show = true;
-      console.log(item);
+      // console.log(item);
       var arr;
       if (!item.lalc) {
         item.spec = this.getArray();
@@ -918,6 +918,9 @@ export default {
       )
     },
     getGood(){
+      this.$vux.loading.show({
+        text: 'Loading'
+      })
       this.bageNum = this.msg.bageNum;
       this.$fetch.post("/weChat/index/getGoodsActivity?goodsActivityId="+this.goodId+'&employeeId='+this.token.employeeId).then(
         res=>{
@@ -944,7 +947,7 @@ export default {
             this.detailList.push(e);
 
           })
-         
+         this.$vux.loading.hide();
         }
       )
     }
@@ -977,6 +980,10 @@ export default {
 <style>
 .vux-x-dialog .weui-mask {
   z-index: 10;
+}
+.vux-loading .weui-toast {
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
 }
 .vux-x-dialog .weui-dialog {
   z-index: 10;

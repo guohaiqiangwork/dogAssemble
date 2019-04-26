@@ -1,6 +1,10 @@
 <template>
-  <div v-if="orderList.length">
+<scroller  style="width:100%;height:100%" :lockX=true  ref="scrollerBottom" :use-pulldown='true' :pulldown-config="pulldownDefaultConfig" :pullup-config="pullupDefaultConfig" :use-pullup='true' @on-pulldown-loading="refresh" @on-pullup-loading="loadMore">
+  <div style="width:100%;height:100%;">
+    <!-- dxssad -->
+    <!--  v-if="orderList.length" -->
     <!-- 订单列表 -->
+    <!-- <div style="height:100%;width:100%;background:#ff0;"></div> -->
     <div
       class="div_display_flex backgroun_color_fff"
       v-for="(item,index) in orderList" :key="index"
@@ -51,20 +55,44 @@
     </div>
     
   </div>
-  <div class="nodata" v-else>
+  </scroller>
+  <!-- <div class="nodata" v-else>
 
       <img  class="mt-50"  src="../../assets/images/mynull@2x.png"/>
      <p> 主人~快去参与拼团吧~</p>
-    </div>
+    </div> -->
 </template>
 <script>
-// import url from "../../bin/url";
-
+import {Scroller} from "vux";
+ const pulldownDefaultConfig = {
+    content: '下拉刷新',
+    height: 40,
+    autoRefresh: false,
+    downContent: '',
+    upContent: '释放后刷新',
+    loadingContent: '正在刷新...',
+    // clsPrefix: 'xs-plugin-pulldown-'
+  }
+  const pullupDefaultConfig = {
+        content: '上拉加载更多',
+        pullUpHeight:60,
+        height: 40,
+        autoRefresh: false,
+        downContent: '释放后加载',
+        upContent: '',
+        loadingContent: '加载中...',
+        // clsPrefix: 'xs-plugin-pullup-'
+    }
 export default {
-  components: {},
+  components: {
+    Scroller
+  },
   name: "order",
   data() {
     return {
+      pulldownDefaultConfig: pulldownDefaultConfig,
+      pullupDefaultConfig: pullupDefaultConfig,
+      page:1,
       orderFalge: false,
       moreLFalg: false,
       goodsInfo:{},
@@ -95,6 +123,35 @@ export default {
     }
   },
   methods: {
+    refresh(){
+      console.log(4646)
+      this.page =1;
+      this.orderList=[];
+      this.getAvatar();
+      this.$nextTick(() => {
+        this.$refs.scrollerBottom.donePulldown()
+        this.$refs.scrollerBottom.reset({top: 0})
+                  // this.$refs.scrollerBottom.reset()//{top: 0}
+              })
+      this.$refs.scrollerBottom.enablePullup()
+    },
+    loadMore(){
+console.log(45)
+      this.page +=1;
+      this.getAvatar();
+      // this.$refs.scrollerBottom.reset()
+      // this.list = this.list.concat(data.list)
+
+      this.$refs.scrollerBottom.donePullup()
+      //  this.$refs.scrollerBottom.enablePulldown()
+    },
+    pull(e){
+      console.log(e);
+      this.$nextTick(() => {
+    // this.$refs.myScroller.donePulldown()
+    this.$refs.scrollerBottom.reset({top: 0})
+  })
+    },
     openListDetails(index) {
       this.orderList[index].orderFalge = !this.orderList[index].orderFalge;
 
@@ -109,19 +166,26 @@ export default {
     },
     //获取参团头像
     getAvatar(){
-      this.$fetch.post("/weChat/personal/getPersonalInfo/"+this.token.activityId).then(
+      console.log(this.page,'ggggggg')
+      this.$fetch.post("/weChat/personal/getPersonalInfo/"+this.token.activityId+'?page.current='+this.page).then(
         res=>{
           console.log(res,'hjkkhkh,,avatarList')
           var reg =/,/g;
-         
-          
-          if(res.obj.records[0].orderList){
+          if(res.obj.records.length){
+             if(res.obj.records[0].orderList){
             var arr = [...res.obj.records[0].orderList];
             res.obj.records[0].orderList.forEach((e,i) =>{
               e.orderFalge =false;
-              e.orderGoodsList.forEach(item => {
-                item.specificationValue=item.specificationValue.replace(reg,' | ' );
-              })
+              // if(e.orderGoodsList.length){
+                  e.orderGoodsList.forEach(item => {
+                  console.log(item,'uuuuuuuuuu');
+                  if(item.specificationValue){
+                    item.specificationValue=item.specificationValue.replace(reg,' | ' );
+                  }
+                  
+                })
+              // }
+              
               
               // this.goodsInfo ={
               //   headimgurl:e.employee.headimgurl,
@@ -133,9 +197,18 @@ export default {
              
               // if
               this.orderList.push(e);
+              console.log(this.orderList)
           })
           // this.orderList = [...res.obj.records[0].orderList];
           }
+          }else{
+            if(this.page>1){
+              this.page-=1;
+            }else{
+              this.page =1;
+            }
+          }
+         
         }
       )
     },
@@ -148,12 +221,19 @@ export default {
 
   mounted() {
     this.getAvatar();
+      
     console.log(11111);
     // console.log(url);
     // console.log(this.$fetch);
   }
 };
 </script>
+<style>
+.xs-container{
+  height: 100%;
+}
+</style>
+
 <style scoped>
 .goods_name{
   width: 10rem;

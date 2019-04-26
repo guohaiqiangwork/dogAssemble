@@ -150,7 +150,7 @@
               style="margin-left:0.2rem"
             >￥{{disPrice}}</span>
           </div>
-          <div class="font_color_99 font_size_11" style="margin-left: 0.8rem;margin-top: -2%;">{{`满${postageNum}件包邮`}}</div>
+          <div class="font_color_99 font_size_11" style="margin-left: 0.8rem;margin-top: -2%;">{{postageNum}}</div>
         </div>
         <div
           :class="['assemble_buttom_buy',bageNum?'':'font_color_99']"
@@ -341,9 +341,10 @@
       </div>
     </div>
     <!-- 邀请好友 -->
-    <div v-if="InvitationFalge">
+    <div v-if="InvitationFalge" class="white_mask">
       <div class="model_background" @click="colseModelProductL">
-        <img src="../../assets/images/tupianjiazaishibai@3x.png" alt>
+        <img src="../../assets/images/jiantou@2x.png" class="point_img">
+        <div class="point_tip">点击这里邀请好友来拼团哦 ~ </div>
       </div>
     </div>
   </div>
@@ -437,7 +438,7 @@ export default {
       totalDis: 0,
       groupNum:0,
       nowCount:0,
-      postageNum:null,
+      postageNum:'',
       isShow : false,
       timeShow:true,
       avatarList:[1,2,3],
@@ -944,10 +945,14 @@ export default {
     },
     // 点击购物车打开弹出层
     colseModelProductL(e) {
+       console.log(4555555444444444444)
+       if (!this.bageNum || this.isJoin || this.isShow) {
+        return;
+      }
       this.modelFalgez = true;
     },
     openModelProductL(e) {
-      if (!this.bageNum) {
+      if (!this.bageNum || this.isJoin || this.isShow) {
         return;
       }
       this.modelFalgez = !this.modelFalgez;
@@ -959,6 +964,11 @@ export default {
         return
       }
       this.InvitationFalge = true;
+    
+      // this.wxapi.ShareTimeline({title:'hello'})
+      // this.wx.showToast({
+      //   title:'成功'
+      // })
     },
     // 邀请好友
     closeToInvitation() {
@@ -1014,7 +1024,7 @@ export default {
          this.startTime = res.obj.startTime +"";
          this.groupNum = res.obj.groupNum;
          this.nowCount = res.obj.nowCount;
-         this.postageNum = res.obj.postageNum;
+         this.postageNum = Number(res.obj.postageNum) ? `满${res.obj.postageNum}件包邮`:'不包邮';
           res.obj.goodsActivityList.forEach(e => {
             var minGroupPrice = e.goodsinfoList.sort(function(a, b) {
                 return Number(a.groupPrice) > Number(b.groupPrice);
@@ -1174,6 +1184,41 @@ export default {
 </style>
 
 <style scoped>
+.model_background{
+  text-align: center;
+  z-index: 22;
+}
+.white_mask{
+  width: 100%;
+  height: calc(100% - 54px);
+  position: absolute;
+  top: 0;
+  z-index: 20;
+  background: #fff;
+}
+.point_img{
+    width: 50%;
+    margin-top: 2.6rem;
+    margin-right: -8rem;
+    transform: rotateZ(-18deg);
+}
+.point_tip{
+    margin-top: 3rem;
+    position: fixed;
+    /* margin: 0 auto; */
+    border: 1px dashed rgba(255,224,1,1);
+    z-index: 10000000000000000000;
+    /* display: flex; */
+    left: 50%;
+    font-size: 1rem;
+    padding: 0.5rem;
+    font-weight: 700;
+    transform: translateX(-50%);
+   
+    white-space: nowrap;
+    display: block;
+    color: #FFE001;
+}
 .ball {
   position: fixed;
   left: 54px;
