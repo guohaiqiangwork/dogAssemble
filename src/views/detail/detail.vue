@@ -36,30 +36,29 @@
     <!-- 产品列表 -->
     <div style="margin-top:2%" class="div_display_flex backgroun_color_fff"
        >
-       <div class="div_display_flex" style="width:100%;">
+       <div class="div_display_flex" style="width:100%;padding:1rem;">
            <!-- 产品图片  -->
           <div class="assemble_list_div">
             <img :src="baseURL + 'sys/attachment/showPic?downloadToken=' + singlegood.avatar + '6210e537ab7425ada8f8cd2430ccb36f'" width="105px" style="max-height:6.5rem">
           </div>
-          <div style="width:60%;">
+          <div class="goods_right">
             <div
-              class="margin_top_div8 font_color_00 font_size_16"
-              style="width:187px;"
+              class=" font_color_00 font_size_16"
             >{{singlegood.name}}</div>
-            <div class="margin_top_div8">
+            <div>
               <span class="font_size_18 font_color_00">
                 ¥{{msg.groupPrice}}
                 <span class="font_size_11" v-show="msg.hasWord">起</span>
               </span>
               <span
-                style="text-decoration:line-through; margin-left: 6%;"
+                style="text-decoration:line-through;"
                 class="font_size_11"
               >￥{{msg.price}}</span>
             </div>
-            <div class="flex_end" style="margin-top: 6%;" v-if="singlegood.ni == 1"><!-- -->
+            <div class="flex_end"  v-if="singlegood.ni == 1"><!-- -->
               <div class="assemble_specifications" @click="open_model(singlegood)">选择规格</div>
             </div>
-            <div class="flex_end"  style="margin-top: 6%;" v-if="singlegood.ni != 1"><!---->
+            <div class="flex_end"   v-if="singlegood.ni != 1"><!---->
               
               <div
                 :class=" ['buy_circular_div','div_display_flex',singlegood.buyNumber>0? 'show_circle' :'border_white']"
@@ -1017,6 +1016,13 @@ export default {
 </style>
 
 <style scoped>
+.goods_right{
+    width: 100%;
+    padding-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 .photo_box{
   height: 100%;
   overflow-x: hidden;
@@ -1257,11 +1263,11 @@ p {
   font-size: 12px;
 }
 .assemble_list_div {
-  min-width: 30%;
-  max-width: 30%;
+  /* min-width: 30%;
+  max-width: 30%; */
   height: 6.5rem;
-  margin-left: 1%;
-  padding: 3%;
+  /* margin-left: 1%;
+  padding: 3%; */
 }
 .assemble_buttom_buy {
   background-color: #ffe001;
