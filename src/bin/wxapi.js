@@ -28,7 +28,8 @@ const wxApi = {
       }
     }
 console.log(data.params)
-    fetch.post(false, '/wxpl/cfgInfo', data).then((res) => {
+    fetch.post('http://192.168.3.2:8085/weChat/setJsSdkMsg').then((res) => {
+      console.log(res,'kkkkkkkkkkkkk');
       wx.config({
         debug: false, // 开启调试模式
         appId: res.appId, // 必填，公众号的唯一标识
@@ -43,12 +44,12 @@ console.log(data.params)
     }).catch((error) => {
       console.log(error)
     })
-    wx.ready((res) => {
-      // 如果需要定制ready回调方法
-      if (callback) {
-        callback()
-      }
-    })
+    // wx.ready((res) => {
+    //   // 如果需要定制ready回调方法
+    //   if (callback) {
+    //     callback()
+    //   }
+    // })
   },
   /**
    * [ShareTimeline 微信分享到朋友圈]

@@ -43,17 +43,17 @@
         @click="gotoDetail(item)"
       >
         <!-- 产品内容 -->
-        <div @click="goToProduct" class="div_display_flex" style="width:100%;">
+        <div @click="goToProduct" class="div_display_flex" style="width:100%;padding:1rem;">
           <!-- 产品图片 -->
           <div class="assemble_list_div">
             <img :src="baseURL + 'sys/attachment/showPic?downloadToken=' + item.avatar + '6210e537ab7425ada8f8cd2430ccb36f'" width="105px" style="max-height:6.5rem">
           </div>
-          <div style="width:60%;">
+          <div style="width:100%;padding-left:1rem;" class="list_right">
             <div
-              class="margin_top_div8 font_color_00 font_size_16"
-              style="width:187px;"
+              class="font_color_00 font_size_16"
+            
             >{{item.name}}</div>
-            <div class="margin_top_div8">
+            <div class="" style="margin-top:1rem;">
               <span class="font_size_18 font_color_00">
                 ¥{{item.groupPrice}}
                 <span class="font_size_11" v-show="item.hasWord">起</span>
@@ -63,10 +63,10 @@
                 class="font_size_11"
               >￥{{item.price}}</span>
             </div>
-            <div class="flex_end" v-if="item.ni == 1" style="margin-top: 6%;">
+            <div class="flex_end" v-if="item.ni == 1" >
               <div class="assemble_specifications" @click.stop="open_model(item,index)">选择规格</div>
             </div>
-            <div class="flex_end" v-if="item.ni != 1" style="margin-top: 6%;">
+            <div class="flex_end" v-if="item.ni != 1" >
               <!-- <div
              
                 style="margin-left: 80%;"
@@ -1171,6 +1171,8 @@ export default {
   },
   mounted() {
     // alert(1)
+    // this.wxapi.wxRegister();
+    console.log(this.wxapi)
     this.getMsg();
     this.getAvatar();
     this.chartQuest();
@@ -1412,11 +1414,18 @@ p {
   font-size: 12px;
 }
 .assemble_list_div {
-  min-width: 30%;
-  max-width: 30%;
+  /* min-width: 30%;
+  max-width: 30%; */
   height: 6.5rem;
-  margin-left: 1%;
-  padding: 3%;
+  /* margin-left: 1%;
+  padding: 3%; */
+}
+.list_right{
+    width: 100%;
+    padding-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 .assemble_buttom_buy {
   background-color: #ffe001;

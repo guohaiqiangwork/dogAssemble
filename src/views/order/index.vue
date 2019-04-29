@@ -1,5 +1,7 @@
 <template>
-<scroller  style="width:100%;height:100%" :lockX=true  ref="scrollerBottom" :use-pulldown='true' :pulldown-config="pulldownDefaultConfig" :pullup-config="pullupDefaultConfig" :use-pullup='true' @on-pulldown-loading="refresh" @on-pullup-loading="loadMore">
+<scroller  style="width:100%;height:100%" :lockX=true  ref="scrollerBottom"  use-pulldown use-pullup @on-pulldown-loading="refresh" @on-pullup-loading="loadMore" :pulldown-config="pulldownDefaultConfig" :pullup-config="pullupDefaultConfig">
+  <!-- :pulldown-config="pulldownDefaultConfig" :pullup-config="pullupDefaultConfig" -->
+  <!-- <load-more :tip="('正在加载')"></load-more> -->
   <div style="width:100%;height:100%;">
     <!-- dxssad -->
     <!--  v-if="orderList.length" -->
@@ -63,7 +65,7 @@
     </div> -->
 </template>
 <script>
-import {Scroller} from "vux";
+import {Scroller,LoadMore} from "vux";
  const pulldownDefaultConfig = {
     content: '下拉刷新',
     height: 40,
@@ -85,7 +87,8 @@ import {Scroller} from "vux";
     }
 export default {
   components: {
-    Scroller
+    Scroller,
+    LoadMore
   },
   name: "order",
   data() {
@@ -93,6 +96,7 @@ export default {
       pulldownDefaultConfig: pulldownDefaultConfig,
       pullupDefaultConfig: pullupDefaultConfig,
       page:1,
+      show:false,
       orderFalge: false,
       moreLFalg: false,
       goodsInfo:{},
@@ -127,6 +131,7 @@ export default {
       console.log(4646)
       this.page =1;
       this.orderList=[];
+      // this.show =true;
       this.getAvatar();
       this.$refs.scrollerBottom.enablePullup()
         this.$refs.scrollerBottom.donePulldown()
@@ -142,7 +147,11 @@ console.log(45)
       this.page +=1;
       this.getAvatar();
       // this.list =1;
+      // if (this.orderList.length >= 10) {
+      //       this.$refs.scrollerBottom.disablePullup()
+      //     }
         this.$refs.scrollerBottom.donePullup()
+        this.$refs.scrollerBottom.donePulldown()
       // this.$refs.scrollerBottom.donePullup()
       //  this.$refs.scrollerBottom.enablePulldown()
     },
@@ -168,12 +177,16 @@ console.log(45)
     //获取参团头像
     getAvatar(){
       console.log(this.page,'ggggggg')
+      var _this = this;
       this.$fetch.post("/weChat/personal/getPersonalInfo/"+this.token.activityId+'?page.current='+this.page).then(
         res=>{
           // this.$nextTick(() => {
-          
+          // this.show =false;
          
         // })
+        _this.$nextTick(() => {
+        _this.$refs.scrollerBottom.reset()
+      })
           console.log(res,'hjkkhkh,,avatarList')
           var reg =/,/g;
           if(res.obj.records.length){

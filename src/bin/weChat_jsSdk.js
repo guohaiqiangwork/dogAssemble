@@ -39,15 +39,18 @@
 			});
 		});
 		wx.ready(function() {//监听微信的分享按钮
+			
 		wx.onMenuShareTimeline({ //例如分享到朋友圈的API
 			title : dataForWeixin.title, // 分享标题
 			link : dataForWeixin.url, // 分享链接
 			imgUrl : dataForWeixin.MsgImg, // 分享图标
 			success : function() {
+				
 				dataForWeixin.callback();
 				// 用户确认分享后执行的回调函数
 			},
 			cancel : function() {
+				
 				// 用户取消分享后执行的回调函数
 			}
 		});
@@ -59,10 +62,12 @@
 			type : 'link', // 分享类型,music、video或link，不填默认为link
 			dataUrl : '', // 如果type是music或video，则要提供数据链接，默认为空
 			success : function() {
+				// alert(134)
 				dataForWeixin.callback();
 				// 用户确认分享后执行的回调函数
 			},
 			cancel : function() {
+				// alert(134)
 				// 用户取消分享后执行的回调函数
 			}
 		});
