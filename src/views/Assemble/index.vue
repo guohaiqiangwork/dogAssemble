@@ -53,7 +53,7 @@
               class="font_color_00 font_size_16"
             
             >{{item.name}}</div>
-            <div class="" style="margin-top:1rem;">
+            <div> <!--style="margin-top:1rem;"-->
               <span class="font_size_18 font_color_00">
                 ¥{{item.groupPrice}}
                 <span class="font_size_11" v-show="item.hasWord">起</span>
@@ -101,7 +101,7 @@
     </div>
 
 
-    <div class="cart" style></div>
+    <div class="cart"></div>
     <div class="ball-container">
       <!--小球 -->
       <div v-for="(ball,ballindex) in balls" :key="ballindex">
@@ -118,7 +118,7 @@
       </div>
     </div>
     <!-- 购买 -->
-    <div class="div_display_flex backgroun_color_fff assemble_buttom_div" style="z-index:12">
+    <div class="div_display_flex backgroun_color_fff assemble_buttom_div" style="z-index:26">
       <!-- 活动正常 -->
       <div style="width: 100%;display: flex;" v-if="!isJoin &&!isShow">
         <div class="bt_buy_img">
@@ -502,10 +502,13 @@ export default {
       this.lists.map(function(e) {
         if (e.goodsinfoList.length) {
           e.goodsinfoList.forEach(item => {
+            item.amount = e.amount;
             if (item && item.buyNumber > 0) {
               item.operaType ='goodsinfoId',                                  
               item.name = e.name;
+              
               arr1.push(item);
+
             //  _this.totalPrice +=Number(item.price) 
             }
           });
@@ -513,6 +516,7 @@ export default {
       });
       
       arr2 = this.lists.filter(e => {
+      
         return e.buyNumber > 0;
       });
       var a = [...arr1, ...arr2];
@@ -581,10 +585,12 @@ export default {
     },
     drop(el) {
       //抛物
+      console.log(111)
       for (let i = 0; i < this.balls.length; i++) {
         let ball = this.balls[i];
 
         if (!ball.show) {
+
           ball.show = true;
           ball.el = el;
           this.dropBalls.push(ball);
@@ -595,7 +601,6 @@ export default {
     },
     beforeDrop(el, event) {
       /* 购物车小球动画实现 */
-
       let count = this.balls.length;
       while (count--) {
         let ball = this.balls[count];
@@ -706,9 +711,13 @@ export default {
 
         return
       }
+      console.log(item,'ggggggggggggggggg');
       // groupPrice
       this.opstion = this.lists[index];
       item.show = true;
+      item.goodsinfoList.forEach(e =>{
+        e.amount = item.amount;
+      })
       var arr;
       if (!item.lalc) {
         item.spec = this.getArray();
@@ -720,9 +729,11 @@ export default {
 
       item.lalc = 1;
       var str = item.strBuffer.join(",");
+      
       var pos = item.goodsinfoList.findIndex(e => {
         return e.typeSize == str;
       });
+      // this.opstion.goodsinfoList[pos].amount = item.amount;
       this.attrValue = this.opstion.goodsinfoList[pos];
       //  console.log(str);
       //  console.log(pos,'pos')
@@ -781,12 +792,27 @@ export default {
     // },
     //选择规格 购物车数量
     addCount(event, num, index) {
-     
+     console.log(num,'lllll');
+      let count =0;
+      num.buyNumber++;
+      this.opstion.goodsinfoList.forEach(e =>{
+        console.log(e,'mmmmmmmmm')
+         count += Number(e.buyNumber);
+      })
+      if(count > num.amount){
+        num.buyNumber--;
+         this.$vux.toast.show({
+          text: `限购${num.amount}件`,
+          position:'middle',
+          type:'text'
+        });
+        return
+      }
       this.totalPrice += Number(num.groupPrice);
       this.totalDis += Number(num.price);
       num.operaType='goodsinfoId'
       this.drop(event.target);
-      var a = num.buyNumber++;
+     
       this.$set(this.lists, this.opstion.goodsinfoList[index], num);
       this.addQuest(num.id,num.operaType);
     },
@@ -803,10 +829,26 @@ export default {
     },
     //点击底部购物车 购物数量
     btm_add(index, event, item) {
+      let count =0;
+      this.filtArrray[index].buyNumber++;
+      this.filtArrray.forEach(ele =>{
+        if(item.name == ele.name){
+          count += Number(ele.buyNumber);
+        }
+      })
+      if(count>item.amount){
+        this.filtArrray[index].buyNumber--;
+         this.$vux.toast.show({
+          text: `限购${item.amount}件`,
+          position:'middle',
+          type:'text'
+        });
+        return
+      }
       this.drop(event.target);
       this.totalPrice += Number(item.groupPrice);
       this.totalDis += Number(item.price);
-      this.filtArrray[index].buyNumber++;
+      
       this.addQuest(item.id,item.operaType);
     },
     btm_dis(index, item) {
@@ -829,12 +871,23 @@ export default {
         });
         return
       }
-      this.totalPrice += Number(item.groupPrice);
-      this.totalDis += Number(item.price);
-      this.drop(event.target);
       var lists = this.lists;
       var buyNumber = Number(lists[index].buyNumber);
       buyNumber += 1;
+      if(buyNumber > item.amount){
+        buyNumber = item.amount;
+         this.$vux.toast.show({
+          text: `限购${item.amount}件`,
+          position:'middle',
+          type:'text'
+        });
+        return;
+      }
+      this.totalPrice += Number(item.groupPrice);
+      this.totalDis += Number(item.price);
+      this.drop(event.target);
+      
+      
       lists[index].buyNumber = buyNumber;
       this.addQuest(item.id,item.operaType);
     },
@@ -957,7 +1010,6 @@ export default {
     },
     // 点击购物车打开弹出层
     colseModelProductL(e) {
-       console.log(4555555444444444444)
        if (!this.bageNum || this.isJoin || this.isShow) {
         return;
       }
@@ -1014,9 +1066,8 @@ export default {
       let qsTime = new Date().getTime();
      
       this.$fetch
-        .post("weChat/index/getActivity?activityId=" + this.token.activityId)
+        .post("weChat/index/getActivity?activityId=" + this.token.activityId+'&employeeId='+this.token.employeeId)
         .then(res => {
-          console.log(res,'ttttt')
          if(qsTime > res.obj.endTime){
            this.timeShow = false;
             this.isShow = true;
@@ -1031,7 +1082,7 @@ export default {
            this.bottom_title ='敬请期待';
            this.isShow = true;
          }
-         this.isJoin =res.attributes.orderPayCount;
+         this.isJoin =res.attributes.orderPayCount > 0? true : false;
          this.isActive = res.obj.activityId;
          this.time = res.obj.endTime + "";
          this.startTime = res.obj.startTime +"";
@@ -1059,6 +1110,7 @@ export default {
                   ? false
                   : true
                 : null,
+              amount:e.amount,
               avatar: e.goods.imgList[0],
               id:e.id,
               buyNumber: e.buyNumber,
@@ -1171,7 +1223,7 @@ export default {
   },
   mounted() {
     // alert(1)
-    // this.wxapi.wxRegister();
+    this.wxapi.wxRegister();
     console.log(this.wxapi)
     this.getMsg();
     this.getAvatar();
@@ -1242,9 +1294,8 @@ export default {
   position: fixed;
   left: 54px;
   bottom: 48px;
-  z-index: 12;
   transition: all 0.4s cubic-bezier(0.49, -0.29, 0.75, 0.41); /*贝塞尔曲线*/
-  /* z-index: 10000000000; */
+  z-index: 30;
 }
 .cart {
   position: fixed;
@@ -1417,6 +1468,7 @@ p {
   /* min-width: 30%;
   max-width: 30%; */
   height: 6.5rem;
+  width: 105px;
   /* margin-left: 1%;
   padding: 3%; */
 }

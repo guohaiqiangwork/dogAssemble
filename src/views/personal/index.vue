@@ -58,7 +58,7 @@
             <div class="personal_c_x_z" style="margin-right: 15px;"  @click="outPay('放弃当前订单？',ele.id,ele.state)" v-if="ele.state == 1">放弃支付</div>
             <div class="personal_c_x_z" style="margin-right: 15px;"  @click="outPay('删除当前订单？',ele.id,ele.state)" v-if="ele.state == 7 || ele.state ==4 || ele.state ==5">删除订单</div>
             <div class="personal_c_x_z backgroun_color_fe01" style="color:#333;border:1px solid #ffe001" v-if="ele.state == 1">重新支付</div>
-            <div class="personal_c_x_z backgroun_color_fe01" style="color:#333;border:1px solid #ffe001" @click="CheckGoods(ele.stateTitle,ele.id)"  v-if="ele.state == 3 || ele.state == 4 ||ele.state ==6">查看物流</div>
+            <div class="personal_c_x_z backgroun_color_fe01" style="color:#333;border:1px solid #ffe001" @click="CheckGoods(ele.stateTitle,ele.id)"  >查看物流</div>
             <!-- v-if="ele.state == 3 || ele.state == 4 ||ele.state ==6" -->
           </div>
         </div>
@@ -290,7 +290,7 @@ export default {
         '132':"揽件滞留"
       };
       this.showDialogStyle =true;
-      // id = 'b145ca639ece4327b5fb565d5d5fc9ce';
+      id = 'b145ca639ece4327b5fb565d5d5fc9ce';
       this.$fetch.post('weChat/mineOrder/getTraceByOrderId/'+ id).then(res =>{
         console.log(res);
         res.obj.forEach(item => {

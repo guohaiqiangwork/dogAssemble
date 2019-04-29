@@ -671,7 +671,22 @@ export default {
       if(this.msg.isJoin){
         return
       }
+      let count =0;
       num.buyNumber++;
+      this.singlegood.goodsinfoList.forEach(e =>{
+        ;
+        count += Number(e.buyNumber);
+      })
+
+      if(count > num.amount){
+        num.buyNumber--;
+        this.$vux.toast.show({
+          text: `限购${num.amount}件`,
+          position:'middle',
+          type:'text'
+        });
+        return
+      }
       num.operaType='goodsinfoId';
       num.name = this.singlegood.name;
       this.singlegood.sumPrice += Number(num.groupPrice);
@@ -719,10 +734,26 @@ export default {
     },
     //点击底部购物车 购物数量
     btm_add(index, event, item) {
+      let count =0;
+      this.filtArrray[index].buyNumber++;
+      this.filtArrray.forEach(ele =>{
+        if(item.name == ele.name){
+          count += Number(ele.buyNumber);
+        }
+      })
+      if(count>item.amount){
+        this.filtArrray[index].buyNumber--;
+         this.$vux.toast.show({
+          text: `限购${item.amount}件`,
+          position:'middle',
+          type:'text'
+        });
+        return
+      }
       this.drop(event.target);
       this.singlegood.sumPrice += Number(item.groupPrice);
       this.singlegood.sumDisprice += Number(item.price);
-      this.filtArrray[index].buyNumber++;
+      
       if(item.operaType == 'goodsinfoId'){
         let pos = this.singlegood.goodsinfoList.findIndex(e =>{
         return item.id == e.id
@@ -764,12 +795,23 @@ export default {
       if(this.msg.isJoin){
         return
       }
+       var buyNumber = Number(item.buyNumber);
+      buyNumber += 1;
+      if(buyNumber > item.amount){
+        buyNumber-=1;
+        this.$vux.toast.show({
+          text: `限购${item.amount}件`,
+          position:'middle',
+          type:'text'
+        });
+        return
+      }
+      // if(){}
       item.sumPrice += Number(item.groupPrice);
       item.sumDisprice += Number(item.price);
       this.drop(event.target);
       // var lists = this.lists;
-      var buyNumber = Number(item.buyNumber);
-      buyNumber += 1;
+     
       item.buyNumber = buyNumber;
       let pos = this.filtArrray.findIndex(e =>{
         return item.id == e.id;
@@ -910,23 +952,18 @@ export default {
     },
     chartQuest(){
       this.$fetch.post('weChat/index/getShoppingcart/'+this.token.employeeId+'/'+this.token.activityId).then(res =>{
-        console.log(res,'jkj');
-        // if(res.obj.length){
-
-        // }else{
-          
-        // }
+     
       })
     },
     //清空购物车请求
       clearQuest(){
         this.$fetch.post('weChat/shoppingcart/getShoppingcartDel/'+this.token.employeeId+'/'+this.token.activityId).then(e =>{
-          console.log(e);
+        
         })
     },
     //点击加号
     addQuest(id,type){
-      console.log(type,'sdddasdas');
+    
       this.$fetch.post('/weChat/shoppingcart/getShoppingcartAdd/'+this.token.employeeId+'/'+this.token.activityId +'?'+type+'='+id).then(
         e =>{
           // console.log(11,e)
@@ -949,7 +986,10 @@ export default {
       this.bageNum = this.msg.bageNum;
       this.$fetch.post("/weChat/index/getGoodsActivity?goodsActivityId="+this.goodId+'&employeeId='+this.token.employeeId).then(
         res=>{
-          console.log(res,'9999');
+         
+          res.obj.goodsinfoList.forEach(e =>{
+            e.amount = res.obj.amount
+          })
           this.singlegood={
               name: res.obj.goods.name,
               avatar: res.obj.goods.imgList[0],
@@ -958,6 +998,7 @@ export default {
               ni: res.obj.goodsinfoList.length ? "1" : "2",
               show: false,
               flag: 0,
+              amount:res.obj.amount,
               price:this.msg.price,
               groupPrice:this.msg.groupPrice,
               goodsSpeList: res.obj.goods.goodsSpeList,
@@ -982,7 +1023,7 @@ export default {
     this.filtArrray =arr;
     this.goodId=this.$route.query.goodId;
     this.msg =JSON.parse(this.$route.query.msg)
-    console.log(this.goodId,'llllllllllllllll');
+   
     this.getGood();
     this.chartQuest();
     // if (window.history && window.history.pushState) {
@@ -1266,6 +1307,7 @@ p {
   /* min-width: 30%;
   max-width: 30%; */
   height: 6.5rem;
+  width: 105px;
   /* margin-left: 1%;
   padding: 3%; */
 }

@@ -28,13 +28,13 @@ const wxApi = {
       }
     }
 console.log(data.params)
-    fetch.post('http://192.168.3.2:8085/weChat/setJsSdkMsg').then((res) => {
+    fetch.post('http://192.168.3.2:8085/weChat/weChat/setJsSdkMsg').then((res) => {
       console.log(res,'kkkkkkkkkkkkk');
       wx.config({
         debug: false, // 开启调试模式
-        appId: res.appId, // 必填，公众号的唯一标识
-        timestamp: res.timestamp, // 必填，生成签名的时间戳
-        nonceStr: res.noncestr, // 必填，生成签名的随机串
+        appId: res.obj.appId, // 必填，公众号的唯一标识
+        timestamp: res.obj.timestamp, // 必填，生成签名的时间戳
+        nonceStr: res.obj.noncestr, // 必填，生成签名的随机串
         signature: res.signature, // 必填，签名，见附录1
         jsApiList: [
           'onMenuShareAppMessage', // 获取“分享给朋友”按钮点击状态及自定义分享内容接口

@@ -20,23 +20,32 @@
 			}
 		}
 		$(function() {
-			var no_sha1_String = "jsapi_ticket=${ticket}&noncestr=${nonceStr}&timestamp=${timeStamp}&url=" + window.location.href;
-			wx.config({
-				debug : false, //调式模式，设置为ture后会直接在网页上弹出调试信息，用于排查问题
-				appId : '${appId}',// 必填，公众号的唯一标识
-				timestamp : '${timeStamp}',// 必填，生成签名的时间戳
-				nonceStr : '${nonceStr}',// 必填，生成签名的随机串
-				signature : $.sha1(no_sha1_String),// 必填，签名，见附录1
-				jsApiList : [ //需要使用的网页服务接口
-					'checkJsApi', //判断当前客户端版本是否支持指定JS接口
-					'onMenuShareTimeline', //分享到朋友圈
-					'onMenuShareAppMessage', //分享给朋友
-					'onMenuShareQQ', //分享到QQ
-					'onMenuShareWeibo', //分享到腾讯微博
-					'onMenuShareQZone', //分享到QQ空间
-					'hideMenuItems', // 批量隐藏功能按钮接口
-				]
-			});
+			$.ajax({
+				url:'http://192.168.3.2:8085/weChat/weChat/setJsSdkMsg',
+				type:'post',
+				success:function(res){
+					console.log(res,1111111111111111111111);
+					dataForWeixin.appId = res.obj.appId;
+					var no_sha1_String = `jsapi_ticket=${res.obj.ticket}&noncestr=${res.obj.nonceStr}&timestamp=${res.obj.timeStamp}&url=" + window.location.href`;
+					wx.config({
+						debug : false, //调式模式，设置为ture后会直接在网页上弹出调试信息，用于排查问题
+						appId : `${res.obj.appId}`,// 必填，公众号的唯一标识
+						timestamp : `${res.obj.timeStamp}`,// 必填，生成签名的时间戳
+						nonceStr : `${res.obj.nonceStr}`,// 必填，生成签名的随机串
+						signature : $.sha1(no_sha1_String),// 必填，签名，见附录1
+						jsApiList : [ //需要使用的网页服务接口
+							'checkJsApi', //判断当前客户端版本是否支持指定JS接口
+							'onMenuShareTimeline', //分享到朋友圈
+							'onMenuShareAppMessage', //分享给朋友
+							'onMenuShareQQ', //分享到QQ
+							'onMenuShareWeibo', //分享到腾讯微博
+							'onMenuShareQZone', //分享到QQ空间
+							'hideMenuItems', // 批量隐藏功能按钮接口
+						]
+					});
+				}
+			})
+			
 		});
 		wx.ready(function() {//监听微信的分享按钮
 			
