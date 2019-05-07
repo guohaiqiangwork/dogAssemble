@@ -353,6 +353,7 @@
 <script>
 import config from '../../config/config.dev.js'
 import url from "../../bin/url";
+const wx = require('weixin-js-sdk')
 import {
   XHeader,
   XDialog,
@@ -1226,8 +1227,8 @@ export default {
   },
   mounted() {
     // alert(1)
-    this.wxapi.wxRegister();
-    console.log(this.wxapi)
+    // this.wxapi.isweixin();
+    console.log(wx,'lll')
     this.getMsg();
     this.getAvatar();
     this.chartQuest();

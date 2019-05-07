@@ -115,7 +115,7 @@
           </div>
         </div>
         <div class="ofo_w_m">
-          <div class="div_display_flex">
+          <div class="div_display_flex flex_between">
             <div class="ofo_w_78">{{item.goods.name}}</div>
             <div v-if="item.goodsinfo">{{item.goodsinfo.price}}</div>
             <div v-if="item.goodsActivity">{{item.goodsActivity.price}}</div>
@@ -130,7 +130,7 @@
             <div class="ofo_n_w font_size_14 font_color_66" style="   width:20%">*{{item.count}}</div>
           </div>
           <div class="ofo_n_w">
-            <div class="ofo_t_c backgroun_color_fe01" @click="dialogShow(index)">套餐明细</div>
+            <div class="ofo_t_c backgroun_color_fe01" @click="dialogShow(index)" v-if="item.goods.setmealList.length">套餐明细</div>
           </div>
         </div>
       </div>
@@ -149,7 +149,7 @@
       </div>
       <div class="div_display_flex">
         <div class="ofo_s_z ofo_w_50 font_size_13 font_color_00">订单总价</div>
-        <div class="ofo_j_z ofo_s_z ofo_w_50 font_size_14 font_color_010">￥{{postagePrice.fee*1 + postagePrice.price}}</div>
+        <div class="ofo_j_z ofo_s_z ofo_w_50 font_size_14 font_color_010">￥{{postagePrice.fee*1 + postagePrice.price*1}}</div>
       </div>
     </div>
     <div class="ofo_w_Z" @click="goToBuy">微信支付</div>
@@ -217,7 +217,8 @@ export default {
       defaultReceiver: "",
       setMealList: [],
       postagePrice: {
-        pricr:''
+        pricr:null,
+        fee:null 
       },
       orderId: ""
     };
@@ -387,10 +388,17 @@ export default {
             this.token.activityId
         )
         .then(data => {
+          console.log(data,9999)
           if (data.success) {
             this.orderId = data.obj.id;
+            this.Paygoods();
           }
         });
+    },
+    Paygoods(){
+      this.$fetch.post('/weChat/order/payOrder/'+this.orderId).then(res =>{
+        console.log(res);
+      })
     }
   },
 
@@ -427,6 +435,9 @@ export default {
 /* .weui-panel{
   margin-top: 0;
 } */
+.flex_between{
+  justify-content: space-between;
+}
 .weui-dialog {
   overflow: visible !important;
 }

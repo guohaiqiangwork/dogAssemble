@@ -1,6 +1,7 @@
 // wxapi.js
 import wx from 'weixin-js-sdk'
 import fetch from './fetch'
+// const wx = require('weixin-js-sdk')
 const wxApi = {
   /**
    * [isweixin 判断是否微信浏览器]
@@ -21,16 +22,15 @@ const wxApi = {
    * [wxRegister 微信Api初始化]
    * @param  {Function} callback [ready回调函数]
    */
-  wxRegister(callback) {
+  wxRegister(_this,callback) {
     let data = {
       params: {
         reqUrl: window.location.href
       }
     }
-console.log(data.params)
+console.log(_this,999)
     fetch.post('http://192.168.3.2:8085/weChat/weChat/setJsSdkMsg').then((res) => {
-      console.log(res,'kkkkkkkkkkkkk');
-      wx.config({
+      _this.config({
         debug: false, // 开启调试模式
         appId: res.obj.appId, // 必填，公众号的唯一标识
         timestamp: res.obj.timestamp, // 必填，生成签名的时间戳
