@@ -167,7 +167,7 @@
           <span class="wid_100">邀请好友去拼团</span>
         </div>
         <div class="wid_30">
-          <span class="wid_100">更多拼团</span>
+          <span class="wid_100" @click="newActive">更多拼团</span>
         </div>
       </div>
     </div>
@@ -473,6 +473,10 @@ export default {
   //   // this.getCode();
   // },
   computed: {
+    newActive(){
+      window.location.href(baseURL+'index.html?'+'employeeId='+this.token.employeeId+'&activityId='+this.isActive)
+      // this.$router.push();
+    },
     clickInterception(){
       let qsTime = new Date().getTime();
       if(qsTime - this.startTime < 500){
@@ -577,9 +581,7 @@ export default {
         });
       });
       a.forEach((e, index) => {
-        e.splice(0, e.length / 2);
-        if (typeof e == "string") {
-        }
+        e.splice(0, Math.floor(e.length / 2));
       });
       return a;
     },
@@ -1074,6 +1076,7 @@ export default {
             this.title ='已结束';
            if(this.isActive){
              this.bottom_title ='更多拼团';
+            //  this.isShow =false;
            }else{
               this.bottom_title ='活动已结束'
            }

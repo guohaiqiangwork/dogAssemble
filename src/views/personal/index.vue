@@ -72,7 +72,7 @@
        <div class="nodata" v-else>
 
       <img  class="picture"  src="../../assets/images/mynull@2x.png" />
-     <p> 主人~快去参与拼团吧~</p>
+     <p class="pt-1"> 主人~快去参与拼团吧~</p>
     </div>
       <!-- 弹出层 -->
       <div class="mask_box" id="maskBox" v-show="showDialogStyle" @click="clickModel">
@@ -356,6 +356,9 @@ export default {
 </style>
 
 <style scoped>
+.pt-1{
+  padding-top: 1rem;
+}
 .picture{
   width: 5rem;
   height: 7rem;

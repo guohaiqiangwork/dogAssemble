@@ -94,7 +94,7 @@
             style="margin-bottom: 3%;width: 90%;"
           >
             <span style="color:#128DED">[默认]</span>
-            {{defaultReceiver.province}}{{defaultReceiver.city}}{{defaultReceiver.area}}{{defaultReceiver.receiveAddress}}
+            {{defaultReceiver.name}}
           </div>
         </div>
       </div>
@@ -145,11 +145,11 @@
           邮费
           <span class="font-size_11 font_color_99" v-if="!postagePrice.fee">(不包邮)</span>
         </div>
-        <div class="ofo_j_z ofo_s_z ofo_w_50 font_size_14 font_color_010">￥{{postagePrice.fee}} 接口获取</div>
+        <div class="ofo_j_z ofo_s_z ofo_w_50 font_size_14 font_color_010">￥{{postagePrice.fee}}</div>
       </div>
       <div class="div_display_flex">
         <div class="ofo_s_z ofo_w_50 font_size_13 font_color_00">订单总价</div>
-        <div class="ofo_j_z ofo_s_z ofo_w_50 font_size_14 font_color_010">￥{{postagePrice.sumMoney}}</div>
+        <div class="ofo_j_z ofo_s_z ofo_w_50 font_size_14 font_color_010">￥{{postagePrice.fee*1 + postagePrice.price}}</div>
       </div>
     </div>
     <div class="ofo_w_Z" @click="goToBuy">微信支付</div>
@@ -241,11 +241,11 @@ export default {
             "/" +
             this.detailedAddress +
             "/" +
-            this.addressF[0] +
+            this.addressValue[0] +
             "/" +
-            this.addressF[1] +
+            this.addressValue[1] +
             "/" +
-            this.addressF[2]
+            this.addressValue[2]
         )
         .then(data => {
           if (data.success) {
@@ -284,6 +284,9 @@ export default {
       //   }
       // });
     },
+     getName(value){
+      return value2name(value, ChinaAddressV4Data);
+    },
     // 去地址管理
     redirectPath() {
       this.$router.push({
@@ -310,16 +313,27 @@ export default {
               this.AddressFalge = false;
               if (this.addressList.length == 1) {
                 this.defaultReceiver = this.addressList[0];
+                 this.defaultReceiver['name']=this.getName ([ this.addressList[0].province, this.addressList[0].city,e.area]) +  this.addressList[0].receiveAddress;
               }
               this.addressList.forEach((e, index) => {
+                
                 if (e.isDefault == 1) {
                   this.defaultReceiver = e;
+                   this.defaultReceiver['name']=this.getName ([e.province,e.city,e.area]) + e.receiveAddress;
+                  this.defaultReceiver['name'] = this.defaultReceiver['name'].replace(/ /g,'')
                   return;
                 }
+               
               });
+              this.Fee(this.defaultReceiver['id']);
             }
           }
         });
+    },
+    Fee(id){
+      this.$fetch.post('weChat/order/getFee/'+id).then(res =>{
+        this.postagePrice.fee= res.obj;
+      })
     },
     // 获取购物车详情
     getShopCar() {
@@ -397,7 +411,11 @@ export default {
     },
     token() {
       return JSON.parse(localStorage.getItem("user"));
-    }
+    },
+    // sumMoney(){
+    //   console.log(this.postagePrice.price)
+    //   return this.postagePrice.fee *1 + this.postagePrice.price*1;
+    // }
   }
 };
 </script>

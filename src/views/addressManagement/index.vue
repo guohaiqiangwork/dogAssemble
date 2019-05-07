@@ -8,7 +8,7 @@
       <div
         class="margin_top_div3 font_size_14 font_color_33"
         style="margin-left:4%"
-      >{{item.province}}{{item.city}}{{item.area}}{{item.receiveAddress}}</div>
+      >{{item.name.replace(/ /g,'')}}</div>
       <div
         class="div_display_flex margin_top_div5"
         style="padding:0 5% 5% 4%;justify-content:space-between;"
@@ -226,12 +226,14 @@ export default {
     },
     //  地址点击完成时
     logHide(str) {
+      console.log(str)
       if (str) {
         var name = value2name(this.addressValue, ChinaAddressV4Data);
         this.addressF = name.trim().split(" ");
-        this.address = name;
+        this.address = name.replace(/ /g,'');
       }
     },
+   
     //  新增地址 编辑地址
     openAddressM(item, id) {
       if (item.receiver) {
@@ -240,9 +242,10 @@ export default {
         this.phoneNumber = item.receiver;
         this.detailedAddress = item.receiveAddress;
         this.addressF = this.address.trim().split(" ");
-        this.addressF[0] = item.province;
-        this.addressF[1] = item.city;
-        this.addressF[2] = item.area;
+        this.address = this.getName ([item.province,item.city,item.area]) + item.receiveAddress;
+        this.address =this.address.replace(/ /g,'')
+        // this.addressValue[1] = item.city;
+        // this.addressValue[2] = item.area;
         this.editFalg = true;
         this.addressId = id;
       } else {
@@ -265,6 +268,9 @@ export default {
         this.detailedAddress = "";
       }
     },
+     getName(value){
+      return value2name(value, ChinaAddressV4Data);
+    },
     // 获取地址列表
     getAddressList() {
       this.$fetch
@@ -272,18 +278,23 @@ export default {
         .then(data => {
           if (data.success) {
             this.addressList = data.obj;
+   
             this.addressList.forEach((e, index) => {
+              e.name = this.getName ([e.province,e.city,e.area]) + e.receiveAddress;
               if (e.isDefault == 1) {
                 e.isDefault = true;
               } else {
                 e.isDefault = false;
               }
             });
+            
           }
+    
         });
     },
     // 地址保存
     saveAddress() {
+      console.log(this.addressValue,'kkkkkkk');
       //  console.log( name1.trim().split(" "));
       this.AddressFalge = false;
       this.showMenus = true;
@@ -298,11 +309,11 @@ export default {
             "/" +
             this.detailedAddress +
             "/" +
-            this.addressF[0] +
+            this.addressValue[0] +
             "/" +
-            this.addressF[1] +
+            this.addressValue[1] +
             "/" +
-            this.addressF[2]
+            this.addressValue[2]
         )
         .then(data => {
           if (data.success) {
@@ -313,6 +324,7 @@ export default {
     },
     // 编辑保存
     editAddressD() {
+      console.log(this.name,464546)
       this.$fetch
         .post(
           "weChat/order/editAddress/" +
@@ -324,11 +336,11 @@ export default {
             "/" +
             this.detailedAddress +
             "/" +
-            this.addressF[0] +
+            this.addressValue[0] +
             "/" +
-            this.addressF[1] +
+            this.addressValue[1] +
             "/" +
-            this.addressF[2]
+            this.addressValue[2]
         )
         .then(data => {
           if (data.success) {
@@ -375,7 +387,8 @@ export default {
   computed: {
     token() {
       return JSON.parse(localStorage.getItem("user"));
-    }
+    },
+    
   }
 };
 </script>

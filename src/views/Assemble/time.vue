@@ -87,6 +87,7 @@ export default {
           self.min = min;
           self.sec = sec;
         } else {
+          
           clearInterval(timer);
           self.content = self.endText;
           self._callback();
