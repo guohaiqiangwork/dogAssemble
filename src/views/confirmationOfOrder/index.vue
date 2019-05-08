@@ -104,6 +104,7 @@
         class="div_display_flex"
         style="justify-content:space-between;"
         v-for="(item,index) in setMealList"
+        :key="index"
       >
         <div style="width:auto;margin-top:5%;">
           <div class="ofo_img_w">
@@ -398,6 +399,8 @@ export default {
     Paygoods(){
       this.$fetch.post('/weChat/order/payOrder/'+this.orderId).then(res =>{
         console.log(res);
+      }).catch(err =>{
+        console.log(err);
       })
     }
   },

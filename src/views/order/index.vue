@@ -2,9 +2,9 @@
 <scroller  style="width:100%;height:100%" :lockX=true  ref="scrollerBottom"  use-pulldown use-pullup @on-pulldown-loading="refresh" @on-pullup-loading="loadMore" :pulldown-config="pulldownDefaultConfig" :pullup-config="pullupDefaultConfig">
   <!-- :pulldown-config="pulldownDefaultConfig" :pullup-config="pullupDefaultConfig" -->
   <!-- <load-more :tip="('正在加载')"></load-more> -->
-  <div style="width:100%;height:100%;">
+  <div style="width:100%;height:100%;" v-if="orderList.length">
     <!-- dxssad -->
-    <!--  v-if="orderList.length" -->
+    <!--   -->
     <!-- 订单列表 -->
     <!-- <div style="height:100%;width:100%;background:#ff0;"></div> -->
     <div
@@ -57,12 +57,13 @@
     </div>
     
   </div>
-  </scroller>
-  <!-- <div class="nodata" v-else>
+   <div class="nodata" v-else>
 
-      <img  class="mt-50"  src="../../assets/images/mynull@2x.png"/>
-     <p> 主人~快去参与拼团吧~</p>
-    </div> -->
+      <img  class="picture" src="../../assets/images/mynull@2x.png"/>
+     <p class="pt-1"> 主人~快去参与拼团吧~</p>
+    </div>
+  </scroller>
+ 
 </template>
 <script>
 import {Scroller,LoadMore} from "vux";
@@ -253,6 +254,13 @@ console.log(45)
 </style>
 
 <style scoped>
+.picture{
+  width: 5rem;
+  height: 7rem;
+}
+.pt-1{
+  padding-top: 1rem;
+}
 .goods_name{
   width: 10rem;
   overflow: hidden;
