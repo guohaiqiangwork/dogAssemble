@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import home from '@/views/home/index'
+import login from '@/views/login/index'
 import nationalStores from '@/views/nationalStores/index'
 import recipeManual from '@/views/recipeManual/index'
 import caseVideo from '@/views/caseVideo/index'
@@ -12,6 +13,7 @@ import recommend from '@/views/recommend/index'
 import exclusive from '@/views/exclusive/index'
 import is404 from '@/views/page/is404'
 import notfound from '@/views/page/notfound'
+
 
 Vue.use(Router)
 
@@ -27,8 +29,17 @@ export default new Router({
       component: home
     },
     {
+      // 登陆
+      path: '/login/:obj',
+      name: 'login',
+      meta: {
+        title: '登陆', 
+      },
+      component: login
+    },
+    {
       // 全国门店
-      path:'/nationalStores',
+      path:'/nationalStores/:obj',
       name:'nationalStores',
       meta:{
         title:'全国门店'
@@ -37,7 +48,7 @@ export default new Router({
     },
     {
       // 配方手册
-      path:'/recipeManual',
+      path:'/recipeManual/:obj',
       name:'recipeManual',
       meta:{
         title:'配方手册'

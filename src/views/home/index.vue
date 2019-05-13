@@ -1,6 +1,7 @@
 <template>
   <div>
     <!-- <x-header :right-options="{showMore: true}" @on-click-more="showMenus = true">首页</x-header> -->
+     <button @click="goToLogin">登陆页面</button>
     <button @click="goToNationalStores">全国门店</button>
     <button @click="goToRecipeManual">配方手册</button>
     <button @click="goTocaseVideo">案例视频</button>
@@ -36,6 +37,20 @@ export default {
           self.opencode = res.data[0].opencode.split(",");
         }
       });
+    },
+    // 登陆
+    goToLogin(){
+      this.$router.push({
+        name:"login",
+        params:{
+          obj:JSON.stringify({
+            type:"profession",
+            data:{
+              id:"参数"
+            }
+          })
+        }
+      })
     },
     //   去个人中心
     goToPersonal(id) {
