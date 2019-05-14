@@ -15,7 +15,7 @@
       <div class="font_color_102 font_size_13 personal_money_m">账户余额（元）</div>
       <div class="div_display_flex personal_price_m">
         <div class="font_color_102 font_size_25 div_width_50">￥0.00</div>
-        <div class="div_display_flex font_color_102 font_size_13 div_width_50">
+        <div class="div_display_flex font_color_102 font_size_13 div_width_50" @click="goToWallet">
           <div style="padding-top: 6%; margin-left: 48%">我要提现</div>
           <div class="width_26" style="margin-top: 3%;">
             <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%">
@@ -42,13 +42,6 @@
     </div>
     <!-- 菜单列表 -->
     <div class="margin_top_div3 personal_div_money" style=" margin-bottom: 24%;">
-      <div class="div_display_flex">
-        <div class="div_width_50 font_color_1A personal_list_font">我的订单</div>
-        <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
-          <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%">
-        </div>
-      </div>
-      <div class="personal_div_border"></div>
        <div class="div_display_flex">
         <div class="div_width_50 font_color_1A personal_list_font">我的订单</div>
         <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
@@ -116,6 +109,20 @@ export default {
     onClickTabBarItem: function(tag) {
       this.$refs.TabBar.didClickedItem("嘿嘿嘿");
       this.item = tag;
+    },
+    // 去我的钱包
+    goToWallet:function(){
+      this.$router.push({
+        name: "myWallet",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: "参数"
+            }
+          })
+        }
+      });
     }
   },
 

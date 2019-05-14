@@ -13,6 +13,8 @@ import recommend from '@/views/recommend/index'
 import exclusive from '@/views/exclusive/index'
 import is404 from '@/views/page/is404'
 import notfound from '@/views/page/notfound'
+import myWallet from '@/views/myWallet/index'
+
 
 
 Vue.use(Router)
@@ -96,16 +98,25 @@ export default new Router({
     path: '/personal/:obj',
     name: 'personal',
     meta: {
-      title: '我的', 
+      title: '个人中心', 
     },
     component: personal
   },
   {
-    // 个人中心
+    // 我的钱包
+    path: '/myWallet/:obj',
+    name: 'myWallet',
+    meta: {
+      title: '我的钱包', 
+    },
+    component: myWallet
+  },
+  {
+    // 推荐信息
     path: '/recommend/:obj',
     name: 'recommend',
     meta: {
-      title: '我的', 
+      title: '推荐信息', 
     },
     component: recommend
   },
