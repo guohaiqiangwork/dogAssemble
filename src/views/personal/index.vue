@@ -42,7 +42,7 @@
     </div>
     <!-- 菜单列表 -->
     <div class="margin_top_div3 personal_div_money" style=" margin-bottom: 24%;">
-       <div class="div_display_flex">
+       <div class="div_display_flex" @click="goToOrder">
         <div class="div_width_50 font_color_1A personal_list_font">我的订单</div>
         <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
           <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%">
@@ -110,6 +110,20 @@ export default {
     goToWallet:function(){
       this.$router.push({
         name: "myWallet",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: "参数"
+            }
+          })
+        }
+      });
+    },
+    // 去我的订单
+    goToOrder:function(){
+      this.$router.push({
+        name: "order",
         params: {
           obj: JSON.stringify({
             type: "profession",

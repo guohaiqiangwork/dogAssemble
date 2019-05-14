@@ -15,7 +15,7 @@ import is404 from '@/views/page/is404'
 import notfound from '@/views/page/notfound'
 import myWallet from '@/views/myWallet/index'
 import  billRecord from '@/views/billRecord/index'
-
+import order from '@/views/order/index'
 
 Vue.use(Router)
 
@@ -103,13 +103,22 @@ export default new Router({
     component: personal
   },
   {
-    // 我的钱包billRecord
+    // 我的钱包
     path: '/myWallet/:obj',
     name: 'myWallet',
     meta: {
       title: '我的钱包', 
     },
     component: myWallet
+  },
+  {
+    // 我的钱包
+    path: '/order/:obj',
+    name: 'order',
+    meta: {
+      title: '我的订单', 
+    },
+    component: order
   },
   {
     // 钱包记录
@@ -138,16 +147,6 @@ export default new Router({
     },
     component: exclusive
   },
-
-    {
-      // 个人中心
-      path: '/personal/:obj',
-      name: 'personal',
-      meta: {
-        title: '我的', 
-      },
-      component: personal
-    },
     {
       path:'/404',
       component: is404
