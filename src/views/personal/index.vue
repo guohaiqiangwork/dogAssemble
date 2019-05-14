@@ -192,9 +192,7 @@ export default {
   margin-top: 18px;
   margin-left: 15px;
 }
-.div_width_50 {
-  width: 50%;
-}
+
 .personal_bt_tc {
   width: 80%;
   text-align: center;

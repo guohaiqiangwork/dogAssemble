@@ -12,6 +12,10 @@
 .backgroun_color_f3{
   background-color:#F3F5F8
 }
+.backgroun_color_4A{
+  background-color: #4A7B67
+}
+
 .margin_top_div8 {
   margin-top: 8%;
 }
@@ -66,6 +70,9 @@ color: #102023
 .font_color_1A{
   color: #1A202C
 }
+.font_color_4A{
+ color: #4A7B67
+}
 /* 字号 */
 .font_size_11 {
   font-size: 11px
@@ -92,6 +99,12 @@ color: #102023
 }
 .font_size_25{
   font-size: 25px;
+}
+.font_size_30{
+  font-size: 30px;
+}
+.font_size_12{
+  font-size:12px
 }
 /* 字体删除线 */
 .font_text_decoration {
@@ -145,3 +158,10 @@ color: #102023
   -ms-user-select:none;
 
 }
+.div_width_50 {
+  width: 50%;
+}
+.text_center {
+  text-align: center;
+}
+
