@@ -27,7 +27,9 @@
 .margin_top_div5 {
   margin-top: 5%;
 }
-
+.padding_bottom_4{
+  padding-bottom: 4%;
+}
 .div_text_left {
   text-align: left;
   margin-left: 4%
@@ -72,6 +74,9 @@ color: #102023
 }
 .font_color_4A{
  color: #4A7B67
+}
+.font_color_A1{
+  color: #A1A1A1
 }
 /* 字号 */
 .font_size_11 {

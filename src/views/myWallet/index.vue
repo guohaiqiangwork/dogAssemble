@@ -4,7 +4,7 @@
     <div class="backgroun_color_4A font_color_ff" style="text-align: center;">
       <div class="div_display_flex" style=" margin-left: 38%;    padding-top: 8%;">
         <div class="wallet_font font_size_16">当前余额(币)</div>
-        <div class="font_size_14" style=" margin-left: 28%">账单记录</div>
+        <div class="font_size_14" style=" margin-left: 28%" @click="goToBillRecord">账单记录</div>
       </div>
       <div class="font_size_30 margin_top_div5" style="padding-bottom: 4%;">00</div>
     </div>
@@ -35,7 +35,21 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    goToBillRecord(){
+       this.$router.push({
+        name: "billRecord",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: "参数"
+            }
+          })
+        }
+      });
+    }
+  },
   created() {
     settitle("我的钱包");
     this.routeParams = JSON.parse(this.$route.params.obj);
