@@ -1,19 +1,25 @@
 <template>
   <div>
-        全国门店
+  全国门店
+   
   </div>
 </template>
 <script>
 import url from "../../bin/url";
-export default {
+import TabBar from "../../components/TabBar";
 
+export default {
+  components: {
+    TabBar
+  },
   name: "nationalStor",
   data() {
     return {
-     
+      item: 0
     };
   },
   methods: {
+    
 
   },
   created() {
@@ -22,11 +28,9 @@ export default {
   },
 
   mounted() {
-   console.log('全国门店')
-
+    console.log("全国门店");
   }
 };
 </script>
 <style scoped>
-
 </style>
