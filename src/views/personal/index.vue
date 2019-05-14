@@ -106,10 +106,6 @@ export default {
   },
   computed: {},
   methods: {
-    onClickTabBarItem: function(tag) {
-      this.$refs.TabBar.didClickedItem("嘿嘿嘿");
-      this.item = tag;
-    },
     // 去我的钱包
     goToWallet:function(){
       this.$router.push({
@@ -126,7 +122,9 @@ export default {
     }
   },
 
-  mounted() {}
+  mounted() {
+    this.$refs.TabBar.didClickedItem("2");
+  }
 };
 </script>
 <style>

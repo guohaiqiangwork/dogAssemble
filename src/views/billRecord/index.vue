@@ -9,11 +9,17 @@
       <div class="bill_font_p padding_bottom_4 font_size_13 font_color_A1">2019-01-25 15:00:00</div>
       <div class="bill_border"></div>
     </div>
+    <!-- 底部菜单栏 -->
+    <TabBar ref="TabBar"/>
   </div>
 </template>
 <script>
 import url from "../../bin/url";
+import TabBar from "../../components/TabBar";
 export default {
+  components: {
+    TabBar
+  },
   name: "billRecord",
   data() {
     return {};
@@ -25,6 +31,7 @@ export default {
   },
 
   mounted() {
+    this.$refs.TabBar.didClickedItem("2");
     console.log("健康界的轻奢");
   }
 };
