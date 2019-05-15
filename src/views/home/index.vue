@@ -1,6 +1,9 @@
 <template>
   <div>
     <!-- <x-header :right-options="{showMore: true}" @on-click-more="showMenus = true">首页</x-header> -->
+    <router-link to="/home">首页</router-link>
+    <router-link to="/goodsdetail">商品详情</router-link>
+    <router-link to="/cart">购物车页面</router-link>
      <button @click="goToLogin">登陆页面</button>
     <button @click="goToNationalStores">全国门店</button>
     <button @click="goToRecipeManual">配方手册</button>

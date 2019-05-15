@@ -13,7 +13,9 @@ import recommend from '@/views/recommend/index'
 import exclusive from '@/views/exclusive/index'
 import is404 from '@/views/page/is404'
 import notfound from '@/views/page/notfound'
-
+import assemble from '@/views/Assemble/index'
+import goodsdetail from '@/views/goodsDetail/index'
+import cart from '@/views/cart/index'
 
 Vue.use(Router)
 
@@ -36,6 +38,27 @@ export default new Router({
         title: '登陆', 
       },
       component: login
+    },
+    {
+      path:'/home',
+      meta: {
+        title:'首页'
+      },
+      component: assemble
+    },
+    {
+      path:'/goodsdetail',
+      meta: {
+        title:'商品详情'
+      },
+      component: goodsdetail
+    },
+    {
+      path:'/cart',
+      meta: {
+        title:'购物车页面'
+      },
+      component: cart
     },
     {
       // 全国门店

@@ -1,6 +1,6 @@
 <template>
     <div class="nodata">
-        <img class="picture" src="../../assets/images/pintuanshouye@2x.png" alt="">
+        <img class="picture" src="" alt="">
         <p >主人~页面找不到了~
         </p>
         <div class="radius">重新加载</div>
