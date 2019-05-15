@@ -17,7 +17,8 @@ import myWallet from '@/views/myWallet/index'
 import  billRecord from '@/views/billRecord/index'
 import order from '@/views/order/index'
 import serviceOrder from '@/views/serviceOrder/index'
-
+import dataStatistics from '@/views/dataStatistics/index' //数据统计
+import dataDetails from '@/views/dataDetails/index'//数据统计详情
 Vue.use(Router)
 
 export default new Router({
@@ -130,6 +131,24 @@ export default new Router({
     },
     component:serviceOrder
   },
+  // 数据统计
+  {
+    path:'/dataStatistics/:obj',
+    name:'dataStatistics',
+    meta:{
+      title:'服务订单',
+    },
+    component:dataStatistics
+  },
+    // 数据统计详情
+    {
+      path:'/dataDetails/:obj',
+      name:'dataDetails',
+      meta:{
+        title:'服务订单',
+      },
+      component:dataDetails
+    },
   {
     // 钱包记录
     path: '/billRecord/:obj',
