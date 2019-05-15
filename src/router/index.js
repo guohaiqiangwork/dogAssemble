@@ -13,6 +13,9 @@ import recommend from '@/views/recommend/index'
 import exclusive from '@/views/exclusive/index'
 import is404 from '@/views/page/is404'
 import notfound from '@/views/page/notfound'
+import assemble from '@/views/Assemble/index'           //主页
+import goodsdetail from '@/views/goodsDetail/index'     //商品详情
+import cart from '@/views/cart/index'                   //购物车
 import myWallet from '@/views/myWallet/index'
 import  billRecord from '@/views/billRecord/index'
 import order from '@/views/order/index'
@@ -40,6 +43,27 @@ export default new Router({
         title: '登陆', 
       },
       component: login
+    },
+    {
+      path:'/home',
+      meta: {
+        title:'首页'
+      },
+      component: assemble
+    },
+    {
+      path:'/goodsdetail',
+      meta: {
+        title:'商品详情'
+      },
+      component: goodsdetail
+    },
+    {
+      path:'/cart',
+      meta: {
+        title:'购物车页面'
+      },
+      component: cart
     },
     {
       // 全国门店

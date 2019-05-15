@@ -196,6 +196,10 @@ color: #102023
   -ms-user-select:none;
 
 }
+
+.red{
+  color: #FF3636;
+}
 /* div宽度 */
 .div_width_50 {
   width: 50%;

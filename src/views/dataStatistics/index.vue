@@ -113,7 +113,7 @@ export default {
 </script>
 <style scoped>
 .personal_img_bj {
-  background-image: url("../../assets/images/404@2x.png");
+  background-image: url("../../assets/images/Battery@2x.png");
   height: 175px;
   background-repeat: no-repeat;
 }

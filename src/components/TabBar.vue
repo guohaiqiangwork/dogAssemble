@@ -4,19 +4,19 @@
       <flexbox style="text-align: center;padding: 4%;    background-color: #fff;">
         <flexbox-item>
           <div class="flex-demo" @click="didClickedItem(0,'nationalStores')">
-            <img src="../assets/images/404@2x.png" style="width: 30%;">
+            <img src="../assets/images/Signal.png" style="width: 30%;">
           </div>
           <div :class="{ 'active': actives == '0'}">首页</div>
         </flexbox-item>
         <flexbox-item>
           <div class="flex-demo" @click="didClickedItem(1)">
-            <img src="../assets/images/404@2x.png" style="width: 30%;">
+            <img src="../assets/images/Signal.png" style="width: 30%;">
           </div>
           <div :class="{ 'active': actives == '1'}">商户</div>
         </flexbox-item>
         <flexbox-item>
           <div class="flex-demo" @click="didClickedItem(2,'personal')">
-            <img src="../assets/images/404@2x.png" style="width: 30%;">
+            <img src="../assets/images/Signal.png" style="width: 30%;">
           </div>
           <div :class="{ 'active': actives == '2'}">个人中心</div>
         </flexbox-item>

@@ -21,7 +21,7 @@
         <div class="div_display_flex margin_top_div3">
           <div style="width:30%">
             <div class="order_width_height">
-              <img src="../../assets/images/404@2x.png" width="100%">
+              <img src="../../assets/images/Signal.png" width="100%">
             </div>
           </div>
           <div style="width:68%">

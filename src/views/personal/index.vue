@@ -4,7 +4,7 @@
     <div class="personal_img_bj">
       <div class="div_display_flex">
         <div class="headr_img_circular">
-          <img src="../../assets/images/404@2x.png" width="100%">
+          <img src="../../assets/images/Signal.png" width="100%">
         </div>
         <div class="font_color_ff font_size_15 personal_font_m">李娜</div>
         <div class="personal_falg_member">至尊会员</div>
@@ -21,55 +21,55 @@
       <div class="personal_cd text_center">
         <div>
           <!-- class="img_width25" class="img_width_100"-->
-          <img src="../../assets/images/add@3x.png">
+          <img src="../../assets/images/个人中心@2x.png">
         </div>
         <div>新建订单</div>
       </div>
       <div class="personal_cd text_center">
         <div>
-          <img src="../../assets/images/add@3x.png">
+          <img src="../../assets/images/个人中心@2x.png">
         </div>
         <div>金额充值</div>
       </div>
       <div class="personal_cd text_center">
         <div @click="goToStatistics">
-          <img src="../../assets/images/add@3x.png">
+          <img src="../../assets/images/个人中心@2x.png">
         </div>
         <div>数据统计</div>
       </div>
       <div class="personal_cd text_center">
         <div>
-          <img src="../../assets/images/add@3x.png">
+          <img src="../../assets/images/个人中心@2x.png">
         </div>
         <div>我的订单</div>
       </div>
       <div class="personal_cd text_center">
         <div>
-          <img src="../../assets/images/add@3x.png">
+          <img src="../../assets/images/个人中心@2x.png">
         </div>
         <div>健康奖金</div>
       </div>
       <div class="personal_cd text_center">
         <div>
-          <img src="../../assets/images/add@3x.png">
+          <img src="../../assets/images/个人中心@2x.png">
         </div>
         <div>会员操作</div>
       </div>
       <div class="personal_cd text_center">
         <div>
-          <img src="../../assets/images/add@3x.png">
+          <img src="../../assets/images/个人中心@2x.png">
         </div>
         <div>设置中心</div>
       </div>
       <div class="personal_cd text_center">
         <div>
-          <img src="../../assets/images/add@3x.png">
+          <img src="../../assets/images/个人中心@2x.png">
         </div>
         <div>店铺设置</div>
       </div>
       <div class="personal_cd text_center">
         <div>
-          <img src="../../assets/images/add@3x.png">
+          <img src="../../assets/images/个人中心@2x.png">
         </div>
         <div>联系客服</div>
       </div>
@@ -225,7 +225,7 @@ export default {
 
 <style scoped>
 .personal_img_bj {
-  background-image: url("../../assets/images/404@2x.png");
+  background-image: url("../../assets/images/Signal.png");
   height: 175px;
   background-repeat: no-repeat;
 }
