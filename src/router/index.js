@@ -1,27 +1,28 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import home from '@/views/home/index'
-import login from '@/views/login/index'
-import nationalStores from '@/views/nationalStores/index'
-import recipeManual from '@/views/recipeManual/index'
-import caseVideo from '@/views/caseVideo/index'
-import shareVideo from '@/views/shareVideo/index'
-import introduce from '@/views/introduce/index'
-import symptoms from '@/views/symptoms/index'
-import personal from '@/views/personal/index'
-import recommend from '@/views/recommend/index'
-import exclusive from '@/views/exclusive/index'
+import home from '@/views/home/index'//调试页
+import login from '@/views/login/index'//登陆
+import nationalStores from '@/views/nationalStores/index'//全国门店
+import recipeManual from '@/views/recipeManual/index'//配方手册
+import caseVideo from '@/views/caseVideo/index'//案列视频
+import shareVideo from '@/views/shareVideo/index'//视频分享
+import introduce from '@/views/introduce/index'//公司介绍
+import symptoms from '@/views/symptoms/index'//病症检测
+import personal from '@/views/personal/index'//个人中心
+import recommend from '@/views/recommend/index'//推荐信息
+import exclusive from '@/views/exclusive/index'//专属门店
 import is404 from '@/views/page/is404'
 import notfound from '@/views/page/notfound'
 import assemble from '@/views/Assemble/index'           //主页
 import goodsdetail from '@/views/goodsDetail/index'     //商品详情
 import cart from '@/views/cart/index'                   //购物车
 import myWallet from '@/views/myWallet/index'
-import  billRecord from '@/views/billRecord/index'
-import order from '@/views/order/index'
-import serviceOrder from '@/views/serviceOrder/index'
+import  billRecord from '@/views/billRecord/index'//钱包记录
+import order from '@/views/order/index'//我的订单
+import serviceOrder from '@/views/serviceOrder/index'//服务订单
 import dataStatistics from '@/views/dataStatistics/index' //数据统计
 import dataDetails from '@/views/dataDetails/index'//数据统计详情
+import healthBonus from '@/views/healthBonus/index'//健康奖金
 Vue.use(Router)
 
 export default new Router({
@@ -192,13 +193,22 @@ export default new Router({
     component: recommend
   },
   {
-    // 专属门店
+    // 专属门店healthBonus
     path: '/exclusive/:obj',
     name: 'exclusive',
     meta: {
       title: '专属门店', 
     },
     component: exclusive
+  },
+  {
+    // 专属门店
+    path: '/healthBonus/:obj',
+    name: 'healthBonus',
+    meta: {
+      title: '健康奖金', 
+    },
+    component: healthBonus
   },
     {
       path:'/404',

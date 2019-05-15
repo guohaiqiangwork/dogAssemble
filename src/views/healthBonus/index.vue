@@ -1,0 +1,126 @@
+<template>
+  <div>
+    <!-- 头部 -->
+    <div class="personal_img_bj">
+      <div class="font_size_12 font_color_ff text_right margin_left_div3">活动规则></div>
+      <div class="text_center font_size_12 font_color_ff margin_top_div3">交易总额</div>
+      <div class="font_size_25 font_color_ff text_center margin_top_div5">1999.00</div>
+      <div class="div_display_flex margin_top_div5">
+        <div class="div_width_33 text_center font_size_12 font_color_ff">
+          <div>245524</div>
+          <div>推荐返佣金额</div>
+        </div>
+        <div class="div_width_33 text_center font_size_12 font_color_ff">
+          <div>245524</div>
+          <div>视频返佣金额</div>
+        </div>
+        <div class="div_width_33 text_center font_size_12 font_color_ff">
+          <div>245524</div>
+          <div>商城返佣金额</div>
+        </div>
+      </div>
+    </div>
+    <div class="health_title_f font_size_14 font_color_76 text_center">赶快邀请好友共赢健康奖金>></div>
+    <!-- tab -->
+    <div class="div_display_flex backgroun_color_fff personal_title">
+      <div v-for="(item,index) in  tabList" @click="tabSwitch(item.id)" :key="index">
+        <div :style="{color:(switchFlage != item.id ? '' :'#D09E56')}">{{item.name}}</div>
+        <div class="switchBorder" v-if="switchFlage == item.id"></div>
+      </div>
+    </div>
+    <!-- 推荐返佣 -->
+    <div v-if="switchFlage == '001'">
+      <div class="backgroun_color_f3" style="min-height:400px">
+        <div class="div_display_flex padding_top_div3 backgroun_color_f3">
+          <div class="national_flag_title margin_left_div3"></div>
+          <div class="font_color_00 font_size_14 margin_left_div2" style="margin-top: 0.8%;">视频返佣</div>
+          <div class="font_size_14 font_color_00 margin_top_div1" style="margin-left: 50%;">视频推荐详情></div>
+        </div>
+        <div class="div_display_flex margin_left_div3 margin_top_div3">
+            <div class="div_width_70 font_size_14">
+                李娜 <span class="font_size_12 font_color_A1"> 2019-01-25 15:00:00</span>
+            </div>
+            <div class="div_with_30 red text_right">
+                ¥565755
+            </div>
+        </div>
+      </div>
+    </div>
+    <!-- 视频返佣 -->
+    <div v-if="switchFlage == '002'">待付款</div>
+    <!-- 商城返佣 -->
+    <div v-if="switchFlage == '003'">待收费</div>
+  </div>
+</template>
+<script>
+import url from "../../bin/url";
+export default {
+  name: "healthBonus",
+  data() {
+    return {
+      tabList: [
+        {
+          name: "推荐返佣",
+          id: "001"
+        },
+        {
+          name: "视频返佣",
+          id: "002"
+        },
+        {
+          name: "商城返佣",
+          id: "003"
+        }
+      ],
+      switchFlage: "001"
+    };
+  },
+  methods: {
+    tabSwitch(id) {
+      console.log(id);
+      this.switchFlage = id;
+    }
+  },
+  created() {
+    settitle("健康奖金");
+    this.routeParams = JSON.parse(this.$route.params.obj);
+  },
+
+  mounted() {
+    console.log("我是健康奖金");
+  }
+};
+</script>
+<style scoped>
+.personal_img_bj {
+  background-image: url("../../assets/images/WechatIMG106_看图王.png");
+  height: 175px;
+  background-repeat: no-repeat;
+}
+.health_title_f {
+  background: linear-gradient(#ffdfb1, #e2ae64);
+  line-height: 3;
+}
+.personal_title {
+  height: 48px;
+  font-size: 14px;
+  line-height: 3;
+  display: flex;
+  color: #908c8c;
+  justify-content: space-around;
+}
+.switchBorder {
+  border: 2px solid #e8bb7a;
+  width: 90%;
+  margin-top: 0%;
+  border-radius: 4px;
+}
+.national_flag_title {
+  width: 2px;
+  height: 15px;
+  background-color: #4a7b67;
+  margin-top: 1%;
+  border: 1px solid #4a7b67;
+  border-radius: 10px;
+}
+</style>

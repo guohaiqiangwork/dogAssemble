@@ -43,7 +43,7 @@
         </div>
         <div>我的订单</div>
       </div>
-      <div class="personal_cd text_center">
+      <div class="personal_cd text_center" @click="goToHealthBonus">
         <div>
           <img src="../../assets/images/个人中心@2x.png">
         </div>
@@ -201,10 +201,24 @@ export default {
         }
       });
     },
-    // 数据统计
+    // 数据统计healthBonus
     goToStatistics: function() {
       this.$router.push({
         name: "dataStatistics",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: "蚕丝"
+            }
+          })
+        }
+      });
+    },
+    // 健康奖金
+    goToHealthBonus: function() {
+      this.$router.push({
+        name: "healthBonus",
         params: {
           obj: JSON.stringify({
             type: "profession",

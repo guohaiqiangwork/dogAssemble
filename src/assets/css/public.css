@@ -41,6 +41,10 @@
 .margin_top_div3 {
   margin-top: 3%;
 }
+.margin_top_div1 {
+  margin-top: 1%;
+}
+
 
 .margin_top_div5 {
   margin-top: 5%;
@@ -60,6 +64,9 @@
 .padding_top_div3{
   padding-top:3%
 }
+.padding_left_div3{
+  padding-left: 3%
+}
 .div_text_left {
   text-align: left;
   margin-left: 4%
@@ -78,7 +85,9 @@
 .font_color_00 {
   color: #000
 }
-
+.font_color_10{
+  color: #102023
+}
 .font_color_99 {
   color: #999999
 }
@@ -209,6 +218,9 @@ color: #102023
 }
 .div_width_30{
   width:30%
+}
+.div_width_33{
+  width:33%
 }
 /* 内容位置 */
 .text_center {
