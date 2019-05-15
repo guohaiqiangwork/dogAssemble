@@ -13,9 +13,13 @@ import recommend from '@/views/recommend/index'
 import exclusive from '@/views/exclusive/index'
 import is404 from '@/views/page/is404'
 import notfound from '@/views/page/notfound'
-import assemble from '@/views/Assemble/index'
-import goodsdetail from '@/views/goodsDetail/index'
-import cart from '@/views/cart/index'
+import assemble from '@/views/Assemble/index'           //主页
+import goodsdetail from '@/views/goodsDetail/index'     //商品详情
+import cart from '@/views/cart/index'                   //购物车
+import myWallet from '@/views/myWallet/index'
+import  billRecord from '@/views/billRecord/index'
+import order from '@/views/order/index'
+import serviceOrder from '@/views/serviceOrder/index'
 
 Vue.use(Router)
 
@@ -119,16 +123,52 @@ export default new Router({
     path: '/personal/:obj',
     name: 'personal',
     meta: {
-      title: '我的', 
+      title: '个人中心', 
     },
     component: personal
   },
   {
-    // 个人中心
+    // 我的钱包
+    path: '/myWallet/:obj',
+    name: 'myWallet',
+    meta: {
+      title: '我的钱包', 
+    },
+    component: myWallet
+  },
+  {
+    // 我的订单
+    path: '/order/:obj',
+    name: 'order',
+    meta: {
+      title: '我的订单', 
+    },
+    component: order
+  },
+  // 服务订单
+  {
+    path:'/serviceOrder/:obj',
+    name:'serviceOrder',
+    meta:{
+      title:'服务订单',
+    },
+    component:serviceOrder
+  },
+  {
+    // 钱包记录
+    path: '/billRecord/:obj',
+    name: 'billRecord',
+    meta: {
+      title: '我的钱包', 
+    },
+    component: billRecord
+  },
+  {
+    // 推荐信息
     path: '/recommend/:obj',
     name: 'recommend',
     meta: {
-      title: '我的', 
+      title: '推荐信息', 
     },
     component: recommend
   },
@@ -141,16 +181,6 @@ export default new Router({
     },
     component: exclusive
   },
-
-    {
-      // 个人中心
-      path: '/personal/:obj',
-      name: 'personal',
-      meta: {
-        title: '我的', 
-      },
-      component: personal
-    },
     {
       path:'/404',
       component: is404

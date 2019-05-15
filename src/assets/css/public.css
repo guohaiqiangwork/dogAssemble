@@ -1,13 +1,22 @@
 .div_display_flex {
   display: flex;
 }
-
+/* 背景色 */
 .backgroun_color_fff {
   background-color: #ffffff
 }
 
 .backgroun_color_fe01 {
   background-color: #ffe001
+}
+.backgroun_color_f3{
+  background-color:#F3F5F8
+}
+.backgroun_color_4A{
+  background-color: #4A7B67
+}
+.backgroun_color_D5{
+  background-color: #D5D5D5
 }
 
 .margin_top_div8 {
@@ -21,7 +30,9 @@
 .margin_top_div5 {
   margin-top: 5%;
 }
-
+.padding_bottom_4{
+  padding-bottom: 4%;
+}
 .div_text_left {
   text-align: left;
   margin-left: 4%
@@ -55,6 +66,22 @@
 .font_color_010 {
   color: #010101
 }
+.font_color_ff{
+  color: #FFFFFF
+}
+.font_color_102{
+color: #102023
+}
+.font_color_1A{
+  color: #1A202C
+}
+.font_color_4A{
+ color: #4A7B67
+}
+.font_color_A1{
+  color: #A1A1A1
+}
+/* 字号 */
 .font_size_11 {
   font-size: 11px
 }
@@ -78,7 +105,15 @@
 .font_size_18 {
   font-size: 18px;
 }
-
+.font_size_25{
+  font-size: 25px;
+}
+.font_size_30{
+  font-size: 30px;
+}
+.font_size_12{
+  font-size:12px
+}
 /* 字体删除线 */
 .font_text_decoration {
   text-decoration: line-through;
@@ -135,3 +170,10 @@
 .red{
   color: #FF3636;
 }
+.div_width_50 {
+  width: 50%;
+}
+.text_center {
+  text-align: center;
+}
+
