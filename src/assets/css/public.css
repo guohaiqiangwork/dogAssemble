@@ -30,8 +30,20 @@
 .margin_top_div5 {
   margin-top: 5%;
 }
+.margin_left_div2 {
+  margin-left: 2%;
+}
+.margin_right_div2 {
+  margin-right: 2%;
+}
+.margin_left_div3{
+  margin-left:3%;
+}
 .padding_bottom_4{
   padding-bottom: 4%;
+}
+.padding_top_div3{
+  padding-top:3%
 }
 .div_text_left {
   text-align: left;
@@ -169,7 +181,15 @@ color: #102023
 .div_width_50 {
   width: 50%;
 }
+.div_width_70{
+  width:70%
+}
+.div_width_30{
+  width:30%
+}
 .text_center {
   text-align: center;
 }
-
+.text_right {
+  text-align: right;
+}
