@@ -8,7 +8,7 @@
     </div>
     <!-- 全部订单 -->
     <div v-if="switchFlage == '001'">
-      <div class="order_block" v-for="item in [1,3,4]">
+      <div class="order_block">
         <div class="div_display_flex">
           <div
             class="font_size_13"

@@ -25,7 +25,7 @@
     </div>
     <!-- 服务订单记录 -->
     <div class="backgroun_color_fff personal_order_m margin_top_div3">
-      <div class="div_display_flex">
+      <div class="div_display_flex" @click="goToService">
         <div class="font_color_1A personal_order_font div_width_50">服务订单记录</div>
         <div class="div_width_50" style="width:26px;margin-left:38%;margin-top:18px">
           <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%">
@@ -133,6 +133,20 @@ export default {
           })
         }
       });
+    },
+    // 去服务订单
+    goToService:function(){
+      this.$router.push({
+        name:'serviceOrder',
+        params:{
+          obj:JSON.stringify({
+            type:'profession',
+            data:{
+              id:'蚕丝'
+            }
+          })
+        }
+      })
     }
   },
 
@@ -141,14 +155,6 @@ export default {
   }
 };
 </script>
-<style>
-.weui-dialog__btn_primary {
-  color: #ffe001 !important;
-}
-.msg_timeline .weui-icon-success-no-circle {
-  /* font-size: 1rem !important; */
-}
-</style>
 
 <style scoped>
 .personal_img_bj {

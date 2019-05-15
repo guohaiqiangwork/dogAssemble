@@ -16,6 +16,7 @@ import notfound from '@/views/page/notfound'
 import myWallet from '@/views/myWallet/index'
 import  billRecord from '@/views/billRecord/index'
 import order from '@/views/order/index'
+import serviceOrder from '@/views/serviceOrder/index'
 
 Vue.use(Router)
 
@@ -112,13 +113,22 @@ export default new Router({
     component: myWallet
   },
   {
-    // 我的钱包
+    // 我的订单
     path: '/order/:obj',
     name: 'order',
     meta: {
       title: '我的订单', 
     },
     component: order
+  },
+  // 服务订单
+  {
+    path:'/serviceOrder/:obj',
+    name:'serviceOrder',
+    meta:{
+      title:'服务订单',
+    },
+    component:serviceOrder
   },
   {
     // 钱包记录
