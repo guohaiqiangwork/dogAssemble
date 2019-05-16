@@ -1,14 +1,15 @@
 <template>
   <div class="backgroun_color_fff" style="min-height:700px">
     <!-- 搜索 -->
-    <!-- <div class="div_display_flex">
-      <div>
-        <img src="../../assets/images/add@3x.png" alt>
-      </div>
-      <div>
-        <input type="text" style="height:76px">
-      </div>
-    </div>-->
+  <div class="search_box">
+      <i class="weui-icon-search search_icon"></i>
+      <input
+        type="text"
+        placeholder="搜索您想找的产品"
+        style="width:100%;height:100%;background-color:#EFEFEF; outline: none;border:none"
+      >
+      <i></i>
+    </div>
     <!-- 推荐门店列表 -->
     <div class="div_display_flex margin_left_div3 padding_top_div3">
       <div class="national_flag_title"></div>
@@ -21,7 +22,7 @@
       </div>
        <div class="div_display_flex margin_top_div3">
         <div class="div_width_70 margin_left_div2">钢铁大街16号</div>
-        <div class="div_width_30 margin_right_div2 text_right">0.8公里</div>
+        <div class="div_width_30 margin_right_div2 text_right" @click="goToMap">0.8公里</div>
       </div>
        <div class="div_display_flex margin_top_div3">
         <div class="div_width_70 margin_left_div2">营业时间</div>
@@ -71,7 +72,22 @@ export default {
       item: 0
     };
   },
-  methods: {},
+  methods: {
+    goToMap (){
+      console.log('7897')
+      this.$router.push({
+        name:"map",
+        params:{
+          obj:JSON.stringify({
+            type:"profession",
+            data:{
+              id:"参数"
+            }
+          })
+        }
+      })
+    }
+  },
   created() {
     settitle("我是全国们店");
     this.routeParams = JSON.parse(this.$route.params.obj);
@@ -96,5 +112,21 @@ export default {
   margin-left: 2%;
   border: 1px solid #E9E9E9;
   border-radius: 8px
+}
+/* 搜索框 */
+.search_box {
+  height: 3.5rem;
+  margin: 0.65rem 1.5rem 0;
+  border-radius: 2rem;
+  position: relative;
+  padding: 0 1.55rem;
+  box-sizing: border-box;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  background: #EFEFEF;
+  line-height: 3.5rem;
+  border: 1px solid #888888;
+  margin-top: 5%;
 }
 </style>
