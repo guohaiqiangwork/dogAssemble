@@ -7,7 +7,7 @@
           <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%">
         </div>
       </div>
-      <div class="div_display_flex width_m">
+      <div class="div_display_flex width_m" @click="accountD">
         <div class="div_width_50 font_color_1A personal_list_font">冻结账户</div>
         <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
           <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%">
@@ -25,30 +25,52 @@
     <div class="text_center">
       <div class="b_t_t">退出登录</div>
     </div>
+    <!-- 账户冻结 -->
+    <confirm v-model="outPayFalge" title @on-cancel="onCancel" @on-confirm="onConfirm">
+      <div style="text-align:center;font-size:18px;">您确认将会员卡冻结吗？</div>
+    </confirm>
   </div>
 </template>
 <script>
 import url from "../../bin/url";
+import { Confirm } from "vux";
 export default {
+  components: {
+    Confirm
+  },
   name: "setUp",
   data() {
-    return {};
+    return {
+      outPayFalge: false //冻结账户弹窗
+    };
   },
   methods: {
     //   去修改密码
-      goToPassword(){
- this.$router.push({
-        name:"changePassword",
-        params:{
-          obj:JSON.stringify({
-            type:"profession",
-            data:{
-              id:"参数"
+    goToPassword() {
+      this.$router.push({
+        name: "changePassword",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: "参数"
             }
           })
         }
-      })
-      }
+      });
+    },
+    //账户冻结
+    accountD() {
+      this.outPayFalge = true;
+    },
+    // 弹窗取消
+    onCancel() {
+      console.log("2");
+    },
+      // 弹窗确认
+    onConfirm() {
+      console.log("233");
+    }
   },
   created() {
     settitle("设置");
