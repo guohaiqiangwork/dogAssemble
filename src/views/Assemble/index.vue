@@ -56,7 +56,6 @@ export default {
         border-radius:2rem;
         position: relative;
         padding: 0 1.55rem;
-  
         box-sizing: border-box;
         z-index: 1;
         display: flex;

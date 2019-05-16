@@ -24,6 +24,7 @@ import dataStatistics from '@/views/dataStatistics/index' //数据统计
 import dataDetails from '@/views/dataDetails/index' //数据统计详情
 import healthBonus from '@/views/healthBonus/index' //健康奖金
 import healthDetail from '@/views/healthDetail/index' //健康奖金详情
+import activityRules from '@/views/activityRules/index'//服务规则
 Vue.use(Router)
 
 export default new Router({
@@ -218,6 +219,15 @@ export default new Router({
         title: '健康奖金详情',
       },
       component: healthDetail
+    },
+    {
+      // 专属门店
+      path: '/activityRules/:obj',
+      name: 'activityRules',
+      meta: {
+        title: '健康奖金详情',
+      },
+      component: activityRules
     },
     {
       path: '/404',

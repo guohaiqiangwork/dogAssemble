@@ -2,7 +2,10 @@
   <div>
     <!-- 头部 -->
     <div class="personal_img_bj">
-      <div class="font_size_12 font_color_ff text_right margin_left_div3 padding_top_div3">活动规则></div>
+      <div
+        class="font_size_12 font_color_ff text_right margin_right_div3 padding_top_div3"
+        @click="goToActivityRules"
+      >活动规则></div>
       <div class="text_center font_size_12 font_color_ff margin_top_div3">交易总额</div>
       <div class="font_size_25 font_color_ff text_center margin_top_div5">1999.00</div>
       <div class="div_display_flex margin_top_div5">
@@ -88,6 +91,20 @@ export default {
     goToHealthDetail() {
       this.$router.push({
         name: "healthDetail",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: "参数"
+            }
+          })
+        }
+      });
+    },
+    // 活动规则
+    goToActivityRules() {
+      this.$router.push({
+        name: "activityRules",
         params: {
           obj: JSON.stringify({
             type: "profession",
