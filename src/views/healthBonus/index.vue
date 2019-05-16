@@ -34,15 +34,18 @@
         <div class="div_display_flex padding_top_div3 backgroun_color_f3">
           <div class="national_flag_title margin_left_div3"></div>
           <div class="font_color_00 font_size_14 margin_left_div2" style="margin-top: 0.8%;">视频返佣</div>
-          <div class="font_size_14 font_color_00 margin_top_div1" style="margin-left: 50%;">视频推荐详情></div>
+          <div
+            class="font_size_14 font_color_00 margin_top_div1"
+            style="margin-left: 50%;"
+            @click="goToHealthDetail"
+          >视频推荐详情></div>
         </div>
         <div class="div_display_flex margin_left_div3 margin_top_div3">
-            <div class="div_width_70 font_size_14">
-                李娜 <span class="font_size_12 font_color_A1"> 2019-01-25 15:00:00</span>
-            </div>
-            <div class="div_with_30 red text_right">
-                ¥565755
-            </div>
+          <div class="div_width_70 font_size_14">
+            李娜
+            <span class="font_size_12 font_color_A1">2019-01-25 15:00:00</span>
+          </div>
+          <div class="div_with_30 red text_right">¥565755</div>
         </div>
       </div>
     </div>
@@ -76,9 +79,24 @@ export default {
     };
   },
   methods: {
+    //   tab切换
     tabSwitch(id) {
       console.log(id);
       this.switchFlage = id;
+    },
+    // 健康奖金详情
+    goToHealthDetail() {
+      this.$router.push({
+        name: "healthDetail",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: "参数"
+            }
+          })
+        }
+      });
     }
   },
   created() {
