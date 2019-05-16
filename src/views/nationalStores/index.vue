@@ -6,7 +6,7 @@
       <input
         type="text"
         placeholder="搜索您想找的产品"
-        style="width:100%;height:100%; outline: none;border:none"
+        style="width:100%;height:100%;background-color:#EFEFEF; outline: none;border:none"
       >
       <i></i>
     </div>
@@ -109,7 +109,7 @@ export default {
   z-index: 1;
   display: flex;
   align-items: center;
-  background: #fff;
+  background: #EFEFEF;
   line-height: 3.5rem;
   border: 1px solid #888888;
   margin-top: 5%;
