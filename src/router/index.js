@@ -26,6 +26,7 @@ import healthBonus from '@/views/healthBonus/index' //健康奖金
 import healthDetail from '@/views/healthDetail/index' //健康奖金详情
 import activityRules from '@/views/activityRules/index'//服务规则
 import setUp from '@/views/setUp/index'//设置
+import changePassword from '@/views/changePassword/index'//修改密码
 Vue.use(Router)
 
 export default new Router({
@@ -231,13 +232,22 @@ export default new Router({
       component: activityRules
     },
     {
-      // 设置
+      // 设置Change Password
       path: '/setUp/:obj',
       name: 'setUp',
       meta: {
         title: '设置',
       },
       component: setUp
+    },
+    {
+      // 修改密码
+      path: '/changePassword/:obj',
+      name: 'changePassword',
+      meta: {
+        title: '设置',
+      },
+      component: changePassword
     },
     {
       path: '/404',

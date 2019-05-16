@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="margin_top_div3 personal_div_money" style=" margin-bottom: 24%;">
-      <div class="div_display_flex width_m">
+      <div class="div_display_flex width_m" @click="goToPassword">
         <div class="div_width_50 font_color_1A personal_list_font">修改密码</div>
         <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
           <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%">
@@ -34,7 +34,22 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    //   去修改密码
+      goToPassword(){
+ this.$router.push({
+        name:"changePassword",
+        params:{
+          obj:JSON.stringify({
+            type:"profession",
+            data:{
+              id:"参数"
+            }
+          })
+        }
+      })
+      }
+  },
   created() {
     settitle("设置");
     this.routeParams = JSON.parse(this.$route.params.obj);
@@ -62,11 +77,6 @@ export default {
 .width_26 {
   width: 26px;
 }
-/* .personal_div_border {
-  border: 1px solid #e9e9e9;
-  width: 94%;
-  margin-left: 3%;
-} */
 .width_m {
   width: 96%;
   margin-left: 2%;
