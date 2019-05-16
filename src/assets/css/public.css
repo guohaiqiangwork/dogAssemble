@@ -33,6 +33,9 @@
 .backgroun_color_B6{
   background-color: #B691FD
 }
+.backgroun_color_E9{
+  background-color: #E9EFEC
+}
 /* margin */
 .margin_top_div8 {
   margin-top: 8%;
@@ -60,6 +63,9 @@
 }
 .margin_left_div6{
   margin-left:6%;
+}
+.margin_left_div8{
+  margin-left:8%;
 }
 .margin_right_div3{
   margin-right: 3%
