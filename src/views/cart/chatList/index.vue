@@ -7,14 +7,14 @@
                 <div class="goods_item">
                     <p class="goods_title">{{item.title}}</p>
                     <p class="goods_flex">
-                        <span class="goods_price red">{{item.price}}</span><span>{{item.num}}</span>
+                        <span class="goods_price red">￥{{item.price}}</span><span>{{item.num}}</span>
                     </p>
                 </div>
             </div>
         </div>
         <div v-else class="cart_none">
             <img src="" alt="">
-            <p>那么多好商品，您不加入购物车吗？</p>
+            <p class="tip_none">那么多好商品，您不加入购物车吗？</p>
             <div class="">去逛逛</div>
         </div>
     </div>
@@ -58,34 +58,34 @@ export default {
         display: flex;
         justify-content: space-around;
         align-items: center;
-        height: 7rem;
-        padding: 2.4rem 1.5rem;
-        margin-bottom: 1rem;
+        height: 1.4rem;
+        padding: 0.46rem 0.3rem;
+        margin-bottom: 0.2rem;
         background: #fff;
         .gooods_avatar{
-            width: 7rem;
-            height: 7rem;
-            margin-left: 1.9rem;
+            width: 1.4rem;
+            height: 1.4rem;
+            margin-left: 0.28rem;
         }
         .goods_item{
-            height: 7rem;
+            height: 1.4rem;
             display:flex;
             flex-direction: column;
             justify-content: space-between;
-            margin-left: 1.25rem;
+            margin-left: 0.3rem;
             .goods_price{
-                font-size: 1.9rem;
+                font-size: 0.38rem;
                
             }
             .goods_flex{
                 display: flex;
                 justify-content: space-between;
-                 line-height: 2.65rem;
+                 line-height: 0.53rem;
             }
         }
         .foods_select{
-            width: 19px;
-            height:19px;
+            width: 0.32rem;
+            height:0.32rem;
             border-radius: 50%;
              -moz-border-radius:  50%; 
        -webkit-border-radius:  50%; 
@@ -96,6 +96,11 @@ export default {
             background-size: 100% 100%; 
         }
 
+    }
+    .cart_none{
+        .tip_none{
+            color: rgba(0,0,0,0.52);
+        }
     }
 }
 </style>

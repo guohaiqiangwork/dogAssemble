@@ -16,6 +16,17 @@ import notfound from '@/views/page/notfound'
 import assemble from '@/views/Assemble/index'           //主页
 import goodsdetail from '@/views/goodsDetail/index'     //商品详情
 import cart from '@/views/cart/index'                   //购物车
+import paysure from '@/views/paysure/index'             //确认支付页面
+import addressment from '@/views/addressment/index'             // 地址管理页面
+import addressopt from '@/views/addressment/option'             // 地址编辑页面
+import immendilypay from '@/views/immendilyPay/index'             // 地址编辑页面
+
+
+
+
+
+
+
 import myWallet from '@/views/myWallet/index'
 import  billRecord from '@/views/billRecord/index'
 import order from '@/views/order/index'
@@ -63,6 +74,34 @@ export default new Router({
         title:'购物车页面'
       },
       component: cart
+    },
+    {
+      path:'/paysure',
+      meta: {
+        title:'确认支付页面'
+      },
+      component: paysure
+    },
+    {
+      path:'/addressment',
+      meta: {
+        title:'地址管理页面'
+      },
+      component: addressment
+    },
+    {
+      path:'/addressopt',
+      meta: {
+        title:'添加地址'
+      },
+      component: addressopt
+    },
+    {
+      path:'/immendilypay',
+      meta: {
+        title:'立即支付'
+      },
+      component: immendilypay
     },
     {
       // 全国门店

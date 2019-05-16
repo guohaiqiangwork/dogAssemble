@@ -66,25 +66,25 @@ export default {
     .hot_tit::before{
         content: '';
         background:url('');
-        padding-right:0.5rem;
+        padding-right:0.1rem;
     }
     .hot_item{
          display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
-        padding: 0 1.5rem;
+        padding: 0 0.42rem;
         .mt_size{
-            margin: 0.8rem 0;
+            margin: 0.2rem 0;
         }
         .hot_logo{
-            height: 8.22rem;
-            width: 8.22rem;
+            height: 1.8rem;
+            width: 1.8rem;
         }
         .hot_msg{
-            text-align: center;
+            text-align: left;
             .hot_price{
                 color: #FF3636;
-                font-size: 1.4rem;
+                font-size: 0.28rem;
             }
         }
     }

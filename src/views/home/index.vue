@@ -4,6 +4,10 @@
     <router-link to="/home">首页</router-link>
     <router-link to="/goodsdetail">商品详情</router-link>
     <router-link to="/cart">购物车页面</router-link>
+    <router-link to="/paysure">去支付页面</router-link>
+    <router-link to="/addressment">地址管理页面</router-link>
+    <router-link to="/addressopt">添加地址</router-link>
+    <router-link to="/immendilypay">立即支付</router-link>
      <button @click="goToLogin">登陆页面</button>
     <button @click="goToNationalStores">全国门店</button>
     <button @click="goToRecipeManual">配方手册</button>

@@ -42,20 +42,22 @@ export default {
   #home{
     height: 100%;
      .hot_tit{
-        padding:0 1.5rem; 
-        margin-bottom: 0.45rem;
+        padding:0 0.31rem; 
+        margin-bottom: 0.09rem;
     }
     .head_box{
-      height: 17.53rem;
+      height: 3.51rem;
       background: url('../../assets/images/head.png') no-repeat;
       background-size:100% 100%;
       overflow: hidden;
       .search_box{
-        height: 3.5rem;
-        margin: 0.65rem 1.5rem 0;
-        border-radius:2rem;
+        height: 0.7rem;
+        width: 6.9rem;
+        margin: 0 auto;
+        // margin: 0.65rem 1.5rem 0;
+        border-radius:0.35rem;
         position: relative;
-        padding: 0 1.55rem;
+        padding: 0 0.31rem;
   
         box-sizing: border-box;
         z-index: 1;
@@ -70,7 +72,7 @@ export default {
           border: none;
         }
         .search_icon{
-          font-size: 1.4rem;
+          font-size: 0.28rem;
           padding-right: 0.2rem;
         }
       }

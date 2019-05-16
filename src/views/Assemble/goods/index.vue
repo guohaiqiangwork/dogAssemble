@@ -48,8 +48,8 @@ export default {
     display: flex;
     justify-content: space-between;
     // width: 100%;
-    height: 7.2rem;
-    padding: 1.8rem 1.5rem;
+    height: 1.44rem;
+    padding: 0.36rem 0.6rem;
     // box-sizing: border-box;
     .item_list{
        width: 5.6rem;
@@ -60,8 +60,8 @@ export default {
        justify-content: space-between;
        align-items: center;
         .item_logo{
-            width: 4.4rem;
-            height: 4.4rem;
+            width: 0.88rem;
+            height: 0.88rem;
         }
         .item_tip{
 

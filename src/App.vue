@@ -9,11 +9,10 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less">
  html,body { height: 100%;margin: 0; padding: 0;
  width: 100%;
- font-size: 10px;
- color: #000;
+ color: #102023;
  font-family: PingFang-SC-Medium;
  font-weight: 500;
    -webkit-tap-highlight-color:rgba(255,255,255,0);
@@ -22,9 +21,7 @@ export default {
  #app{
    height: 100%;
    width: 100%;
- }
- html{
-   font-size: 10px;
+   font-size: 14px;
  }
   /* img{
       font-size: 0;
