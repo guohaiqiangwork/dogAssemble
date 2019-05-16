@@ -17,9 +17,10 @@
         <input
           type="text"
           placeholder="请输⼊验证码"
-          style="width:64%;height:100%;outline: none;border:none"
+          style="width:56%;height:100%;outline: none;border:none"
         >
-        <span class="margin_left_div3 font_color_4A" style="font-size:6px">获取验证码</span>
+        <span v-show="sendAuthCode" class="margin_left_div3 font_color_4A" style="font-size:6px" @click="getAuthCode">获取验证码</span>
+        <span v-show="!sendAuthCode"  class="margin_left_div3 font_color_4A" style="font-size:6px">{{auth_time}}重新获取验证码</span>
       </div>
     </div>
     <div class="pass_list_w">
@@ -34,7 +35,7 @@
       </div>
     </div>
     <!-- 确认 -->
-       <div class="text_center">
+    <div class="text_center">
       <div class="b_t_t">确认</div>
     </div>
   </div>
@@ -44,9 +45,24 @@ import url from "../../bin/url";
 export default {
   name: "changepassword",
   data() {
-    return {};
+    return {
+      sendAuthCode: true /*布尔值，通过v-show控制显示‘获取按钮’还是‘倒计时’ */,
+      auth_time: 0 /*倒计时 计数器*/
+    };
   },
-  methods: {},
+  methods: {
+    getAuthCode: function() {
+      this.sendAuthCode = false;
+      this.auth_time = 6;
+      var auth_timetimer = setInterval(() => {
+        this.auth_time--;
+        if (this.auth_time <= 0) {
+          this.sendAuthCode = true;
+          clearInterval(auth_timetimer);
+        }
+      }, 1000);
+    }
+  },
   created() {
     settitle("修改密码");
     this.routeParams = JSON.parse(this.$route.params.obj);
@@ -85,7 +101,7 @@ export default {
 .width_16 {
   width: 16px;
   height: 16px;
-  margin-right: 3%
+  margin-right: 3%;
 }
 .b_t_t {
   width: 96%;
