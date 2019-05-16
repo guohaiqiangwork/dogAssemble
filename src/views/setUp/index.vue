@@ -21,6 +21,10 @@
         >3155765</div>
       </div>
     </div>
+    <!-- 推出按钮 -->
+    <div class="text_center">
+      <div class="b_t_t">退出登录</div>
+    </div>
   </div>
 </template>
 <script>
@@ -67,5 +71,16 @@ export default {
   width: 96%;
   margin-left: 2%;
   border-bottom: 1px solid #e9e9e9;
+}
+.b_t_t {
+  width: 96%;
+  background-color: #4a7b67;
+  color: #fff;
+  font-size: 16px;
+  line-height: 3;
+  border-radius: 5px;
+  margin-left: 2%;
+  position: fixed;
+  bottom: 5%;
 }
 </style>
