@@ -25,6 +25,7 @@ import dataDetails from '@/views/dataDetails/index' //数据统计详情
 import healthBonus from '@/views/healthBonus/index' //健康奖金
 import healthDetail from '@/views/healthDetail/index' //健康奖金详情
 import activityRules from '@/views/activityRules/index'//服务规则
+import setUp from '@/views/setUp/index'//设置
 Vue.use(Router)
 
 export default new Router({
@@ -228,6 +229,15 @@ export default new Router({
         title: '健康奖金详情',
       },
       component: activityRules
+    },
+    {
+      // 设置
+      path: '/setUp/:obj',
+      name: 'setUp',
+      meta: {
+        title: '设置',
+      },
+      component: setUp
     },
     {
       path: '/404',
