@@ -22,7 +22,7 @@
       </div>
        <div class="div_display_flex margin_top_div3">
         <div class="div_width_70 margin_left_div2">钢铁大街16号</div>
-        <div class="div_width_30 margin_right_div2 text_right">0.8公里</div>
+        <div class="div_width_30 margin_right_div2 text_right" @click="goToMap">0.8公里</div>
       </div>
        <div class="div_display_flex margin_top_div3">
         <div class="div_width_70 margin_left_div2">营业时间</div>
@@ -72,7 +72,22 @@ export default {
       item: 0
     };
   },
-  methods: {},
+  methods: {
+    goToMap (){
+      console.log('7897')
+      this.$router.push({
+        name:"map",
+        params:{
+          obj:JSON.stringify({
+            type:"profession",
+            data:{
+              id:"参数"
+            }
+          })
+        }
+      })
+    }
+  },
   created() {
     settitle("我是全国们店");
     this.routeParams = JSON.parse(this.$route.params.obj);
