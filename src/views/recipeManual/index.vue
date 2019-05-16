@@ -16,7 +16,7 @@
       <div class="margin_top_div3 margin_left_div8">苹果4g 、 芹菜5g 、 芒果10g、 冰40g克</div>
       <div class="margin_top_div3 margin_left_div8">适应：</div>
       <div style="overflow:hidden;zoom:1;">
-        <div class="backgroun_color_E9 b_z_b font_size_12" v-for="item in [1,44]">糖尿病</div>
+        <div class="backgroun_color_E9 b_z_b font_size_12" v-for="item in [1,2,3,333,44]">糖尿病</div>
       </div>
     </div>
   </div>
