@@ -30,7 +30,7 @@ import videopage from '@/views/videopage/index'             // 视频页面
 
 
 
-import myWallet from '@/views/myWallet/index'
+import myWallet from '@/views/myWallet/index'//我的钱包
 import billRecord from '@/views/billRecord/index' //钱包记录
 import order from '@/views/order/index' //我的订单
 import serviceOrder from '@/views/serviceOrder/index' //服务订单

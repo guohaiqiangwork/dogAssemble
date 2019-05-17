@@ -48,6 +48,9 @@
   margin-top: 1%;
 }
 
+.margin_top_div4 {
+  margin-top: 4%;
+}
 
 .margin_top_div5 {
   margin-top: 5%;
@@ -73,11 +76,20 @@
 .padding_bottom_4{
   padding-bottom: 4%;
 }
+.padding_bottom_2{
+  padding-bottom: 2%;
+}
 .padding_top_div3{
   padding-top:3%
 }
 .padding_left_div3{
   padding-left: 3%
+}
+.padding_top_div5{
+  padding-top:5%
+}
+.padding_top_div8{
+  padding-top:8%
 }
 .div_text_left {
   text-align: left;
