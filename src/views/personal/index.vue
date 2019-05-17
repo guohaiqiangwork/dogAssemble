@@ -13,12 +13,12 @@
         </div>
       </div>
       <!-- 账户 -->
-      <div class="personal_money text_center" style="margin-top:-24%">
+      <div class="personal_money text_center" style="margin-top:-21%">
         <div class="font_color_76 font_size_13 padding_top_div3">总金额(元)</div>
-        <div class="font_color_76 font_size_25 margin_top_div3 padding_bottom_4">1000.00</div>
+        <div class="font_color_76 font_size_25 margin_top_div2 c">1000.00</div>
       </div>
       <!-- 菜单列表 -->
-      <div>
+      <div class="margin_top_div4">
         <!-- <div class=""> -->
         <div class="personal_cd text_center">
           <div>
@@ -51,7 +51,7 @@
           </div>
           <div>健康奖金</div>
         </div>
-        <div class="personal_cd text_center" >
+        <div class="personal_cd text_center">
           <div>
             <img src="../../assets/images/个人中心@2x.png">
           </div>
@@ -63,7 +63,7 @@
           </div>
           <div>设置中心</div>
         </div>
-        <div class="personal_cd text_center">
+        <div class="personal_cd text_center" @click="shopDY">
           <div>
             <img src="../../assets/images/个人中心@2x.png">
           </div>
@@ -132,7 +132,7 @@
             </div>
           </div>
           <div class="personal_div_border"></div>
-          <div class="div_display_flex">
+          <div class="div_display_flex" @click="goToExclusive">
             <div class="div_width_50 font_color_1A personal_list_font">专属门店</div>
             <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
               <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%">
@@ -157,7 +157,10 @@
       </div>
       <!-- 冻结账户 -->
       <div v-if="!accountFalge">
-        <div class="backgroun_color_fff personal_order_m margin_top_div3 text_center font_color_1A" style="font-size:8px">
+        <div
+          class="backgroun_color_fff personal_order_m margin_top_div3 text_center font_color_1A"
+          style="font-size:8px"
+        >
           <img src="../../assets/images/提醒 (3)@2x.png" class="per_img_width_18 margin_top_div8">
           <div class="margin_top_div3">您当前帐户已被冻结</div>
           <div class="margin_top_div3">需解冻才可以正常使用</div>
@@ -183,30 +186,36 @@
             </div>
           </div>
           <!-- 确认 -->
-    <div class="text_center" style="padding-bottom: 8%;">
-      <div class="b_t_t">确认解冻</div>
-    </div>
+          <div class="text_center" style="padding-bottom: 8%;">
+            <div class="b_t_t">确认解冻</div>
+          </div>
         </div>
       </div>
       <!-- 底部菜单栏 -->
       <TabBar ref="TabBar"/>
     </div>
+    <!-- 店铺设置 -->
+    <confirm v-model="outPayFalge" title @on-cancel="onCancel" @on-confirm="onConfirm">
+      <div style="text-align:center;font-size:18px;">是否要打烊？</div>
+    </confirm>
   </div>
 </template>
 <script>
 import TabBar from "../../components/TabBar";
-import { Flexbox } from "vux";
+import { Flexbox, Confirm } from "vux";
 export default {
   components: {
-    TabBar
+    TabBar,
+    Confirm
   },
   name: "personal",
   data() {
     return {
-      falg: "sj", //个人 商铺 家庭展示标记
+      falg: "g", //个人 商铺 家庭展示标记
       sendAuthCode: true /*布尔值，通过v-show控制显示‘获取按钮’还是‘倒计时’ */,
-      auth_time: 0 ,/*倒计时 计数器*/
-      accountFalge:true,//账户冻结
+      auth_time: 0 /*倒计时 计数器*/,
+      accountFalge: true ,//账户冻结
+      outPayFalge: false //是否打烊
     };
   },
   created() {
@@ -216,6 +225,18 @@ export default {
   },
   computed: {},
   methods: {
+    //店铺打烊
+    shopDY() {
+      this.outPayFalge = true;
+    },
+    // 弹窗取消
+    onCancel() {
+      console.log("2");
+    },
+      // 弹窗确认
+    onConfirm() {
+      console.log("233");
+    },
     // 去我的钱包
     goToWallet: function() {
       this.$router.push({
@@ -286,10 +307,24 @@ export default {
         }
       });
     },
-    // 去设置
+    // 去设置exclusive
     goToSetUp: function() {
       this.$router.push({
         name: "setUp",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: "蚕丝"
+            }
+          })
+        }
+      });
+    },
+    // 去专属门店
+    goToExclusive: function() {
+      this.$router.push({
+        name: "exclusive",
         params: {
           obj: JSON.stringify({
             type: "profession",
@@ -322,7 +357,7 @@ export default {
 
 <style scoped>
 .personal_img_bj {
-  background-image: url("../../assets/images/Signal.png");
+  background-image: url("../../assets/images/bg.png");
   height: 175px;
   background-repeat: no-repeat;
 }
@@ -408,6 +443,7 @@ export default {
   font-size: 14px;
   padding-bottom: 6%;
   border-top: none;
+  background-color: #fff;
 }
 .search_box {
   height: 3.5rem;
@@ -434,19 +470,19 @@ export default {
   height: 16px;
   margin-right: 3%;
 }
-.per_img_width_18{
-  width:18px;
-  height:18px;
+.per_img_width_18 {
+  width: 18px;
+  height: 18px;
 }
 .b_t_t {
-     width: 90%;
-    background-color: #4a7b67;
-    color: #fff;
-    font-size: 16px;
-    line-height: 3;
-    border-radius: 5px;
-    margin-left: 5%;
-    margin-top: 8%;
+  width: 90%;
+  background-color: #4a7b67;
+  color: #fff;
+  font-size: 16px;
+  line-height: 3;
+  border-radius: 5px;
+  margin-left: 5%;
+  margin-top: 8%;
 }
 </style>
 

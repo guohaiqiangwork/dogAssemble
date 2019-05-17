@@ -20,15 +20,7 @@ import paysure from '@/views/paysure/index'             //确认支付页面
 import addressment from '@/views/addressment/index'             // 地址管理页面
 import addressopt from '@/views/addressment/option'             // 地址编辑页面
 import immendilypay from '@/views/immendilyPay/index'             // 地址编辑页面
-
-
-
-
-
-
-
-
-import myWallet from '@/views/myWallet/index'
+import myWallet from '@/views/myWallet/index'//我的钱包
 import billRecord from '@/views/billRecord/index' //钱包记录
 import order from '@/views/order/index' //我的订单
 import serviceOrder from '@/views/serviceOrder/index' //服务订单

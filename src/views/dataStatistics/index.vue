@@ -1,8 +1,8 @@
 <template>
   <div>
     <!-- 头部 -->
-    <div class="personal_img_bj text_center">
-      <div class="font_size_12 margin_top_div8">总金额(元)</div>
+    <div class="personal_img_bj text_center font_color_ff">
+      <div class="font_size_12 padding_top_div8">总金额(元)</div>
       <div class="font_size_25 margin_top_div3">1000.00</div>
       <div class="font_size_12 margin_top_div3">数据统计截止：2019-05-14 13:15</div>
     </div>
@@ -34,6 +34,10 @@
           <div class="font_size_13 margin_top_div5">推荐返佣(元)</div>
         </div>
         <div class="div_width_45 font_color_ff text_center backgroun_color_B6">
+          <div class="font_size_25 margin_top_div8">300.00</div>
+          <div class="font_size_13 margin_top_div5">商城返佣(元)</div>
+        </div>
+            <div class="div_width_45 font_color_ff text_center backgroun_color_B6">
           <div class="font_size_25 margin_top_div8">300.00</div>
           <div class="font_size_13 margin_top_div5">商城返佣(元)</div>
         </div>
@@ -113,7 +117,7 @@ export default {
 </script>
 <style scoped>
 .personal_img_bj {
-  background-image: url("../../assets/images/Battery@2x.png");
+  background-image: url("../../assets/images/bg@3x.png");
   height: 175px;
   background-repeat: no-repeat;
 }
