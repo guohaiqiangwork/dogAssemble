@@ -19,8 +19,17 @@
           placeholder="请输⼊验证码"
           style="width:56%;height:100%;outline: none;border:none"
         >
-        <span v-show="sendAuthCode" class="margin_left_div3 font_color_4A" style="font-size:6px" @click="getAuthCode">获取验证码</span>
-        <span v-show="!sendAuthCode"  class="margin_left_div3 font_color_4A" style="font-size:6px">{{auth_time}}重新获取验证码</span>
+        <span
+          v-show="sendAuthCode"
+          class="margin_left_div3 font_color_4A"
+          style="font-size:6px"
+          @click="getAuthCode"
+        >获取验证码</span>
+        <span
+          v-show="!sendAuthCode"
+          class="margin_left_div3 font_color_4A"
+          style="font-size:6px"
+        >{{auth_time}}重新获取验证码</span>
       </div>
     </div>
     <div class="pass_list_w">
@@ -79,22 +88,18 @@ export default {
   margin-left: 2%;
 }
 .search_box {
-  height: 3.5rem;
-  margin: 0.65rem 1.5rem 0;
+  height: 0.7rem;
+  margin: 0 auto;
   position: relative;
-  padding: 0 1.55rem;
-  -webkit-box-sizing: border-box;
+  padding: 0 0.31rem;
   box-sizing: border-box;
   z-index: 1;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  background: #fff;
   line-height: 3.5rem;
+  border: 1px solid #888888;
   margin-top: 5%;
+  width: 95%;
   border: none;
   border-bottom: 1px solid rgb(173, 165, 165);
 }

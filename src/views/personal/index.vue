@@ -39,7 +39,7 @@
           </div>
           <div>数据统计</div>
         </div>
-        <div class="personal_cd text_center">
+        <div class="personal_cd text_center" @click="goToOrder">
           <div>
             <img src="../../assets/images/个人中心@2x.png">
           </div>
@@ -51,13 +51,13 @@
           </div>
           <div>健康奖金</div>
         </div>
-        <div class="personal_cd text_center">
+        <div class="personal_cd text_center" >
           <div>
             <img src="../../assets/images/个人中心@2x.png">
           </div>
           <div>会员操作</div>
         </div>
-        <div class="personal_cd text_center">
+        <div class="personal_cd text_center" @click="goToSetUp">
           <div>
             <img src="../../assets/images/个人中心@2x.png">
           </div>
@@ -203,7 +203,7 @@ export default {
   name: "personal",
   data() {
     return {
-      falg: "g", //个人 商铺 家庭展示标记
+      falg: "sj", //个人 商铺 家庭展示标记
       sendAuthCode: true /*布尔值，通过v-show控制显示‘获取按钮’还是‘倒计时’ */,
       auth_time: 0 ,/*倒计时 计数器*/
       accountFalge:true,//账户冻结

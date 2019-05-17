@@ -29,7 +29,10 @@
         <div class="border_left margin_right_div2" style="margin-left: 11%;"></div>推荐门店
         <div class="border_left margin_left_div2"></div>
       </div>
-      <div class="national_list font_color_00 font_size_13 backgroun_color_fff margin_top_div3" v-for="item in [1,3]">
+      <div
+        class="national_list font_color_00 font_size_13 backgroun_color_fff margin_top_div3"
+        v-for="item in [1,3]"
+      >
         <div class="div_display_flex margin_top_div3">
           <div class="div_width_70 margin_left_div2">内蒙古包头市昆都仑区钢铁大街店</div>
           <div class="div_width_30 margin_right_div2 text_right">0.8公里</div>
@@ -134,11 +137,11 @@ export default {
 <style scoped>
 /* 搜索框 */
 .search_box {
-  height: 3.5rem;
-  margin: 0.65rem 1.5rem 0;
-  border-radius: 2rem;
+  height: 0.7rem;
+  margin: 0 auto;
+  border-radius: 0.35rem;
   position: relative;
-  padding: 0 1.55rem;
+  padding: 0 0.31rem;
   box-sizing: border-box;
   z-index: 1;
   display: flex;
@@ -146,6 +149,7 @@ export default {
   background: #efefef;
   line-height: 3.5rem;
   margin-top: 5%;
+  width: 94%;
 }
 .symptoms_border {
   width: 90%;

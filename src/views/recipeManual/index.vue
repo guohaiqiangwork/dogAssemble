@@ -41,11 +41,11 @@ export default {
 </script>
 <style scoped>
 .search_box {
-  height: 3.5rem;
+  height: 0.7rem;
   margin: 0.65rem 1.5rem 0;
-  border-radius: 2rem;
+  border-radius: 0.35rem;
   position: relative;
-  padding: 0 1.55rem;
+  padding: 0 0.31rem;
   box-sizing: border-box;
   z-index: 1;
   display: flex;
@@ -54,6 +54,8 @@ export default {
   line-height: 3.5rem;
   border: 1px solid #efefef;
   margin-top: 5%;
+  width: 94%;
+  margin-left: 3%;
 }
 .b_z_b {
   width: 25%;
