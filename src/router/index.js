@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import home from '@/views/home/index' //调试页
-import login from '@/views/login/index' //登陆
+import login from '@/views/login_reg/index' //登陆
 import nationalStores from '@/views/nationalStores/index' //全国门店
 import recipeManual from '@/views/recipeManual/index' //配方手册
 import caseVideo from '@/views/caseVideo/index' //案列视频
@@ -20,6 +20,8 @@ import paysure from '@/views/paysure/index'             //确认支付页面
 import addressment from '@/views/addressment/index'             // 地址管理页面
 import addressopt from '@/views/addressment/option'             // 地址编辑页面
 import immendilypay from '@/views/immendilyPay/index'             // 地址编辑页面
+import about from '@/views/about/index'             // 关于我们
+import videopage from '@/views/videopage/index'             // 视频页面
 
 
 
@@ -54,7 +56,7 @@ export default new Router({
     },
     {
       // 登陆
-      path: '/login/:obj',
+      path: '/login',
       name: 'login',
       meta: {
         title: '登陆',
@@ -109,6 +111,20 @@ export default new Router({
         title:'立即支付'
       },
       component: immendilypay
+    },
+    {
+      path:'/about',
+      meta: {
+        title:'关于我们'
+      },
+      component: about
+    },
+    {
+      path:'/videopage',
+      meta: {
+        title:'视频页面'
+      },
+      component: videopage
     },
     {
       // 全国门店

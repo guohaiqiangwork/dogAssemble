@@ -2,7 +2,7 @@
   <div>
     <div class="pass_list_w">
       <div class="search_box">
-        <img src="../../assets/images/手机@2x.png" class="width_16">
+        <img src="../../assets/images/phone@2x.png" class="width_16">
         <input
           type="text"
           placeholder="请输⼊您的手机号"

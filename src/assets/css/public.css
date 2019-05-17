@@ -248,3 +248,22 @@ color: #102023
 .img_width25{
   width: 25px;
 }
+
+/* 布局 */
+.flex-between{
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-clo{
+  flex-direction: column;
+}
+
+.flex-around{
+  display: flex;
+  justify-content: space-around;
+}
+
+.align-center{
+  align-items: center;
+}
