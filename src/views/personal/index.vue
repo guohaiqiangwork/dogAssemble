@@ -94,26 +94,28 @@
         </div>
       </div>
       <!-- 账户 -->
-      <div class="personal_div_money" style="margin-top:-8%">
-        <div class="font_color_102 font_size_13 personal_money_m">账户余额（元）</div>
+      <div class="personal_div_money" style="margin-top:-8%;line-height:2" @click="goToWallet">
+        <div
+          class="font_color_102 font_size_13 personal_money_m margin_left_div3 padding_top_div3"
+        >账户余额（元）</div>
         <div class="div_display_flex personal_price_m">
-          <div class="font_color_102 font_size_25 div_width_50">￥0.00</div>
-          <div
+          <div class="font_color_102 font_size_25 div_width_50 margin_left_div3">￥0.00</div>
+          <!-- <div
             class="div_display_flex font_color_102 font_size_13 div_width_50"
-            @click="goToWallet"
+           
           >
-            <div style="padding-top: 6%; margin-left: 48%">我要提现</div>
+             <div style="padding-top: 6%; margin-left: 48%">我要提现</div>
             <div class="width_26" style="margin-top: 3%;">
               <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%">
             </div>
-          </div>
+          </div>-->
         </div>
       </div>
       <!-- 未冻结账户 -->
       <div v-if="accountFalge">
         <!-- 服务订单记录 -->
-        <div class="backgroun_color_fff personal_order_m margin_top_div3">
-          <div class="div_display_flex" @click="goToService">
+        <div class="backgroun_color_fff personal_order_m margin_top_div3" @click="goToService">
+          <div class="div_display_flex">
             <div class="font_color_1A personal_order_font div_width_50">服务订单记录</div>
             <div class="div_width_50" style="width:26px;margin-left:38%;margin-top:18px">
               <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%">
@@ -214,7 +216,7 @@ export default {
       falg: "g", //个人 商铺 家庭展示标记
       sendAuthCode: true /*布尔值，通过v-show控制显示‘获取按钮’还是‘倒计时’ */,
       auth_time: 0 /*倒计时 计数器*/,
-      accountFalge: true ,//账户冻结
+      accountFalge: true, //账户冻结
       outPayFalge: false //是否打烊
     };
   },
@@ -233,7 +235,7 @@ export default {
     onCancel() {
       console.log("2");
     },
-      // 弹窗确认
+    // 弹窗确认
     onConfirm() {
       console.log("233");
     },
