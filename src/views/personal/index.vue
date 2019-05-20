@@ -74,7 +74,7 @@
           </div>
           <div>健康奖金</div>
         </div>
-        <div class="personal_cd text_center">
+        <div class="personal_cd text_center" @click="goToMemberOperation">
           <div>
             <img src="../../assets/images/个人中心@2x.png">
           </div>
@@ -410,6 +410,20 @@ export default {
     goToNewOrder() {
       this.$router.push({
         name: "newOrder",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: "蚕丝"
+            }
+          })
+        }
+      });
+    },
+     // 会员操作
+    goToMemberOperation() {
+      this.$router.push({
+        name: "memberOperation",
         params: {
           obj: JSON.stringify({
             type: "profession",

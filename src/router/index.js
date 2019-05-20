@@ -38,6 +38,7 @@ import changePassword from '@/views/changePassword/index'//修改密码
 import Tmap from '@/views/Tmap/index'//地图
 import recharge from '@/views/recharge/index' // 会员充值
 import newOrder from '@/views/newOrder/index' //新建订单
+import memberOperation from '@/views/memberOperation/index' //会员操作
 Vue.use(Router)
 
 export default new Router({
@@ -308,7 +309,7 @@ export default new Router({
     component: activityRules
   },
   {
-    // 设置Change Password
+    // 设置
     path: '/setUp/:obj',
     name: 'setUp',
     meta: {
@@ -352,6 +353,15 @@ export default new Router({
       title: '地图',
     },
     component: newOrder
+  },
+  {
+    //会员操作
+    path: '/memberOperation/:obj',
+    name: 'memberOperation',
+    meta: {
+      title: '地图',
+    },
+    component: memberOperation
   },
   {
     path: '/404',
