@@ -114,14 +114,14 @@
       <!-- 未冻结账户 -->
       <div v-if="accountFalge">
         <!-- 服务订单记录 -->
-        <div class="backgroun_color_fff personal_order_m margin_top_div3" @click="goToService">
-          <div class="div_display_flex">
+        <div class="backgroun_color_fff personal_order_m margin_top_div3" >
+          <div class="div_display_flex" @click="goToSOrderList">
             <div class="font_color_1A personal_order_font div_width_50">服务订单记录</div>
             <div class="div_width_50" style="width:26px;margin-left:38%;margin-top:18px">
               <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%">
             </div>
           </div>
-          <div class="div_display_flex margin_top_div5" style="padding-bottom: 8%;">
+          <div class="div_display_flex margin_top_div5" style="padding-bottom: 8%;" @click="goToService">
             <div class="personal_bt_tc">进行中套餐</div>
           </div>
         </div>
@@ -141,7 +141,7 @@
             </div>
           </div>
           <div class="personal_div_border"></div>
-          <div class="div_display_flex">
+          <div class="div_display_flex" @click="goToAddressment">
             <div class="div_width_50 font_color_1A personal_list_font">地址管理</div>
             <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
               <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%">
@@ -213,7 +213,7 @@ export default {
   name: "personal",
   data() {
     return {
-      falg: "g", //个人 商铺 家庭展示标记
+      falg: "sj", //个人 商铺 家庭展示标记
       sendAuthCode: true /*布尔值，通过v-show控制显示‘获取按钮’还是‘倒计时’ */,
       auth_time: 0 /*倒计时 计数器*/,
       accountFalge: true, //账户冻结
@@ -281,6 +281,20 @@ export default {
         }
       });
     },
+      // 去服务订单
+    goToSOrderList: function() {
+      this.$router.push({
+        name: "sOrderList",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: "蚕丝"
+            }
+          })
+        }
+      });
+    },
     // 数据统计healthBonus
     goToStatistics: function() {
       this.$router.push({
@@ -327,6 +341,20 @@ export default {
     goToExclusive: function() {
       this.$router.push({
         name: "exclusive",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: "蚕丝"
+            }
+          })
+        }
+      });
+    },
+      // 去地址管理
+    goToAddressment: function() {
+      this.$router.push({
+        name: "addressment",
         params: {
           obj: JSON.stringify({
             type: "profession",

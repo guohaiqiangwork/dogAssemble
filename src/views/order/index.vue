@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="background-color:#F3F5F8;min-height:600px">
     <div class="div_display_flex backgroun_color_fff personal_title">
       <div v-for="(item,index) in  tabList" @click="tabSwitch(item.id)" :key="index">
         <div :style="{color:(switchFlage != item.id ? '' :'#000000')}">{{item.name}}</div>
@@ -19,7 +19,7 @@
           </div>
         </div>
         <div class="div_display_flex margin_top_div3">
-          <div style="width:30%">
+          <div class=" div_width_30 margin_right_div3">
             <div class="order_width_height">
               <img src="../../assets/images/WechatIMG101@2x.png" width="100%">
             </div>
@@ -36,7 +36,7 @@
           </div>
         </div>
         <div class="order_border margin_top_div5"></div>
-        <div class="order_bt_p margin_top_div3">
+        <div class="order_bt_p margin_top_div3" @click="goToPay">
           <div class="oreder_bt_pay backgroun_color_4A">去支付</div>
         </div>
       </div>
@@ -83,9 +83,24 @@ export default {
     };
   },
   methods: {
+    // tab切换
     tabSwitch(id) {
       console.log(id);
       this.switchFlage = id;
+    },
+    // 去支付
+    goToPay(){
+      this.$router.push({
+        name: "paysure",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: 'pay'
+            }
+          })
+        }
+      });
     }
   },
   created() {

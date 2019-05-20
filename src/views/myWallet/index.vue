@@ -2,13 +2,19 @@
   <div>
     <!-- 金额显示 -->
     <div class="backgroun_color_4A font_color_ff" style="text-align: center;">
-      <div class="div_display_flex" style=" margin-left: 38%;    padding-top: 8%;">
+      <!-- <div class="div_display_flex" style=" margin-left: 38%;    padding-top: 8%;">
         <div class="wallet_font font_size_16">当前余额(币)</div>
         <div
           class="font_size_14"
           style=" margin-left: 28%;margin-top:-6%"
-          @click="goToBillRecord"
+        
         >账单记录</div>
+      </div> -->
+      <div class=" text_right margin_right_div3  padding_top_div3 font_size_14"   @click="goToBillRecord">
+        账单记录
+      </div>
+      <div class="wallet_font font_size_16 padding_top_div3">
+        当前余额(币)
       </div>
       <div class="font_size_30 margin_top_div5" style="padding-bottom: 4%;">00</div>
     </div>
