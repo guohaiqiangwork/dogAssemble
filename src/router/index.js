@@ -22,18 +22,12 @@ import addressopt from '@/views/addressment/option'             // 地址编辑�
 import immendilypay from '@/views/immendilyPay/index'             // 地址编辑页面
 import about from '@/views/about/index'             // 关于我们
 import videopage from '@/views/videopage/index'             // 视频页面
-
-
-
-
-
-
-
-
 import myWallet from '@/views/myWallet/index'//我的钱包
 import billRecord from '@/views/billRecord/index' //钱包记录
 import order from '@/views/order/index' //我的订单
 import serviceOrder from '@/views/serviceOrder/index' //服务订单
+import serviceOrderD from '@/views/serviceOrderD/index' //套餐详情
+import sOrderList from '@/views/sOrderList/index' //服务订单
 import dataStatistics from '@/views/dataStatistics/index' //数据统计
 import dataDetails from '@/views/dataDetails/index' //数据统计详情
 import healthBonus from '@/views/healthBonus/index' //健康奖金
@@ -219,12 +213,30 @@ export default new Router({
       },
       component: serviceOrder
     },
+       // 套餐详情
+       {
+        path: '/serviceOrderD/:obj',
+        name: 'serviceOrderD',
+        meta: {
+          title: '服务订单',
+        },
+        component: serviceOrderD
+      },
+    // 服务订单列表
+    {
+      path:'/sOrderList/:obj',
+      name:'sOrderList',
+      meta:{
+        title:'服务订单列表'
+      },
+      component:sOrderList
+    },
     // 数据统计
     {
       path: '/dataStatistics/:obj',
       name: 'dataStatistics',
       meta: {
-        title: '服务订单',
+        title: '数据统计',
       },
       component: dataStatistics
     },
@@ -233,7 +245,7 @@ export default new Router({
       path: '/dataDetails/:obj',
       name: 'dataDetails',
       meta: {
-        title: '服务订单',
+        title: '数据统计详情',
       },
       component: dataDetails
     },

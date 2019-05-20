@@ -114,14 +114,14 @@
       <!-- 未冻结账户 -->
       <div v-if="accountFalge">
         <!-- 服务订单记录 -->
-        <div class="backgroun_color_fff personal_order_m margin_top_div3" @click="goToService">
-          <div class="div_display_flex">
+        <div class="backgroun_color_fff personal_order_m margin_top_div3" >
+          <div class="div_display_flex" @click="goToSOrderList">
             <div class="font_color_1A personal_order_font div_width_50">服务订单记录</div>
             <div class="div_width_50" style="width:26px;margin-left:38%;margin-top:18px">
               <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%">
             </div>
           </div>
-          <div class="div_display_flex margin_top_div5" style="padding-bottom: 8%;">
+          <div class="div_display_flex margin_top_div5" style="padding-bottom: 8%;" @click="goToService">
             <div class="personal_bt_tc">进行中套餐</div>
           </div>
         </div>
@@ -271,6 +271,20 @@ export default {
     goToService: function() {
       this.$router.push({
         name: "serviceOrder",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: "蚕丝"
+            }
+          })
+        }
+      });
+    },
+      // 去服务订单
+    goToSOrderList: function() {
+      this.$router.push({
+        name: "sOrderList",
         params: {
           obj: JSON.stringify({
             type: "profession",
