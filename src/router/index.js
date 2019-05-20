@@ -93,6 +93,7 @@ export default new Router({
     },
     {
       path:'/addressment',
+      name: 'addressment',
       meta: {
         title:'地址管理页面'
       },
@@ -100,6 +101,7 @@ export default new Router({
     },
     {
       path:'/addressopt',
+      name:'addressopt',
       meta: {
         title:'添加地址'
       },
@@ -107,6 +109,7 @@ export default new Router({
     },
     {
       path:'/immendilypay',
+      name:'immendilypay',
       meta: {
         title:'立即支付'
       },

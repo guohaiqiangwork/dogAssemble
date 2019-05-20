@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 每日辟谷套餐记录 -->
-    <div class="service_div_k margin_top_div5">
+    <div class="service_div_k backgroun_color_fff margin_top_div5">
       <div class="div_display_flex font_color_ff backgroun_color_4A service_list">
         <div class="font_size_15 service_font">每日辟谷套餐记录</div>
         <div class="font_size_13 service_title_font">2018.09.30-2019.09.30</div>
@@ -17,7 +17,7 @@
       </div>
     </div>
     <!-- 会员套餐 -->
-    <div class="service_div_k margin_top_div5">
+    <!-- <div class="service_div_k margin_top_div5">
       <div class="div_display_flex font_color_ff backgroun_color_D5 service_list">
         <div class="font_size_15 service_font">会员套餐</div>
         <div class="font_size_13 service_title_font">2018.09.30-2019.09.30</div>
@@ -30,6 +30,12 @@
         <div class="service_width_25">次数</div>
         <div class="service_width_25">食用时间</div>
         <div class="service_width_25">状态</div>
+      </div>
+    </div>-->
+    <div class="serviceOrder backgroun_color_4A font_color_ff">
+      <div class="div_display_flex">
+        <div class="div_width_80">会员套餐名称</div>
+        <div class="div_width_20">24</div>
       </div>
     </div>
   </div>
@@ -64,7 +70,6 @@ export default {
   width: 95%;
   margin-left: 2%;
   border-radius: 8px;
-  background-color: #fff;
 }
 .service_font {
   width: 40%;

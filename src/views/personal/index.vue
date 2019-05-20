@@ -141,7 +141,7 @@
             </div>
           </div>
           <div class="personal_div_border"></div>
-          <div class="div_display_flex">
+          <div class="div_display_flex" @click="goToAddressment">
             <div class="div_width_50 font_color_1A personal_list_font">地址管理</div>
             <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
               <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%">
@@ -327,6 +327,20 @@ export default {
     goToExclusive: function() {
       this.$router.push({
         name: "exclusive",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: "蚕丝"
+            }
+          })
+        }
+      });
+    },
+      // 去地址管理
+    goToAddressment: function() {
+      this.$router.push({
+        name: "addressment",
         params: {
           obj: JSON.stringify({
             type: "profession",
