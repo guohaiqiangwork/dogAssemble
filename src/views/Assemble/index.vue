@@ -1,6 +1,7 @@
 <template>
   <div id="home">
     <div class="head_box">
+      <swiper :list="imgList"  :min-moving-distance="120" @on-index-change="onIndexChange" auto loop></swiper>
       <div class="search_box">
         <i class="weui-icon-search search_icon"></i>
         <input type="text" placeholder="搜索您想找的产品">
@@ -14,22 +15,31 @@
   </div>
 </template>
 <script>
-// import { Search, Group, Cell, XButton } from 'vux'
-// import { Itemes } from './ItemGoods/index.vue';
-// const
+import { Swiper } from 'vux'
 export default {
   components:{
-    // Itemes
+    Swiper,
     Itemes:resolve => require(['./goods/index.vue'],resolve),
     hot:resolve => require(['./hotness/index.vue'],resolve)
   },
   data() {
     return {
-      key: 'value'
+      imgList: [
+        {
+            url: 'javascript:',
+            img: 'https://static.vux.li/demo/1.jpg',
+            title: '送你一朵fua'
+          }, {
+            url: 'javascript:',
+            img: 'https://static.vux.li/demo/5.jpg',
+            title: '送你一次旅行',
+            fallbackImg: 'https://static.vux.li/demo/3.jpg'
+          }
+      ]
     }
   },
   methods: {
-    name() {
+    onIndexChange(currentIndex) {
       
     }
   },
@@ -46,18 +56,21 @@ export default {
         margin-bottom: 0.09rem;
     }
     .head_box{
+      position: relative;
       height: 3.51rem;
-      background: url('../../assets/images/head.png') no-repeat;
       background-size:100% 100%;
       overflow: hidden;
       .search_box{
+        position: absolute;
+        top: 0.14rem;
+        left: 0.3rem;
         height: 0.7rem;
         width: 6.9rem;
         margin: 0 auto;
         padding: 0 0.31rem;
         // margin: 0.65rem 1.5rem 0;
         border-radius:0.35rem;
-        position: relative;
+       
        
   
         box-sizing: border-box;

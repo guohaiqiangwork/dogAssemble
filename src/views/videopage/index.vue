@@ -49,8 +49,8 @@
 import { TransferDom, Popup, XButton} from 'vux'
 export default {
     directives: {
-    TransferDom
-  },
+        TransferDom
+    },
     components:{
          Popup, XButton,
     // Itemes
