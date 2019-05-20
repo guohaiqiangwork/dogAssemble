@@ -66,6 +66,9 @@ export default {
 
         }
     },
+    created(){
+        settitle('地址管理');
+    },
     mounted() {
         
     },

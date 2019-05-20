@@ -102,6 +102,9 @@ export default {
             popupshow:false
         }
     },
+    created(){
+      settitle('商品详情');
+    },
     methods: {
         onIndexChange(currentIndex) {
             this.num = currentIndex + 1;
