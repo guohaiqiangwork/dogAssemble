@@ -39,6 +39,7 @@ import Tmap from '@/views/Tmap/index'//地图
 import recharge from '@/views/recharge/index' // 会员充值
 import newOrder from '@/views/newOrder/index' //新建订单
 import memberOperation from '@/views/memberOperation/index' //会员操作
+import memberD from '@/views/memberD/index'//会员操作详情
 Vue.use(Router)
 
 export default new Router({
@@ -336,11 +337,11 @@ export default new Router({
     component: Tmap
   },
   {
-    // 金额充值newOrder
+    // 金额充值
     path: '/recharge/:obj',
     name: 'recharge',
     meta: {
-      title: '地图',
+      title: '金额充值',
     },
     component: recharge
   },
@@ -350,7 +351,7 @@ export default new Router({
     path: '/newOrder/:obj',
     name: 'newOrder',
     meta: {
-      title: '地图',
+      title: '新建订单',
     },
     component: newOrder
   },
@@ -359,9 +360,18 @@ export default new Router({
     path: '/memberOperation/:obj',
     name: 'memberOperation',
     meta: {
-      title: '地图',
+      title: '会员操作',
     },
     component: memberOperation
+  },
+  {
+    //会员操作详情
+    path: '/memberD/:obj',
+    name: 'memberD',
+    meta: {
+      title: '会员操作详情',
+    },
+    component: memberD
   },
   {
     path: '/404',
