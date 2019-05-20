@@ -55,11 +55,17 @@
 .margin_top_div5 {
   margin-top: 5%;
 }
+.margin_top_div12{
+  margin-top: 12%;
+}
 .margin_left_div2 {
   margin-left: 2%;
 }
 .margin_right_div2 {
   margin-right: 2%;
+}
+.margin_right_div6 {
+  margin-right: 6%;
 }
 .margin_left_div3{
   margin-left:3%;
@@ -81,6 +87,9 @@
 }
 .padding_top_div3{
   padding-top:3%
+}
+.padding_top_div6{
+  padding-top:6%
 }
 .padding_left_div3{
   padding-left: 3%
@@ -143,6 +152,9 @@ color: #102023
 }
 .font_color_76{
   color:#764C02
+}
+.font_color_E8{
+  color:#E8BB7A
 }
 /* 字号 */
 .font_size_11 {
@@ -251,6 +263,15 @@ color: #102023
 }
 .div_width_33{
   width:33%
+}
+.div_width_40{
+  width:40%
+}
+.div_width_43{
+  width:43%
+}
+.div_width_45{
+  width:45%
 }
 /* 内容位置 */
 .text_center {

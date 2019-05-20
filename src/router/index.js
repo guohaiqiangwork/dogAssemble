@@ -36,6 +36,7 @@ import activityRules from '@/views/activityRules/index'//服务规则
 import setUp from '@/views/setUp/index'//设置
 import changePassword from '@/views/changePassword/index'//修改密码
 import Tmap from '@/views/Tmap/index'//地图
+import recharge from '@/views/recharge/index' // 会员充值
 Vue.use(Router)
 
 export default new Router({
@@ -331,6 +332,15 @@ export default new Router({
         title: '地图',
       },
       component: Tmap
+    },
+    {
+      // 地图
+      path: '/recharge/:obj',
+      name: 'recharge',
+      meta: {
+        title: '地图',
+      },
+      component: recharge
     },
     {
       path: '/404',
