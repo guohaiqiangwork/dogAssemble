@@ -80,11 +80,13 @@ export default new Router({
     },
     {
       path:'/paysure',
+      name:'paysure',
       meta: {
         title:'确认支付页面'
       },
       component: paysure
     },
+    
     {
       path:'/addressment',
       name: 'addressment',

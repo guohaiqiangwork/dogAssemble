@@ -213,7 +213,7 @@ export default {
   name: "personal",
   data() {
     return {
-      falg: "g", //个人 商铺 家庭展示标记
+      falg: "sj", //个人 商铺 家庭展示标记
       sendAuthCode: true /*布尔值，通过v-show控制显示‘获取按钮’还是‘倒计时’ */,
       auth_time: 0 /*倒计时 计数器*/,
       accountFalge: true, //账户冻结
