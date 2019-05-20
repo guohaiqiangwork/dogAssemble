@@ -61,7 +61,9 @@ export default {
     settitle("我是登录页面");
     this.routeParams = JSON.parse(this.$route.params.obj);
   },
-
+  created(){
+      settitle('注册与登录');
+  },
   mounted() {
    console.log('我是登录页面')
 

@@ -6,6 +6,10 @@
         </div>
         <cart-list></cart-list>
         <div>
+            <!-- <checklist ref="demoObject" :title="('Option Array with key and value (key must be string)')" :options="objectList" v-model="objectListValue"></checklist> -->
+            <!-- <check-icon :value.sync="demo1"> ({{ demo1 }})</check-icon> -->
+           
+             <i class=""></i>
             <div class="foryou">为您推荐</div>
             <hot></hot>
             <div class="cart_btm">
@@ -24,15 +28,20 @@
     </div>
 </template>
 <script>
-import { resolve } from 'path';
+import { Checklist,CheckIcon  } from 'vux'
 export default {
     components:{
+        Checklist,CheckIcon,
         CartList:resolve => require(['./chatList/index.vue'],resolve),
         hot:resolve => require(['@/views/Assemble/hotness/index.vue'],resolve)
     },
     data() {
         return {
-            key: 'value'
+            key: 'value',
+            demo1:false,
+            //  objectList: [{key: '1', value: '001 value'}, {key: '2', value: '002 value'}, {key: '3', value: '003 value'}],
+            //  objectListValue:null,
+
         }
     },
     methods: {
@@ -40,12 +49,22 @@ export default {
             
         }
     },
+    created(){
+        settitle('购物车');
+    },
     mounted() {
         
     },
 }
 </script>
 <style lang="less">
+.demo3-item {
+  padding: 5px 5px;
+  font-size: 0;
+}
+.demo3-item-selected {
+  outline: 1px solid #8B8AEE;
+}
 #cart{
     width: 100%;
     height: 100%;

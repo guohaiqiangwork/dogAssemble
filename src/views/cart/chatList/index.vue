@@ -2,7 +2,8 @@
     <div id="cartList">
         <div v-if="charList.length">
             <div  class= "cartlist"  v-for="(item,index) in charList" :key="index">
-               <div class="foods_select"></div>
+               <!-- <div class="foods_select"></div> -->
+                <i :class="['weui-icon', 'weui_icon_success', 'weui-icon-success',item.ischeck?'checked' : 'normal']" @click="chooseBuy(item)"></i>
                 <img class="gooods_avatar"   :src="item.logo" alt="">
                 <div class="goods_item">
                     <p class="goods_title">{{item.title}}</p>
@@ -28,27 +29,30 @@ export default {
     },
     data() {
         return {
+            ischeck:false,
             charList:[
                 {
                     logo:require('../../../assets/images/WechatIMG99(1).png'),
                     title:'熊孩子综合蔬菜干香菇脆秋葵干330g 果蔬脆',
                     num:1,
                     id:null,
-                    price:13.9
+                    price:13.9,
+                    ischeck:false,
                 },
                 {
                     logo:require('../../../assets/images/WechatIMG99(1).png'),
                     title:'熊孩子综合蔬菜干香菇脆秋葵干330g 果蔬脆',
                     num:1,
                     id:null,
-                    price:13.9
+                    price:13.9,
+                    ischeck:false,
                 }
             ]
         }
     },
     methods: {
-        name() {
-            
+        chooseBuy(item) {
+            item.ischeck = !item.ischeck;
         }
     },
     mounted() {
@@ -58,7 +62,12 @@ export default {
 </script>
 <style lang="less">
 #cartList{
-    
+    .normal{
+        color: #CDCDCD;
+    }
+    .checked{
+        color:#4A7B67;
+    }
     .cartlist{
         display: flex;
         justify-content: space-around;
@@ -67,6 +76,9 @@ export default {
         padding: 0.46rem 0.3rem;
         margin-bottom: 0.2rem;
         background: #fff;
+        i{
+            font-size: 0.32rem;
+        }
         .gooods_avatar{
             width: 1.4rem;
             height: 1.4rem;
@@ -92,11 +104,9 @@ export default {
             width: 0.32rem;
             height:0.32rem;
             border-radius: 50%;
-             -moz-border-radius:  50%; 
-       -webkit-border-radius:  50%; 
-       border-radius:  50%;
-    //    border: 0 solid rgba(255, 255, 255, 0); 
-            // border: 0;
+            -moz-border-radius:  50%; 
+            -webkit-border-radius:  50%; 
+            border-radius:  50%;
             background: url('../../../assets/images/check.png') no-repeat;
             background-size: 100% 100%; 
         }

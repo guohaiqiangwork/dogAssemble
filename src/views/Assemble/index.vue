@@ -43,6 +43,9 @@ export default {
       
     }
   },
+  created(){
+    settitle('商城')
+  },
   mounted() {
     
   },
@@ -52,8 +55,21 @@ export default {
   #home{
     height: 100%;
      .hot_tit{
+        display: flex;
+        align-items: center;
         padding:0 0.31rem; 
         margin-bottom: 0.09rem;
+    }
+    .hot_tit::before{
+        content: '';
+        display: inline-block;
+        width: 0.06rem;
+        height: 0.3rem;
+        margin-right:0.1rem;
+        // margin-top: 0.6rem;
+        background: #FF8156;
+        border-radius:.03rem;
+        line-height: 0.3rem;
     }
     .head_box{
       position: relative;

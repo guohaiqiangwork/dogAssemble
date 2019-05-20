@@ -9,10 +9,10 @@
             </div>
         </div>
         <div class="address_btm">
-            <div class="address_item flex_between">
-                <x-input label-width="5em" :title='`<span style="${style}">所在城市</span>`' disabled placeholder="请选择您所在的城市" keyboard="number" is-type="china-mobile"></x-input>
+            <div class="address_item flex_between"  @click="showAddress = true">
+                <x-input label-width="5em" v-model="address" :title='`<span style="${style}">所在城市</span>`' disabled placeholder="请选择您所在的城市" keyboard="number" is-type="china-mobile"></x-input>
                 <x-icon type="ios-arrow-right" class="icon_middle"></x-icon>
-                
+                <x-address v-show="false" @on-hide="logHide" @on-show="logShow" :title="title" v-model="addressVal" :list="addressData" @on-shadow-change="onShadowChange" placeholder="请选择地址" inline-desc="可以设置placeholder" :show.sync="showAddress"></x-address>
             </div>
             <div class="address_item">
                 <x-input label-width="5em" :title='`<span style="${style}">收货地址</span>`' placeholder="详细地址" keyboard="number" is-type="china-mobile">
@@ -28,21 +28,41 @@
     </div>
 </template>
 <script>
-import { XInput,XSwitch } from 'vux'
+import {   } from 'vux'
+
+import { XInput,XSwitch,XAddress, ChinaAddressV4Data, Value2nameFilter as value2name } from 'vux'
 export default {
     components:{
         XInput,
-        XSwitch
+        XSwitch,
+        XAddress
     },
     data() {
         return {
-            style: ''
+            style: '',
+            title: '',
+            showAddress:false,
+            addressVal:[],
+            address:'',
+            addressData: ChinaAddressV4Data,
         }
     },
     methods: {
-        name() {
-            
+        logHide(str) {
+            console.log('on-hide', str)
+            if(str){
+                this.address = value2name(this.addressVal, ChinaAddressV4Data)
+            }
+        },
+        logShow() {
+
+        },
+        onShadowChange() {
+
         }
+    },
+    created(){
+        settitle('地址管理');
     },
     mounted() {
         
@@ -51,7 +71,13 @@ export default {
 </script>
 <style lang="less">
 @switch-checked-bg-color:#000000;
+//   .weui-input .weui-input {
+//     text-fill-color: #333;
+//     -webkit-text-fill-color: #333;
+//     opacity: 1;
+//     }
 #opt_address{
+  
     width: 100%;
     height: 100%;
     background: #F3F5F8;

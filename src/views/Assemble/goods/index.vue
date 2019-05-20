@@ -29,6 +29,14 @@ export default {
                 {
                     logo:require('../../../assets/images/WechatIMG99(1).png'),
                     tip:'厨房日用'
+                },
+                {
+                    logo:require('../../../assets/images/WechatIMG99(1).png'),
+                    tip:'厨房日用'
+                },
+                {
+                    logo:require('../../../assets/images/WechatIMG99(1).png'),
+                    tip:'厨房日用'
                 }
             ]
         }
@@ -49,10 +57,12 @@ export default {
     justify-content: space-between;
     // width: 100%;
     height: 1.44rem;
-    padding: 0.36rem 0.6rem;
+    padding: 0.36rem 0;
+    margin:0 0.6rem;
+    overflow-y: hidden;
     // box-sizing: border-box;
     .item_list{
-       width: 5.6rem;
+       min-width: 25%;
     //    text-align: center;
     //    margin: 0 auto;
        display: flex;

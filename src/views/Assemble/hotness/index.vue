@@ -63,11 +63,7 @@ export default {
 <style lang="less">
 #hot{
     background: #fff;
-    .hot_tit::before{
-        content: '';
-        background:url('');
-        padding-right:0.1rem;
-    }
+    
     .hot_item{
          display: flex;
         justify-content: space-between;
