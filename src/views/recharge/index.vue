@@ -109,6 +109,7 @@ export default {
   border-radius: 5px;
   margin-left: 8%;
 }
+/* 图标输入框 */
 .pass_list_w {
   width: 95%;
   margin-left: 2%;

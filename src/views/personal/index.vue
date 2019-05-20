@@ -21,21 +21,21 @@
             </div>
           </div>
           <div class="div_width_70 div_display_flex">
-            <div class="font_color_ff font_size_15  margin_top_div12">李娜</div>
+            <div class="font_color_ff font_size_15 margin_top_div12">李娜</div>
             <div class="personal_falg_member">至尊会员</div>
           </div>
         </div>
         <div class="div_display_flex" style="margin-top:-3%">
           <div class="div_width_30"></div>
           <div class="div_width_70 div_display_flex" @click="goToRecharge">
-            <div class="font_color_E8 font_size_15 ">押金：500元 ></div>
+            <div class="font_color_E8 font_size_15">押金：500元 ></div>
             <div class="personal_falg_m">营业中</div>
           </div>
         </div>
       </div>
 
       <!-- 账户 -->
-      <div class="personal_money text_center"  style="margin-top:-18%">
+      <div class="personal_money text_center" style="margin-top:-18%">
         <!-- style="margin-top:-21%" -->
         <div class="font_color_76 font_size_13 padding_top_div3">总金额(元)</div>
         <div class="font_color_76 font_size_25 margin_top_div2 c">1000.00</div>
@@ -43,14 +43,14 @@
       <!-- 菜单列表 -->
       <div class="margin_top_div4">
         <!-- <div class=""> -->
-        <div class="personal_cd text_center">
+        <div class="personal_cd text_center" @click="goToNewOrder">
           <div>
             <!-- class="img_width25" class="img_width_100"-->
             <img src="../../assets/images/个人中心@2x.png">
           </div>
           <div>新建订单</div>
         </div>
-        <div class="personal_cd text_center">
+        <div class="personal_cd text_center" @click="goToRecharge">
           <div>
             <img src="../../assets/images/个人中心@2x.png">
           </div>
@@ -392,10 +392,24 @@ export default {
         }
       });
     },
-// 押金充值
+    // 押金充值
     goToRecharge: function() {
       this.$router.push({
         name: "recharge",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: "蚕丝"
+            }
+          })
+        }
+      });
+    },
+    // 新建订单
+    goToNewOrder() {
+      this.$router.push({
+        name: "newOrder",
         params: {
           obj: JSON.stringify({
             type: "profession",
