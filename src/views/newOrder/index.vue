@@ -26,7 +26,7 @@
       <div class="margin_top_div5">
         <span class="font_size_14 font_color_1A margin_left_div6">配方名称：</span>
         <select name id style="width:70%">
-          <option value="1">fjsdljflskdj</option>
+          <option value="1">请选择</option>
         </select>
       </div>
       <div class="background_color_F8 margin_top_div5" style="height:10px"></div>

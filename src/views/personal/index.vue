@@ -13,6 +13,9 @@
         </div>
         
       </div>-->
+      <!-- <div>
+        <img src="../../assets/images/bg.png" style="width: 100%" >
+      </div>-->
       <div class="personal_img_bj">
         <div class="div_display_flex">
           <div class="div_width_30">
@@ -96,7 +99,9 @@
           <div>
             <img src="../../assets/images/个人中心@2x.png">
           </div>
-          <div>联系客服</div>
+          <div>
+            <a :href="'tel:' + 15049372463">联系客服</a>
+          </div>
         </div>
 
         <!-- </div> -->
@@ -420,7 +425,7 @@ export default {
         }
       });
     },
-     // 会员操作
+    // 会员操作
     goToMemberOperation() {
       this.$router.push({
         name: "memberOperation",
@@ -457,6 +462,7 @@ export default {
 <style scoped>
 .personal_img_bj {
   background-image: url("../../assets/images/bg.png");
+  background-size: 100%;
   height: 175px;
   background-repeat: no-repeat;
 }
@@ -479,11 +485,12 @@ export default {
   margin-top: 35px;
   font-size: 12px;
   margin-left: 47%;
+  line-height: 1.5;
 }
 .personal_falg_m {
   color: #ffffff;
   font-size: 13px;
-  margin-left: 49%;
+  margin-left: 26%;
 }
 .personal_font_m {
   margin-left: 13px;
