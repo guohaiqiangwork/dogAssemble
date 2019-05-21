@@ -19,12 +19,12 @@ export default {
   },
   methods: {},
   created() {
-    settitle("我是登陆页面");
+    settitle("充值记录页面");
     this.routeParams = JSON.parse(this.$route.params.obj);
   },
 
   mounted() {
-    console.log("我是登陆页面");
+    console.log("我是充值记录页面");
   }
 };
 </script>
