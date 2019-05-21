@@ -4,7 +4,7 @@
     <div class="recharge_div_b margin_top_div3">
       <div class="div_display_flex padding_top_div6">
         <div class="div_width_50 margin_left_div6 font_size_16 font_color_1A">押金充值</div>
-        <div class="div_width_50 text_right margin_right_div6 font_size_14 font_color_4A">充值记录</div>
+        <div class="div_width_50 text_right margin_right_div6 font_size_14 font_color_4A" @click="goToRechargeList">充值记录</div>
       </div>
       <div class="margin_top_div8">
         <input type="text" class="recharge_input_b" placeholder="输入您想充值的金额…">
@@ -31,11 +31,11 @@
         </div>
       </div>
       <div class="div_display_flex">
-        <div class="div_width_43 text_center b_t_c">
+        <div class="div_width_43 text_center b_t_c" :style="{ backgroundColor:( classA  == '1' ? '#DEE8E3' : '') }" @click="moneyXz(1)">
           <div class="margin_top_div3 font_color_10 font_size_25">899</div>
           <div class="margin_top_div3 font_size_13 font_color_1A padding_bottom_4">充899返200元</div>
         </div>
-        <div class="div_width_43 text_center b_t_c">
+        <div class="div_width_43 text_center b_t_c" :style="{ backgroundColor:( classA  == '2' ? '#DEE8E3' : '') }"  @click="moneyXz(2)">
           <div class="margin_top_div3 font_color_10 font_size_25">1009</div>
           <div class="margin_top_div3 font_size_13 font_color_1A padding_bottom_4">充1009减200元</div>
         </div>
@@ -55,9 +55,30 @@ import url from "../../bin/url";
 export default {
   name: "recharge",
   data() {
-    return {};
+    return {
+      classA:''
+    };
   },
-  methods: {},
+  methods: {
+    // 选择金额
+    moneyXz(falge){
+      this.classA = falge
+    },
+    // 去充值记录页面
+    goToRechargeList: function() {
+      this.$router.push({
+        name: "rechargeList",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: "蚕丝"
+            }
+          })
+        }
+      });
+    },
+  },
   created() {
     settitle("押金充值");
     this.routeParams = JSON.parse(this.$route.params.obj);

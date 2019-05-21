@@ -3,19 +3,6 @@
     <!-- 商铺 家庭 -->
     <div class="backgroun_color_f3" v-if="falg == 'sj'">
       <!-- 头部 -->
-      <!-- <div class="personal_img_bj">
-        <div class="div_display_flex">
-          <div class="headr_img_circular">
-            <img src="../../assets/images/Signal.png" width="100%">
-          </div>
-          <div class="font_color_ff font_size_15 personal_font_m">李娜</div>
-          <div class="personal_falg_member">至尊会员</div>
-        </div>
-        
-      </div>-->
-      <!-- <div>
-        <img src="../../assets/images/bg.png" style="width: 100%" >
-      </div>-->
       <div class="personal_img_bj">
         <div class="div_display_flex">
           <div class="div_width_30">

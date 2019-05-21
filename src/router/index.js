@@ -40,6 +40,7 @@ import recharge from '@/views/recharge/index' // 会员充值
 import newOrder from '@/views/newOrder/index' //新建订单
 import memberOperation from '@/views/memberOperation/index' //会员操作
 import memberD from '@/views/memberD/index'//会员操作详情
+import rechargeList from '@/views/rechargeList/index' //充值记录
 Vue.use(Router)
 
 export default new Router({
@@ -372,6 +373,15 @@ export default new Router({
       title: '会员操作详情',
     },
     component: memberD
+  },
+  {
+    // 充值记录
+    path: '/rechargeList/:obj',
+    name: 'rechargeList',
+    meta: {
+      title: '充值记录'
+    },
+    component: rechargeList
   },
   {
     path: '/404',
