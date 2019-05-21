@@ -22,6 +22,17 @@ import addressopt from '@/views/addressment/option'             // 地址编辑�
 import immendilypay from '@/views/immendilyPay/index'             // 地址编辑页面
 import about from '@/views/about/index'             // 关于我们
 import videopage from '@/views/videopage/index'             // 视频页面
+import videomangment from '@/views/videoMangment/index'             // 管理视频页面
+import auditstate from '@/views/videoMangment/auditState/index'             // 状态审核
+import videoupload from '@/views/videoMangment/videoUpload/index'             // 视频上传
+
+
+
+
+
+
+
+
 import myWallet from '@/views/myWallet/index'//我的钱包
 import billRecord from '@/views/billRecord/index' //钱包记录
 import order from '@/views/order/index' //我的订单
@@ -125,6 +136,27 @@ export default new Router({
         title:'视频页面'
       },
       component: videopage
+    },
+    {
+      path:'/videomangment',
+      meta: {
+        title:'管理视频'
+      },
+      component: videomangment
+    },
+    {
+      path:'/auditstate',
+      meta: {
+        title:'审核管理'
+      },
+      component: auditstate
+    },
+    {
+      path:'/videoupload',
+      meta: {
+        title:'审核管理'
+      },
+      component: videoupload
     },
     {
       // 全国门店

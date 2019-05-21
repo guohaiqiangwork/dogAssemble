@@ -16,7 +16,8 @@
             </div>
             <div class="address_item">
                 <x-input label-width="5em" :title='`<span style="${style}">收货地址</span>`' placeholder="详细地址" keyboard="number" is-type="china-mobile">
-                    <x-icon slot="restricted-label" type="ios-arrow-right" class="icon_middle"></x-icon>
+                    <!-- <x-icon type="ios-arrow-right" class="icon_middle"></x-icon> -->
+                     <!-- <img class="icon_size" src="../../assets/images/position.png" alt="" slot="restricted-label" > -->
                 </x-input>
             </div>
             <div class="address_item">

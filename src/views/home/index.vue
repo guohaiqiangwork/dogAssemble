@@ -11,6 +11,7 @@
     <router-link to="/about">关于我们</router-link>
     <router-link to="/videopage">视频页面</router-link>
     <router-link to="/login">登录和注册页面</router-link>
+    <router-link to="/videomangment">视频管理</router-link>
      <!-- <button @click="goToLogin">登陆页面</button> -->
     <button @click="goToNationalStores">全国门店</button>
     <button @click="goToRecipeManual">配方手册</button>

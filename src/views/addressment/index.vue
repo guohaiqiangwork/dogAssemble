@@ -26,7 +26,10 @@
                 </swipeout-item>
             </swipeout>
         </div>
-        <div class="add_button">新增收货地址</div>
+        <div class="add_button">
+            <x-icon type="ios-plus-outline" size="28"></x-icon>
+            <span class="ml-space">新增收货地址</span>
+        </div>
     </div>
 </template>
 <script>
@@ -75,12 +78,16 @@ export default {
 }
 </script>
 <style lang="less">
+
 #address{
     width: 100%;
     height: 100%;
     background: #F3F5F8;
     .vux-swipeout-content{
         border-radius:0.12rem;
+    }
+    .vux-x-icon {
+        fill: #fff;
     }
     .address_container{
         padding: 0.2rem;
@@ -138,16 +145,19 @@ export default {
         position: fixed;
         bottom: 2.04rem;
         left: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width:6.9rem;
         height:0.9rem;
-        // margin: 0 auto;
         background:rgba(74,123,103,1);
         border-radius:0.12rem;
         font-size:0.32rem;
-        text-align: center;
-        line-height: 0.9rem;
         color:rgba(255,255,255,1);
         transform: translateX(-50%);
+        .ml-space{
+            margin-left: 0.06rem;
+        }
 
     }
 }
