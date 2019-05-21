@@ -16,8 +16,8 @@
     <div>
       <div class="font_color_1A font_size_14 margin_left_div6 margin_top_div5">选择套餐类型：</div>
       <div class="div_display_flex margin_top_div5">
-        <div class="new_order_b1">会员套餐</div>
-        <div class="new_order_b2">辟谷套餐</div>
+        <div :class="classA  == '1'? 'new_order_b1' : 'new_order_b2' " @click="newOrderXZ('1')">会员套餐</div>
+        <div  :class="classA  == '2'? 'new_order_b1' : 'new_order_b2' " @click="newOrderXZ('2')">辟谷套餐</div>
       </div>
     </div>
 
@@ -101,7 +101,8 @@ export default {
     return {
       item: 0,
       newFalge: false, //是否新建
-      newPay: true //新建订单支付
+      newPay: true ,//新建订单支付
+      classA:''//选择标示
     };
   },
   methods: {
@@ -131,6 +132,11 @@ export default {
           })
         }
       });
+    },
+    // 选择套餐
+    newOrderXZ(falge){
+      console.log(falge)
+      this.classA = falge
     }
   },
   created() {
