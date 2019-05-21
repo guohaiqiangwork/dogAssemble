@@ -48,339 +48,380 @@ import setUp from '@/views/setUp/index'//设置
 import changePassword from '@/views/changePassword/index'//修改密码
 import Tmap from '@/views/Tmap/index'//地图
 import recharge from '@/views/recharge/index' // 会员充值
+import newOrder from '@/views/newOrder/index' //新建订单
+import memberOperation from '@/views/memberOperation/index' //会员操作
+import memberD from '@/views/memberD/index'//会员操作详情
+import rechargeList from '@/views/rechargeList/index' //充值记录
 Vue.use(Router)
 
 export default new Router({
   routes: [{
-      // 调试页面
-      path: '/',
-      name: 'home',
-      meta: {
-        title: '调试',
-      },
-      component: home
+    // 调试页面
+    path: '/',
+    name: 'home',
+    meta: {
+      title: '调试',
     },
-    {
-      // 登陆
-      path: '/login',
-      name: 'login',
-      meta: {
-        title: '登陆',
-      },
-      component: login
+    component: home
+  },
+  {
+    // 登陆
+    path: '/login',
+    name: 'login',
+    meta: {
+      title: '登陆',
     },
-    {
-      path: '/home',
-      meta: {
-        title: '首页'
-      },
-      component: assemble
+    component: login
+  },
+  {
+    path: '/home',
+    meta: {
+      title: '首页'
     },
-    {
-      path: '/goodsdetail',
-      meta: {
-        title: '商品详情'
-      },
-      component: goodsdetail
+    component: assemble
+  },
+  {
+    path: '/goodsdetail',
+    meta: {
+      title: '商品详情'
     },
-    {
-      path: '/cart',
-      meta: {
-        title: '购物车页面'
-      },
-      component: cart
+    component: goodsdetail
+  },
+  {
+    path: '/cart',
+    meta: {
+      title: '购物车页面'
     },
-    {
-      path:'/paysure',
-      name:'paysure',
-      meta: {
-        title:'确认支付页面'
-      },
-      component: paysure
+    component: cart
+  },
+  {
+    path: '/paysure',
+    name: 'paysure',
+    meta: {
+      title: '确认支付页面'
     },
-    
-    {
-      path:'/addressment',
-      name: 'addressment',
-      meta: {
-        title:'地址管理页面'
-      },
-      component: addressment
+    component: paysure
+  },
+
+  {
+    path: '/addressment',
+    name: 'addressment',
+    meta: {
+      title: '地址管理页面'
     },
-    {
-      path:'/addressopt',
-      name:'addressopt',
-      meta: {
-        title:'添加地址'
-      },
-      component: addressopt
+    component: addressment
+  },
+  {
+    path: '/addressopt',
+    name: 'addressopt',
+    meta: {
+      title: '添加地址'
     },
-    {
-      path:'/immendilypay',
-      name:'immendilypay',
-      meta: {
-        title:'立即支付'
-      },
-      component: immendilypay
+    component: addressopt
+  },
+  {
+    path: '/immendilypay',
+    name: 'immendilypay',
+    meta: {
+      title: '立即支付'
     },
-    {
-      path:'/about',
-      meta: {
-        title:'关于我们'
-      },
-      component: about
+    component: immendilypay
+  },
+  {
+    path: '/about',
+    meta: {
+      title: '关于我们'
     },
-    {
-      path:'/videopage',
-      meta: {
-        title:'视频页面'
-      },
-      component: videopage
+    component: about
+  },
+  {
+    path: '/videopage',
+    meta: {
+      title: '视频页面'
     },
-    {
-      path:'/videomangment',
-      meta: {
-        title:'管理视频'
-      },
-      component: videomangment
+    component: videopage
+  },
+  {
+    path:'/videomangment',
+    meta: {
+      title:'管理视频'
     },
-    {
-      path:'/auditstate',
-      meta: {
-        title:'审核管理'
-      },
-      component: auditstate
+    component: videomangment
+  },
+  {
+    path:'/auditstate',
+    meta: {
+      title:'审核管理'
     },
-    {
-      path:'/videoupload',
-      meta: {
-        title:'审核管理'
-      },
-      component: videoupload
+    component: auditstate
+  },
+  {
+    path:'/videoupload',
+    meta: {
+      title:'审核管理'
     },
-    {
-      // 全国门店
-      path: '/nationalStores/:obj',
-      name: 'nationalStores',
-      meta: {
-        title: '全国门店'
-      },
-      component: nationalStores
+    component: videoupload
+  },
+  {
+    // 全国门店
+    path: '/nationalStores/:obj',
+    name: 'nationalStores',
+    meta: {
+      title: '全国门店'
     },
-    {
-      // 配方手册
-      path: '/recipeManual/:obj',
-      name: 'recipeManual',
-      meta: {
-        title: '配方手册'
-      },
-      component: recipeManual
+    component: nationalStores
+  },
+  {
+    // 配方手册
+    path: '/recipeManual/:obj',
+    name: 'recipeManual',
+    meta: {
+      title: '配方手册'
     },
-    {
-      // 案例视频
-      path: '/caseVideo/:obj',
-      name: 'caseVideo',
-      meta: {
-        title: '配方手册'
-      },
-      component: caseVideo
+    component: recipeManual
+  },
+  {
+    // 案例视频
+    path: '/caseVideo/:obj',
+    name: 'caseVideo',
+    meta: {
+      title: '配方手册'
     },
-    {
-      // 视频分享
-      path: '/shareVideo/:obj',
-      name: 'shareVideo',
-      meta: {
-        title: '案例视频'
-      },
-      component: shareVideo
+    component: caseVideo
+  },
+  {
+    // 视频分享
+    path: '/shareVideo/:obj',
+    name: 'shareVideo',
+    meta: {
+      title: '案例视频'
     },
-    {
-      // 公司介绍
-      path: '/introduce/:obj',
-      name: 'introduce',
-      meta: {
-        title: '公司介绍'
-      },
-      component: introduce
+    component: shareVideo
+  },
+  {
+    // 公司介绍
+    path: '/introduce/:obj',
+    name: 'introduce',
+    meta: {
+      title: '公司介绍'
     },
-    {
-      // 病症检测
-      path: '/symptoms/:obj',
-      name: 'symptoms',
-      meta: {
-        title: '病症检测'
-      },
-      component: symptoms
+    component: introduce
+  },
+  {
+    // 病症检测
+    path: '/symptoms/:obj',
+    name: 'symptoms',
+    meta: {
+      title: '病症检测'
     },
-    {
-      // 个人中心
-      path: '/personal/:obj',
-      name: 'personal',
-      meta: {
-        title: '个人中心',
-      },
-      component: personal
+    component: symptoms
+  },
+  {
+    // 个人中心
+    path: '/personal/:obj',
+    name: 'personal',
+    meta: {
+      title: '个人中心',
     },
-    {
-      // 我的钱包
-      path: '/myWallet/:obj',
-      name: 'myWallet',
-      meta: {
-        title: '我的钱包',
-      },
-      component: myWallet
+    component: personal
+  },
+  {
+    // 我的钱包
+    path: '/myWallet/:obj',
+    name: 'myWallet',
+    meta: {
+      title: '我的钱包',
     },
-    {
-      // 我的订单
-      path: '/order/:obj',
-      name: 'order',
-      meta: {
-        title: '我的订单',
-      },
-      component: order
+    component: myWallet
+  },
+  {
+    // 我的订单
+    path: '/order/:obj',
+    name: 'order',
+    meta: {
+      title: '我的订单',
     },
-    // 服务订单
-    {
-      path: '/serviceOrder/:obj',
-      name: 'serviceOrder',
-      meta: {
-        title: '服务订单',
-      },
-      component: serviceOrder
+    component: order
+  },
+  // 服务订单
+  {
+    path: '/serviceOrder/:obj',
+    name: 'serviceOrder',
+    meta: {
+      title: '服务订单',
     },
-       // 套餐详情
-       {
-        path: '/serviceOrderD/:obj',
-        name: 'serviceOrderD',
-        meta: {
-          title: '服务订单',
-        },
-        component: serviceOrderD
-      },
-    // 服务订单列表
-    {
-      path:'/sOrderList/:obj',
-      name:'sOrderList',
-      meta:{
-        title:'服务订单列表'
-      },
-      component:sOrderList
+    component: serviceOrder
+  },
+  // 套餐详情
+  {
+    path: '/serviceOrderD/:obj',
+    name: 'serviceOrderD',
+    meta: {
+      title: '服务订单',
     },
-    // 数据统计
-    {
-      path: '/dataStatistics/:obj',
-      name: 'dataStatistics',
-      meta: {
-        title: '数据统计',
-      },
-      component: dataStatistics
+    component: serviceOrderD
+  },
+  // 服务订单列表
+  {
+    path: '/sOrderList/:obj',
+    name: 'sOrderList',
+    meta: {
+      title: '服务订单列表'
     },
-    // 数据统计详情
-    {
-      path: '/dataDetails/:obj',
-      name: 'dataDetails',
-      meta: {
-        title: '数据统计详情',
-      },
-      component: dataDetails
+    component: sOrderList
+  },
+  // 数据统计
+  {
+    path: '/dataStatistics/:obj',
+    name: 'dataStatistics',
+    meta: {
+      title: '数据统计',
     },
-    {
-      // 钱包记录
-      path: '/billRecord/:obj',
-      name: 'billRecord',
-      meta: {
-        title: '我的钱包',
-      },
-      component: billRecord
+    component: dataStatistics
+  },
+  // 数据统计详情
+  {
+    path: '/dataDetails/:obj',
+    name: 'dataDetails',
+    meta: {
+      title: '数据统计详情',
     },
-    {
-      // 推荐信息
-      path: '/recommend/:obj',
-      name: 'recommend',
-      meta: {
-        title: '推荐信息',
-      },
-      component: recommend
+    component: dataDetails
+  },
+  {
+    // 钱包记录
+    path: '/billRecord/:obj',
+    name: 'billRecord',
+    meta: {
+      title: '我的钱包',
     },
-    {
-      // 专属门店
-      path: '/exclusive/:obj',
-      name: 'exclusive',
-      meta: {
-        title: '专属门店',
-      },
-      component: exclusive
+    component: billRecord
+  },
+  {
+    // 推荐信息
+    path: '/recommend/:obj',
+    name: 'recommend',
+    meta: {
+      title: '推荐信息',
     },
-    {
-      // 健康奖金
-      path: '/healthBonus/:obj',
-      name: 'healthBonus',
-      meta: {
-        title: '健康奖金',
-      },
-      component: healthBonus
+    component: recommend
+  },
+  {
+    // 专属门店
+    path: '/exclusive/:obj',
+    name: 'exclusive',
+    meta: {
+      title: '专属门店',
     },
-    {
-      // 专属门店
-      path: '/healthDetail/:obj',
-      name: 'healthDetail',
-      meta: {
-        title: '健康奖金详情',
-      },
-      component: healthDetail
+    component: exclusive
+  },
+  {
+    // 健康奖金
+    path: '/healthBonus/:obj',
+    name: 'healthBonus',
+    meta: {
+      title: '健康奖金',
     },
-    {
-      // 专属门店
-      path: '/activityRules/:obj',
-      name: 'activityRules',
-      meta: {
-        title: '健康奖金详情',
-      },
-      component: activityRules
+    component: healthBonus
+  },
+  {
+    // 专属门店
+    path: '/healthDetail/:obj',
+    name: 'healthDetail',
+    meta: {
+      title: '健康奖金详情',
     },
-    {
-      // 设置Change Password
-      path: '/setUp/:obj',
-      name: 'setUp',
-      meta: {
-        title: '设置',
-      },
-      component: setUp
+    component: healthDetail
+  },
+  {
+    // 专属门店
+    path: '/activityRules/:obj',
+    name: 'activityRules',
+    meta: {
+      title: '健康奖金详情',
     },
-    {
-      // 修改密码
-      path: '/changePassword/:obj',
-      name: 'changePassword',
-      meta: {
-        title: '设置',
-      },
-      component: changePassword
+    component: activityRules
+  },
+  {
+    // 设置
+    path: '/setUp/:obj',
+    name: 'setUp',
+    meta: {
+      title: '设置',
     },
-    {
-      // 地图
-      path: '/Tmap/:obj',
-      name: 'Tmap',
-      meta: {
-        title: '地图',
-      },
-      component: Tmap
+    component: setUp
+  },
+  {
+    // 修改密码
+    path: '/changePassword/:obj',
+    name: 'changePassword',
+    meta: {
+      title: '设置',
     },
-    {
-      // 地图
-      path: '/recharge/:obj',
-      name: 'recharge',
-      meta: {
-        title: '地图',
-      },
-      component: recharge
+    component: changePassword
+  },
+  {
+    // 地图
+    path: '/Tmap/:obj',
+    name: 'Tmap',
+    meta: {
+      title: '地图',
     },
-    {
-      path: '/404',
-      component: is404
+    component: Tmap
+  },
+  {
+    // 金额充值
+    path: '/recharge/:obj',
+    name: 'recharge',
+    meta: {
+      title: '金额充值',
     },
-    {
-      path: '/notfound',
-      component: notfound
-    }
+    component: recharge
+  },
+
+  {
+    //新建订单
+    path: '/newOrder/:obj',
+    name: 'newOrder',
+    meta: {
+      title: '新建订单',
+    },
+    component: newOrder
+  },
+  {
+    //会员操作
+    path: '/memberOperation/:obj',
+    name: 'memberOperation',
+    meta: {
+      title: '会员操作',
+    },
+    component: memberOperation
+  },
+  {
+    //会员操作详情
+    path: '/memberD/:obj',
+    name: 'memberD',
+    meta: {
+      title: '会员操作详情',
+    },
+    component: memberD
+  },
+  {
+    // 充值记录
+    path: '/rechargeList/:obj',
+    name: 'rechargeList',
+    meta: {
+      title: '充值记录'
+    },
+    component: rechargeList
+  },
+  {
+    path: '/404',
+    component: is404
+  },
+  {
+    path: '/notfound',
+    component: notfound
+  }
   ]
 })

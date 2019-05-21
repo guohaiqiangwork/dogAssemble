@@ -13,7 +13,6 @@
                 <p class="video_name">{{item.videoName}}</p>
                 <p class="video_desc">{{item.videoDesc}}</p>
                 <p class="video_price">{{item.videoPrice}}</p>
-                z
             </div>
         </div>
     </div>
