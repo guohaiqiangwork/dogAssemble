@@ -13,7 +13,7 @@ import recommend from '@/views/recommend/index' //推荐信息
 import exclusive from '@/views/exclusive/index' //专属门店
 import is404 from '@/views/page/is404'
 import notfound from '@/views/page/notfound'
-import assemble from '@/views/Assemble/index'           //主页
+import assemble from '@/views/Assemble/index'           //主页                                    +
 import goodsdetail from '@/views/goodsDetail/index'     //商品详情
 import cart from '@/views/cart/index'                   //购物车
 import paysure from '@/views/paysure/index'             //确认支付页面
@@ -59,12 +59,71 @@ Vue.use(Router)
 export default new Router({
   routes: [{
     // 调试页面
-    path: '/',
-    name: 'home',
+    path: '/hom',
+    
     meta: {
       title: '调试',
     },
     component: home
+  },
+  {
+    // 登陆
+    path: '/',
+    name: 'login',
+    meta: {
+     
+      title: '首页',
+    },
+    component:  resolve => require(['@/components/TabBar.vue'], resolve),
+    children:[
+        {
+            path: '/home',
+            name: 'home',
+            meta: {
+                title: '首页',
+            },
+            component: resolve => require(['@/views/Assemble/index'], resolve),
+        },
+        {
+          path: '/goodsdetail',
+          meta: {
+            title: '商品详情'
+          },
+          component: resolve => require(['@/views/goodsDetail/index'], resolve),
+        },
+        {
+          path: '/cart',
+          name: 'cart',
+          meta: {
+            title: '购物车页面'
+          },
+          component: resolve => require(['@/views/cart/index'], resolve),
+        },
+        {
+          path: '/paysure',
+          name: 'paysure',
+          meta: {
+            title: '确认支付页面'
+          },
+          component: resolve => require(['@/views/paysure/index'], resolve),
+        },
+        {
+          path: '/addressment',
+          name: 'addressment',
+          meta: {
+            title: '地址管理页面'
+          },
+          component: resolve => require(['@/views/addressment/index'], resolve),
+        },
+        {
+          path: '/addressopt',
+          name: 'addressopt',
+          meta: {
+            title: '添加地址'
+          },
+          component: resolve => require(['@/views/addressment/option'], resolve),
+        },
+      ]
   },
   {
     // 登陆
@@ -76,52 +135,19 @@ export default new Router({
     },
     component: login
   },
-  {
-    path: '/home',
-    meta: {
-      title: '首页'
-    },
-    component: assemble
-  },
-  {
-    path: '/goodsdetail',
-    meta: {
-      title: '商品详情'
-    },
-    component: goodsdetail
-  },
-  {
-    path: '/cart',
-    meta: {
-      title: '购物车页面'
-    },
-    component: cart
-  },
-  {
-    path: '/paysure',
-    name: 'paysure',
-    meta: {
-      title: '确认支付页面'
-    },
-    component: paysure
-  },
+  // {
+  //   path: '/home',
+  //   meta: {
+  //     title: '首页'
+  //   },
+  //   component: assemble
+  // },
+ 
+ 
+  
 
-  {
-    path: '/addressment',
-    name: 'addressment',
-    meta: {
-      title: '地址管理页面'
-    },
-    component: addressment
-  },
-  {
-    path: '/addressopt',
-    name: 'addressopt',
-    meta: {
-      title: '添加地址'
-    },
-    component: addressopt
-  },
+ 
+
   {
     path: '/immendilypay',
     name: 'immendilypay',

@@ -1,15 +1,17 @@
 <template>
   <div id="TabBar">
+
+    <router-view></router-view>
     <div class="tabBar_bt">
       <flexbox style="text-align: center;padding: 4%;    background-color: #fff;">
         <flexbox-item>
-          <div class="flex-demo" @click="didClickedItem(0,'nationalStores')">
+          <div class="flex-demo" @click="didClickedItem(0,'home')">
             <img src="../assets/images/Signal.png" style="width: 30%;">
           </div>
           <div :class="{ 'active': actives == '0'}">首页</div>
         </flexbox-item>
         <flexbox-item>
-          <div class="flex-demo" @click="didClickedItem(1)">
+          <div class="flex-demo" @click="didClickedItem(1,'cart')">
             <img src="../assets/images/Signal.png" style="width: 30%;">
           </div>
           <div :class="{ 'active': actives == '1'}">商户</div>
