@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="background-color:#F8F8F8;min-height:700px">
     <!-- 搜索 -->
     <div class="search_box">
       <i class="weui-icon-search search_icon"></i>
@@ -12,23 +12,46 @@
     </div>
     <!-- 配方 -->
     <div class="symptoms_border font_size_14 font_color_1A">
-      <div>配方</div>
+      <div class="div_display_flex">
+        <div style="  margin-left: -2%;"></div>
+        <div class="margin_left_div3">套餐配方</div>
+      </div>
       <div class="margin_top_div3 sym_bor">
         可选用淡竹叶5克、莲子心5克、炒栀子6克、单皮3
         克，每日一剂即可。
       </div>
+      <div class="div_display_flex">
+        <div class="backgroun_color_E9 font_color_4A font_size_13 padding_t1_l2">注意事项</div>
+        <div class="font_size_13 font_color_10 margin_left_div3 margin_top_div1">忌酒、忌烟、忌辛辣</div>
+      </div>
+      <div class="div_display_flex margin_top_div3">
+        <div class="backgroun_color_E9 font_color_4A font_size_13 padding_t1_l2">适宜人群</div>
+        <div class="font_size_13 font_color_10 margin_left_div3 margin_top_div1">脾胃不好人群</div>
+      </div>
+      <div class="div_display_flex margin_top_div3">
+        <div class="backgroun_color_E9 font_color_4A font_size_13 padding_t1_l2">适应病症</div>
+        <div class="font_size_13 font_color_10 margin_left_div3 margin_top_div1">糖尿病、高血压</div>
+      </div>
     </div>
     <!-- 病症 -->
     <div class="symptoms_border font_size_14 font_color_1A">
-      <div>多种病症</div>
+      <div class="div_display_flex">
+        <div style="width:13px;margin-left:-2%">
+          <img src="../../assets/images/tS@2x.png" class="img_width_100">
+        </div>
+        <div class="margin_left_div2 font_size_14 font_color_4A">贴心小提示</div>
+      </div>
       <div class="margin_top_div3">多病症需到门店经过营养师面诊，根据对应的进行配餐</div>
     </div>
     <!-- 推荐门店 -->
-    <div>
-      <div class="div_display_flex font_color_4A margin_top_div8 font_size_15">
-        <div class="border_left margin_right_div2" style="margin-left: 11%;"></div>推荐门店
-        <div class="border_left margin_left_div2"></div>
+    <div class="symptoms_border">
+      <div class="div_display_flex">
+        <div style="width:13px;margin-left:-2%">
+          <img src="../../assets/images/门店@2x.png" class="img_width_100">
+        </div>
+        <div class="margin_left_div2 font_size_14 font_color_4A">推荐门店</div>
       </div>
+
       <div
         class="national_list font_color_00 font_size_13 backgroun_color_fff margin_top_div3"
         v-for="item in [1,3]"
@@ -39,7 +62,9 @@
         </div>
         <div class="div_display_flex margin_top_div3">
           <div class="div_width_70 margin_left_div2">钢铁大街16号</div>
-          <div class="div_width_30 margin_right_div2 text_right" @click="goToMap">0.8公里</div>
+          <div class="div_width_30 margin_right_div2 text_right" @click="goToMap">
+                <img src="../../assets/images/1440@2x.png" width="12px">
+          </div>
         </div>
         <div class="div_display_flex margin_top_div3">
           <div class="div_width_70 margin_left_div2">营业时间</div>
@@ -152,12 +177,15 @@ export default {
   width: 94%;
 }
 .symptoms_border {
-  width: 90%;
-  margin-left: 5%;
+  width: 85%;
+  margin-left: 4%;
   margin-top: 5%;
+  background-color: #ffffff;
+  padding: 3%;
+  border-radius: 5px;
 }
 .sym_bor {
-  border: 1px solid #e2e2e2;
+  /* border: 1px solid #e2e2e2; */
   padding: 2%;
   line-height: 2;
 }
@@ -168,9 +196,6 @@ export default {
   margin-top: 2%;
 }
 .national_list {
-  width: 93%;
-  margin-left: 2%;
-  border: 1px solid #e9e9e9;
-  border-radius: 8px;
+  border-bottom: 1px solid #e9e9e9;
 }
 </style>

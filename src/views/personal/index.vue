@@ -447,6 +447,11 @@ export default {
 </script>
 
 <style scoped>
+/* 拨打电话 */
+a:link {
+  color: #333333;
+  text-decoration: none;
+}
 .personal_img_bj {
   background-image: url("../../assets/images/bg.png");
   background-size: 100%;
