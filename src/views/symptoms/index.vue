@@ -62,7 +62,9 @@
         </div>
         <div class="div_display_flex margin_top_div3">
           <div class="div_width_70 margin_left_div2">钢铁大街16号</div>
-          <div class="div_width_30 margin_right_div2 text_right" @click="goToMap">0.8公里</div>
+          <div class="div_width_30 margin_right_div2 text_right" @click="goToMap">
+                <img src="../../assets/images/1440@2x.png" width="12px">
+          </div>
         </div>
         <div class="div_display_flex margin_top_div3">
           <div class="div_width_70 margin_left_div2">营业时间</div>
@@ -196,5 +198,4 @@ export default {
 .national_list {
   border-bottom: 1px solid #e9e9e9;
 }
-
 </style>
