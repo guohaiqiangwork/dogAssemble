@@ -5,7 +5,7 @@
                 <i class="weui-icon-search search_icon"></i>
                 <input type="text" placeholder="搜索您想找的视频">
             </div>
-            <div class="flex-between align-center">
+            <div class="flex-between align-center" @click="goOrder">
                 <span>视频订单</span>
                  <x-icon type="ios-arrow-right" class="icon_middle"></x-icon>
             </div>
@@ -77,6 +77,9 @@ export default {
     methods: {
         goList() {
             this.$router.push('/videolist');
+        },
+        goOrder() {
+            this.$router.push("/videosorder");
         }
     },
     mounted() {

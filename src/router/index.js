@@ -26,6 +26,7 @@ import videomangment from '@/views/videoMangment/index'             // 管理视
 import auditstate from '@/views/videoMangment/auditState/index'             // 状态审核
 import videoupload from '@/views/videoMangment/videoUpload/index'             // 视频上传
 import videolist from '@/views/about/videoList/index'             // 视频列表
+import videosorder from '@/views/about/videosOrder/index'             // 视频订单
 
 
 
@@ -135,12 +136,20 @@ export default new Router({
       title: '关于我们'
     },
     component: about
-  }, {
+  }, 
+  {
     path: '/videolist',
     meta: {
       title: '视频列表'
     },
     component: videolist
+  },
+  {
+    path: '/videosorder',
+    meta: {
+      title: '视频订单'
+    },
+    component: videosorder
   },
   {
     path: '/videopage',

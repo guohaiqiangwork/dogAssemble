@@ -31,7 +31,13 @@
                     <p>{{item.videoPrice}}</p>
                 </div>
 
-                <div></div>
+                <div class="flex-between kind_list font-blod">
+                    <p class="nowrap mr-space">说明原因</p>
+                    <p> 视频具体没有过的原因，那些有问题
+                        视频具体没有过的原因，那些有问题
+                        视频具体没有过的原因，那些有问题
+                    </p>
+                </div>
             </div>
         </div>
     </div>
@@ -93,9 +99,18 @@ export default {
             .mt-sapce{
                 margin-top: 0.25rem;
             }
+            .font-blod{
+                font-weight: 700;
+            }
             .kind_list{
                 display: flex;
                 padding: 0 0.4rem 0.32rem;
+                .nowrap{
+                    white-space: nowrap;
+                }
+                .mr-space{
+                    margin-right: 0.33rem; 
+                }
                 .kind_name{
                     min-width: 1.32rem;
                     margin-right: 0.26rem;
