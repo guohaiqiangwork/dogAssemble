@@ -39,6 +39,7 @@
 .background_color_F8{
   background-color: #F8F8F8
 }
+
 /* margin */
 .margin_top_div8 {
   margin-top: 8%;
@@ -102,6 +103,9 @@
 }
 .padding_top_div8{
   padding-top:8%
+}
+.padding_t1_l2{
+  padding: 1% 2%;
 }
 .div_text_left {
   text-align: left;
