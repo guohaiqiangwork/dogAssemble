@@ -321,3 +321,10 @@ color: #102023
 .align-center{
   align-items: center;
 }
+/* 小🍟 */
+.sy_s_t {
+  width: 6px;
+  height: 23px;
+  background-color: #ff8156;
+  border-radius: 5px
+}

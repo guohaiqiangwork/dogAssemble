@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style=" background-color:#F3F5F8;    padding-top: 3%;">
     <!-- 搜索 -->
     <div class="search_box">
       <i class="weui-icon-search search_icon" style="color:#999999"></i>
@@ -11,14 +11,38 @@
       <i></i>
     </div>
     <!-- 配方列表 -->
-    <div class="font_size_14 font_color_10" v-for="item in [1,2,3,4,]">
-      <div class="margin_top_div5 margin_left_div6">配方1</div>
+    <div class="font_size_14 font_color_10 recie_border_w" v-for="item in [1,2,3,4,]">
+      <div class="div_display_flex">
+        <div class="margin_left_div3 sy_s_t"></div>
+        <div class="margin_top_div1 margin_left_div3">套餐配方</div>
+      </div>
+
       <div class="margin_top_div3 margin_left_div8">苹果4g 、 芹菜5g 、 芒果10g、 冰40g克</div>
-      <div class="margin_top_div3 margin_left_div8">适应：</div>
+      <!-- <div class="margin_top_div3 margin_left_div8">适应：</div>
       <div style="overflow:hidden;zoom:1;">
         <div class="backgroun_color_E9 b_z_b font_size_12" v-for="item in [1,2,3,333,44]">糖尿病</div>
+      </div>-->
+      <div class="div_display_flex">
+        <div
+          class="backgroun_color_E9 font_color_4A font_size_13 padding_t1_l2 margin_left_div6 margin_top_div3"
+        >注意事项</div>
+        <div class="font_size_13 font_color_10 margin_left_div3 margin_top_div3">忌酒、忌烟、忌辛辣</div>
+      </div>
+        <div class="div_display_flex">
+        <div
+          class="backgroun_color_E9 font_color_4A font_size_13 padding_t1_l2 margin_left_div6 margin_top_div3"
+        >适宜人群</div>
+        <div class="font_size_13 font_color_10 margin_left_div3 margin_top_div3">忌酒、忌烟、忌辛辣</div>
+      </div>
+         <div class="div_display_flex">
+        <div
+          class="backgroun_color_E9 font_color_4A font_size_13 padding_t1_l2 margin_left_div6 margin_top_div3"
+        >适应病症</div>
+        <div class="font_size_13 font_color_10 margin_left_div3 margin_top_div3">忌酒、忌烟、忌辛辣</div>
       </div>
     </div>
+    </div>
+
   </div>
 </template>
 <script>
@@ -66,5 +90,13 @@ export default {
   margin-left: 8%;
   margin-top: 3%;
   float: left;
+}
+.recie_border_w {
+  width: 90%;
+  background-color: #fff;
+  border-radius: 5px;
+  margin-left: 3%;
+  padding: 2%;
+  margin-top: 2%;
 }
 </style>

@@ -13,7 +13,7 @@
     <!-- 配方 -->
     <div class="symptoms_border font_size_14 font_color_1A">
       <div class="div_display_flex">
-        <div class="sy_s_t"></div>
+        <div style="  margin-left: -2%;"></div>
         <div class="margin_left_div3">套餐配方</div>
       </div>
       <div class="margin_top_div3 sym_bor">
@@ -196,12 +196,5 @@ export default {
 .national_list {
   border-bottom: 1px solid #e9e9e9;
 }
-/* 小🍟 */
-.sy_s_t {
-  width: 6px;
-  height: 23px;
-  background-color: #ff8156;
-  border-radius: 5px;
-  margin-left: -2%;
-}
+
 </style>
