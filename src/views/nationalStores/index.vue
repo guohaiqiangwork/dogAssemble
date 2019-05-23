@@ -76,7 +76,7 @@ export default {
     goToMap() {
       console.log("7897");
       this.$router.push({
-        name: "map",
+        name: "Tmap",
         params: {
           obj: JSON.stringify({
             type: "profession",
