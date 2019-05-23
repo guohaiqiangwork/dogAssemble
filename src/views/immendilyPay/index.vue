@@ -20,6 +20,14 @@
                 </div>
             </div>
             <div class="post_detail">
+                 <div class="post_list">
+                    <span>属性一</span>
+                    <span>规格</span>
+                </div>
+                 <div class="post_list">
+                    <span>属性二</span>
+                    <span>规格</span>
+                </div>
                 <div class="post_list">
                     <span>合计金额</span>
                     <span>￥200.00</span>

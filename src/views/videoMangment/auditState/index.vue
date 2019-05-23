@@ -30,6 +30,8 @@
                     <p class="kind_name">视频价格</p>
                     <p>{{item.videoPrice}}</p>
                 </div>
+
+                <div></div>
             </div>
         </div>
     </div>

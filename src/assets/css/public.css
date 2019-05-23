@@ -311,7 +311,9 @@ color: #102023
   display: flex;
   justify-content: space-around;
 }
-
+.flex-start{
+  display: flex;
+}
 .align-center{
   align-items: center;
 }

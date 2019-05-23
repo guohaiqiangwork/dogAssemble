@@ -11,6 +11,10 @@
     <itemes></itemes>
     <div class="hot_tit">热门推荐</div>
     <hot></hot>
+    <div class="bg_gray">
+        <div class="hot_tit mt-space">全部商品</div>
+        <whoel></whoel>
+    </div>
     <!-- <item-goods></item-goods> -->
   </div>
 </template>
@@ -20,7 +24,8 @@ export default {
   components:{
     Swiper,
     Itemes:resolve => require(['./goods/index.vue'],resolve),
-    hot:resolve => require(['./hotness/index.vue'],resolve)
+    hot:resolve => require(['./hotness/index.vue'],resolve),
+    whoel:resolve => require(['./wholegoods/index.vue'],resolve)
   },
   data() {
     return {
@@ -54,6 +59,14 @@ export default {
 <style lang="less">
   #home{
     height: 100%;
+    .mt-space{
+      margin-top: 0.35rem;
+     
+    }
+    .bg_gray{
+      background: #F6F6F6;
+      overflow: hidden;
+    }
      .hot_tit{
         display: flex;
         align-items: center;

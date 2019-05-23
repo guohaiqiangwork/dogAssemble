@@ -21,7 +21,7 @@
                     </span>
                    
 
-                    <div class="deal_down">去结算</div>
+                    <div class="deal_down" @click="payPage">去结算</div>
                 </div>
             </div>
         </div>
@@ -45,8 +45,8 @@ export default {
         }
     },
     methods: {
-        name() {
-            
+        payPage() {
+            this.$router.push('/paysure')
         }
     },
     created(){

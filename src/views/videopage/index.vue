@@ -10,7 +10,8 @@
         <div v-transfer-dom>
             <popup v-model="show" position="bottom" max-height="50%">
                 <div class="popup_box">
-                    <div class="search_list">
+
+                    <!-- <div class="search_list">
                         <div class="list_item">
                             <div class="video_img"></div>
                             <div class="flex-around flex-clo ">
@@ -18,7 +19,6 @@
                                 <p>查看此视频对糖尿病患者有帮助</p>
                             </div>
                             <x-icon type="ios-close-empty" size="30" class="icon_pos" @click="show = false"></x-icon>
-                            <!-- <x-icon type="ios-arrow-right" class="icon_middle"></x-icon> -->
                         </div>
                     </div>
         
@@ -34,9 +34,23 @@
                     <div class="pay_price">
                         <img class="icon_size" src="../../assets/images/scan.png" alt="">
                         ¥19.90
+                    </div> -->
+
+                    <p class="text-right">
+                        <x-icon type="ios-close-empty" size="30"  @click="show = false"></x-icon>
+                    </p>
+                    
+                    <div class="flex-between">
+                         <div  class="flex-around flex-clo">
+                             <p class="video_name">王阳案例1</p>
+                             <p>查看此视频对糖尿病患者有帮助</p>
+                         </div>
+                          <p class="pay_price">
+                             ￥19.90
+                         </p>
                     </div>
                     <div class="pay_btn">
-                        立即充值
+                        立即购买
                     </div>
                 </div>
             </popup>
@@ -82,13 +96,16 @@ export default {
   .popup_box{
         padding: 0 0.3rem;
         font-size: 0.28rem;
-        .search_list{
-            .list_item{
-                display: flex;
-                justify-content: flex-start;
-                margin: 0.34rem 0;
-                // padding: 0.17rem 0.32rem;
-                align-items: center;
+        .text-right{
+            text-align: right;
+        }
+        // .search_list{
+            // .list_item{
+            //     display: flex;
+            //     justify-content: flex-start;
+            //     margin: 0.34rem 0;
+            //     // padding: 0.17rem 0.32rem;
+            //     align-items: center;
                 .video_img{
                     width: 2.1rem;
                     height: 1.4rem;
@@ -105,13 +122,13 @@ export default {
                     line-height:0.37rem;
                     color:rgba(0,0,0,0.52);
                 }
-                .icon_pos{
-                    position: absolute;
-                    top: 0.3rem;
-                    right: 0.3rem;
-                }
-            }
-        }
+                // .icon_pos{
+                //     position: absolute;
+                //     top: 0.3rem;
+                //     right: 0.3rem;
+                // }
+            // }
+        // }
         .pay_btn{
             width:6.9rem;
             height:0.9rem;
@@ -123,7 +140,7 @@ export default {
             color:rgba(255,255,255,1);
         }
         .pay_price{
-            margin: 0.41rem 0 0.48rem 0;
+            // margin: 0.41rem 0 0.48rem 0;
             font-size:0.48rem;
             text-align: right;
             line-height:0.67rem;

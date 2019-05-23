@@ -25,6 +25,7 @@ import videopage from '@/views/videopage/index'             // 视频页面
 import videomangment from '@/views/videoMangment/index'             // 管理视频页面
 import auditstate from '@/views/videoMangment/auditState/index'             // 状态审核
 import videoupload from '@/views/videoMangment/videoUpload/index'             // 视频上传
+import videolist from '@/views/about/videoList/index'             // 视频列表
 
 
 
@@ -66,10 +67,11 @@ export default new Router({
   },
   {
     // 登陆
-    path: '/login',
+    path: '/login/:id',
     name: 'login',
     meta: {
-      title: '登陆',
+      word:'login',
+      title: '登录',
     },
     component: login
   },
@@ -133,6 +135,12 @@ export default new Router({
       title: '关于我们'
     },
     component: about
+  }, {
+    path: '/videolist',
+    meta: {
+      title: '视频列表'
+    },
+    component: videolist
   },
   {
     path: '/videopage',

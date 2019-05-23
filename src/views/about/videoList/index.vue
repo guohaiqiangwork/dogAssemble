@@ -1,39 +1,14 @@
 <template>
-    <div id="about-us">
-        <div class="flex-between align-center head-box">
+    <div id="video-list">
+        
             <div class="search_box">
                 <i class="weui-icon-search search_icon"></i>
                 <input type="text" placeholder="搜索您想找的视频">
             </div>
-            <div class="flex-between align-center">
-                <span>视频订单</span>
-                 <x-icon type="ios-arrow-right" class="icon_middle"></x-icon>
-            </div>
-        </div>
-
-
-
-        <div class="case_box">
-            <div class="case_item  flex-clo" @click="goList">
-                <p class="case_neme">糖尿病</p>
-                <!-- <p class="case_eng">Diabetes</p> -->
-            </div>
-            <div class="case_item  flex-clo" @click="goList">
-                <p class="case_neme">糖尿病</p>
-                <!-- <p class="case_eng">Diabetes</p> -->
-            </div>
-            <div class="case_item  flex-clo" @click="goList">
-                <p class="case_neme">糖尿病</p>
-                <!-- <p class="case_eng">Diabetes</p> -->
-            </div>
-            <div class="case_item  flex-clo" @click="goList">
-                <p class="case_neme">糖尿病</p>
-                <!-- <p class="case_eng">Diabetes</p> -->
-            </div>
-        </div>
-        <!-- 搜索显示的列表 -->
-        <!-- <div class="search_list">
-            <div class="list_item flex-between" v-for="(item,index) in searchList" :key="index">
+          
+  
+        <div class="search_list">
+            <div class="list_item flex-between" v-for="(item,index) in searchList" :key="index" @click="visitTv">
                 <div class="video_img"></div>
                 <div class="flex-around flex-clo ">
                     <p class="video_name">{{item.videoname}}</p>
@@ -41,24 +16,14 @@
                 </div>
                 <x-icon type="ios-arrow-right" class="icon_middle"></x-icon>
             </div>
-        </div> -->
-
-
-
-
-        <!-- <div class="flex-between list_opt">
-            <span>视频订单</span>
-            <span>
-                <x-icon type="ios-arrow-right" class="icon_middle"></x-icon>
-            </span>
-        </div> -->
+        </div>
     </div>
 </template>
 <script>
 export default {
     data() {
         return {
-            searchList: [
+           searchList: [
                 {
                     videoid:'',
                     videoimg:'',
@@ -75,17 +40,14 @@ export default {
         }
     },
     methods: {
-        goList() {
-            this.$router.push('/videolist');
+        visitTv() {
+            this.$router.push('/videopage')
         }
     },
-    mounted() {
-        
-    },
-}
+}   
 </script>
 <style lang="less">
-#about-us{
+#video-list{
     height: 100%;
     overflow: hidden;
     .vux-x-icon {
@@ -97,7 +59,7 @@ export default {
     .search_box{
         height: 0.7rem;
         // width: 5.18rem;
-        
+        margin: 0.24rem 0.3rem;
         padding:  0 0.31rem;
         // margin: 0.65rem 1.5rem 0;
         border-radius:0.35rem;

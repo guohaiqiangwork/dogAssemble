@@ -65,7 +65,7 @@
                             <inline-x-number width="30px" :min="0"></inline-x-number>
                         </p>
                     </div>
-                    <div class="buy_btn">确认</div>
+                    <div class="buy_btn" @click="buyGoods">确认</div>
                 </div> 
             </popup>
         </div>
@@ -112,6 +112,9 @@ export default {
         addCart(){
             this.popupshow = true;
         },
+        buyGoods(){
+            this.$router.push('/paysure')
+        }
     },
     mounted() {
         

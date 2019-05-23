@@ -9,7 +9,7 @@
                         <span>王佳宇</span>
                         <span>13654550023</span>
                     </div>
-                    <img class="icon_right" src="../../assets/images/right.png" alt="">
+                    <img class="icon_right" src="../../assets/images/right.png" alt="" @click="goAddress">
                 </div>
                 <div class="address_msg">
                     <div class="topic_box">
@@ -22,7 +22,7 @@
         <div class="form_box">
             
             <div class="goods_list">
-                
+<!--                 
                 <img src="../../assets/images/WechatIMG102.png" alt="">
                 <div class="item_msg">
                     <p>熊孩子综合蔬菜干香菇脆秋葵干330g袋果蔬脆</p>
@@ -30,9 +30,38 @@
                         <span>¥13.9</span>
                         <span class="item_num">×3</span>
                     </p>
+                </div> -->
+
+
+                <div class="flex-between">
+                    <div class="flex-between flex-clo align-center items">
+                        <img src="../../assets/images/WechatIMG102.png" alt="">
+                        <p>¥13.9</p>
+                    </div>
+                    <div class="flex-between flex-clo align-center items">
+                        <img src="../../assets/images/WechatIMG102.png" alt="">
+                        <p>¥13.9</p>
+                    </div>
+                    <div class="flex-between flex-clo align-center items">
+                        <img src="../../assets/images/WechatIMG102.png" alt="">
+                        <p>¥13.9</p>
+                    </div>
+                </div>
+
+                <div class="flex-start align-center">
+                    <span>共2件</span>
+                    <x-icon type="ios-arrow-right" size='30'></x-icon>
                 </div>
             </div>
             <!-- 单行form -->
+            <div class="item_form">
+                <span>规格一</span>
+                <span>规格单位</span>
+            </div>
+            <div class="item_form">
+                <span>规格二</span>
+                <span>规格单位</span>
+            </div>
             <div class="item_form">
                 <span>合计金额</span>
                 <span>￥200</span>
@@ -70,8 +99,8 @@ export default {
         }
     },
     methods: {
-        name() {
-            
+        goAddress() {
+            this.$router.push('/addressment')
         }
     },
     mounted() {
@@ -151,6 +180,9 @@ export default {
                 display: flex;
                 justify-content: space-between;
                 padding: 0.36rem 0.5rem;
+                .items{
+                    margin-right: 0.34rem;
+                }
                 img{
                     width: 1.4rem;
                     height: 1.4rem;

@@ -20,7 +20,7 @@
                             <p>{{item.address}}</p>
                         </div>
                         <div class="option">
-                            <img  src="../../assets/images/edit.png" alt="">
+                            <img  @click="addAddress" src="../../assets/images/edit.png" alt="">
                         </div>
                     </div>
                 </swipeout-item>
@@ -28,7 +28,7 @@
         </div>
         <div class="add_button">
             <x-icon type="ios-plus-outline" size="28"></x-icon>
-            <span class="ml-space">新增收货地址</span>
+            <span class="ml-space" @click="addAddress">新增收货地址</span>
         </div>
     </div>
 </template>
@@ -67,6 +67,9 @@ export default {
         },
         onButtonClick(){
 
+        },
+        addAddress(){
+            this.$router.push('/addressopt')
         }
     },
     created(){

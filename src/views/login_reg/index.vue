@@ -5,7 +5,7 @@
           <p class="logo_title">果蔬精粹吧</p>
         </div>
 
-        <div class="form" v-if="false">
+        <div class="form" v-if="haslogin == 2">
            <!-- <x-input label-width="4em"  placeholder="I'm placeholder"></x-input> -->
 
             <x-input  keyboard="number" is-type="china-mobile" placeholder="请输入手机号码" @on-click-clear-icon='clear'>
@@ -21,7 +21,7 @@
             <x-input disabled></x-input>
         </div>
 
-        <div class="form">
+        <div class="form" v-else>
            <x-input  keyboard="number" is-type="china-mobile" placeholder="请输入手机号码" @on-click-clear-icon='clear'>
               <img slot="label" style="padding-right:10px;display:block;with:0.33rem;height:0.33rem" src="../../assets/images/phone@2x.png">
             </x-input>
@@ -30,11 +30,11 @@
             </x-input>
             <x-input disabled></x-input>
             <p class="flex-between px-15">
-              <a href="#">忘记密码</a><a href="#">立即注册</a>
+              <a href="#" @click="editPass">忘记密码</a><a href="#" @click="regTest">立即注册</a>
             </p>
         </div>
 
-        <div class="login_btn">{{btn}}</div>
+        <div class="login_btn">{{haslogin == 1 ? '登录'  : '注册'}}</div>
         <p class="login_tit">登录即代表您已同意《御康商贸用户隐私政策》</p>
   </div>
 </template>
@@ -46,6 +46,11 @@ export default {
   components: {
     XInput,
   },
+  computed: {
+    haslogin(){
+      return this.$route.params.id
+    }
+  },
   data() {
     return {
       btn:'注册',
@@ -55,6 +60,12 @@ export default {
   methods: {
     clear(){
 
+    },
+    editPass(){
+      this.$router.push('/changePassword/:obj',{obj:1});
+    },
+    regTest(){
+      this.$router.push('/login/2')
     }
   },
   created() {
@@ -65,7 +76,8 @@ export default {
       settitle('注册与登录');
   },
   mounted() {
-   console.log('我是登录页面')
+    
+   console.log('我是登录页面',this.haslogin)
 
   }
 };
