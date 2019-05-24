@@ -59,7 +59,7 @@ Vue.use(Router)
 export default new Router({
   routes: [{
     // 调试页面
-    path: '/hom',
+    path: '/',
     
     meta: {
       title: '调试',
