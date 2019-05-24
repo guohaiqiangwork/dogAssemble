@@ -60,7 +60,7 @@
             <!-- class="img_width25" class="img_width_100"-->
             <img src="../../assets/images/dingdan@2x.png" width="25px">
           </div>
-          <div>我的订单</div>
+          <div>商城订单</div>
         </div>
         <div class="personal_cd text_center" @click="goToHealthBonus">
           <div class="margin_top28">
@@ -76,6 +76,7 @@
           </div>
           <div>会员操作</div>
         </div>
+
         <div class="personal_cd text_center" @click="goToSetUp">
           <div class="margin_top28">
             <!-- class="img_width25" class="img_width_100"-->
@@ -83,22 +84,34 @@
           </div>
           <div>设置中心</div>
         </div>
-        <div class="personal_cd text_center" @click="shopDY">
+        <div class="personal_cd text_center" @click="goToSetUp">
           <div class="margin_top28">
             <!-- class="img_width25" class="img_width_100"-->
             <img src="../../assets/images/dingdan@2x.png" width="25px">
           </div>
-          <div>店铺设置</div>
+          <div>食养配方</div>
         </div>
-        <div class="personal_cd text_center">
+           <div class="personal_cd text_center" @click="goToSetUp">
           <div class="margin_top28">
             <!-- class="img_width25" class="img_width_100"-->
+            <img src="../../assets/images/dingdan@2x.png" width="25px">
+          </div>
+          <div>视频管理</div>
+        </div>
+        <!-- <div class="personal_cd text_center" @click="shopDY">
+          <div class="margin_top28">
+            <img src="../../assets/images/dingdan@2x.png" width="25px">
+          </div>
+          <div>店铺设置</div>
+        </div> -->
+        <!-- <div class="personal_cd text_center">
+          <div class="margin_top28">
             <img src="../../assets/images/dingdan@2x.png" width="25px">
           </div>
           <div>
             <a :href="'tel:' + 15049372463">联系客服</a>
           </div>
-        </div>
+        </div> -->
 
         <!-- </div> -->
       </div>
@@ -197,7 +210,7 @@
           <img src="../../assets/images/提醒 (3)@2x.png" class="per_img_width_18 margin_top_div8">
           <div class="margin_top_div3">您当前帐户已被冻结</div>
           <div class="margin_top_div3">需解冻才可以正常使用</div>
-            <div class="margin_top_div3">1231313***33</div>
+          <div class="margin_top_div3">1231313***33</div>
           <div class="pass_list_w">
             <div class="search_box">
               <img src="../../assets/images/验证码@2x.png" class="width_16">
@@ -245,7 +258,7 @@ export default {
   name: "personal",
   data() {
     return {
-      falg: "g", //个人 商铺 家庭展示标记
+      falg: "sj", //个人 商铺 家庭展示标记
       sendAuthCode: true /*布尔值，通过v-show控制显示‘获取按钮’还是‘倒计时’ */,
       auth_time: 0 /*倒计时 计数器*/,
       accountFalge: true, //账户冻结
