@@ -1,22 +1,30 @@
 <template>
-  <div>
+  <div style="background-color:#F3F5F8;padding:1%">
     <!-- 押金充值 -->
     <div class="recharge_div_b margin_top_div3">
       <div class="div_display_flex padding_top_div6">
         <div class="div_width_50 margin_left_div6 font_size_16 font_color_1A">押金充值</div>
-        <div class="div_width_50 text_right margin_right_div6 font_size_14 font_color_4A" @click="goToRechargeList">充值记录</div>
+        <div
+          class="div_width_50 text_right margin_right_div6 font_size_14 font_color_4A"
+          @click="goToRechargeList"
+        >充值记录</div>
       </div>
       <div class="margin_top_div8">
         <input type="text" class="recharge_input_b" placeholder="输入您想充值的金额…">
       </div>
-      <div class="div_display_flex margin_top_div3 padding_bottom_4">
-        <div class="div_width_70"></div>
+      <div class="div_display_flex margin_top_div6 padding_bottom_4">
         <div class="recharge_button_b">立即充值</div>
       </div>
     </div>
     <!-- 会员充值 -->
     <div class="recharge_div_b margin_top_div5">
-      <div class="font_size_16 font_color_1A margin_left_div6">会员充值</div>
+      <div class="div_display_flex padding_top_div6">
+        <div class="div_width_50 margin_left_div6 font_size_16 font_color_1A">会员充值</div>
+        <div
+          class="div_width_50 text_right margin_right_div6 font_size_14 font_color_4A"
+          @click="goToRechargeList"
+        >充值记录</div>
+      </div>
       <div>
         <div class="pass_list_w">
           <div class="search_box">
@@ -30,22 +38,30 @@
           </div>
         </div>
       </div>
-      <div class="div_display_flex">
-        <div class="div_width_43 text_center b_t_c" :style="{ backgroundColor:( classA  == '1' ? '#DEE8E3' : '') }" @click="moneyXz(1)">
+      <div class="div_display_flex margin_top_div5">
+        <div
+          class="div_width_43 text_center b_t_c"
+          :style="{ backgroundColor:( classA  == '1' ? '#DEE8E3' : '') }"
+          @click="moneyXz(1)"
+        >
           <div class="margin_top_div3 font_color_10 font_size_25">899</div>
           <div class="margin_top_div3 font_size_13 font_color_1A padding_bottom_4">充899返200元</div>
         </div>
-        <div class="div_width_43 text_center b_t_c" :style="{ backgroundColor:( classA  == '2' ? '#DEE8E3' : '') }"  @click="moneyXz(2)">
+        <div
+          class="div_width_43 text_center b_t_c"
+          :style="{ backgroundColor:( classA  == '2' ? '#DEE8E3' : '') }"
+          @click="moneyXz(2)"
+        >
           <div class="margin_top_div3 font_color_10 font_size_25">1009</div>
           <div class="margin_top_div3 font_size_13 font_color_1A padding_bottom_4">充1009减200元</div>
         </div>
       </div>
       <div>
-        <input type="text" class="recharge_input_b2 margin_top_div8" placeholder="输入您想充值的金额…">
+        <input type="text" class="recharge_input_b2 margin_top_div8" placeholder="输入其他金额">
       </div>
       <div class="div_display_flex margin_top_div8">
-        <div class="div_width_43 backgroun_color_4A bt_d_c">支付宝</div>
-        <div class="div_width_43 backgroun_color_4A bt_d_c">现金</div>
+        <div class="div_width_43 backgroun_color_4A bt_d_c">支付宝充值</div>
+        <div class="div_width_43 backgroun_color_4A bt_d_c">现金充值</div>
       </div>
     </div>
   </div>
@@ -56,13 +72,13 @@ export default {
   name: "recharge",
   data() {
     return {
-      classA:''
+      classA: ""
     };
   },
   methods: {
     // 选择金额
-    moneyXz(falge){
-      this.classA = falge
+    moneyXz(falge) {
+      this.classA = falge;
     },
     // 去充值记录页面
     goToRechargeList: function() {
@@ -77,7 +93,7 @@ export default {
           })
         }
       });
-    },
+    }
   },
   created() {
     settitle("押金充值");
@@ -125,10 +141,10 @@ export default {
   text-align: center;
   background-color: #4a7b67;
   color: #fff;
-  width: 20%;
   line-height: 3;
   border-radius: 5px;
-  margin-left: 8%;
+  margin-left: 4%;
+  width: 92%;
 }
 /* 图标输入框 */
 .pass_list_w {
@@ -137,9 +153,7 @@ export default {
 }
 .search_box {
   height: 0.7rem;
-  margin: 0 auto;
   position: relative;
-  padding: 0 0.31rem;
   box-sizing: border-box;
   z-index: 1;
   display: flex;
@@ -147,9 +161,10 @@ export default {
   line-height: 3.5rem;
   border: 1px solid #888888;
   margin-top: 5%;
-  width: 95%;
+  width: 92%;
   border: none;
   border-bottom: 1px solid rgb(173, 165, 165);
+  margin-left: 4%;
 }
 .width_16 {
   width: 16px;
@@ -170,6 +185,6 @@ export default {
   font-size: 14px;
   color: #fff;
   line-height: 3;
-  text-align: center
+  text-align: center;
 }
 </style>

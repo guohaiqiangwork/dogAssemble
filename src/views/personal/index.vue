@@ -1,23 +1,24 @@
 <template>
-  <div style="background-color:#F3F5F8; min-height:700px">
+  <!-- style="background-color:#F3F5F8; min-height:700px" -->
+  <div>
     <!-- 商铺 家庭 -->
     <div class="backgroun_color_f3" v-if="falg == 'sj'">
       <!-- 头部 -->
       <div class="personal_img_bj">
         <div class="div_display_flex">
-          <div class="div_width_30">
+          <div class="div_width_25">
             <div class="headr_img_circular">
-              <img src="../../assets/images/Signal.png" width="100%">
+              <img src="../../assets/images/dingdan@2x.png" width="100%">
             </div>
           </div>
-          <div class="div_width_70 div_display_flex">
+          <div class="div_width_75 div_display_flex">
             <div class="font_color_ff font_size_15 margin_top_div12">李娜</div>
             <div class="personal_falg_member">至尊会员</div>
           </div>
         </div>
         <div class="div_display_flex" style="margin-top:-3%">
-          <div class="div_width_30"></div>
-          <div class="div_width_70 div_display_flex" @click="goToRecharge">
+          <div class="div_width_25"></div>
+          <div class="div_width_75 div_display_flex" @click="goToRecharge">
             <div class="font_color_E8 font_size_15">押金：500元 ></div>
             <div class="personal_falg_m">营业中</div>
           </div>
@@ -25,7 +26,7 @@
       </div>
 
       <!-- 账户 -->
-      <div class="personal_money text_center" style="margin-top:-18%">
+      <div class="personal_money text_center" style="margin-top:-21%">
         <!-- style="margin-top:-21%" -->
         <div class="font_color_76 font_size_13 padding_top_div3">总金额(元)</div>
         <div class="font_color_76 font_size_25 margin_top_div2 c">1000.00</div>
@@ -34,57 +35,65 @@
       <div class="margin_top_div4">
         <!-- <div class=""> -->
         <div class="personal_cd text_center" @click="goToNewOrder">
-          <div>
+          <div class="margin_top28">
             <!-- class="img_width25" class="img_width_100"-->
-            <img src="../../assets/images/个人中心@2x.png">
+            <img src="../../assets/images/dingdan@2x.png" width="25px">
           </div>
           <div>新建订单</div>
         </div>
         <div class="personal_cd text_center" @click="goToRecharge">
-          <div>
-            <img src="../../assets/images/个人中心@2x.png">
+          <div class="margin_top28">
+            <!-- class="img_width25" class="img_width_100"-->
+            <img src="../../assets/images/dingdan@2x.png" width="25px">
           </div>
           <div>金额充值</div>
         </div>
-        <div class="personal_cd text_center">
-          <div @click="goToStatistics">
-            <img src="../../assets/images/个人中心@2x.png">
+        <div class="personal_cd text_center" @click="goToStatistics">
+          <div class="margin_top28">
+            <!-- class="img_width25" class="img_width_100"-->
+            <img src="../../assets/images/dingdan@2x.png" width="25px">
           </div>
           <div>数据统计</div>
         </div>
         <div class="personal_cd text_center" @click="goToOrder">
-          <div>
-            <img src="../../assets/images/个人中心@2x.png">
+          <div class="margin_top28">
+            <!-- class="img_width25" class="img_width_100"-->
+            <img src="../../assets/images/dingdan@2x.png" width="25px">
           </div>
           <div>我的订单</div>
         </div>
         <div class="personal_cd text_center" @click="goToHealthBonus">
-          <div>
-            <img src="../../assets/images/个人中心@2x.png">
+          <div class="margin_top28">
+            <!-- class="img_width25" class="img_width_100"-->
+            <img src="../../assets/images/dingdan@2x.png" width="25px">
           </div>
           <div>健康奖金</div>
         </div>
         <div class="personal_cd text_center" @click="goToMemberOperation">
-          <div>
-            <img src="../../assets/images/个人中心@2x.png">
+          <div class="margin_top28">
+            <!-- class="img_width25" class="img_width_100"-->
+            <img src="../../assets/images/dingdan@2x.png" width="25px">
           </div>
           <div>会员操作</div>
         </div>
         <div class="personal_cd text_center" @click="goToSetUp">
-          <div>
-            <img src="../../assets/images/个人中心@2x.png">
+          <div class="margin_top28">
+            <!-- class="img_width25" class="img_width_100"-->
+            <img src="../../assets/images/dingdan@2x.png" width="25px">
           </div>
           <div>设置中心</div>
         </div>
         <div class="personal_cd text_center" @click="shopDY">
-          <div>
-            <img src="../../assets/images/个人中心@2x.png">
+          <div class="margin_top28">
+            <!-- class="img_width25" class="img_width_100"-->
+            <img src="../../assets/images/dingdan@2x.png" width="25px">
           </div>
           <div>店铺设置</div>
         </div>
         <div class="personal_cd text_center">
-          <div>
-            <img src="../../assets/images/个人中心@2x.png">
+          <div class="margin_top28">
+            <!-- class="img_width25" class="img_width_100"-->
+            <img src="../../assets/images/dingdan@2x.png" width="25px">
           </div>
           <div>
             <a :href="'tel:' + 15049372463">联系客服</a>
@@ -455,7 +464,7 @@ a:link {
 .personal_img_bj {
   background-image: url("../../assets/images/bg.png");
   background-size: 100%;
-  height: 175px;
+  height: 200px;
   background-repeat: no-repeat;
 }
 .headr_img_circular {
@@ -476,13 +485,13 @@ a:link {
   border-radius: 5px;
   margin-top: 35px;
   font-size: 12px;
-  margin-left: 47%;
+  margin-left: 60%;
   line-height: 1.5;
 }
 .personal_falg_m {
   color: #ffffff;
   font-size: 13px;
-  margin-left: 26%;
+  margin-left: 40%;
 }
 .personal_font_m {
   margin-left: 13px;
@@ -547,6 +556,7 @@ a:link {
   padding-bottom: 6%;
   border-top: none;
   background-color: #fff;
+  height: 96px;
 }
 .search_box {
   height: 3.5rem;
@@ -586,6 +596,9 @@ a:link {
   border-radius: 5px;
   margin-left: 5%;
   margin-top: 8%;
+}
+.margin_top28 {
+  margin-top: 28%;
 }
 </style>
 
