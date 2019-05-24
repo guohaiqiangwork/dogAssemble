@@ -35,7 +35,7 @@
                 </p>
             </div>
         </div>
-
+ 
         <div  class="goods-item flex-between align-center">
            
             <img class="goods-img" src="../../../assets/images/WechatIMG99.png" alt="">
@@ -76,6 +76,7 @@ export default {
     height: 100%;
     width: 100%;
     overflow-x:hidden;
+
     .goods-item{
         padding: 0.3rem 0.45rem;
         border-bottom: 1px solid #E9E9E9;

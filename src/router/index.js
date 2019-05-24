@@ -54,7 +54,6 @@ export default new Router({
   routes: [{
     // 调试页面
     path: '/',
-    
     meta: {
       title: '调试',
     },
@@ -71,7 +70,7 @@ export default new Router({
     component:  resolve => require(['@/components/TabBar.vue'], resolve),
     children:[
         {
-            path: '/',
+            path: '/home',
             name: 'home',
             meta: {
                 title: '首页',
