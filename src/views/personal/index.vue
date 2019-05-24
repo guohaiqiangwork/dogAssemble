@@ -197,6 +197,7 @@
           <img src="../../assets/images/提醒 (3)@2x.png" class="per_img_width_18 margin_top_div8">
           <div class="margin_top_div3">您当前帐户已被冻结</div>
           <div class="margin_top_div3">需解冻才可以正常使用</div>
+            <div class="margin_top_div3">1231313***33</div>
           <div class="pass_list_w">
             <div class="search_box">
               <img src="../../assets/images/验证码@2x.png" class="width_16">
@@ -568,23 +569,11 @@ a:link {
   height: 96px;
 }
 .search_box {
-  height: 3.5rem;
-  margin: 0.65rem 1.5rem 0;
-  position: relative;
-  padding: 0 1.55rem;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  z-index: 1;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  background: #fff;
-  line-height: 3.5rem;
+  width: 90%;
+  margin-left: 5%;
   margin-top: 5%;
-  border: none;
+  padding-left: -5%;
+  height: 30px;
   border-bottom: 1px solid rgb(173, 165, 165);
 }
 .width_16 {
