@@ -23,7 +23,10 @@
         </div>
       </div>
     </div>
-    <div class="health_title_f font_size_14 font_color_76 text_center">赶快邀请好友共赢健康奖金>></div>
+    <div
+      class="health_title_f font_size_14 font_color_76 text_center"
+      style="margin-top:-2%"
+    >赶快邀请好友共赢健康奖金>></div>
     <!-- tab -->
     <div class="div_display_flex backgroun_color_fff personal_title">
       <div v-for="(item,index) in  tabList" @click="tabSwitch(item.id)" :key="index">
@@ -39,16 +42,21 @@
           <div class="font_color_00 font_size_14 margin_left_div2" style="margin-top: 0.8%;">视频返佣</div>
           <div
             class="font_size_14 font_color_00 margin_top_div1"
-            style="margin-left: 50%;"
+            style="margin-left: 60%;"
             @click="goToHealthDetail"
-          >视频推荐详情></div>
+          >全部返佣></div>
         </div>
-        <div class="div_display_flex margin_left_div3 margin_top_div3">
-          <div class="div_width_70 font_size_14">
-            李娜
-            <span class="font_size_12 font_color_A1">2019-01-25 15:00:00</span>
+        <div v-for="item in [1,2,3]">
+          <div class="div_display_flex margin_left_div3 margin_top_div3">
+            <div class="div_width_70 font_size_14">
+              果蔬精粹吧（万达店最多八个字）
+              <span
+                style="border: 1px solid darkgreen; padding: 1%;font-size: 12px;"
+              >开业</span>
+            </div>
+            <div class="div_with_30 " style="margin-left:10%">家庭版</div>
           </div>
-          <div class="div_with_30 red text_right">¥565755</div>
+          <div class="margin_left_div3 margin_top_div2 font_color_A1 font_size_13">2019-01-25 15:00:00</div>
         </div>
       </div>
     </div>
@@ -128,8 +136,9 @@ export default {
 </script>
 <style scoped>
 .personal_img_bj {
-  background-image: url("../../assets/images/WechatIMG106_看图王.png");
-  height: 175px;
+  background-image: url("../../assets/images/bg@2x.png");
+  background-size: 100%;
+  height: 200px;
   background-repeat: no-repeat;
 }
 .health_title_f {

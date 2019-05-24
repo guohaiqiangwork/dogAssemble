@@ -24,14 +24,15 @@
               <img src="../../assets/images/WechatIMG101@2x.png" width="100%">
             </div>
           </div>
-          <div style="width:68%">
+          <div style="width:63%">
             <div class="font_color_00 font_size_14">
               熊孩子综合蔬菜干香菇脆秋葵干330g
               果蔬脆
             </div>
             <div class="div_display_flex margin_top_div3">
               <div class="order_price_font">¥13.9</div>
-              <div class="order_price_bt">10*300g</div>
+              <div class=" text_right" style="margin-left: 61%;">*3</div>
+              <!-- order_price_bt -->
             </div>
           </div>
         </div>
@@ -169,7 +170,7 @@ export default {
   width: 24%;
   text-align: center;
   color: #fff;
-  border-radius: 13px;
+  border-radius: 3px;
   height: 26px;
   font-size: 12px;
   line-height: 2.1;

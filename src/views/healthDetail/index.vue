@@ -38,18 +38,18 @@ export default {
 </script>
 <style scope>
 .search_box {
-  height: 3.5rem;
-  margin: 0.65rem 1.5rem 0;
-  border-radius: 2rem;
+  height: 0.7rem;
+  margin: 0 auto;
   position: relative;
-  padding: 0 1.55rem;
+  padding: 0 0.31rem;
   box-sizing: border-box;
   z-index: 1;
   display: flex;
   align-items: center;
-  background: #fff;
   line-height: 3.5rem;
   border: 1px solid #888888;
   margin-top: 5%;
+  width: 90%;
+  border-radius: 0.4rem
 }
 </style>
