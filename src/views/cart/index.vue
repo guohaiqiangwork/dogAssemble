@@ -58,6 +58,7 @@ export default {
 }
 </script>
 <style lang="less">
+
 .demo3-item {
   padding: 5px 5px;
   font-size: 0;
@@ -66,9 +67,16 @@ export default {
   outline: 1px solid #8B8AEE;
 }
 #cart{
+
     width: 100%;
     height: 100%;
     background: #F8F8F8;
+    .vux-number-selector svg{
+        fill:#4a7b67;
+    }
+    .vux-number-selector.vux-number-disabled svg{
+        fill: #ccc;
+    }
     .package_tit{
         display: flex;
         align-items: center;

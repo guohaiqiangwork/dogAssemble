@@ -1,9 +1,12 @@
 <template>
     <div id="upload">
         <div class="cintainer">
-            <popup-picker v-show="false" :popup-title="'please select'" :title="title1" :data="list1" :show="pickershow" v-model="value1_1" confirm-text='设置' cancel-text="x" @on-hide="onHide" @on-change="onChange" :placeholder="'please select'">
+            <!--  一级分类 -->
+            <popup-picker v-show="false" :popup-title="'please select'" :title="title1" :data="list1" :show="pickershow" v-model="value1_1" cancel-text="x" @on-hide="onHide" @on-change="onChange" :placeholder="'please select'">
             </popup-picker>
-
+            <!-- 二级分类 -->
+            <popup-picker v-show="false" :popup-title="'please select'" :title="title1" :data="list1" :show="pickershow" v-model="value1_1" confirm-text="设置" cancel-text="x" @on-hide="onHide" @on-change="onChange" :placeholder="'please select'">
+            </popup-picker>
             <div v-transfer-dom>
                 <x-dialog v-model="show" class="dialog">
                     <div class="card">
@@ -84,6 +87,7 @@ export default {
             value1_1: ['iPhone'],
             pickershow:false,
             show:false,
+            confirmtext:'',
             kindList:[
                 {
 

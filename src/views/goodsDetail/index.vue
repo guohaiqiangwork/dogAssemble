@@ -123,21 +123,26 @@ export default {
 </script>
 <style lang="less">
 .popup_box{
-    ul{
-        list-style: none;
-    }
-    
-    
-    height: 100%;
+        height: 100%;
         padding: 0 0.3rem;
         background: #fff;
         font-size: 0.28rem;
         overflow-x: hidden;
+        ul{
+            list-style: none;
+        }
         img{
             height: 1.74rem;
             width: 1.74rem;
             font-size: 0;
         }
+        .vux-number-selector svg{
+            fill:#4a7b67;
+        }
+        .vux-number-selector.vux-number-disabled svg{
+            fill: #ccc;
+        }
+       
         .goods_info{
             padding: 0.3rem 0 0 0;
             .popup_head{
@@ -192,6 +197,7 @@ export default {
         }
 }
 #goods_detail{
+  
     height: 100%;
     width: 100%;
     overflow-x: hidden;

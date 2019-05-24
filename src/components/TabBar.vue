@@ -1,9 +1,9 @@
 <template>
   <div id="TabBar">
 
-    <router-view></router-view>
-    <div class="tabBar_bt">
-      <flexbox style="text-align: center;padding: 4%;    background-color: #fff;">
+    <router-view class="routeview"></router-view>
+    <div class="tabBar_bt flex-between  align-center">
+      <flexbox style="text-align: center;height:80px; background-color: #fff;">
         <flexbox-item>
           <div class="flex-demo" @click="didClickedItem(0,'home')">
             <img src="../assets/images/Signal.png" style="width: 30%;">
@@ -62,10 +62,14 @@ export default {
 </script>
 
 <style scoped>
+.routeview{
+  margin-bottom: 80px;
+}
 .tabBar_bt {
   position: fixed;
   bottom: 0;
   color: red;
+ 
   width: 100%;
 }
 .active {

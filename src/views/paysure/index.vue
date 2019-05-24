@@ -46,6 +46,11 @@
                         <img src="../../assets/images/WechatIMG102.png" alt="">
                         <p>¥13.9</p>
                     </div>
+
+                    <div class="flex-between flex-clo align-center items">
+                        <img src="../../assets/images/WechatIMG102.png" alt="">
+                        <p>¥13.9</p>
+                    </div>
                 </div>
 
                 <div class="flex-start align-center">
