@@ -9,7 +9,8 @@
                         <span>王佳宇</span>
                         <span>13654550023</span>
                     </div>
-                    <img class="icon_right" src="../../assets/images/right.png" alt="" @click="goAddress">
+                    <!-- <img class="icon_right" src="../../assets/images/right.png" alt="" > -->
+                    <x-icon @click="goAddress" type="ios-arrow-right" size='30'></x-icon>
                 </div>
                 <div class="address_msg">
                     <div class="topic_box">
@@ -55,7 +56,7 @@
 
                 <div class="flex-start align-center" @click="goList">
                     <span>共2件</span>
-                    <x-icon type="ios-arrow-right" size='30'></x-icon>
+                    <x-icon  type="ios-arrow-right" size='30'></x-icon>
                 </div>
             </div>
             <!-- 单行form -->
@@ -121,8 +122,12 @@ export default {
         width: 100%;
         height: 100%;
         // background: #F6F6F6;
+        .icon_right{
+                width: 0.16rem;
+                height: 0.28rem;
+        }
         .address_box{
-            padding: 0 0.28rem;
+            padding: 0 0.3rem;
             background: #fff;
         }
         .title_address{
@@ -149,10 +154,7 @@ export default {
                 width: 0.34rem;
                 height: 0.34rem;
             }
-            .icon_right{
-                width: 0.16rem;
-                height: 0.28rem;
-            }
+            
         }
         .address_msg{
             display: flex;
@@ -187,13 +189,13 @@ export default {
             .goods_list{
                 display: flex;
                 justify-content: space-between;
-                padding: 0.36rem 0.5rem;
+                padding: 0.36rem 0.3rem;
                 .items{
-                    margin-right: 0.34rem;
+                    margin-right: 0.27rem;
                 }
                 img{
-                    width: 1.4rem;
-                    height: 1.4rem;
+                    width: 1.1rem;
+                    height: 1.1rem;
                 }
                 .item_msg{
                     display: flex;

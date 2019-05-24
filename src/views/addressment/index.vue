@@ -86,6 +86,9 @@ export default {
     width: 100%;
     height: 100%;
     background: #F3F5F8;
+    .vux-swipeout-button-primary{
+            background: #4a7b67;
+    }
     .vux-swipeout-content{
         border-radius:0.12rem;
     }
