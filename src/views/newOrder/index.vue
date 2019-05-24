@@ -17,12 +17,12 @@
       <div class="font_color_1A font_size_14 margin_left_div6 margin_top_div5">选择套餐类型：</div>
       <div class="div_display_flex margin_top_div5">
         <div :class="classA  == '1'? 'new_order_b1' : 'new_order_b2' " @click="newOrderXZ('1')">会员套餐</div>
-        <div  :class="classA  == '2'? 'new_order_b1' : 'new_order_b2' " @click="newOrderXZ('2')">辟谷套餐</div>
+        <div :class="classA  == '2'? 'new_order_b1' : 'new_order_b2' " @click="newOrderXZ('2')">辟谷套餐</div>
       </div>
     </div>
 
     <!-- 未支付 -->
-    <div v-if="newPay">
+    <div v-if="classA == '1'">
       <div class="margin_top_div5">
         <span class="font_size_14 font_color_1A margin_left_div6">配方名称：</span>
         <select name id style="width:70%">
@@ -51,8 +51,8 @@
         @click="newOrderq"
       >确认套餐</div>
     </div>
-    <!-- 支付 -->
-    <div v-if="!newPay">
+    <!-- 辟谷套餐 -->
+    <div v-if="classA == '2'">
       <div class="margin_top_div5">
         <span class="font_size_14 font_color_1A margin_left_div6">购买天数：</span>
         <select name id style="width:70%">
@@ -73,43 +73,82 @@
       </div>
       <!-- 按钮 -->
       <div class="div_display_flex" style="position: fixed;bottom: 0;width: 100%;line-height: 3;">
-        <div class="div_width_70 backgroun_color_E9  padding_left_div3">
+        <div class="div_width_70 backgroun_color_E9 padding_left_div3">
           金额：
           <span class="red">23423</span>
         </div>
-        <div class="div_width_30 text_center backgroun_color_4A font_color_ff font_size_14" @click="goToPay">确认支付</div>
+        <div
+          class="div_width_30 text_center backgroun_color_4A font_color_ff font_size_14"
+          @click="payPassW"
+        >确认支付</div>
       </div>
     </div>
     <!-- 套餐建立 -->
     <confirm v-model="newFalge" title @on-cancel="onCancel" @on-confirm="onConfirm">
-      <div style="text-align:center;font-size:18px;">套餐已建好是否建立第一单？</div>
+      <div style="text-align:center;font-size:18px;">
+        确认给张星新建吗？
+        <br>13855778844
+      </div>
     </confirm>
+    <!-- 密码支付 -->
+    <div>
+      <x-dialog
+        v-model="payShowD"
+        hide-on-blur
+        :dialog-style="{'max-width': '100%', width: '100%', height: '50%', 'background-color': 'transparent'}"
+      >
+        <div class="backgroun_color_fff model_password">
+          <div
+            @click="payShowD = false"
+            class="text_right margin_right_div3 padding_top_div3"
+          >X</div>
+          <div class="font_size_16 font_color_10">输入会员支付密码{{ni}}</div>
+          <div class="pass_input_6">
+            <input type="password" v-model="ni" class="pass_input" maxlength="1">
+            <input type="password" v-model="ni" class="pass_input" maxlength="1">
+            <input type="password" v-model="ni" class="pass_input" maxlength="1">
+            <input type="password" v-model="ni" class="pass_input" maxlength="1">
+            <input type="password" v-model="ni" class="pass_input" maxlength="1">
+            <input type="password" v-model="ni" class="pass_input" maxlength="1">
+          </div>
+          <div class="div_display_flex margin_left_div8 margin_top_div3 padding_bottom_4">
+            <div>
+              <img src="../../assets/images/til@2x.png" width="14px">
+            </div>
+            <div class="font_color_4A margin_left_div2" style="line-height: 1;">密码为您登录时设置的密码</div>
+          </div>
+        </div>
+      </x-dialog>
+    </div>
   </div>
 </template>
 <script>
 import url from "../../bin/url";
 import TabBar from "../../components/TabBar";
-import { Confirm } from "vux";
+import { Confirm, XDialog, CheckIcon } from "vux";
 
 export default {
   components: {
     TabBar,
-    Confirm
+    Confirm,
+    XDialog
   },
   name: "newOrder",
   data() {
     return {
       item: 0,
       newFalge: false, //是否新建
-      newPay: true ,//新建订单支付
-      classA:''//选择标示
+      newPay: true, //新建订单支付
+      classA: "", //选择标示
+      payShowD: false, //支付
+      ni: ""
     };
   },
   methods: {
     //订单新建
     newOrderq() {
       this.newFalge = true;
-     
+      
     },
     // 弹窗取消
     onCancel() {
@@ -117,26 +156,29 @@ export default {
     },
     // 弹窗确认
     onConfirm() {
-     this.newPay = false;//去支付
+      this.newPay = false; //去支付
     },
-      // 去支付
-    goToPay(){
-      this.$router.push({
-        name: "paysure",
-        params: {
-          obj: JSON.stringify({
-            type: "profession",
-            data: {
-              id: 'pay'
-            }
-          })
-        }
-      });
-    },
+    // 去支付
+    payPassW(){
+       this.payShowD = true;
+           },
+    // goToPay() {
+    //   this.$router.push({
+    //     name: "paysure",
+    //     params: {
+    //       obj: JSON.stringify({
+    //         type: "profession",
+    //         data: {
+    //           id: "pay"
+    //         }
+    //       })
+    //     }
+    //   });
+    // },
     // 选择套餐
-    newOrderXZ(falge){
-      console.log(falge)
-      this.classA = falge
+    newOrderXZ(falge) {
+      console.log(falge);
+      this.classA = falge;
     }
   },
   created() {
@@ -209,5 +251,23 @@ export default {
   line-height: 3;
   border-radius: 5px;
   margin-top: 34%;
+}
+.model_password {
+  width: 90%;
+  margin-left: 5%;
+  border-radius: 8px;
+}
+.pass_input {
+  border: 1px solid #979797;
+  width: 15%;
+  margin-left: -2%;
+  line-height: 2;
+  font-size: 32px;
+  text-align: center;
+}
+.pass_input_6 {
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 5%;
 }
 </style>
