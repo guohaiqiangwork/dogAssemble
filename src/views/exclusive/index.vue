@@ -6,19 +6,19 @@
     <div class="ex_border margin_top_div3">
       <div class="div_display_flex">
         <div style="width:80%" class="font_size_16 font_color_10">内蒙古包头市昆都仑区钢铁大街店</div>
-        <div style="width:20%" class="font_size_13 font_color_10">1.8km</div>
+        <div style="width:20%" class="font_size_13 font_color_10 text_right">1.8km</div>
       </div>
       <div class="div_display_flex margin_top_div3">
         <div class="font_size_16 font_color_10 ex_img_b">
-          <img src="../../assets/images/phone@2x.png" class="img_width_100">
+          <img src="../../assets/images/1440@2x.png" class="img_width_100">
         </div>
-        <div style="width:80%" class="font_size_13 font_color_10">钢铁大街16号</div>
+        <div style="width:80%" class="font_size_13 font_color_10 margin_left_div2">钢铁大街16号</div>
       </div>
       <div class="div_display_flex margin_top_div3">
         <div class="font_size_16 font_color_10 ex_img_b">
-          <img src="../../assets/images/phone@2x.png" class="img_width_100">
+          <img src="../../assets/images/电话 (1)@2x.png" class="img_width_100">
         </div>
-        <div style="width:80%" class="font_size_13 font_color_10">门店电话：17870987</div>
+        <div style="width:80%" class="font_size_13 font_color_10 margin_left_div2">门店电话：17870987</div>
       </div>
     </div>
     <div class="margin_top_div5" @click="goToNationalStores">
@@ -70,7 +70,7 @@ export default {
   margin-left: 2%;
 }
 .ex_img_b {
-  width: 29px;
-  height: 29px;
+  width: 15px;
+  height: 15px;
 }
 </style>

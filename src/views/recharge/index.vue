@@ -60,19 +60,28 @@
         <input type="text" class="recharge_input_b2 margin_top_div8" placeholder="输入其他金额">
       </div>
       <div class="div_display_flex margin_top_div8">
-        <div class="div_width_43 backgroun_color_4A bt_d_c">支付宝充值</div>
-        <div class="div_width_43 backgroun_color_4A bt_d_c">现金充值</div>
+        <div class="div_width_43 backgroun_color_4A bt_d_c" @click="rechargeq">支付宝充值</div>
+        <div class="div_width_43 backgroun_color_4A bt_d_c" @click="rechargeq">现金充值</div>
       </div>
+        <!-- 确认充值 -->
+    <confirm v-model="rechargeFalge" title @on-cancel="onCancel" @on-confirm="onConfirm">
+      <div style="text-align:center;font-size:18px;">您确认要充值吗？</div>
+    </confirm>
     </div>
   </div>
 </template>
 <script>
 import url from "../../bin/url";
+import { Confirm } from "vux";
 export default {
+  components: {
+    Confirm
+  },
   name: "recharge",
   data() {
     return {
-      classA: ""
+      classA: "",
+       rechargeFalge: false, //是否新建
     };
   },
   methods: {
@@ -93,7 +102,20 @@ export default {
           })
         }
       });
-    }
+    },
+    // 确认充值
+      rechargeq() {
+      this.rechargeFalge = true;
+     
+    },
+     // 弹窗取消
+    onCancel() {
+      console.log("2");
+    },
+    // 弹窗确认
+    onConfirm() {
+     this.newPay = false;//去支付
+    },
   },
   created() {
     settitle("押金充值");

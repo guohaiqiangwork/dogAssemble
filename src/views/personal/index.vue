@@ -12,7 +12,7 @@
             </div>
           </div>
           <div class="div_width_75 div_display_flex">
-            <div class="font_color_ff font_size_15 margin_top_div12">李娜</div>
+            <div class="font_color_ff font_size_15 margin_top_div12">李娜1</div>
             <div class="personal_falg_member">至尊会员</div>
           </div>
         </div>
@@ -108,21 +108,24 @@
     <!-- 个人 -->
     <div class="backgroun_color_f3" v-if="falg == 'g'">
       <!-- 头部 -->
-      <div class="personal_img_bj">
+      <div class="personal_img_bjg">
         <div class="div_display_flex">
-          <div class="headr_img_circular">
-            <img src="../../assets/images/Signal.png" width="100%">
+          <div class="div_width_25">
+            <div class="headr_img_circular">
+              <img src="../../assets/images/dingdan@2x.png" width="100%">
+            </div>
           </div>
-          <div class="font_color_ff font_size_15 personal_font_m">李娜</div>
-          <div class="personal_falg_member">至尊会员</div>
+          <div class="div_width_75 div_display_flex">
+            <div class="font_color_ff font_size_15 margin_top_div12">4李娜2</div>
+          </div>
         </div>
       </div>
       <!-- 账户 -->
-      <div class="personal_div_money" style="margin-top:-8%;line-height:2" @click="goToWallet">
+      <div class="personal_div_money" style="margin-top:-20%;line-height:2.5" @click="goToWallet">
         <div
           class="font_color_102 font_size_13 personal_money_m margin_left_div3 padding_top_div3"
         >账户余额（元）</div>
-        <div class="div_display_flex personal_price_m">
+        <div class="div_display_flex personal_price_m padding_bottom_4">
           <div class="font_color_102 font_size_25 div_width_50 margin_left_div3">￥0.00</div>
           <!-- <div
             class="div_display_flex font_color_102 font_size_13 div_width_50"
@@ -241,7 +244,7 @@ export default {
   name: "personal",
   data() {
     return {
-      falg: "sj", //个人 商铺 家庭展示标记
+      falg: "g", //个人 商铺 家庭展示标记
       sendAuthCode: true /*布尔值，通过v-show控制显示‘获取按钮’还是‘倒计时’ */,
       auth_time: 0 /*倒计时 计数器*/,
       accountFalge: true, //账户冻结
@@ -465,6 +468,12 @@ a:link {
   background-image: url("../../assets/images/bg.png");
   background-size: 100%;
   height: 200px;
+  background-repeat: no-repeat;
+}
+.personal_img_bjg {
+  background-image: url("../../assets/images/bg.png");
+  background-size: 100%;
+  height: 184px;
   background-repeat: no-repeat;
 }
 .headr_img_circular {
