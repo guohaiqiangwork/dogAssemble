@@ -2,12 +2,12 @@
     <div id="upload">
         <div class="cintainer">
             <!--  一级分类 -->
-            <popup-picker v-show="false" :popup-title="'please select'" :title="title1" :data="list1" :show="pickershow" v-model="value1_1" cancel-text="x" @on-hide="onHide" @on-change="onChange" :placeholder="'please select'">
+            <popup-picker v-show="false" :popup-title="'please select'" :title="title1" :data="list1" :show="pickershow" v-model="value1_1" cancel-text="x"  @on-hide="firstHide" @on-change="onChange" :placeholder="'please select'">
             </popup-picker>
             <!-- 二级分类 -->
-            <popup-picker v-show="false" :popup-title="'please select'" :title="title1" :data="list1" :show="pickershow" v-model="value1_1" confirm-text="设置" cancel-text="x" @on-hide="onHide" @on-change="onChange" :placeholder="'please select'">
+            <popup-picker v-show="false" :popup-title="'please select'" :title="title1" :data="list1" :show="secshow" v-model="value1_1" confirm-text="设置" cancel-text="x" @on-hide="onHide" @on-change="onChange" :placeholder="'please select'">
             </popup-picker>
-            <div v-transfer-dom>
+            <!-- <div v-transfer-dom>
                 <x-dialog v-model="show" class="dialog">
                     <div class="card">
                         <div class="card-title flex-between align-center">
@@ -21,27 +21,21 @@
                             <p class="line-txt" v-for="(item,index) in kindList" :key="index">
                                 <x-input label-width="5em" :title='`<span style="${style}">二级分类:</span>`' placeholder="名字输入" keyboard="number" is-type="china-mobile"></x-input>
                             </p>
-                            <!-- <p class="line-txt mt-space">
-                                <x-input label-width="5em" :title='`<span style="${style}">二级分类:</span>`' placeholder="名字输入" keyboard="number" is-type="china-mobile"></x-input>
-                            </p>
-                            <p class="line-txt mt-space">
-                                <x-input label-width="5em" :title='`<span style="${style}">二级分类:</span>`' placeholder="名字输入" keyboard="number" is-type="china-mobile"></x-input>
-                            </p> -->
+                          
                         </div>
                     </div>
                     <div class="sub-btn">
                         提交
                     </div>
                 </x-dialog>
-                <!-- <alert v-model="show"  @on-show="onShow" @on-hide="atHide"> <div>dsad</div></alert> -->
-            </div>
+            </div> -->
 
             <div class="list flex-between align-center"  @click="pickershow = true">
                 <span>分类</span>
                 <x-icon type="ios-arrow-right" class="icon_middle"></x-icon>
             </div>
 
-            <div class="list flex-between align-center"  @click="pickershow = true">
+            <div class="list flex-between align-center"  @click="secshow = true">
                 <span>二级分类</span>
                 <x-icon type="ios-arrow-right" class="icon_middle"></x-icon>
             </div>
@@ -88,6 +82,7 @@ export default {
             pickershow:false,
             show:false,
             confirmtext:'',
+            secshow: false,
             kindList:[
                 {
 
@@ -100,8 +95,11 @@ export default {
             
         },
         onHide(str){
+            this.secshow =false;
+            this.$router.push('/addclass');
+        },
+        firstHide(){
             this.pickershow =false;
-            this.show = str;
         },
         atHide(){
 
@@ -166,6 +164,7 @@ export default {
         margin: 0.2rem;
         background: #fff;
         height: calc(100% - 0.4rem);
+        overflow-x: hidden;
         .list{
             padding: 0.27rem 0;
             margin: 0 0.42rem;

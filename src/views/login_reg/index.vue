@@ -7,8 +7,10 @@
 
         <div class="form" v-if="haslogin == 2">
            <!-- <x-input label-width="4em"  placeholder="I'm placeholder"></x-input> -->
-
-            <x-input  keyboard="number" is-type="china-mobile" placeholder="请输入手机号码" @on-click-clear-icon='clear'>
+            <x-input  keyboard="number" is-type="china-mobile" placeholder="请输入您的姓名" @on-click-clear-icon='clear'>
+              <img slot="label" style="padding-right:10px;display:block;with:0.33rem;height:0.33rem" src="../../assets/images/name.png">
+            </x-input>
+            <x-input class="mt-40" keyboard="number" is-type="china-mobile" placeholder="请输入手机号码" @on-click-clear-icon='clear'>
               <img slot="label" style="padding-right:10px;display:block;with:0.33rem;height:0.33rem" src="../../assets/images/phone@2x.png">
             </x-input>
             <x-input class="mt-40"  keyboard="number" is-type="china-mobile" placeholder="请输⼊验证码" @on-click-clear-icon='clear'>

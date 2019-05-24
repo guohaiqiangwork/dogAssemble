@@ -53,7 +53,7 @@
                     </div>
                 </div>
 
-                <div class="flex-start align-center">
+                <div class="flex-start align-center" @click="goList">
                     <span>共2件</span>
                     <x-icon type="ios-arrow-right" size='30'></x-icon>
                 </div>
@@ -106,7 +106,10 @@ export default {
     methods: {
         goAddress() {
             this.$router.push('/addressment')
-        }
+        },
+        goList(){
+            this.$router.push('/goodslist')
+        },
     },
     mounted() {
         

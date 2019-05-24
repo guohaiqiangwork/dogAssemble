@@ -318,6 +318,10 @@ color: #102023
 .flex-start{
   display: flex;
 }
+.flex-end{
+  display: flex;
+  justify-content: flex-end;
+}
 .align-center{
   align-items: center;
 }

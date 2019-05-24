@@ -13,13 +13,7 @@ import recommend from '@/views/recommend/index' //推荐信息
 import exclusive from '@/views/exclusive/index' //专属门店
 import is404 from '@/views/page/is404'
 import notfound from '@/views/page/notfound'
-import assemble from '@/views/Assemble/index'           //主页                                    +
-import goodsdetail from '@/views/goodsDetail/index'     //商品详情
-import cart from '@/views/cart/index'                   //购物车
-import paysure from '@/views/paysure/index'             //确认支付页面
-import addressment from '@/views/addressment/index'             // 地址管理页面
-import addressopt from '@/views/addressment/option'             // 地址编辑页面
-import immendilypay from '@/views/immendilyPay/index'             // 地址编辑页面
+import immendilypay from '@/views/immendilyPay/index'             // 立即支付页面
 import about from '@/views/about/index'             // 关于我们
 import videopage from '@/views/videopage/index'             // 视频页面
 import videomangment from '@/views/videoMangment/index'             // 管理视频页面
@@ -204,6 +198,20 @@ export default new Router({
       title:'审核管理'
     },
     component: videoupload
+  },
+  {
+    path:'/addclass',
+    meta: {
+      title:'添加分类'
+    },
+    component:  resolve => require(['@/views/videoMangment/addClass/index'], resolve),
+  },
+  {
+    path:'/goodslist',
+    meta: {
+      title:'商品列表'
+    },
+    component:  resolve => require(['@/views/paysure/goodsList/index'], resolve),
   },
   {
     // 全国门店
