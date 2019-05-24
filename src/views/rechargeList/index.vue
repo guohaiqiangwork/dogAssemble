@@ -30,8 +30,8 @@ export default {
 </script>
 <style scoped>
 .data_d_b {
-  width: 94%;
+  width: 92%;
   border-bottom: 1px solid #e9e9e9;
-  margin-left: 3%;
+  margin-left: 4%;
 }
 </style>

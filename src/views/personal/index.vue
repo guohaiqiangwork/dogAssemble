@@ -1,23 +1,24 @@
 <template>
-  <div style="background-color:#F3F5F8; min-height:700px">
+  <!-- style="background-color:#F3F5F8; min-height:700px" -->
+  <div>
     <!-- 商铺 家庭 -->
     <div class="backgroun_color_f3" v-if="falg == 'sj'">
       <!-- 头部 -->
       <div class="personal_img_bj">
         <div class="div_display_flex">
-          <div class="div_width_30">
+          <div class="div_width_25">
             <div class="headr_img_circular">
-              <img src="../../assets/images/Signal.png" width="100%">
+              <img src="../../assets/images/dingdan@2x.png" width="100%">
             </div>
           </div>
-          <div class="div_width_70 div_display_flex">
-            <div class="font_color_ff font_size_15 margin_top_div12">李娜</div>
+          <div class="div_width_75 div_display_flex">
+            <div class="font_color_ff font_size_15 margin_top_div12">李娜1</div>
             <div class="personal_falg_member">至尊会员</div>
           </div>
         </div>
         <div class="div_display_flex" style="margin-top:-3%">
-          <div class="div_width_30"></div>
-          <div class="div_width_70 div_display_flex" @click="goToRecharge">
+          <div class="div_width_25"></div>
+          <div class="div_width_75 div_display_flex" @click="goToRecharge">
             <div class="font_color_E8 font_size_15">押金：500元 ></div>
             <div class="personal_falg_m">营业中</div>
           </div>
@@ -25,7 +26,7 @@
       </div>
 
       <!-- 账户 -->
-      <div class="personal_money text_center" style="margin-top:-18%">
+      <div class="personal_money text_center" style="margin-top:-21%">
         <!-- style="margin-top:-21%" -->
         <div class="font_color_76 font_size_13 padding_top_div3">总金额(元)</div>
         <div class="font_color_76 font_size_25 margin_top_div2 c">1000.00</div>
@@ -34,57 +35,65 @@
       <div class="margin_top_div4">
         <!-- <div class=""> -->
         <div class="personal_cd text_center" @click="goToNewOrder">
-          <div>
+          <div class="margin_top28">
             <!-- class="img_width25" class="img_width_100"-->
-            <img src="../../assets/images/个人中心@2x.png">
+            <img src="../../assets/images/dingdan@2x.png" width="25px">
           </div>
           <div>新建订单</div>
         </div>
         <div class="personal_cd text_center" @click="goToRecharge">
-          <div>
-            <img src="../../assets/images/个人中心@2x.png">
+          <div class="margin_top28">
+            <!-- class="img_width25" class="img_width_100"-->
+            <img src="../../assets/images/dingdan@2x.png" width="25px">
           </div>
           <div>金额充值</div>
         </div>
-        <div class="personal_cd text_center">
-          <div @click="goToStatistics">
-            <img src="../../assets/images/个人中心@2x.png">
+        <div class="personal_cd text_center" @click="goToStatistics">
+          <div class="margin_top28">
+            <!-- class="img_width25" class="img_width_100"-->
+            <img src="../../assets/images/dingdan@2x.png" width="25px">
           </div>
           <div>数据统计</div>
         </div>
         <div class="personal_cd text_center" @click="goToOrder">
-          <div>
-            <img src="../../assets/images/个人中心@2x.png">
+          <div class="margin_top28">
+            <!-- class="img_width25" class="img_width_100"-->
+            <img src="../../assets/images/dingdan@2x.png" width="25px">
           </div>
           <div>我的订单</div>
         </div>
         <div class="personal_cd text_center" @click="goToHealthBonus">
-          <div>
-            <img src="../../assets/images/个人中心@2x.png">
+          <div class="margin_top28">
+            <!-- class="img_width25" class="img_width_100"-->
+            <img src="../../assets/images/dingdan@2x.png" width="25px">
           </div>
           <div>健康奖金</div>
         </div>
         <div class="personal_cd text_center" @click="goToMemberOperation">
-          <div>
-            <img src="../../assets/images/个人中心@2x.png">
+          <div class="margin_top28">
+            <!-- class="img_width25" class="img_width_100"-->
+            <img src="../../assets/images/dingdan@2x.png" width="25px">
           </div>
           <div>会员操作</div>
         </div>
         <div class="personal_cd text_center" @click="goToSetUp">
-          <div>
-            <img src="../../assets/images/个人中心@2x.png">
+          <div class="margin_top28">
+            <!-- class="img_width25" class="img_width_100"-->
+            <img src="../../assets/images/dingdan@2x.png" width="25px">
           </div>
           <div>设置中心</div>
         </div>
         <div class="personal_cd text_center" @click="shopDY">
-          <div>
-            <img src="../../assets/images/个人中心@2x.png">
+          <div class="margin_top28">
+            <!-- class="img_width25" class="img_width_100"-->
+            <img src="../../assets/images/dingdan@2x.png" width="25px">
           </div>
           <div>店铺设置</div>
         </div>
         <div class="personal_cd text_center">
-          <div>
-            <img src="../../assets/images/个人中心@2x.png">
+          <div class="margin_top28">
+            <!-- class="img_width25" class="img_width_100"-->
+            <img src="../../assets/images/dingdan@2x.png" width="25px">
           </div>
           <div>
             <a :href="'tel:' + 15049372463">联系客服</a>
@@ -99,21 +108,24 @@
     <!-- 个人 -->
     <div class="backgroun_color_f3" v-if="falg == 'g'">
       <!-- 头部 -->
-      <div class="personal_img_bj">
+      <div class="personal_img_bjg">
         <div class="div_display_flex">
-          <div class="headr_img_circular">
-            <img src="../../assets/images/Signal.png" width="100%">
+          <div class="div_width_25">
+            <div class="headr_img_circular">
+              <img src="../../assets/images/dingdan@2x.png" width="100%">
+            </div>
           </div>
-          <div class="font_color_ff font_size_15 personal_font_m">李娜</div>
-          <div class="personal_falg_member">至尊会员</div>
+          <div class="div_width_75 div_display_flex">
+            <div class="font_color_ff font_size_15 margin_top_div12">4李娜2</div>
+          </div>
         </div>
       </div>
       <!-- 账户 -->
-      <div class="personal_div_money" style="margin-top:-8%;line-height:2" @click="goToWallet">
+      <div class="personal_div_money" style="margin-top:-20%;line-height:2.5" @click="goToWallet">
         <div
           class="font_color_102 font_size_13 personal_money_m margin_left_div3 padding_top_div3"
         >账户余额（元）</div>
-        <div class="div_display_flex personal_price_m">
+        <div class="div_display_flex personal_price_m padding_bottom_4">
           <div class="font_color_102 font_size_25 div_width_50 margin_left_div3">￥0.00</div>
           <!-- <div
             class="div_display_flex font_color_102 font_size_13 div_width_50"
@@ -185,6 +197,7 @@
           <img src="../../assets/images/提醒 (3)@2x.png" class="per_img_width_18 margin_top_div8">
           <div class="margin_top_div3">您当前帐户已被冻结</div>
           <div class="margin_top_div3">需解冻才可以正常使用</div>
+            <div class="margin_top_div3">1231313***33</div>
           <div class="pass_list_w">
             <div class="search_box">
               <img src="../../assets/images/验证码@2x.png" class="width_16">
@@ -232,7 +245,7 @@ export default {
   name: "personal",
   data() {
     return {
-      falg: "sj", //个人 商铺 家庭展示标记
+      falg: "g", //个人 商铺 家庭展示标记
       sendAuthCode: true /*布尔值，通过v-show控制显示‘获取按钮’还是‘倒计时’ */,
       auth_time: 0 /*倒计时 计数器*/,
       accountFalge: true, //账户冻结
@@ -455,7 +468,13 @@ a:link {
 .personal_img_bj {
   background-image: url("../../assets/images/bg.png");
   background-size: 100%;
-  height: 175px;
+  height: 200px;
+  background-repeat: no-repeat;
+}
+.personal_img_bjg {
+  background-image: url("../../assets/images/bg.png");
+  background-size: 100%;
+  height: 184px;
   background-repeat: no-repeat;
 }
 .headr_img_circular {
@@ -476,13 +495,13 @@ a:link {
   border-radius: 5px;
   margin-top: 35px;
   font-size: 12px;
-  margin-left: 47%;
+  margin-left: 60%;
   line-height: 1.5;
 }
 .personal_falg_m {
   color: #ffffff;
   font-size: 13px;
-  margin-left: 26%;
+  margin-left: 40%;
 }
 .personal_font_m {
   margin-left: 13px;
@@ -547,25 +566,14 @@ a:link {
   padding-bottom: 6%;
   border-top: none;
   background-color: #fff;
+  height: 96px;
 }
 .search_box {
-  height: 3.5rem;
-  margin: 0.65rem 1.5rem 0;
-  position: relative;
-  padding: 0 1.55rem;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  z-index: 1;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  background: #fff;
-  line-height: 3.5rem;
+  width: 90%;
+  margin-left: 5%;
   margin-top: 5%;
-  border: none;
+  padding-left: -5%;
+  height: 30px;
   border-bottom: 1px solid rgb(173, 165, 165);
 }
 .width_16 {
@@ -586,6 +594,9 @@ a:link {
   border-radius: 5px;
   margin-left: 5%;
   margin-top: 8%;
+}
+.margin_top28 {
+  margin-top: 28%;
 }
 </style>
 

@@ -41,10 +41,6 @@
 }
 
 /* margin */
-.margin_top_div8 {
-  margin-top: 8%;
-}
-
 .margin_top_div3 {
   margin-top: 3%;
 }
@@ -58,6 +54,12 @@
 
 .margin_top_div5 {
   margin-top: 5%;
+}
+.margin_top_div6 {
+  margin-top: 6%;
+}
+.margin_top_div8 {
+  margin-top: 8%;
 }
 .margin_top_div12{
   margin-top: 12%;
@@ -253,14 +255,8 @@ color: #102023
   color: #FF3636;
 }
 /* div宽度 */
-.div_width_50 {
-  width: 50%;
-}
-.div_width_70{
-  width:70%
-}
-.div_width_80{
-  width:80%
+.div_width_8{
+  width:8%
 }
 .div_width_15{
   width:15%
@@ -285,6 +281,18 @@ color: #102023
 }
 .div_width_45{
   width:45%
+}
+.div_width_50 {
+  width: 50%;
+}
+.div_width_70{
+  width:70%
+}
+.div_width_75{
+  width:75%
+}
+.div_width_80{
+  width:80%
 }
 /* 内容位置 */
 .text_center {
