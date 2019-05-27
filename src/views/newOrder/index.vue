@@ -125,7 +125,7 @@
 <script>
 import url from "../../bin/url";
 import TabBar from "../../components/TabBar";
-import { Confirm, XDialog, CheckIcon } from "vux";
+import { Confirm, XDialog } from "vux";
 
 export default {
   components: {
@@ -251,23 +251,5 @@ export default {
   line-height: 3;
   border-radius: 5px;
   margin-top: 34%;
-}
-.model_password {
-  width: 90%;
-  margin-left: 5%;
-  border-radius: 8px;
-}
-.pass_input {
-  border: 1px solid #979797;
-  width: 15%;
-  margin-left: -2%;
-  line-height: 2;
-  font-size: 32px;
-  text-align: center;
-}
-.pass_input_6 {
-  width: 90%;
-  margin-left: 5%;
-  margin-top: 5%;
 }
 </style>

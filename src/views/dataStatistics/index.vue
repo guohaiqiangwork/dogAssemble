@@ -15,9 +15,12 @@
         </div>
       </div>
       <div class="tab_fg_border"></div>
-      <!-- 全部订单 -->
+      <!-- 今天 -->
       <div v-if="switchFlage == '001'">
-        <div class="div_width_45 font_color_ff text_center backgroun_color_76" @click="goTODataDetails">
+        <div
+          class="div_width_45 font_color_ff text_center backgroun_color_76"
+          @click="goTODataDetails"
+        >
           <div class="font_size_25 margin_top_div8">300.00</div>
           <div class="font_size_13 margin_top_div5">充值金额(元)</div>
         </div>
@@ -37,25 +40,64 @@
           <div class="font_size_25 margin_top_div8">300.00</div>
           <div class="font_size_13 margin_top_div5">商城返佣(元)</div>
         </div>
-            <div class="div_width_45 font_color_ff text_center backgroun_color_B6">
+        <div class="div_width_45 font_color_ff text_center backgroun_color_B6">
           <div class="font_size_25 margin_top_div8">300.00</div>
           <div class="font_size_13 margin_top_div5">商城返佣(元)</div>
         </div>
       </div>
-      <!-- 待付款 -->
+      <!-- 昨天 -->
       <div v-if="switchFlage == '002'">待付款</div>
-      <!-- 待收费 -->
+      <!-- 近7天 -->
       <div v-if="switchFlage == '003'">待收费</div>
-      <!-- 已发货 -->
+      <!-- 近30天 -->
       <div v-if="switchFlage == '004'">已发货</div>
-      <!-- 已完成 -->
-      <div v-if="switchFlage == '005'">已完成</div>
+      <!-- 自定义 -->
+      <div v-if="switchFlage == '005'">
+        <div class="div_display_flex font_size_13 font_color_10" style="margin-top: 3%;margin-left: 4%;">
+          <div class="s_t "></div>
+          <div class=" margin_left_div3"> <datetime v-model="valueS" @on-change="changeS" :title="''" clear-text @on-clear="setToday" :min-year=2019 :max-year=2020 ></datetime></div>
+          <div class=" margin_left_div3">--</div>
+          <div class=" margin_left_div3"> <datetime v-model="valueE" @on-change="changeE" :title="''" clear-text @on-clear="setToday" :min-year=2019 :max-year=2020 ></datetime></div>
+        </div>
+  <div
+          class="div_width_45 font_color_ff text_center backgroun_color_76"
+          @click="goTODataDetails"
+        >
+          <div class="font_size_25 margin_top_div8">300.00</div>
+          <div class="font_size_13 margin_top_div5">充值金额(元)</div>
+        </div>
+        <div class="div_width_45 font_color_ff text_center backgroun_color_17">
+          <div class="font_size_25 margin_top_div8">300.00</div>
+          <div class="font_size_13 margin_top_div5">跨店服务费(元)</div>
+        </div>
+        <div class="div_width_45 font_color_ff text_center backgroun_color_E8">
+          <div class="font_size_25 margin_top_div8">300.00</div>
+          <div class="font_size_13 margin_top_div5">视频返佣(元)</div>
+        </div>
+        <div class="div_width_45 font_color_ff text_center backgroun_color_FF8">
+          <div class="font_size_25 margin_top_div8">300.00</div>
+          <div class="font_size_13 margin_top_div5">推荐返佣(元)</div>
+        </div>
+        <div class="div_width_45 font_color_ff text_center backgroun_color_B6">
+          <div class="font_size_25 margin_top_div8">300.00</div>
+          <div class="font_size_13 margin_top_div5">商城返佣(元)</div>
+        </div>
+        <div class="div_width_45 font_color_ff text_center backgroun_color_B6">
+          <div class="font_size_25 margin_top_div8">300.00</div>
+          <div class="font_size_13 margin_top_div5">商城返佣(元)</div>
+        </div>
+      
+      </div>
     </div>
   </div>
 </template>
 <script>
 import url from "../../bin/url";
+import { Datetime } from "vux";
 export default {
+  components: {
+    Datetime
+  },
   name: "dataStatistics",
   data() {
     return {
@@ -81,7 +123,9 @@ export default {
           id: "005"
         }
       ],
-      switchFlage: "001"
+      switchFlage: "005", //默认展示tab
+      valueS: "2019-09-09",
+      valueE: "2020-09-09"
     };
   },
   methods: {
@@ -91,8 +135,8 @@ export default {
       this.switchFlage = id;
     },
     // 去数据详情
-    goTODataDetails(){
- this.$router.push({
+    goTODataDetails() {
+      this.$router.push({
         name: "dataDetails",
         params: {
           obj: JSON.stringify({
@@ -103,6 +147,24 @@ export default {
           })
         }
       });
+    },
+    //  时间事件
+    changeS(value) {
+      console.log("change", value);
+    },
+    changeE(value) {
+      console.log("change", value);
+    },
+    //时间
+    setToday(value) {
+      console.log(value);
+      let now = new Date();
+      let cmonth = now.getMonth() + 1;
+      let day = now.getDate();
+      if (cmonth < 10) cmonth = "0" + cmonth;
+      if (day < 10) day = "0" + day;
+      this.value1 = now.getFullYear() + "-" + cmonth + "-" + day;
+      console.log(this.value1);
     }
   },
   created() {
@@ -146,4 +208,5 @@ export default {
   margin-top: 3%;
   height: 93px;
 }
+
 </style>
