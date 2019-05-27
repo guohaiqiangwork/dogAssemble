@@ -80,7 +80,7 @@ export default {
         height: 0.3rem;
         margin-right:0.1rem;
         // margin-top: 0.6rem;
-        background: #FF8156;
+        background: #4A7B67;
         border-radius:.03rem;
         line-height: 0.3rem;
     }

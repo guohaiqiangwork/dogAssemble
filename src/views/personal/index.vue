@@ -370,17 +370,18 @@ export default {
     },
     // 去设置exclusive
     goToSetUp: function() {
-      this.$router.push({
-        name: "setUp",
-        params: {
-          obj: JSON.stringify({
-            type: "profession",
-            data: {
-              id: "蚕丝"
-            }
-          })
-        }
-      });
+      this.$router.push('/eatbook');
+      // this.$router.push({
+      //   name: "setUp",
+      //   params: {
+      //     obj: JSON.stringify({
+      //       type: "profession",
+      //       data: {
+      //         id: "蚕丝"
+      //       }
+      //     })
+      //   }
+      // });
     },
     // 去专属门店
     goToExclusive: function() {

@@ -204,6 +204,12 @@ export default new Router({
       title:'添加分类'
     },
     component:  resolve => require(['@/views/videoMangment/addClass/index'], resolve),
+  },{
+    path:'/book',
+    meta: {
+      title:'添加分类'
+    },
+    component:  resolve => require(['@/views/eatBook/book/index'], resolve),
   },
   {
     path:'/goodslist',
@@ -211,6 +217,13 @@ export default new Router({
       title:'商品列表'
     },
     component:  resolve => require(['@/views/paysure/goodsList/index'], resolve),
+  },
+  {
+    path:'/eatbook',
+    meta: {
+      title:'食养配方'
+    },
+    component:  resolve => require(['@/views/eatBook/index'], resolve),
   },
   {
     // 全国门店
