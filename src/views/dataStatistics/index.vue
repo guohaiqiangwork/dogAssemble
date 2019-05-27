@@ -208,12 +208,5 @@ export default {
   margin-top: 3%;
   height: 93px;
 }
-.s_t{
-      width: 2px;
-    height: 15px;
-    background-color: #4a7b67;
-    margin-top: 1%;
-    border: 1px solid #4a7b67;
-    border-radius: 10px;
-}
+
 </style>

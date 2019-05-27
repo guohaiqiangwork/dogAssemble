@@ -18,7 +18,7 @@
       >
         <div class="div_width_15 margin_left_div3">张新的</div>
         <div class="div_width_25">2019-04-23</div>
-        <div class="div_width_50 text_right" @click="goToMemberD">辟谷套餐</div>
+        <div class="div_width_50 text_right">辟谷套餐</div>
       </div>
     </div>
     <!-- 无数据 -->
@@ -28,7 +28,7 @@
     </div>
     <!-- 按钮 -->
     <div class=" div_display_flex">
-      <div class="font_color_ff font_size_16 backgroun_color_4A text_center bt_m_o">新建套餐</div>
+      <div class="font_color_ff font_size_16 backgroun_color_4A text_center bt_m_o" @click="goToMemberD">新建套餐</div>
       <div class="font_color_ff font_size_16 backgroun_color_4A text_center bt_m_q">全部会员</div>
     </div>
   </div>

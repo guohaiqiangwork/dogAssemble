@@ -87,6 +87,9 @@
 .margin_right_div3{
   margin-right: 3%
 }
+.margin_bottom_8{
+  margin-bottom: 8%
+}
 .padding_bottom_4{
   padding-bottom: 4%;
 }
@@ -341,4 +344,31 @@ color: #102023
   height: 23px;
   background-color: #ff8156;
   border-radius: 5px
+}
+.s_t{
+  width: 2px;
+height: 15px;
+background-color: #4a7b67;
+margin-top: 1%;
+border: 1px solid #4a7b67;
+border-radius: 10px;
+}
+/* 密码输入框样式 */
+.model_password {
+  width: 90%;
+  margin-left: 5%;
+  border-radius: 8px;
+}
+.pass_input {
+  border: 1px solid #979797;
+  width: 15%;
+  margin-left: -2%;
+  line-height: 2;
+  font-size: 32px;
+  text-align: center;
+}
+.pass_input_6 {
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 5%;
 }
