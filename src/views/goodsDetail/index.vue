@@ -62,7 +62,7 @@
                         
                         <p class="flex-between align-center mt-space">
                             <span>购买数量</span>
-                            <inline-x-number width="30px" :min="0"></inline-x-number>
+                            <inline-x-number width="30px" :title="('Quantity')" :min="0"  v-model="buyNum"></inline-x-number>
                         </p>
                     </div>
                     <div class="buy_btn" @click="buyGoods">确认</div>
@@ -75,7 +75,6 @@
 <script>
 import hot from '../Assemble/hotness/index'
 import { Swiper,TransferDom, Popup, XButton, InlineXNumber } from 'vux'
-import { get } from 'http';
 export default {
     directives: {
         TransferDom
@@ -85,15 +84,23 @@ export default {
         hot,Swiper,Popup, XButton,InlineXNumber
     },
     computed:{
-        route(){
-            return this.$route.query.id;
-        },
         popupshow:{
             get:function () {
                 return this.$parent.show;
             },
             set: function (oldVal,newVal) {
             }
+        },
+        buyNum:{
+            get:function () {
+                return this.$parent.buyNum;
+            },
+            set: function (Val) {
+                this.$parent.buyNum = Val;
+                // console.log(Val);
+
+            }
+            
         }
     },
     data() {
@@ -130,7 +137,7 @@ export default {
         // },
         buyGoods(){
             this.$router.push('/paysure')
-        }
+        },
     },
     mounted() {
         console.log(this.$parent.show);

@@ -11,15 +11,18 @@
           <div :class="{ 'active': actives == '0'}">首页</div>
         </flexbox-item>
         <flexbox-item>
-          <div class="flex-demo" @click="didClickedItem(1,'cart')">
+          <div class="flex-demo pos" @click="didClickedItem(1,'cart')">
             <img src="../assets/images/Signal.png" style="width: 30%;">
+            <badge class="msg-sign" :text="buyNum" v-if="buyNum"></badge>
           </div>
-          <div :class="{ 'active': actives == '1'}">商户</div>
+          <div :class="{ 'active': actives == '1'}">
+            <span>商户</span>
+          </div>
         </flexbox-item>
        
         <flexbox-item v-if="this.route == '/goodsdetail'">
             <div class="flex-start">
-              <div class="foot-btn green">加入购物车</div>
+              <div class="foot-btn green" @click="addCart">加入购物车</div>
               <div class="foot-btn yello" @click="ImmeBuy">立即购买</div>
             </div>
         </flexbox-item>
@@ -35,12 +38,13 @@
 </template>
 
 <script>
-import { Flexbox, FlexboxItem } from "vux";
+import { Flexbox, FlexboxItem,Badge } from "vux";
 export default {
    name: "TabBar",
   components: {
     Flexbox,
-    FlexboxItem
+    FlexboxItem,
+    Badge
   },
   computed:{
     route(){
@@ -51,12 +55,16 @@ export default {
   data: function() {
     return {
       actives: 0,
-      show:false
+      show:false,
+      buyNum:0,
     };
   },
   methods: {
     ImmeBuy(){
       this.show = true;
+    },
+    addCart(){
+      this.buyNum++;
     },
     didClickedItem: function(tag, name) {
       console.log(tag);
@@ -84,6 +92,14 @@ export default {
 .vux-flexbox .vux-flexbox-item{
   width: auto;
   min-width: unset;
+}
+.pos{
+  position: relative;
+}
+.msg-sign{
+  position: absolute;
+  top: 0;
+  left: calc(50% + 8px);
 }
 .routeview{
   margin-bottom: 48px;
