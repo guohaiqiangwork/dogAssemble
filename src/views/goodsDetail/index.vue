@@ -28,7 +28,7 @@
 
 
         <div v-transfer-dom>
-            <popup v-model="popupshow" position="bottom">
+            <popup v-model="popupshow" position="bottom" @on-hide='close'>
                 <div class="popup_box ">
                     <div class="goods_info flex-between">
                         <div class="popup_head">
@@ -42,7 +42,7 @@
                             </div>
                         </div>
                        
-                        <x-icon type="ios-close-empty" size="30" class="icon_pos" @click="popupshow = false"></x-icon>
+                        <x-icon type="ios-close-empty" size="30" class="icon_pos" @click="close"></x-icon>
                     </div>
                     <div class="goods_detail">
                         <div>
@@ -69,19 +69,32 @@
                 </div> 
             </popup>
         </div>
-        <span @click="addCart">出来吧，弹窗！</span>   
     </div>
     
 </template>
 <script>
 import hot from '../Assemble/hotness/index'
 import { Swiper,TransferDom, Popup, XButton, InlineXNumber } from 'vux'
+import { get } from 'http';
 export default {
     directives: {
         TransferDom
     },
+    props:['popup'],
     components:{
         hot,Swiper,Popup, XButton,InlineXNumber
+    },
+    computed:{
+        route(){
+            return this.$route.query.id;
+        },
+        popupshow:{
+            get:function () {
+                return this.$parent.show;
+            },
+            set: function (oldVal,newVal) {
+            }
+        }
     },
     data() {
         return {
@@ -99,25 +112,28 @@ export default {
                 }
             ],
             num:1,
-            popupshow:false
+            // popupshow:false
         }
     },
     created(){
       settitle('商品详情');
     },
     methods: {
+        close(){
+            this.$parent.show = false;
+        },
         onIndexChange(currentIndex) {
             this.num = currentIndex + 1;
         },
-        addCart(){
-            this.popupshow = true;
-        },
+        // addCart(){
+        //     this.popupshow = true;
+        // },
         buyGoods(){
             this.$router.push('/paysure')
         }
     },
     mounted() {
-        
+        console.log(this.$parent.show);
     },
 }
 </script>

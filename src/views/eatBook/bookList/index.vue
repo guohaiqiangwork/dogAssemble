@@ -34,7 +34,11 @@ export default {
     data() {
         return {
             show:'da',
-            bookList: [],
+            bookList: [
+                {
+                    
+                }
+            ],
         }
     },
     methods: {
