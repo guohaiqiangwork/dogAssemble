@@ -156,6 +156,17 @@ export default {
     },
     // 弹窗确认
     onConfirm() {
+     this.$router.push({
+        name: "orderSuccess",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: "参数"
+            }
+          })
+        }
+      });
       this.newPay = false; //去支付
     },
     // 去支付

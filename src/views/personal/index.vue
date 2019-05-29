@@ -13,7 +13,16 @@
           </div>
           <div class="div_width_75 div_display_flex">
             <div class="font_color_ff font_size_15 margin_top_div12">李娜1</div>
-            <div class="personal_falg_member">至尊会员</div>
+            <div class="personal_falg_member" style="margin-left: 58%; margin-top: 3%;">
+              <img src="../../assets/images/122@2x.png" width="60px">
+            </div>
+            <!-- 打烊 -->
+            <!-- <div class="div_display_flex" style="margin-left: 54%; margin-top: 10%;">
+              <div class="font_color_ff" style="margin-top:16%">打烊中…</div>
+              <div>
+                <img src="../../assets/images/td@2x.png" width="30px">
+              </div>
+            </div> -->
           </div>
         </div>
         <div class="div_display_flex" style="margin-top:-3%">
@@ -29,7 +38,7 @@
       <div class="personal_money text_center" style="margin-top:-21%">
         <!-- style="margin-top:-21%" -->
         <div class="font_color_76 font_size_13 padding_top_div3">总金额(元)</div>
-        <div class="font_color_76 font_size_25 " style="padding-bottom: 2%;">1000.00</div>
+        <div class="font_color_76 font_size_25" style="padding-bottom: 2%;">1000.00</div>
       </div>
       <!-- 菜单列表 -->
       <div class="margin_top_div4">
@@ -41,21 +50,21 @@
           </div>
           <div>新建订单</div>
         </div>
-         <div class="personal_cd text_center" @click="goToMemberOperation">
+        <div class="personal_cd text_center" @click="goToMemberOperation">
           <div class="margin_top28">
             <!-- class="img_width25" class="img_width_100"-->
             <img src="../../assets/images/1574@2x.png" width="25px" height="30px">
           </div>
           <div>会员操作</div>
         </div>
-           <div class="personal_cd text_center" @click="goToSetUp">
+        <div class="personal_cd text_center" @click="goToSetUp">
           <div class="margin_top28">
             <!-- class="img_width25" class="img_width_100"-->
             <img src="../../assets/images/1569@2x.png" width="25px">
           </div>
           <div>食养配方</div>
         </div>
-          <div class="personal_cd text_center" @click="goToStatistics">
+        <div class="personal_cd text_center" @click="goToStatistics">
           <div class="margin_top28">
             <!-- class="img_width25" class="img_width_100"-->
             <img src="../../assets/images/wenjianjia@2x.png" width="25px" height="30px">
@@ -69,14 +78,14 @@
           </div>
           <div>金额充值</div>
         </div>
-       <div class="personal_cd text_center" @click="goToHealthBonus">
+        <div class="personal_cd text_center" @click="goToHealthBonus">
           <div class="margin_top28">
             <!-- class="img_width25" class="img_width_100"-->
             <img src="../../assets/images/1570@2x.png" width="25px" height="30px">
           </div>
           <div>健康奖金</div>
         </div>
-      
+
         <div class="personal_cd text_center" @click="goToOrder">
           <div class="margin_top28">
             <!-- class="img_width25" class="img_width_100"-->
@@ -84,11 +93,11 @@
           </div>
           <div>商城订单</div>
         </div>
-      
-          <div class="personal_cd text_center" @click="goToSetUp">
+
+        <div class="personal_cd text_center" @click="goToSetUp">
           <div class="margin_top28">
             <!-- class="img_width25" class="img_width_100"-->
-            <img src="../../assets/images/1566@2x.png" width="25px"  height="30px">
+            <img src="../../assets/images/1566@2x.png" width="25px" height="30px">
           </div>
           <div>视频管理</div>
         </div>
@@ -96,18 +105,17 @@
         <div class="personal_cd text_center" @click="goToSetUp">
           <div class="margin_top28">
             <!-- class="img_width25" class="img_width_100"-->
-            <img src="../../assets/images/1579@2x.png" width="25px"  height="30px">
+            <img src="../../assets/images/1579@2x.png" width="25px" height="30px">
           </div>
           <div>设置中心</div>
         </div>
-        
-        
+
         <!-- <div class="personal_cd text_center" @click="shopDY">
           <div class="margin_top28">
             <img src="../../assets/images/dingdan@2x.png" width="25px">
           </div>
           <div>店铺设置</div>
-        </div> -->
+        </div>-->
         <!-- <div class="personal_cd text_center">
           <div class="margin_top28">
             <img src="../../assets/images/dingdan@2x.png" width="25px">
@@ -115,7 +123,7 @@
           <div>
             <a :href="'tel:' + 15049372463">联系客服</a>
           </div>
-        </div> -->
+        </div>-->
 
         <!-- </div> -->
       </div>
@@ -374,7 +382,7 @@ export default {
     },
     // 去设置exclusive
     goToSetUp: function() {
-      this.$router.push('/eatbook');
+      this.$router.push("/eatbook");
       // this.$router.push({
       //   name: "setUp",
       //   params: {
@@ -504,7 +512,7 @@ a:link {
   margin-left: 36px;
   margin-top: 30px;
 }
-.personal_falg_member {
+/* .personal_falg_member {
   width: 60px;
   height: 18px;
   background-color: #e8bb7a;
@@ -515,7 +523,7 @@ a:link {
   font-size: 12px;
   margin-left: 60%;
   line-height: 1.5;
-}
+} */
 .personal_falg_m {
   color: #ffffff;
   font-size: 13px;
