@@ -29,7 +29,7 @@
       <div class="personal_money text_center" style="margin-top:-21%">
         <!-- style="margin-top:-21%" -->
         <div class="font_color_76 font_size_13 padding_top_div3">总金额(元)</div>
-        <div class="font_color_76 font_size_25 margin_top_div2 c">1000.00</div>
+        <div class="font_color_76 font_size_25 " style="padding-bottom: 2%;">1000.00</div>
       </div>
       <!-- 菜单列表 -->
       <div class="margin_top_div4">
@@ -37,67 +37,71 @@
         <div class="personal_cd text_center" @click="goToNewOrder">
           <div class="margin_top28">
             <!-- class="img_width25" class="img_width_100"-->
-            <img src="../../assets/images/dingdan@2x.png" width="25px">
+            <img src="../../assets/images/dingdan@2x.png" width="25px" height="30px">
           </div>
           <div>新建订单</div>
+        </div>
+         <div class="personal_cd text_center" @click="goToMemberOperation">
+          <div class="margin_top28">
+            <!-- class="img_width25" class="img_width_100"-->
+            <img src="../../assets/images/1574@2x.png" width="25px" height="30px">
+          </div>
+          <div>会员操作</div>
+        </div>
+           <div class="personal_cd text_center" @click="goToSetUp">
+          <div class="margin_top28">
+            <!-- class="img_width25" class="img_width_100"-->
+            <img src="../../assets/images/1569@2x.png" width="25px">
+          </div>
+          <div>食养配方</div>
+        </div>
+          <div class="personal_cd text_center" @click="goToStatistics">
+          <div class="margin_top28">
+            <!-- class="img_width25" class="img_width_100"-->
+            <img src="../../assets/images/wenjianjia@2x.png" width="25px" height="30px">
+          </div>
+          <div>数据统计</div>
         </div>
         <div class="personal_cd text_center" @click="goToRecharge">
           <div class="margin_top28">
             <!-- class="img_width25" class="img_width_100"-->
-            <img src="../../assets/images/dingdan@2x.png" width="25px">
+            <img src="../../assets/images/1562@2x.png" width="25px" height="30px">
           </div>
           <div>金额充值</div>
         </div>
-        <div class="personal_cd text_center" @click="goToStatistics">
+       <div class="personal_cd text_center" @click="goToHealthBonus">
           <div class="margin_top28">
             <!-- class="img_width25" class="img_width_100"-->
-            <img src="../../assets/images/dingdan@2x.png" width="25px">
-          </div>
-          <div>数据统计</div>
-        </div>
-        <div class="personal_cd text_center" @click="goToOrder">
-          <div class="margin_top28">
-            <!-- class="img_width25" class="img_width_100"-->
-            <img src="../../assets/images/dingdan@2x.png" width="25px">
-          </div>
-          <div>商城订单</div>
-        </div>
-        <div class="personal_cd text_center" @click="goToHealthBonus">
-          <div class="margin_top28">
-            <!-- class="img_width25" class="img_width_100"-->
-            <img src="../../assets/images/dingdan@2x.png" width="25px">
+            <img src="../../assets/images/1570@2x.png" width="25px" height="30px">
           </div>
           <div>健康奖金</div>
         </div>
-        <div class="personal_cd text_center" @click="goToMemberOperation">
+      
+        <div class="personal_cd text_center" @click="goToOrder">
           <div class="margin_top28">
             <!-- class="img_width25" class="img_width_100"-->
-            <img src="../../assets/images/dingdan@2x.png" width="25px">
+            <img src="../../assets/images/1554@2x.png" width="25px" height="30px">
           </div>
-          <div>会员操作</div>
+          <div>商城订单</div>
+        </div>
+      
+          <div class="personal_cd text_center" @click="goToSetUp">
+          <div class="margin_top28">
+            <!-- class="img_width25" class="img_width_100"-->
+            <img src="../../assets/images/1566@2x.png" width="25px"  height="30px">
+          </div>
+          <div>视频管理</div>
         </div>
 
         <div class="personal_cd text_center" @click="goToSetUp">
           <div class="margin_top28">
             <!-- class="img_width25" class="img_width_100"-->
-            <img src="../../assets/images/dingdan@2x.png" width="25px">
+            <img src="../../assets/images/1579@2x.png" width="25px"  height="30px">
           </div>
           <div>设置中心</div>
         </div>
-        <div class="personal_cd text_center" @click="goToSetUp">
-          <div class="margin_top28">
-            <!-- class="img_width25" class="img_width_100"-->
-            <img src="../../assets/images/dingdan@2x.png" width="25px">
-          </div>
-          <div>食养配方</div>
-        </div>
-           <div class="personal_cd text_center" @click="goToSetUp">
-          <div class="margin_top28">
-            <!-- class="img_width25" class="img_width_100"-->
-            <img src="../../assets/images/dingdan@2x.png" width="25px">
-          </div>
-          <div>视频管理</div>
-        </div>
+        
+        
         <!-- <div class="personal_cd text_center" @click="shopDY">
           <div class="margin_top28">
             <img src="../../assets/images/dingdan@2x.png" width="25px">
