@@ -313,6 +313,7 @@
 <script>
 import TabBar from "../../components/TabBar";
 import { Flexbox, Confirm } from "vux";
+require ('../../static/des')
 export default {
   components: {
     TabBar,
@@ -548,6 +549,7 @@ export default {
   },
 
   mounted() {
+    console.log(window.DesUtils.encode('1232313',"fruits-app,yuntu,com"))
     this.$refs.TabBar.didClickedItem("2");
   }
 };
