@@ -9,8 +9,8 @@
       <div class="margin_top_div5">
         <div class="font_size_15 font_color_010 div_display_flex me_d">
           <div class="s_t"></div>
-          <div style="margin-top:-2.5%;margin-left:3%">张星</div>
-          <span class="margin_left_div3" style="margin-top:-2%;">1231312312312</span>
+          <div style="margin-top:-2.5%;margin-left:3%">{{infoList.name}}</div>
+          <span class="margin_left_div3" style="margin-top:-2%;">{{infoList.phone}}</span>
         </div>
         <!-- <div class="div_display_flex">
           <div class="me_d_s" style="margin-left:24%"></div>
@@ -57,22 +57,22 @@
     </div>
     <!-- 辟谷套餐 -->
     <div v-if="!memberFalg">
-      <div class="font_size_12 margin_left_div6 margin_top_div5">
+      <div class="font_size_12 margin_left_div6 margin_top_div5" v-if="infoList.userType == '0'">
         <img src="../../assets/images/提醒 (3)@2x.png" style="width:19px">
         当前用户为跨店用户
       </div>
       <div class="margin_top_div5">
         <div class="font_size_15 font_color_010 div_display_flex me_d">
           <div class="s_t"></div>
-          <div style="margin-top:-2.5%;margin-left:3%">张星</div>
-          <span class="margin_left_div3" style="margin-top:-2%;">1231312312312</span>
+          <div style="margin-top:-2.5%;margin-left:3%">{{infoList.name}}</div>
+          <span class="margin_left_div3" style="margin-top:-2%;">{{infoList.phone}}</span>
         </div>
         <div
           class="div_display_flex font_size_15 font_color_01 me_d_n border_tlr_b"
           style="background-color:#DEE8E3;"
         >
           <div class="div_width_50">辟谷套餐</div>
-          <div class="div_width_50 text_right margin_right_div3">2019.09.30</div>
+          <div class="div_width_50 text_right margin_right_div3">{{nowTime}}</div>
         </div>
         <!-- 规格 -->
         <div class="m_b_DB font_size_13 font_color_10">
@@ -82,17 +82,33 @@
             <div class="div_width_25">状态</div>
             <div class="div_width_25">操作</div>
           </div>
-          <div class="div_display_flex text_center" v-for="item in [1,2,3]">
-            <div class="div_width_25">次数</div>
-            <div class="div_width_25">食用时间</div>
-            <div class="div_width_25">状态</div>
-            <div class="div_width_25">/</div>
+          <div
+            class="div_display_flex text_center"
+            v-for="(item,index) in infoList.biguDateLists"
+            :key="index"
+          >
+            <div class="div_width_25">{{index +1}}</div>
+            <div class="div_width_25">{{item.recommTime}}</div>
+            <div class="div_width_25" style="color:#4A7B67" v-if="item.state == '1'">待完成</div>
+            <div class="div_width_25" style="color:#E9E9E9" v-if="item.state == '2'">已完成</div>
+            <div class="div_width_25" style="color:#E6435A" v-if="item.state == '3'">已作废</div>
+            <div class="div_width_25" v-if="item.state != '1'">/</div>
+            <div
+              class="div_width_25"
+              style="color:#4A7B67"
+              v-if="item.state == '1'"
+              @click="goPayB(item.id)"
+            >确认</div>
           </div>
         </div>
       </div>
       <!-- 按钮 -->
       <!-- 按钮 -->
-      <div class="div_display_flex" style="position: fixed;bottom: 0;width: 100%;line-height: 3;">
+      <div
+        class="div_display_flex"
+        style="position: fixed;bottom: 0;width: 100%;line-height: 3;"
+        v-if="memberFalg"
+      >
         <div class="div_width_70 backgroun_color_E9 padding_left_div3">
           金额：
           <span class="red">23423</span>
@@ -149,56 +165,87 @@ export default {
   data() {
     return {
       classA: "1",
-      memberFalg: false, //辟谷/会员套餐标记
+      memberFalg: "", //辟谷/会员套餐标记
       payShowD: false, //支付
       ni: "",
-      payBFalge: false //辟谷消费提示
+      payBFalge: false, //辟谷消费提示
+      parameter: "", //参数
+      infoList: "", //详情
+      nowTime: new Date() //当前日期
     };
   },
   methods: {
-    //  去会员详情
-    goToMemberD() {
-      this.$router.push({
-        name: "memberD",
-        params: {
-          obj: JSON.stringify({
-            type: "profession",
-            data: {
-              id: "蚕丝"
-            }
-          })
-        }
-      });
-    },
     // 选择套餐
     tabT(id) {
       this.classA = id;
     },
-    
+
     // 会员打开支付
     goPay() {
       this.payShowD = true;
     },
     // 辟谷消费
-    goPayB() {
+    goPayB(id) {
+      this.payId = id; //辟谷消费id
       this.payBFalge = true;
     },
-     // 弹窗取消
-    onCancel() {
-      console.log("2");
-    },
+    // 弹窗取消
+    onCancel() {},
     // 弹窗确认
     onConfirm() {
-      this.newPay = false; //去支付
+      let _obj = {
+        openId: url.openId,
+        id: this.payId
+      };
+      this.$fetch.post(url.sureBigu, _obj).then(
+        data => {
+          if (data.code == 0) {
+           this.getInfo(this.parameter.item.id);
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
+        }
+      );
+      // this.payShowD = true; //去支付
     },
+    // 获取会员详情
+    getInfo(id) {
+      let _obj = {
+        openId: url.openId,
+        id: id
+      };
+      this.$fetch.post(url.getOrderInfo, _obj).then(
+        data => {
+          if (data.code == 0) {
+            this.infoList = data.obj;
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
+        }
+      );
+    },
+    // 获取当前时间
+    timeNow() {
+      var now = new Date(); //当前日期
+      var nowDay = now.getDate(); //当前日
+      var nowMonth = now.getMonth(); //当前月
+      var nowYear = now.getFullYear(); //当前年
+      this.nowTime = nowYear + "." + nowMonth + "." + nowDay;
+    }
   },
   created() {
     settitle("会员操作详情");
-    this.routeParams = JSON.parse(this.$route.params.obj);
+    this.parameter = this.routeParams = JSON.parse(this.$route.params.obj).data;
+    if (this.parameter.item.type == "1") {
+      this.memberFalg = false; //判断是否辟谷
+    }
   },
 
   mounted() {
-    console.log("会员操作详情");
+    this.getInfo(this.parameter.item.id); //获取详情
+    this.timeNow();
   }
 };
 </script>

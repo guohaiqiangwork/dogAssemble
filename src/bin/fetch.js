@@ -5,7 +5,8 @@ const options = {
   baseURL: config.baseURL,
   timeout: 300000,
   headers:{
-    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+    'Content-Type': 'application/json;charset=UTF-8',
+    'AuthorizationKey':'d2f3acfc-89ad-4714-943c-bfe4504527d8'
   }
 
 }

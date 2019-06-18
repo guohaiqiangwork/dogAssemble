@@ -6,6 +6,9 @@
       <input
         type="text"
         placeholder="请输入手机号"
+        maxlength="11"
+        v-on:input="getCheckMember(phone)"
+        v-model="phone"
         style="width:100%;height:100%;background-color:#EFEFEF; outline: none;border:none"
       >
       <i></i>
@@ -14,11 +17,13 @@
     <div>
       <div
         class="div_display_flex margin_top_div5 font_size_14 font_color_1A"
-        v-for="item in [1,2,3,4,5]"
+        v-for="(item,index) in memberList"
+        :key="index"
       >
-        <div class="div_width_15 margin_left_div3">张新的</div>
-        <div class="div_width_25">2019-04-23</div>
-        <div class="div_width_50 text_right">辟谷套餐</div>
+        <div class="div_width_15 margin_left_div3" @click="goToMemberD(item)">{{item.name}}</div>
+        <div class="div_width_25">{{item.phone}}</div>
+        <div class="div_width_50 text_right" v-if="item.type == 0">会员{{item.recipe}}</div>
+        <div class="div_width_50 text_right" v-if="item.type == 1">辟谷{{item.recipe}}</div>
       </div>
     </div>
     <!-- 无数据 -->
@@ -27,8 +32,11 @@
       该用户不存在
     </div>
     <!-- 按钮 -->
-    <div class=" div_display_flex">
-      <div class="font_color_ff font_size_16 backgroun_color_4A text_center bt_m_o" @click="goToMemberD">新建套餐</div>
+    <div class="div_display_flex">
+      <div
+        class="font_color_ff font_size_16 backgroun_color_4A text_center bt_m_o"
+        @click="goToNewOrder"
+      >新建套餐</div>
       <div class="font_color_ff font_size_16 backgroun_color_4A text_center bt_m_q">全部会员</div>
     </div>
   </div>
@@ -38,22 +46,75 @@ import url from "../../bin/url";
 export default {
   name: "memberOperation",
   data() {
-    return {};
+    return {
+      memberList: [], //列表数据
+      phone: "" //查询手机号
+    };
   },
   methods: {
     //  去会员详情
-    goToMemberD() {
+    goToMemberD(item) {
       this.$router.push({
         name: "memberD",
         params: {
           obj: JSON.stringify({
             type: "profession",
             data: {
-              id: "蚕丝"
+              item
             }
           })
         }
       });
+    },
+    // 去新建套餐
+    goToNewOrder() {
+      this.$router.push({
+        name: "newOrder",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {}
+          })
+        }
+      });
+    },
+    // 获取列表参数
+    getMemberList() {
+      let keywords = {
+        openId: url.openId
+      };
+      this.$fetch.post(url.getMemberList, keywords).then(
+        data => {
+          console.log(data);
+          if (data.code == 0) {
+            this.memberList = data.obj;
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
+        }
+      );
+    },
+    // 查询订单会员
+    getCheckMember(phone) {
+      if (phone.length != "11") {
+        return;
+      }
+      let keywords = {
+        openId: url.openId,
+        phone: phone
+      };
+      this.$fetch.post(url.checkMember, keywords).then(
+        data => {
+          console.log(data);
+          if (data.code == 0) {
+            this.memberList = data.obj;
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
+        }
+      );
     }
   },
   created() {
@@ -62,7 +123,8 @@ export default {
   },
 
   mounted() {
-    console.log("会员操作");
+    //获取列表
+    this.getMemberList();
   }
 };
 </script>
