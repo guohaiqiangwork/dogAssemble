@@ -94,13 +94,12 @@
           <div>商城订单</div>
         </div>
 
-        <div class="personal_cd text_center" @click="goToSetUp">
+        <!-- <div class="personal_cd text_center" @click="goToSetUp">
           <div class="margin_top28">
-            <!-- class="img_width25" class="img_width_100"-->
             <img src="../../assets/images/1566@2x.png" width="25px" height="30px">
           </div>
           <div>视频管理</div>
-        </div>
+        </div> -->
 
         <div class="personal_cd text_center" @click="goToSetUp">
           <div class="margin_top28">
@@ -158,13 +157,12 @@
           <div>健康奖金</div>
         </div>
 
-        <div class="personal_cd_j text_center" @click="goToSetUp">
+        <!-- <div class="personal_cd_j text_center" @click="goToSetUp">
           <div class="margin_top28">
-            <!-- class="img_width25" class="img_width_100"-->
             <img src="../../assets/images/1566@2x.png" width="25px" height="30px">
           </div>
           <div>视频管理</div>
-        </div>
+        </div> -->
         <div class="personal_cd_j text_center" @click="goToPassword">
           <div class="margin_top28">
             <img src="../../assets/images/1582@2x.png" width="25px" height="30px">
