@@ -21,14 +21,6 @@ import auditstate from '@/views/videoMangment/auditState/index'             // �
 import videoupload from '@/views/videoMangment/videoUpload/index'             // 视频上传
 import videolist from '@/views/about/videoList/index'             // 视频列表
 import videosorder from '@/views/about/videosOrder/index'             // 视频订单
-
-
-
-
-
-
-
-
 import myWallet from '@/views/myWallet/index'//我的钱包
 import billRecord from '@/views/billRecord/index' //钱包记录
 import order from '@/views/order/index' //我的订单
@@ -48,6 +40,7 @@ import newOrder from '@/views/newOrder/index' //新建订单
 import memberOperation from '@/views/memberOperation/index' //会员操作
 import memberD from '@/views/memberD/index'//会员操作详情
 import rechargeList from '@/views/rechargeList/index' //充值记录
+import orderSuccess from '@/views/orderSuccess/index'//订单成功
 Vue.use(Router)
 
 export default new Router({
@@ -449,7 +442,16 @@ export default new Router({
     meta: {
       title: '新建订单',
     },
-    component: newOrder
+    component: newOrder 
+  },
+  {
+    //新建订单
+    path: '/orderSuccess/:obj',
+    name: 'orderSuccess',
+    meta: {
+      title: '新建成功',
+    },
+    component: orderSuccess 
   },
   {
     //会员操作

@@ -1,7 +1,7 @@
 <template>
   <!-- style="background-color:#F3F5F8; min-height:700px" -->
   <div>
-    <!-- 商铺 家庭 -->
+    <!-- 商铺 -->
     <div class="backgroun_color_f3" v-if="falg == 'sj'">
       <!-- 头部 -->
       <div class="personal_img_bj">
@@ -13,7 +13,16 @@
           </div>
           <div class="div_width_75 div_display_flex">
             <div class="font_color_ff font_size_15 margin_top_div12">李娜1</div>
-            <div class="personal_falg_member">至尊会员</div>
+            <div class="personal_falg_member">
+              <img src="../../assets/images/122@2x.png" width="60px">
+            </div>
+            <!-- 打烊 -->
+            <!-- <div class="div_display_flex" style="margin-left: 54%; margin-top: 10%;">
+              <div class="font_color_ff" style="margin-top:16%">打烊中…</div>
+              <div>
+                <img src="../../assets/images/td@2x.png" width="30px">
+              </div>
+            </div>-->
           </div>
         </div>
         <div class="div_display_flex" style="margin-top:-3%">
@@ -29,7 +38,7 @@
       <div class="personal_money text_center" style="margin-top:-21%">
         <!-- style="margin-top:-21%" -->
         <div class="font_color_76 font_size_13 padding_top_div3">总金额(元)</div>
-        <div class="font_color_76 font_size_25 margin_top_div2 c">1000.00</div>
+        <div class="font_color_76 font_size_25" style="padding-bottom: 2%;">1000.00</div>
       </div>
       <!-- 菜单列表 -->
       <div class="margin_top_div4">
@@ -37,89 +46,141 @@
         <div class="personal_cd text_center" @click="goToNewOrder">
           <div class="margin_top28">
             <!-- class="img_width25" class="img_width_100"-->
-            <img src="../../assets/images/dingdan@2x.png" width="25px">
+            <img src="../../assets/images/dingdan@2x.png" width="25px" height="30px">
           </div>
           <div>新建订单</div>
-        </div>
-        <div class="personal_cd text_center" @click="goToRecharge">
-          <div class="margin_top28">
-            <!-- class="img_width25" class="img_width_100"-->
-            <img src="../../assets/images/dingdan@2x.png" width="25px">
-          </div>
-          <div>金额充值</div>
-        </div>
-        <div class="personal_cd text_center" @click="goToStatistics">
-          <div class="margin_top28">
-            <!-- class="img_width25" class="img_width_100"-->
-            <img src="../../assets/images/dingdan@2x.png" width="25px">
-          </div>
-          <div>数据统计</div>
-        </div>
-        <div class="personal_cd text_center" @click="goToOrder">
-          <div class="margin_top28">
-            <!-- class="img_width25" class="img_width_100"-->
-            <img src="../../assets/images/dingdan@2x.png" width="25px">
-          </div>
-          <div>商城订单</div>
-        </div>
-        <div class="personal_cd text_center" @click="goToHealthBonus">
-          <div class="margin_top28">
-            <!-- class="img_width25" class="img_width_100"-->
-            <img src="../../assets/images/dingdan@2x.png" width="25px">
-          </div>
-          <div>健康奖金</div>
         </div>
         <div class="personal_cd text_center" @click="goToMemberOperation">
           <div class="margin_top28">
             <!-- class="img_width25" class="img_width_100"-->
-            <img src="../../assets/images/dingdan@2x.png" width="25px">
+            <img src="../../assets/images/1574@2x.png" width="25px" height="30px">
           </div>
           <div>会员操作</div>
         </div>
-
-        <div class="personal_cd text_center" @click="goToSetUp">
+        <div class="personal_cd text_center" @click="goToTBook">
           <div class="margin_top28">
             <!-- class="img_width25" class="img_width_100"-->
-            <img src="../../assets/images/dingdan@2x.png" width="25px">
-          </div>
-          <div>设置中心</div>
-        </div>
-        <div class="personal_cd text_center" @click="goToSetUp">
-          <div class="margin_top28">
-            <!-- class="img_width25" class="img_width_100"-->
-            <img src="../../assets/images/dingdan@2x.png" width="25px">
+            <img src="../../assets/images/1569@2x.png" width="25px">
           </div>
           <div>食养配方</div>
         </div>
-           <div class="personal_cd text_center" @click="goToSetUp">
+        <div class="personal_cd text_center" @click="goToStatistics">
           <div class="margin_top28">
             <!-- class="img_width25" class="img_width_100"-->
-            <img src="../../assets/images/dingdan@2x.png" width="25px">
+            <img src="../../assets/images/wenjianjia@2x.png" width="25px" height="30px">
+          </div>
+          <div>数据统计</div>
+        </div>
+        <div class="personal_cd text_center" @click="goToRecharge">
+          <div class="margin_top28">
+            <!-- class="img_width25" class="img_width_100"-->
+            <img src="../../assets/images/1562@2x.png" width="25px" height="30px">
+          </div>
+          <div>金额充值</div>
+        </div>
+        <div class="personal_cd text_center" @click="goToHealthBonus">
+          <div class="margin_top28">
+            <!-- class="img_width25" class="img_width_100"-->
+            <img src="../../assets/images/1570@2x.png" width="25px" height="30px">
+          </div>
+          <div>健康奖金</div>
+        </div>
+
+        <div class="personal_cd text_center" @click="goToOrder">
+          <div class="margin_top28">
+            <!-- class="img_width25" class="img_width_100"-->
+            <img src="../../assets/images/1554@2x.png" width="25px" height="30px">
+          </div>
+          <div>商城订单</div>
+        </div>
+
+        <!-- <div class="personal_cd text_center" @click="goToSetUp">
+          <div class="margin_top28">
+            <img src="../../assets/images/1566@2x.png" width="25px" height="30px">
           </div>
           <div>视频管理</div>
-        </div>
-        <!-- <div class="personal_cd text_center" @click="shopDY">
-          <div class="margin_top28">
-            <img src="../../assets/images/dingdan@2x.png" width="25px">
-          </div>
-          <div>店铺设置</div>
-        </div> -->
-        <!-- <div class="personal_cd text_center">
-          <div class="margin_top28">
-            <img src="../../assets/images/dingdan@2x.png" width="25px">
-          </div>
-          <div>
-            <a :href="'tel:' + 15049372463">联系客服</a>
-          </div>
         </div> -->
 
-        <!-- </div> -->
+        <div class="personal_cd text_center" @click="goToSetUp">
+          <div class="margin_top28">
+            <!-- class="img_width25" class="img_width_100"-->
+            <img src="../../assets/images/1579@2x.png" width="25px" height="30px">
+          </div>
+          <div>设置中心</div>
+        </div>
+      </div>
+      <!-- 底部菜单栏 -->
+      <TabBar ref="TabBar"/>
+    </div>
+    <!-- 家庭 -->
+    <div class="backgroun_color_f3" v-if="falg == 'jt'">
+      <!-- 头部 -->
+      <div class="personal_img_bj">
+        <div class="div_display_flex">
+          <div class="div_width_25">
+            <div class="headr_img_circular">
+              <img src="../../assets/images/dingdan@2x.png" width="100%">
+            </div>
+          </div>
+          <div class="div_width_75 div_display_flex">
+            <div class="font_color_ff font_size_15" style="margin-top:14%">果蔬精粹吧（万达店）</div>
+          </div>
+        </div>
+      </div>
+      <!-- 账户 -->
+      <div class="personal_money text_center" style="margin-top:-24%">
+        <!-- style="margin-top:-21%" -->
+        <div class="font_color_76 font_size_13 padding_top_div3">总金额(元)</div>
+        <div class="font_color_76 font_size_25" style="padding-bottom: 2%;">1000.00</div>
+      </div>
+      <!-- 菜单列表 -->
+      <div class="margin_top_div4">
+        <div class="personal_cd_j text_center" @click="goToOrder">
+          <div class="margin_top28">
+            <!-- class="img_width25" class="img_width_100"-->
+            <img src="../../assets/images/1554@2x.png" width="25px" height="30px">
+          </div>
+          <div>商城订单</div>
+        </div>
+        <div class="personal_cd_j text_center" @click="goToStatistics">
+          <div class="margin_top28">
+            <!-- class="img_width25" class="img_width_100"-->
+            <img src="../../assets/images/wenjianjia@2x.png" width="25px" height="30px">
+          </div>
+          <div>数据统计</div>
+        </div>
+        <div class="personal_cd_j text_center" @click="goToHealthBonus">
+          <div class="margin_top28">
+            <!-- class="img_width25" class="img_width_100"-->
+            <img src="../../assets/images/1570@2x.png" width="25px" height="30px">
+          </div>
+          <div>健康奖金</div>
+        </div>
+
+        <!-- <div class="personal_cd_j text_center" @click="goToSetUp">
+          <div class="margin_top28">
+            <img src="../../assets/images/1566@2x.png" width="25px" height="30px">
+          </div>
+          <div>视频管理</div>
+        </div> -->
+        <div class="personal_cd_j text_center" @click="goToPassword">
+          <div class="margin_top28">
+            <img src="../../assets/images/1582@2x.png" width="25px" height="30px">
+          </div>
+          <div>修改密码</div>
+        </div>
+        <div class="personal_cd_j text_center">
+          <div class="margin_top28">
+            <img src="../../assets/images/1578@2x.png" width="25px" height="30px">
+          </div>
+          <div>联系客服</div>
+        </div>
       </div>
       <!-- 底部菜单栏 -->
       <TabBar ref="TabBar"/>
     </div>
     <!-- 个人 -->
-    <div class="backgroun_color_f3" v-if="falg == 'g'">
+    <div class="backgroun_color_f3" v-if="falg == 'gr'">
       <!-- 头部 -->
       <div class="personal_img_bjg">
         <div class="div_display_flex">
@@ -250,6 +311,7 @@
 <script>
 import TabBar from "../../components/TabBar";
 import { Flexbox, Confirm } from "vux";
+require ('../../static/des')
 export default {
   components: {
     TabBar,
@@ -258,7 +320,7 @@ export default {
   name: "personal",
   data() {
     return {
-      falg: "sj", //个人 商铺 家庭展示标记
+      falg: "sj", //个人 商家 展示标记
       sendAuthCode: true /*布尔值，通过v-show控制显示‘获取按钮’还是‘倒计时’ */,
       auth_time: 0 /*倒计时 计数器*/,
       accountFalge: true, //账户冻结
@@ -370,18 +432,21 @@ export default {
     },
     // 去设置exclusive
     goToSetUp: function() {
-      this.$router.push('/eatbook');
-      // this.$router.push({
-      //   name: "setUp",
-      //   params: {
-      //     obj: JSON.stringify({
-      //       type: "profession",
-      //       data: {
-      //         id: "蚕丝"
-      //       }
-      //     })
-      //   }
-      // });
+      this.$router.push({
+        name: "setUp",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: "蚕丝"
+            }
+          })
+        }
+      });
+    },
+    // 去配方
+    goToTBook: function() {
+      this.$router.push("/eatbook");
     },
     // 去专属门店
     goToExclusive: function() {
@@ -453,6 +518,20 @@ export default {
         }
       });
     },
+    // 修改密码
+    goToPassword() {
+      this.$router.push({
+        name: "changePassword",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: "蚕丝"
+            }
+          })
+        }
+      });
+    },
     // 获取验证码
     getAuthCode: function() {
       this.sendAuthCode = false;
@@ -468,6 +547,7 @@ export default {
   },
 
   mounted() {
+    console.log(window.DesUtils.encode('1232313',"fruits-app,yuntu,com"))
     this.$refs.TabBar.didClickedItem("2");
   }
 };
@@ -501,16 +581,8 @@ a:link {
   margin-top: 30px;
 }
 .personal_falg_member {
-  width: 60px;
-  height: 18px;
-  background-color: #e8bb7a;
-  text-align: center;
-  color: #896628;
-  border-radius: 5px;
-  margin-top: 35px;
-  font-size: 12px;
-  margin-left: 60%;
-  line-height: 1.5;
+  margin-left: 58%;
+  margin-top: 3%;
 }
 .personal_falg_m {
   color: #ffffff;
@@ -572,6 +644,17 @@ a:link {
 /* 菜单块 */
 .personal_cd {
   border: 1px solid #ededed;
+  float: left;
+  width: 33%;
+  border-left: none;
+  color: #333333;
+  font-size: 14px;
+  padding-bottom: 6%;
+  border-top: none;
+  background-color: #fff;
+  height: 96px;
+}
+.personal_cd_j {
   float: left;
   width: 33%;
   border-left: none;
