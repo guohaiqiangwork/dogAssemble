@@ -9,7 +9,7 @@
                     <p class="goods_title">{{item.title}}</p>
                     <p class="goods_flex">
                         <span class="goods_price red">￥{{item.price}}</span>
-                        <inline-x-number width="30px" :min="0" v-model="item.num"></inline-x-number>
+                        <inline-x-number width="30px" :min="0" v-model="item.num" @on-change = "change"></inline-x-number>
                     </p>
                 </div>
             </div>
@@ -27,6 +27,14 @@ export default {
     components:{
         InlineXNumber
     },
+    computed:{
+        goodsNum() {
+            let a =this.charList.reduce((a,b) =>{
+                return a.num + b.num;
+            });
+            return a
+        }
+    },
     data() {
         return {
             ischeck:false,
@@ -34,7 +42,7 @@ export default {
                 {
                     logo:require('../../../assets/images/WechatIMG99(1).png'),
                     title:'熊孩子综合蔬菜干香菇脆秋葵干330g 果蔬脆',
-                    num:1,
+                    num:0,
                     id:null,
                     price:13.9,
                     ischeck:false,
@@ -42,7 +50,7 @@ export default {
                 {
                     logo:require('../../../assets/images/WechatIMG99(1).png'),
                     title:'熊孩子综合蔬菜干香菇脆秋葵干330g 果蔬脆',
-                    num:1,
+                    num:0,
                     id:null,
                     price:13.9,
                     ischeck:false,
@@ -53,10 +61,13 @@ export default {
     methods: {
         chooseBuy(item) {
             item.ischeck = !item.ischeck;
+        },
+        change(){
+            this.$emit('changeNum',this.goodsNum);
         }
     },
     mounted() {
-        
+        this.change();
     },
 }
 </script>

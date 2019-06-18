@@ -4,7 +4,7 @@
       <swiper :list="imgList"  :min-moving-distance="120" @on-index-change="onIndexChange" auto loop></swiper>
       <div class="search_box">
         <i class="weui-icon-search search_icon"></i>
-        <input type="text" placeholder="搜索您想找的产品">
+        <input type="text" placeholder="搜索您想找的产品" v-model="iptVal" @input="input" >
         <i></i>
       </div>
     </div>
@@ -20,6 +20,8 @@
 </template>
 <script>
 import { Swiper } from 'vux'
+import { setTimeout, clearTimeout } from 'timers';
+let timer;
 export default {
   components:{
     Swiper,
@@ -29,24 +31,55 @@ export default {
   },
   data() {
     return {
+      iptVal:null,
       imgList: [
         {
             url: 'javascript:',
             img: 'https://static.vux.li/demo/1.jpg',
             title: '送你一朵fua'
-          }, {
+        }, 
+        {
             url: 'javascript:',
             img: 'https://static.vux.li/demo/5.jpg',
             title: '送你一次旅行',
             fallbackImg: 'https://static.vux.li/demo/3.jpg'
-          }
+        }
       ]
     }
+  },
+  computed:{
+    
   },
   methods: {
     onIndexChange(currentIndex) {
       
+    },
+    debounce(func,time,ctx) {
+    
+    },
+    input(){
+      if(timer){
+        window.clearTimeout(timer._id);
+      }
+      timer = setTimeout(() => {
+        console.log(this.iptVal)
+        // this.filterList(this.list,this.iptVal);
+        timer = null;
+      },2000)
+    },
+    filterList(arr,val) {
+      var list = [...arr];
+      var temp = [];
+      list.map(e => {
+        if(val){
+
+        }else{
+          
+        }
+      })
+      return temp
     }
+    
   },
   created(){
     settitle('商城')

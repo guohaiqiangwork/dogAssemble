@@ -5,17 +5,17 @@
                 <x-input label-width="4em" :title='`<span style="${style}">收货人</span>`' placeholder="姓名"></x-input>
             </div>
             <div class="address_item">
-                <x-input label-width="4em" :title='`<span style="${style}">手机号</span>`' placeholder="收货人电话" keyboard="number" is-type="china-mobile"></x-input>
+                <x-input label-width="4em" :title='`<span style="${style}">手机号</span>`' placeholder="收货人电话" keyboard="number" is-type="china-mobile" :show-clear="false"></x-input>
             </div>
         </div>
         <div class="address_btm">
             <div class="address_item flex_between"  @click="showAddress = true">
-                <x-input label-width="5em" v-model="address" :title='`<span style="${style}">所在城市</span>`' disabled placeholder="请选择您所在的城市" keyboard="number" is-type="china-mobile"></x-input>
+                <x-input label-width="5em" v-model="address" :title='`<span style="${style}">所在城市</span>`' disabled placeholder="请选择您所在的城市" keyboard="number" ></x-input>
                 <x-icon type="ios-arrow-right" class="icon_middle"></x-icon>
                 <x-address v-show="false" @on-hide="logHide" @on-show="logShow" :title="title" v-model="addressVal" :list="addressData" @on-shadow-change="onShadowChange" placeholder="请选择地址" inline-desc="可以设置placeholder" :show.sync="showAddress"></x-address>
             </div>
             <div class="address_item">
-                <x-input label-width="5em" :title='`<span style="${style}">收货地址</span>`' placeholder="详细地址" keyboard="number" is-type="china-mobile">
+                <x-input label-width="5em" :title='`<span style="${style}">收货地址</span>`' :show-clear="false"  @on-blur="onBlur"    placeholder="详细地址" keyboard="number" v-model="details" >
                     <!-- <x-icon type="ios-arrow-right" class="icon_middle"></x-icon> -->
                      <!-- <img class="icon_size" src="../../assets/images/position.png" alt="" slot="restricted-label" > -->
                 </x-input>
@@ -40,6 +40,7 @@ export default {
     },
     data() {
         return {
+            details:'',
             style: '',
             title: '',
             showAddress:false,
@@ -60,12 +61,21 @@ export default {
         },
         onShadowChange() {
 
-        }
+        },
+        clearItem(){
+            this.details = '';
+            console.log(465)
+        },
+        onBlur(e,v,q){
+            
+            console.log(e,v,q);
+        },
     },
     created(){
         settitle('地址管理');
     },
     mounted() {
+         
         
     },
 }
@@ -78,7 +88,6 @@ export default {
 //     opacity: 1;
 //     }
 #opt_address{
-  
     width: 100%;
     height: 100%;
     background: #F3F5F8;

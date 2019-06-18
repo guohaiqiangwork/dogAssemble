@@ -4,7 +4,7 @@
             <div class="if_post red">包邮条件</div>
             <p class="word_tit">全场满160包邮，欢迎抢购</p>
         </div>
-        <cart-list></cart-list>
+        <cart-list @changeNum="changeNum"></cart-list>
         <div>
             <!-- <checklist ref="demoObject" :title="('Option Array with key and value (key must be string)')" :options="objectList" v-model="objectListValue"></checklist> -->
             <!-- <check-icon :value.sync="demo1"> ({{ demo1 }})</check-icon> -->
@@ -47,6 +47,10 @@ export default {
     methods: {
         payPage() {
             this.$router.push('/paysure')
+        },
+        changeNum(e) {
+            console.log(e,'klkl');
+            this.$parent.buyNum = e;
         }
     },
     created(){
