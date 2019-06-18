@@ -92,7 +92,6 @@ export default {
             padding:0.03rem  0.1rem;
             margin-right: 0.17rem;
             border: 1px solid #E6435A;
-           
         }
         .word_tit{
             font-weight: 700;
@@ -121,6 +120,9 @@ export default {
         border-top:1px solid rgb(222,222,222);
     }
     .cart_btm{
+        position: fixed;
+        width: 100%;
+        bottom: 45px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -128,13 +130,10 @@ export default {
         line-height: 0.4rem;
         background: #E9EFEC;
         .deal_down{
-            // width:1.9rem;
-            // height:0.98rem;
             padding: 0.3rem  0.56rem;
             margin-left: 0.28rem;
             color: #fff;
             background:rgba(74,123,103,1);
-
         }
         .final_price{
             font-size: 0.26rem;
@@ -150,7 +149,6 @@ export default {
             display: flex;
             justify-content: space-between;
         }
-
     }
 }
 </style>

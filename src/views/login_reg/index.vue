@@ -7,27 +7,27 @@
 
         <div class="form" v-if="haslogin == 2">
            <!-- <x-input label-width="4em"  placeholder="I'm placeholder"></x-input> -->
-            <x-input  keyboard="number" is-type="china-mobile" placeholder="请输入您的姓名" @on-click-clear-icon='clear'>
+            <x-input placeholder="请输入您的姓名" v-model="form.name" required @on-change="change">
               <img slot="label" style="padding-right:10px;display:block;with:0.33rem;height:0.33rem" src="../../assets/images/name.png">
             </x-input>
-            <x-input class="mt-40" keyboard="number" is-type="china-mobile" placeholder="请输入手机号码" @on-click-clear-icon='clear'>
+            <x-input class="mt-40"  placeholder="请输入手机号码" @on-click-clear-icon='clear' ref="inputTel"  required is-type="china-mobile" keyboard="number" v-model="form.phone">
               <img slot="label" style="padding-right:10px;display:block;with:0.33rem;height:0.33rem" src="../../assets/images/phone@2x.png">
             </x-input>
-            <x-input class="mt-40"  keyboard="number" is-type="china-mobile" placeholder="请输⼊验证码" @on-click-clear-icon='clear'>
+            <x-input class="mt-40"  keyboard="number"  placeholder="请输⼊验证码"  :min="4" :max="4" @on-click-clear-icon='clear' required v-model="form.code">
               <img slot="label" style="padding-right:10px;display:block;with:0.33rem;height:0.33rem" src="../../assets/images/验证码@2x.png">
-              <a slot="right" class="code_btn" href="#">获取验证码</a>
+              <a slot="right" class="code_btn" href="#" @click ="sendCode">{{codeValue}}</a>
             </x-input>
-            <x-input class="mt-40" keyboard="number" is-type="china-mobile" placeholder="请设置您的密码,用于套餐支付和登录" @on-click-clear-icon='clear'>
+            <x-input class="mt-40"  type="password" :min="6" :max="6" placeholder="请设置您的密码,用于套餐支付和登录" @on-click-clear-icon='clear' required v-model="form.password">
               <img slot="label" style="padding-right:10px;display:block;with:0.33rem;height:0.33rem" src="../../assets/images/密码@2x.png">
             </x-input>
             <x-input disabled></x-input>
         </div>
 
         <div class="form" v-else>
-           <x-input  keyboard="number" is-type="china-mobile" placeholder="请输入手机号码" @on-click-clear-icon='clear'>
+           <x-input  keyboard="number" is-type="china-mobile" placeholder="请输入手机号码" @on-click-clear-icon='clear' v-model="Logform.phone">
               <img slot="label" style="padding-right:10px;display:block;with:0.33rem;height:0.33rem" src="../../assets/images/phone@2x.png">
             </x-input>
-            <x-input class="mt-40"  is-type="china-mobile" placeholder="请输入密码" @on-click-clear-icon='clear'>
+            <x-input class="mt-40"  type="password" placeholder="请输入密码" @on-click-clear-icon='clear' v-model="Logform.password" required>
               <img slot="label" style="padding-right:10px;display:block;with:0.33rem;height:0.33rem" src="../../assets/images/密码@2x.png">
             </x-input>
             <x-input disabled></x-input>
@@ -36,7 +36,7 @@
             </p>
         </div>
 
-        <div class="login_btn">{{haslogin == 1 ? '登录'  : '注册'}}</div>
+        <div class="login_btn" @click="LoginOrReg">{{haslogin == 1 ? '登录'  : '注册'}}</div>
         <p class="login_tit">登录即代表您已同意《御康商贸用户隐私政策》</p>
   </div>
 </template>
@@ -56,31 +56,121 @@ export default {
   data() {
     return {
       btn:'注册',
-      style:''
+      style:'',
+      timer:'',
+     
+      codeValue:"获取验证码",
+      username:"",
+      telnumber:"",
+      code:"",
+      password:"",
+      form:{
+        openId:'1313121231',
+        headimgurl:"http://m.imeitou.com/uploads/allimg/2019021309/ipijc3xjpfo.jpg",
+        nickname:"随便",
+      },
+      Logform:{
+        openId:'1313121231',
+        password:"",
+        phone:""
+      },
+    
+      validTel:false,
     };
   },
   methods: {
     clear(){
 
     },
+    change(){
+      console.log(123)
+    },
+    LoginOrReg(){
+      console.log( this.haslogin)
+      this.haslogin == 1 ? this.Login() : this.Reg();
+    },
+    Test(){
+      this.$fetch.post("fruits/app/member/getOrderInfo",{openId:52646465465,id:1}).then(res =>{
+        console.log(res);
+      })
+    },
+    //登录
+    Login(){
+      console.log(this.Logform)
+      this.$fetch.post("fruits/app/user/login",this.Logform).then(
+        res =>{
+          if(res.msg =="success"){
+            this.$vux.toast.text('登录成功');
+            localStorage.setItem("user",res.attributes.sessionId)
+            localStorage.setItem("type",res.attributes.type)
+            this.$router.push("/home");
+          }else{
+             this.$vux.toast.text('登录时出现问题，请重新登录');
+          }
+        }
+      )
+    },
+    //注册
+    Reg(){
+      this.$fetch.post("fruits/app/user/register",this.form).then(res =>{
+        console.log(res.code);
+        this.$vux.toast.text('注册成功');
+        setTimeout(() =>{
+          var form = JSON.stringify(this.form)
+          this.$router.push('/login/1?parm='+form);
+        },1000)
+
+      })
+    },
     editPass(){
-      this.$router.push('/changePassword/:obj',{obj:1});
+      this.Test();
+      // this.$router.push('/changePassword/:obj',{obj:1});
     },
     regTest(){
       this.$router.push('/login/2')
+    },
+    sendCode(){
+      var validTel = this.$refs.inputTel.valid;
+      console.log(validTel)
+      if(this.timer || !this.form.phone || !validTel){
+        return
+      }
+      var count = 10;
+      this.$fetch.post('fruits/app/user/getSmsCode',{openId:this.form.openId,phone:this.form.phone}).then(res =>{
+        this.form.code = '1234';
+       
+      })
+       
+     
+      this.timer = setInterval(() => {
+        if(count<=1){
+          clearInterval(this.timer);
+          this.codeValue = "重新获取验证码";
+          this.timer = "";
+          return
+        }
+        count--;
+        this.codeValue = count;
+      },1000)
     }
   },
   created() {
     settitle("我是登录页面");
-    this.routeParams = JSON.parse(this.$route.params.obj);
+    // this.routeParams = JSON.parse(this.$route.params.obj);
   },
   created(){
       settitle('注册与登录');
   },
   mounted() {
-    
-   console.log('我是登录页面',this.haslogin)
+    console.log(this.$route.query["parm"])
+    if(this.$route.query["parm"]){
+      var obj = JSON.parse(this.$route.query["parm"]);
+    console.log(obj)
 
+      this.Logform.phone = obj.phone;
+      this.Logform.password = obj.password;
+      this.Logform.openId = obj.openId;
+    }
   }
 };
 </script>

@@ -1,23 +1,27 @@
 import axios from 'axios'
+import router from '../router'
 const config = require('../config/config.dev')
 // 创建axios实例
-const options = {
+let options = {
   baseURL: config.baseURL,
   timeout: 300000,
   headers:{
-    'Content-Type': 'application/json;charset=UTF-8',
-    'AuthorizationKey':'d2f3acfc-89ad-4714-943c-bfe4504527d8'
+    'Content-Type': 'application/json',
+    'AuthorizationKey':window.localStorage.user || '',
   }
 
 }
-const service = axios.create(options)
+let service = axios.create(options)
 
 // request拦截器
 service
   .interceptors
   .request
   .use(request => {
-  
+    request.headers= {"AuthorizationKey":window.localStorage.getItem("user") };
+    if(request.msg =="未登录"){
+      router.push('/login/1');
+    }
     // request.headers.common["Access-Control-Allow-Origin"]="*"
     return request
   }, error => {
@@ -34,6 +38,7 @@ service
     /**
      * code为非200是错误的请求
      */
+   
     if (response.status !== 200) {
       return Promise.reject('error')
     } else {
