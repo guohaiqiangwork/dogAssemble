@@ -56,26 +56,24 @@
     <div v-if="classA == '1'">
       <div class="margin_top_div5">
         <span class="font_size_14 font_color_1A margin_left_div6">购买天数：</span>
-          <Select style="width:70%" @change="getMemberRecipe($event)">
+        <Select style="width:70%" @change="getMemberRecipe($event)">
           <option>请选择</option>
           <Option v-for="item in recipeList" :value="item.id" :key="item.id">{{item.recipe}}</Option>
         </Select>
       </div>
       <div class="margin_top_div5 font_size_11">
         <span class="font_size_14 font_color_1A margin_left_div6">开始时间：</span>
-        <!-- <calendar v-model="demo2"  disable-past></calendar> -->
-        <!-- <select name id style="width:70%">
-          <option value="1">fjsdljflskdj</option>
-        </select> -->
-        <Calendar
-      v-on:choseDay="clickDay"
-      v-on:changeMonth="changeDate"
-    ></Calendar>
-
+        <datetime
+          v-model="value7"
+          @on-change="change"
+          clear-text="today"
+          @on-clear="setToday"
+          :start-date="startDate"
+        >{{startTime}}</datetime>
       </div>
       <div class="margin_top_div5">
         <span class="font_size_14 font_color_1A margin_left_div6">结束时间：</span>
-         <calendar @on-change="onChange" v-model="demo3"  disable-future></calendar>
+        {{endTime}}
       </div>
       <!-- 按钮 -->
       <div class="div_display_flex" style="position: fixed;bottom: 0;width: 100%;line-height: 3;">
@@ -137,14 +135,14 @@
 <script>
 import url from "../../bin/url";
 import TabBar from "../../components/TabBar";
-import { Confirm, XDialog,Calendar } from "vux";
+import { Confirm, XDialog, Datetime } from "vux";
 
 export default {
   components: {
     TabBar,
     Confirm,
     XDialog,
-    Calendar
+    Datetime
   },
   name: "newOrder",
   data() {
@@ -161,15 +159,51 @@ export default {
       memberID: "", //会员套餐id
       position: "middle", //弹出框类型
       showPositionValue: false, //弹出框
-      checkCustomerName: "" ,//姓名
-         demo2: 'TODAY',//时间只能选今天
-         demo3:'TODAY',
+      checkCustomerName: "", //姓名
+      value7: "", //开始时间
+      startDate: "2015-11-11", //时间控制
+      startTime: "请选择",
+      endTime: ""
     };
   },
   methods: {
     // 日期选择
-     onChange (val) {
-      console.log('on change', val)
+    change(value) {
+      this.startTime = value;
+      dateTemp = value;
+      var dateTemp = dateTemp.split("-");
+      var nDate = new Date(dateTemp[1] + "-" + dateTemp[2] + "-" + dateTemp[0]); //转换为MM-DD-YYYY格式
+      var millSeconds = Math.abs(nDate) +  this.memberID * 24 * 60 * 60 * 1000;
+      var rDate = new Date(millSeconds);
+      var year = rDate.getFullYear();
+      var month = rDate.getMonth() + 1;
+      if (month < 10) month = "0" + month;
+      var date = rDate.getDate();
+      if (date < 10) date = "0" + date;
+      this.endTime = year + "-" + month + "-" + date;
+    },
+    // 获取当前时间
+    timeNow() {
+      var date = new Date();
+      var seperator1 = "-";
+      var year = date.getFullYear();
+      var month = date.getMonth() + 1;
+      var strDate = date.getDate();
+      if (month >= 1 && month <= 9) {
+        month = "0" + month;
+      }
+      if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+      }
+      this.startDate = year + seperator1 + month + seperator1 + strDate;
+    },
+    setToday(value) {
+      let now = new Date();
+      let cmonth = now.getMonth() + 1;
+      let day = now.getDate();
+      if (cmonth < 10) cmonth = "0" + cmonth;
+      if (day < 10) day = "0" + day;
+      this.value7 = now.getFullYear() + "-" + cmonth + "-" + day;
     },
     // 弹窗取消
     onCancel() {},
@@ -245,20 +279,20 @@ export default {
     // 选择套餐
     newOrderXZ(falge) {
       // 获取套餐内容
-        let _obj = {
-          openId: url.openId,
-          type: falge
-        };
-        this.$fetch.post(url.getRecipe, _obj).then(
-          data => {
-            if (data.code == 0) {
-              this.recipeList = data.obj;
-            }
-          },
-          err => {
-            alert("网络缓慢。。");
+      let _obj = {
+        openId: url.openId,
+        type: falge
+      };
+      this.$fetch.post(url.getRecipe, _obj).then(
+        data => {
+          if (data.code == 0) {
+            this.recipeList = data.obj;
           }
-        );
+        },
+        err => {
+          alert("网络缓慢。。");
+        }
+      );
       this.classA = falge;
     },
     // 套餐详情
@@ -295,6 +329,7 @@ export default {
 
   mounted() {
     console.log("新建订单");
+    this.timeNow(); //获取当前时间
   }
 };
 </script>
