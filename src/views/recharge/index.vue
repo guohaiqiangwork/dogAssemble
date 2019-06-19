@@ -33,35 +33,31 @@
               type="text"
               placeholder="请输⼊您的手机号"
               style="width:100%;height:100%;outline: none;border:none"
+              @input="phoneSearch"
+              v-model="phone"
             >
-            <i></i>
+            <i style="display: inline-block;height: 0.7rem;width: 120px;line-height: 0.7rem;">{{name}}</i>
           </div>
         </div>
       </div>
-      <div class="div_display_flex margin_top_div5">
-        <div
-          class="div_width_43 text_center b_t_c"
-          :style="{ backgroundColor:( classA  == '1' ? '#DEE8E3' : '') }"
-          @click="moneyXz(1)"
-        >
-          <div class="margin_top_div3 font_color_10 font_size_25">899</div>
-          <div class="margin_top_div3 font_size_13 font_color_1A padding_bottom_4">充899返200元</div>
-        </div>
-        <div
-          class="div_width_43 text_center b_t_c"
-          :style="{ backgroundColor:( classA  == '2' ? '#DEE8E3' : '') }"
-          @click="moneyXz(2)"
-        >
-          <div class="margin_top_div3 font_color_10 font_size_25">1009</div>
-          <div class="margin_top_div3 font_size_13 font_color_1A padding_bottom_4">充1009减200元</div>
-        </div>
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap">
+            <div class="div_display_flex margin_top_div5" v-for="(item,index) in countList" :key="index" style="width:50%;">
+              <div
+                class=" text_center b_t_c"
+                :style="{ backgroundColor:(classA  == item.id ? '#DEE8E3' : ''),width:'90%'}"
+                @click="moneyXz(item.id)"
+              >
+                <div class="margin_top_div3 font_color_10 font_size_25">{{item.topup}}</div>
+                <div class="margin_top_div3 font_size_13 font_color_1A padding_bottom_4">充{{item.topup}}返{{item.returnmoney}}元</div>
+              </div>
+            </div>
       </div>
       <div>
-        <input type="text" class="recharge_input_b2 margin_top_div8" placeholder="输入其他金额">
+        <input type="text" class="recharge_input_b2 margin_top_div8" placeholder="输入其他金额" v-model="form.amount">
       </div>
       <div class="div_display_flex margin_top_div8">
-        <div class="div_width_43 backgroun_color_4A bt_d_c" @click="rechargeq">支付宝充值</div>
-        <div class="div_width_43 backgroun_color_4A bt_d_c" @click="rechargeq">现金充值</div>
+        <div class="div_width_43 backgroun_color_4A bt_d_c" @click="rechargeq('2')">支付宝充值</div>
+        <div class="div_width_43 backgroun_color_4A bt_d_c" @click="rechargeq('3')">现金充值</div>
       </div>
         <!-- 确认充值 -->
     <confirm v-model="rechargeFalge" title @on-cancel="onCancel" @on-confirm="onConfirm">
@@ -73,6 +69,7 @@
 <script>
 import url from "../../bin/url";
 import { Confirm } from "vux";
+
 export default {
   components: {
     Confirm
@@ -80,32 +77,76 @@ export default {
   name: "recharge",
   data() {
     return {
-      classA: "",
+       classA: "",
        rechargeFalge: false, //是否新建
+       count:3,
+       timer:null,
+       phone:null,
+       name:"",
+       countList:[],
+       form:{
+         openId:"1313121231",
+         type:"",
+         phone:null,
+         amount:null,
+         id:"",
+         payType:""
+       },
+       ifHas:false,//判断是否有手机号
     };
   },
   methods: {
     // 选择金额
     moneyXz(falge) {
       this.classA = falge;
+      this.form.id = falge;
     },
     // 去充值记录页面
     goToRechargeList: function() {
-      this.$router.push({
-        name: "rechargeList",
-        params: {
-          obj: JSON.stringify({
-            type: "profession",
-            data: {
-              id: "蚕丝"
-            }
-          })
+      if(this.ifHas){
+        this.$router.push({
+          name: "rechargeList",
+          params: {
+            obj: JSON.stringify({
+              type: "profession",
+              data: {
+                phone: this.phone
+              }
+            })
+          }
+        });
+      }else{
+        this.$vux.toast.text('请输入正确的手机号');
+      }
+    
+    },
+    getCount(){
+      this.$fetch.post('fruits/app/personal/getPupList',{openId:"1313121231"}).then(res =>{
+        console.log(res);
+        this.countList = [...res.obj];
+      })
+    },
+    // 点击充值
+    cashMethod(){
+      this.$fetch.post("fruits/app/personal/remainRecharge",this.form).then(res =>{
+        console.log(res);
+        if(res.msg == "success"){
+          this.$vux.toast.text('充值成功');
+        }else{
+          this.$vux.toast.text('遇到了错误，请重试');
         }
-      });
+      })
     },
     // 确认充值
-      rechargeq() {
-      this.rechargeFalge = true;
+      rechargeq(val) {
+        if(this.ifHas){
+            this.rechargeFalge = true;
+            this.form.payType = val;
+            this.form.type = this.form.amount? "1" : "0";
+            this.form.phone = this.phone;
+        }else{
+          this.$vux.toast.text('请输入正确的手机号');
+        }
      
     },
      // 弹窗取消
@@ -115,7 +156,39 @@ export default {
     // 弹窗确认
     onConfirm() {
      this.newPay = false;//去支付
+     this.cashMethod();
     },
+    showMember(value){
+      this.$fetch.post('fruits/app/personal/checkCustomer',{openId:"1313121231",phone:value}).then(res =>{
+        this.$vux.loading.hide();
+        if(res.msg == 'find_none_user'){
+          this.$vux.toast.text('没有找到该用户');
+        }
+        if(res.msg == "success"){
+          this.name = res.obj.name;
+          this.ifHas = true;
+        }
+       
+      })
+    },
+    //查找
+    phoneSearch(){
+      var reg = /^1[3,4,5,6,7,8,9]\d{9}$/;
+      if( this.timer ){
+        
+        clearTimeout(this.timer);
+      }
+      this.timer = setTimeout(() =>{
+        if(reg.test(this.phone)){
+          this.showMember(this.phone);
+          this.$vux.loading.show({
+              text: '查询中'
+          })
+        }else{
+          this.$vux.toast.text('请输入正确的手机号');
+        }
+      },2500)
+    }
   },
   created() {
     settitle("押金充值");
@@ -123,10 +196,18 @@ export default {
   },
 
   mounted() {
+    this.getCount();
     console.log("押金充值");
   }
 };
 </script>
+<style>
+.weui-toast{
+    width: 200px;
+    min-height: 50px;
+}
+</style>
+
 <style scoped>
 .recharge_div_b {
   width: 95%;
