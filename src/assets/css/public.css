@@ -361,7 +361,7 @@ border-radius: 10px;
 }
 .pass_input {
   border: 1px solid #979797;
-  width: 15%;
+  width: 100%;
   margin-left: -2%;
   line-height: 2;
   font-size: 32px;

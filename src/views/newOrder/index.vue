@@ -12,7 +12,7 @@
             maxlength="11"
             style="width:100%;height:100%;outline: none;border:none"
           >
-          <i>{{checkCustomerName}}</i>
+          <span style="width: 20%;">{{checkCustomerName}}</span>
         </div>
       </div>
     </div>
@@ -25,8 +25,8 @@
     </div>
 
     <!-- 未支付 -->
-    <div>
-      <div class="margin_top_div5" v-if="classA == '0'">
+    <div v-if="classA == '0'">
+      <div class="margin_top_div5">
         <span class="font_size_14 font_color_1A margin_left_div6">配方名称：</span>
         <Select style="width:70%" @change="getMemberRecipe($event)">
           <option>请选择</option>
@@ -56,12 +56,11 @@
     <div v-if="classA == '1'">
       <div class="margin_top_div5">
         <span class="font_size_14 font_color_1A margin_left_div6">购买天数：</span>
-        <Select style="width:70%" @change="getMemberRecipe($event)">
-          <option>请选择</option>
-          <Option v-for="item in recipeList" :value="item.id" :key="item.id">{{item.recipe}}</Option>
-        </Select>
+        <select v-model="selected" @change="getMemberRecipeDay">
+          <option v-for="option in recipeList" :value="option">{{ option.recipe }}</option>
+        </select>
       </div>
-      <div class="margin_top_div5 font_size_11">
+      <div class="margin_top_div5 font_size_11 div_display_flex">
         <span class="font_size_14 font_color_1A margin_left_div6">开始时间：</span>
         <datetime
           v-model="value7"
@@ -79,7 +78,7 @@
       <div class="div_display_flex" style="position: fixed;bottom: 0;width: 100%;line-height: 3;">
         <div class="div_width_70 backgroun_color_E9 padding_left_div3">
           金额：
-          <span class="red">23423</span>
+          <span class="red">{{payMoney}}</span>
         </div>
         <div
           class="div_width_30 text_center backgroun_color_4A font_color_ff font_size_14"
@@ -103,15 +102,10 @@
         :dialog-style="{'max-width': '100%', width: '100%', height: '50%', 'background-color': 'transparent'}"
       >
         <div class="backgroun_color_fff model_password">
-          <div @click="payShowD = false" class="text_right margin_right_div3 padding_top_div3">X</div>
-          <div class="font_size_16 font_color_10">输入会员支付密码{{ni}}</div>
+          <div @click="payPassWGB" class="text_right margin_right_div3 padding_top_div3">X</div>
+          <div class="font_size_16 font_color_10">输入会员支付密码{{miMa}}</div>
           <div class="pass_input_6">
-            <input type="password" v-model="ni" class="pass_input" maxlength="1">
-            <input type="password" v-model="ni" class="pass_input" maxlength="1">
-            <input type="password" v-model="ni" class="pass_input" maxlength="1">
-            <input type="password" v-model="ni" class="pass_input" maxlength="1">
-            <input type="password" v-model="ni" class="pass_input" maxlength="1">
-            <input type="password" v-model="ni" class="pass_input" maxlength="1">
+            <input type="password" v-model="miMa" class="pass_input" maxlength="6">
           </div>
           <div class="div_display_flex margin_left_div8 margin_top_div3 padding_bottom_4">
             <div>
@@ -122,6 +116,7 @@
         </div>
       </x-dialog>
     </div>
+
     <toast
       v-model="showPositionValue"
       type="text"
@@ -152,7 +147,7 @@ export default {
       newPay: true, //新建订单支付
       classA: "", //选择标示
       payShowD: false, //支付
-      ni: "",
+      miMa: "",
       recipeList: [], //会员下拉框数据
       memberRecipe: "", //配方详情
       phone: "", //会员手机号
@@ -162,18 +157,24 @@ export default {
       checkCustomerName: "", //姓名
       value7: "", //开始时间
       startDate: "2015-11-11", //时间控制
-      startTime: "请选择",
-      endTime: ""
+      startTime: "请选择", //开始日期
+      endTime: "", //结束日期
+      memberIDNumber: "", //
+      payMoney: "", //金额
+      selected: "",
+      passwordNumber: "" //支付密码
     };
   },
   methods: {
     // 日期选择
     change(value) {
       this.startTime = value;
+      console.log(this.memberID);
       dateTemp = value;
       var dateTemp = dateTemp.split("-");
       var nDate = new Date(dateTemp[1] + "-" + dateTemp[2] + "-" + dateTemp[0]); //转换为MM-DD-YYYY格式
-      var millSeconds = Math.abs(nDate) +  this.memberID * 24 * 60 * 60 * 1000;
+      var millSeconds =
+        Math.abs(nDate) + this.memberIDNumber * 24 * 60 * 60 * 1000;
       var rDate = new Date(millSeconds);
       var year = rDate.getFullYear();
       var month = rDate.getMonth() + 1;
@@ -239,10 +240,34 @@ export default {
 
       this.newPay = false; //去支付
     },
-    // 去支付
+    // 打开密码输入框
     payPassW() {
       this.payShowD = true;
     },
+    // 关闭密码输入框
+    payPassWGB() {
+      this.payShowD = false;
+      this.passwordNumber = DesUtils.encode(this.ni, "fruits-app,yuntu,com");
+      //  辟谷套餐保存
+      let _obj = {
+        openId: url.openId,
+        id: this.selected.id,
+        phone: this.phone,
+        password: this.passwordNumber,
+        startDate: this.startTime
+      };
+      this.$fetch.post(url.saveInediaRecipe, _obj).then(
+        data => {
+          if (data.code == 0) {
+            console.log("7897907");
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
+        }
+      );
+    },
+    //
     // goToPay() {
     //   this.$router.push({
     //     name: "paysure",
@@ -278,11 +303,13 @@ export default {
     },
     // 选择套餐
     newOrderXZ(falge) {
+      this.classA = falge;
       // 获取套餐内容
       let _obj = {
         openId: url.openId,
         type: falge
       };
+      console.log(url.getRecipe);
       this.$fetch.post(url.getRecipe, _obj).then(
         data => {
           if (data.code == 0) {
@@ -293,9 +320,8 @@ export default {
           alert("网络缓慢。。");
         }
       );
-      this.classA = falge;
     },
-    // 套餐详情
+    // 套餐详情配方
     getMemberRecipe(event) {
       this.memberID = event.target.value;
       let _obj = {
@@ -312,6 +338,12 @@ export default {
           alert("网络缓慢。。");
         }
       );
+    },
+    // 辟谷天数
+    getMemberRecipeDay() {
+      this.memberID = this.selected.id;
+      this.memberIDNumber = this.selected.recipe;
+      this.payMoney = this.selected.retail;
     },
     //订单保存
     newOrderq() {
