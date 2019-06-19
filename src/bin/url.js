@@ -9,5 +9,5 @@ module.exports = {
   getMemberRecipe: '/fruits/app/order/getMemberRecipe',//新建订单--会员套餐详情
   saveMemberRecipe:'/fruits/app/order/saveMemberRecipe',//新建订单--保存订单（会员套餐）
   checkCustomer:'/fruits/app/personal/checkCustomer',//个人中心--查询会员(充值/建单)
-
+  saveInediaRecipe: '/fruits/app/order/saveInediaRecipe'//辟谷套餐保存
 };
