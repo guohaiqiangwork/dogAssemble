@@ -37,7 +37,10 @@
         class="font_color_ff font_size_16 backgroun_color_4A text_center bt_m_o"
         @click="goToNewOrder"
       >新建套餐</div>
-      <div class="font_color_ff font_size_16 backgroun_color_4A text_center bt_m_q">全部会员</div>
+      <div
+        class="font_color_ff font_size_16 backgroun_color_4A text_center bt_m_q"
+        @click="goToAllMembers"
+      >全部会员</div>
     </div>
   </div>
 </template>
@@ -70,6 +73,18 @@ export default {
     goToNewOrder() {
       this.$router.push({
         name: "newOrder",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {}
+          })
+        }
+      });
+    },
+    // 去全部会员
+    goToAllMembers() {
+      this.$router.push({
+        name: "allMembers",
         params: {
           obj: JSON.stringify({
             type: "profession",
@@ -161,4 +176,5 @@ export default {
   position: fixed;
   bottom: 8%;
 }
+
 </style>

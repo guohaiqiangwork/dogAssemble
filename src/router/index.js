@@ -41,6 +41,9 @@ import memberOperation from '@/views/memberOperation/index' //会员操作
 import memberD from '@/views/memberD/index'//会员操作详情
 import rechargeList from '@/views/rechargeList/index' //充值记录
 import orderSuccess from '@/views/orderSuccess/index'//订单成功
+import allMembers from '@/views/allMembers/index'//全部订单
+import allMembersDetails from '@/views/allMembersDetails/index'//全部订单详情
+import allMembersDetailsD from '@/views/allMembersDetailsD/index'//全部订单详情中详情
 Vue.use(Router)
 
 export default new Router({
@@ -479,6 +482,33 @@ export default new Router({
       title: '充值记录'
     },
     component: rechargeList
+  },
+  {
+    // 全部会员
+    path: '/allMembers/:obj',
+    name: 'allMembers',
+    meta: {
+      title: '全部会员'
+    },
+    component: allMembers
+  },
+  {
+    // 全部会员详情
+    path: '/allMembersDetails/:obj',
+    name: 'allMembersDetails',
+    meta: {
+      title: '全部会员'
+    },
+    component: allMembersDetails
+  },
+  {
+    // 全部会员详情
+    path: '/allMembersDetailsD/:obj',
+    name: 'allMembersDetailsD',
+    meta: {
+      title: '全部会员详情'
+    },
+    component: allMembersDetailsD
   },
   {
     path: '/404',
