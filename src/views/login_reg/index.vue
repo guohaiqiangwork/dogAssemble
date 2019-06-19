@@ -111,11 +111,16 @@ export default {
     Reg(){
       this.$fetch.post("fruits/app/user/register",this.form).then(res =>{
         console.log(res.code);
-        this.$vux.toast.text('注册成功');
-        setTimeout(() =>{
-          var form = JSON.stringify(this.form)
-          this.$router.push('/login/1?parm='+form);
-        },1000)
+        if(res.msg == "success"){
+          this.$vux.toast.text('注册成功');
+          setTimeout(() =>{
+            var form = JSON.stringify(this.form)
+            this.$router.push('/login/1?parm='+form);
+          },1000)
+        }else{
+          this.$vux.toast.text('出现错误，请重试');
+        }
+        
 
       })
     },

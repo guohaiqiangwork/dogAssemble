@@ -1,6 +1,7 @@
 <template>
   <div id="home">
     <div class="head_box">
+      <!-- <img :src="'//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId='+this.str" alt="" width="500" height="500"> -->
       <swiper :list="imgList"  :min-moving-distance="120" @on-index-change="onIndexChange" auto loop></swiper>
       <div class="search_box">
         <i class="weui-icon-search search_icon"></i>
@@ -29,21 +30,22 @@ export default {
     hot:resolve => require(['./hotness/index.vue'],resolve),
     whoel:resolve => require(['./wholegoods/index.vue'],resolve)
   },
+  watch:{
+    imgList:{
+      handler(newName, oldName){
+        this.imgList = newName;
+        console.log(newName,56456)
+      },
+    
+    },
+ 
+  },  
   data() {
     return {
+      str:"",
       iptVal:null,
       imgList: [
-        {
-            url: 'javascript:',
-            img: 'https://static.vux.li/demo/1.jpg',
-            title: '送你一朵fua'
-        }, 
-        {
-            url: 'javascript:',
-            img: 'https://static.vux.li/demo/5.jpg',
-            title: '送你一次旅行',
-            fallbackImg: 'https://static.vux.li/demo/3.jpg'
-        }
+       
       ]
     }
   },
@@ -61,6 +63,50 @@ export default {
     },
     debounce(func,time,ctx) {
     
+    },
+    queryImg(str){
+      this.str = str;
+      this.imgList.push(
+        {
+  url: 'javascript:',
+  img:  '//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId='+str,
+  title: '送你一朵fua'
+},    {
+  url: 'javascript:',
+  img:  '//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId='+str,
+  title: '送你一朵fua1'
+}, 
+ {
+  url: 'javascript:',
+  img:  '//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId='+str,
+  title: '送你一朵fua1'
+},
+ {
+  url: 'javascript:',
+  img:  '//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId='+str,
+  title: '送你一朵fua1'
+},
+        // {
+        //     url: 'javascript:',
+        //     img: '//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId='+str,
+        //     title: '送你一朵fua'
+        // }, 
+        // {
+        //     // url: 'javascript:',
+        //     img: 'https://static.vux.li/demo/5.jpg',
+        //     title: '送你一次旅行',
+        //     fallbackImg: 'https://static.vux.li/demo/3.jpg'
+        // },
+        // {
+        //     url: 'javascript:',
+        //     img: '192.168.3.12:80/fruits/app/blank/showPicture?attachmentId='+str,
+        //     title: '送你一朵fua'
+        // }, 
+      ) 
+   
+      // this.$fetch.post("fruits/blank/showPicture?attachmentId="+str).then(res =>{
+      //   console.log(res);
+      // })
     },
     input(){
       if(timer){
@@ -90,7 +136,12 @@ export default {
     settitle('商城')
   },
   mounted() {
-    
+    this.$fetch.post("fruits/app/blank/getBannerImg",{openId:123456}).then(res =>{
+      console.log(res);
+      res.obj.forEach(e => {
+        this.queryImg(e);
+      });
+    })
   },
 }
 </script>

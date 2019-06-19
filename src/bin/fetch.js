@@ -19,11 +19,8 @@ service
   .request
   .use(request => {
     
-    request.headers= {"AuthorizationKey":window.localStorage.getItem("user") };
-    console.log(request);
-    if(request.msg =="未登录"){
-      router.push('/login/1');
-    }
+    request.headers= {"AuthorizationKey":window.localStorage.getItem("user")};
+   
     // request.headers.common["Access-Control-Allow-Origin"]="*"
     return request
   }, error => {
@@ -40,7 +37,10 @@ service
     /**
      * code为非200是错误的请求
      */
-   
+    // console.log(response)
+    if(response.data.msg =="no_login"){
+      router.push('/login/1');
+    }
     if (response.status !== 200) {
       return Promise.reject('error')
     } else {

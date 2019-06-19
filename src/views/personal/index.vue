@@ -2,17 +2,17 @@
   <!-- style="background-color:#F3F5F8; min-height:700px" -->
   <div>
     <!-- 商铺 -->
-    <div class="backgroun_color_f3" v-if="falg == 'sj'">
+    <div class="backgroun_color_f3" v-if="personalMsg.type == 2">
       <!-- 头部 -->
       <div class="personal_img_bj">
         <div class="div_display_flex">
           <div class="div_width_25">
             <div class="headr_img_circular">
-              <img src="../../assets/images/dingdan@2x.png" width="100%">
+              <img :src="personalMsg.headimgurl" width="100%">
             </div>
           </div>
           <div class="div_width_75 div_display_flex">
-            <div class="font_color_ff font_size_15 margin_top_div12">李娜1</div>
+            <div class="font_color_ff font_size_15 margin_top_div12">{{personalMsg.storeName}}</div>
             <div class="personal_falg_member">
               <img src="../../assets/images/122@2x.png" width="60px">
             </div>
@@ -28,8 +28,8 @@
         <div class="div_display_flex" style="margin-top:-3%">
           <div class="div_width_25"></div>
           <div class="div_width_75 div_display_flex" @click="goToRecharge">
-            <div class="font_color_E8 font_size_15">押金：500元 ></div>
-            <div class="personal_falg_m">营业中</div>
+            <div class="font_color_E8 font_size_15">押金：{{personalMsg.deposit}}元 ></div>
+            <div class="personal_falg_m">{{personalMsg.storeState == 1 ? "营业中":"已打样"}}</div>
           </div>
         </div>
       </div>
@@ -38,7 +38,7 @@
       <div class="personal_money text_center" style="margin-top:-21%">
         <!-- style="margin-top:-21%" -->
         <div class="font_color_76 font_size_13 padding_top_div3">总金额(元)</div>
-        <div class="font_color_76 font_size_25" style="padding-bottom: 2%;">1000.00</div>
+        <div class="font_color_76 font_size_25" style="padding-bottom: 2%;">{{personalMsg.total.toFixed(2)}}</div>
       </div>
       <!-- 菜单列表 -->
       <div class="margin_top_div4">
@@ -110,20 +110,20 @@
         </div>
       </div>
       <!-- 底部菜单栏 -->
-      <TabBar ref="TabBar"/>
+      <!-- <TabBar ref="TabBar"/> -->
     </div>
     <!-- 家庭 -->
-    <div class="backgroun_color_f3" v-if="falg == 'jt'">
+    <div class="backgroun_color_f3" v-if="personalMsg.type == 3">
       <!-- 头部 -->
       <div class="personal_img_bj">
         <div class="div_display_flex">
           <div class="div_width_25">
             <div class="headr_img_circular">
-              <img src="../../assets/images/dingdan@2x.png" width="100%">
+              <img :src="personalMsg.headimgurl" width="100%">
             </div>
           </div>
           <div class="div_width_75 div_display_flex">
-            <div class="font_color_ff font_size_15" style="margin-top:14%">果蔬精粹吧（万达店）</div>
+            <div class="font_color_ff font_size_15" style="margin-top:14%">{{personalMsg.storeName}}</div>
           </div>
         </div>
       </div>
@@ -131,7 +131,7 @@
       <div class="personal_money text_center" style="margin-top:-24%">
         <!-- style="margin-top:-21%" -->
         <div class="font_color_76 font_size_13 padding_top_div3">总金额(元)</div>
-        <div class="font_color_76 font_size_25" style="padding-bottom: 2%;">1000.00</div>
+        <div class="font_color_76 font_size_25" style="padding-bottom: 2%;">{{personalMsg.total.toFixed(2)}}</div>
       </div>
       <!-- 菜单列表 -->
       <div class="margin_top_div4">
@@ -177,20 +177,20 @@
         </div>
       </div>
       <!-- 底部菜单栏 -->
-      <TabBar ref="TabBar"/>
+      <!-- <TabBar ref="TabBar"/> -->
     </div>
     <!-- 个人 -->
-    <div class="backgroun_color_f3" v-if="falg == 'gr'">
+    <div class="backgroun_color_f3" v-if="personalMsg.type == 1">
       <!-- 头部 -->
       <div class="personal_img_bjg">
         <div class="div_display_flex">
           <div class="div_width_25">
             <div class="headr_img_circular">
-              <img src="../../assets/images/dingdan@2x.png" width="100%">
+              <img :src="personalMsg.headimgurl" width="100%">
             </div>
           </div>
           <div class="div_width_75 div_display_flex">
-            <div class="font_color_ff font_size_15 margin_top_div12">4李娜2</div>
+            <div class="font_color_ff font_size_15 margin_top_div12">{{personalMsg.nickname}}</div>
           </div>
         </div>
       </div>
@@ -200,7 +200,7 @@
           class="font_color_102 font_size_13 personal_money_m margin_left_div3 padding_top_div3"
         >账户余额（元）</div>
         <div class="div_display_flex personal_price_m padding_bottom_4">
-          <div class="font_color_102 font_size_25 div_width_50 margin_left_div3">￥0.00</div>
+          <div class="font_color_102 font_size_25 div_width_50 margin_left_div3">￥{{personalMsg.remain.toFixed(2)}}</div>
           <!-- <div
             class="div_display_flex font_color_102 font_size_13 div_width_50"
            
@@ -300,8 +300,9 @@
         </div>
       </div>
       <!-- 底部菜单栏 -->
-      <TabBar ref="TabBar"/>
+     
     </div>
+     <TabBar ref="TabBar"/>
     <!-- 店铺设置 -->
     <confirm v-model="outPayFalge" title @on-cancel="onCancel" @on-confirm="onConfirm">
       <div style="text-align:center;font-size:18px;">是否要打烊？</div>
@@ -311,6 +312,7 @@
 <script>
 import TabBar from "../../components/TabBar";
 import { Flexbox, Confirm } from "vux";
+import { open } from 'fs';
 require ('../../static/des')
 export default {
   components: {
@@ -320,6 +322,7 @@ export default {
   name: "personal",
   data() {
     return {
+      personalMsg:{},
       falg: "sj", //个人 商家 展示标记
       sendAuthCode: true /*布尔值，通过v-show控制显示‘获取按钮’还是‘倒计时’ */,
       auth_time: 0 /*倒计时 计数器*/,
@@ -548,7 +551,21 @@ export default {
 
   mounted() {
     console.log(window.DesUtils.encode('1232313',"fruits-app,yuntu,com"))
-    this.$refs.TabBar.didClickedItem("2");
+  //  this.$nextTick(() =>{
+  //    this.$refs.TabBar.didClickedItem("2");
+  //  })
+
+   
+     
+    this.$fetch.post("fruits/app/personal/getPersonalInfo",{openId:"1313121231"}).then(res =>{
+        console.log(res);
+        this.personalMsg = {...res.obj};
+    })
+  },
+  updated(){
+    this.$nextTick(() =>{
+     this.$refs.TabBar.didClickedItem("2");
+   })
   }
 };
 </script>
