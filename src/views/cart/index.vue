@@ -127,6 +127,7 @@ export default {
         justify-content: space-between;
         align-items: center;
         padding: 0 0 0 0.3rem;
+        box-sizing: border-box;
         line-height: 0.4rem;
         background: #E9EFEC;
         .deal_down{

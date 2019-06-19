@@ -165,6 +165,9 @@ export default {
         }
     }
     .pay_btn{
+        position: fixed;
+        bottom: 0;
+        width: 100%;
         height: 1.09rem;
         text-align: center;
         line-height: 1.09rem;

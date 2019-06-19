@@ -17,10 +17,11 @@
               <img slot="label" style="padding-right:10px;display:block;with:0.33rem;height:0.33rem" src="../../assets/images/验证码@2x.png">
               <a slot="right" class="code_btn" href="#" @click ="sendCode">{{codeValue}}</a>
             </x-input>
-            <x-input class="mt-40"  type="password" :min="6" :max="6" placeholder="请设置您的密码,用于套餐支付和登录" @on-click-clear-icon='clear' required v-model="form.password">
+            <x-input class="mt-40" @on-change="change"  v-model="form.password"  type="password" :min="6" :max="6" placeholder="请设置您的密码,用于套餐支付和登录" @on-click-clear-icon='clear' required >
               <img slot="label" style="padding-right:10px;display:block;with:0.33rem;height:0.33rem" src="../../assets/images/密码@2x.png">
             </x-input>
             <x-input disabled></x-input>
+  
         </div>
 
         <div class="form" v-else>
@@ -58,14 +59,14 @@ export default {
       btn:'注册',
       style:'',
       timer:'',
-     
+     maskValue:"",
       codeValue:"获取验证码",
-      username:"",
-      telnumber:"",
-      code:"",
-      password:"",
       form:{
         openId:'1313121231',
+        password:"",
+        name:"",
+        phone:"",
+        code:"",
         headimgurl:"http://m.imeitou.com/uploads/allimg/2019021309/ipijc3xjpfo.jpg",
         nickname:"随便",
       },
@@ -89,11 +90,7 @@ export default {
       console.log( this.haslogin)
       this.haslogin == 1 ? this.Login() : this.Reg();
     },
-    Test(){
-      this.$fetch.post("fruits/app/member/getOrderInfo",{openId:52646465465,id:1}).then(res =>{
-        console.log(res);
-      })
-    },
+   
     //登录
     Login(){
       console.log(this.Logform)
@@ -123,8 +120,8 @@ export default {
       })
     },
     editPass(){
-      this.Test();
-      // this.$router.push('/changePassword/:obj',{obj:1});
+      
+      this.$router.push('/changePassword/:obj',{obj:1});
     },
     regTest(){
       this.$router.push('/login/2')

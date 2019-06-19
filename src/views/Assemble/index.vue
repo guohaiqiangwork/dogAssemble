@@ -12,7 +12,7 @@
     <div class="hot_tit">热门推荐</div>
     <hot></hot>
     <div class="bg_gray">
-        <div class="hot_tit mt-space">全部商品</div>
+        <div class="hot_tit mt-space" @click="Test">全部商品</div>
         <whoel></whoel>
     </div>
     <!-- <item-goods></item-goods> -->
@@ -51,6 +51,11 @@ export default {
     
   },
   methods: {
+       Test(){
+      this.$fetch.post("fruits/app/personal/checkCustomer",{openId:'52646465465',phone:'1'}).then(res =>{
+        console.log(res);
+      })
+    },
     onIndexChange(currentIndex) {
       
     },

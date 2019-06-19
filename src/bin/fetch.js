@@ -18,7 +18,9 @@ service
   .interceptors
   .request
   .use(request => {
+    
     request.headers= {"AuthorizationKey":window.localStorage.getItem("user") };
+    console.log(request);
     if(request.msg =="未登录"){
       router.push('/login/1');
     }
