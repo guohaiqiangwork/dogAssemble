@@ -7,7 +7,7 @@
         type="text"
         placeholder="请输入手机号"
         maxlength="11"
-        v-on:input="getCheckMember(phone)"
+        v-on:input="getAllUser(phone)"
         v-model="phone"
         style="width:100%;height:100%;background-color:#EFEFEF; outline: none;border:none"
       >
@@ -35,47 +35,25 @@ export default {
   data() {
     return {
       phone: "",
-      allUserList: {
-        code: "0",
-        msg: "success",
-        obj: [
-          {
-            id: "6e2bc5220368423b87a64c3b75d3ea6e",
-            name: "赵新德",
-            phone: "18600000002",
-            createTime: "2019.06.17"
-          },
-          {
-            id: "802587c4a34b4b77b076a9c9dc13142b",
-            name: "詹某某",
-            phone: "18600000000",
-            createTime: "2019.06.14"
-          },
-          {
-            id: "a28588fdb1f64c7db306b1da9d717739",
-            name: "陈安生",
-            phone: "18600000001",
-            createTime: "2019.06.14"
-          }
-        ],
-
-        attributes: {
-          total: 3
+      allUserList:{
+        attributes:{
+          total:''
         }
-      }
+      },
     };
   },
   methods: {
     // 查询订单会员
-    getAllUser() {
+    getAllUser(item) {
       let keywords = {
-        openId: url.openId
+        openId: url.openId,
+        phone:item
       };
       this.$fetch.post(url.getAllUser, keywords).then(
         data => {
           console.log(data);
           if (data.code == 0) {
-            // this.allUserList = data;
+            this.allUserList = data;
           }
         },
         err => {
@@ -96,7 +74,7 @@ export default {
           })
         }
       });
-    }
+    },
   },
   created() {
     settitle("全部会员");
