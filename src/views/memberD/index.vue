@@ -67,10 +67,7 @@
           <div style="margin-top:-2.5%;margin-left:3%">{{infoList.name}}</div>
           <span class="margin_left_div3" style="margin-top:-2%;">{{infoList.phone}}</span>
         </div>
-        <div
-          class="div_display_flex font_size_15 font_color_01 me_d_n border_tlr_b"
-          style="background-color:#DEE8E3;"
-        >
+        <div class="div_display_flex font_size_15 font_color_01 me_d_n border_tlr_b" style="background-color:#DEE8E3;">
           <div class="div_width_50">辟谷套餐</div>
           <div class="div_width_50 text_right margin_right_div3">{{nowTime}}</div>
         </div>
