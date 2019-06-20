@@ -55,6 +55,7 @@
     <!-- 辟谷套餐 -->
     <div v-if="classA == '1'">
       <div class="margin_top_div5">
+        
         <span class="font_size_14 font_color_1A margin_left_div6">购买天数：</span>
         <select v-model="selected" @change="getMemberRecipeDay">
           <option v-for="option in recipeList" :value="option">{{ option.recipe }}</option>
@@ -103,10 +104,37 @@
       >
         <div class="backgroun_color_fff model_password">
           <div @click="payPassWGB" class="text_right margin_right_div3 padding_top_div3">X</div>
-          <div class="font_size_16 font_color_10">输入会员支付密码{{miMa}}</div>
-          <div class="pass_input_6">
+          <div class="font_size_16 font_color_10">输入会员支付密码{{msg}}</div>
+          <!-- <div class="pass_input_6">
             <input type="password" v-model="miMa" class="pass_input" maxlength="6">
-          </div>
+          </div>-->
+          <input
+            ref="pwd"
+            type="password"
+            maxlength="6"
+            v-model="msgPAW"
+            style="position: absolute;z-index: -1;left:-100%;opacity: 0"
+          >
+          <ul class="pwd-wrap" @click="focus">
+            <li>
+              <i v-if="msgLength > 0"></i>
+            </li>
+            <li>
+              <i v-if="msgLength > 1"></i>
+            </li>
+            <li>
+              <i v-if="msgLength > 2"></i>
+            </li>
+            <li>
+              <i v-if="msgLength > 3"></i>
+            </li>
+            <li>
+              <i v-if="msgLength > 4"></i>
+            </li>
+            <li>
+              <i v-if="msgLength > 5"></i>
+            </li>
+          </ul>
           <div class="div_display_flex margin_left_div8 margin_top_div3 padding_bottom_4">
             <div>
               <img src="../../assets/images/til@2x.png" width="14px">
@@ -162,10 +190,26 @@ export default {
       memberIDNumber: "", //
       payMoney: "", //金额
       selected: "",
-      passwordNumber: "" //支付密码
+      passwordNumber: "", //支付密码
+      msgPAW:'',
+     msgLength:0,
     };
   },
+   watch:{
+      msgPAW(curVal){
+        console.log(curVal)
+        if(/[^\d]/g.test(curVal)){
+          this.msgPAW = this.msgPAW.replace(/[^\d]/g,'');
+        }else{
+            this.msgLength = curVal.length;
+            this.msg = curVal
+        }
+      },
+    },
   methods: {
+     focus(){
+          this.$refs.pwd.focus();
+      },
     // 日期选择
     change(value) {
       this.startTime = value;
@@ -247,7 +291,7 @@ export default {
     // 关闭密码输入框
     payPassWGB() {
       this.payShowD = false;
-      this.passwordNumber = DesUtils.encode(this.ni, "fruits-app,yuntu,com");
+      this.passwordNumber = DesUtils.encode(this.msg, "fruits-app,yuntu,com");
       //  辟谷套餐保存
       let _obj = {
         openId: url.openId,
@@ -365,7 +409,7 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style scoped lang="less">
 .pass_list_w {
   width: 95%;
   margin-left: 2%;
@@ -426,4 +470,38 @@ export default {
   border-radius: 5px;
   margin-top: 34%;
 }
+//  密码
+   .pwd-wrap{
+    width: 90%;
+    height: 44px;
+    padding-bottom: 1px;
+    margin: 0 auto;
+    background: #ffffff;
+    border:1px solid #ddd;
+    display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    cursor: pointer;
+
+  }
+  .pwd-wrap li{
+    list-style-type:none;
+    text-align: center;
+    line-height: 44px;
+    -webkit-box-flex: 1;
+    flex: 1;
+    -webkit-flex: 1;
+    border-right:1px solid #ddd ;
+    float:left;
+  }
+  .pwd-wrap li:last-child{
+    border-right: 0;
+  }
+  .pwd-wrap li i{
+    height: 10px;
+    width: 10px;
+    border-radius:50% ;
+    background: #000;
+    display: inline-block;
+  }
 </style>
