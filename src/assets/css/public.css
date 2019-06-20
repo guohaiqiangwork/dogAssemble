@@ -372,3 +372,36 @@ border-radius: 10px;
   margin-left: 5%;
   margin-top: 5%;
 }
+  /* 密码 */
+.pwd-wrap {
+  width: 90%;
+  height: 44px;
+  padding-bottom: 1px;
+  margin: 0 auto;
+  background: #ffffff;
+  border: 1px solid #ddd;
+  display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  cursor: pointer;
+}
+.pwd-wrap li {
+  list-style-type: none;
+  text-align: center;
+  line-height: 44px;
+  -webkit-box-flex: 1;
+  flex: 1;
+  -webkit-flex: 1;
+  border-right: 1px solid #ddd;
+  float: left;
+}
+.pwd-wrap li:last-child {
+  border-right: 0;
+}
+.pwd-wrap li i {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background: #000;
+  display: inline-block;
+}
