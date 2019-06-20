@@ -13,18 +13,18 @@
                 </div>
             </div>
             <!-- <div class=""> -->
-            <ul class="mt-15">
+            <ul class="mt-15" v-for="(item,index) in orderList" :key="index">
                 <li class="book-item flex-between align-center">
                     <div>
-                        <p><span>1.</span><span>2019-04-23 12:00:00</span></p>
-                        <p><span>张新</span><span class="ml-3">脾胃套餐</span></p>
+                        <p><span>{{index+1}}.</span><span>{{item.time}}</span></p>
+                        <p><span>{{item.name}}</span><span class="ml-3">{{item}}</span></p>
                     </div>
                     <div class="complete-btn">
                         完成
                     </div>
                 </li>
 
-                
+<!--                 
                 <li class="book-item flex-between align-center">
                     <div>
                         <p><span>1.</span><span>2019-04-23 12:00:00</span></p>
@@ -33,7 +33,7 @@
                     <div class="complete-btn">
                         完成
                     </div>
-                </li>
+                </li> -->
             </ul>
             <!-- </div> -->
         </div>
@@ -47,12 +47,18 @@ export default {
         }
     },
     methods: {
-        name() {
-            
+        getOrder() {
+            this.$fetch.post("fruits/app/recipe/getTodayOrder",{openId:'1313121231'}).then(res=>{
+                console.log(res);
+                if(res.msg == "success"){
+                    this.orderList = res.obj;
+                }
+               
+            })
         }
     },
     mounted() {
-        
+        this.getOrder();
     },
 }
 </script>

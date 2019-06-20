@@ -23,6 +23,14 @@ Vue.prototype.toNumber = function (num) {
 }
 Vue.component('toast', Toast)
 window.settitle = settitle;
+
+router.beforeEach((to, from, next) => {
+  if(!localStorage.getItem('user') && to.name !== "login"){
+    next("/login/1");
+    return 
+  }
+  next();
+})
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

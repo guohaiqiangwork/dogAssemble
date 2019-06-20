@@ -98,20 +98,21 @@ export default {
   },
   methods: {
     // 选择金额
-    moneyXz(falge,log) {
-     
+    moneyXz(falge,index) {
+      this.countList[index].log = !this.countList[index].log;
       this.countList.forEach((e,i) =>{
-        if(i == log){
-          // console.log(e.log,123)
-          // if(!e.log){
+        if(i == index){
+          if(e.log){
+            this.ifChoic = true;
+            this.form.amount = null;
+          }else{
             this.ifChoic = false;
-          // }
+          }
           return
         }
         e.log = false;
-        this.ifChoic = true;
       })
-      this.countList[log].log = !this.countList[log].log;
+     
       this.classA = falge;
       this.form.id = falge;
     },
@@ -134,6 +135,7 @@ export default {
       }
     
     },
+    //获取充值金额
     getCount(){
       this.$vux.loading.show({
             text: 'Loading'
@@ -144,7 +146,6 @@ export default {
           item.log = false;
           this.countList.push(item)
         });
-        // this.countList = [...res.obj];
         this.$vux.loading.hide();
       })
     },
@@ -173,7 +174,7 @@ export default {
     },
      // 弹窗取消
     onCancel() {
-      console.log("2");
+    
     },
     // 弹窗确认
     onConfirm() {
@@ -219,7 +220,6 @@ export default {
 
   mounted() {
     this.getCount();
-    console.log("押金充值");
   }
 };
 </script>

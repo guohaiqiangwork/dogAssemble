@@ -38,9 +38,12 @@ service
      * code为非200是错误的请求
      */
     // console.log(response)
+   
     if(response.data.msg =="no_login"){
       router.push('/login/1');
     }
+  
+   
     if (response.status !== 200) {
       return Promise.reject('error')
     } else {
