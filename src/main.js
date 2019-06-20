@@ -11,6 +11,9 @@ import we from "./bin/weChat_jsSdk.js"
 import sha1 from "./bin/jquery.sha1"
 import { ToastPlugin, LoadingPlugin } from 'vux'
 import { Toast } from 'vux'
+import { Scroller } from '@nutui/nutui';
+
+Scroller.install(Vue);
 Vue.use(ToastPlugin, { position: 'middle' })
 Vue.use(sha1);
 Vue.use(we);
@@ -25,7 +28,7 @@ Vue.component('toast', Toast)
 window.settitle = settitle;
 
 router.beforeEach((to, from, next) => {
-  if(!localStorage.getItem('user') && to.name !== "login"){
+  if(!localStorage.getItem('user') && to.name !== "login" && to.name !== "shop"){
     next("/login/1");
     return 
   }

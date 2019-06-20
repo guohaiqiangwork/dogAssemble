@@ -13,6 +13,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@nutui/nutui": "^2.1.2",
     "jquery": "^3.4.1",
     "qs": "^6.7.0",
     "raw-loader": "^2.0.0",
@@ -23,6 +24,7 @@
     "weixin-js-sdk": "^1.4.0-test"
   },
   "devDependencies": {
+    "@nutui/babel-plugin-separate-import": "^1.2.0",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",

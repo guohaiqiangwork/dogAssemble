@@ -197,7 +197,7 @@ export default {
   },
    watch:{
       msgPAW(curVal){
-        console.log(curVal)
+        console.log(/[^\d]/g.test(curVal))
         if(/[^\d]/g.test(curVal)){
           this.msgPAW = this.msgPAW.replace(/[^\d]/g,'');
         }else{

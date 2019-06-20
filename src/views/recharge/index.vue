@@ -156,6 +156,10 @@ export default {
         if(res.msg == "success"){
           this.$vux.toast.text('充值成功');
         }else{
+          if(res.msg =="cash_pledge"){
+            this.$vux.toast.text('押金不足');
+            return
+          }
           this.$vux.toast.text('遇到了错误，请重试');
         }
       })

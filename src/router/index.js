@@ -75,6 +75,7 @@ export default new Router({
         },
         {
           path: '/goodsdetail',
+          name:'shop',
           meta: {
             title: '商品详情'
           },
@@ -209,6 +210,7 @@ export default new Router({
   },
   {
     path:'/goodslist',
+    name:'shop',
     meta: {
       title:'商品列表'
     },
@@ -220,6 +222,13 @@ export default new Router({
       title:'食养配方'
     },
     component:  resolve => require(['@/views/eatBook/index'], resolve),
+  },
+  {
+    path:'/bookList',
+    meta: {
+      title:'全部配方'
+    },
+    component:  resolve => require(['@/views/eatBook/bookList/index'], resolve),
   },
   {
     // 全国门店

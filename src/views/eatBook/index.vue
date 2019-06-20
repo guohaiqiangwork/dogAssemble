@@ -1,7 +1,7 @@
 <template>
     <div id="eat-book">
-        <div class="opt-list flex-between align-center">
-            <div class="">
+        <div class="opt-list flex-between align-center" @click="goAllBook">
+            <div class="" >
                  <img class="kind-icon" src="../../assets/images/bottle.png" alt=""><span class="book-kind">全部配方</span>
             </div>
            <img src="../../assets/images/right.png" alt="">
@@ -12,30 +12,34 @@
                     <img class="kind-icon" src="../../assets/images/list.png" alt=""><span class="book-kind">全部订单</span>
                 </div>
             </div>
-            <!-- <div class=""> -->
-            <ul class="mt-15" v-for="(item,index) in orderList" :key="index">
-                <li class="book-item flex-between align-center">
-                    <div>
-                        <p><span>{{index+1}}.</span><span>{{item.time}}</span></p>
-                        <p><span>{{item.name}}</span><span class="ml-3">{{item}}</span></p>
-                    </div>
-                    <div class="complete-btn">
-                        完成
-                    </div>
-                </li>
+            <div class="" v-if="orderList.length">
+                
+                <ul class="mt-15" v-for="(item,index) in orderList" :key="index">
+                    <li class="book-item flex-between align-center">
+                        <div>
+                            <p><span>{{index+1}}.</span><span>{{item.time}}</span></p>
+                            <p><span>{{item.name}}</span><span class="ml-3">{{item.recipe}}</span></p>
+                        </div>
+                        <div class="complete-btn" v-if="item.isComplete == 0">
+                            完成
+                        </div>
+                    </li>
 
-<!--                 
-                <li class="book-item flex-between align-center">
-                    <div>
-                        <p><span>1.</span><span>2019-04-23 12:00:00</span></p>
-                        <p><span>张新</span><span class="ml-3">脾胃套餐</span></p>
-                    </div>
-                    <div class="complete-btn">
-                        完成
-                    </div>
-                </li> -->
-            </ul>
-            <!-- </div> -->
+    <!--                 
+                    <li class="book-item flex-between align-center">
+                        <div>
+                            <p><span>1.</span><span>2019-04-23 12:00:00</span></p>
+                            <p><span>张新</span><span class="ml-3">脾胃套餐</span></p>
+                        </div>
+                        <div class="complete-btn">
+                            完成
+                        </div>
+                    </li> -->
+                </ul>
+            </div>
+            <div v-else style="background:#fff;text-align:center">
+                暂无数据
+            </div>
         </div>
     </div>
 </template>
@@ -43,7 +47,7 @@
 export default {
     data() {
         return {
-            key: 'value'
+            orderList: []
         }
     },
     methods: {
@@ -55,9 +59,13 @@ export default {
                 }
                
             })
-        }
+        },
+        goAllBook(){
+            this.$router.push('/bookList');
+        },
     },
     mounted() {
+        
         this.getOrder();
     },
 }
