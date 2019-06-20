@@ -2,7 +2,7 @@
   <!-- style="background-color:#F3F5F8; min-height:700px" -->
   <div>
     <!-- 商铺 -->
-    <div class="backgroun_color_f3" v-if="personalMsg.type == 1">
+    <div class="backgroun_color_f3" v-if="personalMsg.type == 2">
       <!-- 头部 -->
       <div class="personal_img_bj">
         <div class="div_display_flex">
@@ -189,7 +189,7 @@
       <!-- <TabBar ref="TabBar"/> -->
     </div>
     <!-- 个人 -->
-    <div class="backgroun_color_f3" v-if="personalMsg.type == 2">
+    <div class="backgroun_color_f3" v-if="personalMsg.type == 1">
       <!-- 头部 -->
       <div class="personal_img_bjgl">
         <div class="div_display_flex">
