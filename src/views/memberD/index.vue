@@ -22,36 +22,45 @@
         </div>-->
 
         <!-- 列表 -->
-        <div class="m_b_DB border_tlr_b">
+        <div class="m_b_DB border_tlr_b margin_top_div3">
           <div
             class="div_display_flex text_center font_size_15 font_color_10 padding_left_div3"
             style=" border-bottom:1px solid #e9e9e9;background-color:#DEE8E3 ;border-top-left-radius: 5px; border-top-right-radius: 5px;"
-          >套餐名称</div>
+          >{{infoList.recipe}}</div>
           <div
             class="div_display_flex text_center font_size_13 font_color_1A margin_top_div8 margin_bottom_8"
           >
             <div
+              v-for="(item,index) in infoList.cupTypeLists"
+              :key="index"
               class="div_width_40 btn_ff font_size_13"
-              @click="tabT('1')"
-              :class="classA  == '1'? 'backgroun_color_4A font_color_ff' : 'font_color_4A' "
-            >大杯/¥13.9</div>
-            <div
+              @click="tabT(item)"
+              :class="classA  == item.id? 'backgroun_color_4A font_color_ff' : 'font_color_4A' "
+            >
+              <div>{{item.name}}/¥{{item.retailPrice}}</div>
+            </div>
+            <!-- <div
               class="div_width_40 btn_ff font_size_13"
               @click="tabT('2')"
               :class="classA  == '2'? 'backgroun_color_4A font_color_ff' : 'font_color_4A' "
-            >小杯/¥13.9</div>
+            >423/¥423</div>-->
           </div>
         </div>
         <!-- 支付 -->
         <div class="div_display_flex" style="position: fixed;bottom: 0;width: 100%;line-height: 3;">
           <div class="div_width_70 backgroun_color_E9 padding_left_div3">
             金额：
-            <span class="red">23423</span>
+            <span class="red">{{priceHT}}</span>
           </div>
           <div
             class="div_width_30 text_center backgroun_color_4A font_color_ff font_size_14"
+            @click="goOver()"
+          >结束订单</div>
+          <div
+            class="div_width_30 text_center font_color_ff font_size_14"
+            style="background-color:#E3824F"
             @click="goPay"
-          >确认支付</div>
+          >确认下单</div>
         </div>
       </div>
     </div>
@@ -67,7 +76,10 @@
           <div style="margin-top:-2.5%;margin-left:3%">{{infoList.name}}</div>
           <span class="margin_left_div3" style="margin-top:-2%;">{{infoList.phone}}</span>
         </div>
-        <div class="div_display_flex font_size_15 font_color_01 me_d_n border_tlr_b" style="background-color:#DEE8E3;">
+        <div
+          class="div_display_flex font_size_15 font_color_01 me_d_n border_tlr_b"
+          style="background-color:#DEE8E3;"
+        >
           <div class="div_width_50">辟谷套餐</div>
           <div class="div_width_50 text_right margin_right_div3">{{nowTime}}</div>
         </div>
@@ -108,7 +120,7 @@
       >
         <div class="div_width_70 backgroun_color_E9 padding_left_div3">
           金额：
-          <span class="red">23423</span>
+          <span class="red">234234</span>
         </div>
         <div
           class="div_width_30 text_center backgroun_color_4A font_color_ff font_size_14"
@@ -121,6 +133,10 @@
     <confirm v-model="payBFalge" title @on-cancel="onCancel" @on-confirm="onConfirm">
       <div style="text-align:center;font-size:18px;">您确认此操作吗？</div>
     </confirm>
+    <!-- 订单结束 -->
+    <confirm v-model="orderOverFalge" title @on-cancel="onCancelOver" @on-confirm="onConfirmOVer">
+      <div style="text-align:center;font-size:18px;">您确认要结束订单吗？</div>
+    </confirm>
     <!-- 密码支付 -->
     <div>
       <x-dialog
@@ -130,15 +146,42 @@
       >
         <div class="backgroun_color_fff model_password">
           <div @click="payShowD = false" class="text_right margin_right_div3 padding_top_div3">X</div>
-          <div class="font_size_16 font_color_10">输入会员支付密码{{ni}}</div>
-          <div class="pass_input_6">
+          <div class="font_size_16 font_color_10">输入会员支付密码</div>
+          <!-- <div class="pass_input_6">
             <input type="password" v-model="ni" class="pass_input" maxlength="1">
             <input type="password" v-model="ni" class="pass_input" maxlength="1">
             <input type="password" v-model="ni" class="pass_input" maxlength="1">
             <input type="password" v-model="ni" class="pass_input" maxlength="1">
             <input type="password" v-model="ni" class="pass_input" maxlength="1">
             <input type="password" v-model="ni" class="pass_input" maxlength="1">
-          </div>
+          </div>-->
+          <input
+            ref="pwd"
+            type="password"
+            maxlength="6"
+            v-model="msgPAW"
+            style="position: absolute;z-index: -1;left:-100%;opacity: 0"
+          >
+          <ul class="pwd-wrap" @click="focus">
+            <li>
+              <i v-if="msgLength > 0"></i>
+            </li>
+            <li>
+              <i v-if="msgLength > 1"></i>
+            </li>
+            <li>
+              <i v-if="msgLength > 2"></i>
+            </li>
+            <li>
+              <i v-if="msgLength > 3"></i>
+            </li>
+            <li>
+              <i v-if="msgLength > 4"></i>
+            </li>
+            <li>
+              <i v-if="msgLength > 5"></i>
+            </li>
+          </ul>
           <div class="div_display_flex margin_left_div8 margin_top_div3 padding_bottom_4">
             <div>
               <img src="../../assets/images/til@2x.png" width="14px">
@@ -168,15 +211,61 @@ export default {
       payBFalge: false, //辟谷消费提示
       parameter: "", //参数
       infoList: "", //详情
-      nowTime: new Date() //当前日期
+      nowTime: new Date(), //当前日期
+      priceHT: "", //会员套餐价格
+      orderOverFalge: false, //结束标示
+      msgPAW: "",
+      msgLength: 0
     };
   },
+  watch: {
+    msgPAW(curVal) {
+      console.log(curVal);
+      if (/[^\d]/g.test(curVal)) {
+        this.msgPAW = this.msgPAW.replace(/[^\d]/g, "");
+      } else {
+        this.msgLength = curVal.length;
+        this.msg = DesUtils.encode(curVal, "fruits-app,yuntu,com");
+      }
+      if(this.msgLength == 6){
+        console.log('我来了')
+       this.getSaveMember()
+       this.payShowD =false
+      }
+    }
+  },
   methods: {
-    // 选择套餐
-    tabT(id) {
-      this.classA = id;
+    focus() {
+      this.$refs.pwd.focus();
     },
-
+    // 选择套餐
+    tabT(item) {
+      this.classA = item.id;
+      this.priceHT = item.retailPrice;
+    },
+    // 结束订单弹窗
+    goOver() {
+      this.orderOverFalge = true;
+    },
+    // 弹窗取消
+    onCancelOver() {},
+    // 结束弹窗确认
+    onConfirmOVer() {
+      let _obj = {
+        openId: url.openId,
+        id: this.parameter.item.id
+      };
+      this.$fetch.post(url.closeMemberOrder, _obj).then(
+        data => {
+          if (data.code == 0) {
+            console.log("会员订单结束");
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
+        }
+      );
+    },
     // 会员打开支付
     goPay() {
       this.payShowD = true;
@@ -197,7 +286,7 @@ export default {
       this.$fetch.post(url.sureBigu, _obj).then(
         data => {
           if (data.code == 0) {
-           this.getInfo(this.parameter.item.id);
+            this.getInfo(this.parameter.item.id);
           }
         },
         err => {
@@ -216,6 +305,7 @@ export default {
         data => {
           if (data.code == 0) {
             this.infoList = data.obj;
+            console.log(data);
           }
         },
         err => {
@@ -230,18 +320,41 @@ export default {
       var nowMonth = now.getMonth(); //当前月
       var nowYear = now.getFullYear(); //当前年
       this.nowTime = nowYear + "." + nowMonth + "." + nowDay;
+    },
+    // 会员套餐子订单处理
+    getSaveMember() {
+      let _obj = {
+        openId: url.openId,
+        id: this.parameter.item.id,
+        cupId: this.classA,
+        password:  this.msg
+      };
+      this.$fetch.post(url.saveMember, _obj).then(
+        data => {
+          if (data.code == 0) {
+            this.infoList = data.obj;
+            console.log(data);
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
+        }
+      );
     }
   },
   created() {
     settitle("会员操作详情");
     this.parameter = this.routeParams = JSON.parse(this.$route.params.obj).data;
+    console.log(this.parameter.item.type + "套餐类型");
     if (this.parameter.item.type == "1") {
       this.memberFalg = false; //判断是否辟谷
+    } else {
+      this.memberFalg = true; //判断是否辟谷
     }
   },
 
   mounted() {
-    this.getInfo(this.parameter.item.id); //获取详情
+    this.getInfo(this.parameter.item.id); //订单id获取详情
     this.timeNow();
   }
 };

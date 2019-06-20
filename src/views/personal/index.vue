@@ -11,8 +11,8 @@
               <img :src="personalMsg.headimgurl" width="100%">
             </div>
           </div>
-          <div class="div_width_75 div_display_flex">
-            <div class="font_color_ff font_size_15 margin_top_div12">{{personalMsg.storeName}}</div>
+          <div class="div_width_75 div_display_flex" style="margin-left:-3%">
+            <div class="font_color_ff font_size_15 margin_top_div8">{{personalMsg.storeName}}</div>
             <div class="personal_falg_member">
               <img src="../../assets/images/122@2x.png" width="60px">
             </div>
@@ -27,18 +27,25 @@
         </div>
         <div class="div_display_flex" style="margin-top:-3%">
           <div class="div_width_25"></div>
-          <div class="div_width_75 div_display_flex" @click="goToRecharge">
-            <div class="font_color_E8 font_size_15">押金：{{personalMsg.deposit}}元 ></div>
+          <div
+            class="div_width_75 div_display_flex"
+            @click="goToRecharge"
+            style="margin-left: -3%; margin-top: -2%;"
+          >
+            <div class="font_color_E8 font_size_15">押金：{{personalMsg.deposit}}元</div>
             <div class="personal_falg_m">{{personalMsg.storeState == 1 ? "营业中":"已打样"}}</div>
           </div>
         </div>
       </div>
 
       <!-- 账户 -->
-      <div class="personal_money text_center" style="margin-top:-21%">
+      <div class="personal_money text_center" style="margin-top:-29%">
         <!-- style="margin-top:-21%" -->
         <div class="font_color_76 font_size_13 padding_top_div3">总金额(元)</div>
-        <div class="font_color_76 font_size_25" style="padding-bottom: 2%;">{{personalMsg.total.toFixed(2)}}</div>
+        <div
+          class="font_color_76 font_size_25"
+          style="padding-bottom: 2%;"
+        >{{personalMsg.total.toFixed(2)}}</div>
       </div>
       <!-- 菜单列表 -->
       <div class="margin_top_div4">
@@ -99,7 +106,7 @@
             <img src="../../assets/images/1566@2x.png" width="25px" height="30px">
           </div>
           <div>视频管理</div>
-        </div> -->
+        </div>-->
 
         <div class="personal_cd text_center" @click="goToSetUp">
           <div class="margin_top28">
@@ -128,10 +135,12 @@
         </div>
       </div>
       <!-- 账户 -->
-      <div class="personal_money text_center" style="margin-top:-24%">
-        <!-- style="margin-top:-21%" -->
+      <div class="personal_money text_center" style="margin-top:-29%">
         <div class="font_color_76 font_size_13 padding_top_div3">总金额(元)</div>
-        <div class="font_color_76 font_size_25" style="padding-bottom: 2%;">{{personalMsg.total.toFixed(2)}}</div>
+        <div
+          class="font_color_76 font_size_25"
+          style="padding-bottom: 2%;"
+        >{{personalMsg.total.toFixed(2)}}</div>
       </div>
       <!-- 菜单列表 -->
       <div class="margin_top_div4">
@@ -162,7 +171,7 @@
             <img src="../../assets/images/1566@2x.png" width="25px" height="30px">
           </div>
           <div>视频管理</div>
-        </div> -->
+        </div>-->
         <div class="personal_cd_j text_center" @click="goToPassword">
           <div class="margin_top28">
             <img src="../../assets/images/1582@2x.png" width="25px" height="30px">
@@ -182,7 +191,7 @@
     <!-- 个人 -->
     <div class="backgroun_color_f3" v-if="personalMsg.type == 1">
       <!-- 头部 -->
-      <div class="personal_img_bjg">
+      <div class="personal_img_bjgl">
         <div class="div_display_flex">
           <div class="div_width_25">
             <div class="headr_img_circular">
@@ -200,7 +209,9 @@
           class="font_color_102 font_size_13 personal_money_m margin_left_div3 padding_top_div3"
         >账户余额（元）</div>
         <div class="div_display_flex personal_price_m padding_bottom_4">
-          <div class="font_color_102 font_size_25 div_width_50 margin_left_div3">￥{{personalMsg.remain.toFixed(2)}}</div>
+          <div
+            class="font_color_102 font_size_25 div_width_50 margin_left_div3"
+          >￥{{personalMsg.remain.toFixed(2)}}</div>
           <!-- <div
             class="div_display_flex font_color_102 font_size_13 div_width_50"
            
@@ -300,9 +311,8 @@
         </div>
       </div>
       <!-- 底部菜单栏 -->
-     
     </div>
-     <TabBar ref="TabBar"/>
+    <TabBar ref="TabBar"/>
     <!-- 店铺设置 -->
     <confirm v-model="outPayFalge" title @on-cancel="onCancel" @on-confirm="onConfirm">
       <div style="text-align:center;font-size:18px;">是否要打烊？</div>
@@ -312,8 +322,8 @@
 <script>
 import TabBar from "../../components/TabBar";
 import { Flexbox, Confirm } from "vux";
-import { open } from 'fs';
-require ('../../static/des')
+import { open } from "fs";
+require("../../static/des");
 export default {
   components: {
     TabBar,
@@ -322,7 +332,7 @@ export default {
   name: "personal",
   data() {
     return {
-      personalMsg:{},
+      personalMsg: {},
       falg: "sj", //个人 商家 展示标记
       sendAuthCode: true /*布尔值，通过v-show控制显示‘获取按钮’还是‘倒计时’ */,
       auth_time: 0 /*倒计时 计数器*/,
@@ -550,22 +560,22 @@ export default {
   },
 
   mounted() {
-    console.log(window.DesUtils.encode('1232313',"fruits-app,yuntu,com"))
-  //  this.$nextTick(() =>{
-  //    this.$refs.TabBar.didClickedItem("2");
-  //  })
+    console.log(window.DesUtils.encode("1232313", "fruits-app,yuntu,com"));
+    //  this.$nextTick(() =>{
+    //    this.$refs.TabBar.didClickedItem("2");
+    //  })
 
-   
-     
-    this.$fetch.post("fruits/app/personal/getPersonalInfo",{openId:"1313121231"}).then(res =>{
+    this.$fetch
+      .post("fruits/app/personal/getPersonalInfo", { openId: "1313121231" })
+      .then(res => {
         console.log(res);
-        this.personalMsg = {...res.obj};
-    })
+        this.personalMsg = { ...res.obj };
+      });
   },
-  updated(){
-    this.$nextTick(() =>{
-     this.$refs.TabBar.didClickedItem("2");
-   })
+  updated() {
+    this.$nextTick(() => {
+      this.$refs.TabBar.didClickedItem("2");
+    });
   }
 };
 </script>
@@ -588,23 +598,29 @@ a:link {
   height: 184px;
   background-repeat: no-repeat;
 }
+.personal_img_bjgl {
+  background-image: url("../../assets/images/bgl@3x.png");
+  background-size: 100%;
+  height: 184px;
+  background-repeat: no-repeat;
+}
 .headr_img_circular {
   width: 46px;
   height: 46px;
   border-radius: 50%;
   border: 2px solid #ffffff;
   overflow: hidden;
-  margin-left: 36px;
-  margin-top: 30px;
+  margin-left: 24%;
+  margin-top: 24%;
 }
 .personal_falg_member {
-  margin-left: 58%;
+  margin-left: 60%;
   margin-top: 3%;
 }
 .personal_falg_m {
   color: #ffffff;
   font-size: 13px;
-  margin-left: 40%;
+  margin-left: 50%;
 }
 .personal_font_m {
   margin-left: 13px;

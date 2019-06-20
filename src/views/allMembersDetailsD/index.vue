@@ -2,25 +2,32 @@
   <div>
     <!-- 会员套餐  -->
     <div v-if="ordertypeF == 0">
-      <div
-        class="backgroun_color_4A all_dd_border font_color_ff margin_top_div5"
-        v-for="(item,index) in orderByIdList.obj"
-        :key="index"
-      >
+      <div class="backgroun_color_4A all_dd_border font_color_ff margin_top_div5">
         <div class="div_display_flex font_size_16 padding_top_div5">
-          <div class="div_width_50 padding_left_div3">{{item.recipe}}</div>
-          <div class="div_width_50 font_size_18 text_right pdiing_right8">{{item.num}}</div>
+          <div class="div_width_50 padding_left_div3">{{orderByIdListHY.obj.recipe}}</div>
+          <div class="div_width_50 font_size_18 text_right pdiing_right8">{{orderByIdListHY.obj.num}}</div>
         </div>
         <div class="div_display_flex margin_top_div3 font_size_13">
-          <div class="div_width_50 padding_left_div3">{{item.time}}</div>
+          <div class="div_width_50 padding_left_div3">{{orderByIdListHY.obj.time}}</div>
           <div class="div_width_50 text_right pdiing_right8">已喝次数</div>
         </div>
-        <div class="font_size_18 text_right pdiing_right8 margin_top_div3">{{item.price}}</div>
+        <div
+          class="font_size_18 text_right pdiing_right8 margin_top_div3"
+        >{{orderByIdListHY.obj.price}}</div>
         <div class="div_display_flex margin_top_div3 font_size_13 padding_bottom_4">
-          <div class="div_width_50 padding_left_div3">适应症状：{{item.disease}}</div>
-          <div class="div_width_50 text_right pdiing_right8" vi-if="item.state == 1">服务中</div>
-          <div class="div_width_50 text_right pdiing_right8" vi-if="item.state == 2">已暂停</div>
-          <div class="div_width_50 text_right pdiing_right8" vi-if="item.state == 3">已消费</div>
+          <div class="div_width_75 padding_left_div3">适应症状：{{orderByIdListHY.obj.disease}}</div>
+          <div
+            class="div_width_25 text_right pdiing_right8"
+            v-if="orderByIdListHY.obj.state == 1"
+          >服务中{{orderByIdListHY.obj.state}}</div>
+          <div
+            class="div_width_25 text_right pdiing_right8"
+           v-if="orderByIdListHY.obj.state == 2"
+          >已暂停</div>
+          <div
+            class="div_width_25 text_right pdiing_right8"
+           v-if="orderByIdListHY.obj.state == 3"
+          >已消费</div>
         </div>
       </div>
     </div>
@@ -73,7 +80,19 @@ export default {
   data() {
     return {
       orderByIdList: "",
-      ordertypeF: ""
+      ordertypeF: "",
+      orderByIdListHY:{
+        obj:{
+          recipe:'',
+          num:'',
+          time:'',
+          price:'',
+          state:'',
+          disease:''
+        }
+      },
+      faly:''
+
     };
   },
   methods: {
@@ -86,8 +105,15 @@ export default {
       this.$fetch.post(url.getOrderById, keywords).then(
         data => {
           if (data.code == 0) {
-            this.orderByIdList = data;
             this.ordertypeF = data.attributes.type;
+            if (this.ordertypeF == 1) {
+              this.orderByIdList = data;
+            } else {
+              this.orderByIdListHY = data;
+              this.faly = data.obj.state
+            }
+
+            console.log(this.orderByIdList);
           }
         },
         err => {
@@ -103,9 +129,8 @@ export default {
       this.$fetch.post(url.sureBigu, _obj).then(
         data => {
           if (data.code == 0) {
-            
-          }else{
-              alert(data.msg)
+          } else {
+            alert(data.msg);
           }
         },
         err => {
@@ -117,6 +142,7 @@ export default {
   created() {
     settitle("全部会员详情");
     this.routeParams = JSON.parse(this.$route.params.obj);
+    console.log(this.routeParams.id);
   },
 
   mounted() {

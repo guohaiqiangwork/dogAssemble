@@ -53,24 +53,7 @@ export default {
       allOrderList: {
         name: "詹某某",
         phone: "18600000000",
-        orderLists: [
-          {
-            id: "77dcfe5a94cc41cf89f5aed419ae1ff7",
-            recipe: "辟谷二",
-            price: 99,
-            num: 0,
-            time: "2019.06.17-2019.06.20",
-            state: "1"
-          },
-          {
-            id: "d7e4f1e3c82b4a19bd7e9099f744acee",
-            recipe: "会员一改",
-            price: 0,
-            num: 0,
-            time: "2019.06.14 19:07:38",
-            state: "2"
-          }
-        ]
+        orderLists: ''
       }
     };
   },
@@ -100,7 +83,7 @@ export default {
         data => {
           console.log(data);
           if (data.code == 0) {
-            // this.allOrderList = data.obj;
+            this.allOrderList = data.obj;
           }
         },
         err => {
@@ -112,6 +95,7 @@ export default {
   created() {
     settitle("全部会员详情");
     this.routeParams = JSON.parse(this.$route.params.obj);
+    console.log(this.routeParams)
   },
 
   mounted() {

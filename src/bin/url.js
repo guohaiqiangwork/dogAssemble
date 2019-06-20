@@ -1,6 +1,6 @@
 //页面请求的路径地址
 module.exports = {
-  openId: '97978779787',//测试openId
+  openId: 'asdujfghwiue4yr298r32034ry2',//测试openId
   getMemberList: '/fruits/app/member/getMemberList',//会员操作--查询服务中订单的会员列表
   getOrderInfo: '/fruits/app/member/getOrderInfo',//会员操作--查看服务中订单详情
   checkMember: '/fruits/app/member/checkMember', //查询订单会员
@@ -12,5 +12,7 @@ module.exports = {
   saveInediaRecipe: '/fruits/app/order/saveInediaRecipe',//辟谷套餐保存
   getAllOrder: '/fruits/app/member/getAllOrder',//获取全部订单详情
   getAllUser:'/fruits/app/member/getAllUser',//获取全部会员
-  getOrderById:'/fruits/app/member/getOrderById'//获取全部会员订单详情
+  getOrderById:'/fruits/app/member/getOrderById',//获取全部会员订单详情
+  closeMemberOrder: '/fruits/app/member/closeMemberOrder',//结束会员订单
+  saveMember: '/fruits/app/member/saveMember' //会员子套餐
 };

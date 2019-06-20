@@ -55,7 +55,6 @@
     <!-- 辟谷套餐 -->
     <div v-if="classA == '1'">
       <div class="margin_top_div5">
-        
         <span class="font_size_14 font_color_1A margin_left_div6">购买天数：</span>
         <select v-model="selected" @change="getMemberRecipeDay">
           <option v-for="option in recipeList" :value="option">{{ option.recipe }}</option>
@@ -191,25 +190,26 @@ export default {
       payMoney: "", //金额
       selected: "",
       passwordNumber: "", //支付密码
-      msgPAW:'',
-     msgLength:0,
+      msgPAW: "",
+      msgLength: 0,
+      msg:''
     };
   },
-   watch:{
-      msgPAW(curVal){
-        console.log(/[^\d]/g.test(curVal))
-        if(/[^\d]/g.test(curVal)){
-          this.msgPAW = this.msgPAW.replace(/[^\d]/g,'');
-        }else{
-            this.msgLength = curVal.length;
-            this.msg = curVal
-        }
-      },
-    },
+  watch: {
+    msgPAW(curVal) {
+      console.log(curVal);
+      if (/[^\d]/g.test(curVal)) {
+        this.msgPAW = this.msgPAW.replace(/[^\d]/g, "");
+      } else {
+        this.msgLength = curVal.length;
+        this.msg = curVal;
+      }
+    }
+  },
   methods: {
-     focus(){
-          this.$refs.pwd.focus();
-      },
+    focus() {
+      this.$refs.pwd.focus();
+    },
     // 日期选择
     change(value) {
       this.startTime = value;
@@ -470,38 +470,4 @@ export default {
   border-radius: 5px;
   margin-top: 34%;
 }
-//  密码
-   .pwd-wrap{
-    width: 90%;
-    height: 44px;
-    padding-bottom: 1px;
-    margin: 0 auto;
-    background: #ffffff;
-    border:1px solid #ddd;
-    display: flex;
-    display: -webkit-box;
-    display: -webkit-flex;
-    cursor: pointer;
-
-  }
-  .pwd-wrap li{
-    list-style-type:none;
-    text-align: center;
-    line-height: 44px;
-    -webkit-box-flex: 1;
-    flex: 1;
-    -webkit-flex: 1;
-    border-right:1px solid #ddd ;
-    float:left;
-  }
-  .pwd-wrap li:last-child{
-    border-right: 0;
-  }
-  .pwd-wrap li i{
-    height: 10px;
-    width: 10px;
-    border-radius:50% ;
-    background: #000;
-    display: inline-block;
-  }
 </style>
