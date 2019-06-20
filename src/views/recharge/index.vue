@@ -44,8 +44,8 @@
             <div class="div_display_flex margin_top_div5" v-for="(item,index) in countList" :key="index" style="width:50%;">
               <div
                 class=" text_center b_t_c"
-                :style="{ backgroundColor:(classA  == item.id ? '#DEE8E3' : ''),width:'90%'}"
-                @click="moneyXz(item.id)"
+                :style="{ backgroundColor:(classA  == item.id && item.log ? '#DEE8E3' : ''),width:'90%'}"
+                @click="moneyXz(item.id,index)"
               >
                 <div class="margin_top_div3 font_color_10 font_size_25">{{item.topup}}</div>
                 <div class="margin_top_div3 font_size_13 font_color_1A padding_bottom_4">充{{item.topup}}返{{item.returnmoney}}元</div>
@@ -53,16 +53,16 @@
             </div>
       </div>
       <div>
-        <input type="text" class="recharge_input_b2 margin_top_div8" placeholder="输入其他金额" v-model="form.amount">
+        <input type="text" class="recharge_input_b2 margin_top_div8" placeholder="输入其他金额" v-model="form.amount" :disabled="ifChoic?true:false">
       </div>
       <div class="div_display_flex margin_top_div8">
         <div class="div_width_43 backgroun_color_4A bt_d_c" @click="rechargeq('2')">支付宝充值</div>
         <div class="div_width_43 backgroun_color_4A bt_d_c" @click="rechargeq('3')">现金充值</div>
       </div>
         <!-- 确认充值 -->
-    <confirm v-model="rechargeFalge" title @on-cancel="onCancel" @on-confirm="onConfirm">
-      <div style="text-align:center;font-size:18px;">您确认要充值吗？</div>
-    </confirm>
+      <confirm v-model="rechargeFalge" title @on-cancel="onCancel" @on-confirm="onConfirm">
+        <div style="text-align:center;font-size:18px;">您确认要充值吗？</div>
+      </confirm>
     </div>
   </div>
 </template>
@@ -93,11 +93,25 @@ export default {
          payType:""
        },
        ifHas:false,//判断是否有手机号
+       ifChoic:false,
     };
   },
   methods: {
     // 选择金额
-    moneyXz(falge) {
+    moneyXz(falge,log) {
+     
+      this.countList.forEach((e,i) =>{
+        if(i == log){
+          // console.log(e.log,123)
+          // if(!e.log){
+            this.ifChoic = false;
+          // }
+          return
+        }
+        e.log = false;
+        this.ifChoic = true;
+      })
+      this.countList[log].log = !this.countList[log].log;
       this.classA = falge;
       this.form.id = falge;
     },
@@ -121,9 +135,17 @@ export default {
     
     },
     getCount(){
+      this.$vux.loading.show({
+            text: 'Loading'
+      })
       this.$fetch.post('fruits/app/personal/getPupList',{openId:"1313121231"}).then(res =>{
         console.log(res);
-        this.countList = [...res.obj];
+        res.obj.forEach(item => {
+          item.log = false;
+          this.countList.push(item)
+        });
+        // this.countList = [...res.obj];
+        this.$vux.loading.hide();
       })
     },
     // 点击充值

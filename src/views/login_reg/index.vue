@@ -87,7 +87,6 @@ export default {
       console.log(123)
     },
     LoginOrReg(){
-      console.log( this.haslogin)
       this.haslogin == 1 ? this.Login() : this.Reg();
     },
    
@@ -110,7 +109,6 @@ export default {
     //注册
     Reg(){
       this.$fetch.post("fruits/app/user/register",this.form).then(res =>{
-        console.log(res.code);
         if(res.msg == "success"){
           this.$vux.toast.text('注册成功');
           setTimeout(() =>{
@@ -164,11 +162,8 @@ export default {
       settitle('注册与登录');
   },
   mounted() {
-    console.log(this.$route.query["parm"])
     if(this.$route.query["parm"]){
       var obj = JSON.parse(this.$route.query["parm"]);
-    console.log(obj)
-
       this.Logform.phone = obj.phone;
       this.Logform.password = obj.password;
       this.Logform.openId = obj.openId;

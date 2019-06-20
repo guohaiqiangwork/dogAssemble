@@ -33,7 +33,7 @@ export default {
   watch:{
     imgList:{
       handler(newName, oldName){
-        this.imgList = newName;
+        // this.imgList = newName;
         console.log(newName,56456)
       },
     
@@ -136,6 +136,7 @@ export default {
     settitle('商城')
   },
   mounted() {
+    
     this.$fetch.post("fruits/app/blank/getBannerImg",{openId:123456}).then(res =>{
       console.log(res);
       res.obj.forEach(e => {
