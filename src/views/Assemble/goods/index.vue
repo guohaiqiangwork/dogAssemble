@@ -1,81 +1,101 @@
 <template>
-    <div id="item_goods">
-        <div class="item_list" v-for="(item,index) in itemList" :key="index">
-            <img class="item_logo" :src="item.logo" alt="">
-            <p class="item_tip">{{item.tip}}</p>
-        </div>
+  <div id="item_goods">
+    <div class="item_list" v-for="(item,index) in itemList" :key="index" >
+      <img class="item_logo" :src="item.picId" alt @click="goto(item.id)">
+      <p class="item_tip">{{item.name}}</p>
     </div>
+  </div>
 </template>
 <script>
+import url from "../../../bin/url";
 export default {
-    // props:{
+  // props:{
 
-    // },
-    data() {
-        return {
-            itemList: [
-                {
-                    logo:require('../../../assets/images/WechatIMG99(1).png'),
-                    tip:'奶品水饮'
-                },
-                {
-                    logo:require('../../../assets/images/WechatIMG99(1).png'),
-                    tip:'休闲零食'
-                },
-                {
-                    logo:require('../../../assets/images/WechatIMG99(1).png'),
-                    tip:'母婴用品'
-                },
-                {
-                    logo:require('../../../assets/images/WechatIMG99(1).png'),
-                    tip:'厨房日用'
-                },
-                {
-                    logo:require('../../../assets/images/WechatIMG99(1).png'),
-                    tip:'厨房日用'
-                },
-                {
-                    logo:require('../../../assets/images/WechatIMG99(1).png'),
-                    tip:'厨房日用'
-                }
-            ]
+  // },
+  data() {
+    return {
+      itemList: [
+        {
+          logo: require("../../../assets/images/WechatIMG99(1).png"),
+          tip: "奶品水饮"
+        },
+        {
+          logo: require("../../../assets/images/WechatIMG99(1).png"),
+          tip: "休闲零食"
+        },
+        {
+          logo: require("../../../assets/images/WechatIMG99(1).png"),
+          tip: "母婴用品"
+        },
+        {
+          logo: require("../../../assets/images/WechatIMG99(1).png"),
+          tip: "厨房日用"
+        },
+        {
+          logo: require("../../../assets/images/WechatIMG99(1).png"),
+          tip: "厨房日用"
+        },
+        {
+          logo: require("../../../assets/images/WechatIMG99(1).png"),
+          tip: "厨房日用"
         }
-    },
-    methods: {
-        name() {
-            
+      ]
+    };
+  },
+  methods: {
+    //   获取数据
+    getClassfications() {
+      let _obj = {
+        openId: url.openId
+      };
+      this.$fetch.post(url.getClassfications, _obj).then(
+        data => {
+          if (data.code == 0) {
+            this.itemList = data.obj;
+            this.itemList.forEach(item => {
+              item.picId = url.imgUrl + item.picId;
+            });
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
         }
+      );
     },
-    mounted() {
-        
-    },
-}
+    // 数据传递
+    goto(id){
+        this.$emit('getList',id)
+    }
+  },
+  mounted() {
+    this.getClassfications(); //获取产品分类
+  }
+};
 </script>
 <style lang="less">
-#item_goods{
-    display: flex;
-    justify-content: space-between;
-    // width: 100%;
-    height: 1.44rem;
-    padding: 0.36rem 0;
-    margin:0 0.6rem;
-    overflow-y: hidden;
-    // box-sizing: border-box;
-    .item_list{
-       min-width: 25%;
+#item_goods {
+  display: flex;
+  justify-content: space-between;
+  // width: 100%;
+  height: 1.44rem;
+  padding: 0.36rem 0;
+  margin: 0 0.6rem;
+  overflow-y: hidden;
+  // box-sizing: border-box;
+  .item_list {
+    min-width: 25%;
     //    text-align: center;
     //    margin: 0 auto;
-       display: flex;
-       flex-direction: column;
-       justify-content: space-between;
-       align-items: center;
-        .item_logo{
-            width: 0.88rem;
-            height: 0.88rem;
-        }
-        .item_tip{
-
-        }
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    .item_logo {
+      width: 0.88rem;
+      height: 0.88rem;
     }
+    .item_tip {
+    }
+  }
 }
 </style>
