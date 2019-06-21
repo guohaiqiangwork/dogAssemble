@@ -1,6 +1,6 @@
 <template>
   <div id="whole">
-    <div class="flex-between">
+    <div class="flex-between wrap">
       <div class="goods_item" v-for="(item,index) in goodsList" :key="index" >
         <div class="img_box">
           <img class="goods_img" src="../../../assets/images/WechatIMG102.png" alt>
@@ -43,6 +43,7 @@ export default {
       };
       this.$fetch.post(url.getGoodsList, _obj).then(
         data => {
+          console.log(data)
           if (data.code == 0) {
           this.goodsList = data.obj
           }
@@ -61,11 +62,14 @@ export default {
 <style lang="less">
 #whole {
   padding: 0.35rem 0.42rem 0;
-
+  .wrap{
+    flex-wrap: wrap;
+  } 
   .goods_item {
     border-radius: 0.12rem;
     background: #fff;
     font-size: 0;
+    margin-bottom: 7px;
     .img_box {
       border-bottom: 1px solid #e9e9e9;
       .goods_img {

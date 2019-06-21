@@ -14,7 +14,7 @@
     <hot></hot>
     <div class="bg_gray">
       <div class="hot_tit mt-space" @click="Test">全部商品</div>
-      <whoel listId=this.listId2></whoel>
+      <whoel :listId=this.listId2></whoel>
     </div>
     <!-- <item-goods></item-goods> -->
   </div>
@@ -32,18 +32,25 @@ export default {
   },
   
   watch: {
-    imgList: {
-      handler(newName, oldName) {
-        // this.imgList = newName;
-        console.log(newName, 56456);
-      }
-    }
+    // imgList: {
+    //   handler(newName, oldName) {
+    //     // this.imgList = newName;
+    //     console.log(newName, 56456);
+    //   }
+    // }
   },
   data() {
     return {
       str: "",
       iptVal: null,
-      imgList: [],
+      imgList: [
+        {
+        
+        },
+        {
+        
+        }
+      ],
       listId2:''
     };
   },
@@ -68,56 +75,21 @@ export default {
     debounce(func, time, ctx) {},
     queryImg(str) {
       this.str = str;
+      this.imgList = [];
       this.imgList.push(
         {
           url: "javascript:",
           img:
             "//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId=" +
             str,
-          title: "送你一朵fua"
+            title: "送你一朵fua"
         },
         {
           url: "javascript:",
-          img:
-            "//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId=" +
-            str,
-          title: "送你一朵fua1"
-        },
-        {
-          url: "javascript:",
-          img:
-            "//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId=" +
-            str,
-          title: "送你一朵fua1"
-        },
-        {
-          url: "javascript:",
-          img:
-            "//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId=" +
-            str,
+          img:"http://m.imeitou.com/uploads/allimg/2019021309/ipijc3xjpfo.jpg",
           title: "送你一朵fua1"
         }
-        // {
-        //     url: 'javascript:',
-        //     img: '//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId='+str,
-        //     title: '送你一朵fua'
-        // },
-        // {
-        //     // url: 'javascript:',
-        //     img: 'https://static.vux.li/demo/5.jpg',
-        //     title: '送你一次旅行',
-        //     fallbackImg: 'https://static.vux.li/demo/3.jpg'
-        // },
-        // {
-        //     url: 'javascript:',
-        //     img: '192.168.3.12:80/fruits/app/blank/showPicture?attachmentId='+str,
-        //     title: '送你一朵fua'
-        // },
       );
-
-      // this.$fetch.post("fruits/blank/showPicture?attachmentId="+str).then(res =>{
-      //   console.log(res);
-      // })
     },
     input() {
       if (timer) {
