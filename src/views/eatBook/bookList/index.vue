@@ -97,6 +97,7 @@ export default {
             }
             this.timer = setTimeout(() =>{
                 this.form.name = this.iptVal;
+                this.form.current = 1;
                 this.getRecipeList();
             },1000);
         },

@@ -20,18 +20,18 @@
             <x-input class="mt-40" @on-change="change"  v-model="form.password"  type="password" :min="6" :max="6" placeholder="请设置您的密码,用于套餐支付和登录" @on-click-clear-icon='clear' required >
               <img slot="label" style="padding-right:10px;display:block;with:0.33rem;height:0.33rem" src="../../assets/images/密码@2x.png">
             </x-input>
-            <x-input disabled></x-input>
+            <x-input disabled v-model="btn"></x-input>
   
         </div>
 
         <div class="form" v-else>
-           <x-input  keyboard="number" is-type="china-mobile" placeholder="请输入手机号码" @on-click-clear-icon='clear' v-model="Logform.phone">
+           <x-input  keyboard="number" is-type="china-mobile" placeholder="请输入手机号码" @on-click-clear-icon='clear' required v-model="Logform.phone">
               <img slot="label" style="padding-right:10px;display:block;with:0.33rem;height:0.33rem" src="../../assets/images/phone@2x.png">
             </x-input>
-            <x-input class="mt-40"  type="password" placeholder="请输入密码" @on-click-clear-icon='clear' v-model="Logform.password" required>
+            <x-input class="mt-40"  type="password" placeholder="请输入密码" @on-click-clear-icon='clear' required v-model="Logform.password" >
               <img slot="label" style="padding-right:10px;display:block;with:0.33rem;height:0.33rem" src="../../assets/images/密码@2x.png">
             </x-input>
-            <x-input disabled></x-input>
+            <x-input disabled v-model="btn"></x-input>
             <p class="flex-between px-15">
               <a href="#" @click="editPass">忘记密码</a><a href="#" @click="regTest">立即注册</a>
             </p>

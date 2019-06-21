@@ -210,7 +210,7 @@ export default new Router({
   },
   {
     path:'/goodslist',
-    name:'shop',
+   
     meta: {
       title:'商品列表'
     },

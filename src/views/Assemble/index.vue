@@ -45,7 +45,14 @@ export default {
       str:"",
       iptVal:null,
       imgList: [
-       
+       {
+           title: '送你一次旅行',
+            fallbackImg:'https://static.vux.li/demo/5.jpg'
+        },
+        {
+          title: '送你一次旅行',
+            fallbackImg:'https://static.vux.li/demo/5.jpg'
+        },
       ]
     }
   },
@@ -66,43 +73,9 @@ export default {
     },
     queryImg(str){
       this.str = str;
-      this.imgList.push(
-        {
-  url: 'javascript:',
-  img:  '//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId='+str,
-  title: '送你一朵fua'
-},    {
-  url: 'javascript:',
-  img:  '//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId='+str,
-  title: '送你一朵fua1'
-}, 
- {
-  url: 'javascript:',
-  img:  '//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId='+str,
-  title: '送你一朵fua1'
-},
- {
-  url: 'javascript:',
-  img:  '//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId='+str,
-  title: '送你一朵fua1'
-},
-        // {
-        //     url: 'javascript:',
-        //     img: '//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId='+str,
-        //     title: '送你一朵fua'
-        // }, 
-        // {
-        //     // url: 'javascript:',
-        //     img: 'https://static.vux.li/demo/5.jpg',
-        //     title: '送你一次旅行',
-        //     fallbackImg: 'https://static.vux.li/demo/3.jpg'
-        // },
-        // {
-        //     url: 'javascript:',
-        //     img: '192.168.3.12:80/fruits/app/blank/showPicture?attachmentId='+str,
-        //     title: '送你一朵fua'
-        // }, 
-      ) 
+      this.imgList[0].img = '//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId='+str;
+      this.imgList[1].img = 'http://m.imeitou.com/uploads/allimg/2019021309/ipijc3xjpfo.jpg';
+
    
       // this.$fetch.post("fruits/blank/showPicture?attachmentId="+str).then(res =>{
       //   console.log(res);
@@ -118,18 +91,7 @@ export default {
         timer = null;
       },2000)
     },
-    filterList(arr,val) {
-      var list = [...arr];
-      var temp = [];
-      list.map(e => {
-        if(val){
-
-        }else{
-          
-        }
-      })
-      return temp
-    }
+ 
     
   },
   created(){
