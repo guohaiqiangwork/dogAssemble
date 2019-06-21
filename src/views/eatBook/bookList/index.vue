@@ -19,7 +19,20 @@
             <input type="text" placeholder="搜索您想找的产品" v-model="iptVal" @input="input" >
             <i></i>
         </div>
-        <book-list :list="bookList"></book-list>
+        <div v-for="(item,index) in bookList" :key="index">
+            <book-list :item="item">
+                <div slot="content">
+                    <div v-for="(iten,ind) in item.memberRecipes" :key="ind" v-show="item.type == 0">
+                        <div :class="['kind-list',iten.cupName == '大杯'?'before-tag':'before-tag before-tag-sm']">
+                            <span class="kind-item" v-for="(info,inx) in iten.cupInfos" :key="inx">{{info.foodName+info.gram+'克'}}</span>
+                        </div>
+                    </div>
+                    <div class="kind-list" v-show="item.type == 1">
+                        <span class="kind-item" v-for="(info,inx) in item.biguFoods" :key="inx">{{info.foodName+info.gram+'克'}}</span>
+                    </div>
+                </div>
+            </book-list>
+        </div>
     </div>
     <!-- </div> -->
 </nut-scroller>

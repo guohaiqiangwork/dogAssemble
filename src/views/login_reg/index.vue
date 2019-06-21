@@ -7,47 +7,47 @@
 
         <div class="form" v-if="haslogin == 2">
            <!-- <x-input label-width="4em"  placeholder="I'm placeholder"></x-input> -->
-            <x-input placeholder="请输入您的姓名" v-model="form.name" required @on-change="change">
+            <x-input placeholder="请输入您的姓名" v-model="form.name" required @on-change="change" ref="name">
               <img slot="label" style="padding-right:10px;display:block;with:0.33rem;height:0.33rem" src="../../assets/images/name.png">
             </x-input>
             <x-input class="mt-40"  placeholder="请输入手机号码" @on-click-clear-icon='clear' ref="inputTel"  required is-type="china-mobile" keyboard="number" v-model="form.phone">
               <img slot="label" style="padding-right:10px;display:block;with:0.33rem;height:0.33rem" src="../../assets/images/phone@2x.png">
             </x-input>
-            <x-input class="mt-40"  keyboard="number"  placeholder="请输⼊验证码"  :min="4" :max="4" @on-click-clear-icon='clear' required v-model="form.code">
+            <x-input class="mt-40"  ref="code" keyboard="number"  placeholder="请输⼊验证码"  :min="4" :max="4" @on-click-clear-icon='clear' required v-model="form.code">
               <img slot="label" style="padding-right:10px;display:block;with:0.33rem;height:0.33rem" src="../../assets/images/验证码@2x.png">
               <a slot="right" class="code_btn" href="#" @click ="sendCode">{{codeValue}}</a>
             </x-input>
-            <x-input class="mt-40" @on-change="change"  v-model="form.password"  type="password" :min="6" :max="6" placeholder="请设置您的密码,用于套餐支付和登录" @on-click-clear-icon='clear' required >
+            <x-input class="mt-40" @on-change="change" ref="inputPas" v-model="form.password"  type="password" :min="6" :max="6" placeholder="请设置您的密码,用于套餐支付和登录" @on-click-clear-icon='clear' required >
               <img slot="label" style="padding-right:10px;display:block;with:0.33rem;height:0.33rem" src="../../assets/images/密码@2x.png">
             </x-input>
-            <x-input disabled v-model="btn"></x-input>
+            <x-input disabled v-model="disVal"></x-input>
   
         </div>
 
         <div class="form" v-else>
-           <x-input  keyboard="number" is-type="china-mobile" placeholder="请输入手机号码" @on-click-clear-icon='clear' required v-model="Logform.phone">
+           <x-input  keyboard="number" is-type="china-mobile" placeholder="请输入手机号码" ref="inputTel"  @on-click-clear-icon='clear' required v-model="Logform.phone">
               <img slot="label" style="padding-right:10px;display:block;with:0.33rem;height:0.33rem" src="../../assets/images/phone@2x.png">
             </x-input>
-            <x-input class="mt-40"  type="password" placeholder="请输入密码" @on-click-clear-icon='clear' required v-model="Logform.password" >
+            <x-input class="mt-40"  type="password" placeholder="请输入密码" @on-click-clear-icon='clear' ref="inputPas"  required v-model="Logform.password" >
               <img slot="label" style="padding-right:10px;display:block;with:0.33rem;height:0.33rem" src="../../assets/images/密码@2x.png">
             </x-input>
-            <x-input disabled v-model="btn"></x-input>
+            <x-input disabled v-model="disVal"></x-input>
             <p class="flex-between px-15">
               <a href="#" @click="editPass">忘记密码</a><a href="#" @click="regTest">立即注册</a>
             </p>
         </div>
-
-        <div class="login_btn" @click="LoginOrReg">{{haslogin == 1 ? '登录'  : '注册'}}</div>
+         <x-button type="primary" class="login_btn" :show-loading="btnload" @click.native="LoginOrReg" >{{haslogin == 1 ? '登录'  : '注册'}}</x-button>
+        <!-- <div  @click="LoginOrReg"  >{{haslogin == 1 ? '登录'  : '注册'}}</div> -->
         <p class="login_tit">登录即代表您已同意《御康商贸用户隐私政策》</p>
   </div>
 </template>
 <script>
-import { XInput } from 'vux'
+import { XInput,XButton  } from 'vux'
 
 export default {
   name: "login",
   components: {
-    XInput,
+    XInput,XButton 
   },
   computed: {
     haslogin(){
@@ -56,9 +56,11 @@ export default {
   },
   data() {
     return {
+      disVal:"",
       btn:'注册',
       style:'',
       timer:'',
+      btnload:false,
      maskValue:"",
       codeValue:"获取验证码",
       form:{
@@ -92,9 +94,15 @@ export default {
    
     //登录
     Login(){
+      if(!this.$refs.inputTel.valid || !this.$refs.inputPas.valid){
+        this.$vux.toast.text('请检查输入的内容');
+        return
+      }
       console.log(this.Logform)
+      this.btnload = true;
       this.$fetch.post("fruits/app/user/login",this.Logform).then(
         res =>{
+          this.btnload = false;
           if(res.msg =="success"){
             this.$vux.toast.text('登录成功');
             localStorage.setItem("user",res.attributes.sessionId)
@@ -108,7 +116,15 @@ export default {
     },
     //注册
     Reg(){
+      if(!this.$refs.inputTel.valid || !this.$refs.name.valid || !this.$refs.inputPas.valid || !this.$refs.code.valid ){
+        this.$vux.toast.text('请检查输入的内容');
+        return
+      }
       this.$fetch.post("fruits/app/user/register",this.form).then(res =>{
+        if(res.msg == "registered"){
+          this.$vux.toast.text('手机号已经被注册');
+          return
+        }
         if(res.msg == "success"){
           this.$vux.toast.text('注册成功');
           setTimeout(() =>{
@@ -196,9 +212,7 @@ export default {
     .mt-40{
       padding-top:45px;
     }
-    .code_btn{
-
-    }
+   
     .px-15{
       padding:0 0 0 15px;
     }

@@ -231,6 +231,13 @@ export default new Router({
     component:  resolve => require(['@/views/eatBook/bookList/index'], resolve),
   },
   {
+    path:'/orderbook',
+    meta: {
+      title:'订单中的配方'
+    },
+    component:  resolve => require(['@/views/eatBook/orderList/index'], resolve),
+  },
+  {
     // 全国门店
     path: '/nationalStores/:obj',
     name: 'nationalStores',

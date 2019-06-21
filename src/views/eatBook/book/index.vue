@@ -1,31 +1,24 @@
 <template>
     <div id="allbook">
-        <div v-for="(item,index) in list" :key="index">
+        <!-- <div v-for="(item,index) in list" :key="index"> -->
             <div class="book-list">
-                <p class="flex-between align-center">
-                    <span class="list-name flex-start align-center mb-36">{{item.name}}</span>
-                    <!-- <span name='size' class="green size">大杯</span> -->
+                <p class="flex-between align-center mb-36">
+                    <span class="list-name flex-start align-center">{{item.name}}</span>
+                    <slot name='size'></slot>
                 </p>
-                <div v-for="(iten,ind) in item.memberRecipes" :key="ind" v-show="item.type == 0">
-                    <div :class="['kind-list',iten.cupName == '大杯'?'before-tag':'before-tag before-tag-sm']">
-                        <span class="kind-item" v-for="(info,inx) in iten.cupInfos" :key="inx">{{info.foodName+info.gram+'克'}}</span>
-                    </div>
-                </div>
-                <div class="kind-list" v-show="item.type == 1">
-                    <span class="kind-item" v-for="(info,inx) in item.biguFoods" :key="inx">{{info.foodName+info.gram+'克'}}</span>
-                </div>
+                <slot name="content"></slot>
                 <p class="tip-footer"><span>注意事项：</span><span>{{item.notice}}</span></p>
                 <p class="tip-footer"><span>适宜人群：</span><span>{{item.crowd}}</span></p>
                 <p class="tip-footer"><span>适应病症：</span><span>{{item.disease}}</span></p>
             </div>
-        </div>
+        <!-- </div> -->
     </div>
 </template>
 <script>
 export default {
     props:{
-        list:{
-            type:Array,
+        item:{
+            type:Object,
             default(){
                 return{}
             }
@@ -47,23 +40,27 @@ export default {
 }
 </script>
 <style lang="less">
-#allbook{
-    padding: 0  0.4rem;
-    overflow-x: hidden;
-    box-sizing: border-box;
-    background: #F3F5F8;
-    
-        .green{
+.green{
             color: #4A7B67;
         }
         .size{
             font-size: 0.28rem;
         }
+
+#allbook{
+      
+    padding: 0  0.4rem;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    background: #F3F5F8;
+      
+        
       .book-list{
         padding: 0.3rem 0.4rem;
         background: #fff;
         border-radius: 0.12rem;
         margin-bottom: 0.2rem;
+        
         .mb-36{
             margin-bottom: 0.36rem;
         }

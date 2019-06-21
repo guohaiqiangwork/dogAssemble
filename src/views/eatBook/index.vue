@@ -15,12 +15,12 @@
             <div class="" v-if="orderList.length">
                 
                 <ul class="mt-15" v-for="(item,index) in orderList" :key="index">
-                    <li class="book-item flex-between align-center">
+                    <li class="book-item flex-between align-center" @click="goOrderBook(item.id,item.type)">
                         <div>
                             <p><span>{{index+1}}.</span><span>{{item.time}}</span></p>
                             <p><span>{{item.name}}</span><span class="ml-3">{{item.recipe}}</span></p>
                         </div>
-                        <div class="complete-btn" v-if="item.isComplete == 0">
+                        <div class="complete-btn" v-if="item.isComplete == 0" @click.stop="finish(item)">
                             完成
                         </div>
                     </li>
@@ -47,22 +47,42 @@
 export default {
     data() {
         return {
-            orderList: []
+            orderList: [],
+            form:{
+                openId:"1313121231",
+                id:"",
+                type:""
+            }
         }
     },
     methods: {
+        // 获取订单列表
         getOrder() {
             this.$fetch.post("fruits/app/recipe/getTodayOrder",{openId:'1313121231'}).then(res=>{
-                console.log(res);
                 if(res.msg == "success"){
                     this.orderList = res.obj;
                 }
                
             })
         },
+         // 全部配方
         goAllBook(){
             this.$router.push('/bookList');
         },
+         // 订单配方
+        goOrderBook(id,type){
+            this.$router.push('/orderbook?id='+id+'&type='+type);
+        },
+        finish(item) {
+            this.form.id = item.id;
+            this.form.type = item.type;
+            this.$fetch.post("fruits/app/recipe/completeOrder",this.form).then(res => {
+                if(res.msg == "success"){
+                    item.isComplete = 1;
+                    this.$vux.toast.text('该订单已完成');
+                }
+            })
+        }
     },
     mounted() {
         
