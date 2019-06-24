@@ -20,5 +20,10 @@ module.exports = {
   imgUrl: "//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId=",//图片
   getRecommend: '/fruits/app/blank/getRecommend',//获取推荐列表
   deleteAddress:'/fruits/app/cart/deleteAddress',//删除地址
-  getGoodInfo:'/fruits/app/cart/getGoodInfo',//新增地址接口
+  saveAddress: '/fruits/app/cart/saveAddress',//保存地址接口
+  getAddress: '/fruits/app/cart/getAddress',//修改获取地址
+  // getGoodInfo:'/fruits/app/cart/getGoodInfo',//新增地址接口
+  editAddress: '/fruits/app/cart/editAddress',//编辑地址保存
+  selectAddress:'/fruits/app/cart/selectAddress'//修改地址获取
+
 };

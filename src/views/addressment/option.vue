@@ -1,5 +1,5 @@
 <template>
-    <div id="opt_address">
+      <div id="opt_address">
         <div class="address_top">
             <div class="address_item">
     
@@ -26,168 +26,213 @@
                 <!-- <x-input label-width="4em" :title='`<span style="${style}">手机号</span>`' placeholder="收货人电话" keyboard="number" is-type="china-mobile"></x-input> -->
             </div>
         </div>
-        <div class="save_btn" @click="addressopt">保存</div>
-    </div>
+    <div class="save_btn" v-if="this.routeParams.data.pathF != 'false'" @click="addressoptX">保存休</div>
+    <div class="save_btn" v-if="this.routeParams.data.pathF == 'false'" @click="addressopt">保存新</div>
+  </div>
 </template>
 <script>
-
 import url from "../../bin/url";
-import { XInput,XSwitch,XAddress, ChinaAddressV4Data, Value2nameFilter as value2name } from 'vux'
+import {
+  XInput,
+  XSwitch,
+  XAddress,
+  ChinaAddressV4Data,
+  Value2nameFilter as value2name
+} from "vux";
 export default {
-    components:{
-        XInput,
-        XSwitch,
-        XAddress
-    },
-    data() {
-        return {
-            details:'',
-            style: '',
-            title: '',
-            showAddress:false,
-            addressVal:[],
-            address:'',
-            addressData: ChinaAddressV4Data,
-            addressBC:{
-            name:'',//姓名
-            phone:'',//手机号码
-            details:'',//详细地址
-            isDefault:'',
-            id:''
-            },
-          addressF:''        
-        }
-    },
-    methods: {
-           getName(value){
+  components: {
+    XInput,
+    XSwitch,
+    XAddress
+  },
+  data() {
+    return {
+      details: "",
+      style: "",
+      title: "",
+      showAddress: false,
+      addressVal: [],
+      address: "",
+      addressData: ChinaAddressV4Data,
+      addressBC: {
+        name: "", //姓名
+        phone: "", //手机号码
+        details: "", //详细地址
+        isDefault: "",
+        id: ""
+      },
+      addressF: ""
+    };
+  },
+  methods: {
+    getName(value) {
       return value2name(value, ChinaAddressV4Data);
     },
-        logHide(str) {
-            console.log('on-hide', str)
-            if(str){
-                this.address = value2name(this.addressVal, ChinaAddressV4Data)
-                  this.addressF =  this.address.split(" ");
-                  
-            }
-        },
-        logShow() {
-
-        },
-        onShadowChange() {
-
-        },
-        clearItem(){
-            this.details = '';
-            console.log(465)
-        },
-        onBlur(e,v,q){
-            
-            console.log(e,v,q);
-        },
-        // 地址爆粗
-        addressopt(){
-           let _obj = {
-        openId: url.openId,
-        receiver: this.addressBC.name ,//收货人
-        phone: this.addressBC.phone ,//电话
-        province:this.addressF[0],
-        city:this.addressF[1],
-        area:this.addressF[2],
-        receiveAddress: this.addressBC.details,
-        isDefault:this.addressBC.isDefault,
-        id:this.addressBC.id
-      };
-        if(_obj.isDefault){
-          _obj.isDefault =1 
-      }else{
-          _obj.isDefault = 0
+    logHide(str) {
+      if (str) {
+        this.address = value2name(this.addressVal, ChinaAddressV4Data);
+        this.addressF = this.address.split(" ");
       }
-      this.$fetch.post(url.getGoodInfo, _obj).then(
+    },
+    logShow() {},
+    onShadowChange() {},
+    clearItem() {
+      this.details = "";
+      console.log(465);
+    },
+    onBlur(e, v, q) {
+      console.log(e, v, q);
+    },
+    // 新增地址保存
+    addressopt() {
+      let _obj = {
+        openId: url.openId,
+        receiver: this.addressBC.name, //收货人
+        phone: this.addressBC.phone, //电话
+        province: this.addressF[0],
+        city: this.addressF[1],
+        area: this.addressF[2],
+        receiveAddress: this.addressBC.details,
+        isDefault: this.addressBC.isDefault
+      };
+      if (_obj.isDefault) {
+        _obj.isDefault = "1";
+      } else {
+        _obj.isDefault = "0";
+      }
+      this.$fetch.post(url.saveAddress, _obj).then(
         data => {
           if (data.code == 0) {
             // 刷新地址列表
-
           }
         },
         err => {
           alert("网络缓慢。。");
         }
       );
+    },
+    // 修改地址保存
+    addressoptX() {
+      let _obj = {
+        openId: url.openId,
+         id: this.addressBC.id,
+        receiver: this.addressBC.name, //收货人
+        phone: this.addressBC.phone, //电话
+        province: this.addressF[0],
+        city: this.addressF[1],
+        area: this.addressF[2],
+        receiveAddress: this.addressBC.details,
+        isDefault: this.addressBC.isDefault,
+       
+      };
+      if (_obj.isDefault) {
+        _obj.isDefault = "1";
+      } else {
+        _obj.isDefault = "0";
+      }
+      this.$fetch.post(url.editAddress, _obj).then(
+        data => {
+          if (data.code == 0) {
+            // 刷新地址列表
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
         }
-            },
-    created(){
-        settitle('地址管理');
-         this.routeParams = JSON.parse(this.$route.query.obj);
-         if(this.routeParams.data.pathF != 'false' ){
-             this.addressBC.name = this.routeParams.data.item.name,
-              this.addressBC.details = this.routeParams.data.item.address,
-               this.addressBC.phone = this.routeParams.data.item.tel
-                 this.addressBC.id = this.routeParams.data.item.id
-            }
+      );
     },
-    mounted() {
-         
-        
-    },
-}
+    // 获取修改地址详情
+    getAddress() {
+      let _obj = {
+        openId: url.openId,
+        id: this.addressBC.id
+      };
+      this.$fetch.post(url.getAddress, _obj).then(
+        data => {
+          if (data.code == 0) {
+            console.log(data.obj);
+            var addressValGet = [
+              data.obj.province,
+              data.obj.city,
+              data.obj.area
+            ];
+            this.address = value2name(addressValGet, ChinaAddressV4Data);
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
+        }
+      );
+    }
+  },
+  created() {
+    settitle("地址管理");
+    this.routeParams = JSON.parse(this.$route.query.obj);
+    if (this.routeParams.data.pathF != "false") {
+      (this.addressBC.name = this.routeParams.data.item.name),
+        (this.addressBC.details = this.routeParams.data.item.address),
+        (this.addressBC.phone = this.routeParams.data.item.tel);
+      this.addressBC.id = this.routeParams.data.item.id;
+    }
+    this.getAddress();
+  },
+  mounted() {}
+};
 </script>
 <style lang="less">
-@switch-checked-bg-color:#000000;
+@switch-checked-bg-color: #000000;
 //   .weui-input .weui-input {
 //     text-fill-color: #333;
 //     -webkit-text-fill-color: #333;
 //     opacity: 1;
 //     }
-#opt_address{
-    width: 100%;
-    height: 100%;
-    background: #F3F5F8;
-    overflow-x: hidden;
-    .address_top{
-        margin: 0.2rem;
-        background: #fff;
-        border-radius: 0.12rem;
+#opt_address {
+  width: 100%;
+  height: 100%;
+  background: #f3f5f8;
+  overflow-x: hidden;
+  .address_top {
+    margin: 0.2rem;
+    background: #fff;
+    border-radius: 0.12rem;
+  }
+  .weui-cell__hd {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+  }
+  .flex_between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .icon_middle {
+      // vertical-align: middle;
     }
-    .weui-cell__hd{
-        display: flex;
-        align-items: center;
-        flex-direction: row-reverse
+  }
+  .address_item {
+    margin: 0 0.2rem;
+    border-bottom: 1px solid #f4f4f4;
+    font-size: 0.32rem;
+    .weui-cell {
+      padding: 0.28rem 0.38rem;
     }
-    .flex_between{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        .icon_middle{
-           
-            // vertical-align: middle;
-        }
-    }
-    .address_item{
-           
-            margin: 0 0.2rem;
-            border-bottom: 1px solid #F4F4F4;
-            font-size: 0.32rem;
-            .weui-cell{
-                 padding: 0.28rem 0.38rem;
-            }
-           
-        }
-    .address_btm{
-        margin: 0.2rem;
-        margin-top: 0;
-        background: #fff;
-        border-radius: 0.12rem;
-    }
-    .save_btn{
-        width:6.9rem;
-        height:0.9rem;
-        margin:1.27rem auto 0 auto;
-        font-size:0.32rem;
-        color: #fff;
-        text-align:center;
-        line-height: 0.9rem;
-        background:rgba(74,123,103,1);
-        border-radius:0.12rem;
-    }
+  }
+  .address_btm {
+    margin: 0.2rem;
+    margin-top: 0;
+    background: #fff;
+    border-radius: 0.12rem;
+  }
+  .save_btn {
+    width: 6.9rem;
+    height: 0.9rem;
+    margin: 1.27rem auto 0 auto;
+    font-size: 0.32rem;
+    color: #fff;
+    text-align: center;
+    line-height: 0.9rem;
+    background: rgba(74, 123, 103, 1);
+    border-radius: 0.12rem;
+  }
 }
 </style>
