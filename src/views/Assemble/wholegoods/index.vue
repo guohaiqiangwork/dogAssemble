@@ -1,12 +1,12 @@
 <template>
   <div id="whole">
     <div class="flex-between wrap">
-      <div class="goods_item" v-for="(item,index) in goodsList" :key="index" >
+      <div class="goods_item" v-for="(item,index) in goodsList" :key="index" ref="getwhole">
         <div class="img_box">
           <img class="goods_img" :src="item.picId" alt>
         </div>
         <div class="goods_msg">
-          <p class="goods_name">{{listId2}}{{item.name}}</p>
+          <p class="goods_name">{{item.name}}</p>
           <p class="red">¥{{item.price}}</p>
         </div>
       </div>
@@ -16,31 +16,30 @@
 <script>
 import url from "../../../bin/url";
 export default {
-  props: [
-      
-  ],
+  props: ["listId"],
   data() {
     return {
       key: "value",
-      goodsList:''
+      goodsList: ""
     };
   },
   methods: {
+     
     getGoodsList() {
       let _obj = {
         openId: url.openId,
-        id: '',
-        size: '10',
-        current: '1'
+        id: this.listId || "",
+        size: "10",
+        current: "1"
       };
       this.$fetch.post(url.getGoodsList, _obj).then(
         data => {
-          console.log(data)
+          console.log(data);
           if (data.code == 0) {
-          this.goodsList = data.obj
-           this.goodsList.forEach(item => {
+            this.goodsList = data.obj;
+            this.goodsList.forEach(item => {
               item.picId = url.imgUrl + item.picId;
-              console.log(item.picId)
+              console.log(item.picId);
             });
           }
         },
@@ -51,16 +50,19 @@ export default {
     }
   },
   mounted() {
-    this.getGoodsList();//获取全部列表
+       this.$refs.getwhole.$emit('goToList1',()=>{
+           console.log('788900')
+       })
+    this.getGoodsList(); //获取全部列表
   }
 };
 </script>
 <style lang="less">
 #whole {
   padding: 0.35rem 0.42rem 0;
-  .wrap{
+  .wrap {
     flex-wrap: wrap;
-  } 
+  }
   .goods_item {
     border-radius: 0.12rem;
     background: #fff;

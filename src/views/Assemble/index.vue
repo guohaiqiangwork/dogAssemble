@@ -9,12 +9,25 @@
         <i></i>
       </div>
     </div>
-    <itemes  v-on:getList="goToList1"></itemes>
+    <itemes v-on:getList="goToList1"></itemes>
     <div class="hot_tit">热门推荐</div>
     <hot></hot>
     <div class="bg_gray">
       <div class="hot_tit mt-space" @click="Test">全部商品</div>
-      <whoel :listId=this.listId2></whoel>
+      <div id="whole">
+        <div class="flex-between wrap">
+          <div class="goods_item" v-for="(item,index) in goodsList" :key="index">
+            <div class="img_box">
+              <img class="goods_img" :src="item.picId" alt>
+            </div>
+            <div class="goods_msg">
+              <p class="goods_name">{{item.name}}</p>
+              <p class="red">¥{{item.price}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <whoel :listId="this.listId2"></whoel> -->
     </div>
     <!-- <item-goods></item-goods> -->
   </div>
@@ -22,6 +35,7 @@
 <script>
 import { Swiper } from "vux";
 import { setTimeout, clearTimeout } from "timers";
+import url from "../../bin/url";
 let timer;
 export default {
   components: {
@@ -30,7 +44,7 @@ export default {
     hot: resolve => require(["./hotness/index.vue"], resolve),
     whoel: resolve => require(["./wholegoods/index.vue"], resolve)
   },
-  
+
   watch: {
     // imgList: {
     //   handler(newName, oldName) {
@@ -43,15 +57,10 @@ export default {
     return {
       str: "",
       iptVal: null,
-      imgList: [
-        {
-        
-        },
-        {
-        
-        }
-      ],
-      listId2:''
+      imgList: [{}, {}],
+      listId2: "",
+      key: "value",
+      goodsList: ""
     };
   },
   computed: {},
@@ -59,7 +68,8 @@ export default {
     // 监听
     goToList1(id) {
       console.log("监听" + id);
-      this.listId2 =id
+      this.listId2 = id;
+      this.getGoodsList();
     },
     Test() {
       this.$fetch
@@ -82,11 +92,11 @@ export default {
           img:
             "//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId=" +
             str,
-            title: "送你一朵fua"
+          title: "送你一朵fua"
         },
         {
           url: "javascript:",
-          img:"http://m.imeitou.com/uploads/allimg/2019021309/ipijc3xjpfo.jpg",
+          img: "http://m.imeitou.com/uploads/allimg/2019021309/ipijc3xjpfo.jpg",
           title: "送你一朵fua1"
         }
       );
@@ -110,6 +120,29 @@ export default {
         }
       });
       return temp;
+    },
+    // 获取全部列表
+    getGoodsList() {
+      let _obj = {
+        openId: url.openId,
+        id: this.listId2 || "",
+        size: "10",
+        current: "1"
+      };
+      this.$fetch.post(url.getGoodsList, _obj).then(
+        data => {
+          console.log(data);
+          if (data.code == 0) {
+            this.goodsList = data.obj;
+            this.goodsList.forEach(item => {
+              item.picId = url.imgUrl + item.picId;
+            });
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
+        }
+      );
     }
   },
   created() {
@@ -124,6 +157,7 @@ export default {
           this.queryImg(e);
         });
       });
+    this.getGoodsList(); //
   }
 };
 </script>
@@ -185,6 +219,35 @@ export default {
       .search_icon {
         font-size: 0.28rem;
         padding-right: 0.2rem;
+      }
+    }
+  }
+}
+</style>
+ <style lang="less">
+#whole {
+  padding: 0.35rem 0.42rem 0;
+  .wrap {
+    flex-wrap: wrap;
+  }
+  .goods_item {
+    border-radius: 0.12rem;
+    background: #fff;
+    font-size: 0;
+    margin-bottom: 7px;
+    .img_box {
+      border-bottom: 1px solid #e9e9e9;
+      .goods_img {
+        width: 2.57rem;
+        height: 2.57rem;
+        padding: 0.3rem 0.3rem;
+      }
+    }
+    .goods_msg {
+      font-size: 0.28rem;
+      padding: 0.21rem 0.31rem;
+      .goods_name {
+        line-height: 0.4rem;
       }
     }
   }
