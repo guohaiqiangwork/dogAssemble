@@ -19,5 +19,6 @@ module.exports = {
   getClassfications: '/fruits/app/blank/getClassfications',//获取首页分类
   imgUrl: "//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId=",//图片
   getRecommend: '/fruits/app/blank/getRecommend',//获取推荐列表
-
+  deleteAddress:'/fruits/app/cart/deleteAddress',//删除地址
+  getGoodInfo:'/fruits/app/cart/getGoodInfo'//新增地址接口
 };

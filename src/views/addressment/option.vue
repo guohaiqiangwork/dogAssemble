@@ -2,10 +2,11 @@
     <div id="opt_address">
         <div class="address_top">
             <div class="address_item">
-                <x-input label-width="4em" :title='`<span style="${style}">收货人</span>`' placeholder="姓名"></x-input>
+    
+                <x-input label-width="4em" v-model="addressBC.name"  :title='`<span style="${style}">收货人</span>`' placeholder="姓名"></x-input>
             </div>
             <div class="address_item">
-                <x-input label-width="4em" :title='`<span style="${style}">手机号</span>`' placeholder="收货人电话" keyboard="number" is-type="china-mobile" :show-clear="false"></x-input>
+                <x-input label-width="4em" v-model="addressBC.phone"  :title='`<span style="${style}">手机号</span>`' placeholder="收货人电话" keyboard="number" is-type="china-mobile" :show-clear="false"></x-input>
             </div>
         </div>
         <div class="address_btm">
@@ -15,21 +16,23 @@
                 <x-address v-show="false" @on-hide="logHide" @on-show="logShow" :title="title" v-model="addressVal" :list="addressData" @on-shadow-change="onShadowChange" placeholder="请选择地址" inline-desc="可以设置placeholder" :show.sync="showAddress"></x-address>
             </div>
             <div class="address_item">
-                <x-input label-width="5em" :title='`<span style="${style}">收货地址</span>`' :show-clear="false"  @on-blur="onBlur"    placeholder="详细地址" keyboard="number" v-model="details" >
+            
+                <x-input label-width="5em"  v-model="addressBC.details" :title='`<span style="${style}">收货地址</span>`' :show-clear="false"  @on-blur="onBlur"    placeholder="详细地址" keyboard="number"  >
                     
                 </x-input>
             </div>
             <div class="address_item">
-                 <x-switch title="设为默认地址"></x-switch>
+                {{addressBC.isDefault}}
+                 <x-switch title="设为默认地址" v-model="addressBC.isDefault"></x-switch>
                 <!-- <x-input label-width="4em" :title='`<span style="${style}">手机号</span>`' placeholder="收货人电话" keyboard="number" is-type="china-mobile"></x-input> -->
             </div>
         </div>
-        <div class="save_btn">保存</div>
+        <div class="save_btn" @click="addressopt">保存</div>
     </div>
 </template>
 <script>
-import {   } from 'vux'
 
+import url from "../../bin/url";
 import { XInput,XSwitch,XAddress, ChinaAddressV4Data, Value2nameFilter as value2name } from 'vux'
 export default {
     components:{
@@ -46,6 +49,14 @@ export default {
             addressVal:[],
             address:'',
             addressData: ChinaAddressV4Data,
+            addressBC:{
+            name:'',//姓名
+            phone:'',//手机号码
+            details:'',//详细地址
+            isDefault:''
+            },
+            ni:[]
+            
         }
     },
     methods: {
@@ -53,6 +64,7 @@ export default {
             console.log('on-hide', str)
             if(str){
                 this.address = value2name(this.addressVal, ChinaAddressV4Data)
+                  console.log(value2name(this.addressVal[0] , ChinaAddressV4Data))
             }
         },
         logShow() {
@@ -69,9 +81,44 @@ export default {
             
             console.log(e,v,q);
         },
-    },
+        // 地址爆粗
+        addressopt(){
+           let _obj = {
+        openId: url.openId,
+        receiver: this.addressBC.name ,//收货人
+        phone: this.addressBC.phone ,//电话
+        province:this.address,
+        city:this.address,
+        area:this.address,
+        receiveAddress: this.addressBC.details,
+        isDefault:this.addressBC.isDefault
+      };
+        if(_obj.isDefault){
+          _obj.isDefault =1 
+      }else{
+          _obj.isDefault = 0
+      }
+      this.$fetch.post(url.getGoodInfo, _obj).then(
+        data => {
+          if (data.code == 0) {
+            // 刷新地址列表
+
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
+        }
+      );
+        }
+            },
     created(){
         settitle('地址管理');
+         this.routeParams = JSON.parse(this.$route.query.obj);
+         if(this.routeParams.data.pathF != 'false' ){
+             this.addressBC.name = this.routeParams.data.item.name,
+              this.addressBC.details = this.routeParams.data.item.address,
+               this.addressBC.phone = this.routeParams.data.item.tel
+            }
     },
     mounted() {
          
@@ -95,9 +142,6 @@ export default {
         margin: 0.2rem;
         background: #fff;
         border-radius: 0.12rem;
-        
-        
-        
     }
     .weui-cell__hd{
         display: flex;
