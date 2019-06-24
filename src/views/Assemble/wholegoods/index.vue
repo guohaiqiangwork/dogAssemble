@@ -3,30 +3,22 @@
     <div class="flex-between wrap">
       <div class="goods_item" v-for="(item,index) in goodsList" :key="index" >
         <div class="img_box">
-          <img class="goods_img" src="../../../assets/images/WechatIMG102.png" alt>
+          <img class="goods_img" :src="item.picId" alt>
         </div>
         <div class="goods_msg">
-          <p class="goods_name">{{listId2}}产那安娜</p>
-          <p class="red">￥21.9</p>
+          <p class="goods_name">{{listId2}}{{item.name}}</p>
+          <p class="red">¥{{item.price}}</p>
         </div>
       </div>
-
-      <!-- <div class="goods_item">
-        <div class="img_box">
-          <img class="goods_img" src="../../../assets/images/WechatIMG102.png" alt>
-        </div>
-        <div class="goods_msg">
-          <p class="goods_name">产那安娜</p>
-          <p class="red">￥21.9</p>
-        </div>
-      </div> -->
     </div>
   </div>
 </template>
 <script>
 import url from "../../../bin/url";
 export default {
-  props: ["listId2"],
+  props: [
+      
+  ],
   data() {
     return {
       key: "value",
@@ -46,6 +38,10 @@ export default {
           console.log(data)
           if (data.code == 0) {
           this.goodsList = data.obj
+           this.goodsList.forEach(item => {
+              item.picId = url.imgUrl + item.picId;
+              console.log(item.picId)
+            });
           }
         },
         err => {

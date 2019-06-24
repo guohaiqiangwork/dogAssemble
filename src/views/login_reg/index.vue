@@ -177,7 +177,6 @@ export default {
       this.Logform.password = DesUtils.encode(this.Logform.password,"fruits-app,yuntu,com")
       this.$fetch.post("fruits/app/user/login", this.Logform).then(res => {
         this.btnload = false;
-        console.log(data)
         if (res.msg == "success") {
           this.$vux.toast.text("登录成功");
           localStorage.setItem("user", res.attributes.sessionId);
