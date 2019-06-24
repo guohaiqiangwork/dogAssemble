@@ -18,7 +18,7 @@
             >{{'删除'}}</swipeout-button>
             <!-- <swipeout-button @click.native="onButtonClick('delete')" type="warn">{{$t('Right')}}</swipeout-button> -->
           </div>
-          <div slot="content" class="vux-1px-t address_list">
+          <div slot="content" class="vux-1px-t address_list" @click="goTopaysure(item.id)">
             <div class="name_size">
               <p>{{item.name}}</p>
               <span class="defalut_address" v-show="item.isdefalut">默认</span>
@@ -90,6 +90,7 @@ export default {
         }
       );
     },
+    // 新增地址
     addAddress(item) {
         console.log(item)
         if(item){
@@ -106,7 +107,20 @@ export default {
           })}
       });
     //   this.$router.push("/addressopt");
-    }
+    },
+    //回到下单页面
+     goTopaysure(item) {
+     this.$router.push({
+        name: "paysure",
+        params: {obj: JSON.stringify({
+            type: "profession",
+            data: {
+             item
+            }
+          })}
+      });
+    //   this.$router.push("/addressopt");
+    },
   },
   created() {
     settitle("地址管理");
