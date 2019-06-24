@@ -1,6 +1,6 @@
 <template>
   <div id="paysure">
-    <div class="address_box">
+    <div class="address_box" v-if="selectAddressN">
       <p class="title_address">收货地址</p>
       <div class="address_content">
         <div class="person_msg">
@@ -20,6 +20,13 @@
         </div>
       </div>
     </div>
+    <div v-if="!selectAddressN">
+      <div class="text_center font_size_16" style="line-height:6" @click="goAddress">
+        <img class="icon_size" src="../../assets/images/添加@2x.png" width="16px" height="16px" alt>
+        请添加您的收货人信息
+      </div>
+    </div>
+    <div style="background-color:#F6F6F6;height:8px"></div>
     <div class="form_box">
       <div class="goods_list">
         <!--                 
@@ -100,7 +107,7 @@ export default {
   data() {
     return {
       key: "value",
-      selectAddressN:''
+      selectAddressN: ""
     };
   },
   methods: {
@@ -120,7 +127,7 @@ export default {
       this.$fetch.post(url.selectAddress, _obj).then(
         data => {
           if (data.code == 0) {
-          this.selectAddressN = data.obj
+            this.selectAddressN = data.obj;
           }
         },
         err => {
