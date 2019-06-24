@@ -140,7 +140,7 @@ export default {
       maskValue: "",
       codeValue: "获取验证码",
       form: {
-        openId: "123213",
+        openId: "67868769869",
         password: "",
         name: "",
         phone: "",
@@ -150,7 +150,7 @@ export default {
         nickname: "随便"
       },
       Logform: {
-        openId: "312312312",
+        openId: "",
         password: "",
         phone: ""
       },
@@ -198,6 +198,7 @@ export default {
         this.$vux.toast.text("请检查输入的内容");
         return;
       }
+        this.form.password = DesUtils.encode(this.form.password,"fruits-app,yuntu,com")
       this.$fetch.post("fruits/app/user/register", this.form).then(res => {
         if (res.msg == "registered") {
           this.$vux.toast.text("手机号已经被注册");
