@@ -22,7 +22,6 @@
                 </x-input>
             </div>
             <div class="address_item">
-                {{addressBC.isDefault}}
                  <x-switch title="设为默认地址" v-model="addressBC.isDefault"></x-switch>
                 <!-- <x-input label-width="4em" :title='`<span style="${style}">手机号</span>`' placeholder="收货人电话" keyboard="number" is-type="china-mobile"></x-input> -->
             </div>
@@ -53,18 +52,22 @@ export default {
             name:'',//姓名
             phone:'',//手机号码
             details:'',//详细地址
-            isDefault:''
+            isDefault:'',
+            id:''
             },
-            ni:[]
-            
+          addressF:''        
         }
     },
     methods: {
+           getName(value){
+      return value2name(value, ChinaAddressV4Data);
+    },
         logHide(str) {
             console.log('on-hide', str)
             if(str){
                 this.address = value2name(this.addressVal, ChinaAddressV4Data)
-                  console.log(value2name(this.addressVal[0] , ChinaAddressV4Data))
+                  this.addressF =  this.address.split(" ");
+                  
             }
         },
         logShow() {
@@ -87,11 +90,12 @@ export default {
         openId: url.openId,
         receiver: this.addressBC.name ,//收货人
         phone: this.addressBC.phone ,//电话
-        province:this.address,
-        city:this.address,
-        area:this.address,
+        province:this.addressF[0],
+        city:this.addressF[1],
+        area:this.addressF[2],
         receiveAddress: this.addressBC.details,
-        isDefault:this.addressBC.isDefault
+        isDefault:this.addressBC.isDefault,
+        id:this.addressBC.id
       };
         if(_obj.isDefault){
           _obj.isDefault =1 
@@ -118,6 +122,7 @@ export default {
              this.addressBC.name = this.routeParams.data.item.name,
               this.addressBC.details = this.routeParams.data.item.address,
                this.addressBC.phone = this.routeParams.data.item.tel
+                 this.addressBC.id = this.routeParams.data.item.id
             }
     },
     mounted() {
