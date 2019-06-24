@@ -11,7 +11,7 @@
            
              <i class=""></i>
             <div class="foryou">为您推荐</div>
-            <hot></hot>
+            <hot class="mb-space"></hot>
             <div class="cart_btm">
                 <span>已选1</span>
                 <div class="flex_countrow">
@@ -75,6 +75,9 @@ export default {
     width: 100%;
     height: 100%;
     background: #F8F8F8;
+    .mb-space{
+         margin-bottom:53px;
+    }
     .vux-number-selector svg{
         fill:#4a7b67;
     }

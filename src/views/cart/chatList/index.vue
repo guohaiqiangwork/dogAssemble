@@ -9,7 +9,7 @@
                     <p class="goods_title">{{item.title}}</p>
                     <p class="goods_flex">
                         <span class="goods_price red">￥{{item.price}}</span>
-                        <inline-x-number width="30px" :min="0" v-model="item.num" @on-change = "change"></inline-x-number>
+                        <inline-x-number width="30px" :min="0" v-model="item.num" @on-change="change(item,index)"></inline-x-number>
                     </p>
                 </div>
             </div>
@@ -29,10 +29,14 @@ export default {
     },
     computed:{
         goodsNum() {
-            let a =this.charList.reduce((a,b) =>{
-                return a.num + b.num;
-            });
-            return a
+            if(this.charList.length == 1){
+                 return this.charList[0].num;
+            }else{
+                  let a =this.charList.reduce((a,b) =>{
+                    return a.num + b.num;
+                });
+                return a;
+            }
         }
     },
     data() {
@@ -42,15 +46,15 @@ export default {
                 {
                     logo:require('../../../assets/images/WechatIMG99(1).png'),
                     title:'熊孩子综合蔬菜干香菇脆秋葵干330g 果蔬脆',
-                    num:0,
+                    num:1,
                     id:null,
-                    price:13.9,
+                    price:13.91,
                     ischeck:false,
                 },
                 {
                     logo:require('../../../assets/images/WechatIMG99(1).png'),
                     title:'熊孩子综合蔬菜干香菇脆秋葵干330g 果蔬脆',
-                    num:0,
+                    num:1,
                     id:null,
                     price:13.9,
                     ischeck:false,
@@ -62,12 +66,22 @@ export default {
         chooseBuy(item) {
             item.ischeck = !item.ischeck;
         },
-        change(){
-            this.$emit('changeNum',this.goodsNum);
+        change(item,n){
+              if(item.num <= 0){
+                  this.charList.splice(n,1);
+              }else{
+                  this.$emit('changeNum',this.goodsNum);
+              } 
+        },
+        getCart(){
+            this.$fetch.post("fruits/app/cart/getCart",{openId:"1313121231"}).then(res =>{
+                console.log(res);
+            })
         }
     },
     mounted() {
-        this.change();
+        this.getCart();
+        // this.change();
     },
 }
 </script>

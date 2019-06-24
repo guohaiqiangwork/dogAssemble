@@ -119,6 +119,16 @@ export default {
                 }
             ],
             num:1,
+            form:{
+                openId:"",
+                id:"",
+                num:1,
+                specList:{
+                    specId:"",
+                    specName:"",
+                    value:nill,
+                }
+            }
             // popupshow:false
         }
     },
@@ -131,6 +141,9 @@ export default {
         },
         onIndexChange(currentIndex) {
             this.num = currentIndex + 1;
+            this.$fetch.post("fruits/app/cart/joinCart",this.form).then(res =>{
+                
+            });
         },
         // addCart(){
         //     this.popupshow = true;

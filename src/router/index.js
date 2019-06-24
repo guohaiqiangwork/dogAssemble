@@ -50,6 +50,7 @@ export default new Router({
   routes: [{
     // 调试页面
     path: '/',
+    name:"home",
     meta: {
       title: '调试',
     },
