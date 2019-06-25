@@ -25,7 +25,6 @@ export default {
   },
   methods: {
     goDetail(item){
-      // console.log(item);
       this.$router.push('/goodsdetail?id='+item.id);
     },
     getGoodsList() {

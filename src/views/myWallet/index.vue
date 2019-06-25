@@ -19,7 +19,7 @@
       <div class="font_size_30 margin_top_div5" style="padding-bottom: 4%;">00</div>
     </div>
     <!-- 充值 -->
-    <div>
+    <div v-show="false">
       <div class="font_color_1A wallet_font margin_top_div5">选择充值金额</div>
       <div class="div_display_flex">
         <div class="div_width_50" >
@@ -31,7 +31,7 @@
       </div>
     </div>
     <!-- 其他金额 -->
-    <div>
+    <div v-show="false">
       <input type="text" class="input_m">
       <div class="div_display_flex margin_top_div5 margin_left_div3">
         <div class="img_26">
@@ -43,7 +43,7 @@
       </div>
     </div>
     <!-- 充值按钮 -->
-    <div>
+    <div v-show="false">
       <div class="wallet_cz_bt backgroun_color_4A font_color_ff font_size_16">立即充值</div>
       <div class="font_size_12 margin_top_div5 text_center">
         <span class="font_color_4A">点击[立即充值]</span>,表示您已同意《购卡协议》 和 《购卡流程》

@@ -16,7 +16,7 @@
       <div class="hot_tit mt-space" @click="Test">全部商品</div>
       <div id="whole">
         <div class="flex-between wrap">
-          <div class="goods_item" v-for="(item,index) in goodsList" :key="index">
+          <div class="goods_item" v-for="(item,index) in goodsList" :key="index" @click="goDetail(item)">
             <div class="img_box">
               <img class="goods_img" :src="item.picId" alt>
             </div>
@@ -65,6 +65,9 @@ export default {
   },
   computed: {},
   methods: {
+    goDetail(item){
+      this.$router.push('/goodsdetail?id='+item.id);
+    },
     // 监听
     goToList1(id) {
       console.log("监听" + id);
@@ -244,6 +247,7 @@ export default {
       }
     }
     .goods_msg {
+      width: 2.57rem;
       font-size: 0.28rem;
       padding: 0.21rem 0.31rem;
       .goods_name {
