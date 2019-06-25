@@ -24,6 +24,7 @@ module.exports = {
   getAddress: '/fruits/app/cart/getAddress',//修改获取地址
   // getGoodInfo:'/fruits/app/cart/getGoodInfo',//新增地址接口
   editAddress: '/fruits/app/cart/editAddress',//编辑地址保存
-  selectAddress:'/fruits/app/cart/selectAddress'//修改地址获取
+  selectAddress:'/fruits/app/cart/selectAddress',//修改地址获取
+  getVideoOne: '/fruits/app/video/getVideoOne'//查询视频一级分类
 
 };
