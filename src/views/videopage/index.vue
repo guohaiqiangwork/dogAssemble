@@ -1,23 +1,37 @@
 <template>
   <div id="videopage">
     <!-- 视频页面 -->
-    <div class="video_box"></div>
+    <div class="video_box">
+      <iframe
+        id="video"
+        style="width:100%;height:220px;"
+        :src="videolUrl"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
+    </div>
     <!-- 视频选集 -->
     <!-- <choose-num></choose-num> -->
     <div id="piece">
       <div class="piece_box">
         <p class="flex-between align-center">
-          <span class="case_tit">{{videoList.attributes.classTwo}}</span>
+          <span class="case_tit">{{videoList.classTwo}}</span>
           <img class="icon_size" src="../../assets/images/share.png" alt>
         </p>
         <div class="introduce">
           <p class="tit">简介</p>
-          <p class="video_des">{{videoList.attributes.description}}</p>
+          <p class="video_des">{{videoList.description}}</p>
         </div>
         <div class="piece_list">
           <p class="tit">选集</p>
           <ul class="flex-start">
-            <li class="piece_item" v-for="(item,index) in videoList.obj" :key="index" tabindex="0">
+            <li
+              class="piece_item"
+              @click="openBuy(item)"
+              v-for="(item,index) in videoListObj"
+              :key="index"
+              tabindex="0"
+            >
               <span>{{item.episode}}</span>
               <span class="pay_flag"></span>
             </li>
@@ -60,12 +74,12 @@
 
           <div class="flex-between">
             <div class="flex-around flex-clo">
-              <p class="video_name">{{videoList.attributes.classTwo}}</p>
-              <p>{{videoList.attributes.description}}</p>
+              <p class="video_name">{{videoList.classTwo}}</p>
+              <p>{{videoList.description}}</p>
             </div>
-            <p class="pay_price">￥19.90</p>
+            <p class="pay_price">￥{{modelData.price}}</p>
           </div>
-          <div class="pay_btn">立即购买</div>
+          <div class="pay_btn" @click="saveVideoOrder">立即购买</div>
         </div>
       </popup>
     </div>
@@ -89,7 +103,11 @@ export default {
     return {
       show: false,
       list: [1, 2, 3],
-      videoList: ""
+      videoList: "",
+      videoListObj: "",
+      videoIdPay: "",
+      modelData: "",
+      videolUrl:''
     };
   },
   methods: {
@@ -102,7 +120,51 @@ export default {
       this.$fetch.post(url.getVideoList, _obj).then(
         data => {
           if (data.code == 0) {
-            this.videoList = data;
+            this.videoList = data.attributes;
+            this.videoListObj = data.obj;
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
+        }
+      );
+    },
+    // 购买视频
+    saveVideoOrder() {
+      console.log('5678')
+       let _obj = {
+        openId: url.openId,
+        id: this.videoIdPay
+      };
+       console.log('5333678')
+      this.$fetch.post(url.saveVideoOrder, _obj).then(
+        data => {
+          if (data.code == 0) {
+            console.log(data)
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
+        }
+      );
+    },
+    // 打开购买弹窗
+    openBuy(item) {
+      this.videoIdPay = item.id;
+      let _obj = {
+        openId: url.openId,
+        id: this.videoIdPay
+      };
+      this.$fetch.post(url.getVideoLink, _obj).then(
+        data => {
+          if (data.code == 0) {
+            this.modelData = data.obj;
+            if (data.obj.state == 0) {
+              this.show = true;
+            } else {
+              this.videolUrl =
+                "http://player.youku.com/embed/XNDEyMTAwNjE0MA==";
+            }
           }
         },
         err => {
@@ -226,7 +288,7 @@ ul {
 #videopage {
   .video_box {
     height: 4.22rem;
-    background: #000;
+    // background: #000;
   }
 }
 </style>

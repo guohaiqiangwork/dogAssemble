@@ -4,7 +4,7 @@
       <i class="weui-icon-search search_icon"></i>
       <input type="text" placeholder="搜索您想找的视频">
     </div>
-    <div v-if="searchList.length == 0">
+    <div v-if="searchList.length != 0">
       <div class="search_list">
         <div
           class="list_item flex-between"
@@ -12,7 +12,9 @@
           :key="index"
           @click="visitTv(item.id)"
         >
-          <div class="video_img"></div>
+          <div class="video_img">
+              <img src="../../../assets/images/1602@2x.png" width="100%" alt="">
+          </div>
           <div class="flex-around flex-clo">
             <p class="video_name">{{item.name}}</p>
             <p>{{item.description}}</p>
@@ -77,6 +79,8 @@ export default {
         data => {
           if (data.code == 0) {
             this.searchList = data.obj;
+          console.log(this.searchList);
+            
           }
         },
         err => {

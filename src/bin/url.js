@@ -28,6 +28,7 @@ module.exports = {
   getVideoOne: '/fruits/app/video/getVideoOne',//查询视频一级分类
   getVideoTwo: '/fruits/app/video/getVideoTwo',//查询视频2级分类
   getVideoList: '/fruits/app/video/getVideoList',//查询二级下分类
-  getVideoOrder:'/fruits/app/video/getVideoOrder'//案例视频--视频订单
-
+  getVideoOrder:'/fruits/app/video/getVideoOrder',//案例视频--视频订单
+  getVideoLink: '/fruits/app/video/getVideoLink',//获取视频链接
+  saveVideoOrder:'/fruits/app/personal/saveVideoOrder'
 };
