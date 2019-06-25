@@ -46,17 +46,23 @@
             @click="goToHealthDetail"
           >全部返佣></div>
         </div>
-        <div v-for="item in [1,2,3]">
+        <div v-for="(item,index) in getRecommendBList" :key="index">
           <div class="div_display_flex margin_left_div3 margin_top_div3">
             <div class="div_width_70 font_size_14">
-              果蔬精粹吧（万达店最多八个字）
+              {{item.name}}
               <span
+                v-if="item.state == 1"
                 style="border: 1px solid darkgreen; padding: 1%;font-size: 12px;"
               >开业</span>
+              <span
+                v-if="item.state == 0"
+                style="border: 1px solid darkgreen; padding: 1%;font-size: 12px;"
+              >未开店</span>
             </div>
-            <div class="div_with_30 " style="margin-left:10%">家庭版</div>
+            <div class="div_with_30" style="margin-left:10%" v-if="item.type == 1">家庭版</div>
+            <div class="div_with_30" style="margin-left:10%" v-if="item.type == 0">店铺版</div>
           </div>
-          <div class="margin_left_div3 margin_top_div2 font_color_A1 font_size_13">2019-01-25 15:00:00</div>
+          <div class="margin_left_div3 margin_top_div2 font_color_A1 font_size_13">{{item.time}}</div>
         </div>
       </div>
     </div>
@@ -86,7 +92,8 @@ export default {
           id: "003"
         }
       ],
-      switchFlage: "001"
+      switchFlage: "001",
+      getRecommendBList: ""
     };
   },
   methods: {
@@ -122,6 +129,25 @@ export default {
           })
         }
       });
+    },
+    // 健康奖金--推荐返佣列表
+    getRecommendB() {
+      let _obj = {
+        openId: url.openId,
+        name: "",
+        size: "1",
+        current: "10"
+      };
+      this.$fetch.post(url.getRecommendB, _obj).then(
+        data => {
+          if (data.code == 0) {
+            this.getRecommendBList = data.obj;
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
+        }
+      );
     }
   },
   created() {
@@ -130,7 +156,8 @@ export default {
   },
 
   mounted() {
-    console.log("我是健康奖金");
+    // console.log("我是健康奖金");
+    this.getRecommendB();
   }
 };
 </script>

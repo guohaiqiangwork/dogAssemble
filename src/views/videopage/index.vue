@@ -131,12 +131,10 @@ export default {
     },
     // 购买视频
     saveVideoOrder() {
-      console.log('5678')
        let _obj = {
         openId: url.openId,
         id: this.videoIdPay
       };
-       console.log('5333678')
       this.$fetch.post(url.saveVideoOrder, _obj).then(
         data => {
           if (data.code == 0) {
