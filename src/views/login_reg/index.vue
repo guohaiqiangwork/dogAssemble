@@ -174,7 +174,10 @@ export default {
         return;
       }
       this.btnload = true;
-      this.Logform.password = DesUtils.encode(this.Logform.password,"fruits-app,yuntu,com")
+      this.Logform.password = DesUtils.encode(
+        this.Logform.password,
+        "fruits-app,yuntu,com"
+      );
       this.$fetch.post("fruits/app/user/login", this.Logform).then(res => {
         this.btnload = false;
         if (res.msg == "success") {
@@ -198,7 +201,11 @@ export default {
         this.$vux.toast.text("请检查输入的内容");
         return;
       }
-        this.form.password = DesUtils.encode(this.form.password,"fruits-app,yuntu,com")
+      this.loginP = this.form.password 
+      this.form.password = DesUtils.encode(
+        this.form.password,
+        "fruits-app,yuntu,com"
+      );
       this.$fetch.post("fruits/app/user/register", this.form).then(res => {
         if (res.msg == "registered") {
           this.$vux.toast.text("手机号已经被注册");
@@ -206,10 +213,27 @@ export default {
         }
         if (res.msg == "success") {
           this.$vux.toast.text("注册成功");
-          setTimeout(() => {
-            var form = JSON.stringify(this.form);
-            this.$router.push("/login/1?parm=" + form);
-          }, 1000);
+          // setTimeout(() => {
+          //   var form = JSON.stringify(this.form);
+          //   this.$router.push("/login/1?parm=" + form);
+          // }, 1000);
+          let _obj = {
+            openId: "",
+            password:  DesUtils.encode( this.loginP,"fruits-app,yuntu,com"),
+            phone:  this.form.phone
+          };
+          console.log('889798797')
+          this.$fetch.post("fruits/app/user/login", _obj).then(res => {
+            this.btnload = false;
+            if (res.msg == "success") {
+              this.$vux.toast.text("登录成功");
+              localStorage.setItem("user", res.attributes.sessionId);
+              localStorage.setItem("type", res.attributes.type);
+              this.$router.push("/home");
+            } else {
+              this.$vux.toast.text("登录时出现问题，请重新登录");
+            }
+          });
         } else {
           this.$vux.toast.text("出现错误，请重试");
         }
@@ -250,14 +274,14 @@ export default {
     },
     //获取用户openId
     getOpenId() {
-      let _obj={
-        code:'',
-        state:''
-      }
+      let _obj = {
+        code: "",
+        state: ""
+      };
       this.$fetch.post(url.getOpenId, _obj).then(
         data => {
           if (data.code == 0) {
-           console.log('woshiopenid'+ data)
+            console.log("woshiopenid" + data);
           }
         },
         err => {
