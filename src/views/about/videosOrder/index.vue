@@ -1,49 +1,59 @@
 <template>
   <div id="videos-order">
-    <div class="order-item">
-      <div class="order-head">
-        <p class="flex-between align-center">
-          <span class="ill-name">糖尿病</span>
-          <span class="date-style">2018.09.10 12:00:00</span>
+    <div v-if="videoOrderList.length != 0">
+      <div class="order-item" v-for="(item,index) in videoOrderList" :key="index">
+        <div class="order-head">
+          <p class="flex-between align-center">
+            <span class="ill-name">{{item.classOne}}</span>
+            <span class="date-style">{{item.date}}</span>
+          </p>
+          <p class="video-name">{{item.classTwo}}</p>
+        </div>
+        <p class="order-foot flex-between pt-space">
+          <span>已买集数：第{{item.episode}}集</span>
+          <span class="red">¥{{item.episode}}</span>
         </p>
-        <p class="video-name">王阳案例2</p>
       </div>
-      <p class="order-foot flex-between pt-space">
-        <span>已买集数：第3集</span>
-        <span class="red">¥19.90</span>
-      </p>
     </div>
-
-    <div class="order-item">
-      <div class="order-head">
-        <p class="flex-between align-center">
-          <span class="ill-name">糖尿病</span>
-          <span class="date-style">2018.09.10 12:00:00</span>
-        </p>
-        <p class="video-name">王阳案例2</p>
+    <div v-if="videoOrderList.length == 0">
+      <div class="text_center">
+        <img src="../../../assets/images/1546@2x.png" style="width:80%;margin-top:30%" alt>
       </div>
-      <p class="order-foot flex-between pt-space">
-        <span>已买集数：第3集</span>
-        <span class="red">¥19.90</span>
-      </p>
+      <div class=" font_size_15 text_center margin_top_div3">这里空空如也～</div>
     </div>
   </div>
 </template>
 <script>
-
+import url from "../../../bin/url";
 export default {
   data() {
     return {
-      key: "value"
+      key: "value",
+      videoOrderList: ""
     };
   },
   methods: {
-   
+    // 获取列表
+    getVideoOrder() {
+      let _obj = {
+        openId: url.openId
+      };
+      this.$fetch.post(url.getVideoOrder, _obj).then(
+        data => {
+          if (data.code == 0) {
+            console.log(data);
+            // this.videoOrderList = data.obj;
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
+        }
+      );
+    }
   },
   mounted() {
- 
-  },
-  
+    this.getVideoOrder();
+  }
 };
 </script>
 <style lang="less">

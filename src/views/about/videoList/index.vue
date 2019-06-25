@@ -4,21 +4,29 @@
       <i class="weui-icon-search search_icon"></i>
       <input type="text" placeholder="搜索您想找的视频">
     </div>
-
-    <div class="search_list">
-      <div
-        class="list_item flex-between"
-        v-for="(item,index) in searchList"
-        :key="index"
-        @click="visitTv(item.id)"
-      >
-        <div class="video_img"></div>
-        <div class="flex-around flex-clo">
-          <p class="video_name">{{item.name}}</p>
-          <p>{{item.description}}</p>
+    <div v-if="searchList.length == 0">
+      <div class="search_list">
+        <div
+          class="list_item flex-between"
+          v-for="(item,index) in searchList"
+          :key="index"
+          @click="visitTv(item.id)"
+        >
+          <div class="video_img"></div>
+          <div class="flex-around flex-clo">
+            <p class="video_name">{{item.name}}</p>
+            <p>{{item.description}}</p>
+          </div>
+          <x-icon type="ios-arrow-right" class="icon_middle"></x-icon>
         </div>
-        <x-icon type="ios-arrow-right" class="icon_middle"></x-icon>
       </div>
+    </div>
+
+    <div v-if="searchList.length == 0">
+      <div class="text_center">
+        <img src="../../../assets/images/1546@2x.png" style="width:80%;margin-top:30%" alt>
+      </div>
+      <div class="font_size_15 text_center margin_top_div3">这里空空如也～</div>
     </div>
   </div>
 </template>
@@ -49,7 +57,7 @@ export default {
     visitTv(item) {
       this.$router.push({
         path: "/videopage",
-         query: {
+        query: {
           obj: JSON.stringify({
             type: "profession",
             data: {
@@ -81,8 +89,10 @@ export default {
     this.getVideoTwo();
   },
   created() {
-    this.routeParams = JSON.parse(this.$route.query.obj);
-    this.videoId = this.routeParams.data.id;
+    if (this.$route.query.obj) {
+      this.routeParams = JSON.parse(this.$route.query.obj);
+      this.videoId = this.routeParams.data.id;
+    }
   }
 };
 </script>
