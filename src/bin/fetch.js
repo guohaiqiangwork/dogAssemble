@@ -20,7 +20,6 @@ service
   .use(request => {
     
     request.headers= {"AuthorizationKey":window.localStorage.getItem("user")};
-   
     // request.headers.common["Access-Control-Allow-Origin"]="*"
     return request
   }, error => {

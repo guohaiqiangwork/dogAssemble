@@ -2,17 +2,17 @@
     <div id="piece">
         <div class="piece_box">
             <p class="flex-between align-center">
-                <span class="case_tit">案例1</span>
+                <span class="case_tit">{{videoList.attributes.name}}</span>
                 <img  class="icon_size" src="../../../assets/images/share.png" alt="">
             </p>
             <div class="introduce">
                 <p class="tit">简介</p>
-                <p class="video_des">查看此视频对糖尿病患者有帮助，查看此视频对糖尿病患者有帮助。</p>
+                <p class="video_des">{{videoList.attributes.description}}</p>
             </div>
             <div class="piece_list">
                 <p class="tit">选集</p>
                 <ul class="flex-start">
-                    <li class="piece_item" v-for="(item,index) in list" :key="index" tabindex = "0"> <span>{{item}}</span>  <span class="pay_flag" ></span></li>
+                    <li class="piece_item" v-for="(item,index) in videoList.obj" :key="index" tabindex = "0"> <span>{{item.episode}}</span>  <span class="pay_flag" ></span></li>
                 </ul>
                  
             </div>
@@ -20,20 +20,41 @@
     </div>
 </template>
 <script>
+import url from "../../../bin/url";
 export default {
     data() {
         return {
-            list: [1,2,3]
+            videoList: '',
+            list:[1,2,3]
         }
     },
     methods: {
-        name() {
-            
+        // 获取列表
+    getVideoList() {
+      let _obj = {
+        openId: url.openId,
+        id: this.videoId
+      };
+      this.$fetch.post(url.getVideoList, _obj).then(
+        data => {
+          if (data.code == 0) {
+            this.videoList = data
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
         }
+      );
+    }
     },
     mounted() {
-        
+          this.getVideoList();
     },
+    created() {
+    this.routeParams = JSON.parse(this.$route.query.obj);
+    console.log("567890-");
+    this.videoId = this.routeParams.data.id;
+  }
 }
 </script>
 <style lang="less">
