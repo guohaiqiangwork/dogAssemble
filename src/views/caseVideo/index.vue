@@ -12,11 +12,11 @@
         <!-- v-on:input="getCheckMember()"
         v-model="phone"-->
       </div>
-      <div  class="case_font">视频订单></div>
+      <div class="case_font" @click="goToVOrder">视频订单></div>
     </div>
     <div
       class="personal_img_bj"
-     @click="goToVodeL(item.id)"
+      @click="goToVodeL(item.id)"
       v-for="(item,index) in videoOneList"
       :key="index"
     >{{item.name}}</div>
@@ -29,7 +29,7 @@ export default {
   data() {
     return {
       videoOneList: "", //列表
-      videoId:''
+      videoId: ""
     };
   },
   methods: {
@@ -37,7 +37,7 @@ export default {
     goToVodeL(item) {
       this.$router.push({
         path: "/videolist",
-         query: {
+        query: {
           obj: JSON.stringify({
             type: "profession",
             data: {
@@ -45,6 +45,20 @@ export default {
             }
           })
         }
+      });
+    },
+    // 去视频列表
+    goToVOrder(item) {
+      this.$router.push({
+        path: "/videosorder"
+        //  query: {
+        //   obj: JSON.stringify({
+        //     type: "profession",
+        //     data: {
+        //       id: item
+        //     }
+        //   })
+        // }
       });
     },
     // 获取列表
@@ -64,7 +78,7 @@ export default {
       );
     }
   },
- 
+
   mounted() {
     this.getVideoOne(); //获取视频
   }

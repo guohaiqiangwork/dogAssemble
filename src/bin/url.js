@@ -19,12 +19,15 @@ module.exports = {
   getClassfications: '/fruits/app/blank/getClassfications',//获取首页分类
   imgUrl: "//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId=",//图片
   getRecommend: '/fruits/app/blank/getRecommend',//获取推荐列表
-  deleteAddress:'/fruits/app/cart/deleteAddress',//删除地址
+  deleteAddress: '/fruits/app/cart/deleteAddress',//删除地址
   saveAddress: '/fruits/app/cart/saveAddress',//保存地址接口
   getAddress: '/fruits/app/cart/getAddress',//修改获取地址
   // getGoodInfo:'/fruits/app/cart/getGoodInfo',//新增地址接口
   editAddress: '/fruits/app/cart/editAddress',//编辑地址保存
-  selectAddress:'/fruits/app/cart/selectAddress',//修改地址获取
-  getVideoOne: '/fruits/app/video/getVideoOne'//查询视频一级分类
+  selectAddress: '/fruits/app/cart/selectAddress',//修改地址获取
+  getVideoOne: '/fruits/app/video/getVideoOne',//查询视频一级分类
+  getVideoTwo: '/fruits/app/video/getVideoTwo',//查询视频2级分类
+  getVideoList: '/fruits/app/video/getVideoList',//查询二级下分类
+  getVideoOrder:'/fruits/app/video/getVideoOrder'//案例视频--视频订单
 
 };
