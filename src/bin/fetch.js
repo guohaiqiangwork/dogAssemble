@@ -3,7 +3,7 @@ import router from '../router'
 const config = require('../config/config.dev')
 // 创建axios实例
 let options = {
-  baseURL: config.product,
+  baseURL: config.baseURL,
   timeout: 300000,
   headers:{
     'Content-Type': 'application/json',
