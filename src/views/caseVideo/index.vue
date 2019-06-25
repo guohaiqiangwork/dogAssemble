@@ -12,9 +12,14 @@
         <!-- v-on:input="getCheckMember()"
         v-model="phone"-->
       </div>
-      <div @click="goToVodeL" class="case_font">视频订单></div>
+      <div  class="case_font">视频订单></div>
     </div>
-    <div class="personal_img_bj" v-for="(item,index) in videoOneList" :key="index">{{item.name}}</div>
+    <div
+      class="personal_img_bj"
+     @click="goToVodeL(item.id)"
+      v-for="(item,index) in videoOneList"
+      :key="index"
+    >{{item.name}}</div>
   </div>
 </template>
 <script>
@@ -23,19 +28,20 @@ export default {
   name: "caseVideo",
   data() {
     return {
-      videoOneList: "" //列表
+      videoOneList: "", //列表
+      videoId:''
     };
   },
   methods: {
     // 去视频列表
-    goToVodeL() {
+    goToVodeL(item) {
       this.$router.push({
         path: "/videolist",
-        params: {
+         query: {
           obj: JSON.stringify({
             type: "profession",
             data: {
-              id: "蚕丝"
+              id: item
             }
           })
         }
@@ -58,11 +64,7 @@ export default {
       );
     }
   },
-  created() {
-    settitle("我是视频分享");
-    this.routeParams = JSON.parse(this.$route.params.obj);
-  },
-
+ 
   mounted() {
     this.getVideoOne(); //获取视频
   }
