@@ -10,16 +10,19 @@
             </div>
         </div>
         <div class="goods_item">
-            <p class=" goods_price">熊孩子蔬菜干</p>
-            <div>熊孩子蔬菜干副标题最长26个文字</div>
+            <p class=" goods_price">{{goodsDetail.name}}</p>
+            <div>{{goodsDetail.remark}}</div>
             <p class="goods_name">
-                <span class="red">￥13.9</span>
+                <span class="red">￥{{goodsDetail.price}}</span>
                 <!-- <span>*3</span> -->
             </p>
         </div>
         <div class="">
             <div class="goods_tit">商品详情图</div>
-            <img class="detail_pic" src="../../assets/images/WechatIMG106_看图王.png" alt="">
+            <div v-for="(item,index) in goodsDetail.imgDetailsList" :key="index">
+                <img class="detail_pic" :src="'//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId='+item" alt=""> 
+            </div>
+         
         </div> 
          <div class="foryou">为您推荐</div>
         <hot></hot>
@@ -34,10 +37,10 @@
                         <div class="popup_head">
                             <img src="../../assets/images/WechatIMG99.png" alt="">
                             <div class="flex-around flex-clo ml-space">
-                                <p>熊孩子蔬菜干</p>
+                                <p>{{goodsDetail.name}}</p>
                                 <p class="goods_price">
-                                    <span class="goods_discount">￥21.9</span>
-                                    <span class="red">￥15</span>
+                                    <span class="goods_discount">￥{{goodsDetail.original}}</span>
+                                    <span class="red">￥{{goodsDetail.price}}</span>
                                 </p>
                             </div>
                         </div>
@@ -45,27 +48,25 @@
                         <x-icon type="ios-close-empty" size="30" class="icon_pos" @click="close"></x-icon>
                     </div>
                     <div class="goods_detail">
-                        <div>
-                            <p class="goods_tag">规格</p>
+                        <div v-for="(item,index) in specList" :key="index">
+                            <p class="goods_tag">{{item.name}}</p>
                             <ul class="goods_ul">
-                                <li>106g</li>
-                                <li>200g</li>
-                                <li>400g</li>
+                                <li  v-for="(ite,ind) in item.valueList" :key="ind" @click="choseSpec(item,index,ite)" :class="[form.specList[index].value==ite?'active':'']">{{ite}}</li>
                             </ul>
                         </div>
-                        <div>
+                        <!-- <div>
                             <p class="goods_tag">零食种类</p>
                             <ul class="goods_ul">
                                 <li>蔬果干</li>
                             </ul>
-                        </div>
+                        </div> -->
                         
                         <p class="flex-between align-center mt-space">
                             <span>购买数量</span>
-                            <inline-x-number width="30px" :title="('Quantity')" :min="0"  v-model="buyNum"></inline-x-number>
+                            <inline-x-number width="30px" :title="('Quantity')" :min="0"  v-model="form.num"></inline-x-number>
                         </p>
                     </div>
-                    <div class="buy_btn" @click="buyGoods">确认</div>
+                    <div class="buy_btn" @click="buyGoods()">确认</div>
                 </div> 
             </popup>
         </div>
@@ -84,6 +85,11 @@ export default {
         hot,Swiper,Popup, XButton,InlineXNumber
     },
     computed:{
+        //商品id
+        goodId(){
+            return this.$route.query.id;
+        },
+        //控制弹窗
         popupshow:{
             get:function () {
                 return this.$parent.show;
@@ -96,9 +102,7 @@ export default {
                 return this.$parent.buyNum;
             },
             set: function (Val) {
-                this.$parent.buyNum = Val;
-                // console.log(Val);
-
+                this.form.num=Val;
             }
             
         }
@@ -107,57 +111,109 @@ export default {
         return {
             imgList: [
                 {
-                    url: 'javascript:',
-                    img: require('../../assets/images/WechatIMG101@2x.png'),
-                    title: '送你一sd朵fua'
+                  img:"",
                 },
                 {
-                    url: 'javascript:',
-                    img: require('../../assets/images/WechatIMG106_看图王.png'),
-                    title: '送你一次旅dsa行',
-            // fallbackImg: 'https://static.vux.li/demo/3.jpg'
-                }
+                  img:"",
+
+                },
+            
             ],
+            arr:[],
+            param:{openId:"1313121231",id:this.goodId},
             num:1,
+            //商品详情信息
+            goodsDetail:{},
+            goodsDetailImg:[],
+            specList:[],
+            spec:'',
             form:{
-                openId:"",
-                id:"",
+                openId:"1313121231",
+                id:'',
                 num:1,
-                specList:{
-                    specId:"",
-                    specName:"",
-                    value:nill,
-                }
+                specList:[]
             }
-            // popupshow:false
         }
     },
     created(){
       settitle('商品详情');
     },
     methods: {
+        //关闭弹窗
         close(){
             this.$parent.show = false;
         },
         onIndexChange(currentIndex) {
             this.num = currentIndex + 1;
-            this.$fetch.post("fruits/app/cart/joinCart",this.form).then(res =>{
-                
-            });
         },
-        // addCart(){
-        //     this.popupshow = true;
-        // },
+        //点击确定
         buyGoods(){
-            this.$router.push('/paysure')
+            this.form.id = this.goodId;
+            this.$parent.show = false;
+            if(this.$parent.title == 'cart'){
+                //点击加入购物车
+                this.addCart();
+            }else{
+                //点击立即购买
+            }
         },
+        //添加购物车
+        addCart(){
+            this.$fetch.post("fruits/app/cart/joinCart",this.form).then(res =>{
+                this.$parent.buyNum += this.form.num;
+            })
+        },
+        //获取商品详情
+        getGood(){
+            this.$fetch.post("fruits/app/blank/getGoodInfo",{openId:"1313121231",id:this.goodId}).then(res =>{
+                res.obj.imgBannerList.forEach((el,i) => {
+                    if(i<2){
+                          this.imgList[i].img = "//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId="+el;
+                    }
+                  
+                });
+                this.goodsDetail = {...res.obj};
+                var a = JSON.stringify({a:1})
+                localStorage.setItem('str',a);
+            })
+        },
+        //获取商品规格
+        getSpecs(){
+            this.$fetch.post("fruits/app/cart/getGoodsSpec",{openId:"1313121231",id:this.goodId}).then(res =>{
+                this.specList = [...res.obj.goodsSpecs];
+                this.specList.forEach(e =>{
+                    this.form.specList.push({
+                        value:null,
+                        specName:e.name,
+                        specId:e.id
+                    })
+                    e.valueList.forEach((el,i) =>{
+                        if(i == 0){
+                            this.form.specList[0].value = el;
+
+                        }
+                    })
+                })
+
+            })
+        },
+        // 选择规格
+        choseSpec(item,index,spec){
+            this.spec = index;
+            this.form.specList[index].specName = item.name;
+            this.form.specList[index].value = spec;
+            this.form.specList[index].specId = item.id;
+        },
+
     },
     mounted() {
-        console.log(this.$parent.show);
+        this.getGood();
+        this.getSpecs();
     },
 }
 </script>
 <style lang="less">
+     
 .popup_box{
         height: 100%;
         padding: 0 0.3rem;
@@ -178,7 +234,7 @@ export default {
         .vux-number-selector.vux-number-disabled svg{
             fill: #ccc;
         }
-       
+   
         .goods_info{
             padding: 0.3rem 0 0 0;
             .popup_head{
@@ -214,6 +270,9 @@ export default {
                     text-align: center;
                     border-radius: 0.08rem;
                     background:rgba(245,245,245);
+                }
+                .active{
+                    background: #4A7B67;
                 }
             }
             .mt-space{

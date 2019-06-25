@@ -75,7 +75,7 @@
 
             <div class="item_form">
                 <span>运费</span>
-                <span>￥10</span>
+                <span>￥{{postFee}}</span>
             </div>
             <div class="message_area">
                 <p>留言</p>
@@ -101,7 +101,13 @@ export default {
     },
     data() {
         return {
-            key: 'value'
+            postFee:'',
+            goodsMsg: {}
+        }
+    },
+    computed:{
+        option(){
+          return JSON.parse(this.$route.query.data);
         }
     },
     methods: {
@@ -113,7 +119,11 @@ export default {
         },
     },
     mounted() {
-        
+        this.$fetch.post("fruits/app/cart/getDefaultAddr",this.option).then(res =>{
+            console.log(res);
+            this.goodsMsg = res.obj;
+            this.postFee = res.attributes.postage;
+        })
     },
 }
 </script>

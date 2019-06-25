@@ -28,8 +28,8 @@
 
         <flexbox-item v-if="this.route == '/goodsdetail'">
           <div class="flex-start">
-            <div class="foot-btn green" @click="addCart">加入购物车</div>
-            <div class="foot-btn yello" @click="ImmeBuy">立即购买</div>
+            <div class="foot-btn green" @click="addCart('cart')">加入购物车</div>
+            <div class="foot-btn yello" @click="ImmeBuy('imme')">立即购买</div>
           </div>
         </flexbox-item>
         <flexbox-item v-else>
@@ -65,15 +65,19 @@ export default {
     return {
       actives: 0,
       show: false,
-      buyNum: 0
+      buyNum: 0,
+      title:""
     };
   },
   methods: {
-    ImmeBuy() {
+    ImmeBuy(word) {
       this.show = true;
+      this.title = word;
     },
-    addCart() {
-      this.buyNum++;
+    addCart(word) {
+      this.show = true;
+      this.title = word;
+      // this.buyNum++;
     },
     didClickedItem: function(tag, name) {
       this.actives = tag;

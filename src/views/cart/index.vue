@@ -1,10 +1,10 @@
 <template>
     <div id="cart">
         <div class="package_tit">
-            <div class="if_post red">包邮条件</div>
-            <p class="word_tit">全场满160包邮，欢迎抢购</p>
+            <div class="if_post red" v-if="freeState.isFree == 1">包邮条件</div>
+            <p class="word_tit">全场满{{freeState.free}}包邮，欢迎抢购</p>
         </div>
-        <cart-list @changeNum="changeNum"></cart-list>
+        <cart-list @changeNum="changeNum"  @package="pack" @bottomEve="getBottom" @receiveArray ="getArray"></cart-list>
         <div>
             <!-- <checklist ref="demoObject" :title="('Option Array with key and value (key must be string)')" :options="objectList" v-model="objectListValue"></checklist> -->
             <!-- <check-icon :value.sync="demo1"> ({{ demo1 }})</check-icon> -->
@@ -12,12 +12,12 @@
              <i class=""></i>
             <div class="foryou">为您推荐</div>
             <hot class="mb-space"></hot>
-            <div class="cart_btm">
-                <span>已选1</span>
+            <div class="cart_btm" v-if="Object.keys(bottomMsge).length">
+                <span>已选{{bottomMsge.checkcount}}</span>
                 <div class="flex_countrow">
                     <span class="count_box">
-                         <span>合计: <span class="red final_price">300.00</span></span>
-                         <span>还差20元可享包邮</span>
+                         <span>合计: <span class="red final_price">{{bottomMsge.totalprice}}元</span></span>
+                         <span v-if="freeState.isFree == 1 && freeState.free - bottomMsge.totalprice>0">还差{{freeState.free - bottomMsge.totalprice}}元可享包邮</span>
                     </span>
                    
 
@@ -39,25 +39,71 @@ export default {
         return {
             key: 'value',
             demo1:false,
+            freeState:{},
+            bottomMsge:{},
+            arr:[],
+            goodList:[]
             //  objectList: [{key: '1', value: '001 value'}, {key: '2', value: '002 value'}, {key: '3', value: '003 value'}],
             //  objectListValue:null,
 
         }
     },
-    methods: {
-        payPage() {
-            this.$router.push('/paysure')
-        },
-        changeNum(e) {
-            console.log(e,'klkl');
-            this.$parent.buyNum = e;
+    watch:{
+        bottomMsge:{
+            handler(val){
+                this.bottomMsge =val;
+            }
         }
     },
+    methods: {
+        //去支付页面
+        payPage() {
+            var arr = [];
+            this.goodList.forEach(e => {
+                if(e.ischeck){
+                    arr.push({
+                        id:e.goodsId,
+                        num:e.count
+                    })
+                }
+            });
+            if(!arr.length){
+                return
+            }
+            var obj = {
+                openId:"1313121231",
+                goodList:arr
+            }
+            obj = JSON.stringify(obj);
+            this.$router.push('/paysure?data='+obj);
+        },
+        //数量改变
+        changeNum(e,arr) {
+            this.$parent.buyNum = e;
+        },
+        // 底部信息栏
+        getBottom(val){
+            this.bottomMsge = val;
+        },
+        //邮费
+        pack(val){
+            this.freeState = val;
+        },
+        //购物车数据
+        getArray(arr,n){
+            if(!arr.length){
+                this.goodList = arr;
+                return
+            }
+            this.goodList = arr;
+        },
+    },
+   
     created(){
         settitle('购物车');
     },
     mounted() {
-        
+        // console.log()
     },
 }
 </script>

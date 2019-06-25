@@ -12,15 +12,15 @@
                     </div>
                     <div slot="content" class=" vux-1px-t address_list">
                         <div class="name_size">
-                            <p>{{item.name}}</p>
-                            <span class="defalut_address" v-show="item.isdefalut">默认</span>
+                            <p>{{item.receiver}}</p>
+                            <span class="defalut_address" v-show="item.isDefault == 1">默认</span>
                         </div>
                         <div class="msg_mr">
-                            <p>{{item.tel}}</p>
-                            <p>{{item.address}}</p>
+                            <p>{{item.phone}}</p>
+                            <p>{{item.receiveAddress}}</p>
                         </div>
                         <div class="option">
-                            <img  @click="addAddress" src="../../assets/images/edit.png" alt="">
+                            <img  @click="addAddress(item.id)" src="../../assets/images/edit.png" alt="">
                         </div>
                     </div>
                 </swipeout-item>
@@ -43,7 +43,7 @@ export default {
             addressList: [
                 {
                     id:null,
-                    name:'吕小布',
+                    receiver:'吕小布',
                     address:'文化创意产业园B座广顺路北大街融创动力文化产业园 A205',
                     tel:'189****3837',
                     isdefalut:true,
@@ -70,13 +70,18 @@ export default {
         },
         addAddress(){
             this.$router.push('/addressopt')
-        }
+        },
+        getAddress(){
+            this.$fetch.post("fruits/app/cart/getAddressList",{openId:"1313121231"}).then(res =>{
+                this.addressList = [...res.obj];
+            })
+        },
     },
     created(){
         settitle('地址管理');
     },
     mounted() {
-        
+        this.getAddress();
     },
 }
 </script>

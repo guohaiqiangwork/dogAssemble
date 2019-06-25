@@ -1,15 +1,16 @@
 <template>
     <div id="cartList">
         <div v-if="charList.length">
-            <div  class= "cartlist"  v-for="(item,index) in charList" :key="index">
+            <div  class= "cartlist"  v-for="(item,index) in charList" :key="index" @click="goDetail(item.state)">
                <!-- <div class="foods_select"></div> -->
-                <i :class="['weui-icon', 'weui_icon_success', 'weui-icon-success',item.ischeck?'checked' : 'normal']" @click="chooseBuy(item)"></i>
-                <img class="gooods_avatar"   :src="item.logo" alt="">
+               <i v-if="item.state ==1"></i>
+                <i v-else :class="['weui-icon', 'weui_icon_success', 'weui-icon-success',item.ischeck?'checked' : 'normal']" @click="chooseBuy(item,index)"></i>
+                <img class="gooods_avatar"   :src="'//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId='+item.picId" alt="">
                 <div class="goods_item">
-                    <p class="goods_title">{{item.title}}</p>
+                    <p class="goods_title">{{item.name}}</p>
                     <p class="goods_flex">
                         <span class="goods_price red">￥{{item.price}}</span>
-                        <inline-x-number width="30px" :min="0" v-model="item.num" @on-change="change(item,index)"></inline-x-number>
+                        <inline-x-number width="30px" :min="0" v-model="item.count" @on-change="change(item,index,charList)"></inline-x-number>
                     </p>
                 </div>
             </div>
@@ -30,11 +31,12 @@ export default {
     computed:{
         goodsNum() {
             if(this.charList.length == 1){
-                 return this.charList[0].num;
+                 return Number(this.charList[0].count);
             }else{
-                  let a =this.charList.reduce((a,b) =>{
-                    return a.num + b.num;
-                });
+                var a =0;
+                this.charList.map(e =>{
+                    a+= e.count;
+                })
                 return a;
             }
         }
@@ -42,6 +44,10 @@ export default {
     data() {
         return {
             ischeck:false,
+            bottomMsg:{
+                checkcount:0,
+                totalprice:0
+            },
             charList:[
                 {
                     logo:require('../../../assets/images/WechatIMG99(1).png'),
@@ -63,20 +69,50 @@ export default {
         }
     },
     methods: {
-        chooseBuy(item) {
+        //选择购物车商品
+        chooseBuy(item,n) {
             item.ischeck = !item.ischeck;
+            if(item.ischeck){
+                this.bottomMsg.totalprice += (item.count*item.price).toFixed(2)/1;
+                this.bottomMsg.checkcount++;
+            }else{
+                this.bottomMsg.totalprice -= item.count*item.price;
+                this.bottomMsg.totalprice = this.bottomMsg.totalprice.toFixed(2)/1;
+                this.bottomMsg.checkcount--;
+
+            }
+            this.chart(item,n);
+            this.$emit('bottomEve',this.bottomMsg)
         },
-        change(item,n){
-              if(item.num <= 0){
+        //传递购物车数据
+        chart(item,n){
+            var arr = [...this.charList];
+            this.$emit('receiveArray',arr);
+        },
+        //传递购买数量
+        change(item,n,arr){
+              if(item.count <= 0){
                   this.charList.splice(n,1);
               }else{
+                  this.chart(item,n);
                   this.$emit('changeNum',this.goodsNum);
               } 
         },
+        //获取购买商品的邮费
         getCart(){
             this.$fetch.post("fruits/app/cart/getCart",{openId:"1313121231"}).then(res =>{
-                console.log(res);
+                res.obj.forEach(e => {
+                    e.ischeck = false;
+                });
+                 this.charList = res.obj;
+                 this.$emit('package',res.attributes)
             })
+        },
+        //跳转详情
+        goDetail(state){
+            if(state == 1){
+                return
+            }
         }
     },
     mounted() {
@@ -94,6 +130,7 @@ export default {
         color:#4A7B67;
     }
     .cartlist{
+       
         display: flex;
         justify-content: space-around;
         align-items: center;
@@ -110,6 +147,7 @@ export default {
             margin-left: 0.28rem;
         }
         .goods_item{
+             width: 100%;
             height: 1.4rem;
             display:flex;
             flex-direction: column;

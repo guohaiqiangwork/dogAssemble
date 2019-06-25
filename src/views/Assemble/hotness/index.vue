@@ -88,13 +88,19 @@ export default {
     padding: 0 0.42rem;
     .mt_size {
       margin: 0.2rem 0;
+      min-width: 30%;
+      max-width: 30%;
     }
     .hot_logo {
       height: 1.8rem;
       width: 1.8rem;
     }
     .hot_msg {
+      
       text-align: left;
+      span{
+        white-space: wrap;
+      }
       .hot_price {
         color: #ff3636;
         font-size: 0.28rem;

@@ -1,7 +1,7 @@
 <template>
   <div id="whole">
     <div class="flex-between wrap">
-      <div class="goods_item" v-for="(item,index) in goodsList" :key="index" >
+      <div class="goods_item" v-for="(item,index) in goodsList" :key="index" @click="goDetail(item)">
         <div class="img_box">
           <img class="goods_img" src="../../../assets/images/WechatIMG102.png" alt>
         </div>
@@ -34,6 +34,10 @@ export default {
     };
   },
   methods: {
+    goDetail(item){
+      // console.log(item);
+      this.$router.push('/goodsdetail?id='+item.id);
+    },
     getGoodsList() {
       let _obj = {
         openId: url.openId,
