@@ -1,23 +1,18 @@
 <template>
   <div>
-       <div id="container">
-    </div>
+    <div id="container"></div>
   </div>
 </template>
 <script>
 import url from "../../bin/url";
-import { TMap } from '../../bin/TMap'
+import { TMap } from "../../bin/TMap";
 export default {
-
   name: "Tmap",
   data() {
-    return {
-     
-    };
+    return {};
   },
   methods: {
-
-
+    //  获取当前位置
   },
   created() {
     settitle("地图");
@@ -25,22 +20,24 @@ export default {
   },
 
   mounted() {
-   console.log('我是登陆页面')
-
-   TMap('D2JBZ-JB4RQ-RVE5W-GVKCE-N6LBH-EWBFO').then(qq => {
-            var map = new qq.maps.Map(document.getElementById("container"), {
-                // 地图的中心地理坐标。
-                center: new qq.maps.LatLng(39.916527, 116.397128),
-                 zoom: 8
-            });
-        });
-
+    console.log("我是登陆页面");
+    TMap("D2JBZ-JB4RQ-RVE5W-GVKCE-N6LBH-EWBFO").then(qq => {
+      var map = new qq.maps.Map(document.getElementById("container"), {
+        // 地图的中心地理坐标。
+        center: new qq.maps.LatLng(39.916527, 116.397128),
+        zoom: 8
+      });
+    });
+    this.geolocation = new qq.maps.Geolocation(
+      "JPCBZ-I3W64-FDNUH-XRWFO-MQRFZ-ERBWW",
+      "myapp"
+    );
   }
 };
 </script>
 <style scoped>
 #container {
-    min-width:600px;
-    min-height:767px;
+  min-width: 600px;
+  min-height: 767px;
 }
 </style>

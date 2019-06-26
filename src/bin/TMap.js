@@ -5,7 +5,7 @@ export function TMap(key) {
    }
   var script = document.createElement("script");
   script.type = "text/javascript";
-  script.src = "http://map.qq.com/api/js?v=2.exp&callback=init&key="+key;
+  script.src = "http://map.qq.com/api/js?v=2.exp&callback=init&key="+'JPCBZ-I3W64-FDNUH-XRWFO-MQRFZ-ERBWW';
   script.onerror = reject;
   document.head.appendChild(script);
 })
