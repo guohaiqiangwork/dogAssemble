@@ -27,7 +27,7 @@
             </div>
             <div class="goods_msg">
               <p class="goods_name">{{item.name}}</p>
-              <p class="red">¥{{item.price}}</p>
+              <p class="red">¥{{item.price.toFixed(2)}}</p>
             </div>
           </div>
         </div>
