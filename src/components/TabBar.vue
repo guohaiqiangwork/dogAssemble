@@ -22,7 +22,7 @@
             <badge class="msg-sign" :text="buyNum" v-if="buyNum"></badge>
           </div>
           <div :class="{ 'active': actives == '1'}" class=" font_color_33">
-          商户
+          购物车
           </div>
         </flexbox-item>
 

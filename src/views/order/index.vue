@@ -19,7 +19,7 @@
           </div>
         </div>
         <div class="div_display_flex margin_top_div3">
-          <div class=" div_width_30 margin_right_div3">
+          <div class="div_width_30 margin_right_div3">
             <div class="order_width_height">
               <img src="../../assets/images/WechatIMG101@2x.png" width="100%">
             </div>
@@ -31,7 +31,7 @@
             </div>
             <div class="div_display_flex margin_top_div3">
               <div class="order_price_font">¥13.9</div>
-              <div class=" text_right" style="margin-left: 61%;">*3</div>
+              <div class="text_right" style="margin-left: 61%;">*3</div>
               <!-- order_price_bt -->
             </div>
           </div>
@@ -40,6 +40,12 @@
         <div class="order_bt_p margin_top_div3" @click="goToPay">
           <div class="oreder_bt_pay backgroun_color_4A">去支付</div>
         </div>
+      </div>
+      <div>
+        <div class="text_center">
+          <img src="../../assets/images/1581@2x.png" width="80%" alt>
+        </div>
+        <div class="text_center font_size_15 font_color_99">暂无订单</div>
       </div>
     </div>
     <!-- 待付款 -->
@@ -90,14 +96,14 @@ export default {
       this.switchFlage = id;
     },
     // 去支付
-    goToPay(){
+    goToPay() {
       this.$router.push({
         name: "paysure",
         params: {
           obj: JSON.stringify({
             type: "profession",
             data: {
-              id: 'pay'
+              id: "pay"
             }
           })
         }
@@ -124,11 +130,11 @@ export default {
   justify-content: space-around;
 }
 .switchBorder {
-  border: 1px solid #ff8156;
+  border: 1px solid #4A7B67;
   height: 3px;
   width: 90%;
   margin-top: 0%;
-  background-color: #ff8156;
+  background-color: #4A7B67;
   border-radius: 4px;
 }
 .order_block {

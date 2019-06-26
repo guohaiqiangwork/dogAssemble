@@ -1,7 +1,7 @@
 <template>
   <div id="hot">
     <div class="hot_item">
-      <div v-for="(item,index) in hotList" :key="index" class="mt_size">
+      <div v-for="(item,index) in hotList" :key="index" class="mt_size" @click="goToDetail(item)">
         <img class="hot_logo" :src="item.picId" alt>
         <p class="hot_msg">
           <span>{{item.name}}</span>
@@ -27,26 +27,6 @@ export default {
           logo: require("../../../assets/images/WechatIMG102.png"),
           tip: "熊孩子蔬菜干",
           price: 19.9
-        },
-        {
-          logo: require("../../../assets/images/WechatIMG102.png"),
-          tip: "香菇脆",
-          price: 13.9
-        },
-        {
-          logo: require("../../../assets/images/WechatIMG102.png"),
-          tip: "蔬菜置物架",
-          price: 21.9
-        },
-        {
-          logo: require("../../../assets/images/WechatIMG102.png"),
-          tip: "熊孩子蔬菜干",
-          price: 19.9
-        },
-        {
-          logo: require("../../../assets/images/WechatIMG102.png"),
-          tip: "香菇脆",
-          price: 13.9
         }
       ]
     };
@@ -62,7 +42,7 @@ export default {
             this.hotList = data.obj;
             this.hotList.forEach(item => {
               item.picId = url.imgUrl + item.picId;
-              console.log(item.picId)
+              console.log(item.picId);
             });
           }
         },
@@ -70,6 +50,9 @@ export default {
           alert("网络缓慢。。");
         }
       );
+    },
+    goToDetail(id) {
+      this.$emit("goToDetail", id);
     }
   },
   mounted() {
@@ -96,9 +79,8 @@ export default {
       width: 1.8rem;
     }
     .hot_msg {
-      
       text-align: left;
-      span{
+      span {
         white-space: wrap;
       }
       .hot_price {

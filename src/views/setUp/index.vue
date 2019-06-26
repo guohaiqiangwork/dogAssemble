@@ -22,7 +22,7 @@
       </div>
     </div>
     <!-- 推出按钮 -->
-    <div class="text_center">
+    <div class="text_center" @click="goOut">
       <div class="b_t_t">退出登录</div>
     </div>
     <!-- 账户冻结 -->
@@ -67,9 +67,13 @@ export default {
     onCancel() {
       console.log("2");
     },
-      // 弹窗确认
+    // 弹窗确认
     onConfirm() {
       console.log("233");
+    },
+    goOut() {
+      localStorage.clear();
+      this.$router.push("/login/1");
     }
   },
   created() {

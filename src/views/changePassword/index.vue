@@ -73,12 +73,12 @@ export default {
     }
   },
   created() {
-    settitle("修改密码");
+    settitle("忘记密码");
     this.routeParams = JSON.parse(this.$route.params.obj);
   },
 
   mounted() {
-    console.log("修改密码");
+ 
   }
 };
 </script>

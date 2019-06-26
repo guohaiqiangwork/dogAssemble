@@ -11,18 +11,23 @@
     </div>
     <itemes v-on:getList="goToList1"></itemes>
     <div class="hot_tit">热门推荐</div>
-    <hot></hot>
+    <hot v-on:goToDetail="goToDetail1"></hot>
     <div class="bg_gray">
       <div class="hot_tit mt-space" @click="Test">全部商品</div>
       <div id="whole">
         <div class="flex-between wrap">
-          <div class="goods_item" v-for="(item,index) in goodsList" :key="index" @click="goDetail(item)">
+          <div
+            class="goods_item"
+            v-for="(item,index) in goodsList"
+            :key="index"
+            @click="goDetail(item)"
+          >
             <div class="img_box">
               <img class="goods_img" :src="item.picId" alt>
             </div>
             <div class="goods_msg">
               <p class="goods_name">{{item.name}}</p>
-              <p class="red">¥{{item.price}}</p>
+              <p class="red">¥{{item.price.toFixed(2)}}</p>
             </div>
           </div>
         </div>
@@ -65,14 +70,16 @@ export default {
   },
   computed: {},
   methods: {
-    goDetail(item){
-      this.$router.push('/goodsdetail?id='+item.id);
+    goDetail(item) {
+      this.$router.push("/goodsdetail?id=" + item.id);
     },
     // 监听
     goToList1(id) {
-      console.log("监听" + id);
       this.listId2 = id;
       this.getGoodsList();
+    },
+    goToDetail1(item) {
+      this.goDetail(item);
     },
     Test() {
       this.$fetch
