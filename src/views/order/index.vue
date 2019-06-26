@@ -130,11 +130,11 @@ export default {
   justify-content: space-around;
 }
 .switchBorder {
-  border: 1px solid #ff8156;
+  border: 1px solid #4A7B67;
   height: 3px;
   width: 90%;
   margin-top: 0%;
-  background-color: #ff8156;
+  background-color: #4A7B67;
   border-radius: 4px;
 }
 .order_block {
