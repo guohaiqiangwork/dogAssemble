@@ -31,5 +31,8 @@ module.exports = {
   getVideoOrder:'/fruits/app/video/getVideoOrder',//案例视频--视频订单
   getVideoLink: '/fruits/app/video/getVideoLink',//获取视频链接
   saveVideoOrder:'/fruits/app/personal/saveVideoOrder',//购买视频
-  getRecommendB: '/fruits/app/bonus/getRecommend',//健康奖金
+  getRecommendB: '/fruits/app/bonus/getRecommend',//健康奖金推荐返佣
+  getHealthBonus:'/fruits/app/bonus/getHealthBonus',//健康奖金金额统计
+  getOrderDistri:'/fruits/app/bonus/getOrderDistri',//商城返佣列
+  getVideoDistri:'/fruits/app/bonus/getVideoDistri',//视频返佣列表
 };
