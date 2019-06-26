@@ -145,7 +145,7 @@ export default {
     },
     mounted() {
         this.$fetch.post("fruits/app/cart/getDefaultAddr",this.option).then(res =>{
-            console.log(res);
+            console.log(this.$route);
             this.goodsMsg = res.obj;
             this.postFee = res.attributes.postage;
         })

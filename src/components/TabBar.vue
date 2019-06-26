@@ -92,15 +92,22 @@ export default {
           })
         }
       });
+    },
+    setBage(){
+      this.buyNum = localStorage.getItem('catnum')
     }
   },
   mounted() {
+    this.setBage();
     // console.log(this.route)
   }
 };
 </script>
 
 <style scoped>
+#TabBar{
+  height: 100%;
+}
 .vux-flexbox .vux-flexbox-item {
   width: auto;
   min-width: unset;
@@ -120,7 +127,6 @@ export default {
   position: fixed;
   bottom: 0;
   color: red;
-
   width: 100%;
 }
 .active {

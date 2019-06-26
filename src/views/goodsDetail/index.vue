@@ -26,10 +26,6 @@
         </div> 
          <div class="foryou">为您推荐</div>
         <hot></hot>
-
-
-
-
         <div v-transfer-dom>
             <popup v-model="popupshow" position="bottom" @on-hide='close'>
                 <div class="popup_box ">
@@ -155,6 +151,15 @@ export default {
                 this.addCart();
             }else{
                 //点击立即购买
+                var obj = {
+                    openId:"",
+                    goodList:[{
+                        id:this.goodsDetail.id,
+                        num:this.form.num
+                    }]
+                }
+                obj = JSON.stringify(obj);
+                this.$router.push('/paysure?data='+obj)
             }
         },
         //添加购物车
@@ -174,7 +179,6 @@ export default {
                 });
                 this.goodsDetail = {...res.obj};
                 var a = JSON.stringify({a:1})
-                localStorage.setItem('str',a);
             })
         },
         //获取商品规格

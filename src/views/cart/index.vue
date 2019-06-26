@@ -103,7 +103,6 @@ export default {
         settitle('购物车');
     },
     mounted() {
-        // console.log()
     },
 }
 </script>
@@ -119,8 +118,9 @@ export default {
 #cart{
 
     width: 100%;
-    height: 100%;
+    // height: 100%;
     background: #F8F8F8;
+    min-height: calc(100% - 48px);
     .mb-space{
          margin-bottom:53px;
     }

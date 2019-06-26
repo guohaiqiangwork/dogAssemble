@@ -185,7 +185,7 @@ export default {
           this.$vux.toast.text("登录成功");
           localStorage.setItem("user", res.attributes.sessionId);
           localStorage.setItem("type", res.attributes.type);
-          this.$router.push("/home");
+          this.getCartNum();
         } else {
           this.$vux.toast.text("登录时出现问题，请重新登录");
         }
@@ -246,6 +246,7 @@ export default {
     regTest() {
       this.$router.push("/login/2");
     },
+    //发送验证码
     sendCode() {
       var validTel = this.$refs.inputTel.valid;
       console.log(validTel);
@@ -272,6 +273,16 @@ export default {
         count--;
         this.codeValue = count;
       }, 1000);
+    },
+    //获取购物车数量
+    getCartNum(){
+      this.$fetch.post('fruits/app/cart/getCartNum',{openId:"1313121231"}).then(res =>{
+        console.log(res);
+        if(res.msg == 'success'){
+          this.$router.push("/home");
+          localStorage.setItem('catnum',res.obj);
+        }
+      })
     },
     //获取用户openId
     getOpenId() {

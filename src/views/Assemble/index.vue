@@ -166,7 +166,7 @@ export default {
 </script>
 <style lang="less">
 #home {
-  height: 100%;
+  height: auto;
   .mt-space {
     margin-top: 0.35rem;
   }
@@ -252,6 +252,9 @@ export default {
       padding: 0.21rem 0.31rem;
       .goods_name {
         line-height: 0.4rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
   }

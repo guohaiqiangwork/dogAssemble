@@ -18,7 +18,7 @@
         <div v-else class="cart_none">
             <img class="non_cart" src="../../../assets/images/non_cart.png" alt="">
             <p class="tip_none">那么多好商品，您不加入购物车吗？</p>
-            <div class="cart_btn">去逛逛</div>
+            <div class="cart_btn" @click="goShop">去逛逛</div>
         </div>
     </div>
 </template>
@@ -65,7 +65,12 @@ export default {
                     price:13.9,
                     ischeck:false,
                 }
-            ]
+            ],
+            cartDate:{
+                openId:"1313121231",
+                id:"",
+                num:""
+            }
         }
     },
     methods: {
@@ -79,8 +84,8 @@ export default {
                 this.bottomMsg.totalprice -= item.count*item.price;
                 this.bottomMsg.totalprice = this.bottomMsg.totalprice.toFixed(2)/1;
                 this.bottomMsg.checkcount--;
-
             }
+           
             this.chart(item,n);
             this.$emit('bottomEve',this.bottomMsg)
         },
@@ -91,16 +96,21 @@ export default {
         },
         //传递购买数量
         change(item,n,arr){
-              if(item.count <= 0){
-                  this.charList.splice(n,1);
-              }else{
-                  this.chart(item,n);
-                  this.$emit('changeNum',this.goodsNum);
-              } 
+             console.log(item,'iipipip');
+            this.cartDate.id = item.id;
+            this.cartDate.num = item.count;
+            if(item.count <= 0){
+                this.charList.splice(n,1);
+            }else{
+                this.chart(item,n);
+            }
+            this.postCart();
+            this.$emit('changeNum',this.goodsNum);
         },
         //获取购买商品的邮费
         getCart(){
             this.$fetch.post("fruits/app/cart/getCart",{openId:"1313121231"}).then(res =>{
+                console.log(res,'dfsf')
                 res.obj.forEach(e => {
                     e.ischeck = false;
                 });
@@ -113,6 +123,17 @@ export default {
             if(state == 1){
                 return
             }
+        },
+        //跳转到商城页
+        goShop(){
+            this.$router.push('/home');
+        },
+        //给后台存储购物车数量
+        postCart(){
+       
+            this.$fetch.post('fruits/app/cart/changeNum',this.cartDate).then(res =>{
+                console.log(res,777777777)
+            })
         }
     },
     mounted() {
