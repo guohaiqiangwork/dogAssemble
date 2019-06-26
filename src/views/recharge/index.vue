@@ -55,9 +55,10 @@
       <div>
         <input type="text" class="recharge_input_b2 margin_top_div8" placeholder="输入其他金额" v-model="form.amount" :disabled="ifChoic?true:false">
       </div>
-      <div class="div_display_flex margin_top_div8">
+      <div class="div_display_flex margin_top_div8 flex-around">
         <div class="div_width_43 backgroun_color_4A bt_d_c" @click="rechargeq('2')">支付宝充值</div>
         <div class="div_width_43 backgroun_color_4A bt_d_c" @click="rechargeq('3')">现金充值</div>
+        <div class="div_width_43 backgroun_color_4A bt_d_c" @click="rechargeq('3')">微信充值</div>
       </div>
         <!-- 确认充值 -->
       <confirm v-model="rechargeFalge" title @on-cancel="onCancel" @on-confirm="onConfirm">
@@ -309,7 +310,7 @@ export default {
 .bt_d_c {
   border: 1px solid #4a7b67;
   border-radius: 5px;
-  margin-left: 4%;
+  margin:0 1%;
   margin-top: 5%;
   font-size: 14px;
   color: #fff;

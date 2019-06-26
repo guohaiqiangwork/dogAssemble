@@ -192,6 +192,7 @@
     <div class="backgroun_color_f3" v-if="personalMsg.type == 1">
       <!-- 头部 -->
       <div class="personal_img_bjgl">
+        <div class="billList"  @click="goToBillRecord">账单记录</div>
         <div class="div_display_flex">
           <div class="div_width_25">
             <div class="headr_img_circular">
@@ -355,23 +356,25 @@ export default {
     onCancel() {
       console.log("2");
     },
+    //
+    goToBillRecord(){},
     // 弹窗确认
     onConfirm() {
       console.log("233");
     },
     // 去我的钱包
     goToWallet: function() {
-      this.$router.push({
-        name: "myWallet",
-        params: {
-          obj: JSON.stringify({
-            type: "profession",
-            data: {
-              id: "参数"
-            }
-          })
-        }
-      });
+      // this.$router.push({
+      //   name: "myWallet",
+      //   params: {
+      //     obj: JSON.stringify({
+      //       type: "profession",
+      //       data: {
+      //         id: "参数"
+      //       }
+      //     })
+      //   }
+      // });
     },
     // 去我的订单
     goToOrder: function() {
@@ -586,6 +589,14 @@ a:link {
   color: #333333;
   text-decoration: none;
 }
+.billList{
+  margin-top: 0.15rem;
+  padding: 0 3%;
+  color: #fff;
+  text-align: right;
+  text-decoration: underline;
+  overflow: hidden;
+}
 .personal_img_bj {
   background-image: url("../../assets/images/bg.png");
   background-size: 100%;
@@ -603,6 +614,7 @@ a:link {
   background-size: 100%;
   height: 184px;
   background-repeat: no-repeat;
+  overflow: hidden;
 }
 .headr_img_circular {
   width: 46px;

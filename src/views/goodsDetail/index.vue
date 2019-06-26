@@ -1,7 +1,7 @@
 <template>
     <div id="goods_detail">
         <div class="goods_picbox"> 
-            <swiper :list="imgList"  :min-moving-distance="120" @on-index-change="onIndexChange" auto loop height='100%' :show-dots='false'></swiper>
+            <swiper :list="imgList" v-show="imgList.length"   @on-index-change="onIndexChange" auto loop height='100%' :show-dots='false'></swiper>
             <!-- <img  src="../../assets/images/WechatIMG101(1).png" alt=""> -->
             <div class="circle_num">
                 <span>{{num}}</span>
@@ -106,13 +106,13 @@ export default {
     data() {
         return {
             imgList: [
-                {
-                  img:"",
-                },
-                {
-                  img:"",
+                // {
+                //   img:"",
+                // },
+                // {
+                //   img:"",
 
-                },
+                // },
             
             ],
             arr:[],
@@ -170,13 +170,22 @@ export default {
         },
         //获取商品详情
         getGood(){
+           
             this.$fetch.post("fruits/app/blank/getGoodInfo",{openId:"1313121231",id:this.goodId}).then(res =>{
-                res.obj.imgBannerList.forEach((el,i) => {
-                    if(i<2){
-                          this.imgList[i].img = "//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId="+el;
-                    }
+                // this.$nextTick(() =>{
+                    res.obj.imgBannerList.forEach((el,i) => {
+                    // if(i<2){
+                            this.imgList.push({
+                                url: 'javascript:',
+                                img:"//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId="+el,
+                                title:'123'
+                            });
+                        //   this.imgList[i].img = "//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId="+el;
+                    // }
                   
-                });
+                    });
+                // })
+                
                 this.goodsDetail = {...res.obj};
                 var a = JSON.stringify({a:1})
             })
@@ -211,9 +220,15 @@ export default {
 
     },
     mounted() {
-        this.getGood();
+        this.$nextTick(() =>{
+            this.getGood();
+        })
+        
         this.getSpecs();
     },
+    updated(){
+        // this.getGood();
+    }
 }
 </script>
 <style lang="less">

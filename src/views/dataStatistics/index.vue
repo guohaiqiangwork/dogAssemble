@@ -60,13 +60,14 @@
           <div class=" margin_left_div3"> <datetime v-model="valueE" @on-change="changeE" :title="''" clear-text @on-clear="setToday" :min-year=2019 :max-year=2020 ></datetime></div>
         </div>
   <div
+           v-if="type!=3"
           class="div_width_45 font_color_ff text_center backgroun_color_76"
           @click="goTODataDetails"
         >
           <div class="font_size_25 margin_top_div8">300.00</div>
           <div class="font_size_13 margin_top_div5">充值金额(元)</div>
         </div>
-        <div class="div_width_45 font_color_ff text_center backgroun_color_17">
+        <div class="div_width_45 font_color_ff text_center backgroun_color_17"  v-if="type!=3">
           <div class="font_size_25 margin_top_div8">300.00</div>
           <div class="font_size_13 margin_top_div5">跨店服务费(元)</div>
         </div>
@@ -127,6 +128,11 @@ export default {
       valueS: "2019-09-09",
       valueE: "2020-09-09"
     };
+  },
+  computed:{
+    type(){
+      return localStorage.getItem('type');
+    }
   },
   methods: {
     // tab切换
