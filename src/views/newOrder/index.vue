@@ -12,7 +12,8 @@
             maxlength="11"
             style="width:100%;height:100%;outline: none;border:none"
           >
-          <span style="width: 20%;">{{checkCustomerName}}</span>
+          <span style="width: 20%;" v-if='checkCustomerName'>{{checkCustomerName}}</span>
+          <span style="width: 50%;" v-if='!checkCustomerName'>未查询到用户</span>
         </div>
       </div>
     </div>
@@ -172,7 +173,7 @@ export default {
       item: 0,
       newFalge: false, //是否新建
       newPay: true, //新建订单支付
-      classA: "", //选择标示
+      classA: 0, //选择标示
       payShowD: false, //支付
       miMa: "",
       recipeList: [], //会员下拉框数据
@@ -192,7 +193,7 @@ export default {
       passwordNumber: "", //支付密码
       msgPAW: "",
       msgLength: 0,
-      msg:''
+      msg: ""
     };
   },
   watch: {

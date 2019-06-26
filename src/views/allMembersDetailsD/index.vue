@@ -19,7 +19,7 @@
           <div
             class="div_width_25 text_right pdiing_right8"
             v-if="orderByIdListHY.obj.state == 1"
-          >服务中{{orderByIdListHY.obj.state}}</div>
+          >服务中</div>
           <div
             class="div_width_25 text_right pdiing_right8"
            v-if="orderByIdListHY.obj.state == 2"
