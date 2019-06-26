@@ -12,7 +12,10 @@
             </div>
           </div>
           <div class="div_width_75 div_display_flex" style="margin-left:-3%">
-            <div class="font_color_ff font_size_15 margin_top_div8">{{personalMsg.storeName}}</div>
+            <div
+              class="font_color_ff font_size_15 margin_top_div8"
+              style="width:75%"
+            >{{personalMsg.storeName}}</div>
             <div class="personal_falg_member">
               <img src="../../assets/images/122@2x.png" width="60px">
             </div>
@@ -32,23 +35,23 @@
             @click="goToRecharge"
             style="margin-left: -3%; margin-top: -2%;"
           >
-            <div class="font_color_E8 font_size_15">押金：{{personalMsg.deposit}}元</div>
+            <div class="font_color_E8 font_size_15" style="width:75%">押金：{{personalMsg.deposit}}元</div>
             <div class="personal_falg_m">{{personalMsg.storeState == 1 ? "营业中":"已打样"}}</div>
           </div>
         </div>
+        <!-- 账户 -->
+        <div class="personal_money text_center margin_top_div5" >
+          <!-- style="margin-top:-21%" -->
+          <div class="font_color_76 font_size_13 padding_top_div3">总金额(元)</div>
+          <div
+            class="font_color_76 font_size_25"
+            style="padding-bottom: 2%;"
+          >{{personalMsg.total.toFixed(2)}}</div>
+        </div>
       </div>
 
-      <!-- 账户 -->
-      <div class="personal_money text_center" style="margin-top:-29%">
-        <!-- style="margin-top:-21%" -->
-        <div class="font_color_76 font_size_13 padding_top_div3">总金额(元)</div>
-        <div
-          class="font_color_76 font_size_25"
-          style="padding-bottom: 2%;"
-        >{{personalMsg.total.toFixed(2)}}</div>
-      </div>
       <!-- 菜单列表 -->
-      <div class="margin_top_div4">
+      <div style="margin-top:-6%">
         <!-- <div class=""> -->
         <div class="personal_cd text_center" @click="goToNewOrder">
           <div class="margin_top28">
@@ -587,8 +590,8 @@ a:link {
   text-decoration: none;
 }
 .personal_img_bj {
-  background-image: url("../../assets/images/bg.png");
-  background-size: 100%;
+  background-image: url("../../assets/images/bg@3x.png");
+  background-size: 100% 90%;
   height: 200px;
   background-repeat: no-repeat;
 }
@@ -614,13 +617,13 @@ a:link {
   margin-top: 24%;
 }
 .personal_falg_member {
-  margin-left: 60%;
+  /* margin-left: 60%; */
   margin-top: 3%;
 }
 .personal_falg_m {
   color: #ffffff;
   font-size: 13px;
-  margin-left: 50%;
+  /* margin-left: 50%; */
 }
 .personal_font_m {
   margin-left: 13px;
