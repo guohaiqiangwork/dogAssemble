@@ -18,7 +18,7 @@
         <div v-if="switchFlage == '0'">
           <div v-if="orderList.length != 0">
             <div v-for="(item,index) in orderList" :key="index">
-              <div class="order_block">
+              <div class="order_block" @click="goToOrderDetails(item.id)">
                 <div class="div_display_flex">
                   <div
                     class="font_size_13"
@@ -196,8 +196,8 @@
                   </div>
                 </div>
                 <div class="order_border margin_top_div5"></div>
-                <div class="order_bt_p margin_top_div3" @click="goToPay">
-                  <div class="oreder_bt_pay backgroun_color_4A">去支付</div>
+                <div class="order_bt_p margin_top_div3" @click="sureReceiving(item)">
+                  <div class="oreder_bt_pay backgroun_color_4A">确认收货</div>
                 </div>
               </div>
             </div>
@@ -390,12 +390,25 @@ export default {
     // 去支付
     goToPay() {
       this.$router.push({
-        name: "paysure",
+        name: "orderDetails",
         params: {
           obj: JSON.stringify({
             type: "profession",
             data: {
               id: "pay"
+            }
+          })
+        }
+      });
+    },
+    goToOrderDetails(item) {
+      this.$router.push({
+        name: "orderDetails",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: item
             }
           })
         }
@@ -418,6 +431,24 @@ export default {
               });
             });
             this.orderList = data.obj;
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
+        }
+      );
+    },
+
+    // 确认收货
+    sureReceiving(item) {
+      let _obj = {
+        openId: url.openId,
+        id: item.id
+      };
+      this.$fetch.post(url.sureReceiving, _obj).then(
+        data => {
+          if (data.code == 0) {
+            console.log(data)
           }
         },
         err => {

@@ -35,5 +35,8 @@ module.exports = {
   getHealthBonus:'/fruits/app/bonus/getHealthBonus',//健康奖金金额统计
   getOrderDistri:'/fruits/app/bonus/getOrderDistri',//商城返佣列
   getVideoDistri:'/fruits/app/bonus/getVideoDistri',//视频返佣列表
-  getOrderList:'/fruits/app/shop/getOrderList'//商城订单
+  getOrderList:'/fruits/app/shop/getOrderList',//商城订单
+  getShopOrder:'/fruits/app/shop/getShopOrder',//获取商城订单详情
+  payOrder:'/fruits/app/shop/payOrder',//商城订单支付
+  sureReceiving: '/fruits/app/shop/sureReceiving'//确认收货
 };
