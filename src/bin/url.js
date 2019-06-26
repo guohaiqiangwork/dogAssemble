@@ -1,6 +1,7 @@
 //页面请求的路径地址
 module.exports = {
   openId: 'asdujfghwiue4yr298r32034ry2',//测试openId
+  imgUrl: "//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId=",//图片
   getMemberList: '/fruits/app/member/getMemberList',//会员操作--查询服务中订单的会员列表
   getOrderInfo: '/fruits/app/member/getOrderInfo',//会员操作--查看服务中订单详情
   checkMember: '/fruits/app/member/checkMember', //查询订单会员
@@ -17,7 +18,6 @@ module.exports = {
   saveMember: '/fruits/app/member/saveMember',//会员子套餐
   getGoodsList: '/fruits/app/blank/getGoodsList',//全部商品
   getClassfications: '/fruits/app/blank/getClassfications',//获取首页分类
-  imgUrl: "//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId=",//图片
   getRecommend: '/fruits/app/blank/getRecommend',//获取推荐列表
   deleteAddress: '/fruits/app/cart/deleteAddress',//删除地址
   saveAddress: '/fruits/app/cart/saveAddress',//保存地址接口
@@ -35,4 +35,5 @@ module.exports = {
   getHealthBonus:'/fruits/app/bonus/getHealthBonus',//健康奖金金额统计
   getOrderDistri:'/fruits/app/bonus/getOrderDistri',//商城返佣列
   getVideoDistri:'/fruits/app/bonus/getVideoDistri',//视频返佣列表
+  getOrderList:'/fruits/app/shop/getOrderList'//商城订单
 };
