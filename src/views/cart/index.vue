@@ -2,7 +2,7 @@
   <div id="cart">
     <div class="package_tit">
       <div class="if_post red" v-if="freeState.isFree == 1">包邮条件</div>
-      <p class="word_tit">全场满{{freeState.free}}包邮，欢迎抢购</p>
+      <p class="word_tit">全场满{{freeState.free == 0?freeState.free:''}}包邮，欢迎抢购</p>
     </div>
     <cart-list
       @changeNum="changeNum"
@@ -10,7 +10,7 @@
       @bottomEve="getBottom"
       @receiveArray="getArray"
     ></cart-list>
-    <div>
+    <div style="overflow:hidden">
       <!-- <checklist ref="demoObject" :title="('Option Array with key and value (key must be string)')" :options="objectList" v-model="objectListValue"></checklist> -->
       <!-- <check-icon :value.sync="demo1"> ({{ demo1 }})</check-icon> -->
 
@@ -66,7 +66,7 @@ export default {
   },
   methods: {
     //去支付页面
-    payPage() {
+    payPage() { 
       var arr = [];
       var count = 0;
       this.goodList.forEach(e => {
@@ -92,6 +92,7 @@ export default {
     //数量改变
     changeNum(e, arr) {
       this.$parent.buyNum = e;
+         localStorage.setItem('catnum',this.$parent.buyNum);
     },
     // 底部信息栏
     getBottom(val) {

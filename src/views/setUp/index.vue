@@ -8,7 +8,7 @@
         </div>
       </div>
       <div class="div_display_flex width_m" @click="accountD">
-        <div class="div_width_50 font_color_1A personal_list_font">冻结账户</div>
+        <div class="div_width_50 font_color_1A personal_list_font">{{type == 1 ?'冻结账户' :"关闭店铺"}}</div>
         <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
           <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%">
         </div>
@@ -43,6 +43,11 @@ export default {
     return {
       outPayFalge: false //冻结账户弹窗
     };
+  },
+  computed:{
+    type(){
+      return localStorage.getItem('type')
+    }
   },
   methods: {
     //   去修改密码

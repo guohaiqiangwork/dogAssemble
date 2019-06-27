@@ -13,8 +13,8 @@
             <p class=" goods_price">{{goodsDetail.name}}</p>
             <div>{{goodsDetail.remark}}</div>
             <p class="goods_name">
-                <span class="red">￥{{goodsDetail.price.toFixed(2)}}</span>
-                <!-- <span>*3</span> -->
+                <span class="red">￥{{goodsDetail.price}}</span>
+                <span class="goods_discount">￥{{goodsDetail.original}}</span>
             </p>
         </div>
         <div class="">
@@ -35,8 +35,8 @@
                             <div class="flex-around flex-clo ml-space">
                                 <p>{{goodsDetail.name}}</p>
                                 <p class="goods_price">
-                                    <span class="red">￥{{goodsDetail.price.toFixed(2)}}</span>
-                                    <span class="goods_discount">￥{{goodsDetail.original.toFixed(2)}}</span>
+                                    <span class="red">￥{{goodsDetail.price}}</span>
+                                    <span class="goods_discount">￥{{goodsDetail.original}}</span>
                                 </p>
                             </div>
                         </div>
@@ -66,6 +66,7 @@
                 </div> 
             </popup>
         </div>
+        <div v-if="goodsDetail.state!=0" class="bottom-tip">已下架</div>
     </div>
     
 </template>
@@ -147,9 +148,18 @@ export default {
             this.form.id = this.goodId;
             this.$parent.show = false;
             if(this.$parent.title == 'cart'){
+
                 //点击加入购物车
+                if(this.goodsDetail.state!=0){
+                    this.$vux.toast.text("该商品已下架");
+                    return
+                }
                 this.addCart();
             }else{
+                if(this.goodsDetail.state!=0){
+                    this.$vux.toast.text("该商品已下架");
+                    return
+                }
                 //点击立即购买
                 var obj = {
                     openId:"",
@@ -165,7 +175,11 @@ export default {
         //添加购物车
         addCart(){
             this.$fetch.post("fruits/app/cart/joinCart",this.form).then(res =>{
-                this.$parent.buyNum += this.form.num;
+                
+            this.$parent.buyNum  =this.$parent.buyNum/1;
+            this.$parent.buyNum += this.form.num/1;
+            localStorage.setItem('catnum',this.$parent.buyNum)
+           
             })
         },
         //获取商品详情
@@ -173,6 +187,7 @@ export default {
            
             this.$fetch.post("fruits/app/blank/getGoodInfo",{openId:"1313121231",id:this.goodId}).then(res =>{
                 // this.$nextTick(() =>{
+                    console.log(res,999);
                     res.obj.imgBannerList.forEach((el,i) => {
                     // if(i<2){
                             this.imgList.push({
@@ -187,6 +202,8 @@ export default {
                 // })
                 
                 this.goodsDetail = {...res.obj};
+                this.goodsDetail.price = this.goodsDetail.price.toFixed(2);
+                this.goodsDetail.original = this.goodsDetail.original.toFixed(2);
                 var a = JSON.stringify({a:1})
             })
         },
@@ -194,25 +211,28 @@ export default {
         getSpecs(){
             this.$fetch.post("fruits/app/cart/getGoodsSpec",{openId:"1313121231",id:this.goodId}).then(res =>{
                 this.specList = [...res.obj.goodsSpecs];
-                this.specList.forEach(e =>{
+                this.specList.forEach((e,ind) =>{
                     this.form.specList.push({
                         value:null,
                         specName:e.name,
-                        specId:e.id
+                        specId:e.id,
+                        check:false
                     })
                     e.valueList.forEach((el,i) =>{
                         if(i == 0){
-                            this.form.specList[0].value = el;
-
+                            this.form.specList[ind].value = el;
                         }
+                            
                     })
                 })
+                console.log(this.form.specList,888)
 
             })
         },
         // 选择规格
         choseSpec(item,index,spec){
             this.spec = index;
+            console.log(index)
             this.form.specList[index].specName = item.name;
             this.form.specList[index].value = spec;
             this.form.specList[index].specId = item.id;
@@ -232,7 +252,19 @@ export default {
 }
 </script>
 <style lang="less">
-     
+      .goods_discount{
+                        color:rgb(16,32,35);
+                        opacity:0.52;
+                        text-decoration: line-through;
+                        margin-right: 0.2rem;
+                        font-size: 0.26rem;
+                    }
+                    .bottom-tip{
+                        position: fixed;
+                        width: 100%;
+                        background: #e3e4e5;
+                        color:#fff;
+                    }
 .popup_box{
         height: 100%;
         padding: 0 0.3rem;
@@ -265,17 +297,12 @@ export default {
                 .goods_price{
                     font-size: 0.38rem;
                     line-height: 0.53rem;
-                    .goods_discount{
-                        color:rgb(16,32,35);
-                        opacity:0.52;
-                        text-decoration: line-through;
-                        margin-right: 0.2rem;
-                        font-size: 0.26rem;
-                    }
+                  
                 }
                 
             }
         }
+         
         .goods_detail{
             .goods_tag{
                 padding: 0.4rem 0 0.2rem 0;
@@ -372,8 +399,6 @@ export default {
             line-height: 0.53rem;
         }
         .goods_name{
-            display: flex;
-            justify-content: space-between;
             line-height: 0.45rem;
         }
     }

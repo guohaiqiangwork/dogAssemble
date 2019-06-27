@@ -14,7 +14,7 @@
           <div class="div_width_75 div_display_flex" style="margin-left:-3%">
             <div
               class="font_color_ff font_size_15 margin_top_div8"
-              style="width:75%"
+              style="width:75%;text-overflow:ellipsis;overflow:hidden;white-space:nowrap"
             >{{personalMsg.storeName}}</div>
             <div class="personal_falg_member">
               <img src="../../assets/images/122@2x.png" width="60px">

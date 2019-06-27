@@ -187,10 +187,15 @@ export default {
      this.cashMethod();
     },
     showMember(value){
+      console.log(1212)
       this.$fetch.post('fruits/app/personal/checkCustomer',{openId:"1313121231",phone:value}).then(res =>{
         this.$vux.loading.hide();
         if(res.msg == 'find_none_user'){
           this.$vux.toast.text('没有找到该用户');
+        }
+        if(res.msg == "user_has_frozen"){
+          this.$vux.toast.text('该用户已被冻结');
+
         }
         if(res.msg == "success"){
           this.name = res.obj.name;

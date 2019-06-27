@@ -12,6 +12,11 @@
                         <span class="goods_price red">￥{{item.price.toFixed(2)}}</span>
                         <inline-x-number width="30px" :min="0" v-model="item.count" @on-change="change(item,index,charList)"></inline-x-number>
                     </p>
+                    <div v-if="item.cartGoodsSpecs.length" style="display:flex">
+                        <p v-for="(ite,ind) in item.cartGoodsSpecs" :key="ind">
+                            <span>{{ite.specName+":"+ite.specValue}}</span>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -41,8 +46,9 @@ export default {
             }
         },
         goodsPrice(){
+            var arr = [...this.charList]
             var a =0;
-            this.charList.map(e =>{
+            arr.map(e =>{
                 a+= e.money;
             })
             return a;
@@ -107,6 +113,7 @@ export default {
             this.cartDate.id = item.id;
             this.cartDate.num = item.count;
             if(item.count <= 0){
+                //  this.cartDate.num = 0;
                 this.charList.splice(n,1);
             }else{
                 this.chart(item,n);
@@ -116,6 +123,7 @@ export default {
             }else{
                 // item.money = 0;
             }
+         
             this.bottomMsg.totalprice = this.goodsPrice;
             this.postCart();
             this.$emit('changeNum',this.goodsNum);

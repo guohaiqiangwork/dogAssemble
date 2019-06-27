@@ -275,7 +275,7 @@ export default {
         opacity:0.52;
         text-decoration: line-through;
         margin-right: 0.2rem;
-        font-size: 0.26rem;
+        font-size: 0.18rem;
       }
     }
   }

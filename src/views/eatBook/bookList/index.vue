@@ -81,24 +81,34 @@ export default {
             })
            
             this.$fetch.post("fruits/app/recipe/getRecipeList",this.form).then(res =>{
-                console.log(res);
+                console.log(res,999);
                  this.$vux.loading.hide();
                
                 if(res.obj.length == 0){
                     this.isUnMore1 = true;
                     return
                 }
-                this.bookList = res.obj;
+                this.$nextTick(()=>{
+                    res.obj.forEach(e => {
+                        this.bookList.push(e);
+                    });
+                })
+                
             
             })
         },
          selPullUp () {
-            this.form.current++;
-            this.getRecipeList();
+             this.form.current++;
+            this.$nextTick(()=>{
+                    this.getRecipeList();
+            })
+           
+           
             console.log('上拉刷新数据')
 
         },
         pulldown(){
+            this.bookList = [];
             this.isUnMore1 = false;
             this.form.current = 1;
             this.getRecipeList();

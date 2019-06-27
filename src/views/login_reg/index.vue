@@ -150,7 +150,7 @@ export default {
         nickname: "随便"
       },
       Logform: {
-        openId: "",
+        openId: "1312",
         password: "",
         phone: ""
       },
@@ -175,10 +175,10 @@ export default {
       }
       this.btnload = true;
       // this.Logform.password = DesUtils.encode(this.Logform.password,"fruits-app,yuntu,com")
-      this.Logform.password = DesUtils.encode(
-        this.Logform.password,
-        "fruits-app,yuntu,com"
-      );
+      // this.Logform.password = DesUtils.encode(
+      //   this.Logform.password,
+      //   "fruits-app,yuntu,com"
+      // );
       this.$fetch.post("fruits/app/user/login", this.Logform).then(res => {
         this.btnload = false;
         if (res.msg == "success") {

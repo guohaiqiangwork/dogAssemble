@@ -24,12 +24,12 @@
           class="margin_left_div3 font_color_4A"
           style="font-size:6px"
           @click="getAuthCode"
-        >获取验证码</span>
+        >{{tip}}</span>
         <span
           v-show="!sendAuthCode"
           class="margin_left_div3 font_color_4A"
           style="font-size:6px"
-        >{{auth_time}}重新获取验证码</span>
+        >{{auth_time}}s</span>
       </div>
     </div>
     <div class="pass_list_w">
@@ -56,7 +56,8 @@ export default {
   data() {
     return {
       sendAuthCode: true /*布尔值，通过v-show控制显示‘获取按钮’还是‘倒计时’ */,
-      auth_time: 0 /*倒计时 计数器*/
+      auth_time: 0 /*倒计时 计数器*/,
+      tip:"获取验证码"
     };
   },
   methods: {
@@ -68,6 +69,7 @@ export default {
         if (this.auth_time <= 0) {
           this.sendAuthCode = true;
           clearInterval(auth_timetimer);
+          this.tip =  '重新获取验证码'
         }
       }, 1000);
     }
