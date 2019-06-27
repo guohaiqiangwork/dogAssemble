@@ -150,9 +150,9 @@ export default {
         nickname: "随便"
       },
       Logform: {
-        openId: "134546",
+        openId: "112",
         password: "",
-        phone: "",
+        phone: "13600000000",
         nickname: "掌声",
         headimgurl: "http://m.imeitou.com/uploads/allimg/2019021309/ipijc3xjpfo.jpg"
       },
@@ -224,7 +224,7 @@ export default {
           // }, 1000);
           if (res.attributes.type == 1) {
             let _obj = {
-              openId: "",
+              openId: "112",
               password: DesUtils.encode(this.loginP, "fruits-app,yuntu,com"),
               phone: this.form.phone
             };

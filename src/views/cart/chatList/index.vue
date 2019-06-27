@@ -9,7 +9,7 @@
                 <div class="goods_item">
                     <p class="goods_title">{{item.name}}</p>
                     <p class="goods_flex">
-                        <span class="goods_price red">￥{{item.price.toFixed(2)}}</span>
+                        <span class="goods_price red">￥{{item.price}}</span>
                         <inline-x-number width="30px" :min="0" v-model="item.count" @on-change="change(item,index,charList)"></inline-x-number>
                     </p>
                     <div v-if="item.cartGoodsSpecs.length" style="display:flex">
@@ -135,6 +135,7 @@ export default {
                 res.obj.forEach(e => {
                     e.ischeck = false;
                     e.money = 0;
+                    e.price = e.price.toFixed(2);
                 });
                  this.charList = res.obj;
                  this.$emit('package',res.attributes)
