@@ -47,6 +47,7 @@
             class="font_color_76 font_size_25"
             style="padding-bottom: 2%;"
           >{{personalMsg.total.toFixed(2)}}</div>
+          <!-- -->
         </div>
       </div>
 
@@ -118,7 +119,7 @@
           </div>
           <div>设置中心</div>
         </div>
-        <div class="personal_cd text_center" @click="falgQH">
+        <div class="personal_cd text_center" @click="falgQH" v-if='personalMsg.isChange  == 1'>
           <div class="margin_top28">
             <!-- class="img_width25" class="img_width_100"-->
             <img src="../../assets/images/1609@2x.png" width="25px" height="30px">
@@ -194,7 +195,7 @@
           </div>
           <div>联系客服</div>
         </div>
-        <div class="personal_cd_j text_center" @click="falgQH">
+        <div class="personal_cd_j text_center" @click="falgQH" v-if='personalMsg.isChange  == 1'>
           <div class="margin_top28">
             <img src="../../assets/images/1609@2x.png" width="25px" height="30px">
           </div>
@@ -228,7 +229,8 @@
         <div class="div_display_flex personal_price_m padding_bottom_4">
           <div
             class="font_color_102 font_size_25 div_width_50 margin_left_div3"
-          >￥{{personalMsg.remain.toFixed(2)}}</div>
+          >￥ {{personalMsg.remain.toFixed(2)}}</div>
+          <!-- -->
           <!-- <div
             class="div_display_flex font_color_102 font_size_13 div_width_50"
            
@@ -283,6 +285,13 @@
           <div class="personal_div_border"></div>
           <div class="div_display_flex" @click="goToSetUp">
             <div class="div_width_50 font_color_1A personal_list_font">设置</div>
+            <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
+              <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%">
+            </div>
+          </div>
+           <div class="personal_div_border"></div>
+          <div class="div_display_flex" @click="falgQH" v-if='personalMsg.isChange  == 1'>
+            <div class="div_width_50 font_color_1A personal_list_font">切换身分</div>
             <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
               <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%">
             </div>
@@ -343,6 +352,7 @@
 </template>
 <script>
 import TabBar from "../../components/TabBar";
+import url from "../../bin/url";
 import { Flexbox, Confirm } from "vux";
 import { open } from "fs";
 require("../../static/des");
@@ -386,7 +396,11 @@ export default {
     },
     //身份切换
     falgQH() {
-      this.outPayFalge1 = true;
+      if (this.personalMsg.isChange == 1) {
+        this.outPayFalge1 = true;
+      } else {
+        alert("您现在不能进行切换");
+      }
     },
     // 弹窗取消
     onCancel1() {
@@ -394,7 +408,19 @@ export default {
     },
     // 弹窗确认
     onConfirm1() {
-      console.log("233");
+      let _obj = {
+        openId: url.openId
+      };
+      this.$fetch.post(url.changeCustomer, _obj).then(
+        data => {
+          if (data.code == 0) {
+            console.log("5675868");
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
+        }
+      );
     },
     // 去我的钱包
     goToWallet: function() {
@@ -603,9 +629,8 @@ export default {
     //  })
 
     this.$fetch
-      .post("fruits/app/personal/getPersonalInfo", { openId: "1313121231" })
+      .post("fruits/app/personal/getPersonalInfo", { openId: url.openId })
       .then(res => {
-        console.log(res);
         this.personalMsg = { ...res.obj };
       });
   },
