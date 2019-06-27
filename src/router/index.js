@@ -44,6 +44,7 @@ import orderSuccess from '@/views/orderSuccess/index'//订单成功
 import allMembers from '@/views/allMembers/index'//全部订单
 import allMembersDetails from '@/views/allMembersDetails/index'//全部订单详情
 import allMembersDetailsD from '@/views/allMembersDetailsD/index'//全部订单详情中详情
+import orderDetails from '@/views/orderDetails/index' //商城订单详情
 Vue.use(Router)
 
 export default new Router({
@@ -318,6 +319,15 @@ export default new Router({
       title: '我的订单',
     },
     component: order
+  },
+  {
+    // 我的订单
+    path: '/orderDetails/:obj',
+    name: 'orderDetails',
+    meta: {
+      title: '订单详情',
+    },
+    component: orderDetails
   },
   // 服务订单
   {

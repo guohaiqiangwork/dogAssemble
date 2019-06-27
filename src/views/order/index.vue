@@ -6,56 +6,341 @@
         <div class="switchBorder" v-if="switchFlage == item.id"></div>
       </div>
     </div>
-    <!-- 全部订单 -->
-    <div v-if="switchFlage == '001'">
-      <div class="order_block">
-        <div class="div_display_flex">
-          <div
-            class="font_size_13"
-            style="width:75% ;margin-left: 19px;margin-top: 14px;"
-          >订单编号：3242342342423423</div>
-          <div class="font_size_14" style="margin-top: 14px;">
-            <span class="order_red">.</span> 待付款
+    <nut-scroller
+      :is-un-more="isUnMore1"
+      :is-loading="isLoading1"
+      :type="'vertical'"
+      @loadMore="selPullUp"
+      @pulldown="pulldown"
+    >
+      <div slot="list" class="nut-vert-list-panel">
+        <!-- 全部订单 -->
+        <div v-if="switchFlage == '0'">
+          <div v-if="orderList.length != 0">
+            <div v-for="(item,index) in orderList" :key="index">
+              <div class="order_block" @click="goToOrderDetails(item.id)">
+                <div class="div_display_flex">
+                  <div
+                    class="font_size_13"
+                    style="width:75% ;margin-left: 19px;margin-top: 14px;"
+                  >订单编号：{{item.orderNo}}</div>
+                  <div class="font_size_14" style="margin-top: 14px;">
+                    <span v-if="item.state == 1">
+                      <span class="order_red">*</span>待付款
+                    </span>
+                    <span v-if="item.state == 2">
+                      <span class="order_red">*</span>待发货
+                    </span>
+                    <span v-if="item.state == 3">
+                      <span class="order_red">*</span>待收货
+                    </span>
+                    <span v-if="item.state == 4">
+                      <span class="order_red">*</span>已收货
+                    </span>
+                    <span v-if="item.state == 6">
+                      <span class="order_red">*</span>交易关闭
+                    </span>
+                  </div>
+                </div>
+                <div
+                  class="div_display_flex margin_top_div3"
+                  v-for="(items,index) in item.goodsList"
+                  :key="index"
+                >
+                  <div class="div_width_30 margin_right_div3">
+                    <div class="order_width_height">
+                      <img :src="items.picId" width="100%" alt>
+                    </div>
+                  </div>
+                  <div style="width:63%">
+                    <div class="font_color_00 font_size_14">{{items.name}}</div>
+                    <div class="div_display_flex margin_top_div3">
+                      <div class="order_price_font" style="width:80%">¥{{items.price}}</div>
+                      <div class="text_right">*{{items.count}}</div>
+                      <!-- order_price_bt -->
+                    </div>
+                    <div v-for="(itemsg,index) in items.goodsSpecs" :key="index" class="GG_list">
+                      <span>{{itemsg.specName}}</span>
+                      <span>{{itemsg.specValue}}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="order_border margin_top_div5"></div>
+                <div class="order_bt_p margin_top_div3" @click="goToPay">
+                  <div class="oreder_bt_pay backgroun_color_4A">去支付</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div v-if="orderList.length == 0">
+            <div class="text_center">
+              <img src="../../assets/images/1581@2x.png" width="80%" alt>
+            </div>
+            <div class="text_center font_size_15 font_color_99">暂无订单</div>
           </div>
         </div>
-        <div class="div_display_flex margin_top_div3">
-          <div class="div_width_30 margin_right_div3">
-            <div class="order_width_height">
-              <img src="../../assets/images/WechatIMG101@2x.png" width="100%">
+        <!-- 待付款 -->
+        <div v-if="switchFlage == '1'">
+          <div v-if="orderList.length != 0">
+            <div v-for="(item,index) in orderList" :key="index">
+              <div class="order_block">
+                <div class="div_display_flex">
+                  <div
+                    class="font_size_13"
+                    style="width:75% ;margin-left: 19px;margin-top: 14px;"
+                  >订单编号：{{item.orderNo}}</div>
+                  <div class="font_size_14" style="margin-top: 14px;">
+                    <span v-if="item.state == 1">
+                      <span class="order_red">*</span>待付款
+                    </span>
+                    <span v-if="item.state == 2">
+                      <span class="order_red">*</span>待发货
+                    </span>
+                    <span v-if="item.state == 3">
+                      <span class="order_red">*</span>待收货
+                    </span>
+                    <span v-if="item.state == 4">
+                      <span class="order_red">*</span>已收货
+                    </span>
+                    <span v-if="item.state == 6">
+                      <span class="order_red">*</span>交易关闭
+                    </span>
+                  </div>
+                </div>
+                <div
+                  class="div_display_flex margin_top_div3"
+                  v-for="(items,index) in item.goodsList"
+                  :key="index"
+                >
+                  <div class="div_width_30 margin_right_div3">
+                    <div class="order_width_height">
+                      <img :src="items.picId" width="100%" alt>
+                    </div>
+                  </div>
+                  <div style="width:63%">
+                    <div class="font_color_00 font_size_14">{{items.name}}</div>
+                    <div class="div_display_flex margin_top_div3">
+                      <div class="order_price_font" style="width:80%">¥{{items.price}}</div>
+                      <div class="text_right">*{{items.count}}</div>
+                      <!-- order_price_bt -->
+                    </div>
+                    <div v-for="(itemsg,index) in items.goodsSpecs" :key="index" class="GG_list">
+                      <span>{{itemsg.specName}}</span>
+                      <span>{{itemsg.specValue}}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="order_border margin_top_div5"></div>
+                <div class="order_bt_p margin_top_div3" @click="goToPay">
+                  <div class="oreder_bt_pay backgroun_color_4A">去支付</div>
+                </div>
+              </div>
             </div>
           </div>
-          <div style="width:63%">
-            <div class="font_color_00 font_size_14">
-              熊孩子综合蔬菜干香菇脆秋葵干330g
-              果蔬脆
+          <div v-if="orderList.length == 0">
+            <div class="text_center">
+              <img src="../../assets/images/1581@2x.png" width="80%" alt>
             </div>
-            <div class="div_display_flex margin_top_div3">
-              <div class="order_price_font">¥13.9</div>
-              <div class="text_right" style="margin-left: 61%;">*3</div>
-              <!-- order_price_bt -->
-            </div>
+            <div class="text_center font_size_15 font_color_99">暂无订单</div>
           </div>
         </div>
-        <div class="order_border margin_top_div5"></div>
-        <div class="order_bt_p margin_top_div3" @click="goToPay">
-          <div class="oreder_bt_pay backgroun_color_4A">去支付</div>
+        <!-- 待收费 -->
+        <div v-if="switchFlage == '2'">
+          <div v-if="orderList.length != 0">
+            <div v-for="(item,index) in orderList" :key="index">
+              <div class="order_block">
+                <div class="div_display_flex">
+                  <div
+                    class="font_size_13"
+                    style="width:75% ;margin-left: 19px;margin-top: 14px;"
+                  >订单编号：{{item.orderNo}}</div>
+                  <div class="font_size_14" style="margin-top: 14px;">
+                    <span v-if="item.state == 1">
+                      <span class="order_red">*</span>待付款
+                    </span>
+                    <span v-if="item.state == 2">
+                      <span class="order_red">*</span>待发货
+                    </span>
+                    <span v-if="item.state == 3">
+                      <span class="order_red">*</span>待收货
+                    </span>
+                    <span v-if="item.state == 4">
+                      <span class="order_red">*</span>已收货
+                    </span>
+                    <span v-if="item.state == 6">
+                      <span class="order_red">*</span>交易关闭
+                    </span>
+                  </div>
+                </div>
+                <div
+                  class="div_display_flex margin_top_div3"
+                  v-for="(items,index) in item.goodsList"
+                  :key="index"
+                >
+                  <div class="div_width_30 margin_right_div3">
+                    <div class="order_width_height">
+                      <img :src="items.picId" width="100%" alt>
+                    </div>
+                  </div>
+                  <div style="width:63%">
+                    <div class="font_color_00 font_size_14">{{items.name}}</div>
+                    <div class="div_display_flex margin_top_div3">
+                      <div class="order_price_font" style="width:80%">¥{{items.price}}</div>
+                      <div class="text_right">*{{items.count}}</div>
+                      <!-- order_price_bt -->
+                    </div>
+                    <div v-for="(itemsg,index) in items.goodsSpecs" :key="index" class="GG_list">
+                      <span>{{itemsg.specName}}</span>
+                      <span>{{itemsg.specValue}}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="order_border margin_top_div5"></div>
+                <div class="order_bt_p margin_top_div3" @click="sureReceiving(item)">
+                  <div class="oreder_bt_pay backgroun_color_4A">确认收货</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div v-if="orderList.length == 0">
+            <div class="text_center">
+              <img src="../../assets/images/1581@2x.png" width="80%" alt>
+            </div>
+            <div class="text_center font_size_15 font_color_99">暂无订单</div>
+          </div>
+        </div>
+        <!-- 已发货 -->
+        <div v-if="switchFlage == '3'">
+          <div v-if="orderList.length != 0">
+            <div v-for="(item,index) in orderList" :key="index">
+              <div class="order_block">
+                <div class="div_display_flex">
+                  <div
+                    class="font_size_13"
+                    style="width:75% ;margin-left: 19px;margin-top: 14px;"
+                  >订单编号：{{item.orderNo}}</div>
+                  <div class="font_size_14" style="margin-top: 14px;">
+                    <span v-if="item.state == 1">
+                      <span class="order_red">*</span>待付款
+                    </span>
+                    <span v-if="item.state == 2">
+                      <span class="order_red">*</span>待发货
+                    </span>
+                    <span v-if="item.state == 3">
+                      <span class="order_red">*</span>待收货
+                    </span>
+                    <span v-if="item.state == 4">
+                      <span class="order_red">*</span>已收货
+                    </span>
+                    <span v-if="item.state == 6">
+                      <span class="order_red">*</span>交易关闭
+                    </span>
+                  </div>
+                </div>
+                <div
+                  class="div_display_flex margin_top_div3"
+                  v-for="(items,index) in item.goodsList"
+                  :key="index"
+                >
+                  <div class="div_width_30 margin_right_div3">
+                    <div class="order_width_height">
+                      <img :src="items.picId" width="100%" alt>
+                    </div>
+                  </div>
+                  <div style="width:63%">
+                    <div class="font_color_00 font_size_14">{{items.name}}</div>
+                    <div class="div_display_flex margin_top_div3">
+                      <div class="order_price_font" style="width:80%">¥{{items.price}}</div>
+                      <div class="text_right">*{{items.count}}</div>
+                      <!-- order_price_bt -->
+                    </div>
+                    <div v-for="(itemsg,index) in items.goodsSpecs" :key="index" class="GG_list">
+                      <span>{{itemsg.specName}}</span>
+                      <span>{{itemsg.specValue}}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="order_border margin_top_div5"></div>
+                <div class="order_bt_p margin_top_div3" @click="goToPay">
+                  <div class="oreder_bt_pay backgroun_color_4A">去支付</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div v-if="orderList.length == 0">
+            <div class="text_center">
+              <img src="../../assets/images/1581@2x.png" width="80%" alt>
+            </div>
+            <div class="text_center font_size_15 font_color_99">暂无订单</div>
+          </div>
+        </div>
+        <!-- 已完成 -->
+        <div v-if="switchFlage == '4'">
+          <div v-if="orderList.length != 0">
+            <div v-for="(item,index) in orderList" :key="index">
+              <div class="order_block">
+                <div class="div_display_flex">
+                  <div
+                    class="font_size_13"
+                    style="width:75% ;margin-left: 19px;margin-top: 14px;"
+                  >订单编号：{{item.orderNo}}</div>
+                  <div class="font_size_14" style="margin-top: 14px;">
+                    <span v-if="item.state == 1">
+                      <span class="order_red">*</span>待付款
+                    </span>
+                    <span v-if="item.state == 2">
+                      <span class="order_red">*</span>待发货
+                    </span>
+                    <span v-if="item.state == 3">
+                      <span class="order_red">*</span>待收货
+                    </span>
+                    <span v-if="item.state == 4">
+                      <span class="order_red">*</span>已收货
+                    </span>
+                    <span v-if="item.state == 6">
+                      <span class="order_red">*</span>交易关闭
+                    </span>
+                  </div>
+                </div>
+                <div
+                  class="div_display_flex margin_top_div3"
+                  v-for="(items,index) in item.goodsList"
+                  :key="index"
+                >
+                  <div class="div_width_30 margin_right_div3">
+                    <div class="order_width_height">
+                      <img :src="items.picId" width="100%" alt>
+                    </div>
+                  </div>
+                  <div style="width:63%">
+                    <div class="font_color_00 font_size_14">{{items.name}}</div>
+                    <div class="div_display_flex margin_top_div3">
+                      <div class="order_price_font" style="width:80%">¥{{items.price}}</div>
+                      <div class="text_right">*{{items.count}}</div>
+                      <!-- order_price_bt -->
+                    </div>
+                    <div v-for="(itemsg,index) in items.goodsSpecs" :key="index" class="GG_list">
+                      <span>{{itemsg.specName}}</span>
+                      <span>{{itemsg.specValue}}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="order_border margin_top_div5"></div>
+                <div class="order_bt_p margin_top_div3" @click="goToPay">
+                  <div class="oreder_bt_pay backgroun_color_4A">去支付</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div v-if="orderList.length == 0">
+            <div class="text_center">
+              <img src="../../assets/images/1581@2x.png" width="80%" alt>
+            </div>
+            <div class="text_center font_size_15 font_color_99">暂无订单</div>
+          </div>
         </div>
       </div>
-      <div>
-        <div class="text_center">
-          <img src="../../assets/images/1581@2x.png" width="80%" alt>
-        </div>
-        <div class="text_center font_size_15 font_color_99">暂无订单</div>
-      </div>
-    </div>
-    <!-- 待付款 -->
-    <div v-if="switchFlage == '002'">待付款</div>
-    <!-- 待收费 -->
-    <div v-if="switchFlage == '003'">待收费</div>
-    <!-- 已发货 -->
-    <div v-if="switchFlage == '004'">已发货</div>
-    <!-- 已完成 -->
-    <div v-if="switchFlage == '005'">已完成</div>
+    </nut-scroller>
   </div>
 </template>
 <script>
@@ -67,38 +352,45 @@ export default {
       tabList: [
         {
           name: "全部",
-          id: "001"
+          id: "0"
         },
         {
           name: "待付款",
-          id: "002"
+          id: "1"
         },
         {
           name: "待发货",
-          id: "003"
+          id: "2"
         },
         {
-          name: "已发货",
-          id: "004"
+          name: "待发货",
+          id: "3"
         },
         {
           name: "已完成",
-          id: "005"
+          id: "4"
         }
       ],
-      switchFlage: "001"
+      switchFlage: "0",
+      orderList: "",
+      page: {
+        current: "1",
+        size: "10"
+      },
+      isUnMore1: false,
+      isLoading1: false
     };
   },
   methods: {
     // tab切换
     tabSwitch(id) {
-      console.log(id);
       this.switchFlage = id;
+      this.getOrderList(); //切换时获取数据
     },
     // 去支付
     goToPay() {
       this.$router.push({
-        name: "paysure",
+        name: "orderDetails",
         params: {
           obj: JSON.stringify({
             type: "profession",
@@ -108,8 +400,75 @@ export default {
           })
         }
       });
+    },
+    goToOrderDetails(item) {
+      this.$router.push({
+        name: "orderDetails",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: item
+            }
+          })
+        }
+      });
+    },
+    // 获取商城订单
+    getOrderList() {
+      let _obj = {
+        openId: url.openId,
+        state: this.switchFlage,
+        size: this.page.size,
+        current: this.page.current
+      };
+      this.$fetch.post(url.getOrderList, _obj).then(
+        data => {
+          if (data.code == 0) {
+            data.obj.forEach(item => {
+              item.goodsList.forEach(items => {
+                items.picId = url.imgUrl + items.picId;
+              });
+            });
+            this.orderList = data.obj;
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
+        }
+      );
+    },
+
+    // 确认收货
+    sureReceiving(item) {
+      let _obj = {
+        openId: url.openId,
+        id: item.id
+      };
+      this.$fetch.post(url.sureReceiving, _obj).then(
+        data => {
+          if (data.code == 0) {
+            console.log(data)
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
+        }
+      );
+    },
+    // 上拉加载
+    selPullUp() {
+      this.page.current++;
+      this.getOrderList();
+    },
+    // 下拉刷新
+    pulldown() {
+      this.isUnMore1 = false;
+      this.page.current = 1;
+      this.getOrderList();
     }
   },
+
   created() {
     settitle("我的订单");
     this.routeParams = JSON.parse(this.$route.params.obj);
@@ -117,6 +476,7 @@ export default {
 
   mounted() {
     console.log("我的订单");
+    this.getOrderList(); //获取商城订单
   }
 };
 </script>
@@ -130,11 +490,11 @@ export default {
   justify-content: space-around;
 }
 .switchBorder {
-  border: 1px solid #4A7B67;
+  border: 1px solid #4a7b67;
   height: 3px;
   width: 90%;
   margin-top: 0%;
-  background-color: #4A7B67;
+  background-color: #4a7b67;
   border-radius: 4px;
 }
 .order_block {
@@ -184,5 +544,13 @@ export default {
 }
 .order_bt_p {
   padding-bottom: 3%;
+}
+.GG_list {
+  width: 35%;
+  float: left;
+  margin-top: 2%;
+  margin-left: 2%;
+  font-size: 13px;
+  color: #102023;
 }
 </style>
