@@ -48,36 +48,63 @@
         </div>
         <div
           class="div_width_45 font_color_ff text_center backgroun_color_76"
-          @click="goTODataDetails"
+          @click="goTODataDetails('1')"
         >
           <div class="font_size_25 margin_top_div8">{{moneyList.customerRecharge}}</div>
           <div class="font_size_13 margin_top_div5">会员充值(元)</div>
         </div>
-        <div class="div_width_45 font_color_ff text_center backgroun_color_17">
+        <div
+          class="div_width_45 font_color_ff text_center backgroun_color_17"
+          @click="goTODataDetails('2')"
+        >
           <div class="font_size_25 margin_top_div8">{{moneyList.crossCharge}}</div>
           <div class="font_size_13 margin_top_div5">跨店服务费(元)</div>
         </div>
-        <div class="div_width_45 font_color_ff text_center" style="background-color:#B691FD">
+        <div
+          class="div_width_45 font_color_ff text_center"
+          style="background-color:#B691FD"
+          @click="goTODataDetails('3')"
+        >
           <div class="font_size_25 margin_top_div8">{{moneyList.videoCharge}}</div>
           <div class="font_size_13 margin_top_div5">视频收入(元)</div>
         </div>
-        <div class="div_width_45 font_color_ff text_center" style="background-color:#E091FD">
+        <div
+          class="div_width_45 font_color_ff text_center"
+          style="background-color:#E091FD"
+          @click="goTODataDetails('4')"
+        >
           <div class="font_size_25 margin_top_div8">{{moneyList.videoCommission}}</div>
           <div class="font_size_13 margin_top_div5">视频返佣(元)</div>
         </div>
-        <div class="div_width_45 font_color_ff text_center" style="background-color:#88C3FD">
+        <div
+          class="div_width_45 font_color_ff text_center"
+          style="background-color:#88C3FD"
+          @click="goTODataDetails('5')"
+        >
           <div class="font_size_25 margin_top_div8">{{moneyList.recommendCommission}}</div>
           <div class="font_size_13 margin_top_div5">推荐返佣(元)</div>
         </div>
-        <div class="div_width_45 font_color_ff text_center" style="background-color:#E8BB7A">
+        <div
+          class="div_width_45 font_color_ff text_center"
+          style="background-color:#E8BB7A"
+          @click="goTODataDetails('6')"
+        >
           <div class="font_size_25 margin_top_div8">{{moneyList.shopCommission}}</div>
           <div class="font_size_13 margin_top_div5">商城返佣(元)</div>
         </div>
-        <div class="div_width_45 font_color_ff text_center" style="background-color:#FFB469">
+        <div
+          class="div_width_45 font_color_ff text_center"
+          style="background-color:#FFB469"
+          @click="goTODataDetails('7')"
+        >
           <div class="font_size_25 margin_top_div8">{{moneyList.transferCharge}}</div>
           <div class="font_size_13 margin_top_div5">转店收入(元)</div>
         </div>
-        <div class="div_width_45 font_color_ff text_center" style="background-color:#FF776C">
+        <div
+          class="div_width_45 font_color_ff text_center"
+          style="background-color:#FF776C"
+          @click="goTODataDetails('8')"
+        >
           <div class="font_size_25 margin_top_div8">{{moneyList.expendCharge}}</div>
           <div class="font_size_13 margin_top_div5">押金支出(元)</div>
         </div>
@@ -136,14 +163,15 @@ export default {
       this.getStatistics(); //获取数据
     },
     // 去数据详情
-    goTODataDetails() {
+    goTODataDetails(item) {
+      console.log(item)
       this.$router.push({
         name: "dataDetails",
         params: {
           obj: JSON.stringify({
             type: "profession",
             data: {
-              id: "参数"
+              id: item
             }
           })
         }
