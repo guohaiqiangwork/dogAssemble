@@ -152,7 +152,9 @@ export default {
       Logform: {
         openId: "",
         password: "",
-        phone: ""
+        phone: "",
+        nickname: "掌声",
+        headimgurl: "http://m.imeitou.com/uploads/allimg/2019021309/ipijc3xjpfo.jpg"
       },
 
       validTel: false
@@ -179,12 +181,14 @@ export default {
         this.Logform.password,
         "fruits-app,yuntu,com"
       );
+      // this.Logform.nickname = ""; this.Logform.headimgurl = "";
       this.$fetch.post("fruits/app/user/login", this.Logform).then(res => {
         this.btnload = false;
         if (res.msg == "success") {
           this.$vux.toast.text("登录成功");
           localStorage.setItem("user", res.attributes.sessionId);
           localStorage.setItem("type", res.attributes.type);
+          localStorage.setItem("appUserId", res.attributes.appUserId); //登陆用户id
           this.getCartNum();
         } else {
           this.$vux.toast.text("登录时出现问题，请重新登录");
@@ -202,7 +206,7 @@ export default {
         this.$vux.toast.text("请检查输入的内容");
         return;
       }
-      this.loginP = this.form.password 
+      this.loginP = this.form.password;
       this.form.password = DesUtils.encode(
         this.form.password,
         "fruits-app,yuntu,com"
@@ -218,23 +222,25 @@ export default {
           //   var form = JSON.stringify(this.form);
           //   this.$router.push("/login/1?parm=" + form);
           // }, 1000);
-          let _obj = {
-            openId: "",
-            password:  DesUtils.encode( this.loginP,"fruits-app,yuntu,com"),
-            phone:  this.form.phone
-          };
-          console.log('889798797')
-          this.$fetch.post("fruits/app/user/login", _obj).then(res => {
-            this.btnload = false;
-            if (res.msg == "success") {
-              this.$vux.toast.text("登录成功");
-              localStorage.setItem("user", res.attributes.sessionId);
-              localStorage.setItem("type", res.attributes.type);
-              this.$router.push("/home");
-            } else {
-              this.$vux.toast.text("登录时出现问题，请重新登录");
-            }
-          });
+          if (res.attributes.type == 1) {
+            let _obj = {
+              openId: "",
+              password: DesUtils.encode(this.loginP, "fruits-app,yuntu,com"),
+              phone: this.form.phone
+            };
+            this.$fetch.post("fruits/app/user/login", _obj).then(res => {
+              this.btnload = false;
+              if (res.msg == "success") {
+                this.$vux.toast.text("登录成功");
+                localStorage.setItem("user", res.attributes.sessionId);
+                localStorage.setItem("type", res.attributes.type);
+                localStorage.setItem("appUserId", res.attributes.appUserId); //登陆用户id
+                this.$router.push("/home");
+              } else {
+                this.$vux.toast.text("登录时出现问题，请重新登录");
+              }
+            });
+          }
         } else {
           this.$vux.toast.text("出现错误，请重试");
         }
@@ -275,14 +281,16 @@ export default {
       }, 1000);
     },
     //获取购物车数量
-    getCartNum(){
-      this.$fetch.post('fruits/app/cart/getCartNum',{openId:"1313121231"}).then(res =>{
-        console.log(res);
-        if(res.msg == 'success'){
-          this.$router.push("/home");
-          localStorage.setItem('catnum',res.obj);
-        }
-      })
+    getCartNum() {
+      this.$fetch
+        .post("fruits/app/cart/getCartNum", { openId: "1313121231" })
+        .then(res => {
+          console.log(res);
+          if (res.msg == "success") {
+            this.$router.push("/home");
+            localStorage.setItem("catnum", res.obj);
+          }
+        });
     },
     //获取用户openId
     getOpenId() {
