@@ -2,9 +2,8 @@
   <div>
     <!-- 头部 -->
     <div class="personal_img_bj text_center font_color_ff">
-      <div class="font_size_12 padding_top_div8">总金额(元)</div>
-      <div class="font_size_25 margin_top_div3">1000.00</div>
-      <div class="font_size_12 margin_top_div3">数据统计截止：2019-05-14 13:15</div>
+      <div class="font_size_16 padding_top_div8">总金额(元)</div>
+      <div class="font_size_33 margin_top_div3">{{moneyList.count}}</div>
     </div>
     <!-- tab切换 -->
     <div>
@@ -16,78 +15,72 @@
       </div>
       <div class="tab_fg_border"></div>
       <!-- 今天 -->
-      <div v-if="switchFlage == '001'">
+      <div>
+        <div
+          v-if="switchFlage == '4'"
+          class="div_display_flex font_size_13 font_color_10"
+          style="margin-top: 3%;margin-left: 4%;"
+        >
+          <div class="s_t"></div>
+          <div class="margin_left_div3">
+            <datetime
+              v-model="valueS"
+              @on-change="changeS"
+              :title="''"
+              clear-text
+              @on-clear="setToday"
+              :min-year="2019"
+              :max-year="2300"
+            ></datetime>
+          </div>
+          <div class="margin_left_div3">--</div>
+          <div class="margin_left_div3">
+            <datetime
+              v-model="valueE"
+              @on-change="changeE"
+              :title="''"
+              clear-text
+              @on-clear="setToday"
+              :min-year="2019"
+              :max-year="2300"
+            ></datetime>
+          </div>
+        </div>
         <div
           class="div_width_45 font_color_ff text_center backgroun_color_76"
           @click="goTODataDetails"
         >
-          <div class="font_size_25 margin_top_div8">300.00</div>
-          <div class="font_size_13 margin_top_div5">充值金额(元)</div>
+          <div class="font_size_25 margin_top_div8">{{moneyList.customerRecharge}}</div>
+          <div class="font_size_13 margin_top_div5">会员充值(元)</div>
         </div>
         <div class="div_width_45 font_color_ff text_center backgroun_color_17">
-          <div class="font_size_25 margin_top_div8">300.00</div>
+          <div class="font_size_25 margin_top_div8">{{moneyList.crossCharge}}</div>
           <div class="font_size_13 margin_top_div5">跨店服务费(元)</div>
         </div>
-        <div class="div_width_45 font_color_ff text_center backgroun_color_E8">
-          <div class="font_size_25 margin_top_div8">300.00</div>
+        <div class="div_width_45 font_color_ff text_center" style="background-color:#B691FD">
+          <div class="font_size_25 margin_top_div8">{{moneyList.videoCharge}}</div>
+          <div class="font_size_13 margin_top_div5">视频收入(元)</div>
+        </div>
+        <div class="div_width_45 font_color_ff text_center" style="background-color:#E091FD">
+          <div class="font_size_25 margin_top_div8">{{moneyList.videoCommission}}</div>
           <div class="font_size_13 margin_top_div5">视频返佣(元)</div>
         </div>
-        <div class="div_width_45 font_color_ff text_center backgroun_color_FF8">
-          <div class="font_size_25 margin_top_div8">300.00</div>
+        <div class="div_width_45 font_color_ff text_center" style="background-color:#88C3FD">
+          <div class="font_size_25 margin_top_div8">{{moneyList.recommendCommission}}</div>
           <div class="font_size_13 margin_top_div5">推荐返佣(元)</div>
         </div>
-        <div class="div_width_45 font_color_ff text_center backgroun_color_B6">
-          <div class="font_size_25 margin_top_div8">300.00</div>
+        <div class="div_width_45 font_color_ff text_center" style="background-color:#E8BB7A">
+          <div class="font_size_25 margin_top_div8">{{moneyList.shopCommission}}</div>
           <div class="font_size_13 margin_top_div5">商城返佣(元)</div>
         </div>
-        <div class="div_width_45 font_color_ff text_center backgroun_color_B6">
-          <div class="font_size_25 margin_top_div8">300.00</div>
-          <div class="font_size_13 margin_top_div5">商城返佣(元)</div>
+        <div class="div_width_45 font_color_ff text_center" style="background-color:#FFB469">
+          <div class="font_size_25 margin_top_div8">{{moneyList.transferCharge}}</div>
+          <div class="font_size_13 margin_top_div5">转店收入(元)</div>
         </div>
-      </div>
-      <!-- 昨天 -->
-      <div v-if="switchFlage == '002'">待付款</div>
-      <!-- 近7天 -->
-      <div v-if="switchFlage == '003'">待收费</div>
-      <!-- 近30天 -->
-      <div v-if="switchFlage == '004'">已发货</div>
-      <!-- 自定义 -->
-      <div v-if="switchFlage == '005'">
-        <div class="div_display_flex font_size_13 font_color_10" style="margin-top: 3%;margin-left: 4%;">
-          <div class="s_t "></div>
-          <div class=" margin_left_div3"> <datetime v-model="valueS" @on-change="changeS" :title="''" clear-text @on-clear="setToday" :min-year=2019 :max-year=2020 ></datetime></div>
-          <div class=" margin_left_div3">--</div>
-          <div class=" margin_left_div3"> <datetime v-model="valueE" @on-change="changeE" :title="''" clear-text @on-clear="setToday" :min-year=2019 :max-year=2020 ></datetime></div>
+        <div class="div_width_45 font_color_ff text_center" style="background-color:#FF776C">
+          <div class="font_size_25 margin_top_div8">{{moneyList.expendCharge}}</div>
+          <div class="font_size_13 margin_top_div5">押金支出(元)</div>
         </div>
-  <div
-           v-if="type!=3"
-          class="div_width_45 font_color_ff text_center backgroun_color_76"
-          @click="goTODataDetails"
-        >
-          <div class="font_size_25 margin_top_div8">300.00</div>
-          <div class="font_size_13 margin_top_div5">充值金额(元)</div>
-        </div>
-        <div class="div_width_45 font_color_ff text_center backgroun_color_17"  v-if="type!=3">
-          <div class="font_size_25 margin_top_div8">300.00</div>
-          <div class="font_size_13 margin_top_div5">跨店服务费(元)</div>
-        </div>
-        <div class="div_width_45 font_color_ff text_center backgroun_color_E8">
-          <div class="font_size_25 margin_top_div8">300.00</div>
-          <div class="font_size_13 margin_top_div5">视频返佣(元)</div>
-        </div>
-        <div class="div_width_45 font_color_ff text_center backgroun_color_FF8">
-          <div class="font_size_25 margin_top_div8">300.00</div>
-          <div class="font_size_13 margin_top_div5">推荐返佣(元)</div>
-        </div>
-        <div class="div_width_45 font_color_ff text_center backgroun_color_B6">
-          <div class="font_size_25 margin_top_div8">300.00</div>
-          <div class="font_size_13 margin_top_div5">商城返佣(元)</div>
-        </div>
-        <div class="div_width_45 font_color_ff text_center backgroun_color_B6">
-          <div class="font_size_25 margin_top_div8">300.00</div>
-          <div class="font_size_13 margin_top_div5">商城返佣(元)</div>
-        </div>
-      
       </div>
     </div>
   </div>
@@ -105,33 +98,34 @@ export default {
       tabList: [
         {
           name: "今天",
-          id: "001"
+          id: "0"
         },
         {
           name: "昨天",
-          id: "002"
+          id: "1"
         },
         {
           name: "近7天",
-          id: "003"
+          id: "2"
         },
         {
           name: "近30天",
-          id: "004"
+          id: "3"
         },
         {
           name: "自定义",
-          id: "005"
+          id: "4"
         }
       ],
-      switchFlage: "005", //默认展示tab
+      switchFlage: "0", //默认展示tab
       valueS: "2019-09-09",
-      valueE: "2020-09-09"
+      valueE: "2020-09-09",
+      moneyList: ""
     };
   },
-  computed:{
-    type(){
-      return localStorage.getItem('type');
+  computed: {
+    type() {
+      return localStorage.getItem("type");
     }
   },
   methods: {
@@ -139,6 +133,7 @@ export default {
     tabSwitch(id) {
       console.log(id);
       this.switchFlage = id;
+      this.getStatistics(); //获取数据
     },
     // 去数据详情
     goTODataDetails() {
@@ -171,6 +166,20 @@ export default {
       if (day < 10) day = "0" + day;
       this.value1 = now.getFullYear() + "-" + cmonth + "-" + day;
       console.log(this.value1);
+    },
+    // 获取数据
+    getStatistics() {
+      let _obj = {
+        openId: url.openId,
+        flag: this.switchFlage,
+        startTime: this.valueS,
+        endTime: this.valueE
+      };
+      this.$fetch.post(url.getStatistics, _obj).then(data => {
+        if (data.code == 0) {
+          this.moneyList = data.obj;
+        }
+      });
     }
   },
   created() {
@@ -179,15 +188,17 @@ export default {
   },
 
   mounted() {
+    this.getStatistics(); //获取数据
     console.log("数据统计");
   }
 };
 </script>
 <style scoped>
 .personal_img_bj {
-  background-image: url("../../assets/images/bg@3x.png");
-  height: 175px;
+  background-image: url(/static/img/bg@3x.b188845.png);
+  height: 135px;
   background-repeat: no-repeat;
+  background-size: 100%;
 }
 .personal_title {
   height: 48px;
@@ -214,5 +225,4 @@ export default {
   margin-top: 3%;
   height: 93px;
 }
-
 </style>

@@ -38,5 +38,7 @@ module.exports = {
   getOrderList:'/fruits/app/shop/getOrderList',//商城订单
   getShopOrder:'/fruits/app/shop/getShopOrder',//获取商城订单详情
   payOrder:'/fruits/app/shop/payOrder',//商城订单支付
-  sureReceiving: '/fruits/app/shop/sureReceiving'//确认收货
+  sureReceiving: '/fruits/app/shop/sureReceiving',//确认收货--未联调
+  saveShopOrder: '/fruits/app/cart/saveShopOrder' ,//商城订单支付 ---未联调
+  getStatistics: '/fruits/app/statis/getStatistics'//数据统计数据获取
 };
