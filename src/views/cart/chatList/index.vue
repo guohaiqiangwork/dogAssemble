@@ -9,7 +9,7 @@
                 <div class="goods_item">
                     <p class="goods_title">{{item.name}}</p>
                     <p class="goods_flex">
-                        <span class="goods_price red">￥{{item.price}}</span>
+                        <span class="goods_price red">￥{{item.price.toFixed(2)}}</span>
                         <inline-x-number width="30px" :min="0" v-model="item.count" @on-change="change(item,index,charList)"></inline-x-number>
                     </p>
                 </div>
@@ -39,10 +39,18 @@ export default {
                 })
                 return a;
             }
+        },
+        goodsPrice(){
+            var a =0;
+            this.charList.map(e =>{
+                a+= e.money;
+            })
+            return a;
         }
     },
     data() {
         return {
+            mu:0,
             ischeck:false,
             bottomMsg:{
                 checkcount:0,
@@ -78,14 +86,13 @@ export default {
         chooseBuy(item,n) {
             item.ischeck = !item.ischeck;
             if(item.ischeck){
-                this.bottomMsg.totalprice += (item.count*item.price).toFixed(2)/1;
+                item.money = (item.count*item.price).toFixed(2)/1;
                 this.bottomMsg.checkcount++;
             }else{
-                this.bottomMsg.totalprice -= item.count*item.price;
-                this.bottomMsg.totalprice = this.bottomMsg.totalprice.toFixed(2)/1;
+                item.money = 0;
                 this.bottomMsg.checkcount--;
             }
-           
+            this.bottomMsg.totalprice = this.goodsPrice;
             this.chart(item,n);
             this.$emit('bottomEve',this.bottomMsg)
         },
@@ -104,6 +111,12 @@ export default {
             }else{
                 this.chart(item,n);
             }
+            if(item.ischeck){
+                item.money = (item.count * item.price).toFixed(2)/1;
+            }else{
+                // item.money = 0;
+            }
+            this.bottomMsg.totalprice = this.goodsPrice;
             this.postCart();
             this.$emit('changeNum',this.goodsNum);
         },
@@ -113,6 +126,7 @@ export default {
                 console.log(res,'dfsf')
                 res.obj.forEach(e => {
                     e.ischeck = false;
+                    e.money = 0;
                 });
                  this.charList = res.obj;
                  this.$emit('package',res.attributes)

@@ -23,11 +23,14 @@
             @click="goDetail(item)"
           >
             <div class="img_box">
-              <img class="goods_img" :src="item.picId" alt>
+              <img class="goods_img" :src="item.picId" alt="">
             </div>
             <div class="goods_msg">
               <p class="goods_name">{{item.name}}</p>
-              <p class="red">¥{{item.price.toFixed(2)}}</p>
+              <p>
+                <span class="red">¥{{item.price.toFixed(2)}}</span>
+                <span class="goods_discount" v-if="type!=1">¥{{item.original.toFixed(2)}}</span>
+              </p>
             </div>
           </div>
         </div>
@@ -68,7 +71,11 @@ export default {
       goodsList: ""
     };
   },
-  computed: {},
+  computed: {
+    type(){
+      return localStorage.getItem("type");
+    }
+  },
   methods: {
     goDetail(item) {
       this.$router.push("/goodsdetail?id=" + item.id);
@@ -141,7 +148,7 @@ export default {
       };
       this.$fetch.post(url.getGoodsList, _obj).then(
         data => {
-          console.log(data);
+          console.log(data,'kjljlk');
           if (data.code == 0) {
             this.goodsList = data.obj;
             this.goodsList.forEach(item => {
@@ -262,6 +269,13 @@ export default {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+      }
+      .goods_discount{
+        color:rgb(16,32,35);
+        opacity:0.52;
+        text-decoration: line-through;
+        margin-right: 0.2rem;
+        font-size: 0.26rem;
       }
     }
   }

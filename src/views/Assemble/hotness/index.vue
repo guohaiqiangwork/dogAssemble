@@ -6,7 +6,8 @@
         <p class="hot_msg">
           <span>{{item.name}}</span>
           <br>
-          <span class="hot_price">{{`￥${item.original}`}}</span>
+          <span class="hot_price">{{`￥${item.price.toFixed(2)}`}}</span>
+          <span class="goods_discount" v-if="type!=1">¥{{item.original.toFixed(2)}}</span>
         </p>
       </div>
     </div>
@@ -30,6 +31,11 @@ export default {
         }
       ]
     };
+  },
+  computed:{
+    type(){
+      return localStorage.getItem('type');
+    }
   },
   methods: {
     getRecommend() {
@@ -80,14 +86,24 @@ export default {
     }
     .hot_msg {
       text-align: left;
+      white-space: nowrap;
+      
       span {
         white-space: wrap;
       }
       .hot_price {
         color: #ff3636;
-        font-size: 0.28rem;
+        font-size: 0.16rem;
       }
+     
     }
   }
+   .goods_discount{
+        color:rgb(16,32,35);
+        opacity:0.52;
+        text-decoration: line-through;
+        margin-right: 0.2rem;
+        font-size: 0.13rem;
+      }
 }
 </style>

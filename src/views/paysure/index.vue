@@ -60,7 +60,7 @@
         </div>
 
         <div class="flex-start align-center" @click="goList">
-          <span>共2件</span>
+          <span style="white-space:nowrap;">共{{count}}件</span>
           <x-icon type="ios-arrow-right" size="30"></x-icon>
         </div>
       </div>
@@ -80,7 +80,7 @@
 
       <div class="item_form">
         <span>运费</span>
-        <span>￥￥{{postFee}}</span>
+        <span>￥{{postFee}}</span>
       </div>
       <div class="message_area">
         <p>留言</p>
@@ -115,6 +115,9 @@ export default {
     computed:{
         option(){
           return JSON.parse(this.$route.query.data);
+        },
+        count(){
+          return this.$route.query.count
         }
     },
   methods: {
@@ -314,6 +317,9 @@ export default {
     align-items: center;
     padding: 0 0 0 0.3rem;
     height: 1.09rem;
+    width: 100%;
+    position: fixed;
+    bottom: 48px;
     background: #fff;
     // padding: 1rem 1.5rem;
     .buybutton {

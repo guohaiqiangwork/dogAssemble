@@ -23,11 +23,11 @@
           <span class="count_box">
             <span>
               合计:
-              <span class="red final_price">{{bottomMsge.totalprice}}元</span>
+              <span class="red final_price">{{bottomMsge.totalprice.toFixed(2)}}元</span>
             </span>
             <span
               v-if="freeState.isFree == 1 && freeState.free - bottomMsge.totalprice>0"
-            >还差{{freeState.free - bottomMsge.totalprice}}元可享包邮</span>
+            >还差{{(freeState.free - bottomMsge.totalprice).toFixed(2)}}元可享包邮</span>
           </span>
 
           <div class="deal_down" @click="payPage">去结算</div>
@@ -68,11 +68,14 @@ export default {
     //去支付页面
     payPage() {
       var arr = [];
+      var count = 0;
       this.goodList.forEach(e => {
         if (e.ischeck) {
+          count += e.count;
           arr.push({
             id: e.goodsId,
             num: e.count
+
           });
         }
       });
@@ -84,7 +87,7 @@ export default {
         goodList: arr
       };
       obj = JSON.stringify(obj);
-      this.$router.push("/paysure?data=" + obj);
+      this.$router.push("/paysure?data=" + obj + "&count="+count);
     },
     //数量改变
     changeNum(e, arr) {

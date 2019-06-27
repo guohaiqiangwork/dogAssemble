@@ -13,7 +13,7 @@
             <p class=" goods_price">{{goodsDetail.name}}</p>
             <div>{{goodsDetail.remark}}</div>
             <p class="goods_name">
-                <span class="red">￥{{goodsDetail.price}}</span>
+                <span class="red">￥{{goodsDetail.price.toFixed(2)}}</span>
                 <!-- <span>*3</span> -->
             </p>
         </div>
@@ -35,8 +35,8 @@
                             <div class="flex-around flex-clo ml-space">
                                 <p>{{goodsDetail.name}}</p>
                                 <p class="goods_price">
-                                    <span class="goods_discount">￥{{goodsDetail.original}}</span>
-                                    <span class="red">￥{{goodsDetail.price}}</span>
+                                    <span class="red">￥{{goodsDetail.price.toFixed(2)}}</span>
+                                    <span class="goods_discount">￥{{goodsDetail.original.toFixed(2)}}</span>
                                 </p>
                             </div>
                         </div>
@@ -270,6 +270,7 @@ export default {
                         opacity:0.52;
                         text-decoration: line-through;
                         margin-right: 0.2rem;
+                        font-size: 0.26rem;
                     }
                 }
                 
