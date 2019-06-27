@@ -389,17 +389,17 @@ export default {
     },
     // 去支付
     goToPay() {
-      this.$router.push({
-        name: "orderDetails",
-        params: {
-          obj: JSON.stringify({
-            type: "profession",
-            data: {
-              id: "pay"
-            }
-          })
-        }
-      });
+      // this.$router.push({
+      //   name: "orderDetails",
+      //   params: {
+      //     obj: JSON.stringify({
+      //       type: "profession",
+      //       data: {
+      //         id: "pay"
+      //       }
+      //     })
+      //   }
+      // });
     },
     goToOrderDetails(item) {
       this.$router.push({
