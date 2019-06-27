@@ -37,7 +37,7 @@ service
      * code为非200是错误的请求
      */
     // console.log(response)
-   
+   console.log(response.data.code)
     if(response.data.msg =="no_login"){
       router.push('/login/1');
     }
@@ -48,6 +48,7 @@ service
     } else {
       // var res = JSON.parse(response.data)
       // Params.reslove()
+      
       return response.data
     }
   }, error => {
