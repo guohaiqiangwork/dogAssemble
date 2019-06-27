@@ -5,9 +5,9 @@ const config = require('../config/config.dev')
 let options = {
   baseURL: config.baseURL,
   timeout: 300000,
-  headers:{
+  headers: {
     'Content-Type': 'application/json',
-    'AuthorizationKey':window.localStorage.user || '',
+    'AuthorizationKey': window.localStorage.user || '',
   }
 
 }
@@ -18,13 +18,14 @@ service
   .interceptors
   .request
   .use(request => {
-    request.headers= {"AuthorizationKey":window.localStorage.getItem("user")};
+
+    request.headers = { "AuthorizationKey": window.localStorage.getItem("user") };
     // request.headers.common["Access-Control-Allow-Origin"]="*"
     return request
   }, error => {
     console.log(error)
     Promise.reject(error)
-    
+
   })
 
 // respone拦截器
@@ -35,23 +36,21 @@ service
     /**
      * code为非200是错误的请求
      */
-    console.log(response)
-   console.log(response.code)
-   if(response.data.code == 702){
-    window.open(response.data.obj)
-   }
-   
-    if(response.data.msg =="no_login"){
+    // console.log(response)
+    if (response.data.code == 401) {
+      
+    }
+    if (response.data.msg == "no_login") {
       router.push('/login/1');
     }
-  
-   
+
+
     if (response.status !== 200) {
       return Promise.reject('error')
     } else {
       // var res = JSON.parse(response.data)
       // Params.reslove()
-      
+
       return response.data
     }
   }, error => {

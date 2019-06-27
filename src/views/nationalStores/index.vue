@@ -6,6 +6,8 @@
       <input
         type="text"
         placeholder="搜索您想找的产品"
+        v-model="productNamr"
+        v-on:input="getRecommendStoreList(productNamr)"
         style="width:100%;height:100%;background-color:#EFEFEF; outline: none;border:none"
       >
       <i></i>
@@ -15,65 +17,83 @@
       <div class="national_flag_title"></div>
       <div class="font_color_00 font_size_14 margin_left_div2" style="margin-top: 0.8%;">附近门店推荐</div>
     </div>
-    <div v-for="(item,index) in nationList" class="div_display_flex">
-      <div @click="checkBtn(index,item.id)" :checked="item.isDefault" class="div_width_8">
+    <div class="div_display_flex">
+      <!-- <div @click="checkBtn(index,item.id)" :checked="item.isDefault" class="div_width_8">
         <check-icon :value.sync="item.isDefault" size="13px" style="padding-top: 64%;color:red"></check-icon>
-      </div>
+      </div>-->
       <div class="national_list font_color_00 font_size_13 backgroun_color_fff margin_top_div3">
         <div class="div_display_flex margin_top_div3">
-          <div class="div_width_70 margin_left_div2">内蒙古包头市昆都仑区钢铁大街店</div>
-          <div class="div_width_30 margin_right_div2 text_right">0.8公里</div>
+          <div
+            class="div_width_70 margin_left_div2"
+          >{{recommendStoreList[1].province}}{{recommendStoreList[1].city}}{{recommendStoreList[1].area}}</div>
+          <div class="div_width_30 margin_right_div2 text_right">{{recommendStoreList[1].distance}}</div>
         </div>
         <div class="div_display_flex margin_top_div3">
-          <div class="div_width_70 margin_left_div2">钢铁大街16号</div>
+          <div class="div_width_70 margin_left_div2">{{recommendStoreList[1].address}}</div>
           <div class="div_width_30 margin_right_div2 text_right" @click="goToMap">
             <img src="../../assets/images/1440@2x.png" width="12px">
           </div>
         </div>
         <div class="div_display_flex margin_top_div3">
           <div class="div_width_70 margin_left_div2">营业时间</div>
-          <div class="div_width_30 margin_right_div2 text_right">08:30-21:00</div>
+          <div class="div_width_30 margin_right_div2 text_right">{{recommendStoreList[1].startTime}}</div>
         </div>
         <div class="div_display_flex margin_top_div3 padding_bottom_4">
           <div class="div_width_70 margin_left_div2">门店电话</div>
-          <div class="div_width_30 margin_right_div2 text_right">17870987</div>
+          <div class="div_width_30 margin_right_div2 text_right">{{recommendStoreList[1].phone}}</div>
         </div>
       </div>
     </div>
     <!-- 其他门店列表 -->
-    <div class="div_display_flex margin_left_div3 margin_top_div3">
-      <div class="national_flag_title"></div>
-      <div class="font_color_00 font_size_14 margin_left_div2" style="margin-top: 0.8%;">其他门店</div>
-    </div>
-    <div v-for="(item,index) in nationQList" class="div_display_flex">
-      <div @click="checkQBtn(index,item.id)" :checked="item.isQDefault" class="div_width_8" v-if="classA  == '1'">
-        <check-icon :value.sync="item.isQDefault" size="13px" style="padding-top: 64%;"></check-icon>
-      </div>
-      <div class="national_list font_color_00 font_size_13 backgroun_color_fff margin_top_div3" :class="classA  == '1'? 'national_list' : 'national_list_w' " >
-        <div class="div_display_flex margin_top_div3">
-          <div class="div_width_70 margin_left_div2">内蒙古包头市昆都仑区钢铁大街店</div>
-          <div class="div_width_30 margin_right_div2 text_right">0.8公里</div>
+    <nut-scroller
+      :is-un-more="isUnMore1"
+      :is-loading="isLoading1"
+      :type="'vertical'"
+      @loadMore="selPullUp"
+      @pulldown="pulldown"
+    >
+      <div slot="list" class="nut-vert-list-panel">
+        <div class="div_display_flex margin_left_div3 margin_top_div3">
+          <div class="national_flag_title"></div>
+          <div class="font_color_00 font_size_14 margin_left_div2" style="margin-top: 0.8%;">其他门店</div>
         </div>
-        <div class="div_display_flex margin_top_div3">
-          <div class="div_width_70 margin_left_div2">钢铁大街16号</div>
-          <div class="div_width_30 margin_right_div2 text_right">
-            <img src="../../assets/images/1440@2x.png" width="12px">
+        <div v-for="(item,index) in recommendStoreList" :key="index" class="div_display_flex">
+          <!-- <div @click="checkQBtn(index,item.id)" :checked="item.isQDefault" class="div_width_8" v-if="classA  == '1'">
+        <check-icon :value.sync="item.isQDefault" size="13px" style="padding-top: 64%;"></check-icon>
+          </div>-->
+          <div
+            class="national_list font_color_00 font_size_13 backgroun_color_fff margin_top_div3"
+            :class="classA  == '1'? 'national_list' : 'national_list_w' "
+          >
+            <div class="div_display_flex margin_top_div3">
+              <div class="div_width_70 margin_left_div2">{{item.province}}{{item.city}}{{item.area}}</div>
+              <div class="div_width_30 margin_right_div2 text_right">{{item.distance}}</div>
+            </div>
+            <div class="div_display_flex margin_top_div3">
+              <div class="div_width_70 margin_left_div2">{{item.address}}</div>
+              <div class="div_width_30 margin_right_div2 text_right">
+                <img src="../../assets/images/1440@2x.png" width="12px">
+              </div>
+            </div>
+            <div class="div_display_flex margin_top_div3">
+              <div class="div_width_70 margin_left_div2">营业时间</div>
+              <div class="div_width_30 margin_right_div2 text_right">{{item.startTime}}</div>
+            </div>
+            <div class="div_display_flex margin_top_div3 padding_bottom_4">
+              <div class="div_width_70 margin_left_div2">门店电话</div>
+              <div class="div_width_30 margin_right_div2 text_right">{{item.phone}}</div>
+              <!-- <div class="div_width_30 margin_right_div2 text_right font_color_4A">已关闭</div> -->
+            </div>
           </div>
         </div>
-        <div class="div_display_flex margin_top_div3">
-          <div class="div_width_70 margin_left_div2">营业时间</div>
-          <div class="div_width_30 margin_right_div2 text_right">08:30-21:00</div>
-        </div>
-        <div class="div_display_flex margin_top_div3 padding_bottom_4">
-          <div class="div_width_70 margin_left_div2">门店电话</div>
-          <div class="div_width_30 margin_right_div2 text_right">17870987</div>
-           <!-- <div class="div_width_30 margin_right_div2 text_right font_color_4A">已关闭</div> -->
-        </div>
       </div>
-    </div>
-       <!-- 店铺更换提示 -->
+    </nut-scroller>
+    <!-- 店铺更换提示 -->
     <confirm v-model="nationSFalg" title @on-cancel="onCancel" @on-confirm="onConfirm">
-      <div style="text-align:center;font-size:18px;">您确认转到<br> "东河王中店”吗？</div>
+      <div style="text-align:center;font-size:18px;">
+        您确认转到
+        <br>"东河王中店”吗？
+      </div>
     </confirm>
   </div>
 </template>
@@ -92,8 +112,8 @@ export default {
     return {
       item: 0,
       isDefault: "",
-      classA:'1',//是否有单选框
-      nationSFalg:false,//地址确认
+      classA: "1", //是否有单选框
+      nationSFalg: false, //地址确认
       nationList: [
         { isDefault: false },
         { isDefault: true },
@@ -103,7 +123,15 @@ export default {
         { isQDefault: false },
         { isQDefault: true },
         { isQDefault: false }
-      ]
+      ],
+      page: {
+        current: "1",
+        size: "10"
+      },
+      recommendStoreList: "",
+      productNamr: "",
+      isUnMore1: false,
+      isLoading1: true
     };
   },
   methods: {
@@ -153,9 +181,9 @@ export default {
       // 设置值，以供传递
       this.nationQList[index].isQDefault = true;
       console.log(this.radio);
-      this.nationq()
+      this.nationq();
     },
-     //订单新建
+    //订单新建
     nationq() {
       this.nationSFalg = true;
     },
@@ -165,17 +193,47 @@ export default {
     },
     // 弹窗确认
     onConfirm() {
-    console.log("1");
+      console.log("1");
     },
-
+    //获取数据
+    getRecommendStoreList(item) {
+      let _obj = {
+        openId: url.openId,
+        name: item || '',
+        size: this.page.size,
+        current: this.page.current
+      };
+      this.$fetch.post(url.getRecommendStoreList, _obj).then(
+        data => {
+          if (data.code == 0) {
+            this.recommendStoreList = data.obj;
+            console.log(this.recommendStoreList);
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
+        }
+      );
+    },
+     // 上拉加载
+    selPullUp() {
+      this.page.current++;
+      this.getRecommendStoreList();
+    },
+    // 下拉刷新
+    pulldown() {
+      this.isUnMore1 = false;
+      this.page.current = 1;
+      this.getRecommendStoreList();
+    }
   },
   created() {
     settitle("我是全国们店");
-    this.routeParams = JSON.parse(this.$route.params.obj);
+    // this.routeParams = JSON.parse(this.$route.params.obj);
   },
 
   mounted() {
-    console.log("全国门店");
+    this.getRecommendStoreList(); //获取全国门店
   }
 };
 </script>
@@ -189,8 +247,8 @@ export default {
   border-radius: 10px;
 }
 .national_list {
-  width: 85%;
-  margin-left: 1%;
+  width: 90%;
+  margin-left: 5%;
   border: 1px solid #e9e9e9;
   border-radius: 8px;
 }
