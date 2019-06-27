@@ -150,7 +150,7 @@ export default {
         nickname: "随便"
       },
       Logform: {
-        openId: "112",
+        openId: "",
         password: "",
         phone: "13600000000",
         nickname: "掌声",

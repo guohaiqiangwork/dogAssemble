@@ -18,12 +18,11 @@ service
   .interceptors
   .request
   .use(request => {
-    
     request.headers= {"AuthorizationKey":window.localStorage.getItem("user")};
     // request.headers.common["Access-Control-Allow-Origin"]="*"
     return request
   }, error => {
-    alert(error)
+    console.log(error)
     Promise.reject(error)
     
   })
@@ -36,8 +35,12 @@ service
     /**
      * code为非200是错误的请求
      */
-    // console.log(response)
-   console.log(response.data.code)
+    console.log(response)
+   console.log(response.code)
+   if(response.data.code == 702){
+    window.open(response.data.obj)
+   }
+   
     if(response.data.msg =="no_login"){
       router.push('/login/1');
     }
@@ -52,6 +55,7 @@ service
       return response.data
     }
   }, error => {
+    console.log(error)
     // 错误提示
     // ElementUI.Message({
     //   type: 'error',
