@@ -40,7 +40,7 @@
           </div>
         </div>
         <!-- 账户 -->
-        <div class="personal_money text_center margin_top_div5" >
+        <div class="personal_money text_center margin_top_div5">
           <!-- style="margin-top:-21%" -->
           <div class="font_color_76 font_size_13 padding_top_div3">总金额(元)</div>
           <div
@@ -118,6 +118,13 @@
           </div>
           <div>设置中心</div>
         </div>
+        <div class="personal_cd text_center" @click="falgQH">
+          <div class="margin_top28">
+            <!-- class="img_width25" class="img_width_100"-->
+            <img src="../../assets/images/1609@2x.png" width="25px" height="30px">
+          </div>
+          <div>切换身份</div>
+        </div>
       </div>
       <!-- 底部菜单栏 -->
       <!-- <TabBar ref="TabBar"/> -->
@@ -187,6 +194,12 @@
           </div>
           <div>联系客服</div>
         </div>
+        <div class="personal_cd_j text_center" @click="falgQH">
+          <div class="margin_top28">
+            <img src="../../assets/images/1609@2x.png" width="25px" height="30px">
+          </div>
+          <div>切换身份</div>
+        </div>
       </div>
       <!-- 底部菜单栏 -->
       <!-- <TabBar ref="TabBar"/> -->
@@ -195,7 +208,7 @@
     <div class="backgroun_color_f3" v-if="personalMsg.type == 1">
       <!-- 头部 -->
       <div class="personal_img_bjgl">
-        <div class="billList"  @click="goToBillRecord">账单记录</div>
+        <div class="billList" @click="goToBillRecord">账单记录</div>
         <div class="div_display_flex">
           <div class="div_width_25">
             <div class="headr_img_circular">
@@ -274,6 +287,7 @@
               <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%">
             </div>
           </div>
+
           <div class="personal_div_border"></div>
         </div>
       </div>
@@ -321,6 +335,10 @@
     <confirm v-model="outPayFalge" title @on-cancel="onCancel" @on-confirm="onConfirm">
       <div style="text-align:center;font-size:18px;">是否要打烊？</div>
     </confirm>
+    <!-- 身份切换 -->
+    <confirm v-model="outPayFalge1" title @on-cancel="onCancel1" @on-confirm="onConfirm1">
+      <div style="text-align:center;font-size:18px;">是否进行身份切换</div>
+    </confirm>
   </div>
 </template>
 <script>
@@ -341,7 +359,8 @@ export default {
       sendAuthCode: true /*布尔值，通过v-show控制显示‘获取按钮’还是‘倒计时’ */,
       auth_time: 0 /*倒计时 计数器*/,
       accountFalge: true, //账户冻结
-      outPayFalge: false //是否打烊
+      outPayFalge: false, //是否打烊
+      outPayFalge1: false //身份切换
     };
   },
   created() {
@@ -360,9 +379,21 @@ export default {
       console.log("2");
     },
     //
-    goToBillRecord(){},
+    goToBillRecord() {},
     // 弹窗确认
     onConfirm() {
+      console.log("233");
+    },
+    //身份切换
+    falgQH() {
+      this.outPayFalge1 = true;
+    },
+    // 弹窗取消
+    onCancel1() {
+      console.log("2");
+    },
+    // 弹窗确认
+    onConfirm1() {
       console.log("233");
     },
     // 去我的钱包
@@ -592,7 +623,7 @@ a:link {
   color: #333333;
   text-decoration: none;
 }
-.billList{
+.billList {
   margin-top: 0.15rem;
   padding: 0 3%;
   color: #fff;

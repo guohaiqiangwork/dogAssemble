@@ -26,8 +26,8 @@
                 <!-- <x-input label-width="4em" :title='`<span style="${style}">手机号</span>`' placeholder="收货人电话" keyboard="number" is-type="china-mobile"></x-input> -->
             </div>
         </div>
-    <div class="save_btn" v-if="this.routeParams.data.pathF != 'false'" @click="addressoptX">保存休</div>
-    <div class="save_btn" v-if="this.routeParams.data.pathF == 'false'" @click="addressopt">保存新</div>
+    <div class="save_btn" v-if="pathFx != 'ent'" @click="addressoptX">保存</div>
+    <div class="save_btn" v-if="pathFx == 'ent'" @click="addressopt">保存</div>
   </div>
 </template>
 <script>
@@ -61,7 +61,8 @@ export default {
         isDefault: "",
         id: ""
       },
-      addressF: ""
+      addressF: "",
+      pathFx:''
     };
   },
   methods: {
@@ -168,11 +169,12 @@ export default {
   created() {
     settitle("地址管理");
     this.routeParams = JSON.parse(this.$route.query.obj);
-    if (this.routeParams.data.pathF != "false") {
-      (this.addressBC.name = this.routeParams.data.item.name),
-        (this.addressBC.details = this.routeParams.data.item.address),
-        (this.addressBC.phone = this.routeParams.data.item.tel);
-      this.addressBC.id = this.routeParams.data.item.id;
+    this.pathFx =this.routeParams.data.item
+    if (this.routeParams.data.item != "ent") {
+        this.addressBC.name = this.routeParams.data.item.name,
+        this.addressBC.details = this.routeParams.data.item.address,
+        this.addressBC.phone = this.routeParams.data.item.tel;
+        this.addressBC.id = this.routeParams.data.item.id;
     }
     this.getAddress();
   },

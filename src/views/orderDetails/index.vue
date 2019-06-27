@@ -70,6 +70,7 @@
 </template>
 <script>
 import url from "../../bin/url";
+import wexinPay from '../../bin/weiXinPay'
 import { XTextarea } from "vux";
 export default {
   name: "orderDetails",
@@ -112,12 +113,16 @@ export default {
       };
       this.$fetch.post(url.payOrder, _obj).then(data => {
         if (data.code == 0) {
-          cosnole.log(data)
+           var obj = eval("(" + data.obj + ")"); 
+          console.log(obj)
+          wexinPay(obj)
         }
       });
     }
   },
-  mounted() {},
+  mounted() {
+    console.log(wexinPay)
+  },
   created() {
     if (this.$route.params.obj) {
       this.routeParams = JSON.parse(this.$route.params.obj);

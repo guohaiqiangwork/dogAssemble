@@ -36,7 +36,7 @@
     </div>
     <div class="add_button">
       <x-icon type="ios-plus-outline" size="28"></x-icon>
-      <span class="ml-space" @click="addAddress(false)">新增收货地址</span>
+      <span class="ml-space" @click="addAddress('ent')">新增收货地址</span>
     </div>
   </div>
 </template>
@@ -96,7 +96,7 @@ export default {
     // 地址编辑新增
     addAddress(item) {
       console.log(item);
-      if (item) {
+      if (item != 'ent') {
         this.pathF = true;
       }
       this.$router.push({
