@@ -68,15 +68,32 @@ export default {
     //去支付页面
     payPage() { 
       var arr = [];
+      var picList =[];
       var count = 0;
+      console.log(this.goodList)
       this.goodList.forEach(e => {
         if (e.ischeck) {
           count += e.count;
           arr.push({
             id: e.goodsId,
-            num: e.count
+            num: e.count,
+            specList:[
+              {
+                specId:e.id,
+                specName:e.cartGoodsSpecs[0].specName,
+                value:e.cartGoodsSpecs[0].specValue,
+              }
+            ]
 
           });
+          picList.push(e.picId);
+          // e.cartGoodsSpecs.forEach(item =>{
+          //   specList.push({
+          //       specId:item.id,
+          //       specName:item.specName,
+          //       value:item.specValue,
+          //   });
+          // })
         }
       });
       if (!arr.length) {

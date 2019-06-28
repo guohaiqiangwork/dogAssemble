@@ -113,16 +113,20 @@ export default {
         openId:"",
         addressId:null,
         remarks:"",
-        goodList:[],
-        id:null,
-        num:null,
-        specList:[
+        goodList:[
           {
-            specId:null,
-            specName:"",
-            value:null,
+            num:'',
+            id:'',
+            specList:[
+              {
+                specId:null,
+                specName:"",
+                value:null,
+              }
+            ]
           }
-        ]
+        ],
+       
       },
       goodsMsg: {}
     };
@@ -162,6 +166,9 @@ export default {
       }
     },
     mounted() {
+      var a = this.$route.query.data;
+       a =JSON.parse(a);
+       console.log(a);
         this.$fetch.post("fruits/app/cart/getDefaultAddr",this.option).then(res =>{
             console.log(res.obj);
             this.goodsMsg = res.obj;
@@ -169,6 +176,7 @@ export default {
         })
     },
       created() {
+        
     if (this.$route.params.obj) {
       this.routeParams = JSON.parse(this.$route.params.obj);
       this.getSelectAddress(this.routeParams.data.item); //获取地址
