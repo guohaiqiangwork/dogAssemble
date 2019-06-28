@@ -7,7 +7,7 @@ Vue.use(ToastPlugin)
 const config = require('../config/config.dev')
 // 创建axios实例
 let options = {
-  baseURL: config.baseURL,
+  baseURL: config.product,
   timeout: 300000,
   headers: {
     'Content-Type': 'application/json',

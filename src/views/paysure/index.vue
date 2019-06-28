@@ -59,16 +59,16 @@
       <div class="item_form">
         <span>规格二</span>
         <span>规格单位</span>
-      </div> -->
+      </div>-->
       <div>
-          <!-- <div class="item_form">
+        <!-- <div class="item_form">
             <span>规格一</span>
             <span>规格单位</span>
-          </div> -->
-          <div class="item_form">
-            <span>合计金额</span>
-            <span>￥{{price}}</span>
-          </div>
+        </div>-->
+        <div class="item_form">
+          <span>合计金额</span>
+          <span>￥{{price}}</span>
+        </div>
       </div>
       <div class="item_form">
         <span>运费</span>
@@ -76,7 +76,13 @@
       </div>
       <div class="message_area">
         <p>留言</p>
-        <x-textarea :max="200" name="detail" placeholder="placeholder" :show-counter="true" v-model="form.remarks"></x-textarea>
+        <x-textarea
+          :max="200"
+          name="detail"
+          placeholder="placeholder"
+          :show-counter="true"
+          v-model="form.remarks"
+        ></x-textarea>
         <!-- <p class="buyflag">支付代表同意《购买须知》</p> -->
       </div>
       <div class="pay_box">
@@ -92,6 +98,7 @@
 <script>
 import url from "../../bin/url";
 import { XTextarea } from "vux";
+import weiXinPay from "../../bin/weiXinPay"
 export default {
   components: {
     XTextarea
@@ -100,73 +107,87 @@ export default {
     return {
       key: "value",
       selectAddressN: "",
-      postFee:'',
-      form:{
-        openId:localStorage.getItem('openId'),
-        addressId:null,
-        remarks:"",
-        goodList:[
-         
-        ],
-       
+      postFee: "",
+      form: {
+        openId: localStorage.getItem("openId"),
+        addressId: null,
+        remarks: "",
+        goodList: []
       },
       goodsMsg: {}
     };
   },
-    computed:{
-        option(){
-          return JSON.parse(this.$route.query.data);
-        },
-        count(){
-          // get(){
-          //   return this.$route.query.count
-          // },
-          // set(val){
-          //   this.$route.query.count = val;
-          // }
-          return this.$route.query.count
-        },
-        price(){
-          return this.$route.query.price;
-        },
-        list(){
-          return this.$route.query.list;
-        }
+  computed: {
+    option() {
+      return JSON.parse(this.$route.query.data);
     },
+    count() {
+      // get(){
+      //   return this.$route.query.count
+      // },
+      // set(val){
+      //   this.$route.query.count = val;
+      // }
+      return this.$route.query.count;
+    },
+    price() {
+      return this.$route.query.price;
+    },
+    list() {
+      return this.$route.query.list;
+    }
+  },
   methods: {
-    paysure(){
+    paysure() {
       this.form.addressId = this.goodsMsg.id;
       this.form.goodList = this.option.goodList;
-      console.log(this.option.goodList,'oooo')
-      this.$fetch.post('fruits/app/cart/saveShopOrder',this.form).then(res =>{
-        console.log(res,'kkkk')
-        if(res.msg == 'success'){
-          this.$vux.toast.text('支付成功');
-          setTimeout(() =>{
-            this.$router.push('/order/:obj',{
-            type: "profession",
-            data: {
-              id: "参数"
-            }
+      console.log(this.option.goodList, "oooo");
+      this.$fetch.post("fruits/app/cart/saveShopOrder", this.form).then(res => {
+        console.log(res, "kkkk");
+        if (res.msg == "success") {
+          this.$vux.toast.text("支付成功");
+          var a =JSON.parse(res.obj)
+          // console.log(weiXinPay,7979)
+          weiXinPay(a,function(val){
+            console.log(val,'kjkljlk')
+            alert(val)
+          },function(err){
+            alert(err,132)
+            console.log(err);
           })
-          },2000)
-          
+          // setTimeout(() => {
+          //   this.$router.push("/order/:obj", {
+          //     type: "profession",
+          //     data: {
+          //       id: "参数"
+          //     }
+          //   });
+          // }, 2000);
         }
-      })
+      });
     },
     //去地址管理
     goAddress() {
-      this.$router.push("/addressment");
+      console.log(this.count, 6756);
+      var obj = JSON.stringify(this.option);
+      this.$router.push(
+        "/addressment?data=" +
+          obj +
+          "&count=" +
+          this.count +
+          "&price=" +
+          this.price
+      );
     },
     // 去商品页
     goList() {
       // console.log(this.list)
       var obj = JSON.stringify(this.option);
-      this.$router.push("/goodslist?list="+obj);
+      this.$router.push("/goodslist?list=" + obj);
     },
-      //  goList(){
-      //       this.$router.push('/goodslist')
-      //   },
+    //  goList(){
+    //       this.$router.push('/goodslist')
+    //   },
     // 获取地址
     getSelectAddress(item) {
       // 会员订单保存
@@ -174,39 +195,38 @@ export default {
         openId: localStorage.getItem("openId"),
         id: item
       };
-      this.$fetch.post(url.selectAddress, _obj).then(
-        data => {
-          if (data.code == 0) {
-            this.selectAddressN = data.obj;
-          }else{
-             alert(data.msg)
-          }
-        })
-        console.log(this.selectAddressN,999)
-      }
-    },
-    mounted() {
-      console.log(this.option,'ppp')
-      //  获取邮费
-        this.$fetch.post("fruits/app/cart/getDefaultAddr",this.option).then(res =>{
-            console.log(res.obj,666);
-            this.goodsMsg = res.obj;
-            this.postFee = res.attributes.postage;
-        })
-    },
-      created() {
-        
-    // if (this.$route.params.obj) {
-    //   this.routeParams = JSON.parse(this.$route.params.obj);
-    //   this.getSelectAddress(this.routeParams.data.item); //获取地址
-    // }
-  }
+      this.$fetch.post(url.selectAddress, _obj).then(data => {
+        if (data.code == 0) {
+          this.goodsMsg = data.obj;
+          console.log(this.goodsMsg, "jjj");
+        } else {
+          alert(data.msg);
+        }
+      });
 
-       
- 
-    
+      // console.log(this.selectAddressN,999)
+    }
+  },
+  mounted() {
+    // console.log(JSON.parse(this.option),'ppp')
+    //  获取邮费
+    this.$fetch
+      .post("fruits/app/cart/getDefaultAddr", this.option)
+      .then(res => {
+        console.log(this.$route.params.obj, 666);
+        this.goodsMsg = res.obj;
+        this.postFee = res.attributes.postage;
+        if (this.$route.params.obj) {
+          this.routeParams = JSON.parse(this.$route.params.obj);
+          this.getSelectAddress(this.routeParams.data.item); //获取地址
+        }
+      });
+  },
+  created() {
+    console.log(this.$route, 99);
   }
-  // mounted() {},
+};
+// mounted() {},
 
 // };
 </script>

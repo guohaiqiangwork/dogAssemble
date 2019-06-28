@@ -475,7 +475,7 @@ export default {
 
   created() {
     settitle("我的订单");
-    this.routeParams = JSON.parse(this.$route.params.obj);
+    // this.routeParams = JSON.parse(this.$route.params.obj);
   },
 
   mounted() {

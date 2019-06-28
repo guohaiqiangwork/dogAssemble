@@ -57,7 +57,7 @@ export default {
       addressBC: {
         name: "", //姓名
         phone: "", //手机号码
-        details: "", //详细地址
+        details: "14346", //详细地址
         isDefault: false,
         id: ""
       },
@@ -131,9 +131,9 @@ export default {
          id: this.addressBC.id,
         receiver: this.addressBC.name, //收货人
         phone: this.addressBC.phone, //电话
-        province: this.addressF[0],
-        city: this.addressF[1],
-        area: this.addressF[2],
+        province: this.addressVal[0],
+        city: this.addressVal[1],
+        area: this.addressVal[2],
         receiveAddress: this.addressBC.details,
         isDefault: this.addressBC.isDefault,
        
@@ -147,6 +147,19 @@ export default {
         data => {
           if (data.code == 0) {
             // 刷新地址列表
+            this.$router.push({
+        name: "addressment",
+        params: {
+          // obj: JSON.stringify({
+          //   type: "profession",
+          //   data: {
+          //     item,
+          //     pathF: this.pathF
+          //   }
+          // })
+        },
+        query:this.$route.query
+      });
           }else{
              alert(data.msg)
           }
@@ -171,6 +184,15 @@ export default {
               data.obj.city,
               data.obj.area
             ];
+            this.addressBC.name = data.obj.receiver,
+            this.addressBC.details = data.obj.receiveAddress,
+            this.addressBC.phone = data.obj.phone;
+            this.addressBC.id = data.obj.id;
+            this.addressVal[0] = data.obj.province;
+            this.addressVal[1] = data.obj.city;
+            this.addressVal[2] = data.obj.area;
+
+            console.log(this.addressBC,'llllllll')
             this.address = value2name(addressValGet, ChinaAddressV4Data);
           }else{
              alert(data.msg)
@@ -184,12 +206,14 @@ export default {
   },
   created() {
     settitle("地址管理");
-    this.routeParams = JSON.parse(this.$route.query.obj);
+    console.log(this.$route,'kjklk')
+    this.routeParams = JSON.parse(this.$route.params.obj);
     this.pathFx =this.routeParams.data.item
     if (this.routeParams.data.item != "ent") {
-        this.addressBC.name = this.routeParams.data.item.name,
-        this.addressBC.details = this.routeParams.data.item.address,
-        this.addressBC.phone = this.routeParams.data.item.tel;
+      console.log(this.routeParams,'iuyoiuoiuo')
+        // this.addressBC.name = this.routeParams.data.item.receiver,
+        // this.addressBC.details = this.routeParams.data.item.receiveAddress,
+        // this.addressBC.phone = this.routeParams.data.item.phone;
         this.addressBC.id = this.routeParams.data.item.id;
     }
     this.getAddress();

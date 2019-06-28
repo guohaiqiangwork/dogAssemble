@@ -4,7 +4,10 @@
             <div  class= "cartlist"  v-for="(item,index) in charList" :key="index" @click.prevent="goDetail(item)">
                <!-- <div class="foods_select"></div> -->
                <i v-if="item.state ==1"></i>
-               <i v-else :class="['weui-icon', 'weui_icon_success', 'weui-icon-success',item.ischeck?'checked' : 'normal']" @click.stop="chooseBuy(item,index)"></i>
+               <span v-else @click.stop="chooseBuy(item,index)">
+                    <i  :class="['weui-icon', 'weui_icon_success', 'weui-icon-success',item.ischeck?'checked' : 'normal']" ></i>
+               </span>
+              
                 <img class="gooods_avatar"   :src="'http://www.gsb.yuntunet.cn/fruits/app/blank/showPicture?attachmentId='+item.picId" alt="">
                 <div class="goods_item">
                     <p class="goods_title">{{item.name}}</p>
@@ -187,6 +190,7 @@ export default {
         margin-bottom: 0.2rem;
         background: #fff;
         i{
+            display: inline-block;
             font-size: 0.32rem;
         }
         .distroy{

@@ -1,8 +1,9 @@
 <template>
   <div id="address">
     <div class="address_container" v-if="addressList.length != 0">
-      <swipeout v-for="(item,index) in addressList" :key="index">
+      <swipeout v-for="(item,index) in addressList" :key="index"  >
         <swipeout-item
+      
           @on-close="handleEvents('on-close')"
           @on-open="handleEvents('on-open')"
           transition-mode="follow"
@@ -15,7 +16,7 @@
             >{{'删除'}}</swipeout-button>
             <!-- <swipeout-button @click.native="onButtonClick('delete')" type="warn">{{$t('Right')}}</swipeout-button> -->
           </div>
-          <div slot="content" class="vux-1px-t address_list">
+          <div slot="content" class="vux-1px-t address_list"  @click="goBack(item)">
             <div class="name_size">
               <p>{{item.receiver}}</p>
               <span class="defalut_address" v-show="item.isDefault == 1">默认</span>
@@ -25,7 +26,7 @@
               <p>{{item.receiveAddress}}</p>
             </div>
             <div class="option">
-              <img @click="addAddress(item)" src="../../assets/images/edit.png" alt>
+              <img @click.stop="addAddress(item)" src="../../assets/images/edit.png" alt>
             </div>
           </div>
         </swipeout-item>
@@ -94,19 +95,41 @@ export default {
         }
       );
     },
-
+    goBack(item){
+      console.log(item,'000')
+      // this.$router.push('/paysure',{
+      //   data:{
+          
+      //   }
+        
+      // })
+      console.log(this.$route.query.data,'jkj')
+      // this.$route.query.data = JSON.stringify(this.$route.query.data);
+      console.log(this.$route,888);
+      this.$router.push({
+        name: "paysure",
+        params: {
+          obj: JSON.stringify({
+            data: {
+              item:item.id
+            }
+          })
+        },
+        query:this.$route.query
+      });
+    },
     // addAddress() {
     //   this.$router.push("/addressopt");
     // },
     // 地址编辑新增
     addAddress(item) {
-      console.log(item);
+      console.log(this.$route,98080);
       if (item != 'ent') {
         this.pathF = true;
       }
       this.$router.push({
-        path: "/addressopt",
-        query: {
+        name: "addressopt",
+        params: {
           obj: JSON.stringify({
             type: "profession",
             data: {
@@ -114,7 +137,8 @@ export default {
               pathF: this.pathF
             }
           })
-        }
+        },
+        query:this.$route.query
       });
       //   this.$router.push("/addressopt");
     },
@@ -123,6 +147,7 @@ export default {
       this.$fetch
         .post("fruits/app/cart/getAddressList", { openId: localStorage.getItem("openId") })
         .then(res => {
+          console.log(res,'kkk')
           this.addressList = [...res.obj];
         });
     }
@@ -131,6 +156,8 @@ export default {
     settitle("地址管理");
   },
   mounted() {
+      console.log(this.$route,9880);
+
     this.getAddress();
   }
 };

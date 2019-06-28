@@ -73,7 +73,7 @@
       </div>
       <div class="margin_top_div5">
         <span class="font_size_14 font_color_1A margin_left_div6">结束时间：</span>
-        {{endTime}}
+        {{memberIDNumber==1 ?startTime :endTime }}
       </div>
       <!-- 按钮 -->
       <div class="div_display_flex" style="position: fixed;bottom: 0;width: 100%;line-height: 3;">
@@ -399,6 +399,7 @@ export default {
       this.memberID = this.selected.id;
       this.memberIDNumber = this.selected.recipe;
       this.payMoney = this.selected.retail;
+      console.log(this.memberIDNumber)
     },
     //订单保存
     newOrderq() {
