@@ -38,6 +38,8 @@
 </template>
 <script>
 import { Checklist, CheckIcon } from "vux";
+import url from "../../bin/url";
+
 export default {
   components: {
     Checklist,
@@ -69,24 +71,42 @@ export default {
     payPage() { 
       var arr = [];
       var picList =[];
-      var count = 0;
-      console.log(this.goodList)
+      var count = 0,
+          price = 0;
+      console.log(this.goodList,'lll')
       this.goodList.forEach(e => {
         if (e.ischeck) {
           count += e.count;
-          arr.push({
+          price += (e.count*e.price).toFixed(2)/1;
+          e.cartGoodsSpecs.forEach(el =>{
+            picList.push({
+                specId:el.id,
+                specName:el.specName,
+                value:el.specValue,
+              })
+          })
+          if(e.cartGoodsSpecs.length){
+            arr.push({
             id: e.goodsId,
             num: e.count,
-            specList:[
-              {
-                specId:e.id,
-                specName:e.cartGoodsSpecs[0].specName,
-                value:e.cartGoodsSpecs[0].specValue,
-              }
-            ]
+            name:e.name,
+            img:url.imgUrl + e.picId,
+            price:e.price,
+            specList:picList,
 
           });
-          picList.push(e.picId);
+          }else{
+            arr.push({
+              id: e.goodsId,
+              num: e.count,
+              name:e.name,
+              price:e.price,
+              img:url.imgUrl + e.picId,
+              specList:[]
+            })
+          }
+          
+          // picList.push(e.picId);
           // e.cartGoodsSpecs.forEach(item =>{
           //   specList.push({
           //       specId:item.id,
@@ -101,10 +121,11 @@ export default {
       }
       var obj = {
         openId: localStorage.getItem("openId"),
-        goodList: arr
+        goodList: arr,
+        // name:
       };
       obj = JSON.stringify(obj);
-      this.$router.push("/paysure?data=" + obj + "&count="+count);
+      this.$router.push("/paysure?data=" + obj + "&count="+count + "&price="+price);
     },
     //数量改变
     changeNum(e, arr) {

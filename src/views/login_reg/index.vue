@@ -181,9 +181,9 @@ export default {
         "fruits-app,yuntu,com"
       );
       // this.Logform.nickname = ""; this.Logform.headimgurl = "";
-      this.Logform.openId = localStorage.getItem("openId");
-      this.Logform.nickname = localStorage.getItem("nickname");
-      this.Logform.headimgurl = localStorage.getItem("headimgurl");
+      this.Logform.openId = localStorage.getItem("openId") || '112';
+      this.Logform.nickname = localStorage.getItem("nickname") || '随便';
+      this.Logform.headimgurl = localStorage.getItem("headimgurl") || 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJrDNnAKic6SaKbPB5FGldToRvRnlEgQwjIT9xaNoh1gspSk3xgUUX5Myvl4Sz68wSTZCHEOKOZsiag/132';
       this.$fetch.post("fruits/app/user/login", this.Logform).then(res => {
         this.btnload = false;
         if (res.msg == "success") {
@@ -233,7 +233,7 @@ export default {
               password: DesUtils.encode(this.loginP, "fruits-app,yuntu,com"),
               phone: this.form.phone,
               nickname: localStorage.getItem("nickname"),
-              headimgurl: localStorage.getItem("headimgurl")
+              headimgurl: localStorage.getItem("headimgurl") || 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJrDNnAKic6SaKbPB5FGldToRvRnlEgQwjIT9xaNoh1gspSk3xgUUX5Myvl4Sz68wSTZCHEOKOZsiag/132'
             };
 
             this.$fetch.post("fruits/app/user/login", _obj).then(res => {

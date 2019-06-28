@@ -31,7 +31,7 @@
         </swipeout-item>
       </swipeout>
     </div>
-    <div v-if="addressList.length == 0" style="    background-color: #fff;text-align: center;margin-top: 30%;  height: 100%;
+    <div v-if="addressList.length == 0" style="background-color: #fff;text-align: center;height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;">
@@ -136,8 +136,9 @@ export default {
 <style lang="less">
 #address {
   width: 100%;
-  height: 100%;
+  height: calc(100% - 48px);
   background: #f3f5f8;
+  overflow-x: hidden;
   .vux-swipeout-button-primary {
     background: #4a7b67;
   }

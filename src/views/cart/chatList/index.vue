@@ -4,7 +4,7 @@
             <div  class= "cartlist"  v-for="(item,index) in charList" :key="index" @click.prevent="goDetail(item)">
                <!-- <div class="foods_select"></div> -->
                <i v-if="item.state ==1"></i>
-                <i v-else :class="['weui-icon', 'weui_icon_success', 'weui-icon-success',item.ischeck?'checked' : 'normal']" @click="chooseBuy(item,index)"></i>
+               <i v-else :class="['weui-icon', 'weui_icon_success', 'weui-icon-success',item.ischeck?'checked' : 'normal']" @click.stop="chooseBuy(item,index)"></i>
                 <img class="gooods_avatar"   :src="'http://www.gsb.yuntunet.cn/fruits/app/blank/showPicture?attachmentId='+item.picId" alt="">
                 <div class="goods_item">
                     <p class="goods_title">{{item.name}}</p>
@@ -16,7 +16,7 @@
                     </p>
                     <div v-if="item.cartGoodsSpecs.length&&item.state !=1" style="display:flex">
                         <p v-for="(ite,ind) in item.cartGoodsSpecs" :key="ind">
-                            <span>{{ite.specName+":"+ite.specValue}}</span>
+                            <span>{{ite.specName + ":" + ite.specValue}}</span>
                         </p>
                     </div>
                 </div>
@@ -66,35 +66,20 @@ export default {
                 totalprice:0
             },
             charList:[
-                {
-                    logo:require('../../../assets/images/WechatIMG99(1).png'),
-                    title:'熊孩子综合蔬菜干香菇脆秋葵干330g 果蔬脆',
-                    num:1,
-                    id:null,
-                    price:13.91,
-                    ischeck:false,
-                },
-                {
-                    logo:require('../../../assets/images/WechatIMG99(1).png'),
-                    title:'熊孩子综合蔬菜干香菇脆秋葵干330g 果蔬脆',
-                    num:1,
-                    id:null,
-                    price:13.9,
-                    ischeck:false,
-                }
             ],
             cartDate:{
                 openId:localStorage.getItem("openId"),
                 id:"",
                 num:""
             },
-            goDetail(item){
-                // console.log(item.goodsId,999);
-                this.$router.push("/goodsdetail?id=" + item.goodsId);
-            },
+          
         }
     },
     methods: {
+          goDetail(item){
+                // console.log(item.goodsId,999);
+                this.$router.push("/goodsdetail?id=" + item.goodsId);
+            },
         defalut(){
             // return false
         },

@@ -21,16 +21,16 @@ export default {
   data() {
     return {
       hotList: [
-        {
-          logo: require("../../../assets/images/WechatIMG102.png"),
-          tip: "蔬菜置物架",
-          price: 21.9
-        },
-        {
-          logo: require("../../../assets/images/WechatIMG102.png"),
-          tip: "熊孩子蔬菜干",
-          price: 19.9
-        }
+        // {
+        //   logo: require("../../../assets/images/WechatIMG102.png"),
+        //   tip: "蔬菜置物架",
+        //   price: 21.9
+        // },
+        // {
+        //   logo: require("../../../assets/images/WechatIMG102.png"),
+        //   tip: "熊孩子蔬菜干",
+        //   price: 19.9
+        // }
       ]
     };
   },

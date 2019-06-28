@@ -13,7 +13,7 @@
             <div class="address_item flex_between"  @click="showAddress = true">
                 <x-input label-width="5em" v-model="address" :title='`<span style="${style}">所在城市</span>`' disabled placeholder="请选择您所在的城市" keyboard="number" ></x-input>
                 <x-icon type="ios-arrow-right" class="icon_middle"></x-icon>
-                <x-address v-show="false" @on-hide="logHide" @on-show="logShow" :title="title" v-model="addressVal" :list="addressData" @on-shadow-change="onShadowChange" placeholder="请选择地址" inline-desc="可以设置placeholder" :show.sync="showAddress"></x-address>
+                <x-address v-show="false" @on-hide="logHide" @on-show="logShow"  :title="title" v-model="addressVal" :list="addressData" @on-shadow-change="onShadowChange" placeholder="请选择地址" inline-desc="可以设置placeholder" :show.sync="showAddress"></x-address>
             </div>
             <div class="address_item">
             
@@ -58,7 +58,7 @@ export default {
         name: "", //姓名
         phone: "", //手机号码
         details: "", //详细地址
-        isDefault: "",
+        isDefault: false,
         id: ""
       },
       addressF: "",
@@ -71,12 +71,18 @@ export default {
     },
     logHide(str) {
       if (str) {
+          console.log(this.addressVal,9999)
+      console.log(this.address)
         this.address = value2name(this.addressVal, ChinaAddressV4Data);
         this.addressF = this.address.split(" ");
       }
     },
-    logShow() {},
-    onShadowChange() {},
+    logShow() {
+    
+    },
+    onShadowChange(val) {
+      console.log(val)
+    },
     clearItem() {
       this.details = "";
       console.log(465);
@@ -84,17 +90,20 @@ export default {
     onBlur(e, v, q) {
       console.log(e, v, q);
     },
+    onChange(val){
+      console.log(val,'ppp');
+    },
     // 新增地址保存
     addressopt() {
       let _obj = {
         openId: localStorage.getItem("openId"),
         receiver: this.addressBC.name, //收货人
         phone: this.addressBC.phone, //电话
-        province: this.addressF[0],
-        city: this.addressF[1],
-        area: this.addressF[2],
+        province: this.addressVal[0],
+        city: this.addressVal[1],
+        area: this.addressVal[2],
         receiveAddress: this.addressBC.details,
-        isDefault: this.addressBC.isDefault
+        isDefault: this.addressBC.isDefault?1:0
       };
       if (_obj.isDefault) {
         _obj.isDefault = "1";
@@ -105,6 +114,7 @@ export default {
         data => {
           if (data.code == 0) {
             // 刷新地址列表
+            this.$router.push('/addressment')
           }
         },
         err => {
@@ -151,7 +161,7 @@ export default {
       this.$fetch.post(url.getAddress, _obj).then(
         data => {
           if (data.code == 0) {
-            console.log(data.obj);
+            console.log(data.obj,555);
             var addressValGet = [
               data.obj.province,
               data.obj.city,

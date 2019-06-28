@@ -2,24 +2,26 @@
     <div id="goodsList">
 
         
-        <div  class="goods-item flex-between align-center">
+        <div  class="goods-item flex-between align-center" v-for="(item,index) in list.goodList" :key="index">
            
-            <img class="goods-img" src="../../../assets/images/WechatIMG99.png" alt="">
+            <img class="goods-img" :src="item.img" alt="">
            
             <div class="goods-msg">
-                <p>熊孩子综合蔬菜干香菇脆秋葵干330g袋果蔬脆</p>
+                <p>{{item.name}}</p>
                 <p class="mt-12 flex-between">
                     <span class="flex-between align-center">
-                        <span class="goods-price">¥13.9</span>
-                        <span class="ml-2">规格:800g</span>
-                        <span class="ml-2">规格:800g</span>
+                        <span class="goods-price">¥{{item.price}}</span>
+                        <span v-for="(el,ind) in item.specList" :key="ind">
+                            <span class="ml-2">{{el.specName}}:{{el.value}}</span>
+                            <!-- <span class="ml-2">规格:800g</span> -->
+                        </span>
                     </span>
-                    <span>X3</span>
+                    <span>X{{item.num}}</span>
                 </p>
             </div>
         </div>
 
-        <div  class="goods-item flex-between align-center">
+        <!-- <div  class="goods-item flex-between align-center">
            
             <img class="goods-img" src="../../../assets/images/WechatIMG99.png" alt="">
            
@@ -34,9 +36,9 @@
                     <span>X3</span>
                 </p>
             </div>
-        </div>
+        </div> -->
  
-        <div  class="goods-item flex-between align-center">
+        <!-- <div  class="goods-item flex-between align-center">
            
             <img class="goods-img" src="../../../assets/images/WechatIMG99.png" alt="">
            
@@ -51,7 +53,7 @@
                     <span>X3</span>
                 </p>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 <script>
@@ -61,13 +63,18 @@ export default {
             key: 'value'
         }
     },
+    computed:{
+        list(){
+            return JSON.parse(this.$route.query.list);
+        }
+    },
     methods: {
         name() {
             
         }
     },
     mounted() {
-        
+        console.log(this.list)
     },
 }
 </script>
@@ -85,6 +92,7 @@ export default {
             height: 1.4rem;
         }
         .goods-msg{
+            width: 100%;
             margin-left: 0.3rem;
             .mt-12{
                 margin-top: 0.12rem;

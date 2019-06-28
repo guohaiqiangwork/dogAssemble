@@ -1,26 +1,26 @@
 <template>
   <div id="paysure">
-    <div class="address_box" v-if="selectAddressN">
+    <div class="address_box" v-if="goodsMsg.receiver">
       <p class="title_address">收货地址</p>
       <div class="address_content">
         <div class="person_msg">
           <div class="half_box">
             <img class="icon_size" src="../../assets/images/position.png" alt>
-            <span>{{selectAddressN.receiver}}</span>
-            <span>{{selectAddressN.phone}}</span>
+            <span>{{goodsMsg.receiver}}</span>
+            <span>{{goodsMsg.phone}}</span>
           </div>
           <!-- <img class="icon_right" src="../../assets/images/right.png" alt="" > -->
           <x-icon @click="goAddress" type="ios-arrow-right" size="30"></x-icon>
         </div>
         <div class="address_msg">
-          <div class="topic_box" v-if="selectAddressN.isDefault == 1">
+          <div class="topic_box" v-if="goodsMsg.isDefault == 1">
             <span class="defalut_toic">默认</span>
           </div>
-          <span>{{selectAddressN.receiveAddress}}</span>
+          <span>{{goodsMsg.receiveAddress}}</span>
         </div>
       </div>
     </div>
-    <div v-if="!selectAddressN">
+    <div v-else>
       <div class="text_center font_size_16" style="line-height:6" @click="goAddress">
         <img class="icon_size" src="../../assets/images/添加@2x.png" width="16px" height="16px" alt>
         请添加您的收货人信息
@@ -39,23 +39,10 @@
                     </p>
         </div>-->
 
-        <div class="flex-between">
+        <div class="flex-between" v-for="(item,index) in option.goodList" :key="index">
           <div class="flex-between flex-clo align-center items">
-            <img src="../../assets/images/WechatIMG102.png" alt>
-            <p>¥13.9</p>
-          </div>
-          <div class="flex-between flex-clo align-center items">
-            <img src="../../assets/images/WechatIMG102.png" alt>
-            <p>¥13.9</p>
-          </div>
-          <div class="flex-between flex-clo align-center items">
-            <img src="../../assets/images/WechatIMG102.png" alt>
-            <p>¥13.9</p>
-          </div>
-
-          <div class="flex-between flex-clo align-center items">
-            <img src="../../assets/images/WechatIMG102.png" alt>
-            <p>¥13.9</p>
+            <img :src="item.img" alt>
+            <p>¥{{item.price}}</p>
           </div>
         </div>
 
@@ -65,34 +52,39 @@
         </div>
       </div>
       <!-- 单行form -->
-      <div class="item_form">
+      <!-- <div class="item_form">
         <span>规格一</span>
         <span>规格单位</span>
       </div>
       <div class="item_form">
         <span>规格二</span>
         <span>规格单位</span>
+      </div> -->
+      <div>
+          <!-- <div class="item_form">
+            <span>规格一</span>
+            <span>规格单位</span>
+          </div> -->
+          <div class="item_form">
+            <span>合计金额</span>
+            <span>￥{{price}}</span>
+          </div>
       </div>
-      <div class="item_form">
-        <span>合计金额</span>
-        <span>￥200</span>
-      </div>
-
       <div class="item_form">
         <span>运费</span>
         <span>￥{{postFee}}</span>
       </div>
       <div class="message_area">
         <p>留言</p>
-        <x-textarea :max="200" name="detail" placeholder="placeholder" :show-counter="true"></x-textarea>
+        <x-textarea :max="200" name="detail" placeholder="placeholder" :show-counter="true" v-model="form.remarks"></x-textarea>
         <!-- <p class="buyflag">支付代表同意《购买须知》</p> -->
       </div>
       <div class="pay_box">
         <div class>
           <span>实际支付</span>
-          <span class="red price_size">￥ 400.00</span>
+          <span class="red price_size">￥{{(price/1+postFee/1).toFixed(2)}}</span>
         </div>
-        <div class="buybutton">确认支付</div>
+        <div class="buybutton" @click="paysure">确认支付</div>
       </div>
     </div>
   </div>
@@ -110,21 +102,11 @@ export default {
       selectAddressN: "",
       postFee:'',
       form:{
-        openId:"",
+        openId:localStorage.getItem('openId'),
         addressId:null,
         remarks:"",
         goodList:[
-          {
-            num:'',
-            id:'',
-            specList:[
-              {
-                specId:null,
-                specName:"",
-                value:null,
-              }
-            ]
-          }
+         
         ],
        
       },
@@ -136,16 +118,51 @@ export default {
           return JSON.parse(this.$route.query.data);
         },
         count(){
+          // get(){
+          //   return this.$route.query.count
+          // },
+          // set(val){
+          //   this.$route.query.count = val;
+          // }
           return this.$route.query.count
+        },
+        price(){
+          return this.$route.query.price;
+        },
+        list(){
+          return this.$route.query.list;
         }
     },
   methods: {
+    paysure(){
+      this.form.addressId = this.goodsMsg.id;
+      this.form.goodList = this.option.goodList;
+      console.log(this.option.goodList,'oooo')
+      this.$fetch.post('fruits/app/cart/saveShopOrder',this.form).then(res =>{
+        console.log(res,'kkkk')
+        if(res.msg == 'success'){
+          this.$vux.toast.text('支付成功');
+          setTimeout(() =>{
+            this.$router.push('/order/:obj',{
+            type: "profession",
+            data: {
+              id: "参数"
+            }
+          })
+          },2000)
+          
+        }
+      })
+    },
+    //去地址管理
     goAddress() {
       this.$router.push("/addressment");
     },
-  
+    // 去商品页
     goList() {
-      this.$router.push("/goodslist");
+      // console.log(this.list)
+      var obj = JSON.stringify(this.option);
+      this.$router.push("/goodslist?list="+obj);
     },
       //  goList(){
       //       this.$router.push('/goodslist')
@@ -163,24 +180,24 @@ export default {
             this.selectAddressN = data.obj;
           }
         })
+        console.log(this.selectAddressN,999)
       }
     },
     mounted() {
-      var a = this.$route.query.data;
-       a =JSON.parse(a);
-       console.log(a);
+      console.log(this.option,'ppp')
+      //  获取邮费
         this.$fetch.post("fruits/app/cart/getDefaultAddr",this.option).then(res =>{
-            console.log(res.obj);
+            console.log(res.obj,666);
             this.goodsMsg = res.obj;
             this.postFee = res.attributes.postage;
         })
     },
       created() {
         
-    if (this.$route.params.obj) {
-      this.routeParams = JSON.parse(this.$route.params.obj);
-      this.getSelectAddress(this.routeParams.data.item); //获取地址
-    }
+    // if (this.$route.params.obj) {
+    //   this.routeParams = JSON.parse(this.$route.params.obj);
+    //   this.getSelectAddress(this.routeParams.data.item); //获取地址
+    // }
   }
 
        
