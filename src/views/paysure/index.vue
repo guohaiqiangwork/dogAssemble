@@ -151,6 +151,7 @@ export default {
           weiXinPay(a,function(val){
             console.log(val,'kjkljlk')
             alert(JSON.stringify(val),2222);
+            alert(JSON.parse(val),3333);
             alert(val)
           },function(err){
             alert(err,132)
