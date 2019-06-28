@@ -29,7 +29,7 @@ export default {
     },
     getGoodsList() {
       let _obj = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         id: this.listId || "",
         size: "10",
         current: "1"

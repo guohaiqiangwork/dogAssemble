@@ -12,7 +12,7 @@
     <!-- <router-link to="/videopage">视频页面</router-link> -->
     <router-link to="/login/1">登录和注册页面</router-link>
     <router-link to="/videomangment">视频管理</router-link>
-     <!-- <button @click="goToLogin">登陆页面</button> -->
+    <!-- <button @click="goToLogin">登陆页面</button> -->
     <button @click="goToNationalStores">全国门店</button>
     <button @click="goToRecipeManual">配方手册</button>
     <button @click="goTocaseVideo">案例视频</button>
@@ -22,6 +22,7 @@
     <button @click="goToPersonal">个人中心</button>
     <button @click="goToRecommend">推荐信息</button>
     <button @click="goToExclusive">专属门店</button>
+    <button @click="getOpenId"></button>
   </div>
 </template>
 <script>
@@ -34,7 +35,9 @@ export default {
   },
   name: "home",
   data() {
-    return {};
+    return {
+      code: ""
+    };
   },
   methods: {
     getData() {
@@ -50,18 +53,18 @@ export default {
       });
     },
     // 登陆
-    goToLogin(){
+    goToLogin() {
       this.$router.push({
-        name:"login",
-        params:{
-          obj:JSON.stringify({
-            type:"profession",
-            data:{
-              id:"参数"
+        name: "login",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: "参数"
             }
           })
         }
-      })
+      });
     },
     //   去个人中心
     goToPersonal(id) {
@@ -202,6 +205,25 @@ export default {
           })
         }
       });
+    },
+    getQueryString(name) {
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+      var r = window.location.search.substr(1).match(reg);
+      if (r != null) return unescape(r[2]);
+      return null;
+    },
+    //获取用户openId
+    getOpenId() {
+      var data = {
+        code: this.code,
+        state: ""
+      };
+      this.$fetch.post(url.getOpenId, data).then(res => {
+        console.log(res);
+        localStorage.setItem("openId", res.obj.openid);
+        localStorage.setItem("nickname", res.obj.nickname);
+        localStorage.setItem("headimgurl", res.obj.headimgurl);
+      });
     }
   },
   created() {
@@ -210,8 +232,9 @@ export default {
   },
 
   mounted() {
-    // console.log(url);
-    // console.log(this.$fetch);
+    this.code = this.getQueryString("code");
+    console.log(this.code);
+    this.getOpenId();
   }
 };
 </script>
@@ -224,6 +247,6 @@ button {
   font-size: 16px;
   border-radius: 5%;
   margin-top: 2%;
-  margin-left: 3%
+  margin-left: 3%;
 }
 </style>

@@ -114,7 +114,7 @@ export default {
     // 获取列表
     getVideoList() {
       let _obj = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         id: this.videoId
       };
       this.$fetch.post(url.getVideoList, _obj).then(
@@ -132,7 +132,7 @@ export default {
     // 购买视频
     saveVideoOrder() {
        let _obj = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         id: this.videoIdPay
       };
       this.$fetch.post(url.saveVideoOrder, _obj).then(
@@ -150,7 +150,7 @@ export default {
     openBuy(item) {
       this.videoIdPay = item.id;
       let _obj = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         id: this.videoIdPay
       };
       this.$fetch.post(url.getVideoLink, _obj).then(

@@ -91,7 +91,7 @@ export default {
     Test() {
       this.$fetch
         .post("fruits/app/personal/checkCustomer", {
-          openId: "52646465465",
+          openId: localStorage.getItem("openId"),
           phone: "1"
         })
         .then(res => {
@@ -107,7 +107,7 @@ export default {
         {
           url: "javascript:",
           img:
-            "//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId=" +
+            "http://www.gsb.yuntunet.cn/fruits/app/blank/showPicture?attachmentId=" +
             str,
           title: "送你一朵fua"
         },
@@ -141,7 +141,7 @@ export default {
     // 获取全部列表
     getGoodsList() {
       let _obj = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         id: this.listId2 || "",
         size: "10",
         current: "1"
@@ -169,7 +169,7 @@ export default {
   },
   mounted() {
     this.$fetch
-      .post("fruits/app/blank/getBannerImg", { openId: 123456 })
+      .post("fruits/app/blank/getBannerImg", { openId: localStorage.getItem("openId")})
       .then(res => {
         console.log(res);
         res.obj.forEach(e => {

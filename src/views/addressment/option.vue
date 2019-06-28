@@ -87,7 +87,7 @@ export default {
     // 新增地址保存
     addressopt() {
       let _obj = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         receiver: this.addressBC.name, //收货人
         phone: this.addressBC.phone, //电话
         province: this.addressF[0],
@@ -115,7 +115,7 @@ export default {
     // 修改地址保存
     addressoptX() {
       let _obj = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
          id: this.addressBC.id,
         receiver: this.addressBC.name, //收货人
         phone: this.addressBC.phone, //电话
@@ -145,7 +145,7 @@ export default {
     // 获取修改地址详情
     getAddress() {
       let _obj = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         id: this.addressBC.id
       };
       this.$fetch.post(url.getAddress, _obj).then(

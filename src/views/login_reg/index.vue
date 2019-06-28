@@ -140,21 +140,20 @@ export default {
       maskValue: "",
       codeValue: "获取验证码",
       form: {
-        openId: "112",
+        openId: "",
         password: "",
         name: "",
         phone: "",
         code: "",
-        headimgurl:
-          "http://m.imeitou.com/uploads/allimg/2019021309/ipijc3xjpfo.jpg",
-        nickname: "随便"
+        headimgurl: "",
+        nickname: ""
       },
       Logform: {
-        openId: "112",
+        openId: "",
         password: "",
-        phone: "18912341234",
-        nickname: "掌声",
-        headimgurl: "http://m.imeitou.com/uploads/allimg/2019021309/ipijc3xjpfo.jpg"
+        phone: "",
+        nickname: "",
+        headimgurl: ""
       },
 
       validTel: false
@@ -182,6 +181,9 @@ export default {
         "fruits-app,yuntu,com"
       );
       // this.Logform.nickname = ""; this.Logform.headimgurl = "";
+      this.Logform.openId = localStorage.getItem("openId");
+      this.Logform.nickname = localStorage.getItem("nickname");
+      this.Logform.headimgurl = localStorage.getItem("headimgurl");
       this.$fetch.post("fruits/app/user/login", this.Logform).then(res => {
         this.btnload = false;
         if (res.msg == "success") {
@@ -191,7 +193,7 @@ export default {
           localStorage.setItem("appUserId", res.attributes.appUserId); //登陆用户id
           this.getCartNum();
         } else {
-          this.$vux.toast.text("登录时出现问题，请重新登录");
+          // this.$vux.toast.text("登录时出现问题，请重新登录");
         }
       });
     },
@@ -211,6 +213,9 @@ export default {
         this.form.password,
         "fruits-app,yuntu,com"
       );
+      this.form.openId = localStorage.getItem("openId");
+      this.form.nickname = localStorage.getItem("nickname");
+      this.form.headimgurl = localStorage.getItem("headimgurl");
       this.$fetch.post("fruits/app/user/register", this.form).then(res => {
         if (res.msg == "registered") {
           this.$vux.toast.text("手机号已经被注册");
@@ -224,10 +229,13 @@ export default {
           // }, 1000);
           if (res.attributes.type == 1) {
             let _obj = {
-              openId: "",
+              openId: localStorage.getItem("openId"),
               password: DesUtils.encode(this.loginP, "fruits-app,yuntu,com"),
-              phone: this.form.phone
+              phone: this.form.phone,
+              nickname: localStorage.getItem("nickname"),
+              headimgurl: localStorage.getItem("headimgurl")
             };
+
             this.$fetch.post("fruits/app/user/login", _obj).then(res => {
               this.btnload = false;
               if (res.msg == "success") {
@@ -237,7 +245,7 @@ export default {
                 localStorage.setItem("appUserId", res.attributes.appUserId); //登陆用户id
                 this.$router.push("/home");
               } else {
-                this.$vux.toast.text("登录时出现问题，请重新登录");
+                // this.$vux.toast.text("登录时出现问题，请重新登录");
               }
             });
           }
@@ -259,14 +267,18 @@ export default {
       if (this.timer || !this.form.phone || !validTel) {
         return;
       }
-      var count = 10;
+      var count = 60;
+      this.form.openId = localStorage.getItem("openId");
       this.$fetch
         .post("fruits/app/user/getSmsCode", {
           openId: this.form.openId,
-          phone: this.form.phone
+          phone: this.form.phone,
+          openId:localStorage.getItem("openId"),
+          type:0
         })
         .then(res => {
-          this.form.code = "1234";
+          console.log(res)
+          // this.form.code = "1234";
         });
 
       this.timer = setInterval(() => {
@@ -283,7 +295,7 @@ export default {
     //获取购物车数量
     getCartNum() {
       this.$fetch
-        .post("fruits/app/cart/getCartNum", { openId: url.openId })
+        .post("fruits/app/cart/getCartNum", { openId: localStorage.getItem("openId")})
         .then(res => {
           console.log(res);
           if (res.msg == "success") {
@@ -292,22 +304,21 @@ export default {
           }
         });
     },
+    getQueryString(name) {
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+      var r = window.location.search.substr(1).match(reg);
+      if (r != null) return unescape(r[2]);
+      return null;
+    },
     //获取用户openId
     getOpenId() {
-      let _obj = {
-        code: "",
+      var data = {
+        code: this.code,
         state: ""
       };
-      this.$fetch.post(url.getOpenId, _obj).then(
-        data => {
-          if (data.code == 0) {
-            console.log("woshiopenid" + data);
-          }
-        },
-        err => {
-          alert("网络缓慢。。");
-        }
-      );
+      this.$fetch.post(url.getOpenId, data).then(res => {
+        console.log(res, "dfsf");
+      });
     }
   },
   created() {
@@ -325,6 +336,10 @@ export default {
       this.Logform.password = obj.password;
       this.Logform.openId = obj.openId;
     }
+    console.log(url.openId);
+    // this.code = this.getQueryString("code");
+    // console.log(this.code);
+    // this.getOpenId();
   }
 };
 </script>

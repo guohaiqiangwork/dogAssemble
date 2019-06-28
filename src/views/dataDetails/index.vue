@@ -42,7 +42,7 @@ export default {
     // 获取数据
     getChargeList() {
       let _obj = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         type: this.routeParams.data.id,
         size: this.page.size,
         current: this.page.current

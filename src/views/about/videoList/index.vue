@@ -72,7 +72,7 @@ export default {
     // 获取列表
     getVideoTwo() {
       let _obj = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         id: this.videoId
       };
       this.$fetch.post(url.getVideoTwo, _obj).then(

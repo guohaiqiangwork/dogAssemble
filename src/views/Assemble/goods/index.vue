@@ -46,7 +46,7 @@ export default {
     //   获取数据
     getClassfications() {
       let _obj = {
-        openId: url.openId
+        openId: localStorage.getItem("openId")
       };
       this.$fetch.post(url.getClassfications, _obj).then(
         data => {

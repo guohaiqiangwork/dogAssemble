@@ -411,7 +411,7 @@ export default {
     // 弹窗确认
     onConfirm1() {
       let _obj = {
-        openId: url.openId
+        openId: localStorage.getItem("openId")
       };
       this.$fetch.post(url.changeCustomer, _obj).then(
         data => {
@@ -664,7 +664,7 @@ export default {
     //  })
 
     this.$fetch
-      .post("fruits/app/personal/getPersonalInfo", { openId: url.openId })
+      .post("fruits/app/personal/getPersonalInfo", { openId: localStorage.getItem("openId") })
       .then(res => {
         this.personalMsg = { ...res.obj };
       });

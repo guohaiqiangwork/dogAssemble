@@ -49,7 +49,7 @@ export default {
         return {
             orderList: [],
             form:{
-                openId:"1313121231",
+                openId:localStorage.getItem("openId"),
                 id:"",
                 type:""
             }
@@ -58,7 +58,7 @@ export default {
     methods: {
         // 获取订单列表
         getOrder() {
-            this.$fetch.post("fruits/app/recipe/getTodayOrder",{openId:'1313121231'}).then(res=>{
+            this.$fetch.post("fruits/app/recipe/getTodayOrder",{openId:localStorage.getItem("openId")}).then(res=>{
                 if(res.msg == "success"){
                     this.orderList = res.obj;
                 }

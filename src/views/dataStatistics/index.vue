@@ -198,7 +198,7 @@ export default {
     // 获取数据
     getStatistics() {
       let _obj = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         flag: this.switchFlage,
         startTime: this.valueS,
         endTime: this.valueE

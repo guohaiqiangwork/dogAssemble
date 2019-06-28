@@ -100,7 +100,7 @@ export default {
         return;
       }
       var obj = {
-        openId: "1313121231",
+        openId: localStorage.getItem("openId"),
         goodList: arr
       };
       obj = JSON.stringify(obj);

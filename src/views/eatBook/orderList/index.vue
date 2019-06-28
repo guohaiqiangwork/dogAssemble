@@ -18,7 +18,7 @@ export default {
     data() {
         return {
             form: {
-                openId:"1313121231",
+                openId:localStorage.getItem("openId"),
                 id:"",
                 type:""
             },

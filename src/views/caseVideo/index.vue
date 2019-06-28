@@ -64,7 +64,7 @@ export default {
     // 获取列表
     getVideoOne() {
       let _obj = {
-        openId: url.openId
+        openId: localStorage.getItem("openId")
       };
       this.$fetch.post(url.getVideoOne, _obj).then(
         data => {

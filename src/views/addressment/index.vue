@@ -78,7 +78,7 @@ export default {
     // 删除地址
     onButtonClick(item) {
       let _obj = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         id: item
       };
       this.$fetch.post(url.deleteAddress, _obj).then(
@@ -119,7 +119,7 @@ export default {
     // 获取地址
     getAddress() {
       this.$fetch
-        .post("fruits/app/cart/getAddressList", { openId: url.openId })
+        .post("fruits/app/cart/getAddressList", { openId: localStorage.getItem("openId") })
         .then(res => {
           this.addressList = [...res.obj];
         });

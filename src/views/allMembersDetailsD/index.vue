@@ -99,7 +99,7 @@ export default {
     // 查询订单会员
     getOrderById() {
       let keywords = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         id: this.routeParams.data.id
       };
       this.$fetch.post(url.getOrderById, keywords).then(
@@ -123,7 +123,7 @@ export default {
     },
     goPayB(id) {
       let _obj = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         id: id
       };
       this.$fetch.post(url.sureBigu, _obj).then(

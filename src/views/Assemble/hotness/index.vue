@@ -45,7 +45,7 @@ export default {
   methods: {
     getRecommend() {
       let _obj = {
-        openId: url.openId
+        openId: localStorage.getItem("openId")
       };
       this.$fetch.post(url.getRecommend, _obj).then(
         data => {
