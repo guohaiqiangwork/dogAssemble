@@ -1,18 +1,20 @@
 <template>
     <div id="cartList">
         <div v-if="charList.length">
-            <div  class= "cartlist"  v-for="(item,index) in charList" :key="index" @click="goDetail(item.state)">
+            <div  class= "cartlist"  v-for="(item,index) in charList" :key="index" @click.prevent="goDetail(item)">
                <!-- <div class="foods_select"></div> -->
-               <i v-if="item.state ==1"></i>
-                <i v-else :class="['weui-icon', 'weui_icon_success', 'weui-icon-success',item.ischeck?'checked' : 'normal']" @click="chooseBuy(item,index)"></i>
+               <i v-if="item.state ==1" class="distroy">失效</i>
+                <i v-else :class="['weui-icon', 'weui_icon_success', 'weui-icon-success',item.ischeck?'checked' : 'normal']" @click.stop ="chooseBuy(item,index)"></i>
                 <img class="gooods_avatar"   :src="'//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId='+item.picId" alt="">
                 <div class="goods_item">
                     <p class="goods_title">{{item.name}}</p>
                     <p class="goods_flex">
                         <span class="goods_price red">￥{{item.price}}</span>
-                        <inline-x-number width="30px" :min="0" v-model="item.count" @on-change="change(item,index,charList)"></inline-x-number>
+                        <span style="display:inline-block"  @click.stop="defalut">
+                            <inline-x-number width="30px" :min="0" v-model="item.count" @on-change="change(item,index,charList)" v-if="item.state !=1"></inline-x-number>
+                        </span>
                     </p>
-                    <div v-if="item.cartGoodsSpecs.length" style="display:flex">
+                    <div v-if="item.cartGoodsSpecs.length&&item.state !=1" style="display:flex">
                         <p v-for="(ite,ind) in item.cartGoodsSpecs" :key="ind">
                             <span>{{ite.specName+":"+ite.specValue}}</span>
                         </p>
@@ -84,10 +86,17 @@ export default {
                 openId:"1313121231",
                 id:"",
                 num:""
-            }
+            },
+            goDetail(item){
+                // console.log(item.goodsId,999);
+                this.$router.push("/goodsdetail?id=" + item.goodsId);
+            },
         }
     },
     methods: {
+        defalut(){
+            // return false
+        },
         //选择购物车商品
         chooseBuy(item,n) {
             item.ischeck = !item.ischeck;
@@ -110,11 +119,12 @@ export default {
         //传递购买数量
         change(item,n,arr){
              console.log(item,'iipipip');
-          
+          this.cartDate.id = item.id;
+            this.cartDate.num = item.count;
             if(item.count <= 0){
-                console.log(this.goodsNum);
-                 this.cartDate.id = null;
-                // this.chart(item,n);
+                // console.log(this.goodsNum);
+                //  this.cartDate.id = null;
+                this.chart(item,n);
                 this.cartDate.num = 0;
                 this.postCart();
                 this.$emit('changeNum',this.goodsNum);
@@ -149,11 +159,11 @@ export default {
             })
         },
         //跳转详情
-        goDetail(state){
-            if(state == 1){
-                return
-            }
-        },
+        // goDetail(state){
+        //     if(state == 1){
+        //         return
+        //     }
+        // },
         //跳转到商城页
         goShop(){
             this.$router.push('/home');
@@ -163,6 +173,7 @@ export default {
        
             this.$fetch.post('fruits/app/cart/changeNum',this.cartDate).then(res =>{
                 console.log(res,777777777)
+                this.getCart();
             })
         }
     },
@@ -174,6 +185,7 @@ export default {
 </script>
 <style lang="less">
 #cartList{
+
     .normal{
         color: #CDCDCD;
     }
@@ -191,6 +203,16 @@ export default {
         background: #fff;
         i{
             font-size: 0.32rem;
+        }
+        .distroy{
+            font-size:0.24rem;
+            width:0.64rem;
+            height:0.37rem;
+            padding: 0 2px;
+            color: #fff;
+            white-space: nowrap;
+            text-align: center;
+            background:rgba(165,165,165,1);
         }
         .gooods_avatar{
             width: 1.4rem;

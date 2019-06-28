@@ -27,7 +27,7 @@
     </div>
     <!-- 账户冻结 -->
     <confirm v-model="outPayFalge" title @on-cancel="onCancel" @on-confirm="onConfirm">
-      <div style="text-align:center;font-size:18px;">您确认将会员卡冻结吗？</div>
+      <div style="text-align:center;font-size:18px;">{{type == 1?"您确认将会员卡冻结吗？" :"是否要打烊"}}</div>
     </confirm>
   </div>
 </template>
@@ -41,7 +41,8 @@ export default {
   name: "setUp",
   data() {
     return {
-      outPayFalge: false //冻结账户弹窗
+      outPayFalge: false, //冻结账户弹窗
+      text:""
     };
   },
   computed:{
@@ -74,6 +75,11 @@ export default {
     },
     // 弹窗确认
     onConfirm() {
+      if(type ==1){
+
+      }else{
+        
+      }
       console.log("233");
     },
     goOut() {

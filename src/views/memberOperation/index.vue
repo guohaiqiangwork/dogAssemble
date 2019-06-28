@@ -19,11 +19,14 @@
         class="div_display_flex margin_top_div5 font_size_14 font_color_1A"
         v-for="(item,index) in memberList"
         :key="index"
+       
       >
-        <div class="div_width_15 margin_left_div3" @click="goToMemberD(item)">{{item.name}}</div>
-        <div class="div_width_25">{{item.phone}}</div>
-        <div class="div_width_50 text_right" v-if="item.type == 0">会员{{item.recipe}}</div>
-        <div class="div_width_50 text_right" v-if="item.type == 1">辟谷{{item.recipe}}</div>
+      <!-- <div  @click="goToMemberD(item)"> -->
+        <div class="div_width_15 margin_left_div3" >{{item.name}}</div>
+        <div class="div_width_25"  @click="goToMemberD(item)">{{item.phone}}</div>
+        <div class="div_width_50 text_right" v-if="item.type == 0"  @click="goToMemberD(item)">会员{{item.recipe}}</div>
+        <div class="div_width_50 text_right" v-if="item.type == 1"  @click="goToMemberD(item)">辟谷{{item.recipe}}</div>
+      <!-- </div> -->
       </div>
     </div>
     <!-- 无数据 -->

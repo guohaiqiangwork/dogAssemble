@@ -10,10 +10,10 @@
       </div>
     </div>
     <itemes v-on:getList="goToList1"></itemes>
-    <div class="hot_tit">热门推荐</div>
+    <!-- <div class="hot_tit">热门推荐</div> -->
     <hot v-on:goToDetail="goToDetail1"></hot>
     <div class="bg_gray">
-      <div class="hot_tit mt-space" @click="Test">全部商品</div>
+      <div class="hot_tit mt-space" @click="Test" v-if="goodsList.length">全部商品</div>
       <div id="whole">
         <div class="flex-between wrap">
           <div
@@ -28,7 +28,7 @@
             <div class="goods_msg">
               <p class="goods_name">{{item.name}}</p>
               <p>
-                <span class="red">¥{{item.price}}</span>
+                <span class="red" >¥{{type==1?item.original:item.price}}</span>
                 <span class="goods_discount" v-if="type!=1">¥{{item.original}}</span>
               </p>
             </div>

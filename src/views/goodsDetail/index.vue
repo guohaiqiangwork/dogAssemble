@@ -13,8 +13,8 @@
             <p class=" goods_price">{{goodsDetail.name}}</p>
             <div>{{goodsDetail.remark}}</div>
             <p class="goods_name">
-                <span class="red">￥{{goodsDetail.price}}</span>
-                <span class="goods_discount">￥{{goodsDetail.original}}</span>
+                <span class="red">￥{{type == 1?goodsDetail.original:goodsDetail.price}}</span>
+                <span class="goods_discount" v-if="type!=1">￥{{goodsDetail.original}}</span>
             </p>
         </div>
         <div class="">
@@ -24,7 +24,7 @@
             </div>
          
         </div> 
-         <div class="foryou">为您推荐</div>
+         <!-- <div class="foryou">为您推荐</div> -->
         <hot></hot>
         <div v-transfer-dom>
             <popup v-model="popupshow" position="bottom" @on-hide='close'>
@@ -102,6 +102,9 @@ export default {
                 this.form.num=Val;
             }
             
+        },
+        type(){
+            return localStorage.getItem('type');
         }
     },
     data() {

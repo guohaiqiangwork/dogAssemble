@@ -1,5 +1,7 @@
 <template>
   <div id="hot">
+    <div class="hot_tit" v-if="home&&hotList.length">热门推荐</div>
+       <div class="foryou" v-if="!home&&hotList.length">为您推荐</div>
     <div class="hot_item">
       <div v-for="(item,index) in hotList" :key="index" class="mt_size" @click="goToDetail(item)">
         <img class="hot_logo" :src="item.picId" alt>
@@ -35,6 +37,9 @@ export default {
   computed:{
     type(){
       return localStorage.getItem('type');
+    },
+    home(){
+      return this.$route.path == '/home'
     }
   },
   methods: {
@@ -71,7 +76,27 @@ export default {
 <style lang="less">
 #hot {
   background: #fff;
-
+.foryou {
+    padding: 0.64rem 0 0.52rem 0;
+    font-size: 0.3rem;
+    color: #4a7b67;
+    text-align: center;
+    background: #fff;
+  }
+  .foryou:before {
+    content: "";
+    display: inline-block;
+    width: 1.7rem;
+    margin: 0 0.26rem 0.1rem 0;
+    border-top: 1px solid rgb(222, 222, 222);
+  }
+  .foryou:after {
+    content: "";
+    display: inline-block;
+    width: 1.7rem;
+    margin: 0 0 0.1rem 0.26rem;
+    border-top: 1px solid rgb(222, 222, 222);
+  }
   .hot_item {
     display: flex;
     justify-content: space-between;
@@ -88,6 +113,8 @@ export default {
     }
     .hot_msg {
       text-align: left;
+      overflow: hidden;
+      text-overflow: ellipsis;
       white-space: nowrap;
       
       span {

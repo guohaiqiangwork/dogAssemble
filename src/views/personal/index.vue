@@ -416,14 +416,27 @@ export default {
       this.$fetch.post(url.changeCustomer, _obj).then(
         data => {
           if (data.code == 0) {
-            this.$router.go(0)
-            console.log("5675868");
+            localStorage.setItem('type',data.attributes.type);
+            this.getCartNum();
+            
           }
         },
         err => {
           alert("网络缓慢。。");
         }
       );
+    },
+    //获取购物车数量
+    getCartNum() {
+      this.$fetch
+        .post("fruits/app/cart/getCartNum", { openId: url.openId })
+        .then(res => {
+          if (res.msg == "success") {
+            // this.$router.push("/home");
+            localStorage.setItem("catnum", res.obj);
+            this.$router.go(0);
+          }
+        });
     },
     // 去我的钱包
     goToWallet: function() {
@@ -526,6 +539,7 @@ export default {
     // 去配方
     goToTBook: function() {
         if(this.personalMsg.storeState != 1){
+          this.$vux.toast.text("店铺已打烊，该功能无法操作");
         return
       }
       this.$router.push("/eatbook");
@@ -561,6 +575,8 @@ export default {
     // 押金充值
     goToRecharge: function() {
       if(this.personalMsg.storeState != 1){
+          this.$vux.toast.text("店铺已打烊，该功能无法操作");
+
         return
       }
       this.$router.push({
@@ -578,6 +594,8 @@ export default {
     // 新建订单
     goToNewOrder() {
         if(this.personalMsg.storeState != 1){
+          this.$vux.toast.text("店铺已打烊，该功能无法操作");
+
         return
       }
       this.$router.push({
@@ -595,6 +613,8 @@ export default {
     // 会员操作
     goToMemberOperation() {
         if(this.personalMsg.storeState != 1){
+          this.$vux.toast.text("店铺已打烊，该功能无法操作");
+
         return
       }
       this.$router.push({

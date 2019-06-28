@@ -9,7 +9,7 @@
                 <slot name="content"></slot>
                 <p class="tip-footer"><span>注意事项：</span><span>{{item.notice}}</span></p>
                 <p class="tip-footer"><span>适宜人群：</span><span>{{item.crowd}}</span></p>
-                <p class="tip-footer" v-if="item.memberRecipes.length"><span>适应病症：</span><span>{{item.disease}}</span></p>
+                <p class="tip-footer" v-if="item.memberRecipes.length"><span v-if="item.disease">适应病症：</span><span>{{item.disease}}</span></p>
             </div>
         <!-- </div> -->
     </div>

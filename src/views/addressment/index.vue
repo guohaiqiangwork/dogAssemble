@@ -31,7 +31,10 @@
         </swipeout-item>
       </swipeout>
     </div>
-    <div v-if="addressList.length == 0" style="    background-color: #fff;text-align: center;margin-top: 30%;">
+    <div v-if="addressList.length == 0" style="    background-color: #fff;text-align: center;margin-top: 30%;  height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;">
         暂无地址
     </div>
     <div class="add_button">

@@ -7,7 +7,7 @@
 
     <div class="form" v-if="haslogin == 2">
       <!-- <x-input label-width="4em"  placeholder="I'm placeholder"></x-input> -->
-      <x-input placeholder="请输入您的姓名" v-model="form.name" required @on-change="change" ref="name">
+      <x-input placeholder="请输入您的真实姓名" v-model="form.name" required @on-change="change" ref="name">
         <img
           slot="label"
           style="padding-right:10px;display:block;with:0.33rem;height:0.33rem"
@@ -16,7 +16,7 @@
       </x-input>
       <x-input
         class="mt-40"
-        placeholder="请输入手机号码"
+        placeholder="请输入手机号"
         @on-click-clear-icon="clear"
         ref="inputTel"
         required
@@ -113,7 +113,7 @@
       @click.native="LoginOrReg"
     >{{haslogin == 1 ? '登录' : '注册'}}</x-button>
     <!-- <div  @click="LoginOrReg"  >{{haslogin == 1 ? '登录'  : '注册'}}</div> -->
-    <p class="login_tit">登录即代表您已同意《御康商贸用户隐私政策》</p>
+    <p class="login_tit">{{haslogin == 1 ? '登录' : '注册'}}即代表您已同意《御康商贸用户隐私政策》</p>
   </div>
 </template>
 <script>

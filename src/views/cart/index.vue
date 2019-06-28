@@ -2,7 +2,7 @@
   <div id="cart">
     <div class="package_tit">
       <div class="if_post red" v-if="freeState.isFree == 1">包邮条件</div>
-      <p class="word_tit">全场满{{freeState.free == 0?freeState.free:''}}包邮，欢迎抢购</p>
+      <p class="word_tit">{{freeState.free == 0?'全场包邮':`全场满${freeState.free}包邮，欢迎抢购`}}</p>
     </div>
     <cart-list
       @changeNum="changeNum"
@@ -15,7 +15,7 @@
       <!-- <check-icon :value.sync="demo1"> ({{ demo1 }})</check-icon> -->
 
       <i class></i>
-      <div class="foryou">为您推荐</div>
+   
       <hot class="mb-space" v-on:goToDetail="goDetail"></hot>
       <div class="cart_btm" v-if="Object.keys(bottomMsge).length">
         <span>已选{{bottomMsge.checkcount}}</span>

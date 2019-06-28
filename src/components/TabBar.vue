@@ -15,11 +15,11 @@
         <flexbox-item>
           <div class="flex-demo pos" @click="didClickedItem(1,'cart')" v-if="actives != '1'">
             <img src="../assets/images/4@2x.png" style="width: 18%;">
-            <badge class="msg-sign" :text="buyNum" v-if="buyNum"></badge>
+            <badge class="msg-sign" :text="buyNum" v-if="buyNum!=0"></badge>
           </div>
           <div class="flex-demo pos" @click="didClickedItem(1,'cart')" v-if="actives == '1'">
             <img src="../assets/images/2z@2x.png" style="width:18%;">
-            <badge class="msg-sign" :text="buyNum" v-if="buyNum"></badge>
+            <badge class="msg-sign" :text="buyNum" v-if="buyNum!=0"></badge>
           </div>
           <div :class="{ 'active': actives == '1'}" class=" font_color_33">
           购物车

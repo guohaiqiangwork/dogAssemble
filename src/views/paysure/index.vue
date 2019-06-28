@@ -109,6 +109,21 @@ export default {
       key: "value",
       selectAddressN: "",
       postFee:'',
+      form:{
+        openId:"",
+        addressId:null,
+        remarks:"",
+        goodList:[],
+        id:null,
+        num:null,
+        specList:[
+          {
+            specId:null,
+            specName:"",
+            value:null,
+          }
+        ]
+      },
       goodsMsg: {}
     };
   },
@@ -148,7 +163,7 @@ export default {
     },
     mounted() {
         this.$fetch.post("fruits/app/cart/getDefaultAddr",this.option).then(res =>{
-            console.log(this.$route);
+            console.log(res.obj);
             this.goodsMsg = res.obj;
             this.postFee = res.attributes.postage;
         })

@@ -5,7 +5,7 @@
       <i class="weui-icon-search search_icon"></i>
       <input
         type="text"
-        placeholder="搜索您想找的产品"
+        placeholder="搜索您想找的门店"
         v-model="productNamr"
         v-on:input="getRecommendStoreList(productNamr)"
         style="width:100%;height:100%;background-color:#EFEFEF; outline: none;border:none"
@@ -228,7 +228,7 @@ export default {
     }
   },
   created() {
-    settitle("我是全国们店");
+    settitle("全国门店");
     // this.routeParams = JSON.parse(this.$route.params.obj);
   },
 

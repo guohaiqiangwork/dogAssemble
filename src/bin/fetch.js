@@ -42,7 +42,8 @@ service
      */
     // console.log(response)
     if(response.data.code == 702){
-      window.open(response.data.obj)
+      location.href(response.data.obj)
+     
      }
      
     if (response.data.msg == "no_login") {
