@@ -28,18 +28,20 @@ module.exports = {
   getVideoOne: '/fruits/app/video/getVideoOne',//查询视频一级分类
   getVideoTwo: '/fruits/app/video/getVideoTwo',//查询视频2级分类
   getVideoList: '/fruits/app/video/getVideoList',//查询二级下分类
-  getVideoOrder:'/fruits/app/video/getVideoOrder',//案例视频--视频订单
+  getVideoOrder: '/fruits/app/video/getVideoOrder',//案例视频--视频订单
   getVideoLink: '/fruits/app/video/getVideoLink',//获取视频链接
-  saveVideoOrder:'/fruits/app/personal/saveVideoOrder',//购买视频
+  saveVideoOrder: '/fruits/app/personal/saveVideoOrder',//购买视频
   getRecommendB: '/fruits/app/bonus/getRecommend',//健康奖金推荐返佣
-  getHealthBonus:'/fruits/app/bonus/getHealthBonus',//健康奖金金额统计
-  getOrderDistri:'/fruits/app/bonus/getOrderDistri',//商城返佣列
-  getVideoDistri:'/fruits/app/bonus/getVideoDistri',//视频返佣列表
-  getOrderList:'/fruits/app/shop/getOrderList',//商城订单
-  getShopOrder:'/fruits/app/shop/getShopOrder',//获取商城订单详情
-  payOrder:'/fruits/app/shop/payOrder',//商城订单支付
+  getHealthBonus: '/fruits/app/bonus/getHealthBonus',//健康奖金金额统计
+  getOrderDistri: '/fruits/app/bonus/getOrderDistri',//商城返佣列
+  getVideoDistri: '/fruits/app/bonus/getVideoDistri',//视频返佣列表
+  getOrderList: '/fruits/app/shop/getOrderList',//商城订单
+  getShopOrder: '/fruits/app/shop/getShopOrder',//获取商城订单详情
+  payOrder: '/fruits/app/shop/payOrder',//商城订单支付
   sureReceiving: '/fruits/app/shop/sureReceiving',//确认收货--未联调
-  saveShopOrder: '/fruits/app/cart/saveShopOrder' ,//商城订单支付 ---未联调
+  saveShopOrder: '/fruits/app/cart/saveShopOrder',//商城订单支付 ---未联调
   getStatistics: '/fruits/app/statis/getStatistics',//数据统计数据获取
-  getChargeList:'/fruits/app/statis/getChargeList'//数据统计数据详情
+  getChargeList: '/fruits/app/statis/getChargeList',//数据统计数据详情
+  changeCustomer: '/fruits/app/personal/changeCustomer',//身份切换
+  getRecommendStoreList: '/fruits/app/personal/getRecommendStoreList' //获取全国门店
 };

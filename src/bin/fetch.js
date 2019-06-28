@@ -37,9 +37,10 @@ service
      * code为非200是错误的请求
      */
     // console.log(response)
-    if (response.data.code == 401) {
-      
-    }
+    if(response.data.code == 702){
+      window.open(response.data.obj)
+     }
+  
     if (response.data.msg == "no_login") {
       router.push('/login/1');
     }

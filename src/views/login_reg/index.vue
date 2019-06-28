@@ -140,7 +140,7 @@ export default {
       maskValue: "",
       codeValue: "获取验证码",
       form: {
-        openId: "67868769869",
+        openId: "",
         password: "",
         name: "",
         phone: "",
@@ -150,7 +150,7 @@ export default {
         nickname: "随便"
       },
       Logform: {
-        openId: "112",
+        openId: "",
         password: "",
         phone: "13600000000",
         nickname: "掌声",
@@ -224,7 +224,7 @@ export default {
           // }, 1000);
           if (res.attributes.type == 1) {
             let _obj = {
-              openId: "112",
+              openId: "",
               password: DesUtils.encode(this.loginP, "fruits-app,yuntu,com"),
               phone: this.form.phone
             };
@@ -283,7 +283,7 @@ export default {
     //获取购物车数量
     getCartNum() {
       this.$fetch
-        .post("fruits/app/cart/getCartNum", { openId: "1313121231" })
+        .post("fruits/app/cart/getCartNum", { openId: url.openId })
         .then(res => {
           console.log(res);
           if (res.msg == "success") {
