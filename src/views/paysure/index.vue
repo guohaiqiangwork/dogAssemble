@@ -141,7 +141,7 @@ export default {
     paysure() {
       this.form.addressId = this.goodsMsg.id;
       this.form.goodList = this.option.goodList;
-      console.log(this.option.goodList, "oooo");
+      console.log(this.form, "oooo");
       this.$fetch.post("fruits/app/cart/saveShopOrder", this.form).then(res => {
         console.log(res, "kkkk");
         if (res.msg == "success") {
@@ -210,12 +210,12 @@ export default {
     }
   },
   mounted() {
-    // console.log(JSON.parse(this.option),'ppp')
+    console.log(this.option,'ppp')
     //  获取邮费
     this.$fetch
       .post("fruits/app/cart/getDefaultAddr", this.option)
       .then(res => {
-        console.log(this.$route.params.obj, 666);
+        console.log(res, 666);
         this.goodsMsg = res.obj;
         this.postFee = res.attributes.postage;
         if (this.$route.params.obj) {

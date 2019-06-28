@@ -131,6 +131,7 @@ export default {
                 openId:localStorage.getItem("openId"),
                 id:'',
                 num:1,
+                price:null,
                 specList:[]
             }
         }
@@ -149,6 +150,7 @@ export default {
         //点击确定
         buyGoods(){
             this.form.id = this.goodId;
+            this.form.price = this.goodsDetail.price;
             this.$parent.show = false;
             if(this.$parent.title == 'cart'){
 
@@ -166,13 +168,20 @@ export default {
                 //点击立即购买
                 var obj = {
                     openId:localStorage.getItem("openId"),
-                    goodList:[{
-                        id:this.goodsDetail.id,
-                        num:this.form.num
-                    }]
+                    goodList:[this.form]
                 }
+                // [{
+                //         id:this.goodsDetail.id,
+                //         num:this.form.num,
+                //         price:this.goodsDetail.price,
+                //         name:this.goodsDetail.name
+                //     }]
+                // var obj = this.form;
                 obj = JSON.stringify(obj);
-                this.$router.push('/paysure?data='+obj)
+                // console.log(this.goodsDetail);
+                // console.log(this.form,7878);
+                
+                this.$router.push('/paysure?data='+obj + "&count="+this.form.num + "&price="+this.goodsDetail.price)
             }
         },
         //添加购物车
@@ -263,6 +272,8 @@ export default {
                     }
                     .bottom-tip{
                         position: fixed;
+                        bottom: 48px;
+                        text-align: center;
                         width: 100%;
                         background: #e3e4e5;
                         color:#fff;
