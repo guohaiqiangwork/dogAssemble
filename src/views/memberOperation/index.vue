@@ -106,6 +106,8 @@ export default {
           console.log(data);
           if (data.code == 0) {
             this.memberList = data.obj;
+          }else{
+             alert(data.msg)
           }
         },
         err => {
@@ -127,6 +129,8 @@ export default {
           console.log(data);
           if (data.code == 0) {
             this.memberList = data.obj;
+          }else{
+             alert(data.msg)
           }
         },
         err => {

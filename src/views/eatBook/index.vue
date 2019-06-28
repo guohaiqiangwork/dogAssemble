@@ -61,7 +61,9 @@ export default {
             this.$fetch.post("fruits/app/recipe/getTodayOrder",{openId:localStorage.getItem("openId")}).then(res=>{
                 if(res.msg == "success"){
                     this.orderList = res.obj;
-                }
+                }else{
+             alert(data.msg)
+          }
                
             })
         },
@@ -80,7 +82,9 @@ export default {
                 if(res.msg == "success"){
                     item.isComplete = 1;
                     this.$vux.toast.text('该订单已完成');
-                }
+                }else{
+             alert(data.msg)
+          }
             })
         }
     },

@@ -157,6 +157,8 @@ export default {
         data => {
           if (data.code == 0) {
             this.selectAddressN = data.obj;
+          }else{
+             alert(data.msg)
           }
         })
       }

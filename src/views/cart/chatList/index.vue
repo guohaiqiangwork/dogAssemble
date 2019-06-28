@@ -173,7 +173,6 @@ export default {
         postCart(){
        
             this.$fetch.post('fruits/app/cart/changeNum',this.cartDate).then(res =>{
-                console.log(res,777777777)
                 this.getCart();
             })
         }

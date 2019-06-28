@@ -39,6 +39,8 @@ export default {
         data => {
           if (data.code == 0) {
             this.videoList = data
+          }else{
+             alert(data.msg)
           }
         },
         err => {

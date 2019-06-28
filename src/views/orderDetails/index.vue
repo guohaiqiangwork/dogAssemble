@@ -102,7 +102,9 @@ export default {
           });
 
           this.shopOrderList = data.obj;
-        }
+        }else{
+             alert(data.msg)
+          }
       });
     },
     // 立即支付
@@ -116,7 +118,9 @@ export default {
            var obj = eval("(" + data.obj + ")"); 
           console.log(obj)
           wexinPay(obj)
-        }
+        }else{
+             alert(data.msg)
+          }
       });
     }
   },

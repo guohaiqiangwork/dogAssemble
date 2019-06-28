@@ -57,6 +57,8 @@ export default {
               item.picId = url.imgUrl + item.picId;
               console.log(item.picId);
             });
+          }else{
+             alert(data.msg)
           }
         },
         err => {

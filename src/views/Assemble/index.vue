@@ -156,6 +156,8 @@ export default {
               item.original = item.original.toFixed(2)
               item.picId = url.imgUrl + item.picId;
             });
+          }else{
+             alert(data.msg)
           }
         },
         err => {

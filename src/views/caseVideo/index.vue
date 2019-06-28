@@ -70,6 +70,8 @@ export default {
         data => {
           if (data.code == 0) {
             this.videoOneList = data.obj;
+          }else{
+             alert(data.msg)
           }
         },
         err => {

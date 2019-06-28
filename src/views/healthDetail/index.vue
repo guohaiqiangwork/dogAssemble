@@ -107,6 +107,8 @@ export default {
             } else {
               this.getRecommendBList.concat(data.obj);
             }
+          }else{
+             alert(data.msg)
           }
         },
         err => {
@@ -130,6 +132,8 @@ export default {
             } else {
               this.getVideoDistriList.concat(data.obj);
             }
+          }else{
+             alert(data.msg)
           }
         },
         err => {
@@ -153,6 +157,8 @@ export default {
             } else {
               this.getOrderDistriList.concat(data.obj);
             }
+          }else{
+             alert(data.msg)
           }
         },
         err => {

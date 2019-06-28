@@ -190,7 +190,6 @@ export default {
            
             this.$fetch.post("fruits/app/blank/getGoodInfo",{openId:localStorage.getItem("openId"),id:this.goodId}).then(res =>{
                 // this.$nextTick(() =>{
-                    console.log(res,999);
                     res.obj.imgBannerList.forEach((el,i) => {
                     // if(i<2){
                             this.imgList.push({

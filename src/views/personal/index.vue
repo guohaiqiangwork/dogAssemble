@@ -2,7 +2,7 @@
   <!-- style="background-color:#F3F5F8; min-height:700px" -->
   <div>
     <!-- 商铺 -->
-    <div class="backgroun_color_f3" v-if="personalMsg.type == 2">
+    <div class="backgroun_color_f3" v-if="personalMsg.type == 1">
       <!-- 头部 -->
       <div class="personal_img_bj">
         <div class="div_display_flex">
@@ -47,7 +47,8 @@
           <div
             class="font_color_76 font_size_25"
             style="padding-bottom: 2%;"
-          >{{personalMsg.total.toFixed(2)}}</div>
+          ></div>
+          <!-- {{personalMsg.total.toFixed(2)}} -->
           <!-- -->
         </div>
       </div>
@@ -152,7 +153,8 @@
         <div
           class="font_color_76 font_size_25"
           style="padding-bottom: 2%;"
-        >{{personalMsg.total.toFixed(2)}}</div>
+        ></div>
+        <!-- {{personalMsg.total.toFixed(2)}} -->
       </div>
       <!-- 菜单列表 -->
       <div class="margin_top_div4">

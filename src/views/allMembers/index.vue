@@ -54,6 +54,8 @@ export default {
           console.log(data);
           if (data.code == 0) {
             this.allUserList = data;
+          }else{
+             alert(data.msg)
           }
         },
         err => {

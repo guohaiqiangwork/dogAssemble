@@ -431,6 +431,8 @@ export default {
               });
             });
             this.orderList = data.obj;
+          }else{
+             alert(data.msg)
           }
         },
         err => {
@@ -449,6 +451,8 @@ export default {
         data => {
           if (data.code == 0) {
             console.log(data)
+          }else{
+             alert(data.msg)
           }
         },
         err => {

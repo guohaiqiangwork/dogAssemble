@@ -105,6 +105,8 @@ export default {
         data => {
           if (data.code == 0) {
             // 刷新地址列表
+          }else{
+             alert(data.msg)
           }
         },
         err => {
@@ -135,6 +137,8 @@ export default {
         data => {
           if (data.code == 0) {
             // 刷新地址列表
+          }else{
+             alert(data.msg)
           }
         },
         err => {
@@ -158,6 +162,8 @@ export default {
               data.obj.area
             ];
             this.address = value2name(addressValGet, ChinaAddressV4Data);
+          }else{
+             alert(data.msg)
           }
         },
         err => {
