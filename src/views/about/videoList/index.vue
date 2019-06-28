@@ -82,7 +82,7 @@ export default {
           console.log(this.searchList);
             
           }else{
-             alert(data.msg)
+            //  alert(data.msg)
           }
         },
         err => {

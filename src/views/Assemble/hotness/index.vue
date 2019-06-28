@@ -68,7 +68,7 @@ export default {
     },
     goToDetail(id) {
       this.$emit("goToDetail", id);
-    }
+    },
   },
   mounted() {
     this.getRecommend(); //获取推荐列表

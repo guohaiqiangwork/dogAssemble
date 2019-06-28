@@ -48,7 +48,7 @@ function poiToaddress(poi) {
                 var address = result.regeocode.formattedAddress; //返回地址描述  
                 address2point(address);   
                 console.log("地址：："+address); 
-                alert("当前地址:" + address);
+                <!-- alert("当前地址:" + address); -->
             }  
         });  
     })  
@@ -65,8 +65,8 @@ function address2point(address) {
             if (status === 'complete' && result.info === 'OK') {  
                 var geocode = result.geocodes[0];  
                 var resultStr = geocode.location.lng + "," + geocode.location.lat;  
-                console.log(resultStr);  
-                alert("resultStr" + resultStr);
+                <!-- console.log(resultStr);   -->
+                <!-- alert("resultStr" + resultStr); -->
             }  
         });  
     })  

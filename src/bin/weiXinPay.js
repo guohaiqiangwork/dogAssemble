@@ -31,7 +31,7 @@ let wexinPay = (data, cb, errorCb) => {
             paySign: paySign, // 支付签名
             success: function (res) {
                 // 支付成功后的回调函数
-                alert('支付状态')
+                // alert('支付状态')
                 cb(res);
             },
             fail: function (res) {

@@ -145,7 +145,7 @@ export default {
       this.$fetch.post("fruits/app/cart/saveShopOrder", this.form).then(res => {
         console.log(res, "kkkk");
         if (res.msg == "success") {
-          this.$vux.toast.text("支付成功");
+          // this.$vux.toast.text("支付成功");
           var a =JSON.parse(res.obj)
           // console.log(weiXinPay,7979)
           weiXinPay(a,function(val){

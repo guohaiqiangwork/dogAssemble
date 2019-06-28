@@ -132,6 +132,11 @@ export default {
 
       })
     },
+    getStore(){
+      this.$fetch.post('fruits/app/personal/getRecommendStoreList').then(res =>{
+        console.log(res);
+      })
+    },
     // 未知内容
     setImagePreview() {
       var barcodeWebview = plus.webview.create("nihao.html", "barcode", {
@@ -186,6 +191,7 @@ export default {
   },
 
   mounted() {
+    this.getStore();
     // this.getList()
     console.log("病症检测");
   }
