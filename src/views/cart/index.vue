@@ -91,8 +91,9 @@ export default {
     },
     //数量改变
     changeNum(e, arr) {
+      console.log(e);
       this.$parent.buyNum = e;
-         localStorage.setItem('catnum',this.$parent.buyNum);
+      localStorage.setItem('catnum',e);
     },
     // 底部信息栏
     getBottom(val) {

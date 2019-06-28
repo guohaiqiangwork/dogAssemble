@@ -58,6 +58,10 @@ export default {
   computed: {
     route() {
       return this.$route.path;
+    },
+    cartNum(){
+      return localStorage.getItem('catnum');
+
     }
   },
   props: {},

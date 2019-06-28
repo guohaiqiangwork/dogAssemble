@@ -6,8 +6,8 @@
         <p class="hot_msg">
           <span>{{item.name}}</span>
           <br>
-          <span class="hot_price">{{`￥${item.price.toFixed(2)}`}}</span>
-          <span class="goods_discount" v-if="type!=1">¥{{item.original.toFixed(2)}}</span>
+          <span class="hot_price">{{`￥${type == 1?item.original:item.price}`}}</span>
+          <span class="goods_discount" v-if="type!=1">¥{{item.original}}</span>
         </p>
       </div>
     </div>
@@ -47,6 +47,8 @@ export default {
           if (data.code == 0) {
             this.hotList = data.obj;
             this.hotList.forEach(item => {
+              item.price = item.price.toFixed(2);
+              item.original = item.original.toFixed(2);
               item.picId = url.imgUrl + item.picId;
               console.log(item.picId);
             });

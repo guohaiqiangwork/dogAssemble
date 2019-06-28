@@ -110,11 +110,17 @@ export default {
         //传递购买数量
         change(item,n,arr){
              console.log(item,'iipipip');
-            this.cartDate.id = item.id;
-            this.cartDate.num = item.count;
+          
             if(item.count <= 0){
-                //  this.cartDate.num = 0;
-                this.charList.splice(n,1);
+                console.log(this.goodsNum);
+                 this.cartDate.id = null;
+                // this.chart(item,n);
+                this.cartDate.num = 0;
+                this.postCart();
+                this.$emit('changeNum',this.goodsNum);
+
+                // this.charList.splice(n,1);
+                return
             }else{
                 this.chart(item,n);
             }
@@ -123,7 +129,8 @@ export default {
             }else{
                 // item.money = 0;
             }
-         
+            // this.cartDate.id = item.id;
+            // this.cartDate.num = item.count;
             this.bottomMsg.totalprice = this.goodsPrice;
             this.postCart();
             this.$emit('changeNum',this.goodsNum);

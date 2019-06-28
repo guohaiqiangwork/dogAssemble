@@ -17,7 +17,8 @@
               style="width:75%;text-overflow:ellipsis;overflow:hidden;white-space:nowrap"
             >{{personalMsg.storeName}}</div>
             <div class="personal_falg_member">
-              <img src="../../assets/images/122@2x.png" width="60px">
+              <img src="../../assets/images/122@2x.png" width="60px" v-if="personalMsg.storeState == 1">
+              <img src="../../assets/images/td@2x.png" width="60px" v-if="personalMsg.storeState != 1">
             </div>
             <!-- 打烊 -->
             <!-- <div class="div_display_flex" style="margin-left: 54%; margin-top: 10%;">
@@ -36,7 +37,7 @@
             style="margin-left: -3%; margin-top: -2%;"
           >
             <div class="font_color_E8 font_size_15" style="width:75%">押金：{{personalMsg.deposit}}元</div>
-            <div class="personal_falg_m">{{personalMsg.storeState == 1 ? "营业中":"已打样"}}</div>
+            <div class="personal_falg_m">{{personalMsg.storeState == 1 ? "营业中":"已打烊"}}</div>
           </div>
         </div>
         <!-- 账户 -->
@@ -291,7 +292,7 @@
           </div>
            <div class="personal_div_border"></div>
           <div class="div_display_flex" @click="falgQH" v-if='personalMsg.isChange  == 1'>
-            <div class="div_width_50 font_color_1A personal_list_font">切换身分</div>
+            <div class="div_width_50 font_color_1A personal_list_font">切换身份</div>
             <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
               <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%">
             </div>
@@ -398,6 +399,7 @@ export default {
     falgQH() {
       if (this.personalMsg.isChange == 1) {
         this.outPayFalge1 = true;
+        // this.$router.go(0)
       } else {
         alert("您现在不能进行切换");
       }
@@ -414,6 +416,7 @@ export default {
       this.$fetch.post(url.changeCustomer, _obj).then(
         data => {
           if (data.code == 0) {
+            this.$router.go(0)
             console.log("5675868");
           }
         },
@@ -522,6 +525,9 @@ export default {
     },
     // 去配方
     goToTBook: function() {
+        if(this.personalMsg.storeState != 1){
+        return
+      }
       this.$router.push("/eatbook");
     },
     // 去专属门店
@@ -554,6 +560,9 @@ export default {
     },
     // 押金充值
     goToRecharge: function() {
+      if(this.personalMsg.storeState != 1){
+        return
+      }
       this.$router.push({
         name: "recharge",
         params: {
@@ -568,6 +577,9 @@ export default {
     },
     // 新建订单
     goToNewOrder() {
+        if(this.personalMsg.storeState != 1){
+        return
+      }
       this.$router.push({
         name: "newOrder",
         params: {
@@ -582,6 +594,9 @@ export default {
     },
     // 会员操作
     goToMemberOperation() {
+        if(this.personalMsg.storeState != 1){
+        return
+      }
       this.$router.push({
         name: "memberOperation",
         params: {

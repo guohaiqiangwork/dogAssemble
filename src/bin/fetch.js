@@ -1,5 +1,9 @@
-import axios from 'axios'
-import router from '../router'
+import axios from 'axios';
+import router from '../router';
+import Vue from 'vue'
+import  { ToastPlugin } from 'vux'
+Vue.use(ToastPlugin)
+
 const config = require('../config/config.dev')
 // 创建axios实例
 let options = {
@@ -40,11 +44,18 @@ service
     if(response.data.code == 702){
       window.open(response.data.obj)
      }
-  
+     
     if (response.data.msg == "no_login") {
       router.push('/login/1');
     }
-
+    if(response.data.code == 300){
+      alert(response.data.message)
+      // Vue.$vux.toast.show({
+      //   text:response.data.message
+      //  })
+       
+      router.push('/login/1');
+    }
 
     if (response.status !== 200) {
       return Promise.reject('error')

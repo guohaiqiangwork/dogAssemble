@@ -140,7 +140,7 @@ export default {
       maskValue: "",
       codeValue: "获取验证码",
       form: {
-        openId: "",
+        openId: "112",
         password: "",
         name: "",
         phone: "",
@@ -150,9 +150,9 @@ export default {
         nickname: "随便"
       },
       Logform: {
-        openId: "",
+        openId: "112",
         password: "",
-        phone: "13600000000",
+        phone: "18912341234",
         nickname: "掌声",
         headimgurl: "http://m.imeitou.com/uploads/allimg/2019021309/ipijc3xjpfo.jpg"
       },
