@@ -122,6 +122,8 @@ export default {
           if (data.code == 0) {
             this.videoList = data.attributes;
             this.videoListObj = data.obj;
+          }else{
+             alert(data.msg)
           }
         },
         err => {
@@ -139,6 +141,8 @@ export default {
         data => {
           if (data.code == 0) {
             console.log(data)
+          }else{
+             alert(data.msg)
           }
         },
         err => {

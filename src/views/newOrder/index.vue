@@ -276,6 +276,8 @@ export default {
                 })
               }
             });
+          }else{
+             alert(data.msg)
           }
         },
         err => {
@@ -305,6 +307,8 @@ export default {
         data => {
           if (data.code == 0) {
             console.log("7897907");
+          }else{
+             alert(data.msg)
           }
         },
         err => {
@@ -339,6 +343,8 @@ export default {
         data => {
           if (data.code == 0) {
             this.checkCustomerName = data.obj.name;
+          }else{
+             alert(data.msg)
           }
         },
         err => {
@@ -359,6 +365,8 @@ export default {
         data => {
           if (data.code == 0) {
             this.recipeList = data.obj;
+          }else{
+             alert(data.msg)
           }
         },
         err => {
@@ -377,6 +385,8 @@ export default {
         data => {
           if (data.code == 0) {
             this.memberRecipe = data.obj;
+          }else{
+             alert(data.msg)
           }
         },
         err => {

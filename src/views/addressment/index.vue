@@ -85,6 +85,8 @@ export default {
         data => {
           if (data.code == 0) {
             this.getAddress(); //刷新列表
+          }else{
+             alert(data.msg)
           }
         },
         err => {

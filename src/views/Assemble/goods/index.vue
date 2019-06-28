@@ -55,6 +55,8 @@ export default {
             this.itemList.forEach(item => {
               item.picId = url.imgUrl + item.picId;
             });
+          }else{
+             alert(data.msg)
           }
         },
         err => {

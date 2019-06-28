@@ -238,6 +238,8 @@ export default {
         data => {
           if (data.code == 0) {
             this.getHealthBonusD = data.obj;
+          }else{
+             alert(data.msg)
           }
         },
         err => {
@@ -257,6 +259,8 @@ export default {
         data => {
           if (data.code == 0) {
             this.getRecommendBList = data.obj;
+          }else{
+             alert(data.msg)
           }
         },
         err => {
@@ -276,6 +280,8 @@ export default {
         data => {
           if (data.code == 0) {
             this.getVideoDistriList = data.obj;
+          }else{
+             alert(data.msg)
           }
         },
         err => {
@@ -295,6 +301,8 @@ export default {
         data => {
           if (data.code == 0) {
             this.getOrderDistriList = data.obj;
+          }else{
+             alert(data.msg)
           }
         },
         err => {

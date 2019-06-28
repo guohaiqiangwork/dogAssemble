@@ -6,6 +6,8 @@
         <input
           type="text"
           placeholder="请输⼊您的手机号"
+          maxlength="11"
+          v-model="phone"
           style="width:100%;height:100%;outline: none;border:none"
         >
         <i></i>
@@ -16,6 +18,7 @@
         <img src="../../assets/images/验证码@2x.png" class="width_16">
         <input
           type="text"
+          v-model="code"
           placeholder="请输⼊验证码"
           style="width:56%;height:100%;outline: none;border:none"
         >
@@ -37,6 +40,7 @@
         <img src="../../assets/images/密码@2x.png" class="width_16">
         <input
           type="text"
+          v-model="password"
           placeholder="请设置您的新密码"
           style="width:100%;height:100%;outline: none;border:none"
         >
@@ -45,7 +49,7 @@
     </div>
     <!-- 确认 -->
     <div class="text_center">
-      <div class="b_t_t">确认</div>
+      <div class="b_t_t" @click="changePassword">确认</div>
     </div>
   </div>
 </template>
@@ -57,21 +61,52 @@ export default {
     return {
       sendAuthCode: true /*布尔值，通过v-show控制显示‘获取按钮’还是‘倒计时’ */,
       auth_time: 0 /*倒计时 计数器*/,
-      tip:"获取验证码"
+      tip: "获取验证码",
+      phone: "",
+      password: "",
+      code: ""
     };
   },
   methods: {
+    // 获取验证
     getAuthCode: function() {
       this.sendAuthCode = false;
-      this.auth_time = 6;
+      this.auth_time = 60;
+      this.$fetch
+        .post("fruits/app/user/getSmsCode", {
+          phone: this.phone,
+          openId: localStorage.getItem("openId"),
+          type: 2
+        })
+        .then(res => {
+          console.log(res);
+          // this.form.code = "1234";
+        });
+
       var auth_timetimer = setInterval(() => {
         this.auth_time--;
         if (this.auth_time <= 0) {
           this.sendAuthCode = true;
           clearInterval(auth_timetimer);
-          this.tip =  '重新获取验证码'
+          this.tip = "重新获取验证码";
         }
       }, 1000);
+    },
+    // 修改密码
+    changePassword() {
+      let data = {
+        openId: localStorage.getItem("openId"),
+        code: this.code,
+        password: DesUtils.encode(this.password, "fruits-app,yuntu,com")
+      };
+      this.$fetch.post(url.changePassword, data).then(res => {
+        console.log(res);
+       if(data.code= 0){
+         alert('修改成功')
+       }else{
+             alert(data.msg)
+          }
+      });
     }
   },
   created() {
@@ -79,9 +114,7 @@ export default {
     this.routeParams = JSON.parse(this.$route.params.obj);
   },
 
-  mounted() {
- 
-  }
+  mounted() {}
 };
 </script>
 <style scoped>

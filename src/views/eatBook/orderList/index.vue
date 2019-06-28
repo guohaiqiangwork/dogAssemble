@@ -33,7 +33,9 @@ export default {
                 console.log(res);
                 if(res.msg == "success"){
                     this.book = {...res.obj}
-                }
+                }else{
+             alert(data.msg)
+          }
             })
         }
     },

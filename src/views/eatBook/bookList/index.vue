@@ -87,7 +87,9 @@ export default {
                 if(res.obj.length == 0){
                     this.isUnMore1 = true;
                     return
-                }
+                }else{
+             alert(data.msg)
+          }
                 this.$nextTick(()=>{
                     res.obj.forEach(e => {
                         this.bookList.push(e);

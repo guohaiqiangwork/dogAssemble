@@ -22,7 +22,6 @@ service
   .interceptors
   .request
   .use(request => {
-
     request.headers = { "AuthorizationKey": window.localStorage.getItem("user") };
     // request.headers.common["Access-Control-Allow-Origin"]="*"
     return request
@@ -41,7 +40,11 @@ service
      * code为非200是错误的请求
      */
     console.log(response.data.msg)
+    // alert(response.data.msg)
      if(response.data.msg == "openId_none!"){
+      window.location.href=response.data.obj
+     }
+     if(response.data.msg == "openId_error!"){
       window.location.href=response.data.obj
      }
     if (response.data.msg == "no_login") {

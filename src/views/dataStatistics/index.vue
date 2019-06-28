@@ -206,7 +206,9 @@ export default {
       this.$fetch.post(url.getStatistics, _obj).then(data => {
         if (data.code == 0) {
           this.moneyList = data.obj;
-        }
+        }else{
+             alert(data.msg)
+          }
       });
     }
   },

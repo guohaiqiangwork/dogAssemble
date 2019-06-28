@@ -28,7 +28,9 @@ export default {
         console.log(res);
         if(res.msg == "success"){
           this.list = [...res.obj];
-        }
+        }else{
+             alert(data.msg)
+          }
         
         this.$vux.loading.hide();
       })

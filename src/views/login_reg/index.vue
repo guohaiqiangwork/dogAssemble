@@ -192,9 +192,9 @@ export default {
           localStorage.setItem("type", res.attributes.type);
           localStorage.setItem("appUserId", res.attributes.appUserId); //登陆用户id
           this.getCartNum();
-        } else {
-          // this.$vux.toast.text("登录时出现问题，请重新登录");
-        }
+        } else{
+             alert(data.msg)
+          }
       });
     },
     //注册
@@ -245,13 +245,13 @@ export default {
                 localStorage.setItem("appUserId", res.attributes.appUserId); //登陆用户id
                 this.$router.push("/home");
               } else {
-                // this.$vux.toast.text("登录时出现问题，请重新登录");
+                alert(res.data.msg)
               }
             });
           }
-        } else {
-          this.$vux.toast.text("出现错误，请重试");
-        }
+        } else{
+             alert(data.msg)
+          }
       });
     },
     editPass() {
@@ -273,11 +273,11 @@ export default {
         .post("fruits/app/user/getSmsCode", {
           openId: this.form.openId,
           phone: this.form.phone,
-          openId:localStorage.getItem("openId"),
-          type:0
+          openId: localStorage.getItem("openId"),
+          type: 0
         })
         .then(res => {
-          console.log(res)
+          console.log(res);
           // this.form.code = "1234";
         });
 
@@ -295,31 +295,35 @@ export default {
     //获取购物车数量
     getCartNum() {
       this.$fetch
-        .post("fruits/app/cart/getCartNum", { openId: localStorage.getItem("openId")})
+        .post("fruits/app/cart/getCartNum", {
+          openId: localStorage.getItem("openId")
+        })
         .then(res => {
           console.log(res);
           if (res.msg == "success") {
             this.$router.push("/home");
             localStorage.setItem("catnum", res.obj);
+          }else{
+             alert(data.msg)
           }
         });
     },
-    getQueryString(name) {
-      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-      var r = window.location.search.substr(1).match(reg);
-      if (r != null) return unescape(r[2]);
-      return null;
-    },
+    // getQueryString(name) {
+    //   var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    //   var r = window.location.search.substr(1).match(reg);
+    //   if (r != null) return unescape(r[2]);
+    //   return null;
+    // },
     //获取用户openId
-    getOpenId() {
-      var data = {
-        code: this.code,
-        state: ""
-      };
-      this.$fetch.post(url.getOpenId, data).then(res => {
-        console.log(res, "dfsf");
-      });
-    }
+    // getOpenId() {
+    //   var data = {
+    //     code: this.code,
+    //     state: ""
+    //   };
+    //   this.$fetch.post(url.getOpenId, data).then(res => {
+    //     console.log(res, "dfsf");
+    //   });
+    // }
   },
   created() {
     settitle("我是登录页面");
@@ -336,10 +340,7 @@ export default {
       this.Logform.password = obj.password;
       this.Logform.openId = obj.openId;
     }
-    console.log(url.openId);
-    // this.code = this.getQueryString("code");
-    // console.log(this.code);
-    // this.getOpenId();
+   alert(localStorage.getItem("openId"));
   }
 };
 </script>

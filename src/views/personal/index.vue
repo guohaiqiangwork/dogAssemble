@@ -47,7 +47,8 @@
           <div
             class="font_color_76 font_size_25"
             style="padding-bottom: 2%;"
-          >{{personalMsg.total.toFixed(2)}}</div>
+          ></div>
+          <!-- {{personalMsg.total.toFixed(2)}} -->
           <!-- -->
         </div>
       </div>
@@ -152,7 +153,8 @@
         <div
           class="font_color_76 font_size_25"
           style="padding-bottom: 2%;"
-        >{{personalMsg.total.toFixed(2)}}</div>
+        ></div>
+        <!-- {{personalMsg.total.toFixed(2)}} -->
       </div>
       <!-- 菜单列表 -->
       <div class="margin_top_div4">

@@ -43,6 +43,8 @@ export default {
           if (data.code == 0) {
             console.log(data);
             // this.videoOrderList = data.obj;
+          }else{
+             alert(data.msg)
           }
         },
         err => {

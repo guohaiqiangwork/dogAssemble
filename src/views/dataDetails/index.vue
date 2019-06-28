@@ -50,7 +50,9 @@ export default {
       this.$fetch.post(url.getChargeList, _obj).then(data => {
         if (data.code == 0) {
           this.dataChargeList = this.dataChargeList.concat(data.obj);
-        }
+        }else{
+             alert(data.msg)
+          }
       });
     },
     // 上拉加载

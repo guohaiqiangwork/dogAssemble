@@ -81,6 +81,8 @@ export default {
             this.searchList = data.obj;
           console.log(this.searchList);
             
+          }else{
+             alert(data.msg)
           }
         },
         err => {

@@ -259,6 +259,8 @@ export default {
         data => {
           if (data.code == 0) {
             console.log("会员订单结束");
+          }else{
+             alert(data.msg)
           }
         },
         err => {
@@ -287,6 +289,8 @@ export default {
         data => {
           if (data.code == 0) {
             this.getInfo(this.parameter.item.id);
+          }else{
+             alert(data.msg)
           }
         },
         err => {
@@ -306,6 +310,8 @@ export default {
           if (data.code == 0) {
             this.infoList = data.obj;
             console.log(data);
+          }else{
+             alert(data.msg)
           }
         },
         err => {
@@ -334,6 +340,8 @@ export default {
           if (data.code == 0) {
             this.infoList = data.obj;
             console.log(data);
+          }else{
+             alert(data.msg)
           }
         },
         err => {

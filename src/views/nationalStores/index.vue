@@ -208,6 +208,8 @@ export default {
           if (data.code == 0) {
             this.recommendStoreList = data.obj;
             console.log(this.recommendStoreList);
+          }else{
+             alert(data.msg)
           }
         },
         err => {

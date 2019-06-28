@@ -114,6 +114,8 @@ export default {
             }
 
             console.log(this.orderByIdList);
+          }else{
+             alert(data.msg)
           }
         },
         err => {
