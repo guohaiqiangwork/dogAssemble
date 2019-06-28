@@ -157,7 +157,7 @@ export default {
       },
 
       validTel: false,
-      getoptnId:''
+      getoptnId: ""
     };
   },
   methods: {
@@ -182,9 +182,9 @@ export default {
         "fruits-app,yuntu,com"
       );
       // this.Logform.nickname = ""; this.Logform.headimgurl = "";
-      this.Logform.openId = localStorage.getItem("openId") || '112';
-      this.Logform.nickname = localStorage.getItem("nickname") || '随便';
-      this.Logform.headimgurl = localStorage.getItem("headimgurl") || 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJrDNnAKic6SaKbPB5FGldToRvRnlEgQwjIT9xaNoh1gspSk3xgUUX5Myvl4Sz68wSTZCHEOKOZsiag/132';
+      this.Logform.openId = localStorage.getItem("openId");
+      this.Logform.nickname = localStorage.getItem("nickname");
+      this.Logform.headimgurl = localStorage.getItem("headimgurl");
       this.$fetch.post("fruits/app/user/login", this.Logform).then(res => {
         this.btnload = false;
         alert(res.msg);
@@ -235,7 +235,9 @@ export default {
               password: DesUtils.encode(this.loginP, "fruits-app,yuntu,com"),
               phone: this.form.phone,
               nickname: localStorage.getItem("nickname"),
-              headimgurl: localStorage.getItem("headimgurl") || 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJrDNnAKic6SaKbPB5FGldToRvRnlEgQwjIT9xaNoh1gspSk3xgUUX5Myvl4Sz68wSTZCHEOKOZsiag/132'
+              headimgurl:
+                localStorage.getItem("headimgurl") ||
+                "http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJrDNnAKic6SaKbPB5FGldToRvRnlEgQwjIT9xaNoh1gspSk3xgUUX5Myvl4Sz68wSTZCHEOKOZsiag/132"
             };
 
             this.$fetch.post("fruits/app/user/login", _obj).then(res => {
@@ -326,18 +328,16 @@ export default {
     //   });
     // }
     getAddress() {
-      if(localStorage.getItem("openId") == 'null'){
-        this.getoptnId = ''
-      }else{
-        this.getoptnId = localStorage.getItem("openId")
+      if (localStorage.getItem("openId") == "null") {
+        this.getoptnId = "";
+      } else {
+        this.getoptnId = localStorage.getItem("openId");
       }
       this.$fetch
         .post("fruits/app/cart/getAddressList", {
           openId: this.getoptnId
         })
-        .then(res => {
-         
-        });
+        .then(res => {});
     }
   },
   created() {
@@ -355,7 +355,7 @@ export default {
       this.Logform.password = obj.password;
       this.Logform.openId = obj.openId;
     }
-    this.getAddress()
+    this.getAddress();
   }
 };
 </script>
