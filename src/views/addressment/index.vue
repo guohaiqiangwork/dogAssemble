@@ -56,20 +56,6 @@ export default {
   data() {
     return {
       addressList: [
-        {
-          id: "1231",
-          receiver: "吕小布",
-          address: "文化创意产业园B座广顺路北大街融创动力文化产业园 A205",
-          tel: "189****3837",
-          isdefalut: true
-        },
-        {
-          id: "123123",
-          name: "吕小布",
-          address: "文化创意产业园B座广顺路北大街融创动力文化产业园 A205",
-          tel: "189****3837",
-          isdefalut: false
-        }
       ]
     };
   },
