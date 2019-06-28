@@ -40,7 +40,7 @@ service
     /**
      * code为非200是错误的请求
      */
-
+    console.log(response);
     var aUrl = 'https://open.weixin.qq.com/connect/oauth2/authorize?' + '?appid=' + response.data.obj + '&redirect_uri=http://www.gsb.yuntunet.cn/%23/&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect'
     if (response.data.code == "702") {
       window.location.href = aUrl
