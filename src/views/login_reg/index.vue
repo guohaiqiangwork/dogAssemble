@@ -308,22 +308,22 @@ export default {
           }
         });
     },
-    getQueryString(name) {
-      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-      var r = window.location.search.substr(1).match(reg);
-      if (r != null) return unescape(r[2]);
-      return null;
-    },
+    // getQueryString(name) {
+    //   var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    //   var r = window.location.search.substr(1).match(reg);
+    //   if (r != null) return unescape(r[2]);
+    //   return null;
+    // },
     //获取用户openId
-    getOpenId() {
-      var data = {
-        code: this.code,
-        state: ""
-      };
-      this.$fetch.post(url.getOpenId, data).then(res => {
-        console.log(res, "dfsf");
-      });
-    }
+    // getOpenId() {
+    //   var data = {
+    //     code: this.code,
+    //     state: ""
+    //   };
+    //   this.$fetch.post(url.getOpenId, data).then(res => {
+    //     console.log(res, "dfsf");
+    //   });
+    // }
   },
   created() {
     settitle("我是登录页面");
@@ -341,9 +341,6 @@ export default {
       this.Logform.openId = obj.openId;
     }
    alert(localStorage.getItem("openId"));
-    // this.code = this.getQueryString("code");
-    // console.log(this.code);
-    // this.getOpenId();
   }
 };
 </script>
