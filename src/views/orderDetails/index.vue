@@ -92,7 +92,7 @@ export default {
     //   获取订单详情
     getShopOrder(item) {
       let _obj = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         id: item
       };
       this.$fetch.post(url.getShopOrder, _obj).then(data => {
@@ -108,7 +108,7 @@ export default {
     // 立即支付
     payOrder() {
       let _obj = {
-        openId: url.openId,
+        openId:localStorage.getItem("openId"),
         id: this.routeParams.data.id
       };
       this.$fetch.post(url.payOrder, _obj).then(data => {

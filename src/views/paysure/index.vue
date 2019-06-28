@@ -150,7 +150,7 @@ export default {
     getSelectAddress(item) {
       // 会员订单保存
       let _obj = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         id: item
       };
       this.$fetch.post(url.selectAddress, _obj).then(

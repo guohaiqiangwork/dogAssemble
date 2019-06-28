@@ -20,7 +20,7 @@
         <div class="">
             <div class="goods_tit">商品详情图</div>
             <div v-for="(item,index) in goodsDetail.imgDetailsList" :key="index">
-                <img class="detail_pic" :src="'//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId='+item" alt=""> 
+                <img class="detail_pic" :src="'http://www.gsb.yuntunet.cn/fruits/app/blank/showPicture?attachmentId='+item" alt=""> 
             </div>
          
         </div> 
@@ -120,7 +120,7 @@ export default {
             
             ],
             arr:[],
-            param:{openId:"1313121231",id:this.goodId},
+            param:{openId:localStorage.getItem("openId"),id:this.goodId},
             num:1,
             //商品详情信息
             goodsDetail:{},
@@ -128,7 +128,7 @@ export default {
             specList:[],
             spec:'',
             form:{
-                openId:"1313121231",
+                openId:localStorage.getItem("openId"),
                 id:'',
                 num:1,
                 specList:[]
@@ -165,7 +165,7 @@ export default {
                 }
                 //点击立即购买
                 var obj = {
-                    openId:"",
+                    openId:localStorage.getItem("openId"),
                     goodList:[{
                         id:this.goodsDetail.id,
                         num:this.form.num
@@ -188,14 +188,14 @@ export default {
         //获取商品详情
         getGood(){
            
-            this.$fetch.post("fruits/app/blank/getGoodInfo",{openId:"1313121231",id:this.goodId}).then(res =>{
+            this.$fetch.post("fruits/app/blank/getGoodInfo",{openId:localStorage.getItem("openId"),id:this.goodId}).then(res =>{
                 // this.$nextTick(() =>{
                     console.log(res,999);
                     res.obj.imgBannerList.forEach((el,i) => {
                     // if(i<2){
                             this.imgList.push({
                                 url: 'javascript:',
-                                img:"//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId="+el,
+                                img:"http://www.gsb.yuntunet.cn/fruits/app/blank/showPicture?attachmentId="+el,
                                 title:'123'
                             });
                         //   this.imgList[i].img = "//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId="+el;
@@ -212,7 +212,7 @@ export default {
         },
         //获取商品规格
         getSpecs(){
-            this.$fetch.post("fruits/app/cart/getGoodsSpec",{openId:"1313121231",id:this.goodId}).then(res =>{
+            this.$fetch.post("fruits/app/cart/getGoodsSpec",{openId:localStorage.getItem("openId"),id:this.goodId}).then(res =>{
                 this.specList = [...res.obj.goodsSpecs];
                 this.specList.forEach((e,ind) =>{
                     this.form.specList.push({

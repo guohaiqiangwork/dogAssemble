@@ -76,7 +76,7 @@ export default {
     // 查询订单会员
     getAllOrder() {
       let keywords = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         id: this.routeParams.data.id
       };
       this.$fetch.post(url.getAllOrder, keywords).then(

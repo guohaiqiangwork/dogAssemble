@@ -258,7 +258,7 @@ export default {
     onConfirm() {
       // 会员订单保存
       let _obj = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         id: this.memberID, //会员套餐id
         phone: this.phone
       };
@@ -295,7 +295,7 @@ export default {
       this.passwordNumber = DesUtils.encode(this.msg, "fruits-app,yuntu,com");
       //  辟谷套餐保存
       let _obj = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         id: this.selected.id,
         phone: this.phone,
         password: this.passwordNumber,
@@ -332,7 +332,7 @@ export default {
         return;
       }
       let _obj = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         phone: phone
       };
       this.$fetch.post(url.checkCustomer, _obj).then(
@@ -351,7 +351,7 @@ export default {
       this.classA = falge;
       // 获取套餐内容
       let _obj = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         type: falge
       };
       console.log(url.getRecipe);
@@ -370,7 +370,7 @@ export default {
     getMemberRecipe(event) {
       this.memberID = event.target.value;
       let _obj = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         id: this.memberID
       };
       this.$fetch.post(url.getMemberRecipe, _obj).then(

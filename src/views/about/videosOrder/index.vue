@@ -36,7 +36,7 @@ export default {
     // 获取列表
     getVideoOrder() {
       let _obj = {
-        openId: url.openId
+        openId:localStorage.getItem("openId")
       };
       this.$fetch.post(url.getVideoOrder, _obj).then(
         data => {

@@ -46,7 +46,7 @@ export default {
     // 查询订单会员
     getAllUser(item) {
       let keywords = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         phone:item
       };
       this.$fetch.post(url.getAllUser, keywords).then(

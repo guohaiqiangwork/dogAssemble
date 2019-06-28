@@ -417,7 +417,7 @@ export default {
     // 获取商城订单
     getOrderList() {
       let _obj = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         state: this.switchFlage,
         size: this.page.size,
         current: this.page.current
@@ -442,7 +442,7 @@ export default {
     // 确认收货
     sureReceiving(item) {
       let _obj = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         id: item.id
       };
       this.$fetch.post(url.sureReceiving, _obj).then(

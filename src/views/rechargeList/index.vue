@@ -24,7 +24,7 @@ export default {
       this.$vux.loading.show({
         text: 'Loading'
       })
-      this.$fetch.post('fruits/app/personal/rechargeRecord',{openId:"1313121231",phone:this.routeParams.data.phone}).then(res =>{
+      this.$fetch.post('fruits/app/personal/rechargeRecord',{openId:localStorage.getItem("openId"),phone:this.routeParams.data.phone}).then(res =>{
         console.log(res);
         if(res.msg == "success"){
           this.list = [...res.obj];

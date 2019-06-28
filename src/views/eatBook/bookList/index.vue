@@ -61,7 +61,7 @@ export default {
             show:'da',
             bookList: [],
             form:{
-                openId:"1313121231",
+                openId:localStorage.getItem("openId"),
                 name:"",
                 size:"3",
                 current:"1"

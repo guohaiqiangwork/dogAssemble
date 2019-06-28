@@ -3,9 +3,9 @@
         <div v-if="charList.length">
             <div  class= "cartlist"  v-for="(item,index) in charList" :key="index" @click.prevent="goDetail(item)">
                <!-- <div class="foods_select"></div> -->
-               <i v-if="item.state ==1" class="distroy">失效</i>
-                <i v-else :class="['weui-icon', 'weui_icon_success', 'weui-icon-success',item.ischeck?'checked' : 'normal']" @click.stop ="chooseBuy(item,index)"></i>
-                <img class="gooods_avatar"   :src="'//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId='+item.picId" alt="">
+               <i v-if="item.state ==1"></i>
+                <i v-else :class="['weui-icon', 'weui_icon_success', 'weui-icon-success',item.ischeck?'checked' : 'normal']" @click="chooseBuy(item,index)"></i>
+                <img class="gooods_avatar"   :src="'http://www.gsb.yuntunet.cn/fruits/app/blank/showPicture?attachmentId='+item.picId" alt="">
                 <div class="goods_item">
                     <p class="goods_title">{{item.name}}</p>
                     <p class="goods_flex">
@@ -31,6 +31,7 @@
 </template>
 <script>
 import { InlineXNumber } from 'vux'
+import url from '../../../bin/url'
 export default {
     components:{
         InlineXNumber
@@ -83,7 +84,7 @@ export default {
                 }
             ],
             cartDate:{
-                openId:"1313121231",
+                openId:localStorage.getItem("openId"),
                 id:"",
                 num:""
             },
@@ -147,7 +148,7 @@ export default {
         },
         //获取购买商品的邮费
         getCart(){
-            this.$fetch.post("fruits/app/cart/getCart",{openId:"1313121231"}).then(res =>{
+            this.$fetch.post("fruits/app/cart/getCart",{openId:localStorage.getItem("openId")}).then(res =>{
                 console.log(res,'dfsf')
                 res.obj.forEach(e => {
                     e.ischeck = false;

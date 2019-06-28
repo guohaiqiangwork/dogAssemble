@@ -252,7 +252,7 @@ export default {
     // 结束弹窗确认
     onConfirmOVer() {
       let _obj = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         id: this.parameter.item.id
       };
       this.$fetch.post(url.closeMemberOrder, _obj).then(
@@ -280,7 +280,7 @@ export default {
     // 弹窗确认
     onConfirm() {
       let _obj = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         id: this.payId
       };
       this.$fetch.post(url.sureBigu, _obj).then(
@@ -298,7 +298,7 @@ export default {
     // 获取会员详情
     getInfo(id) {
       let _obj = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         id: id
       };
       this.$fetch.post(url.getOrderInfo, _obj).then(
@@ -324,7 +324,7 @@ export default {
     // 会员套餐子订单处理
     getSaveMember() {
       let _obj = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         id: this.parameter.item.id,
         cupId: this.classA,
         password:  this.msg

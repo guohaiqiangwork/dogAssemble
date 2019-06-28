@@ -86,7 +86,7 @@ export default {
        name:"",
        countList:[],
        form:{
-         openId:"1313121231",
+         openId:localStorage.getItem("openId"),
          type:"",
          phone:null,
          amount:null,
@@ -141,7 +141,7 @@ export default {
       this.$vux.loading.show({
             text: 'Loading'
       })
-      this.$fetch.post('fruits/app/personal/getPupList',{openId:"1313121231"}).then(res =>{
+      this.$fetch.post('fruits/app/personal/getPupList',{openId:localStorage.getItem("openId")}).then(res =>{
         console.log(res);
         res.obj.forEach(item => {
           item.log = false;
@@ -188,7 +188,7 @@ export default {
     },
     showMember(value){
       console.log(1212)
-      this.$fetch.post('fruits/app/personal/checkCustomer',{openId:"1313121231",phone:value}).then(res =>{
+      this.$fetch.post('fruits/app/personal/checkCustomer',{openId:localStorage.getItem("openId"),phone:value}).then(res =>{
         this.$vux.loading.hide();
         if(res.msg == 'find_none_user'){
           this.$vux.toast.text('没有找到该用户');

@@ -1,7 +1,7 @@
 //页面请求的路径地址
 module.exports = {
-  openId: 'asdujfghwiue4yr298r32034ry2',//测试openId
-  imgUrl: "//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId=",//图片
+  openId:localStorage.getItem("openId"),//测试openId
+  imgUrl: "http://www.gsb.yuntunet.cn/fruits/app/blank/showPicture?attachmentId=",//图片
   getMemberList: '/fruits/app/member/getMemberList',//会员操作--查询服务中订单的会员列表
   getOrderInfo: '/fruits/app/member/getOrderInfo',//会员操作--查看服务中订单详情
   checkMember: '/fruits/app/member/checkMember', //查询订单会员
@@ -43,5 +43,6 @@ module.exports = {
   getStatistics: '/fruits/app/statis/getStatistics',//数据统计数据获取
   getChargeList: '/fruits/app/statis/getChargeList',//数据统计数据详情
   changeCustomer: '/fruits/app/personal/changeCustomer',//身份切换
-  getRecommendStoreList: '/fruits/app/personal/getRecommendStoreList' //获取全国门店
+  getRecommendStoreList: '/fruits/app/personal/getRecommendStoreList', //获取全国门店
+  getOpenId:'/fruits/app/weChat/getOpenId',//获取openid
 };

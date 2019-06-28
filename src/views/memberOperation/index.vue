@@ -99,7 +99,7 @@ export default {
     // 获取列表参数
     getMemberList() {
       let keywords = {
-        openId: url.openId
+        openId: localStorage.getItem("openId")
       };
       this.$fetch.post(url.getMemberList, keywords).then(
         data => {
@@ -119,7 +119,7 @@ export default {
         return;
       }
       let keywords = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         phone: phone
       };
       this.$fetch.post(url.checkMember, keywords).then(

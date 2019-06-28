@@ -198,7 +198,7 @@ export default {
     //获取数据
     getRecommendStoreList(item) {
       let _obj = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         name: item || '',
         size: this.page.size,
         current: this.page.current

@@ -94,7 +94,7 @@ export default {
     // 健康奖金--推荐返佣列表
     getRecommendB() {
       let _obj = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         name: this.itemName,
         size: this.page.size,
         current: this.page.current
@@ -117,7 +117,7 @@ export default {
     // 视频返佣列表
     getVideoDistri() {
       let _obj = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         name: this.itemName,
         size: this.page.size,
         current: this.page.current
@@ -140,7 +140,7 @@ export default {
     // 健康奖金商城
     getOrderDistri() {
       let _obj = {
-        openId: url.openId,
+        openId: localStorage.getItem("openId"),
         name: this.itemName,
         size: this.page.size,
         current: this.page.current
