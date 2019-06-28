@@ -156,7 +156,8 @@ export default {
         headimgurl: ""
       },
 
-      validTel: false
+      validTel: false,
+      getoptnId:''
     };
   },
   methods: {
@@ -186,15 +187,16 @@ export default {
       this.Logform.headimgurl = localStorage.getItem("headimgurl") || 'http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJrDNnAKic6SaKbPB5FGldToRvRnlEgQwjIT9xaNoh1gspSk3xgUUX5Myvl4Sz68wSTZCHEOKOZsiag/132';
       this.$fetch.post("fruits/app/user/login", this.Logform).then(res => {
         this.btnload = false;
+        alert(res.msg);
         if (res.msg == "success") {
           this.$vux.toast.text("登录成功");
           localStorage.setItem("user", res.attributes.sessionId);
           localStorage.setItem("type", res.attributes.type);
           localStorage.setItem("appUserId", res.attributes.appUserId); //登陆用户id
           this.getCartNum();
-        } else{
-             alert(data.msg)
-          }
+        } else {
+          alert(data.msg);
+        }
       });
     },
     //注册
@@ -245,13 +247,13 @@ export default {
                 localStorage.setItem("appUserId", res.attributes.appUserId); //登陆用户id
                 this.$router.push("/home");
               } else {
-                alert(res.data.msg)
+                alert(res.msg);
               }
             });
           }
-        } else{
-             alert(data.msg)
-          }
+        } else {
+          alert(res.msg);
+        }
       });
     },
     editPass() {
@@ -299,12 +301,11 @@ export default {
           openId: localStorage.getItem("openId")
         })
         .then(res => {
-          console.log(res);
           if (res.msg == "success") {
             this.$router.push("/home");
             localStorage.setItem("catnum", res.obj);
-          }else{
-             alert(data.msg)
+          } else {
+            alert(res.msg);
           }
         });
     },
@@ -324,6 +325,20 @@ export default {
     //     console.log(res, "dfsf");
     //   });
     // }
+    getAddress() {
+      if(localStorage.getItem("openId") == 'null'){
+        this.getoptnId = ''
+      }else{
+        this.getoptnId = localStorage.getItem("openId")
+      }
+      this.$fetch
+        .post("fruits/app/cart/getAddressList", {
+          openId: this.getoptnId
+        })
+        .then(res => {
+         
+        });
+    }
   },
   created() {
     settitle("我是登录页面");
@@ -340,7 +355,7 @@ export default {
       this.Logform.password = obj.password;
       this.Logform.openId = obj.openId;
     }
-   alert(localStorage.getItem("openId"));
+    this.getAddress()
   }
 };
 </script>

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import router from '../router';
 import Vue from 'vue'
-import  { ToastPlugin } from 'vux'
+import { ToastPlugin } from 'vux'
 Vue.use(ToastPlugin)
 
 const config = require('../config/config.dev')
@@ -36,26 +36,33 @@ service
   .interceptors
   .response
   .use(response => {
+
     /**
      * code为非200是错误的请求
      */
-    console.log(response.data.msg)
-    // alert(response.data.msg)
-     if(response.data.msg == "openId_none!"){
-      window.location.href=response.data.obj
-     }
-     if(response.data.msg == "openId_error!"){
-      window.location.href=response.data.obj
-     }
+
+    var aUrl = 'https://open.weixin.qq.com/connect/oauth2/authorize?' + '?appid=' + response.data.obj + '&redirect_uri=http://www.gsb.yuntunet.cn/%23/&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect'
+    if (response.data.code == "702") {
+      window.location.href = aUrl
+    }
+    if (response.data.msg == "openId_none!") {
+      window.location.href = aUrl
+    }
+    if (response.data.msg == "openId_error") {
+      window.location.href = aUrl
+    }
+    if (response.data.msg == "openId_error!") {
+      window.location.href = aUrl
+    }
     if (response.data.msg == "no_login") {
       router.push('/login/1');
     }
-    if(response.data.code == 300){
+    if (response.data.code == 300) {
       alert(response.data.message)
       // Vue.$vux.toast.show({
       //   text:response.data.message
       //  })
-       
+
       router.push('/login/1');
     }
 
