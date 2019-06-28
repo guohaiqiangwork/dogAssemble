@@ -149,12 +149,12 @@ export default {
           var a =JSON.parse(res.obj)
           // console.log(weiXinPay,7979)
           weiXinPay(a,function(val){
-            console.log(val,'kjkljlk')
+            // console.log(val,'kjkljlk')
             alert(JSON.stringify(val),2222);
-            alert(JSON.parse(val),3333);
+            // alert(JSON.parse(val),3333);
             alert(val)
           },function(err){
-            alert(err,132)
+            alert(JSON.stringify(err),132);
             console.log(err);
           })
           // setTimeout(() => {
