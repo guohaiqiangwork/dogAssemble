@@ -220,7 +220,7 @@ export default {
         state: ""
       };
       this.$fetch.post(url.getOpenId, data).then(res => {
-        if (data.code == 0) {
+        if (res.code == 0) {
           localStorage.setItem("openId", res.obj.openid);
           localStorage.setItem("nickname", res.obj.nickname);
           localStorage.setItem("headimgurl", res.obj.headimgurl);
@@ -230,13 +230,14 @@ export default {
     }
   },
   created() {
-    settitle("我是调试页");
+    settitle("授权页面");
     // this.getCode();
   },
 
   mounted() {
     this.code = this.getQueryString("code");
     this.getOpenId();
+   alert(this.code)
   }
 };
 </script>

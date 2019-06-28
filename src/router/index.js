@@ -48,15 +48,16 @@ import orderDetails from '@/views/orderDetails/index' //商城订单详情
 Vue.use(Router)
 
 export default new Router({
-  routes: [{
-    // 调试页面
-    path: '/',
-    name:"home",
-    meta: {
-      title: '调试',
-    },
-    component: home
-  },
+  routes: [
+  //   {
+  //   // 调试页面
+  //   path: '/',
+  //   name:"home",
+  //   meta: {
+  //     title: '调试',
+  //   },
+  //   component: home
+  // },
   {
     // 登陆
     path: '/',

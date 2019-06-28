@@ -40,19 +40,18 @@ service
     /**
      * code为非200是错误的请求
      */
-
-    var aUrl = 'https://open.weixin.qq.com/connect/oauth2/authorize?' + '?appid=' + response.data.obj + '&redirect_uri=http://www.gsb.yuntunet.cn/%23/&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect'
+    // alert(response.data.obj +  '我是appid')
     if (response.data.code == "702") {
-      window.location.href = aUrl
+      window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?' + 'appid=' + 'wxf3dc1eef51c76ba6' + '&redirect_uri=http://www.gsb.yuntunet.cn/%23/&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect'
     }
     if (response.data.msg == "openId_none!") {
-      window.location.href = aUrl
+      window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?' + 'appid=' + 'wxf3dc1eef51c76ba6' + '&redirect_uri=http://www.gsb.yuntunet.cn/%23/&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect'
     }
     if (response.data.msg == "openId_error") {
-      window.location.href = aUrl
+      window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?' + 'appid=' + 'wxf3dc1eef51c76ba6' + '&redirect_uri=http://www.gsb.yuntunet.cn/%23/&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect'
     }
     if (response.data.msg == "openId_error!") {
-      window.location.href = aUrl
+      window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?' + 'appid=' + 'wxf3dc1eef51c76ba6' + '&redirect_uri=http://www.gsb.yuntunet.cn/%23/&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect'
     }
     if (response.data.msg == "no_login") {
       router.push('/login/1');
