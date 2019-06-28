@@ -152,8 +152,8 @@ export default {
         openId: "",
         password: "",
         phone: "",
-        nickname: "",
-        headimgurl: ""
+        nickname: "fd",
+        headimgurl: "fdfds"
       },
 
       validTel: false,
@@ -182,9 +182,9 @@ export default {
         "fruits-app,yuntu,com"
       );
       // this.Logform.nickname = ""; this.Logform.headimgurl = "";
-      this.Logform.openId = localStorage.getItem("openId");
-      this.Logform.nickname = localStorage.getItem("nickname");
-      this.Logform.headimgurl = localStorage.getItem("headimgurl");
+      this.Logform.openId = localStorage.getItem("openId") || '112';
+      this.Logform.nickname = localStorage.getItem("nickname") || 'dfsf';
+      this.Logform.headimgurl = localStorage.getItem("headimgurl") || 'fdsa';
       this.$fetch.post("fruits/app/user/login", this.Logform).then(res => {
         this.btnload = false;
         alert(res.msg);

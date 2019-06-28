@@ -6,11 +6,15 @@
       <input
         type="text"
         placeholder="搜索您想找的配方…"
+        v-model="form.name"
         style="width:100%;height:100%;background-color:#EFEFEF; outline: none;border:none"
+        @input="search"
       >
       <i></i>
     </div>
+    <div v-if="form.name">
     <!-- 配方 -->
+    
     <div class="symptoms_border font_size_14 font_color_1A">
       <div class="div_display_flex">
         <div style="  margin-left: -2%;"></div>
@@ -76,6 +80,7 @@
         </div>
       </div>
     </div>
+    </div>
   </div>
 </template>
 <script>
@@ -83,7 +88,15 @@ import url from "../../bin/url";
 export default {
   name: "symptoms",
   data() {
-    return {};
+    return {
+      timer:'',
+      form:{
+        openId:localStorage.getItem("openId"),
+        name:"",
+        size:"10",
+        current:"1"
+      }
+    };
   },
   methods: {
     // 去地图
@@ -100,6 +113,24 @@ export default {
           })
         }
       });
+    },
+    search(val){
+      clearTimeout(this.timer);
+      this.timer = setTimeout(() =>{
+        console.log(this.form.name)
+        // this.form.name = val;
+        this.getList();
+      },2000);
+    },
+    getList(){
+      this.$fetch.post('fruits/app/recipe/getRecipeList',this.form).then(res =>{
+        console.log(res,'dfs')
+        if(res.obj.length){
+          this.$vux.toast.text('暂无数据')
+        }
+        this.eatBook = res.obj;
+
+      })
     },
     // 未知内容
     setImagePreview() {
@@ -155,6 +186,7 @@ export default {
   },
 
   mounted() {
+    // this.getList()
     console.log("病症检测");
   }
 };
