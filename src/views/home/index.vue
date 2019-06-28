@@ -21,8 +21,8 @@
     <button @click="goToSymptoms">检测病症</button>
     <button @click="goToPersonal">个人中心</button>
     <button @click="goToRecommend">推荐信息</button>
-    <button @click="goToExclusive">专属门店</button>-->
-    <!-- <button @click="goTol">登陆</button> -->
+    <button @click="goToExclusive">专属门店</button> -->
+    <button @click="goTol">获取当前路径</button>
   </div>
 </template>
 <script>
@@ -227,17 +227,23 @@ export default {
           this.$router.push('/login/1')
         }
       });
+    },
+    goTol(){
+       alert(window.location.href)
     }
   },
   created() {
     settitle("授权页面");
     // this.getCode();
+     
   },
 
   mounted() {
+  alert(window.location.href)
     this.code = this.getQueryString("code");
+      alert(this.code)
     this.getOpenId();
-   alert(this.code)
+
   }
 };
 </script>
