@@ -150,6 +150,7 @@ export default {
           // console.log(weiXinPay,7979)
           weiXinPay(a,function(val){
             console.log(val,'kjkljlk')
+            alert(JSON.stringify(val),2222);
             alert(val)
           },function(err){
             alert(err,132)
