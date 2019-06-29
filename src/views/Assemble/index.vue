@@ -17,7 +17,7 @@
     <div class="bg_gray">
       <div class="hot_tit mt-space" @click="Test" v-if="goodsList.length">全部商品</div>
       <div id="whole">
-        <div class="flex-between wrap">
+        <div class="flex-between wrap" style="margin-bottom: 3%;">
           <div
             class="goods_item"
             v-for="(item,index) in goodsList"
