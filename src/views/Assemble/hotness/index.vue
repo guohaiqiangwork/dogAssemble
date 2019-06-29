@@ -1,5 +1,5 @@
 <template>
-  <div id="hot">
+  <div id="hot" class=" margin_top_div3">
     <div class="hot_tit" v-if="home&&hotList.length">热门推荐</div>
        <div class="foryou" v-if="!home&&hotList.length">为您推荐</div>
     <div class="hot_item">
