@@ -13,7 +13,7 @@
     <!-- <router-link to="/login/1">登录和注册页面</router-link> -->
     <!-- <router-link to="/videomangment">视频管理</router-link> -->
     <!-- <button @click="goToLogin">登陆页面</button> -->
-    <button @click="goToNationalStores">全国门店</button>
+    <!-- <button @click="goToNationalStores">全国门店</button>
     <button @click="goToRecipeManual">配方手册</button>
     <button @click="goTocaseVideo">案例视频</button>
     <button @click="goToShareVideo">分享视频</button>
@@ -22,7 +22,7 @@
     <button @click="goToPersonal">个人中心</button>
     <button @click="goToRecommend">推荐信息</button>
     <button @click="goToExclusive">专属门店</button> -->
-    <button @click="goTol">获取当前路径</button>
+    <!-- <button @click="goTol">获取当前路径</button> -->
   </div>
 </template>
 <script>
@@ -239,9 +239,7 @@ export default {
   },
 
   mounted() {
-  alert(window.location.href)
     this.code = this.getQueryString("code");
-      alert(this.code)
     this.getOpenId();
 
   }
