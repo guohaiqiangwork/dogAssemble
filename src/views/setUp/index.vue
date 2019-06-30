@@ -7,7 +7,13 @@
           <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%">
         </div>
       </div>
-      <div class="div_display_flex width_m" @click="accountD">
+      <div class="div_display_flex width_m" v-if="type == 2 " @click="goToAddress">
+        <div class="div_width_50 font_color_1A personal_list_font">地址管理</div>
+        <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
+          <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%">
+        </div>
+      </div>
+      <div class="div_display_flex width_m" @click="accountD" v-if="type != 3 ">
         <div class="div_width_50 font_color_1A personal_list_font">{{type == 1 ?'冻结账户' :"关闭店铺"}}</div>
         <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
           <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%">
@@ -42,12 +48,12 @@ export default {
   data() {
     return {
       outPayFalge: false, //冻结账户弹窗
-      text:""
+      text: ""
     };
   },
-  computed:{
-    type(){
-      return localStorage.getItem('type')
+  computed: {
+    type() {
+      return localStorage.getItem("type");
     }
   },
   methods: {
@@ -65,6 +71,20 @@ export default {
         }
       });
     },
+    // 去地址管理
+    goToAddress() {
+      this.$router.push({
+        name: "addressment",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: "蚕丝"
+            }
+          })
+        }
+      });
+    },
     //账户冻结
     accountD() {
       this.outPayFalge = true;
@@ -75,10 +95,8 @@ export default {
     },
     // 弹窗确认
     onConfirm() {
-      if(type ==1){
-
-      }else{
-        
+      if (type == 1) {
+      } else {
       }
       console.log("233");
     },
@@ -93,6 +111,13 @@ export default {
   },
 
   mounted() {
+    this.$fetch
+      .post("fruits/app/personal/getPersonalInfo", {
+        openId: localStorage.getItem("openId")
+      })
+      .then(res => {
+        this.personalMsg = { ...res.obj };
+      });
     console.log("设置");
   }
 };
