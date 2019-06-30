@@ -45,6 +45,7 @@ import allMembers from '@/views/allMembers/index'//全部订单
 import allMembersDetails from '@/views/allMembersDetails/index'//全部订单详情
 import allMembersDetailsD from '@/views/allMembersDetailsD/index'//全部订单详情中详情
 import orderDetails from '@/views/orderDetails/index' //商城订单详情
+import sharedBonus from '@/views/sharedBonus/index'//共享奖金
 Vue.use(Router)
 
 export default new Router({
@@ -537,6 +538,15 @@ export default new Router({
         title: '全部会员详情'
       },
       component: allMembersDetailsD
+    },
+    {
+      // 共享奖金
+      path: '/sharedBonus',
+      name: 'sharedBonus',
+      meta: {
+        title: '共享奖金'
+      },
+      component: sharedBonus
     },
     {
       path: '/404',
