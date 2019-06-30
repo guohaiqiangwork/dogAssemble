@@ -1,19 +1,19 @@
 <template>
   <div>
-    <!-- <x-header :right-options="{showMore: true}" @on-click-more="showMenus = true">首页</x-header> -->
-    <!-- <router-link to="/home">首页</router-link> -->
-    <!-- <router-link to="/goodsdetail">商品详情</router-link> -->
-    <!-- <router-link to="/cart">购物车页面</router-link> -->
-    <!-- <router-link to="/paysure">去支付页面</router-link> -->
-    <!-- <router-link to="/addressment">地址管理页面</router-link> -->
-    <!-- <router-link to="/addressopt">添加地址</router-link> -->
-    <!-- <router-link to="/immendilypay">立即支付</router-link> -->
-    <!-- <router-link to="/about">关于我们</router-link> -->
-    <!-- <router-link to="/videopage">视频页面</router-link> -->
-    <!-- <router-link to="/login/1">登录和注册页面</router-link> -->
-    <!-- <router-link to="/videomangment">视频管理</router-link> -->
-    <!-- <button @click="goToLogin">登陆页面</button> -->
-    <!-- <button @click="goToNationalStores">全国门店</button>
+    <x-header :right-options="{showMore: true}" @on-click-more="showMenus = true">首页</x-header>
+    <router-link to="/home">首页</router-link>
+    <router-link to="/goodsdetail">商品详情</router-link>
+    <router-link to="/cart">购物车页面</router-link>
+    <router-link to="/paysure">去支付页面</router-link>
+    <router-link to="/addressment">地址管理页面</router-link>
+    <router-link to="/addressopt">添加地址</router-link>
+    <router-link to="/immendilypay">立即支付</router-link>
+    <router-link to="/about">关于我们</router-link>
+    <router-link to="/videopage">视频页面</router-link>
+    <router-link to="/login/1">登录和注册页面</router-link>
+    <router-link to="/videomangment">视频管理</router-link>
+    <button @click="goToLogin">登陆页面</button>
+    <button @click="goToNationalStores">全国门店</button>
     <button @click="goToRecipeManual">配方手册</button>
     <button @click="goTocaseVideo">案例视频</button>
     <button @click="goToShareVideo">分享视频</button>
@@ -21,8 +21,9 @@
     <button @click="goToSymptoms">检测病症</button>
     <button @click="goToPersonal">个人中心</button>
     <button @click="goToRecommend">推荐信息</button>
-    <button @click="goToExclusive">专属门店</button> -->
-    <!-- <button @click="goTol">获取当前路径</button> -->
+    <button @click="goToExclusive">专属门店</button>
+    <button @click="goTol">获取当前路径</button>
+    <router-link to='/sharedBonus'>共享奖金</router-link>
   </div>
 </template>
 <script>
