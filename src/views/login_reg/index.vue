@@ -159,7 +159,7 @@ export default {
         nickname: "随便"
       },
       Logform: {
-        openId: "",
+        openId: "2229",
         password: "",
         phone: "",
         nickname: "fd",
@@ -199,8 +199,7 @@ export default {
         if (res.msg == "success") {
           console.log('success',res);
           this.$vux.toast.text("登录成功");
-          localStorage.setItem("user", res.attributes.sessionId);
-          localStorage.setItem("openId",this.obj.openId);
+          localStorage.setItem("user", res.attributes.sessionId) ;
           localStorage.setItem("type", res.attributes.type);
           localStorage.setItem("appUserId", res.attributes.appUserId); //登陆用户id
           this.getCartNum();

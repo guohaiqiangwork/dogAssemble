@@ -1,7 +1,7 @@
 //页面请求的路径地址
 module.exports = {
   openId:localStorage.getItem("openId"),//测试openId
-  imgUrl: "http://www.gsb.yuntunet.cn/fruits/app/blank/showPicture?attachmentId=",//图片
+  imgUrl: "//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId=",//图片
   getMemberList: '/fruits/app/member/getMemberList',//会员操作--查询服务中订单的会员列表
   getOrderInfo: '/fruits/app/member/getOrderInfo',//会员操作--查看服务中订单详情
   checkMember: '/fruits/app/member/checkMember', //查询订单会员

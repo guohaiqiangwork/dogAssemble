@@ -120,11 +120,15 @@ export default {
       white-space: nowrap;
       
       span {
+        display: inline-block;
         white-space: wrap;
+        color: #000;
+        font-size: .28rem;
       }
       .hot_price {
-        color: #ff3636;
-        font-size: 0.16rem;
+        color: #E6435A;
+        font-size: 0.28rem;
+        padding: 0.1rem 0rem;
       }
      
     }

@@ -1,3 +1,6 @@
+a{
+  text-decoration: none;
+}
 .div_display_flex {
   display: flex;
 }
@@ -170,6 +173,11 @@ color: #102023
 .font_color_E8{
   color:#E8BB7A
 }
+.font_color_BF{
+  color: #BFBFBF;
+  font-size: .28rem;
+  padding-bottom: 0.05rem;
+}
 /* 字号 */
 .font_size_11 {
   font-size: 11px
@@ -263,7 +271,7 @@ color: #102023
 }
 
 .red{
-  color: #FF3636;
+  color: #E6435A;
 }
 /* div宽度 */
 .div_width_8{

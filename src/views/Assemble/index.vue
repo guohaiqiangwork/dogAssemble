@@ -110,13 +110,13 @@ export default {
           url: "javascript:",
           img:
             "http://www.gsb.yuntunet.cn/fruits/app/blank/showPicture?attachmentId=" +
-            str,
-          title: "送你一朵fua"
+            str
+          // title: "送你一朵fua"
         },
         {
           url: "javascript:",
-          img: "http://m.imeitou.com/uploads/allimg/2019021309/ipijc3xjpfo.jpg",
-          title: "送你一朵fua1"
+          img: "http://m.imeitou.com/uploads/allimg/2019021309/ipijc3xjpfo.jpg"
+          // title: "送你一朵fua1"
         }
       );
     },
@@ -199,6 +199,8 @@ export default {
     align-items: center;
     padding: 0 0.31rem;
     margin-bottom: 0.09rem;
+    font-size: .28rem;
+    color: #000000;
   }
   .hot_tit::before {
     content: "";
@@ -207,7 +209,7 @@ export default {
     height: 0.3rem;
     margin-right: 0.1rem;
     // margin-top: 0.6rem;
-    background: #4a7b67;
+    background: #FF8156;
     border-radius: 0.03rem;
     line-height: 0.3rem;
   }
@@ -216,6 +218,8 @@ export default {
     height: 3.51rem;
     background-size: 100% 100%;
     overflow: hidden;
+    padding-top:1rem;
+    background: #F5F5F5;
     .search_box {
       position: absolute;
       top: 0.14rem;
@@ -244,6 +248,16 @@ export default {
         padding-right: 0.2rem;
       }
     }
+    .vux-icon-dot{
+      width: 7px;
+      height: 3px;
+      background:rgba(255,255,255,1);
+      opacity:0.68;
+      border-radius:10px;
+    }
+    .active{
+      opacity: 1;
+    }
   }
 }
 </style>
@@ -271,7 +285,9 @@ export default {
       font-size: 0.28rem;
       padding: 0.21rem 0.31rem;
       .goods_name {
+        color: #000;
         line-height: 0.4rem;
+        font-family:PingFang SC;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;

@@ -79,14 +79,14 @@
         <x-textarea
           :max="200"
           name="detail"
-          placeholder="placeholder"
+          placeholder="至少200字"
           :show-counter="true"
           v-model="form.remarks"
         ></x-textarea>
         <!-- <p class="buyflag">支付代表同意《购买须知》</p> -->
       </div>
       <div class="pay_box">
-        <div class>
+        <div style="margin-left:0.3rem;">
           <span>实际支付</span>
           <span class="red price_size">￥{{(price/1+postFee/1).toFixed(2)}}</span>
         </div>
@@ -379,11 +379,11 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 0 0 0.3rem;
+    padding: 0;
     height: 1.09rem;
     width: 100%;
     position: fixed;
-    bottom: 48px;
+    bottom: .9rem;
     background: #fff;
     // padding: 1rem 1.5rem;
     .buybutton {
@@ -393,6 +393,7 @@ export default {
       background: #4a7b67;
       font-size: 0.26rem;
       text-align: center;
+      float: right;
       line-height: 1.09rem;
     }
     .price_size {

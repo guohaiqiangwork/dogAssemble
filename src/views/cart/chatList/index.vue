@@ -337,6 +337,7 @@ export default {
         .tip_none{
             padding: 0.4rem 0;
             color: rgba(0,0,0,0.52);
+            font-size: .28rem;
         }
         .non_cart{
             width: 2.06rem;
@@ -351,6 +352,7 @@ export default {
             text-align: center;
             line-height: 0.8rem;
             color: #fff; 
+            font-size: .28rem;
         }
     }
 }

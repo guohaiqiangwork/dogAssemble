@@ -10,8 +10,8 @@
             </div>
         </div>
         <div class="goods_item">
-            <p class=" goods_price">{{goodsDetail.name}}</p>
-            <div>{{goodsDetail.remark}}</div>
+            <p class="goods_price">{{goodsDetail.name}}</p>
+            <div class="goods_des">{{goodsDetail.remark}}</div>
             <p class="goods_name">
                 <span class="red">￥{{type == 1?goodsDetail.original:goodsDetail.price}}</span>
                 <span class="goods_discount" v-if="type!=1&&type">￥{{goodsDetail.original}}</span>
@@ -33,7 +33,7 @@
                         <div class="popup_head">
                             <img src="../../assets/images/WechatIMG99.png" alt="">
                             <div class="flex-around flex-clo ml-space">
-                                <p>{{goodsDetail.name}}</p>
+                                <p style="font-weight:700;margin-top:-.3rem;">{{goodsDetail.name}}</p>
                                 <p class="goods_price">
                                     <span class="red">￥{{goodsDetail.price}}</span>
                                     <span class="goods_discount">￥{{goodsDetail.original}}</span>
@@ -203,8 +203,7 @@ export default {
                     // if(i<2){
                             this.imgList.push({
                                 url: 'javascript:',
-                                img:"http://www.gsb.yuntunet.cn/fruits/app/blank/showPicture?attachmentId="+el,
-                                title:'123'
+                                img:"http://www.gsb.yuntunet.cn/fruits/app/blank/showPicture?attachmentId="+el
                             });
                         //   this.imgList[i].img = "//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId="+el;
                     // }
@@ -310,7 +309,7 @@ export default {
                 .goods_price{
                     font-size: 0.38rem;
                     line-height: 0.53rem;
-                  
+                    margin-top: -.9rem;
                 }
                 
             }
@@ -333,6 +332,7 @@ export default {
                 }
                 .active{
                     background: #4A7B67;
+                    color: #fff;
                 }
             }
             .mt-space{
@@ -341,11 +341,12 @@ export default {
             
         }
         .buy_btn{
-            width: 7rem;
+            width: 6.9rem;
             height: 1rem;
             margin: 0.63rem 0 0.44rem 0;
             background: #4A7B67;
             line-height: 1rem;
+            font-size: .3rem;
             text-align: center;
             color: #fff;
             border-radius: 0.12rem;
@@ -410,9 +411,18 @@ export default {
         padding:0.3rem 0.28rem 0.3rem;
         .goods_price{
             line-height: 0.53rem;
+            font-size: .32rem;
+        }
+        .goods_des{
+            font-size: .26rem;
+            color: #000000;
+            opacity: 0.52;
+            padding-bottom: 0.1rem;
         }
         .goods_name{
             line-height: 0.45rem;
+            font-size: .38rem;
+            color: #E6435A;
         }
     }
     .detail_pic{
@@ -422,6 +432,8 @@ export default {
     .goods_tit{
         margin-bottom: 0.59rem;
         text-align: center;
+        color: #000;
+        font-size: .3rem;
     }
     .goods_tit:before{
         content: '';

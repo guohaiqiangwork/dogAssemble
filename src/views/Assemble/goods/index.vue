@@ -95,8 +95,11 @@ export default {
     .item_logo {
       width: 0.88rem;
       height: 0.88rem;
+      border-radius: 50%;
     }
     .item_tip {
+      color: #242E42;
+      font-size: .28rem;
     }
   }
 }
