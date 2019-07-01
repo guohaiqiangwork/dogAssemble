@@ -41,11 +41,12 @@ export default {
     },
     computed:{
         goodsNum() {
-            if(this.charList.length == 1){
-                 return Number(this.charList[0].count);
+            var arr =[...this.charList]
+            if(arr.length == 1){
+                 return Number(arr[0].count);
             }else{
                 var a =0;
-                this.charList.map(e =>{
+                arr.map(e =>{
                     a+= e.count;
                 })
                 return a;
@@ -118,7 +119,7 @@ export default {
                 this.postCart(n);
                 this.bottomMsg.checkcount--;
                 this.$emit('changeNum',this.goodsNum);
-
+                // if(){}s
                 // this.charList.splice(n,1);
                 return
             }else{
@@ -136,14 +137,52 @@ export default {
             this.$emit('changeNum',this.goodsNum);
         },
         //获取购买商品的邮费
-        getCart(){
+        getCart(arr = []){
+            console.log(arr,'lll')
             this.$fetch.post("fruits/app/cart/getCart",{openId:localStorage.getItem("openId")}).then(res =>{
-                console.log(res,'dfsf')
-                res.obj.forEach(e => {
-                    e.ischeck = false;
+                // console.log(res,'dfsf')
+                res.obj.forEach((e,i) => {
+                   
+                    //  if(e.indexOf(this.charList))
+                   
+                   
                     e.money = 0;
                     e.price = e.price.toFixed(2);
+                    if(arr.length){
+                        // if(arr[i]){
+                            console.log(e,'0000000')
+                            if(arr && e.id == arr[i].id){
+                                e.ischeck = true;
+                                console.log(342)
+                            }
+                            // else{
+                                //  e.ischeck = false;
+                            // }
+                        // }
+                        // console.log(arr[i],'jhjlk')
+                    }else{
+                         e.ischeck = false;
+                    }
+                
+                    // arr.filter(a =>{
+                    //     console.log(a.id == e.id,'kjkl')
+                    //     if(a.id == e.id){
+                    //         e.ischeck = true;
+                    //     }else{
+                    //         e.ischeck = false;
+                    //     }
+                    // })
                 });
+                console.log(res.obj)
+                //  if(arr){
+                //     arr.map(e =>{
+                //         res.obj.forEach(a =>{
+                //             if(e.id == a.id){
+                //                 e.ischeck = true;
+                //             }
+                //         })
+                //     })
+                //  }
                  this.charList = res.obj;
                  this.$emit('package',res.attributes)
             })
@@ -160,9 +199,30 @@ export default {
         },
         //给后台存储购物车数量
         postCart(n){
-            console.log(n,9879);
+            // console.log(n,9879);
+            var arr =[];
+            arr = [...this.charList];
+            arr.splice(n,1);
+            arr.forEach((e,i) =>{
+                if(!e.ischeck){
+                    arr.splice(i,1)
+                }
+            })
+            // console.log(arr,8898)
+            // this.charList = [...arr]
+            // this.charList.forEach(e =>{
+
+            // })
+            // this.charList.forEach(e =>{
+            //     if(e.ischeck){
+            //         arr.push(e);
+            //     }
+            // })
+            
             this.$fetch.post('fruits/app/cart/changeNum',this.cartDate).then(res =>{
-                this.getCart();
+                console.log(res);
+                // this.charList = [...arr]
+                this.getCart(arr);
             })
         }
     },
