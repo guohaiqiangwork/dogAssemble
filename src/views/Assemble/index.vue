@@ -31,7 +31,7 @@
               <p class="goods_name">{{item.name}}</p>
               <p>
                 <span class="red" >¥{{type==1?item.original:item.price}}</span>
-                <span class="goods_discount" v-if="type!=1">¥{{item.original}}</span>
+                <span class="goods_discount" v-if="type!=1&&type">¥{{item.original}}</span>
               </p>
             </div>
           </div>

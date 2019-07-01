@@ -9,7 +9,7 @@
           <span>{{item.name}}</span>
           <br>
           <span class="hot_price">{{`￥${type == 1?item.original:item.price}`}}</span>
-          <span class="goods_discount" v-if="type!=1">¥{{item.original}}</span>
+          <span class="goods_discount" v-if="type!=1&&type">¥{{item.original}}</span>
         </p>
       </div>
     </div>

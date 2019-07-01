@@ -14,7 +14,7 @@
             <div>{{goodsDetail.remark}}</div>
             <p class="goods_name">
                 <span class="red">￥{{type == 1?goodsDetail.original:goodsDetail.price}}</span>
-                <span class="goods_discount" v-if="type!=1">￥{{goodsDetail.original}}</span>
+                <span class="goods_discount" v-if="type!=1&&type">￥{{goodsDetail.original}}</span>
             </p>
         </div>
         <div class="">

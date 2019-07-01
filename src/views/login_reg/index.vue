@@ -149,7 +149,7 @@ export default {
         nickname: ""
       },
       Logform: {
-        openId: "",
+        openId: "112",
         password: "",
         phone: "",
         nickname: "fd",
@@ -176,16 +176,19 @@ export default {
         return;
       }
       this.btnload = true;
+       var obj = {};
+           obj = {...this.Logform};
       // this.Logform.password = DesUtils.encode(this.Logform.password,"fruits-app,yuntu,com")
-      this.Logform.password = DesUtils.encode(
-        this.Logform.password,
+      obj.password = DesUtils.encode(
+        obj.password,
         "fruits-app,yuntu,com"
       );
       // this.Logform.nickname = ""; this.Logform.headimgurl = "";
       this.Logform.openId = localStorage.getItem("openId") || '112';
       this.Logform.nickname = localStorage.getItem("nickname") || 'dfsf';
       this.Logform.headimgurl = localStorage.getItem("headimgurl") || 'fdsa';
-      this.$fetch.post("fruits/app/user/login", this.Logform).then(res => {
+     
+      this.$fetch.post("fruits/app/user/login", obj).then(res => {
         this.btnload = false;
         alert(res.msg);
         if (res.msg == "success") {
