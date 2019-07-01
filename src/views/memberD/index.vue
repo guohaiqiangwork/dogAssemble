@@ -186,7 +186,7 @@
             <div>
               <img src="../../assets/images/til@2x.png" width="14px">
             </div>
-            <div class="font_color_4A margin_left_div2" style="line-height: 1;">密码为您登录时设置的密码</div>
+            <div class="font_color_4A margin_left_div2" style="line-height: 1;">密码为会员消费/登录时设置的密码</div>
           </div>
         </div>
       </x-dialog>
@@ -260,6 +260,9 @@ export default {
           if (data.code == 0) {
             console.log("会员订单结束");
           }else{
+            if(data.msg =='user_not_allow'){
+              this.$vux.toast.text('跨店订单不允许结束')
+            }
              alert(data.msg)
           }
         },
@@ -340,7 +343,25 @@ export default {
           if (data.code == 0) {
             this.infoList = data.obj;
             console.log(data);
+            this.$vux.toast.text('支付成功');
+            setTimeout(() =>{
+              this.$router.push({
+                name: "memberOperation",
+                params: {
+                  obj: JSON.stringify({
+                    type: "profession",
+                    data: {
+                      id: "蚕丝"
+                    }
+                  })
+                }
+              });
+            },2000)
           }else{
+            if(data.msg=='password_error'){
+              this.$vux.toast.text('密码错误');
+              this.msgPAW = null;
+            }
              alert(data.msg)
           }
         },
