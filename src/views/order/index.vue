@@ -66,7 +66,7 @@
                   </div>
                 </div>
                 <div class="order_border margin_top_div5"></div>
-                <div class="order_bt_p margin_top_div3" @click="goToPay">
+                <div class="order_bt_p margin_top_div3" @click="goToPay(items.id)">
                   <div class="oreder_bt_pay backgroun_color_4A">去支付</div>
                 </div>
               </div>
@@ -83,7 +83,7 @@
         <div v-if="switchFlage == '1'">
           <div v-if="orderList.length != 0">
             <div v-for="(item,index) in orderList" :key="index">
-              <div class="order_block">
+              <div class="order_block" @click="goToOrderDetails(item.id)">
                 <div class="div_display_flex">
                   <div
                     class="font_size_13"
@@ -131,7 +131,7 @@
                   </div>
                 </div>
                 <div class="order_border margin_top_div5"></div>
-                <div class="order_bt_p margin_top_div3" @click="goToPay">
+                <div class="order_bt_p margin_top_div3" @click="goToPay(items.id)">
                   <div class="oreder_bt_pay backgroun_color_4A">去支付</div>
                 </div>
               </div>
@@ -148,7 +148,7 @@
         <div v-if="switchFlage == '2'">
           <div v-if="orderList.length != 0">
             <div v-for="(item,index) in orderList" :key="index">
-              <div class="order_block">
+              <div class="order_block" @click="goToOrderDetails(item.id)">
                 <div class="div_display_flex">
                   <div
                     class="font_size_13"
@@ -213,7 +213,7 @@
         <div v-if="switchFlage == '3'">
           <div v-if="orderList.length != 0">
             <div v-for="(item,index) in orderList" :key="index">
-              <div class="order_block">
+              <div class="order_block" @click="goToOrderDetails(item.id)">
                 <div class="div_display_flex">
                   <div
                     class="font_size_13"
@@ -261,7 +261,7 @@
                   </div>
                 </div>
                 <div class="order_border margin_top_div5"></div>
-                <div class="order_bt_p margin_top_div3" @click="goToPay">
+                <div class="order_bt_p margin_top_div3" @click="goToPay(items.id)">
                   <div class="oreder_bt_pay backgroun_color_4A">去支付</div>
                 </div>
               </div>
@@ -278,7 +278,7 @@
         <div v-if="switchFlage == '4'">
           <div v-if="orderList.length != 0">
             <div v-for="(item,index) in orderList" :key="index">
-              <div class="order_block">
+              <div class="order_block" @click="goToOrderDetails(item.id)">
                 <div class="div_display_flex">
                   <div
                     class="font_size_13"
@@ -326,7 +326,7 @@
                   </div>
                 </div>
                 <div class="order_border margin_top_div5"></div>
-                <div class="order_bt_p margin_top_div3" @click="goToPay">
+                <div class="order_bt_p margin_top_div3" @click="goToPay(items.id)">
                   <div class="oreder_bt_pay backgroun_color_4A">去支付</div>
                 </div>
               </div>
@@ -388,18 +388,21 @@ export default {
       this.getOrderList(); //切换时获取数据
     },
     // 去支付
-    goToPay() {
-      // this.$router.push({
-      //   name: "orderDetails",
-      //   params: {
-      //     obj: JSON.stringify({
-      //       type: "profession",
-      //       data: {
-      //         id: "pay"
-      //       }
-      //     })
-      //   }
-      // });
+
+    goToPay(id) {
+      let _obj = {
+        openId: localStorage.getItem("openId"),
+        id: id
+      };
+      this.$fetch.post(url.payOrder, _obj).then(data => {
+        if (data.code == 0) {
+          var obj = eval("(" + data.obj + ")");
+          console.log(obj);
+          wexinPay(obj);
+        } else {
+          alert(data.msg);
+        }
+      });
     },
     goToOrderDetails(item) {
       this.$router.push({
@@ -431,8 +434,8 @@ export default {
               });
             });
             this.orderList = data.obj;
-          }else{
-             alert(data.msg)
+          } else {
+            alert(data.msg);
           }
         },
         err => {
@@ -450,9 +453,9 @@ export default {
       this.$fetch.post(url.sureReceiving, _obj).then(
         data => {
           if (data.code == 0) {
-            console.log(data)
-          }else{
-             alert(data.msg)
+            console.log(data);
+          } else {
+            alert(data.msg);
           }
         },
         err => {
