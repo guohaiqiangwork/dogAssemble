@@ -104,7 +104,7 @@
       >
         <div class="backgroun_color_fff model_password">
           <div @click="payPassWGB" class="text_right margin_right_div3 padding_top_div3">X</div>
-          <div class="font_size_16 font_color_10">输入会员支付密码{{msg}}</div>
+          <div class="font_size_16 font_color_10">输入会员支付密码</div>
           <!-- <div class="pass_input_6">
             <input type="password" v-model="miMa" class="pass_input" maxlength="6">
           </div>-->

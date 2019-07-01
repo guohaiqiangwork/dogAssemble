@@ -4,14 +4,19 @@
     <div class="tabBar_bt flex-between align-center">
       <flexbox style="text-align: center;height:48px; background-color: #fff;">
         <flexbox-item>
-          <div class="flex-demo" @click="didClickedItem(0,'home')" v-if="actives != '0'">
-            <img src="../assets/images/1@2x.png" style="width: 18%;">
-          </div>
-          <div class="flex-demo" @click="didClickedItem(0,'home')" v-if="actives == '0'">
-            <img src="../assets/images/1z@2x.png" style="width: 18%;">
-          </div>
-          <div :class="{ 'active': actives == '0'}" class=" font_color_33">首页</div>
+          <router-link to="/home">
+            <div class="flex-demo" v-if="actives != '0'">
+              <img src="../assets/images/1@2x.png" style="width: 18%;">
+            </div>
+          </router-link>
+          <router-link to="/home">
+            <div class="flex-demo" v-if="actives == '0'">
+              <img src="../assets/images/1z@2x.png" style="width: 18%;">
+            </div>
+            <div :class="{ 'active': actives == '0'}" class="font_color_33">首页</div>
+          </router-link>
         </flexbox-item>
+
         <flexbox-item>
           <div class="flex-demo pos" @click="didClickedItem(1,'cart')" v-if="actives != '1'">
             <img src="../assets/images/4@2x.png" style="width: 18%;">
@@ -21,9 +26,7 @@
             <img src="../assets/images/2z@2x.png" style="width:18%;">
             <badge class="msg-sign" :text="buyNum" v-if="buyNum!=0"></badge>
           </div>
-          <div :class="{ 'active': actives == '1'}" class=" font_color_33">
-          购物车
-          </div>
+          <div :class="{ 'active': actives == '1'}" class="font_color_33">购物车</div>
         </flexbox-item>
 
         <flexbox-item v-if="this.route == '/goodsdetail'">
@@ -39,7 +42,7 @@
           <div class="flex-demo" @click="didClickedItem(2,'personal')" v-if="actives == '2'">
             <img src="../assets/images/gerenzhongxin@2x.png" style="width: 18%;">
           </div>
-          <div :class="{ 'active': actives == '2'}" class=" font_color_33">个人中心</div>
+          <div :class="{ 'active': actives == '2'}" class="font_color_33">个人中心</div>
         </flexbox-item>
       </flexbox>
     </div>
@@ -59,9 +62,8 @@ export default {
     route() {
       return this.$route.path;
     },
-    cartNum(){
-      return localStorage.getItem('catnum');
-
+    cartNum() {
+      return localStorage.getItem("catnum");
     }
   },
   props: {},
@@ -70,7 +72,7 @@ export default {
       actives: 0,
       show: false,
       buyNum: 0,
-      title:""
+      title: ""
     };
   },
   methods: {
@@ -97,8 +99,8 @@ export default {
         }
       });
     },
-    setBage(){
-      this.buyNum = localStorage.getItem('catnum')
+    setBage() {
+      this.buyNum = localStorage.getItem("catnum");
     }
   },
   mounted() {
@@ -109,7 +111,7 @@ export default {
 </script>
 
 <style scoped>
-#TabBar{
+#TabBar {
   height: 100%;
 }
 .vux-flexbox .vux-flexbox-item {

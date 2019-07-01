@@ -9,13 +9,15 @@
         <i></i>
       </div>
     </div>
+
     <itemes v-on:getList="goToList1"></itemes>
+    <div style="height:8px;background-color:#F6F6F6"></div>
     <!-- <div class="hot_tit">热门推荐</div> -->
     <hot v-on:goToDetail="goToDetail1"></hot>
     <div class="bg_gray">
       <div class="hot_tit mt-space" @click="Test" v-if="goodsList.length">全部商品</div>
       <div id="whole">
-        <div class="flex-between wrap">
+        <div class="flex-between wrap" style="margin-bottom: 3%;">
           <div
             class="goods_item"
             v-for="(item,index) in goodsList"
