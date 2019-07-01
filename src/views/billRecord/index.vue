@@ -1,12 +1,19 @@
 <template>
   <div class="backgroun_color_fff" style="min-height: 700px;">
     <!-- 账单列表 -->
-    <div v-for="item in [1,2,3]">
+    <div v-for="(item,index) in customerRecordList" :key="index">
       <div class="div_display_flex font_color_33 bill_font_p">
-        <div class="font_size_16 div_width_50">充值金额</div>
-        <div class="font_size_18 div_width_50 bill_font_right">+899.00</div>
+        <div class="font_size_16 div_width_50" v-if="item.payType == 1">充值金额</div>
+        <div class="font_size_16 div_width_50" v-if="item.payType == 2">辟谷套餐消费</div>
+        <div class="font_size_16 div_width_50" v-if="item.payType == 3">会员套餐消费</div>
+        <div class="font_size_16 div_width_50" v-if="item.payType == 4">退单</div>
+        <div class="font_size_18 div_width_50 bill_font_right">
+          <span v-if="item.payType == 4 || item.payType == 1">+</span>
+          <span v-if="item.payType == 2 || item.payType == 3">-</span>
+          {{item.recharge}}
+        </div>
       </div>
-      <div class="bill_font_p padding_bottom_4 font_size_13 font_color_A1">2019-01-25 15:00:00</div>
+      <div class="bill_font_p padding_bottom_4 font_size_13 font_color_A1">{{item.rechargeTime}}</div>
       <div class="bill_border"></div>
     </div>
     <!-- 底部菜单栏 -->
@@ -22,17 +29,35 @@ export default {
   },
   name: "billRecord",
   data() {
-    return {};
+    return {
+      customerRecordList: "" //数据列表
+    };
   },
-  methods: {},
+  methods: {
+    //获取账单列表
+    getCustomerRecord() {
+      this.$fetch
+        .post("/fruits/app/personal/customerRecord", {
+          openId: localStorage.getItem("openId")
+        })
+        .then(res => {
+          if (res.code == 0) {
+            console.log(res);
+            this.customerRecordList = res.obj;
+          } else {
+            alert(res.msg);
+          }
+        });
+    }
+  },
   created() {
     settitle("健康界的轻奢");
     this.routeParams = JSON.parse(this.$route.params.obj);
   },
 
   mounted() {
-    this.$refs.TabBar.didClickedItem("2");
-    console.log("健康界的轻奢");
+    this.getCustomerRecord(); //获取数据
+    // this.$refs.TabBar.didClickedItem("2");
   }
 };
 </script>

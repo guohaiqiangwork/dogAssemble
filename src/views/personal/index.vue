@@ -17,8 +17,16 @@
               style="width:75%;text-overflow:ellipsis;overflow:hidden;white-space:nowrap"
             >{{personalMsg.storeName}}</div>
             <div class="personal_falg_member">
-              <img src="../../assets/images/122@2x.png" width="60px" v-if="personalMsg.storeState == 1">
-              <img src="../../assets/images/td@2x.png" width="60px" v-if="personalMsg.storeState != 1">
+              <img
+                src="../../assets/images/122@2x.png"
+                width="60px"
+                v-if="personalMsg.storeState == 1"
+              >
+              <img
+                src="../../assets/images/td@2x.png"
+                width="60px"
+                v-if="personalMsg.storeState != 1"
+              >
             </div>
             <!-- 打烊 -->
             <!-- <div class="div_display_flex" style="margin-left: 54%; margin-top: 10%;">
@@ -44,10 +52,7 @@
         <div class="personal_money text_center margin_top_div5">
           <!-- style="margin-top:-21%" -->
           <div class="font_color_76 font_size_13 padding_top_div3">总金额(元)</div>
-          <div
-            class="font_color_76 font_size_25"
-            style="padding-bottom: 2%;"
-          ></div>
+          <div class="font_color_76 font_size_25" style="padding-bottom: 2%;"></div>
           <!-- {{personalMsg.total.toFixed(2)}} -->
           <!-- -->
         </div>
@@ -121,7 +126,7 @@
           </div>
           <div>设置中心</div>
         </div>
-        <div class="personal_cd text_center" @click="falgQH" v-if='personalMsg.isChange  == 1'>
+        <div class="personal_cd text_center" @click="falgQH" v-if="personalMsg.isChange  == 1">
           <div class="margin_top28">
             <!-- class="img_width25" class="img_width_100"-->
             <img src="../../assets/images/1609@2x.png" width="25px" height="30px">
@@ -150,10 +155,7 @@
       <!-- 账户 -->
       <div class="personal_money text_center" style="margin-top:-29%">
         <div class="font_color_76 font_size_13 padding_top_div3">总金额(元)</div>
-        <div
-          class="font_color_76 font_size_25"
-          style="padding-bottom: 2%;"
-        ></div>
+        <div class="font_color_76 font_size_25" style="padding-bottom: 2%;"></div>
         <!-- {{personalMsg.total.toFixed(2)}} -->
       </div>
       <!-- 菜单列表 -->
@@ -198,7 +200,7 @@
           </div>
           <div>联系客服</div>
         </div>
-        <div class="personal_cd_j text_center" @click="falgQH" v-if='personalMsg.isChange  == 1'>
+        <div class="personal_cd_j text_center" @click="falgQH" v-if="personalMsg.isChange  == 1">
           <div class="margin_top28">
             <img src="../../assets/images/1609@2x.png" width="25px" height="30px">
           </div>
@@ -292,8 +294,8 @@
               <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%">
             </div>
           </div>
-           <div class="personal_div_border"></div>
-          <div class="div_display_flex" @click="falgQH" v-if='personalMsg.isChange  == 1'>
+          <div class="personal_div_border"></div>
+          <div class="div_display_flex" @click="falgQH" v-if="personalMsg.isChange  == 1">
             <div class="div_width_50 font_color_1A personal_list_font">切换身份</div>
             <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
               <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%">
@@ -392,7 +394,19 @@ export default {
       console.log("2");
     },
     //
-    goToBillRecord() {},
+    goToBillRecord() {
+      this.$router.push({
+        name: "billRecord",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: "参数"
+            }
+          })
+        }
+      });
+    },
     // 弹窗确认
     onConfirm() {
       console.log("233");
@@ -418,9 +432,8 @@ export default {
       this.$fetch.post(url.changeCustomer, _obj).then(
         data => {
           if (data.code == 0) {
-            localStorage.setItem('type',data.attributes.type);
+            localStorage.setItem("type", data.attributes.type);
             this.getCartNum();
-            
           }
         },
         err => {
@@ -431,7 +444,9 @@ export default {
     //获取购物车数量
     getCartNum() {
       this.$fetch
-        .post("fruits/app/cart/getCartNum", { openId: localStorage.getItem('openId') })
+        .post("fruits/app/cart/getCartNum", {
+          openId: localStorage.getItem("openId")
+        })
         .then(res => {
           if (res.msg == "success") {
             // this.$router.push("/home");
@@ -540,9 +555,9 @@ export default {
     },
     // 去配方
     goToTBook: function() {
-        if(this.personalMsg.storeState != 1){
-          this.$vux.toast.text("店铺已打烊，该功能无法操作");
-        return
+      if (this.personalMsg.storeState != 1) {
+        this.$vux.toast.text("店铺已打烊，该功能无法操作");
+        return;
       }
       this.$router.push("/eatbook");
     },
@@ -576,10 +591,10 @@ export default {
     },
     // 押金充值
     goToRecharge: function() {
-      if(this.personalMsg.storeState != 1){
-          this.$vux.toast.text("店铺已打烊，该功能无法操作");
+      if (this.personalMsg.storeState != 1) {
+        this.$vux.toast.text("店铺已打烊，该功能无法操作");
 
-        return
+        return;
       }
       this.$router.push({
         name: "recharge",
@@ -595,10 +610,10 @@ export default {
     },
     // 新建订单
     goToNewOrder() {
-        if(this.personalMsg.storeState != 1){
-          this.$vux.toast.text("店铺已打烊，该功能无法操作");
+      if (this.personalMsg.storeState != 1) {
+        this.$vux.toast.text("店铺已打烊，该功能无法操作");
 
-        return
+        return;
       }
       this.$router.push({
         name: "newOrder",
@@ -614,11 +629,10 @@ export default {
     },
     // 会员操作
     goToMemberOperation() {
-        if(this.personalMsg.storeState != 1){
-          this.$vux.toast.text("店铺已打烊，该功能无法操作");
-
-        return
-      }
+      //   if(this.personalMsg.storeState != 1){
+      //     this.$vux.toast.text("店铺已打烊，该功能无法操作");
+      //   return
+      // }
       this.$router.push({
         name: "memberOperation",
         params: {
@@ -666,7 +680,9 @@ export default {
     //  })
 
     this.$fetch
-      .post("fruits/app/personal/getPersonalInfo", { openId: localStorage.getItem("openId") })
+      .post("fruits/app/personal/getPersonalInfo", {
+        openId: localStorage.getItem("openId")
+      })
       .then(res => {
         this.personalMsg = { ...res.obj };
       });
