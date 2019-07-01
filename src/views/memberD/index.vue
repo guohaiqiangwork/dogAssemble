@@ -186,7 +186,7 @@
             <div>
               <img src="../../assets/images/til@2x.png" width="14px">
             </div>
-            <div class="font_color_4A margin_left_div2" style="line-height: 1;">密码为您登录时设置的密码</div>
+            <div class="font_color_4A margin_left_div2" style="line-height: 1;">密码为会员登录时设置的密码</div>
           </div>
         </div>
       </x-dialog>
@@ -220,17 +220,17 @@ export default {
   },
   watch: {
     msgPAW(curVal) {
-      console.log(curVal);
+      console.log(curVal)
       if (/[^\d]/g.test(curVal)) {
         this.msgPAW = this.msgPAW.replace(/[^\d]/g, "");
       } else {
         this.msgLength = curVal.length;
         this.msg = DesUtils.encode(curVal, "fruits-app,yuntu,com");
       }
-      if(this.msgLength == 6){
-        console.log('我来了')
-       this.getSaveMember()
-       this.payShowD =false
+      if (this.msgLength == 6) {
+        this.getSaveMember();
+        this.payShowD = false;
+        this.curVal = "";
       }
     }
   },
@@ -258,9 +258,9 @@ export default {
       this.$fetch.post(url.closeMemberOrder, _obj).then(
         data => {
           if (data.code == 0) {
-            console.log("会员订单结束");
-          }else{
-             alert(data.msg)
+            alert("会员订单结束");
+          } else {
+            alert(data.msg);
           }
         },
         err => {
@@ -289,8 +289,8 @@ export default {
         data => {
           if (data.code == 0) {
             this.getInfo(this.parameter.item.id);
-          }else{
-             alert(data.msg)
+          } else {
+            alert(data.msg);
           }
         },
         err => {
@@ -310,8 +310,8 @@ export default {
           if (data.code == 0) {
             this.infoList = data.obj;
             console.log(data);
-          }else{
-             alert(data.msg)
+          } else {
+            alert(data.msg);
           }
         },
         err => {
@@ -333,15 +333,22 @@ export default {
         openId: localStorage.getItem("openId"),
         id: this.parameter.item.id,
         cupId: this.classA,
-        password:  this.msg
+        password: this.msg
       };
       this.$fetch.post(url.saveMember, _obj).then(
         data => {
           if (data.code == 0) {
             this.infoList = data.obj;
-            console.log(data);
-          }else{
-             alert(data.msg)
+          } else {
+            this.msgLength = '';
+            this.curVal = '';
+            if (data.msg == "password_error") {
+              alert("密码错误");
+            } else if (data.msg == "credit_is_running_low") {
+              alert("用户余额不足");
+            } else {
+              alert(data.msg);
+            }
           }
         },
         err => {
