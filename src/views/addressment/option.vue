@@ -57,7 +57,7 @@ export default {
       addressBC: {
         name: "", //姓名
         phone: "", //手机号码
-        details: "14346", //详细地址
+        details: "", //详细地址
         isDefault: false,
         id: ""
       },
