@@ -229,7 +229,7 @@ export default {
       });
     },
     goTol(){
-       alert(window.location.href)
+      //  alert(window.location.href)
     }
   },
   created() {
@@ -239,9 +239,9 @@ export default {
   },
 
   mounted() {
-  alert(window.location.href)
+  // alert(window.location.href)
     this.code = this.getQueryString("code");
-      alert(this.code)
+      // alert(this.code)
     this.getOpenId();
 
   }
