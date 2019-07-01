@@ -431,7 +431,7 @@ export default {
     //获取购物车数量
     getCartNum() {
       this.$fetch
-        .post("fruits/app/cart/getCartNum", { openId: url.openId })
+        .post("fruits/app/cart/getCartNum", { openId: localStorage.getItem('openId') })
         .then(res => {
           if (res.msg == "success") {
             // this.$router.push("/home");
@@ -728,7 +728,7 @@ a:link {
 .personal_falg_m {
   color: #ffffff;
   font-size: 13px;
-  /* margin-left: 50%; */
+  margin-left: 3%;
 }
 .personal_font_m {
   margin-left: 13px;

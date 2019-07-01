@@ -186,7 +186,7 @@
             <div>
               <img src="../../assets/images/til@2x.png" width="14px">
             </div>
-            <div class="font_color_4A margin_left_div2" style="line-height: 1;">密码为会员登录时设置的密码</div>
+            <div class="font_color_4A margin_left_div2" style="line-height: 1;">密码为会员消费/登录时设置的密码</div>
           </div>
         </div>
       </x-dialog>
@@ -258,11 +258,12 @@ export default {
       this.$fetch.post(url.closeMemberOrder, _obj).then(
         data => {
           if (data.code == 0) {
-            alert("会员订单结束");
-          } else if ((data.msg = "user_not_allow")) {
-            alert("不允许跨店操作");
-          }else {
-            alert(data.msg)
+            console.log("会员订单结束");
+          }else{
+            if(data.msg =='user_not_allow'){
+              this.$vux.toast.text('跨店订单不允许结束')
+            }
+             alert(data.msg)
           }
         },
         err => {

@@ -40,7 +40,9 @@ import url from "../../bin/url";
 export default {
   name: "serviceOrder",
   data() {
-    return {};
+    return {
+      list:[],
+    };
   },
   methods: {
     goToSOrderD(falg) {
@@ -55,7 +57,13 @@ export default {
           })
         }
       });
-    }
+    },
+    getItem(){
+      this.$fetch.post('fruits/app/member/getMyOrder',{openId:localStorage.getItem('openId'),id:this.$route.query.id}).then(res =>{
+        console.log(res);
+        this.list = res.obj;
+      })
+    },
   },
   created() {
     settitle("健康界的轻奢");
@@ -65,6 +73,7 @@ export default {
 
   mounted() {
     console.log("服务订单");
+    this.getItem();
   }
 };
 </script>

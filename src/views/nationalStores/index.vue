@@ -15,7 +15,7 @@
     <!-- 推荐门店列表 -->
     <div class="div_display_flex margin_left_div3 padding_top_div3">
       <div class="national_flag_title"></div>
-      <div class="font_color_00 font_size_14 margin_left_div2" style="margin-top: 0.8%;">附近门店推荐</div>
+      <div class="font_color_00 font_size_14 margin_left_div2" style="margin-top: 0.8%;">附1近门店推荐</div>
     </div>
     <div class="div_display_flex">
       <!-- <div @click="checkBtn(index,item.id)" :checked="item.isDefault" class="div_width_8">
@@ -113,6 +113,7 @@ export default {
   data() {
     return {
       item: 0,
+      timer:"",
       isDefault: "",
       classA: "1", //是否有单选框
       nationSFalg: false, //地址确认
@@ -205,7 +206,9 @@ export default {
         openId: localStorage.getItem("openId"),
         name: item || "",
         size: this.page.size,
-        current: this.page.current
+        current: this.page.current,
+        latitude:this.latitude,
+        longitude:this.longitude
       };
       this.$fetch.post(url.getRecommendStoreList, _obj).then(
         data => {
@@ -243,6 +246,7 @@ export default {
       this.latitude = position.lat;//唯独
       this.longitude = position.lng;//进度
       this.city = position.city;
+      this.getRecommendStoreList(); //获取全国门店
     },
     showErr() {
       console.log("定位失败");
@@ -256,7 +260,7 @@ export default {
 
   mounted() {
     this.getMyLocation();
-    this.getRecommendStoreList(); //获取全国门店
+    // this.getRecommendStoreList(); //获取全国门店
   }
 };
 </script>

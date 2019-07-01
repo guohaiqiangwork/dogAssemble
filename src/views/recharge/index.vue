@@ -45,7 +45,7 @@
               <div
                 class=" text_center b_t_c"
                 :style="{ backgroundColor:(classA  == item.id && item.log ? '#DEE8E3' : ''),width:'90%'}"
-                @click="moneyXz(item.id,index)"
+                @click="moneyXz(item.id,index,item.topup)"
               >
                 <div class="margin_top_div3 font_color_10 font_size_25">{{item.topup}}</div>
                 <div class="margin_top_div3 font_size_13 font_color_1A padding_bottom_4">充{{item.topup}}返{{item.returnmoney}}元</div>
@@ -53,12 +53,13 @@
             </div>
       </div>
       <div>
-        <input type="text" class="recharge_input_b2 margin_top_div8" placeholder="输入其他金额" v-model="form.amount" :disabled="ifChoic?true:false">
+        <!-- :disabled="ifChoic?true:false" -->
+        <input type="text" class="recharge_input_b2 margin_top_div8" placeholder="输入其他金额" v-model="amount"  @focus="otherFocus">
       </div>
       <div class="div_display_flex margin_top_div8 flex-around">
         <div class="div_width_43 backgroun_color_4A bt_d_c" @click="rechargeq('2')">支付宝充值</div>
         <div class="div_width_43 backgroun_color_4A bt_d_c" @click="rechargeq('3')">现金充值</div>
-        <div class="div_width_43 backgroun_color_4A bt_d_c" @click="rechargeq('3')">微信充值</div>
+        <div class="div_width_43 backgroun_color_4A bt_d_c" @click="rechargeq('4')">微信充值</div>
       </div>
         <!-- 确认充值 -->
       <confirm v-model="rechargeFalge" title @on-cancel="onCancel" @on-confirm="onConfirm">
@@ -85,6 +86,7 @@ export default {
        phone:null,
        name:"",
        countList:[],
+       amount:null,
        form:{
          openId:localStorage.getItem("openId"),
          type:"",
@@ -99,14 +101,17 @@ export default {
   },
   methods: {
     // 选择金额
-    moneyXz(falge,index) {
+    moneyXz(falge,index,topup) {
+      // console.log(,890)
       this.countList[index].log = !this.countList[index].log;
       this.countList.forEach((e,i) =>{
         if(i == index){
           if(e.log){
             this.ifChoic = true;
-            this.form.amount = null;
+             this.amount = null;
+            this.form.amount = topup;
           }else{
+            this.form.amount = this.amount;
             this.ifChoic = false;
           }
           return
@@ -116,6 +121,13 @@ export default {
      
       this.classA = falge;
       this.form.id = falge;
+    },
+    //其它金额充值
+    otherFocus(){
+      console.log(this.countList,123)
+      this.countList.forEach(e =>{
+        e.log = false;
+      })
     },
     // 去充值记录页面
     goToRechargeList: function() {
@@ -167,6 +179,7 @@ export default {
     },
     // 确认充值
       rechargeq(val) {
+        this.form.amount = this.amount?this.amount:this.form.amount;
         if(this.ifHas){
             this.rechargeFalge = true;
             this.form.payType = val;

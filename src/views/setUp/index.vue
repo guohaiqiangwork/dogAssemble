@@ -95,7 +95,20 @@ export default {
     },
     // 弹窗确认
     onConfirm() {
-      if (type == 1) {
+      if (this.type == 1) {
+        this.$fetch
+          .post("/fruits/app/personal/freezingCustomer", {
+            openId: localStorage.getItem("openId")
+          })
+          .then(res => {
+            if (res.code == 0) {
+              alert("冻结成功");
+            } else if (res.msg == "user_has_frozen") {
+              alert("该账号已冻结");
+            } else {
+              alert(res.msg);
+            }
+          });
       } else {
       }
       console.log("233");

@@ -57,7 +57,7 @@ export default {
       addressBC: {
         name: "", //姓名
         phone: "", //手机号码
-        details: "14346", //详细地址
+        details: "", //详细地址
         isDefault: false,
         id: ""
       },
@@ -178,7 +178,6 @@ export default {
       this.$fetch.post(url.getAddress, _obj).then(
         data => {
           if (data.code == 0) {
-            console.log(data.obj,555);
             var addressValGet = [
               data.obj.province,
               data.obj.city,
@@ -195,7 +194,7 @@ export default {
             console.log(this.addressBC,'llllllll')
             this.address = value2name(addressValGet, ChinaAddressV4Data);
           }else{
-             alert(data.msg)
+            //  alert(data.msg)
           }
         },
         err => {

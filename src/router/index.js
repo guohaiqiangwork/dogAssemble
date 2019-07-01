@@ -13,7 +13,7 @@ import recommend from '@/views/recommend/index' //推荐信息
 import exclusive from '@/views/exclusive/index' //专属门店
 import is404 from '@/views/page/is404'
 import notfound from '@/views/page/notfound'
-import immendilypay from '@/views/immendilyPay/index'             // 立即支付页面
+import immendilypay from '@/views/immendilyPay/index'             // 立即支付 页面
 import about from '@/views/about/index'             // 关于我们
 import videopage from '@/views/videopage/index'             // 视频页面
 import videomangment from '@/views/videoMangment/index'             // 管理视频页面
@@ -46,6 +46,7 @@ import allMembersDetails from '@/views/allMembersDetails/index'//全部订单详
 import allMembersDetailsD from '@/views/allMembersDetailsD/index'//全部订单详情中详情
 import orderDetails from '@/views/orderDetails/index' //商城订单详情
 import sharedBonus from '@/views/sharedBonus/index'//共享奖金
+import privacyProtocol from '@/views/privacyProtocol/index'//协议
 Vue.use(Router)
 
 export default new Router({
@@ -539,6 +540,15 @@ export default new Router({
         title: '全部会员详情'
       },
       component: allMembersDetailsD
+    },
+    {
+      // 全部会员详情
+      path: '/privacyProtocol',
+      name: 'privacyProtocol',
+      meta: {
+        title: '协议'
+      },
+      component: privacyProtocol
     },
     {
       // 共享奖金

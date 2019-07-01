@@ -7,7 +7,7 @@
 
     <div class="form" v-if="haslogin == 2">
       <!-- <x-input label-width="4em"  placeholder="I'm placeholder"></x-input> -->
-      <x-input placeholder="请输入您的真实姓名" v-model="form.name" required @on-change="change" ref="name">
+      <x-input placeholder="请输入您的真实姓名" v-model="form.name" required @on-change="change" :max='6' ref="name">
         <img
           slot="label"
           style="padding-right:10px;display:block;with:0.33rem;height:0.33rem"
@@ -140,13 +140,13 @@ export default {
       maskValue: "",
       codeValue: "获取验证码",
       form: {
-        openId: "",
+        openId: "112",
         password: "",
         name: "",
         phone: "",
         code: "",
-        headimgurl: "",
-        nickname: ""
+        headimgurl: "123",
+        nickname: "随便"
       },
       Logform: {
         openId: "2229",
@@ -163,7 +163,7 @@ export default {
   methods: {
     clear() {},
     change() {
-      console.log(123);
+
     },
     LoginOrReg() {
       this.haslogin == 1 ? this.Login() : this.Reg();
@@ -184,7 +184,7 @@ export default {
         "fruits-app,yuntu,com"
       );
       // this.Logform.nickname = ""; this.Logform.headimgurl = "";
-      this.Logform.openId = localStorage.getItem("openId") || '112';
+      this.Logform.openId = localStorage.getItem("openId");
       this.Logform.nickname = localStorage.getItem("nickname") || 'dfsf';
       this.Logform.headimgurl = localStorage.getItem("headimgurl") || 'fdsa';
      
@@ -192,8 +192,10 @@ export default {
         this.btnload = false;
         alert(res.msg);
         if (res.msg == "success") {
+          console.log('success',res);
           this.$vux.toast.text("登录成功");
           localStorage.setItem("user", res.attributes.sessionId);
+          localStorage.setItem("openId",this.obj.openId);
           localStorage.setItem("type", res.attributes.type);
           localStorage.setItem("appUserId", res.attributes.appUserId); //登陆用户id
           this.getCartNum();
@@ -218,9 +220,9 @@ export default {
         this.form.password,
         "fruits-app,yuntu,com"
       );
-      this.form.openId = localStorage.getItem("openId");
-      this.form.nickname = localStorage.getItem("nickname");
-      this.form.headimgurl = localStorage.getItem("headimgurl");
+      this.form.openId = localStorage.getItem("openId") || 112;
+      this.form.nickname = localStorage.getItem("nickname")||"随便";
+      this.form.headimgurl = localStorage.getItem("headimgurl")||"324";
       this.$fetch.post("fruits/app/user/register", this.form).then(res => {
         if (res.msg == "registered") {
           this.$vux.toast.text("手机号已经被注册");
@@ -234,7 +236,7 @@ export default {
           // }, 1000);
           if (res.attributes.type == 1) {
             let _obj = {
-              openId: localStorage.getItem("openId"),
+              openId: localStorage.getItem("openId")||"112",
               password: DesUtils.encode(this.loginP, "fruits-app,yuntu,com"),
               phone: this.form.phone,
               nickname: localStorage.getItem("nickname"),
@@ -275,12 +277,12 @@ export default {
         return;
       }
       var count = 60;
-      this.form.openId = localStorage.getItem("openId");
+      this.form.openId = localStorage.getItem("openId")||"112";
       this.$fetch
         .post("fruits/app/user/getSmsCode", {
           openId: this.form.openId,
           phone: this.form.phone,
-          openId: localStorage.getItem("openId"),
+          openId: localStorage.getItem("openId") ||"112",
           type: 0
         })
         .then(res => {
@@ -358,7 +360,7 @@ export default {
       this.Logform.password = obj.password;
       this.Logform.openId = obj.openId;
     }
-    this.getAddress();
+    // this.getAddress();
   }
 };
 </script>
