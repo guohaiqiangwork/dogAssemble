@@ -7,7 +7,14 @@
 
     <div class="form" v-if="haslogin == 2">
       <!-- <x-input label-width="4em"  placeholder="I'm placeholder"></x-input> -->
-      <x-input placeholder="请输入您的真实姓名" v-model="form.name" required @on-change="change" :max='6' ref="name">
+      <x-input
+        placeholder="请输入您的真实姓名"
+        v-model="form.name"
+        required
+        @on-change="change"
+        :max="6"
+        ref="name"
+      >
         <img
           slot="label"
           style="padding-right:10px;display:block;with:0.33rem;height:0.33rem"
@@ -113,7 +120,10 @@
       @click.native="LoginOrReg"
     >{{haslogin == 1 ? '登录' : '注册'}}</x-button>
     <!-- <div  @click="LoginOrReg"  >{{haslogin == 1 ? '登录'  : '注册'}}</div> -->
-    <p class="login_tit">{{haslogin == 1 ? '登录' : '注册'}}即代表您已同意《御康商贸用户隐私政策》</p>
+    <p
+      class="login_tit"
+      @click="goToPrivacyProtocol"
+    >{{haslogin == 1 ? '登录' : '注册'}}即代表您已同意《御康商贸用户隐私政策》</p>
   </div>
 </template>
 <script>
@@ -140,7 +150,7 @@ export default {
       maskValue: "",
       codeValue: "获取验证码",
       form: {
-        openId: "112",
+        openId: "",
         password: "",
         name: "",
         phone: "",
@@ -162,9 +172,7 @@ export default {
   },
   methods: {
     clear() {},
-    change() {
-
-    },
+    change() {},
     LoginOrReg() {
       this.haslogin == 1 ? this.Login() : this.Reg();
     },
@@ -176,18 +184,15 @@ export default {
         return;
       }
       this.btnload = true;
-       var obj = {};
-           obj = {...this.Logform};
+      var obj = {};
+      obj = { ...this.Logform };
       // this.Logform.password = DesUtils.encode(this.Logform.password,"fruits-app,yuntu,com")
-      obj.password = DesUtils.encode(
-        obj.password,
-        "fruits-app,yuntu,com"
-      );
+      obj.password = DesUtils.encode(obj.password, "fruits-app,yuntu,com");
       // this.Logform.nickname = ""; this.Logform.headimgurl = "";
       this.Logform.openId = localStorage.getItem("openId");
-      this.Logform.nickname = localStorage.getItem("nickname") || 'dfsf';
-      this.Logform.headimgurl = localStorage.getItem("headimgurl") || 'fdsa';
-     
+      this.Logform.nickname = localStorage.getItem("nickname");
+      this.Logform.headimgurl = localStorage.getItem("headimgurl");
+
       this.$fetch.post("fruits/app/user/login", obj).then(res => {
         this.btnload = false;
         alert(res.msg);
@@ -200,7 +205,7 @@ export default {
           localStorage.setItem("appUserId", res.attributes.appUserId); //登陆用户id
           this.getCartNum();
         } else {
-          alert(data.msg);
+          alert(res.msg);
         }
       });
     },
@@ -220,9 +225,9 @@ export default {
         this.form.password,
         "fruits-app,yuntu,com"
       );
-      this.form.openId = localStorage.getItem("openId") || 112;
-      this.form.nickname = localStorage.getItem("nickname")||"随便";
-      this.form.headimgurl = localStorage.getItem("headimgurl")||"324";
+      this.form.openId = localStorage.getItem("openId");
+      this.form.nickname = localStorage.getItem("nickname");
+      this.form.headimgurl = localStorage.getItem("headimgurl");
       this.$fetch.post("fruits/app/user/register", this.form).then(res => {
         if (res.msg == "registered") {
           this.$vux.toast.text("手机号已经被注册");
@@ -236,7 +241,7 @@ export default {
           // }, 1000);
           if (res.attributes.type == 1) {
             let _obj = {
-              openId: localStorage.getItem("openId")||"112",
+              openId: localStorage.getItem("openId"),
               password: DesUtils.encode(this.loginP, "fruits-app,yuntu,com"),
               phone: this.form.phone,
               nickname: localStorage.getItem("nickname"),
@@ -277,12 +282,12 @@ export default {
         return;
       }
       var count = 60;
-      this.form.openId = localStorage.getItem("openId")||"112";
+      this.form.openId = localStorage.getItem("openId");
       this.$fetch
         .post("fruits/app/user/getSmsCode", {
           openId: this.form.openId,
           phone: this.form.phone,
-          openId: localStorage.getItem("openId") ||"112",
+          openId: localStorage.getItem("openId") ,
           type: 0
         })
         .then(res => {
@@ -343,6 +348,12 @@ export default {
           openId: this.getoptnId
         })
         .then(res => {});
+    },
+    // 协议
+    goToPrivacyProtocol() {
+      this.$router.push({
+        name: "privacyProtocol"
+      });
     }
   },
   created() {
