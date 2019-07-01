@@ -220,7 +220,7 @@ export default {
   },
   watch: {
     msgPAW(curVal) {
-      console.log(curVal)
+      console.log(curVal);
       if (/[^\d]/g.test(curVal)) {
         this.msgPAW = this.msgPAW.replace(/[^\d]/g, "");
       } else {
@@ -259,8 +259,10 @@ export default {
         data => {
           if (data.code == 0) {
             alert("会员订单结束");
-          } else {
-            alert(data.msg);
+          } else if ((data.msg = "user_not_allow")) {
+            alert("不允许跨店操作");
+          }else {
+            alert(data.msg)
           }
         },
         err => {
@@ -338,10 +340,12 @@ export default {
       this.$fetch.post(url.saveMember, _obj).then(
         data => {
           if (data.code == 0) {
+            alert("下单成功");
             this.infoList = data.obj;
+            this.goToMemberOperation(); //去会员操作
           } else {
-            this.msgLength = '';
-            this.curVal = '';
+            this.msgLength = "";
+            this.curVal = "";
             if (data.msg == "password_error") {
               alert("密码错误");
             } else if (data.msg == "credit_is_running_low") {
@@ -355,6 +359,24 @@ export default {
           alert("网络缓慢。。");
         }
       );
+    },
+    // 会员操作
+    goToMemberOperation() {
+      //   if(this.personalMsg.storeState != 1){
+      //     this.$vux.toast.text("店铺已打烊，该功能无法操作");
+      //   return
+      // }
+      this.$router.push({
+        name: "memberOperation",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: "蚕丝"
+            }
+          })
+        }
+      });
     }
   },
   created() {
