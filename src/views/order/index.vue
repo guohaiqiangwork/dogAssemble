@@ -73,7 +73,7 @@
             </div>
           </div>
           <div v-if="orderList.length == 0">
-            <div class="text_center">
+            <div class="text_center" style="margin-top16%">
               <img src="../../assets/images/1581@2x.png" width="80%" alt>
             </div>
             <div class="text_center font_size_15 font_color_99">暂无订单</div>
@@ -138,7 +138,7 @@
             </div>
           </div>
           <div v-if="orderList.length == 0">
-            <div class="text_center">
+            <div class="text_center" style="margin-top16%">
               <img src="../../assets/images/1581@2x.png" width="80%" alt>
             </div>
             <div class="text_center font_size_15 font_color_99">暂无订单</div>
@@ -203,7 +203,7 @@
             </div>
           </div>
           <div v-if="orderList.length == 0">
-            <div class="text_center">
+            <div class="text_center" style="margin-top16%">
               <img src="../../assets/images/1581@2x.png" width="80%" alt>
             </div>
             <div class="text_center font_size_15 font_color_99">暂无订单</div>
@@ -268,7 +268,7 @@
             </div>
           </div>
           <div v-if="orderList.length == 0">
-            <div class="text_center">
+            <div class="text_center" style="margin-top16%">
               <img src="../../assets/images/1581@2x.png" width="80%" alt>
             </div>
             <div class="text_center font_size_15 font_color_99">暂无订单</div>

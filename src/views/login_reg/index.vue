@@ -159,7 +159,7 @@ export default {
         nickname: "随便"
       },
       Logform: {
-        openId: "2229",
+        openId: "",
         password: "",
         phone: "",
         nickname: "fd",
@@ -197,12 +197,14 @@ export default {
         this.btnload = false;
         alert(res.msg);
         if (res.msg == "success") {
-          console.log('success',res);
+          console.log("success", res);
           this.$vux.toast.text("登录成功");
-          localStorage.setItem("user", res.attributes.sessionId) ;
+          localStorage.setItem("user", res.attributes.sessionId);
           localStorage.setItem("type", res.attributes.type);
           localStorage.setItem("appUserId", res.attributes.appUserId); //登陆用户id
           this.getCartNum();
+        } else if (res.msg == "password_error") {
+          alert("密码错误");
         } else {
           alert(res.msg);
         }
@@ -257,6 +259,8 @@ export default {
                 localStorage.setItem("type", res.attributes.type);
                 localStorage.setItem("appUserId", res.attributes.appUserId); //登陆用户id
                 this.$router.push("/home");
+              } else if (res.msg == "password_error") {
+                alert("密码错误");
               } else {
                 alert(res.msg);
               }
@@ -286,7 +290,7 @@ export default {
         .post("fruits/app/user/getSmsCode", {
           openId: this.form.openId,
           phone: this.form.phone,
-          openId: localStorage.getItem("openId") ,
+          openId: localStorage.getItem("openId"),
           type: 0
         })
         .then(res => {

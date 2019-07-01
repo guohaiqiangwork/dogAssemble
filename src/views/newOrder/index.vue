@@ -366,9 +366,8 @@ export default {
       // 获取套餐内容
       let _obj = {
         openId: localStorage.getItem("openId"),
-        type: falge
+        type:  falge
       };
-      console.log(url.getRecipe);
       this.$fetch.post(url.getRecipe, _obj).then(
         data => {
           if (data.code == 0) {
@@ -426,6 +425,7 @@ export default {
   mounted() {
     console.log("新建订单");
     this.timeNow(); //获取当前时间
+    this.newOrderXZ('0')
   }
 };
 </script>

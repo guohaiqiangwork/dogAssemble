@@ -258,6 +258,7 @@ export default {
       this.$fetch.post(url.closeMemberOrder, _obj).then(
         data => {
           if (data.code == 0) {
+            this.getInfo(this.parameter.item.id);
             console.log("会员订单结束");
           }else{
             if(data.msg =='user_not_allow'){
