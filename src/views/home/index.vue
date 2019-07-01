@@ -23,7 +23,8 @@
     <button @click="goToRecommend">推荐信息</button>
     <button @click="goToExclusive">专属门店</button>
     <button @click="goTol">获取当前路径</button>
-    <router-link to='/sharedBonus'>共享奖金</router-link>
+    <button @click="goToPrivacyProtocol">协议</button>
+    <router-link to="/sharedBonus">共享奖金</router-link>
   </div>
 </template>
 <script>
@@ -207,6 +208,12 @@ export default {
         }
       });
     },
+    // 专属门店
+    goToPrivacyProtocol() {
+      this.$router.push({
+        name: "privacyProtocol"
+      });
+    },
     getQueryString(name) {
       var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
       var r = window.location.search.substr(1).match(reg);
@@ -225,24 +232,22 @@ export default {
           localStorage.setItem("openId", res.obj.openid);
           localStorage.setItem("nickname", res.obj.nickname);
           localStorage.setItem("headimgurl", res.obj.headimgurl);
-          this.$router.push('/login/1')
+          this.$router.push("/login/1");
         }
       });
     },
-    goTol(){
+    goTol() {
       //  alert(window.location.href)
     }
   },
   created() {
     settitle("授权页面");
     // this.getCode();
-     
   },
 
   mounted() {
     this.code = this.getQueryString("code");
     this.getOpenId();
-
   }
 };
 </script>
