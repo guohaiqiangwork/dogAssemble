@@ -2,31 +2,31 @@
   <div id="TabBar">
     <router-view class="routeview"></router-view>
     <div class="tabBar_bt flex-between align-center">
-      <flexbox style="text-align: center;height:48px; background-color: #fff;">
+      <flexbox style="text-align: center; background-color: #fff;">
         <flexbox-item>
           <router-link to="/home">
             <div class="flex-demo" v-if="actives != '0'">
-              <img src="../assets/images/1@2x.png" style="width: 18%;">
+              <img src="../assets/images/home@2x.png" style="width: .4rem;height:0.4rem;">
             </div>
           </router-link>
           <router-link to="/home">
             <div class="flex-demo" v-if="actives == '0'">
-              <img src="../assets/images/1z@2x.png" style="width: 18%;">
+              <img src="../assets/images/home_active@2x.png" style="width: .4rem;height:0.4rem;">
             </div>
-            <div :class="{ 'active': actives == '0'}" class="font_color_33">首页</div>
+            <div :class="{ 'active': actives == '0'}" class="font_color_BF">首页</div>
           </router-link>
         </flexbox-item>
 
         <flexbox-item>
           <div class="flex-demo pos" @click="didClickedItem(1,'cart')" v-if="actives != '1'">
-            <img src="../assets/images/4@2x.png" style="width: 18%;">
+            <img src="../assets/images/goodsCar.png" style="width: .4rem;height:0.4rem;">
             <badge class="msg-sign" :text="buyNum" v-if="buyNum!=0"></badge>
           </div>
           <div class="flex-demo pos" @click="didClickedItem(1,'cart')" v-if="actives == '1'">
-            <img src="../assets/images/2z@2x.png" style="width:18%;">
+            <img src="../assets/images/goodsCar_active.png" style="width: .4rem;height:0.4rem;">
             <badge class="msg-sign" :text="buyNum" v-if="buyNum!=0"></badge>
           </div>
-          <div :class="{ 'active': actives == '1'}" class="font_color_33">购物车</div>
+          <div :class="{ 'active': actives == '1'}" class="font_color_BF">购物车</div>
         </flexbox-item>
 
         <flexbox-item v-if="this.route == '/goodsdetail'">
@@ -37,12 +37,12 @@
         </flexbox-item>
         <flexbox-item v-else>
           <div class="flex-demo" @click="didClickedItem(2,'personal')" v-if="actives != '2'">
-            <img src="../assets/images/geren@2x.png" style="width: 18%;">
+            <img src="../assets/images/personCenter.png" style="width: .4rem;height:0.4rem;">
           </div>
           <div class="flex-demo" @click="didClickedItem(2,'personal')" v-if="actives == '2'">
-            <img src="../assets/images/gerenzhongxin@2x.png" style="width: 18%;">
+            <img src="../assets/images/personCenter_active.png" style="width: .4rem;height:0.4rem;">
           </div>
-          <div :class="{ 'active': actives == '2'}" class="font_color_33">个人中心</div>
+          <div :class="{ 'active': actives == '2'}" class="font_color_BF">个人中心</div>
         </flexbox-item>
       </flexbox>
     </div>
@@ -114,9 +114,13 @@ export default {
 #TabBar {
   height: 100%;
 }
+.flex-demo{
+  margin-top: 0.05rem;
+}
 .vux-flexbox .vux-flexbox-item {
   width: auto;
   min-width: unset;
+  font-size: 0;
 }
 .pos {
   position: relative;
@@ -127,24 +131,26 @@ export default {
   left: calc(50% + 8px);
 }
 .routeview {
-  margin-bottom: 48px;
+  margin-bottom: .9rem;
 }
 .tabBar_bt {
   position: fixed;
   bottom: 0;
   color: red;
   width: 100%;
+  height: 0.9rem;
+  overflow: hidden;
 }
 .active {
-  color: #896628;
+  color: #4A7B67;
 }
 
 .foot-btn {
-  width: 80px;
-  height: 48px;
+  width: 1.8rem;
+  height: .9rem;
   text-align: center;
-  line-height: 48px;
-  font-size: 13px;
+  line-height: .9rem;
+  font-size: .26rem;
   color: #fff;
 }
 .green {

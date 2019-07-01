@@ -149,7 +149,7 @@ export default {
         nickname: ""
       },
       Logform: {
-        openId: "112",
+        openId: "2229",
         password: "",
         phone: "",
         nickname: "fd",
