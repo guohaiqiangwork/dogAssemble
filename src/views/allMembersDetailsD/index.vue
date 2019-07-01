@@ -131,6 +131,7 @@ export default {
       this.$fetch.post(url.sureBigu, _obj).then(
         data => {
           if (data.code == 0) {
+            this.getOrderById()//获取列表
           } else {
             alert(data.msg);
           }

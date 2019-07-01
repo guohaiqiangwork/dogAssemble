@@ -227,10 +227,10 @@ export default {
         this.msgLength = curVal.length;
         this.msg = DesUtils.encode(curVal, "fruits-app,yuntu,com");
       }
-      if(this.msgLength == 6){
-        console.log('我来了')
-       this.getSaveMember()
-       this.payShowD =false
+      if (this.msgLength == 6) {
+        this.getSaveMember();
+        this.payShowD = false;
+        this.curVal = "";
       }
     }
   },
@@ -292,8 +292,8 @@ export default {
         data => {
           if (data.code == 0) {
             this.getInfo(this.parameter.item.id);
-          }else{
-             alert(data.msg)
+          } else {
+            alert(data.msg);
           }
         },
         err => {
@@ -313,8 +313,8 @@ export default {
           if (data.code == 0) {
             this.infoList = data.obj;
             console.log(data);
-          }else{
-             alert(data.msg)
+          } else {
+            alert(data.msg);
           }
         },
         err => {
@@ -336,39 +336,48 @@ export default {
         openId: localStorage.getItem("openId"),
         id: this.parameter.item.id,
         cupId: this.classA,
-        password:  this.msg
+        password: this.msg
       };
       this.$fetch.post(url.saveMember, _obj).then(
         data => {
           if (data.code == 0) {
+            alert("下单成功");
             this.infoList = data.obj;
-            console.log(data);
-            this.$vux.toast.text('支付成功');
-            setTimeout(() =>{
-              this.$router.push({
-                name: "memberOperation",
-                params: {
-                  obj: JSON.stringify({
-                    type: "profession",
-                    data: {
-                      id: "蚕丝"
-                    }
-                  })
-                }
-              });
-            },2000)
-          }else{
-            if(data.msg=='password_error'){
-              this.$vux.toast.text('密码错误');
-              this.msgPAW = null;
+            this.goToMemberOperation(); //去会员操作
+          } else {
+            this.msgLength = "";
+            this.curVal = "";
+            if (data.msg == "password_error") {
+              alert("密码错误");
+            } else if (data.msg == "credit_is_running_low") {
+              alert("用户余额不足");
+            } else {
+              alert(data.msg);
             }
-             alert(data.msg)
           }
         },
         err => {
           alert("网络缓慢。。");
         }
       );
+    },
+    // 会员操作
+    goToMemberOperation() {
+      //   if(this.personalMsg.storeState != 1){
+      //     this.$vux.toast.text("店铺已打烊，该功能无法操作");
+      //   return
+      // }
+      this.$router.push({
+        name: "memberOperation",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: "蚕丝"
+            }
+          })
+        }
+      });
     }
   },
   created() {
