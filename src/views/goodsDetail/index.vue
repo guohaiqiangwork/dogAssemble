@@ -33,7 +33,7 @@
                         <div class="popup_head">
                             <img src="../../assets/images/WechatIMG99.png" alt="">
                             <div class="flex-around flex-clo ml-space">
-                                <p>{{goodsDetail.name}}</p>
+                                <p style="font-weight:700;margin-top:-.3rem;">{{goodsDetail.name}}</p>
                                 <p class="goods_price">
                                     <span class="red">￥{{goodsDetail.price}}</span>
                                     <span class="goods_discount">￥{{goodsDetail.original}}</span>
@@ -309,7 +309,7 @@ export default {
                 .goods_price{
                     font-size: 0.38rem;
                     line-height: 0.53rem;
-                  
+                    margin-top: -.9rem;
                 }
                 
             }
@@ -332,6 +332,7 @@ export default {
                 }
                 .active{
                     background: #4A7B67;
+                    color: #fff;
                 }
             }
             .mt-space{
