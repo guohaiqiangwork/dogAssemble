@@ -1,35 +1,63 @@
 <template>
   <div>
-    <!-- 每日辟谷套餐记录 -->
-    <div class="service_div_k backgroun_color_fff margin_top_div5">
-      <div class="div_display_flex font_color_ff backgroun_color_4A service_list">
-        <div class="font_size_15 service_font">辟谷套餐</div>
-        <div class="font_size_13 service_title_font">2018.09.30-2019.09.30</div>
-      </div>
-
+    <!-- 每日辟谷套餐记录   -->
+    <div v-if="biGList.length !=0">
       <div
-        v-for="(item,index) in [1,2,3]"
-        class="div_display_flex font_color_00 font_size_13 text_center service_list_border"
+        class="service_div_k backgroun_color_fff margin_top_div5"
+        v-for="(item,index) in biGList"
+        :key="index"
       >
-        <div class="service_width_25" @click="goToSOrderD('b')">序号</div>
-        <div class="service_width_25">次数</div>
-        <div class="service_width_25">食用时间</div>
-        <div class="service_width_25">状态</div>
+        <div class="div_display_flex font_color_ff backgroun_color_4A service_list">
+          <div class="font_size_15 service_font">{{item.recipe}}</div>
+          <div class="font_size_13 service_title_font">{{item.time}}</div>
+        </div>
+
+        <div class="div_display_flex font_color_00 font_size_13 text_center service_list_border">
+          <div class="service_width_25" @click="goToSOrderD('b',item.id)">序号</div>
+          <div class="service_width_25">次数</div>
+          <div class="service_width_25">食用时间</div>
+          <div class="service_width_25">状态</div>
+        </div>
+        <div
+          v-for="(items,index) in item.biguDayLists"
+          :key="index"
+          class="div_display_flex font_color_00 font_size_13 text_center service_list_border"
+        >
+          <div class="service_width_25" @click="goToSOrderD('b')">{{index + 1}}</div>
+          <div class="service_width_25">{{items.num}}</div>
+          <div class="service_width_25">{{items.time}}</div>
+          <div class="service_width_25" v-if="item.state == 0">未开始</div>
+          <div class="service_width_25" v-if="item.state == 1">服务中</div>
+          <div class="service_width_25" v-if="item.state == 2">已暂停</div>
+          <div class="service_width_25" v-if="item.state == 3">已完成</div>
+        </div>
       </div>
     </div>
-
-    <div class="service_Order_b backgroun_color_4A font_color_ff" @click="goToSOrderD('h')">
-      <div class="div_display_flex margin_top_div5 padding_top_div3 font_size_16">
-        <div class="div_width_80 margin_left_div3">会员套餐名称</div>
-        <div class="div_width_20">24</div>
-      </div>
-      <div class="div_display_flex margin_top_div3 font_size_13">
-        <div class="div_width_80 margin_left_div3">2018.09.30 12:00:00</div>
-        <div class="div_width_20">已喝次数</div>
-      </div>
-      <div class="div_display_flex margin_top_div8 padding_bottom_4 font_size_13">
-        <div class="div_width_80 margin_left_div2">适应症：脾胃不舒服的</div>
-        <div class="div_width_20">已消费</div>
+    <!-- 会员套餐 -->
+    <div v-if="huiYList.length !=0">
+      <div
+        class="service_Order_b backgroun_color_4A font_color_ff"
+        v-for="(item,index) in huiYList"
+        :key="index"
+      >
+        <div class="div_display_flex margin_top_div5 padding_top_div3 font_size_16">
+          <div class="div_width_80 margin_left_div3">{{item.recipe}}</div>
+          <div class="div_width_20">{{item.num}}</div>
+        </div>
+        <div class="div_display_flex margin_top_div3 font_size_13">
+          <div class="div_width_80 margin_left_div3">{{item.time}}</div>
+          <div class="div_width_20">已喝次数</div>
+        </div>
+        <div class="div_display_flex margin_top_div8 padding_bottom_4 font_size_13">
+          <div
+            class="div_width_80 margin_left_div2"
+            @click="goToSOrderD('h',item)"
+          >适应症：{{item.disease}}</div>
+          <div class="div_width_20" v-if="item.state == 0">未开始</div>
+          <div class="div_width_20" v-if="item.state == 1">服务中</div>
+          <div class="div_width_20" v-if="item.state == 2">已暂停</div>
+          <div class="div_width_20" v-if="item.state == 3">已完成</div>
+        </div>
       </div>
     </div>
   </div>
@@ -41,29 +69,49 @@ export default {
   name: "serviceOrder",
   data() {
     return {
-      list:[],
+      list: [],
+      huiYList: [],
+      biGList: []
     };
   },
   methods: {
-    goToSOrderD(falg) {
+    goToSOrderD(falg, item) {
       this.$router.push({
         name: "serviceOrderD",
         params: {
           obj: JSON.stringify({
             type: "profession",
             data: {
-              id: falg
+              id: falg,
+              item: item
             }
           })
         }
       });
     },
-    getItem(){
-      this.$fetch.post('fruits/app/member/getMyOrder',{openId:localStorage.getItem('openId'),id:this.$route.query.id}).then(res =>{
-        console.log(res);
-        this.list = res.obj;
-      })
-    },
+    // 获取数据
+    getItem() {
+      this.$fetch
+        .post("fruits/app/member/getMyOrder", {
+          openId: localStorage.getItem("openId"),
+          id: this.$route.query.id
+        })
+        .then(res => {
+          if (res.code == 0) {
+            console.log(res.obj);
+            res.obj.forEach(item => {
+              if (item.type == 0) {
+                this.huiYList.push(item);
+              } else {
+                this.biGList.push(item);
+              }
+            });
+            // this.list = res.obj;
+          } else {
+            alert(res.msg);
+          }
+        });
+    }
   },
   created() {
     settitle("健康界的轻奢");
