@@ -7,7 +7,7 @@
 
     <div class="form" v-if="haslogin == 2">
       <!-- <x-input label-width="4em"  placeholder="I'm placeholder"></x-input> -->
-      <x-input placeholder="请输入您的真实姓名" v-model="form.name" required @on-change="change" ref="name">
+      <x-input placeholder="请输入您的真实姓名" v-model="form.name" required @on-change="change" :max='6' ref="name">
         <img
           slot="label"
           style="padding-right:10px;display:block;with:0.33rem;height:0.33rem"
@@ -149,7 +149,7 @@ export default {
         nickname: ""
       },
       Logform: {
-        openId: "112",
+        openId: "",
         password: "",
         phone: "",
         nickname: "fd",
@@ -163,7 +163,7 @@ export default {
   methods: {
     clear() {},
     change() {
-      console.log(123);
+
     },
     LoginOrReg() {
       this.haslogin == 1 ? this.Login() : this.Reg();
@@ -184,7 +184,7 @@ export default {
         "fruits-app,yuntu,com"
       );
       // this.Logform.nickname = ""; this.Logform.headimgurl = "";
-      this.Logform.openId = localStorage.getItem("openId") || '112';
+      this.Logform.openId = localStorage.getItem("openId");
       this.Logform.nickname = localStorage.getItem("nickname") || 'dfsf';
       this.Logform.headimgurl = localStorage.getItem("headimgurl") || 'fdsa';
      
@@ -234,7 +234,7 @@ export default {
           // }, 1000);
           if (res.attributes.type == 1) {
             let _obj = {
-              openId: localStorage.getItem("openId"),
+              openId: localStorage.getItem("openId") ,
               password: DesUtils.encode(this.loginP, "fruits-app,yuntu,com"),
               phone: this.form.phone,
               nickname: localStorage.getItem("nickname"),
