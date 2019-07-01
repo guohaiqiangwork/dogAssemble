@@ -41,6 +41,7 @@
         <input
           type="text"
           v-model="password"
+          maxlength="6"
           placeholder="请设置您的新密码"
           style="width:100%;height:100%;outline: none;border:none"
         >
@@ -70,6 +71,13 @@ export default {
   methods: {
     // 获取验证
     getAuthCode: function() {
+      if (!this.phone) {
+        alert("请输入手机号");
+        return;
+      } else if (this.phone.length != 11) {
+        alert("请输入正确手机号");
+        return;
+      }
       this.sendAuthCode = false;
       this.auth_time = 60;
       this.$fetch
@@ -99,9 +107,8 @@ export default {
     },
     // 修改密码
     changePassword() {
-      if(!this.code||!this.phone||!this.password){
-          this.$vux.toast.text("所有内容均为必填项，请检查");
-
+      if (!this.code || !this.phone || !this.password) {
+        this.$vux.toast.text("所有内容均为必填项，请检查");
       }
       let data = {
         openId: localStorage.getItem("openId"),
@@ -110,11 +117,11 @@ export default {
       };
       this.$fetch.post(url.changePassword, data).then(res => {
         console.log(res);
-       if(data.code= 0){
-         alert('修改成功')
-       }else{
-             alert(data.msg)
-          }
+        if ((data.code = 0)) {
+          alert("修改成功");
+        } else {
+          alert(data.msg);
+        }
       });
     }
   },

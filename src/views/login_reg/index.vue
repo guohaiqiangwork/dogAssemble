@@ -7,7 +7,7 @@
 
     <div class="form" v-if="haslogin == 2">
       <!-- <x-input label-width="4em"  placeholder="I'm placeholder"></x-input> -->
-      <x-input placeholder="请输入您的真实姓名" v-model="form.name" required @on-change="change" ref="name">
+      <x-input placeholder="请输入您的真实姓名" v-model="form.name" required @on-change="change" :max='6' ref="name">
         <img
           slot="label"
           style="padding-right:10px;display:block;with:0.33rem;height:0.33rem"
@@ -149,7 +149,7 @@ export default {
         nickname: "随便"
       },
       Logform: {
-        openId: "112",
+        openId: "",
         password: "",
         phone: "",
         nickname: "fd",
@@ -163,7 +163,7 @@ export default {
   methods: {
     clear() {},
     change() {
-      console.log(123);
+
     },
     LoginOrReg() {
       this.haslogin == 1 ? this.Login() : this.Reg();
@@ -184,7 +184,7 @@ export default {
         "fruits-app,yuntu,com"
       );
       // this.Logform.nickname = ""; this.Logform.headimgurl = "";
-      this.Logform.openId = localStorage.getItem("openId") || '112';
+      this.Logform.openId = localStorage.getItem("openId");
       this.Logform.nickname = localStorage.getItem("nickname") || 'dfsf';
       this.Logform.headimgurl = localStorage.getItem("headimgurl") || 'fdsa';
      

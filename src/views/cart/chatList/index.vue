@@ -115,7 +115,8 @@ export default {
                 //  this.cartDate.id = null;
                 this.chart(item,n);
                 this.cartDate.num = 0;
-                this.postCart();
+                this.postCart(n);
+                this.bottomMsg.checkcount--;
                 this.$emit('changeNum',this.goodsNum);
 
                 // this.charList.splice(n,1);
@@ -158,8 +159,8 @@ export default {
             this.$router.push('/home');
         },
         //给后台存储购物车数量
-        postCart(){
-       
+        postCart(n){
+            console.log(n,9879);
             this.$fetch.post('fruits/app/cart/changeNum',this.cartDate).then(res =>{
                 this.getCart();
             })

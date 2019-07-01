@@ -46,6 +46,7 @@ import allMembersDetails from '@/views/allMembersDetails/index'//全部订单详
 import allMembersDetailsD from '@/views/allMembersDetailsD/index'//全部订单详情中详情
 import orderDetails from '@/views/orderDetails/index' //商城订单详情
 import sharedBonus from '@/views/sharedBonus/index'//共享奖金
+import privacyProtocol from '@/views/privacyProtocol/index'//协议
 Vue.use(Router)
 
 export default new Router({
@@ -539,6 +540,15 @@ export default new Router({
         title: '全部会员详情'
       },
       component: allMembersDetailsD
+    },
+    {
+      // 全部会员详情
+      path: '/privacyProtocol',
+      name: 'privacyProtocol',
+      meta: {
+        title: '协议'
+      },
+      component: privacyProtocol
     },
     {
       // 共享奖金
