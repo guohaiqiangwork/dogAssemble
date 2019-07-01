@@ -95,11 +95,13 @@
         <br>"东河王中店”吗？
       </div>
     </confirm>
+    <div id="container" style="width:600px;height:500px;"></div>
   </div>
 </template>
 <script>
 import url from "../../bin/url";
 import TabBar from "../../components/TabBar";
+import { TMap } from "../../bin/TMap";
 import { CheckIcon, Confirm } from "vux";
 export default {
   components: {
@@ -131,7 +133,9 @@ export default {
       recommendStoreList: "",
       productNamr: "",
       isUnMore1: false,
-      isLoading1: true
+      isLoading1: true,
+      longitude: 0, //经度
+      latitude: 0 //纬度
     };
   },
   methods: {
@@ -199,7 +203,7 @@ export default {
     getRecommendStoreList(item) {
       let _obj = {
         openId: localStorage.getItem("openId"),
-        name: item || '',
+        name: item || "",
         size: this.page.size,
         current: this.page.current
       };
@@ -208,8 +212,8 @@ export default {
           if (data.code == 0) {
             this.recommendStoreList = data.obj;
             console.log(this.recommendStoreList);
-          }else{
-             alert(data.msg)
+          } else {
+            alert(data.msg);
           }
         },
         err => {
@@ -217,7 +221,7 @@ export default {
         }
       );
     },
-     // 上拉加载
+    // 上拉加载
     selPullUp() {
       this.page.current++;
       this.getRecommendStoreList();
@@ -227,6 +231,22 @@ export default {
       this.isUnMore1 = false;
       this.page.current = 1;
       this.getRecommendStoreList();
+    },
+    //第一部分
+    //定位获得当前位置信息
+    getMyLocation() {
+      var geolocation = new qq.maps.Geolocation("JPCBZ-I3W64-FDNUH-XRWFO-MQRFZ-ERBWW", "opo");
+      geolocation.getIpLocation(this.showPosition, this.showErr);
+    },
+    showPosition(position) {
+      console.log(position);
+      this.latitude = position.lat;//唯独
+      this.longitude = position.lng;//进度
+      this.city = position.city;
+    },
+    showErr() {
+      console.log("定位失败");
+      this.getMyLocation(); //定位失败再请求定位，测试使用
     }
   },
   created() {
@@ -235,6 +255,7 @@ export default {
   },
 
   mounted() {
+    this.getMyLocation();
     this.getRecommendStoreList(); //获取全国门店
   }
 };
