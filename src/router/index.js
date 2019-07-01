@@ -13,7 +13,7 @@ import recommend from '@/views/recommend/index' //推荐信息
 import exclusive from '@/views/exclusive/index' //专属门店
 import is404 from '@/views/page/is404'
 import notfound from '@/views/page/notfound'
-import immendilypay from '@/views/immendilyPay/index'             // 立即支付页面
+import immendilypay from '@/views/immendilyPay/index'             // 立即支付 页面
 import about from '@/views/about/index'             // 关于我们
 import videopage from '@/views/videopage/index'             // 视频页面
 import videomangment from '@/views/videoMangment/index'             // 管理视频页面

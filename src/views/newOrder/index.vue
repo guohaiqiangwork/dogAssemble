@@ -2,6 +2,7 @@
   <div>
     <div>
       <div class="pass_list_w">
+        <p v-if="transferFlag" class="red font_size_14">当前用户为跨店会员</p>
         <div class="search_box">
           <img src="../../assets/images/phone@2x.png" class="width_16">
           <input
@@ -12,8 +13,8 @@
             maxlength="11"
             style="width:100%;height:100%;outline: none;border:none"
           >
-          <span style="width: 20%;" v-if='checkCustomerName'>{{checkCustomerName}}</span>
-          <span style="width: 50%;" v-if='!checkCustomerName'>未查询到用户</span>
+          <span style="width: 20%;" v-if='checkCustomerName&&this.phone'>{{checkCustomerName}}</span>
+          <span style="width: 50%;" v-if='!checkCustomerName&&this.phone'>未查询到用户</span>
         </div>
       </div>
     </div>
@@ -172,6 +173,7 @@ export default {
     return {
       item: 0,
       newFalge: false, //是否新建
+      transferFlag:false,
       newPay: true, //新建订单支付
       classA: 0, //选择标示
       payShowD: false, //支付
@@ -343,6 +345,9 @@ export default {
         data => {
           if (data.code == 0) {
             this.checkCustomerName = data.obj.name;
+            if(data.obj.type == 3){
+              this.transferFlag  = true;
+            }
           }else{
              alert(data.msg)
           }

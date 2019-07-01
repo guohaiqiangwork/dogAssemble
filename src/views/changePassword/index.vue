@@ -76,7 +76,7 @@ export default {
         .post("fruits/app/user/getSmsCode", {
           phone: this.phone,
           openId: localStorage.getItem("openId"),
-          type: 2
+          type: 4
         })
         .then(res => {
           console.log(res);
@@ -94,6 +94,10 @@ export default {
     },
     // 修改密码
     changePassword() {
+      if(!this.code||!this.phone||!this.password){
+          this.$vux.toast.text("所有内容均为必填项，请检查");
+
+      }
       let data = {
         openId: localStorage.getItem("openId"),
         code: this.code,

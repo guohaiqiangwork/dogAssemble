@@ -113,6 +113,7 @@ export default {
   data() {
     return {
       item: 0,
+      timer:"",
       isDefault: "",
       classA: "1", //是否有单选框
       nationSFalg: false, //地址确认
@@ -205,7 +206,9 @@ export default {
         openId: localStorage.getItem("openId"),
         name: item || "",
         size: this.page.size,
-        current: this.page.current
+        current: this.page.current,
+        latitude:this.latitude,
+        longitude:this.longitude
       };
       this.$fetch.post(url.getRecommendStoreList, _obj).then(
         data => {
@@ -243,6 +246,7 @@ export default {
       this.latitude = position.lat;//唯独
       this.longitude = position.lng;//进度
       this.city = position.city;
+      this.getRecommendStoreList(); //获取全国门店
     },
     showErr() {
       console.log("定位失败");
@@ -256,7 +260,7 @@ export default {
 
   mounted() {
     this.getMyLocation();
-    this.getRecommendStoreList(); //获取全国门店
+    // this.getRecommendStoreList(); //获取全国门店
   }
 };
 </script>
