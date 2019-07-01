@@ -62,7 +62,7 @@ export default {
                 if(res.msg == "success"){
                     this.orderList = res.obj;
                 }else{
-             alert(data.msg)
+             alert(res.msg)
           }
                
             })

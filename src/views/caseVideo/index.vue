@@ -69,9 +69,10 @@ export default {
       this.$fetch.post(url.getVideoOne, _obj).then(
         data => {
           if (data.code == 0) {
+            console.log(data.obj);
             this.videoOneList = data.obj;
-          }else{
-             alert(data.msg)
+          } else {
+            alert(data.msg);
           }
         },
         err => {
@@ -88,7 +89,7 @@ export default {
 </script>
 <style scoped>
 .personal_img_bj {
-  background-image: url(/static/img/矩形1@2x.55d8df9.png);
+  background-image: url("../../assets/images/999009.png");
   background-size: 100%;
   background-repeat: no-repeat;
   width: 40%;
