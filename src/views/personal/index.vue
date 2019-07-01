@@ -728,7 +728,7 @@ a:link {
 .personal_falg_m {
   color: #ffffff;
   font-size: 13px;
-  /* margin-left: 50%; */
+  margin-left: 3%;
 }
 .personal_font_m {
   margin-left: 13px;
