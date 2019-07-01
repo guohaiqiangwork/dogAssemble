@@ -15,7 +15,7 @@
     <!-- 推荐门店列表 -->
     <div class="div_display_flex margin_left_div3 padding_top_div3">
       <div class="national_flag_title"></div>
-      <div class="font_color_00 font_size_14 margin_left_div2" style="margin-top: 0.8%;">附近门店推荐</div>
+      <div class="font_color_00 font_size_14 margin_left_div2" style="margin-top: 0.8%;">附1近门店推荐</div>
     </div>
     <div class="div_display_flex">
       <!-- <div @click="checkBtn(index,item.id)" :checked="item.isDefault" class="div_width_8">

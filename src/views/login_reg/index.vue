@@ -140,13 +140,13 @@ export default {
       maskValue: "",
       codeValue: "获取验证码",
       form: {
-        openId: "",
+        openId: "112",
         password: "",
         name: "",
         phone: "",
         code: "",
-        headimgurl: "",
-        nickname: ""
+        headimgurl: "123",
+        nickname: "随便"
       },
       Logform: {
         openId: "112",
@@ -192,8 +192,10 @@ export default {
         this.btnload = false;
         alert(res.msg);
         if (res.msg == "success") {
+          console.log('success',res);
           this.$vux.toast.text("登录成功");
           localStorage.setItem("user", res.attributes.sessionId);
+          localStorage.setItem("openId",this.obj.openId);
           localStorage.setItem("type", res.attributes.type);
           localStorage.setItem("appUserId", res.attributes.appUserId); //登陆用户id
           this.getCartNum();
@@ -218,9 +220,9 @@ export default {
         this.form.password,
         "fruits-app,yuntu,com"
       );
-      this.form.openId = localStorage.getItem("openId");
-      this.form.nickname = localStorage.getItem("nickname");
-      this.form.headimgurl = localStorage.getItem("headimgurl");
+      this.form.openId = localStorage.getItem("openId") || 112;
+      this.form.nickname = localStorage.getItem("nickname")||"随便";
+      this.form.headimgurl = localStorage.getItem("headimgurl")||"324";
       this.$fetch.post("fruits/app/user/register", this.form).then(res => {
         if (res.msg == "registered") {
           this.$vux.toast.text("手机号已经被注册");
@@ -234,7 +236,7 @@ export default {
           // }, 1000);
           if (res.attributes.type == 1) {
             let _obj = {
-              openId: localStorage.getItem("openId"),
+              openId: localStorage.getItem("openId")||"112",
               password: DesUtils.encode(this.loginP, "fruits-app,yuntu,com"),
               phone: this.form.phone,
               nickname: localStorage.getItem("nickname"),
@@ -275,12 +277,12 @@ export default {
         return;
       }
       var count = 60;
-      this.form.openId = localStorage.getItem("openId");
+      this.form.openId = localStorage.getItem("openId")||"112";
       this.$fetch
         .post("fruits/app/user/getSmsCode", {
           openId: this.form.openId,
           phone: this.form.phone,
-          openId: localStorage.getItem("openId"),
+          openId: localStorage.getItem("openId") ||"112",
           type: 0
         })
         .then(res => {
