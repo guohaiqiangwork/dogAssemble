@@ -133,11 +133,13 @@ export default {
             // this.cartDate.id = item.id;
             // this.cartDate.num = item.count;
             this.bottomMsg.totalprice = this.goodsPrice;
-            this.postCart();
+            // this.postCart();
+            this.saveCart();
             this.$emit('changeNum',this.goodsNum);
         },
         //获取购买商品的邮费
         getCart(arr = []){
+            
             console.log(arr,'lll')
             this.$fetch.post("fruits/app/cart/getCart",{openId:localStorage.getItem("openId")}).then(res =>{
                 // console.log(res,'dfsf')
@@ -148,20 +150,42 @@ export default {
                    
                     e.money = 0;
                     e.price = e.price.toFixed(2);
+                    if(!arr.length){
+                        e.ischeck = false;
+                    }
                     if(arr.length){
-                        // if(arr[i]){
-                            console.log(e,'0000000')
-                            if(arr && e.id == arr[i].id){
+                        // debugger
+                        console.log(arr,'jlkjllkjl')
+                        arr.forEach((item,ind) =>{
+                            if(item.id == e.id){
                                 e.ischeck = true;
-                                console.log(342)
+                                // arr.splice(ind,1)
+                                // console.log(13)
                             }
                             // else{
-                                //  e.ischeck = false;
+                            //     if(item.id!=e.id){
+                            //         // e.ischeck = false;
+                            //     }
+                               
                             // }
+                        })
+                        // if(arr[i]){
+                        //     console.log(arr,'0000000')
+                        //     if( e.id==arr[i].id ){
+                                
+                        //         console.log(e,342)
+                        //     }
+                        //     // else{
+                                
+                        //     }else{
+                        //     }
                         // }
                         // console.log(arr[i],'jhjlk')
                     }else{
-                         e.ischeck = false;
+                        // if(!arr.length){
+                        //      e.ischeck = false;
+                        // }
+                       
                     }
                 
                     // arr.filter(a =>{
@@ -173,6 +197,7 @@ export default {
                     //     }
                     // })
                 });
+               
                 console.log(res.obj)
                 //  if(arr){
                 //     arr.map(e =>{
@@ -223,6 +248,11 @@ export default {
                 console.log(res);
                 // this.charList = [...arr]
                 this.getCart(arr);
+            })
+        },
+        saveCart(){
+            this.$fetch.post('fruits/app/cart/changeNum',this.cartDate).then(res =>{
+               
             })
         }
     },

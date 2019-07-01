@@ -25,7 +25,7 @@
          
         </div> 
          <!-- <div class="foryou">为您推荐</div> -->
-        <hot></hot>
+        <hot @goToDetail="goDetail"></hot>
         <div v-transfer-dom>
             <popup v-model="popupshow" position="bottom" @on-hide='close'>
                 <div class="popup_box ">
@@ -140,6 +140,11 @@ export default {
       settitle('商品详情');
     },
     methods: {
+        //商品详情页
+        goDetail(item) {
+            this.$router.push("/goodsdetail?id=" + item.id);
+            this.$router.go(0)
+        },
         //关闭弹窗
         close(){
             this.$parent.show = false;
@@ -149,6 +154,7 @@ export default {
         },
         //点击确定
         buyGoods(){
+            console.log(this.form,'lll')
             this.form.id = this.goodId;
             this.form.price = this.goodsDetail.price;
             this.$parent.show = false;
@@ -166,6 +172,7 @@ export default {
                     return
                 }
                 //点击立即购买
+                this.form.name = this.goodsDetail.name;
                 var obj = {
                     openId:localStorage.getItem("openId"),
                     goodList:[this.form]
@@ -177,11 +184,13 @@ export default {
                 //         name:this.goodsDetail.name
                 //     }]
                 // var obj = this.form;
+                console.log(this.goodsDetail)
+             
                 obj = JSON.stringify(obj);
                 // console.log(this.goodsDetail);
                 // console.log(this.form,7878);
                 
-                this.$router.push('/paysure?data='+obj + "&count="+this.form.num + "&price="+this.goodsDetail.price)
+                this.$router.push('/paysure?data='+obj + "&count="+this.form.num + "&price="+this.goodsDetail.price/1*this.form.num/1)
             }
         },
         //添加购物车

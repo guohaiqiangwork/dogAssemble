@@ -14,7 +14,7 @@
             style="width:100%;height:100%;outline: none;border:none"
           >
           <span style="width: 20%;" v-if='checkCustomerName&&this.phone'>{{checkCustomerName}}</span>
-          <span style="width: 50%;" v-if='!checkCustomerName&&this.phone'>未查询到用户</span>
+          <!-- <span style="width: 50%;" v-if='!checkCustomerName&&this.phone'>未查询到用户</span> -->
         </div>
       </div>
     </div>
@@ -345,6 +345,9 @@ export default {
         data => {
           if (data.code == 0) {
             this.checkCustomerName = data.obj.name;
+            if(!checkCustomerName&&this.phone){
+              this.$vux.toast.text('未查询到用户');
+            }
             if(data.obj.type == 3){
               this.transferFlag  = true;
             }
