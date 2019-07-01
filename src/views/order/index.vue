@@ -209,7 +209,7 @@
             <div class="text_center font_size_15 font_color_99">暂无订单</div>
           </div>
         </div>
-        <!-- 已发货 -->
+        <!-- 待收货 -->
         <div v-if="switchFlage == '3'">
           <div v-if="orderList.length != 0">
             <div v-for="(item,index) in orderList" :key="index">
@@ -261,8 +261,8 @@
                   </div>
                 </div>
                 <div class="order_border margin_top_div5"></div>
-                <div class="order_bt_p margin_top_div3" @click="goToPay(items.id)">
-                  <div class="oreder_bt_pay backgroun_color_4A">去支付</div>
+                <div class="order_bt_p margin_top_div3" @click="sureReceiving(items.id)">
+                  <div class="oreder_bt_pay backgroun_color_4A">确认收货</div>
                 </div>
               </div>
             </div>
@@ -363,7 +363,7 @@ export default {
           id: "2"
         },
         {
-          name: "待发货",
+          name: "待收货",
           id: "3"
         },
         {
