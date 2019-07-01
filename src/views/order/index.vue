@@ -60,7 +60,7 @@
                       <!-- order_price_bt -->
                     </div>
                     <div v-for="(itemsg,index) in items.goodsSpecs" :key="index" class="GG_list">
-                      <span>{{itemsg.specName}}</span>
+                      <span>{{itemsg.specName}}：</span>
                       <span>{{itemsg.specValue}}</span>
                     </div>
                   </div>
@@ -125,7 +125,7 @@
                       <!-- order_price_bt -->
                     </div>
                     <div v-for="(itemsg,index) in items.goodsSpecs" :key="index" class="GG_list">
-                      <span>{{itemsg.specName}}</span>
+                      <span>{{itemsg.specName}}：</span>
                       <span>{{itemsg.specValue}}</span>
                     </div>
                   </div>
@@ -190,7 +190,7 @@
                       <!-- order_price_bt -->
                     </div>
                     <div v-for="(itemsg,index) in items.goodsSpecs" :key="index" class="GG_list">
-                      <span>{{itemsg.specName}}</span>
+                      <span>{{itemsg.specName}}：</span>
                       <span>{{itemsg.specValue}}</span>
                     </div>
                   </div>
@@ -255,7 +255,7 @@
                       <!-- order_price_bt -->
                     </div>
                     <div v-for="(itemsg,index) in items.goodsSpecs" :key="index" class="GG_list">
-                      <span>{{itemsg.specName}}</span>
+                      <span>{{itemsg.specName}}：</span>
                       <span>{{itemsg.specValue}}</span>
                     </div>
                   </div>
@@ -320,7 +320,7 @@
                       <!-- order_price_bt -->
                     </div>
                     <div v-for="(itemsg,index) in items.goodsSpecs" :key="index" class="GG_list">
-                      <span>{{itemsg.specName}}</span>
+                      <span>{{itemsg.specName}}：</span>
                       <span>{{itemsg.specValue}}</span>
                     </div>
                   </div>
