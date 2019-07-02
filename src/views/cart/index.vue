@@ -71,6 +71,7 @@ export default {
     payPage() { 
       var arr = [];
       var picList =[];
+      var cartsids = [];
       var count = 0,
           price = 0;
       console.log(this.goodList,'lll')
@@ -103,7 +104,8 @@ export default {
               price:e.price,
               img:url.imgUrl + e.picId,
               specList:[]
-            })
+            });
+            cartsids.push(e.id)
           }
           
           // picList.push(e.picId);
@@ -122,6 +124,8 @@ export default {
       var obj = {
         openId: localStorage.getItem("openId"),
         goodList: arr,
+        type:'0',
+        cartsids:cartsids,
         // name:
       };
       obj = JSON.stringify(obj);

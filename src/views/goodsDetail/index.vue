@@ -179,6 +179,7 @@ export default {
                 }
                 //点击立即购买
                 this.form.name = this.goodsDetail.name;
+                this.form.type = "1";
                 var obj = {
                     openId:localStorage.getItem("openId"),
                     goodList:[this.form]
