@@ -39,9 +39,6 @@ service
     /**
      * code为非200是错误的请求
      */
-<<<<<<< HEAD
-    // if (response.data.code == "702") {
-=======
     if (response.data.code == "702") {
       window.location.href = response.data.obj
     }
@@ -49,7 +46,6 @@ service
       window.location.href = response.data.obj
     }
     // if (response.data.msg == "openId_error") {
->>>>>>> aba71e92a0f0021d8612bd4ae54e446d85eb3bd9
     //   alert(response.data.obj + '接口返回链接')
     //   window.location.href = response.data.obj
     // }
