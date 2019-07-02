@@ -140,8 +140,13 @@ export default {
   methods: {
     paysure() {
       this.form.addressId = this.goodsMsg.id;
-      this.form.goodList = this.option.goodList;
-      console.log(this.form, "oooo");
+      this.form.goodList = [...this.option.goodList];
+      this.form.type = this.option.type;
+      if(this.form.type == 0){
+        this.form.goodList =[];
+        this.form.cartsids = this.option.cartsids;
+      }
+      console.log(this.option, "oooo",this.form);
       this.$fetch.post("fruits/app/cart/saveShopOrder", this.form).then(res => {
         console.log(res, "kkkk");
         if (res.msg == "success") {

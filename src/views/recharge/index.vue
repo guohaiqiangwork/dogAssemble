@@ -6,7 +6,7 @@
         <div class="div_width_50 margin_left_div6 font_size_16 font_color_1A">押金充值</div>
         <div
           class="div_width_50 text_right margin_right_div6 font_size_14 font_color_4A"
-          @click="goToRechargeList"
+          @click="goToRechargeList(0)"
         >充值记录</div>
       </div>
       <div class="margin_top_div8">
@@ -22,7 +22,7 @@
         <div class="div_width_50 margin_left_div6 font_size_16 font_color_1A">会员充值</div>
         <div
           class="div_width_50 text_right margin_right_div6 font_size_14 font_color_4A"
-          @click="goToRechargeList"
+          @click="goToRechargeList(1)"
         >充值记录</div>
       </div>
       <div>
@@ -145,7 +145,20 @@ export default {
       });
     },
     // 去充值记录页面
-    goToRechargeList: function() {
+    goToRechargeList: function(e) {
+      if(e ==0){
+         this.$router.push({
+          name: "rechargeList",
+          params: {
+            obj: JSON.stringify({
+              type: "profession",
+              data: {
+                type: e
+              }
+            })
+          }
+        });
+      }
       if (this.ifHas) {
         this.$router.push({
           name: "rechargeList",
@@ -153,7 +166,8 @@ export default {
             obj: JSON.stringify({
               type: "profession",
               data: {
-                phone: this.phone
+                phone: this.phone,
+                type:e
               }
             })
           }
