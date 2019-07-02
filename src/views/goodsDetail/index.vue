@@ -31,7 +31,7 @@
                 <div class="popup_box ">
                     <div class="goods_info flex-between">
                         <div class="popup_head">
-                            <img src="../../assets/images/WechatIMG99.png" alt="">
+                            <img :src="form.pic" alt="">
                             <div class="flex-around flex-clo ml-space">
                                 <p style="font-weight:700;margin-top:-.3rem;">{{goodsDetail.name}}</p>
                                 <p class="goods_price">
@@ -72,6 +72,8 @@
 </template>
 <script>
 import hot from '../Assemble/hotness/index'
+import url from '../../bin/url'
+
 import { Swiper,TransferDom, Popup, XButton, InlineXNumber } from 'vux'
 export default {
     directives: {
@@ -127,10 +129,12 @@ export default {
             goodsDetailImg:[],
             specList:[],
             spec:'',
+            pic:'',
             form:{
                 openId:localStorage.getItem("openId"),
                 id:'',
                 num:1,
+                pic:'',
                 price:null,
                 specList:[]
             }
@@ -200,6 +204,7 @@ export default {
             this.$parent.buyNum  =this.$parent.buyNum/1;
             this.$parent.buyNum += this.form.num/1;
             localStorage.setItem('catnum',this.$parent.buyNum)
+            // this.$router.push('/paysure?data='+obj + "&count="+this.form.num + "&price="+this.goodsDetail.price/1*this.form.num/1)
            
             })
         },
@@ -235,6 +240,7 @@ export default {
                         value:null,
                         specName:e.name,
                         specId:e.id,
+                        
                         check:false
                     })
                     e.valueList.forEach((el,i) =>{
@@ -243,7 +249,9 @@ export default {
                         }
                             
                     })
+                    
                 })
+                this.form.pic = url.imgUrl + res.obj.picId,
                 console.log(this.form.specList,888)
 
             })

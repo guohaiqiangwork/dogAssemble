@@ -218,7 +218,7 @@ export default {
     height: 3.51rem;
     background-size: 100% 100%;
     overflow: hidden;
-    padding-top:1rem;
+    // padding-top:1rem;
     background: #F5F5F5;
     .search_box {
       position: absolute;
