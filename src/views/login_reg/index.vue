@@ -374,7 +374,7 @@ export default {
       this.Logform.password = obj.password;
       this.Logform.openId = obj.openId;
     }
-    // this.getAddress();
+    this.getAddress();
   }
 };
 </script>
