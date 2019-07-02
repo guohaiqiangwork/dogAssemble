@@ -196,9 +196,9 @@
                   </div>
                 </div>
                 <div class="order_border margin_top_div5"></div>
-                <div class="order_bt_p margin_top_div3" @click="sureReceiving(item)">
+                <!-- <div class="order_bt_p margin_top_div3" @click="sureReceiving(item)">
                   <div class="oreder_bt_pay backgroun_color_4A">确认收货</div>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
