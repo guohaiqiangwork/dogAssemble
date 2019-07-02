@@ -138,8 +138,25 @@ export default {
     }
   },
   methods: {
+    //轮询支付状态
+    redirect(val){
+      var count = 0;
+      var timer = setInterval(()=>{
+        this.$fetch.post('fruits/app/cart/getOrderState',{openId:localStorage.getItem('openId'),orderId:val}).then(res =>{
+          count++;
+          if(res.obj){
+           this.$vux.toast.text('充值成功')
+            this.$router.push('/home');
+            clearInterval(timer)
+          }
+          if(count>3){
+            clearInterval(timer)
+          }
+        })
+      },1000)
+    },
     //获取购物车数量
-    getCartNum() {
+    getCartNum(val) {
       this.$fetch
         .post("fruits/app/cart/getCartNum", {
           openId: localStorage.getItem("openId")
@@ -147,7 +164,8 @@ export default {
         .then(res => {
           if (res.msg == "success") {
             localStorage.setItem("catnum", res.obj);
-            this.$router.go(0)
+            // this.$router.go(0)
+            this.redirect(val)
           } else {
             alert(res.msg);
           }
@@ -162,19 +180,15 @@ export default {
         this.form.goodList =[];
         this.form.cartsIds = this.option.cartsIds;
       }
-      console.log(this.option, "oooo",this.form);
+      console.log(this.form, "oooo",this.form);
       this.$fetch.post("fruits/app/cart/saveShopOrder", this.form).then(res => {
-        console.log(res, "kkkk");
         if (res.msg == "success") {
-          this.getCartNum()
+          this.getCartNum(res.attributes.orderId)
           // this.$vux.toast.text("支付成功");
           var a =JSON.parse(res.obj)
           // console.log(weiXinPay,7979)
           weiXinPay(a,function(val){
             // console.log(val,'kjkljlk')
-            alert(JSON.stringify(val),2222);
-            // alert(JSON.parse(val),3333);
-            alert(val)
           },function(err){
             alert(JSON.stringify(err),132);
             console.log(err);
@@ -246,6 +260,9 @@ export default {
           this.getSelectAddress(this.routeParams.data.item); //获取地址
         }
       });
+  },
+  beforeDestroy() {
+    // clr
   },
   created() {
     console.log(this.$route, 99);

@@ -7,6 +7,12 @@
           <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%">
         </div>
       </div>
+      <div class="div_display_flex width_m" v-if="type == 2" @click="Confirm">
+        <div class="div_width_50 font_color_1A personal_list_font">切换身份</div>
+        <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
+          <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%">
+        </div>
+      </div>
       <div class="div_display_flex width_m" v-if="type == 2 " @click="goToAddress">
         <div class="div_width_50 font_color_1A personal_list_font">地址管理</div>
         <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
@@ -35,6 +41,10 @@
     <confirm v-model="outPayFalge" title @on-cancel="onCancel" @on-confirm="onConfirm">
       <div style="text-align:center;font-size:18px;">{{type == 1?"您确认将会员卡冻结吗？" :"是否要打烊"}}</div>
     </confirm>
+    <!-- 切换身份 -->
+    <confirm v-model="confirmShow" title @on-cancel="onCancel" @on-confirm="changeIDE">
+      <div style="text-align:center;font-size:18px;">{{'您确定要切换身份吗？'}}</div>
+    </confirm>
   </div>
 </template>
 <script>
@@ -48,7 +58,8 @@ export default {
   data() {
     return {
       outPayFalge: false, //冻结账户弹窗
-      text: ""
+      text: "",
+      confirmShow:false,
     };
   },
   computed: {
@@ -70,6 +81,40 @@ export default {
           })
         }
       });
+    },
+    Confirm(){
+      this.confirmShow = true;
+    },
+    //切换身份
+    changeIDE(){
+       let _obj = {
+        openId: localStorage.getItem("openId")
+      };
+      this.$fetch.post(url.changeCustomer, _obj).then(
+        data => {
+          if (data.code == 0) {
+            localStorage.setItem("type", data.attributes.type);
+            this.getCartNum();
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
+        }
+      );
+    },
+     //获取购物车数量
+    getCartNum() {
+      this.$fetch
+        .post("fruits/app/cart/getCartNum", {
+          openId: localStorage.getItem("openId")
+        })
+        .then(res => {
+          if (res.msg == "success") {
+            // this.$router.push("/home");
+            localStorage.setItem("catnum", res.obj);
+            this.$router.go(0);
+          }
+        });
     },
     // 去地址管理
     goToAddress() {
