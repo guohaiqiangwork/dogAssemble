@@ -58,7 +58,7 @@ export default {
         name: "", //姓名
         phone: "", //手机号码
         details: "", //详细地址
-        isDefault: false,
+        isDefault: true,
         id: ""
       },
       addressF: "",
