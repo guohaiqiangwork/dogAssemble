@@ -1,6 +1,6 @@
 <template>
   <div>
-    <x-header :right-options="{showMore: true}" @on-click-more="showMenus = true">首页</x-header>
+    <!-- <x-header :right-options="{showMore: true}" @on-click-more="showMenus = true">首页</x-header>
     <router-link to="/home">首页</router-link>
     <router-link to="/goodsdetail">商品详情</router-link>
     <router-link to="/cart">购物车页面</router-link>
@@ -21,10 +21,11 @@
     <button @click="goToSymptoms">检测病症</button>
     <button @click="goToPersonal">个人中心</button>
     <button @click="goToRecommend">推荐信息</button>
-    <button @click="goToExclusive">专属门店</button>
+    <button @click="goToExclusive">专属门店</button>-->
     <button @click="goTol">获取当前路径</button>
-    <button @click="goToPrivacyProtocol">协议</button>
-    <router-link to="/sharedBonus">共享奖金</router-link>
+    <!-- <button @click="goToPrivacyProtocol">协议</button>
+    <button @click="goToSuccessful">支付成功页面</button>
+    <router-link to="/sharedBonus">共享奖金</router-link>-->
   </div>
 </template>
 <script>
@@ -214,6 +215,12 @@ export default {
         name: "privacyProtocol"
       });
     },
+    // 支付成功
+    goToSuccessful() {
+      this.$router.push({
+        name: "successful"
+      });
+    },
     getQueryString(name) {
       var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
       var r = window.location.search.substr(1).match(reg);
@@ -229,6 +236,7 @@ export default {
       };
       this.$fetch.post(url.getOpenId, data).then(res => {
         if (res.code == 0) {
+          console.log(res);
           localStorage.setItem("openId", res.obj.openid);
           localStorage.setItem("nickname", res.obj.nickname);
           localStorage.setItem("headimgurl", res.obj.headimgurl);
@@ -247,7 +255,9 @@ export default {
 
   mounted() {
     this.code = this.getQueryString("code");
-    this.getOpenId();
+    setTimeout(() =>{
+      this.getOpenId();
+    }, 1000);
   }
 };
 </script>

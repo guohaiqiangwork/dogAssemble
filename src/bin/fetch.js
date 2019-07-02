@@ -47,14 +47,14 @@ service
       alert(response.data.obj + '接口返回链接')
       window.location.href = response.data.obj
     }
-    if (response.data.msg == "openId_error") {
-      alert(response.data.obj + '接口返回链接')
-      window.location.href = response.data.obj
-    }
-    if (response.data.msg == "openId_error!") {
-      alert(response.data.obj + '接口返回链接')
-      window.location.href = response.data.obj
-    }
+    // if (response.data.msg == "openId_error") {
+    //   alert(response.data.obj + '接口返回链接')
+    //   window.location.href = response.data.obj
+    // }
+    // if (response.data.msg == "openId_error!") {
+    //   alert(response.data.obj + '接口返回链接')
+    //   window.location.href = response.data.obj
+    // }
     if (response.data.msg == "no_login") {
       router.push('/login/1');
     }
@@ -64,7 +64,7 @@ service
       //   text:response.data.message
       //  })
 
-    //   router.push('/login/1');
+      router.push('/login/1');
     }
 
     if (response.status !== 200) {
