@@ -19,7 +19,10 @@
         <input type="text" placeholder="搜索您想找的产品" v-model="iptVal" @input="input">
         <i></i>
       </div>
-      <div v-for="(item,index) in bookList" :key="index">
+      <template v-if="bookList.length">
+
+      
+      <div v-for="(item,index) in bookList" :key="index" >
         <book-list :item="item">
           <div slot="content">
             <div v-for="(iten,ind) in item.memberRecipes" :key="ind" v-show="item.type == 0">
@@ -42,6 +45,10 @@
             </div>
           </div>
         </book-list>
+      </div>
+      </template>
+      <div v-else class="nodata">
+        暂无数据
       </div>
     </div>
     <!-- </div> -->
@@ -126,6 +133,7 @@ export default {
       this.timer = setTimeout(() => {
         this.form.name = this.iptVal;
         this.form.current = 1;
+        this.bookList = [];
         this.getRecipeList();
       }, 1000);
     }
@@ -139,6 +147,16 @@ export default {
 <style lang="less">
 .nut-scroller {
   background: #f3f5f8;
+}
+.nodata{
+    width: 100%;
+    height: 9rem;
+    display: flex;
+    font-size: 12px;
+     background: #f3f5f8;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
 }
 .weui-toast {
   width: 200px;

@@ -78,8 +78,8 @@ export default {
         alert("请输入正确手机号");
         return;
       }
-      this.sendAuthCode = false;
-      this.auth_time = 60;
+      // this.sendAuthCode = false;
+      
       this.$fetch
         .post("fruits/app/user/getSmsCode", {
           phone: this.phone,
@@ -91,11 +91,13 @@ export default {
           if(res.msg == "find_none_user"){
             clearInterval(auth_timetimer);
             this.tip = "获取验证码";
-            this.$vux.toast.text("当前账号不存在")
+            this.$vux.toast.text("当前账号不存在");
+            return
           }
           // this.form.code = "1234";
         });
-
+        this.sendAuthCode = false;
+      this.auth_time = 60;
       var auth_timetimer = setInterval(() => {
         this.auth_time--;
         if (this.auth_time <= 0) {
