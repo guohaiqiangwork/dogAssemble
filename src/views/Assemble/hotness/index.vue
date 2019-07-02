@@ -101,14 +101,13 @@ export default {
   }
   .hot_item {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     flex-wrap: wrap;
     padding: 0 0.42rem;
     .mt_size {
       margin: 0.2rem 0;
       min-width: 30%;
       max-width: 30%;
-      margin-left: 3%;
     }
     .hot_logo {
       height: 1.8rem;
