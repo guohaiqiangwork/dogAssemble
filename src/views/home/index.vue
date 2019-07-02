@@ -21,11 +21,11 @@
     <button @click="goToSymptoms">检测病症</button>
     <button @click="goToPersonal">个人中心</button>
     <button @click="goToRecommend">推荐信息</button>
-    <button @click="goToExclusive">专属门店</button> -->
+    <button @click="goToExclusive">专属门店</button>-->
     <button @click="goTol">获取当前路径</button>
     <!-- <button @click="goToPrivacyProtocol">协议</button>
     <button @click="goToSuccessful">支付成功页面</button>
-    <router-link to="/sharedBonus">共享奖金</router-link> -->
+    <router-link to="/sharedBonus">共享奖金</router-link>-->
   </div>
 </template>
 <script>
@@ -215,7 +215,7 @@ export default {
         name: "privacyProtocol"
       });
     },
-     // 支付成功
+    // 支付成功
     goToSuccessful() {
       this.$router.push({
         name: "successful"
@@ -236,6 +236,7 @@ export default {
       };
       this.$fetch.post(url.getOpenId, data).then(res => {
         if (res.code == 0) {
+          console.log(res);
           localStorage.setItem("openId", res.obj.openid);
           localStorage.setItem("nickname", res.obj.nickname);
           localStorage.setItem("headimgurl", res.obj.headimgurl);
@@ -254,7 +255,9 @@ export default {
 
   mounted() {
     this.code = this.getQueryString("code");
-    this.getOpenId();
+    setTimeout(function() {
+      this.getOpenId();
+    }, 1000);
   }
 };
 </script>
