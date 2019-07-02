@@ -105,9 +105,9 @@ export default {
               img:url.imgUrl + e.picId,
               specList:[]
             });
-            cartsids.push(e.id)
+            
           }
-          
+          cartsids.push(e.id)
           // picList.push(e.picId);
           // e.cartGoodsSpecs.forEach(item =>{
           //   specList.push({
@@ -125,7 +125,7 @@ export default {
         openId: localStorage.getItem("openId"),
         goodList: arr,
         type:'0',
-        cartsids:cartsids,
+        cartsIds:cartsids,
         // name:
       };
       obj = JSON.stringify(obj);

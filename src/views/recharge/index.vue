@@ -37,6 +37,7 @@
               v-model="phone"
             >
             <i
+              v-if="phone"
               style="display: inline-block;height: 0.7rem;width: 120px;line-height: 0.7rem;"
             >{{name}}</i>
           </div>
@@ -214,11 +215,12 @@ export default {
     },
     // 确认充值
     rechargeq(val) {
+      this.form.type = this.amount ? "1" : "0";
       this.form.amount = this.amount ? this.amount : this.form.amount;
       if (this.ifHas) {
         this.rechargeFalge = true;
         this.form.payType = val;
-        this.form.type = this.form.amount ? "1" : "0";
+       
         this.form.phone = this.phone;
       } else {
         this.$vux.toast.text("请输入正确的手机号");
@@ -254,6 +256,10 @@ export default {
     },
     //查找
     phoneSearch() {
+      if(!this.phone){
+        clearTimeout(this.timer);
+        return
+      }
       var reg = /^1[3,4,5,6,7,8,9]\d{9}$/;
       if (this.timer) {
         clearTimeout(this.timer);

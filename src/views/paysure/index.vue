@@ -138,18 +138,35 @@ export default {
     }
   },
   methods: {
+    //获取购物车数量
+    getCartNum() {
+      this.$fetch
+        .post("fruits/app/cart/getCartNum", {
+          openId: localStorage.getItem("openId")
+        })
+        .then(res => {
+          if (res.msg == "success") {
+            localStorage.setItem("catnum", res.obj);
+            this.$router.go(0)
+          } else {
+            alert(res.msg);
+          }
+        });
+    },
+    //点击确认支付
     paysure() {
       this.form.addressId = this.goodsMsg.id;
       this.form.goodList = [...this.option.goodList];
       this.form.type = this.option.type;
       if(this.form.type == 0){
         this.form.goodList =[];
-        this.form.cartsids = this.option.cartsids;
+        this.form.cartsIds = this.option.cartsIds;
       }
       console.log(this.option, "oooo",this.form);
       this.$fetch.post("fruits/app/cart/saveShopOrder", this.form).then(res => {
         console.log(res, "kkkk");
         if (res.msg == "success") {
+          this.getCartNum()
           // this.$vux.toast.text("支付成功");
           var a =JSON.parse(res.obj)
           // console.log(weiXinPay,7979)
