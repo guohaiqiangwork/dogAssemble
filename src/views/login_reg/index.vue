@@ -155,15 +155,15 @@ export default {
         name: "",
         phone: "",
         code: "",
-        headimgurl: "123",
-        nickname: "随便"
+        headimgurl: "",
+        nickname: ""
       },
       Logform: {
         openId: "",
         password: "",
         phone: "",
-        nickname: "fd",
-        headimgurl: "fdfds"
+        nickname: "",
+        headimgurl: ""
       },
 
       validTel: false,
@@ -189,9 +189,9 @@ export default {
       // this.Logform.password = DesUtils.encode(this.Logform.password,"fruits-app,yuntu,com")
       obj.password = DesUtils.encode(obj.password, "fruits-app,yuntu,com");
       // this.Logform.nickname = ""; this.Logform.headimgurl = "";
-      this.Logform.openId = localStorage.getItem("openId") ||112;
-      this.Logform.nickname = localStorage.getItem("nickname") ||'dsf';
-      this.Logform.headimgurl = localStorage.getItem("headimgurl") ||'dsf';
+      this.Logform.openId = localStorage.getItem("openId");
+      this.Logform.nickname = localStorage.getItem("nickname");
+      this.Logform.headimgurl = localStorage.getItem("headimgurl");
 
       this.$fetch.post("fruits/app/user/login", obj).then(res => {
         this.btnload = false;
