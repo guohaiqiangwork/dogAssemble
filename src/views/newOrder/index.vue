@@ -14,7 +14,7 @@
             style="width:100%;height:100%;outline: none;border:none"
           >
           <span style="width: 20%;" v-if='checkCustomerName&&this.phone'>{{checkCustomerName}}</span>
-          <span style="width: 50%;" v-if='!checkCustomerName&&this.phone'>未查询到用户</span>
+          <!-- <span style="width: 50%;" v-if='!checkCustomerName&&this.phone'>未查询到用户</span> -->
         </div>
       </div>
     </div>
@@ -345,6 +345,9 @@ export default {
         data => {
           if (data.code == 0) {
             this.checkCustomerName = data.obj.name;
+            if(!checkCustomerName&&this.phone){
+              this.$vux.toast.text('未查询到用户');
+            }
             if(data.obj.type == 3){
               this.transferFlag  = true;
             }
@@ -363,9 +366,8 @@ export default {
       // 获取套餐内容
       let _obj = {
         openId: localStorage.getItem("openId"),
-        type: falge
+        type:  falge
       };
-      console.log(url.getRecipe);
       this.$fetch.post(url.getRecipe, _obj).then(
         data => {
           if (data.code == 0) {
@@ -423,6 +425,7 @@ export default {
   mounted() {
     console.log("新建订单");
     this.timeNow(); //获取当前时间
+    this.newOrderXZ('0')
   }
 };
 </script>

@@ -131,7 +131,7 @@ export default {
       return this.$route.query.count;
     },
     price() {
-      return this.$route.query.price;
+      return this.$route.query.price.toFixed(2)/1;
     },
     list() {
       return this.$route.query.list;
@@ -185,6 +185,7 @@ export default {
     goList() {
       // console.log(this.list)
       var obj = JSON.stringify(this.option);
+      console.log(this.option)
       this.$router.push("/goodslist?list=" + obj);
     },
     //  goList(){
@@ -292,6 +293,9 @@ export default {
       height: 0.8rem;
       width: 0.8rem;
       margin: 0 0.11rem;
+      white-space: nowrap;
+      // display: flex;
+      // flex-wrap: nowrap;
     }
   }
   .form_box {

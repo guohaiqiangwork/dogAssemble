@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import debugging from '@/views/home/index' //调试页
+// import debugging from '@/views/home/index' //调试页
+import home from '@/views/home/index' //调试页
 import login from '@/views/login_reg/index' //登陆
 import nationalStores from '@/views/nationalStores/index' //全国门店
 import recipeManual from '@/views/recipeManual/index' //配方手册
@@ -47,19 +48,19 @@ import allMembersDetailsD from '@/views/allMembersDetailsD/index'//全部订单�
 import orderDetails from '@/views/orderDetails/index' //商城订单详情
 import sharedBonus from '@/views/sharedBonus/index'//共享奖金
 import privacyProtocol from '@/views/privacyProtocol/index'//协议
+import successful from '@/views/successful/index'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history', //去掉链接中的#
   routes: [
     {
       // 调试页面
       path: '/',
-      name: "debugging",
+      name: "home",
       meta: {
         title: '调试',
       },
-      component: debugging
+      component: home
     },
     {
       // // 登陆
@@ -549,6 +550,15 @@ export default new Router({
         title: '协议'
       },
       component: privacyProtocol
+    },
+    {
+      // 全部会员详情
+      path: '/successful',
+      name: 'successful',
+      meta: {
+        title: '充值成功'
+      },
+      component: successful
     },
     {
       // 共享奖金

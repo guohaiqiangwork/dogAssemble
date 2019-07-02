@@ -25,13 +25,13 @@
          
         </div> 
          <!-- <div class="foryou">为您推荐</div> -->
-        <hot></hot>
+        <hot @goToDetail="goDetail"></hot>
         <div v-transfer-dom>
             <popup v-model="popupshow" position="bottom" @on-hide='close'>
                 <div class="popup_box ">
                     <div class="goods_info flex-between">
                         <div class="popup_head">
-                            <img src="../../assets/images/WechatIMG99.png" alt="">
+                            <img :src="form.pic" alt="">
                             <div class="flex-around flex-clo ml-space">
                                 <p style="font-weight:700;margin-top:-.3rem;">{{goodsDetail.name}}</p>
                                 <p class="goods_price">
@@ -73,6 +73,8 @@
 </template>
 <script>
 import hot from '../Assemble/hotness/index'
+import url from '../../bin/url'
+
 import { Swiper,TransferDom, Popup, XButton, InlineXNumber } from 'vux'
 export default {
     directives: {
@@ -128,10 +130,12 @@ export default {
             goodsDetailImg:[],
             specList:[],
             spec:'',
+            pic:'',
             form:{
                 openId:localStorage.getItem("openId"),
                 id:'',
                 num:1,
+                pic:'',
                 price:null,
                 specList:[]
             }
@@ -141,6 +145,11 @@ export default {
       settitle('商品详情');
     },
     methods: {
+        //商品详情页
+        goDetail(item) {
+            this.$router.push("/goodsdetail?id=" + item.id);
+            this.$router.go(0)
+        },
         //关闭弹窗
         close(){
             this.$parent.show = false;
@@ -150,6 +159,7 @@ export default {
         },
         //点击确定
         buyGoods(){
+            console.log(this.form,'lll')
             this.form.id = this.goodId;
             this.form.price = this.goodsDetail.price;
             this.$parent.show = false;
@@ -167,6 +177,7 @@ export default {
                     return
                 }
                 //点击立即购买
+                this.form.name = this.goodsDetail.name;
                 var obj = {
                     openId:localStorage.getItem("openId"),
                     goodList:[this.form]
@@ -178,11 +189,13 @@ export default {
                 //         name:this.goodsDetail.name
                 //     }]
                 // var obj = this.form;
+                console.log(this.goodsDetail)
+             
                 obj = JSON.stringify(obj);
                 // console.log(this.goodsDetail);
                 // console.log(this.form,7878);
                 
-                this.$router.push('/paysure?data='+obj + "&count="+this.form.num + "&price="+this.goodsDetail.price)
+                this.$router.push('/paysure?data='+obj + "&count="+this.form.num + "&price="+this.goodsDetail.price/1*this.form.num/1)
             }
         },
         //添加购物车
@@ -192,6 +205,7 @@ export default {
             this.$parent.buyNum  =this.$parent.buyNum/1;
             this.$parent.buyNum += this.form.num/1;
             localStorage.setItem('catnum',this.$parent.buyNum)
+            // this.$router.push('/paysure?data='+obj + "&count="+this.form.num + "&price="+this.goodsDetail.price/1*this.form.num/1)
            
             })
         },
@@ -227,6 +241,7 @@ export default {
                         value:null,
                         specName:e.name,
                         specId:e.id,
+                        
                         check:false
                     })
                     e.valueList.forEach((el,i) =>{
@@ -235,7 +250,9 @@ export default {
                         }
                             
                     })
+                    
                 })
+                this.form.pic = url.imgUrl + res.obj.picId,
                 console.log(this.form.specList,888)
 
             })

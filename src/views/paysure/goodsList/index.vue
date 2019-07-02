@@ -9,7 +9,7 @@
             <div class="goods-msg">
                 <p>{{item.name}}</p>
                 <p class="mt-12 flex-between">
-                    <span class="flex-between align-center">
+                    <span class="flex-between align-center wrap">
                         <span class="goods-price">¥{{item.price}}</span>
                         <span v-for="(el,ind) in item.specList" :key="ind">
                             <span class="ml-2">{{el.specName}}:{{el.value}}</span>
@@ -83,7 +83,9 @@ export default {
     height: 100%;
     width: 100%;
     overflow-x:hidden;
-
+    .wrap{
+        flex-wrap: wrap;
+    }
     .goods-item{
         padding: 0.3rem 0.45rem;
         border-bottom: 1px solid #E9E9E9;
