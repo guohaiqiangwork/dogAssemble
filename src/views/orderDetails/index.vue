@@ -115,8 +115,13 @@ export default {
       };
       this.$fetch.post(url.payOrder, _obj).then(data => {
         if (data.code == 0) {
-           var obj = eval("(" + data.obj + ")"); 
-          console.log(obj)
+          //  var obj = eval("(" + data.obj + ")"); 
+             var objPay =JSON.parse(res.obj)
+          weiXinPay(objPay,function(val){
+            console.log(val)
+          },function(err){
+            alert(JSON.stringify(err));
+          })
           wexinPay(obj)
         }else{
              alert(data.msg)
