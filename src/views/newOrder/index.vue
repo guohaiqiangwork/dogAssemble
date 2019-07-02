@@ -13,7 +13,7 @@
             maxlength="11"
             style="width:100%;height:100%;outline: none;border:none"
           >
-          <span style="width: 20%;" v-if='checkCustomerName&&this.phone'>{{checkCustomerName}}</span>
+          <span style="width: 20%;" v-if="checkCustomerName&&this.phone">{{checkCustomerName}}</span>
           <!-- <span style="width: 50%;" v-if='!checkCustomerName&&this.phone'>未查询到用户</span> -->
         </div>
       </div>
@@ -104,7 +104,7 @@
         :dialog-style="{'max-width': '100%', width: '100%', height: '50%', 'background-color': 'transparent'}"
       >
         <div class="backgroun_color_fff model_password">
-          <div @click="payPassWGB" class="text_right margin_right_div3 padding_top_div3">X</div>
+          <div @click="overMonen" class="text_right margin_right_div3 padding_top_div3">X</div>
           <div class="font_size_16 font_color_10">输入会员支付密码</div>
           <!-- <div class="pass_input_6">
             <input type="password" v-model="miMa" class="pass_input" maxlength="6">
@@ -173,7 +173,7 @@ export default {
     return {
       item: 0,
       newFalge: false, //是否新建
-      transferFlag:false,
+      transferFlag: false,
       newPay: true, //新建订单支付
       classA: 0, //选择标示
       payShowD: false, //支付
@@ -206,6 +206,10 @@ export default {
       } else {
         this.msgLength = curVal.length;
         this.msg = curVal;
+      }
+      if (this.msgLength == 6) {
+          this.payShowD = false;
+        this.payPassWGB();
       }
     }
   },
@@ -278,8 +282,8 @@ export default {
                 })
               }
             });
-          }else{
-             alert(data.msg)
+          } else {
+            alert(data.msg);
           }
         },
         err => {
@@ -293,9 +297,12 @@ export default {
     payPassW() {
       this.payShowD = true;
     },
+    // 关闭弹窗
+    overMonen() {
+      this.payShowD = false;
+    },
     // 关闭密码输入框
     payPassWGB() {
-      this.payShowD = false;
       this.passwordNumber = DesUtils.encode(this.msg, "fruits-app,yuntu,com");
       //  辟谷套餐保存
       let _obj = {
@@ -309,8 +316,8 @@ export default {
         data => {
           if (data.code == 0) {
             console.log("7897907");
-          }else{
-             alert(data.msg)
+          } else {
+            alert(data.msg);
           }
         },
         err => {
@@ -345,14 +352,14 @@ export default {
         data => {
           if (data.code == 0) {
             this.checkCustomerName = data.obj.name;
-            if(!checkCustomerName&&this.phone){
-              this.$vux.toast.text('未查询到用户');
+            if (!checkCustomerName && this.phone) {
+              this.$vux.toast.text("未查询到用户");
             }
-            if(data.obj.type == 3){
-              this.transferFlag  = true;
+            if (data.obj.type == 3) {
+              this.transferFlag = true;
             }
-          }else{
-             alert(data.msg)
+          } else {
+            alert(data.msg);
           }
         },
         err => {
@@ -366,14 +373,14 @@ export default {
       // 获取套餐内容
       let _obj = {
         openId: localStorage.getItem("openId"),
-        type:  falge
+        type: falge
       };
       this.$fetch.post(url.getRecipe, _obj).then(
         data => {
           if (data.code == 0) {
             this.recipeList = data.obj;
-          }else{
-             alert(data.msg)
+          } else {
+            alert(data.msg);
           }
         },
         err => {
@@ -392,8 +399,8 @@ export default {
         data => {
           if (data.code == 0) {
             this.memberRecipe = data.obj;
-          }else{
-             alert(data.msg)
+          } else {
+            alert(data.msg);
           }
         },
         err => {
@@ -406,7 +413,7 @@ export default {
       this.memberID = this.selected.id;
       this.memberIDNumber = this.selected.recipe;
       this.payMoney = this.selected.retail;
-      console.log(this.memberIDNumber)
+      console.log(this.memberIDNumber);
     },
     //订单保存
     newOrderq() {
@@ -425,7 +432,7 @@ export default {
   mounted() {
     console.log("新建订单");
     this.timeNow(); //获取当前时间
-    this.newOrderXZ('0')
+    this.newOrderXZ("0");
   }
 };
 </script>
