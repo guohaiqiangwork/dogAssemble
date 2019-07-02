@@ -2,7 +2,7 @@
   <div id="login">
     <div class="logo_box">
       <img class="logo" src="../../assets/images/logo.png" alt>
-      <p class="logo_title">果蔬精粹吧</p>
+      <p class="logo_title">果蔬精萃吧</p>
     </div>
 
     <div class="form" v-if="haslogin == 2">
@@ -150,7 +150,7 @@ export default {
       maskValue: "",
       codeValue: "获取验证码",
       form: {
-        openId: "",
+        openId:'',
         password: "",
         name: "",
         phone: "",
@@ -159,7 +159,7 @@ export default {
         nickname: ""
       },
       Logform: {
-        openId: "",
+        openId: '',
         password: "",
         phone: "",
         nickname: "",
@@ -188,10 +188,16 @@ export default {
       obj = { ...this.Logform };
       // this.Logform.password = DesUtils.encode(this.Logform.password,"fruits-app,yuntu,com")
       obj.password = DesUtils.encode(obj.password, "fruits-app,yuntu,com");
+<<<<<<< HEAD
       // this.Logform.nickname = ""; this.Logform.headimgurl = "";
       this.Logform.openId = localStorage.getItem("openId");
       this.Logform.nickname = localStorage.getItem("nickname");
       this.Logform.headimgurl = localStorage.getItem("headimgurl");
+=======
+      obj.openId = localStorage.getItem("openId");
+      obj.nickname = localStorage.getItem("nickname");
+      obj.headimgurl = localStorage.getItem("headimgurl");
+>>>>>>> aba71e92a0f0021d8612bd4ae54e446d85eb3bd9
       this.$fetch.post("fruits/app/user/login", obj).then(res => {
         this.btnload = false;
         alert(res.msg);
@@ -204,12 +210,11 @@ export default {
           this.getCartNum();
         } else if (res.msg == "password_error") {
           alert("密码错误");
-        }else if(res.msg == "account_is_not_exist"){
+        } else if (res.msg == "account_is_not_exist") {
           this.$vux.toast.text("该用户不存在，请注册");
-          setTimeout(() =>{
-            this.$router.push('/login/2');
-          },2000)
-
+          setTimeout(() => {
+            this.$router.push("/login/2");
+          }, 2000);
         } else {
           alert(res.msg);
         }
@@ -255,7 +260,6 @@ export default {
                 localStorage.getItem("headimgurl") ||
                 "http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJrDNnAKic6SaKbPB5FGldToRvRnlEgQwjIT9xaNoh1gspSk3xgUUX5Myvl4Sz68wSTZCHEOKOZsiag/132"
             };
-
             this.$fetch.post("fruits/app/user/login", _obj).then(res => {
               this.btnload = false;
               if (res.msg == "success") {
@@ -336,27 +340,27 @@ export default {
     //   return null;
     // },
     //获取用户openId
-    // getOpenId() {
-    //   var data = {
-    //     code: this.code,
-    //     state: ""
-    //   };
-    //   this.$fetch.post(url.getOpenId, data).then(res => {
-    //     console.log(res, "dfsf");
-    //   });
-    // }
-    getAddress() {
-      if (localStorage.getItem("openId") == "null") {
-        this.getoptnId = "";
-      } else {
-        this.getoptnId = localStorage.getItem("openId");
-      }
-      this.$fetch
-        .post("fruits/app/cart/getAddressList", {
-          openId: this.getoptnId
-        })
-        .then(res => {});
+    getOpenId() {
+      var data = {
+        code: this.code,
+        state: ""
+      };
+      this.$fetch.post(url.getOpenId, data).then(res => {
+        console.log(res, "dfsf");
+      });
     },
+    // getAddress() {
+    //   if (localStorage.getItem("openId") == "null") {
+    //     this.getoptnId = "";
+    //   } else {
+    //     this.getoptnId = localStorage.getItem("openId");
+    //   }
+    //   this.$fetch
+    //     .post("fruits/app/cart/getAddressList", {
+    //       openId: this.getoptnId
+    //     })
+    //     .then(res => {});
+    // },
     // 协议
     goToPrivacyProtocol() {
       this.$router.push({
@@ -372,14 +376,15 @@ export default {
     settitle("注册与登录");
   },
   mounted() {
-    // this.getOpenId()//获取用户open ID
+    this.getOpenId(); //获取用户open ID
     if (this.$route.query["parm"]) {
       var obj = JSON.parse(this.$route.query["parm"]);
       this.Logform.phone = obj.phone;
       this.Logform.password = obj.password;
       this.Logform.openId = obj.openId;
     }
-    this.getAddress();
+   
+    // this.getAddress();
   }
 };
 </script>

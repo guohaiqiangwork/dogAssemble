@@ -3,7 +3,7 @@
         <div v-if="charList.length">
             <div  class= "cartlist"  v-for="(item,index) in charList" :key="index" @click.prevent="goDetail(item)">
                <!-- <div class="foods_select"></div> -->
-               <i v-if="item.state ==1"></i>
+               <i v-if="item.state ==1" class="distroy">失效</i>
                <span v-else @click.stop="chooseBuy(item,index)">
                     <i  :class="['weui-icon', 'weui_icon_success', 'weui-icon-success',item.ischeck?'checked' : 'normal']" ></i>
                </span>
@@ -81,7 +81,10 @@ export default {
     },
     methods: {
           goDetail(item){
-                // console.log(item.goodsId,999);
+                if(item.state == 1){
+                    this.$vux.toast.text('该商品已下架');
+                    return
+                }
                 this.$router.push("/goodsdetail?id=" + item.goodsId);
             },
         defalut(){
@@ -264,7 +267,7 @@ export default {
 </script>
 <style lang="less">
 #cartList{
-
+   
     .normal{
         color: #CDCDCD;
     }
@@ -290,6 +293,7 @@ export default {
             font-size:0.24rem;
             width:0.64rem;
             height:0.37rem;
+            line-height: 0.37rem;
             padding: 0 2px;
             color: #fff;
             white-space: nowrap;

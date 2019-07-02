@@ -415,7 +415,7 @@ export default {
     falgQH() {
       if (this.personalMsg.isChange == 1) {
         this.outPayFalge1 = true;
-        this.$router.go(0)
+        // this.$router.go(0)
       } else {
         alert("您现在不能进行切换");
       }
