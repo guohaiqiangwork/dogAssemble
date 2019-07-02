@@ -25,7 +25,7 @@
          
         </div> 
          <!-- <div class="foryou">为您推荐</div> -->
-        <hot @goToDetail="goDetail"></hot>
+        <hot @goToDetail="goDetail" class="hot-btn-space"></hot>
         <div v-transfer-dom>
             <popup v-model="popupshow" position="bottom" @on-hide='close'>
                 <div class="popup_box ">
@@ -68,7 +68,7 @@
                 </div> 
             </popup>
         </div>
-        <div v-if="goodsDetail.state!=0" class="bottom-tip">已下架</div>
+        <div  class="bottom-tip" v-if="goodsDetail.state == 1">已下架</div>
     </div>
     
 </template>
@@ -167,13 +167,13 @@ export default {
             if(this.$parent.title == 'cart'){
 
                 //点击加入购物车
-                if(this.goodsDetail.state!=0){
+                if(this.goodsDetail.state==1){
                     this.$vux.toast.text("该商品已下架");
                     return
                 }
                 this.addCart();
             }else{
-                if(this.goodsDetail.state!=0){
+                if(this.goodsDetail.state==1){
                     this.$vux.toast.text("该商品已下架");
                     return
                 }
@@ -226,7 +226,7 @@ export default {
                   
                     });
                 // })
-                
+                console.log(res,666)
                 this.goodsDetail = {...res.obj};
                 this.goodsDetail.price = this.goodsDetail.price.toFixed(2);
                 this.goodsDetail.original = this.goodsDetail.original.toFixed(2);
@@ -282,20 +282,24 @@ export default {
 </script>
 <style lang="less">
       .goods_discount{
-                        color:rgb(16,32,35);
-                        opacity:0.52;
-                        text-decoration: line-through;
-                        margin-right: 0.2rem;
-                        font-size: 0.26rem;
-                    }
-                    .bottom-tip{
-                        position: fixed;
-                        bottom: 48px;
-                        text-align: center;
-                        width: 100%;
-                        background: #e3e4e5;
-                        color:#fff;
-                    }
+        color:rgb(16,32,35);
+        opacity:0.52;
+        text-decoration: line-through;
+        margin-right: 0.2rem;
+        font-size: 0.26rem;
+    }
+    .bottom-tip{
+        position: fixed;
+        bottom: 48px;
+        padding: 8px;
+        text-align: center;
+        width: 100%;
+        background: #e3e4e5;
+        color:#fff;
+    }
+    .hot-btn-space{
+        margin-bottom: 0.9rem;
+    }
 .popup_box{
         height: 100%;
         padding: 0 0.3rem;

@@ -70,6 +70,7 @@ export default new Router({
 
         title: '首页',
       },
+      // redirect:'/home',
       component: resolve => require(['@/components/TabBar.vue'], resolve),
       children: [
         {
