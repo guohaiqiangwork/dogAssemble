@@ -1,20 +1,32 @@
 <template>
   <div class="backgroun_color_fff" style="min-height: 700px;">
     <!-- 账单列表 -->
-    <div v-for="(item,index) in customerRecordList" :key="index">
-      <div class="div_display_flex font_color_33 bill_font_p">
-        <div class="font_size_16 div_width_50" v-if="item.payType == 1">充值金额</div>
-        <div class="font_size_16 div_width_50" v-if="item.payType == 2">辟谷套餐消费</div>
-        <div class="font_size_16 div_width_50" v-if="item.payType == 3">会员套餐消费</div>
-        <div class="font_size_16 div_width_50" v-if="item.payType == 4">退单</div>
-        <div class="font_size_18 div_width_50 bill_font_right">
-          <span v-if="item.payType == 4 || item.payType == 1">+</span>
-          <span v-if="item.payType == 2 || item.payType == 3">-</span>
-          {{item.recharge}}
+    <div v-if="customerRecordList.length > 0">
+      <div v-for="(item,index) in customerRecordList" :key="index">
+        <div class="div_display_flex font_color_33 bill_font_p">
+          <div class="font_size_16 div_width_50" v-if="item.payType == 1">充值金额</div>
+          <div class="font_size_16 div_width_50" v-if="item.payType == 2">辟谷套餐消费</div>
+          <div class="font_size_16 div_width_50" v-if="item.payType == 3">会员套餐消费</div>
+          <div class="font_size_16 div_width_50" v-if="item.payType == 4">退单</div>
+          <div class="font_size_18 div_width_50 bill_font_right">
+            <span v-if="item.payType == 4 || item.payType == 1">+</span>
+            <span v-if="item.payType == 2 || item.payType == 3">-</span>
+            {{item.recharge}}
+          </div>
         </div>
+        <div class="bill_font_p padding_bottom_4 font_size_13 font_color_A1">{{item.rechargeTime}}</div>
+        <div class="bill_border"></div>
       </div>
-      <div class="bill_font_p padding_bottom_4 font_size_13 font_color_A1">{{item.rechargeTime}}</div>
-      <div class="bill_border"></div>
+    </div>
+    <div v-if="customerRecordList.length == 0">
+      <div>
+        <img
+          src="../../assets/images/1581@2x.png"
+          style="width: 80%;margin-left: 10%;margin-top: 30%;"
+          alt
+        >
+      </div>
+      <div style="text-align: center;margin-top: 6%;">暂无订单</div>
     </div>
     <!-- 底部菜单栏 -->
     <TabBar ref="TabBar"/>
