@@ -10,10 +10,10 @@
         >充值记录</div>
       </div>
       <div class="margin_top_div8">
-        <input type="text" class="recharge_input_b" placeholder="输入您想充值的金额…">
+        <input type="text" class="recharge_input_b" placeholder="输入您想充值的金额…" v-model="amountMoney">
       </div>
       <div class="div_display_flex margin_top_div6 padding_bottom_4">
-        <div class="recharge_button_b">立即充值</div>
+        <div class="recharge_button_b" @click="getDepositRecharge">立即充值</div>
       </div>
     </div>
     <!-- 会员充值 -->
@@ -86,8 +86,8 @@
 </template>
 <script>
 import url from "../../bin/url";
+import weiXinPay from "../../bin/weiXinPay";
 import { Confirm } from "vux";
-
 export default {
   components: {
     Confirm
@@ -112,7 +112,8 @@ export default {
         payType: ""
       },
       ifHas: false, //判断是否有手机号
-      ifChoic: false
+      ifChoic: false,
+      amountMoney: "" //押金充值金额
     };
   },
   methods: {
@@ -221,7 +222,7 @@ export default {
       if (this.ifHas) {
         this.rechargeFalge = true;
         this.form.payType = val;
-       
+
         this.form.phone = this.phone;
       } else {
         this.$vux.toast.text("请输入正确的手机号");
@@ -257,9 +258,9 @@ export default {
     },
     //查找
     phoneSearch() {
-      if(!this.phone){
+      if (!this.phone) {
         clearTimeout(this.timer);
-        return
+        return;
       }
       var reg = /^1[3,4,5,6,7,8,9]\d{9}$/;
       if (this.timer) {
@@ -275,6 +276,27 @@ export default {
           this.$vux.toast.text("请输入正确的手机号");
         }
       }, 2500);
+    },
+    // 押金充值
+    getDepositRecharge() {
+      this.$fetch
+        .post("/fruits/app/personal/depositRecharge", {
+          openId: localStorage.getItem("openId"),
+          amount: this.amountMoney
+        })
+        .then(res => {
+          if (res.msg == "success") {
+            var obj = JSON.parse(res.obj);
+            weiXinPay(
+              obj,
+              function(val) {
+                alert(val);
+              },
+              function(err) {}
+            );
+          } else {
+          }
+        });
     }
   },
   created() {
