@@ -147,8 +147,8 @@ export default {
     },
     // 去充值记录页面
     goToRechargeList: function(e) {
-      if(e ==0){
-         this.$router.push({
+      if (e == 0) {
+        this.$router.push({
           name: "rechargeList",
           params: {
             obj: JSON.stringify({
@@ -159,6 +159,7 @@ export default {
             })
           }
         });
+        return;
       }
       if (this.ifHas) {
         this.$router.push({
@@ -168,7 +169,7 @@ export default {
               type: "profession",
               data: {
                 phone: this.phone,
-                type:e
+                type: e
               }
             })
           }
