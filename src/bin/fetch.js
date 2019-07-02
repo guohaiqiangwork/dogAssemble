@@ -43,10 +43,10 @@ service
       alert(response.data.obj + '接口返回链接')
       window.location.href = response.data.obj
     }
-    // if (response.data.msg == "openId_none!") {
-    //   alert(response.data.obj + '接口返回链接')
-    //   window.location.href = response.data.obj
-    // }
+    if (response.data.msg == "openId_none!") {
+      alert(response.data.obj + '接口返回链接')
+      window.location.href = response.data.obj
+    }
     // if (response.data.msg == "openId_error") {
     //   alert(response.data.obj + '接口返回链接')
     //   window.location.href = response.data.obj

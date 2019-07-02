@@ -255,7 +255,7 @@ export default {
 
   mounted() {
     this.code = this.getQueryString("code");
-    setTimeout(function() {
+    setTimeout(() =>{
       this.getOpenId();
     }, 1000);
   }

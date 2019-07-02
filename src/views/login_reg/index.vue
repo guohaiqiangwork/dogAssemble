@@ -205,6 +205,12 @@ export default {
           this.getCartNum();
         } else if (res.msg == "password_error") {
           alert("密码错误");
+        }else if(res.msg == "account_is_not_exist"){
+          this.$vux.toast.text("该用户不存在，请注册");
+          setTimeout(() =>{
+            this.$router.push('/login/2');
+          },2000)
+
         } else {
           alert(res.msg);
         }
