@@ -192,7 +192,6 @@ export default {
       this.Logform.openId = localStorage.getItem("openId");
       this.Logform.nickname = localStorage.getItem("nickname");
       this.Logform.headimgurl = localStorage.getItem("headimgurl");
-
       this.$fetch.post("fruits/app/user/login", obj).then(res => {
         this.btnload = false;
         alert(res.msg);
