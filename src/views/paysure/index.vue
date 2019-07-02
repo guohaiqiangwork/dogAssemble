@@ -131,7 +131,7 @@ export default {
       return this.$route.query.count;
     },
     price() {
-      return this.$route.query.price.toFixed(2)/1;
+      return (this.$route.query.price/1).toFixed(2)/1;
     },
     list() {
       return this.$route.query.list;

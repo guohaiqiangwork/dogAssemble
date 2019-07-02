@@ -302,7 +302,7 @@
             </div>
           </div>
 
-          <div class="personal_div_border"></div>
+          <div class="personal_div_border" v-if="personalMsg.isChange  == 1"></div>
         </div>
       </div>
       <!-- 冻结账户 -->
@@ -788,7 +788,7 @@ a:link {
   font-size: 15px;
 }
 .personal_div_border {
-  border: 1px solid #e9e9e9;
+  border-bottom: 1px solid #e9e9e9;
   width: 94%;
   margin-left: 3%;
 }

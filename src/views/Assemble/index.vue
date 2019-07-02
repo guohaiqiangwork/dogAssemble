@@ -17,7 +17,7 @@
     <div class="bg_gray">
       <div class="hot_tit mt-space" @click="Test" v-if="goodsList.length">全部商品</div>
       <div id="whole">
-        <div class="flex-between wrap" style="margin-bottom: 3%;">
+        <div class="flex-between wrap" style="margin-bottom: 0.9rem;">
           <div
             class="goods_item"
             v-for="(item,index) in goodsList"
@@ -126,19 +126,37 @@ export default {
       }
       timer = setTimeout(() => {
         console.log(this.iptVal);
+        this.getGoods(this.iptVal)
         // this.filterList(this.list,this.iptVal);
         timer = null;
       }, 2000);
     },
-    filterList(arr, val) {
-      var list = [...arr];
-      var temp = [];
-      list.map(e => {
-        if (val) {
-        } else {
+    getGoods(val=''){
+      let _obj = {
+        openId: localStorage.getItem("openId"),
+        id: this.listId2 || "",
+        name:val,
+        size: "10",
+        current: "1"
+      };
+      this.$fetch.post(url.getGoodsList, _obj).then(
+        data => {
+          console.log(data,'kjljlk');
+          if (data.code == 0) {
+            this.goodsList = data.obj;
+            this.goodsList.forEach(item => {
+              item.price = item.price.toFixed(2);
+              item.original = item.original.toFixed(2)
+              item.picId = url.imgUrl + item.picId;
+            });
+          }else{
+             alert(data.msg)
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
         }
-      });
-      return temp;
+      );
     },
     // 获取全部列表
     getGoodsList() {

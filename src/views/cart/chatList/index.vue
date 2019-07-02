@@ -280,6 +280,8 @@ export default {
         padding: 0.46rem 0.3rem;
         margin-bottom: 0.2rem;
         background: #fff;
+        // width: 100%;
+        // box-sizing: border-box;
         i{
             display: inline-block;
             font-size: 0.32rem;

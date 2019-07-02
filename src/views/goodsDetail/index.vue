@@ -35,8 +35,10 @@
                             <div class="flex-around flex-clo ml-space">
                                 <p style="font-weight:700;margin-top:-.3rem;">{{goodsDetail.name}}</p>
                                 <p class="goods_price">
-                                    <span class="red">￥{{goodsDetail.price}}</span>
-                                    <span class="goods_discount">￥{{goodsDetail.original}}</span>
+                                    <span class="red" >¥{{type==1?goodsDetail.original:goodsDetail.price}}</span>
+                                    <span class="goods_discount" v-if="type!=1&&type">¥{{goodsDetail.original}}</span>
+                                    <!-- <span class="red">￥{{goodsDetail.price}}</span>
+                                    <span class="goods_discount">￥{{goodsDetail.original}}</span> -->
                                 </p>
                             </div>
                         </div>
@@ -62,7 +64,7 @@
                             <inline-x-number width="30px" :title="('Quantity')" :min="0"  v-model="form.num"></inline-x-number>
                         </p>
                     </div>
-                    <div class="buy_btn" @click="buyGoods()">确认</div>
+                    <div class="buy_btn" @click="buyGoods">确认</div>
                 </div> 
             </popup>
         </div>
@@ -373,7 +375,8 @@ export default {
   
     height: 100%;
     width: 100%;
-    overflow-x: hidden;
+    // overflow-x: hidden;
+    overflow-y: scroll;
     .vux-slider{
         height: 100%;
         width: 100%;
