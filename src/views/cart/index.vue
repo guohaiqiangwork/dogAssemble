@@ -232,7 +232,7 @@ export default {
   .cart_btm {
     position: fixed;
     width: 100%;
-    bottom: 45px;
+    bottom: .9rem;
     display: flex;
     justify-content: space-between;
     align-items: center;

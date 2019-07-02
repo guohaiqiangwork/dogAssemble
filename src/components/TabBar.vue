@@ -132,6 +132,7 @@ export default {
   width: auto;
   min-width: unset;
   font-size: 0;
+  margin-left: 0 !important;
 }
 .pos {
   position: relative;
@@ -151,6 +152,8 @@ export default {
   width: 100%;
   height: 0.9rem;
   overflow: hidden;
+  background: #fff;
+  border-top: 1px solid #eee;
 }
 .active {
   color: #4A7B67;
