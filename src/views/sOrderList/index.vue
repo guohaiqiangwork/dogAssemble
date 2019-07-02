@@ -4,7 +4,7 @@
       <div class="div_display_flex margin_top_div3">
         <div class="div_width_30 margin_left_div3">{{item.recipe}}</div>
         <div class="div_width_70 text_right margin_right_div3">{{item.time}}</div>
-        <span @click="goDetail(item.id,item.state)">></span>
+        <span @click="goDetail(item)">></span>
       </div>
       <div class="div_display_flex margin_top_div3">
         <div class="div_width_30 margin_left_div3">￥ {{item.price}}</div>
@@ -36,8 +36,20 @@ export default {
           this.list = res.obj;
         });
     },
-    goDetail() {
-      this.$router.push("/serviceOrder?id=" + id + "&state=" + state);
+    goDetail(item) {
+       this.$router.push({
+        name: "serviceOrder",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id:item.id,
+              state:item.state
+            }
+          })
+        }
+      });
+      // this.$router.push("/serviceOrder?id=" + id + "&state=" + state);
     }
   },
   created() {
