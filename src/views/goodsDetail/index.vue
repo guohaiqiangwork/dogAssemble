@@ -42,6 +42,7 @@
                         </div>
                        
                         <x-icon type="ios-close-empty" size="30" class="icon_pos" @click="close"></x-icon>
+                    
                     </div>
                     <div class="goods_detail">
                         <div v-for="(item,index) in specList" :key="index">
