@@ -41,7 +41,7 @@
     <confirm v-model="outPayFalge" title @on-cancel="onCancel" @on-confirm="onConfirm">
       <div style="text-align:center;font-size:18px;">{{type == 1?"您确认将会员卡冻结吗？" :"是否要打烊"}}</div>
     </confirm>
-     <confirm v-model="PayFalge" title="您当前用户已被冻结需解冻才可以正常使用" :hide-on-blur="true" :show-cancel-button="false" confirm-text="确认解冻" @on-confirm="onConfirm">
+     <confirm v-model="PayFalge" :title="'您当前用户'+tel+'已被冻结需解冻才可以正常使用'" :hide-on-blur="true" :show-cancel-button="false" confirm-text="确认解冻" @on-confirm="onConfirm">
       <div style="text-align:center;font-size:18px;display:flex;">
         <input type="number" class="codeWrite" v-model="code">
         <span class="font-12" @click="sendCode"><a>{{codeValue}}</a></span>
@@ -64,8 +64,8 @@ export default {
     tel(){
       var str = localStorage.getItem('phone');
       var reg = /(\d{3})\d{4}(\d{4})/;
-      str.replace(reg,'$1****$2');
-     
+      str = str.replace(reg,'$1****$2');
+      return str
     }
   },
   name: "setUp",
@@ -213,6 +213,7 @@ export default {
           this.$fetch.post("fruits/app/personal/thawCustomer",{openId:localStorage.getItem('openId'),code:this.code}).then(res =>{
             if(res.msg == 'success'){
               this.$vux.toast.text('解冻成功!');
+              this.$router.go(0)
             }
           })
         }else{
@@ -222,7 +223,8 @@ export default {
           })
           .then(res => {
             if (res.code == 0) {
-              localStorage.setItem('state',3)
+              localStorage.setItem('state',3);
+              this.$router.go(0)
               alert("冻结成功");
             } else if (res.msg == "user_has_frozen") {
               alert("该账号已冻结");
