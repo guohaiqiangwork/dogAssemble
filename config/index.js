@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxy: {
       '/fruits':{
-        target:'http://192.168.3.12:80/',
+  		target:'http://192.168.3.12:80/',
         chageOrigin:true,
         pathRewrite:{
           // '^/fruits':''
