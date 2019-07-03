@@ -39,12 +39,12 @@ service
     /**
      * code为非200是错误的请求
      */
-    if (response.data.code == "702") {
-      window.location.href = response.data.obj
-    }
-    if (response.data.msg == "openId_none!") {
-      window.location.href = response.data.obj
-    }
+     if (response.data.code == "702") {
+       window.location.href = response.data.obj
+     }
+     if (response.data.msg == "openId_none!") {
+       window.location.href = response.data.obj
+     }
     // if (response.data.msg == "openId_error") {
     //   alert(response.data.obj + '接口返回链接')
     //   window.location.href = response.data.obj
@@ -56,14 +56,14 @@ service
     // if (response.data.msg == "no_login") {
     //   router.push('/login/1');
     // }
-    if (response.data.code == 300) {
-      // alert(response.data.message)
-      // Vue.$vux.toast.show({
-      //   text:response.data.message
-      //  })
+    // if (response.data.code == 300) {
+    //   // alert(response.data.message)
+    //   // Vue.$vux.toast.show({
+    //   //   text:response.data.message
+    //   //  })
 
-      router.push('/login/1');
-    }
+    //   router.push('/login/1');
+    // }
 
     if (response.status !== 200) {
       return Promise.reject('error')
