@@ -202,6 +202,7 @@ export default {
           localStorage.setItem("user", res.attributes.sessionId);
           localStorage.setItem("type", res.attributes.type);
           localStorage.setItem("appUserId", res.attributes.appUserId); //登陆用户id
+          localStorage.setItem("phone",obj.phone)
           this.getCartNum();
         } else if (res.msg == "password_error") {
           alert("密码错误");

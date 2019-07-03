@@ -41,7 +41,7 @@
     <confirm v-model="outPayFalge" title @on-cancel="onCancel" @on-confirm="onConfirm">
       <div style="text-align:center;font-size:18px;">{{type == 1?"您确认将会员卡冻结吗？" :"是否要打烊"}}</div>
     </confirm>
-     <confirm v-model="PayFalge" title="您当前用户已被冻结需解冻才可以正常使用" :show-cancel-button="false" confirm-text="确认解冻" @on-confirm="onConfirm">
+     <confirm v-model="PayFalge" title="您当前用户已被冻结需解冻才可以正常使用" :hide-on-blur="true" :show-cancel-button="false" confirm-text="确认解冻" @on-confirm="onConfirm">
       <div style="text-align:center;font-size:18px;display:flex;">
         <input type="number" class="codeWrite" v-model="code">
         <span class="font-12" @click="sendCode"><a>{{codeValue}}</a></span>
@@ -60,6 +60,14 @@ export default {
   components: {
     Confirm
   },
+  comouted:{
+    tel(){
+      var str = localStorage.getItem('phone');
+      var reg = /(\d{3})\d{4}(\d{4})/;
+      str.replace(reg,'$1****$2');
+     
+    }
+  },
   name: "setUp",
   data() {
     return {
@@ -70,7 +78,7 @@ export default {
       code:null,
       codeValue:'获取验证码',
       form:{
-        phone:"15010825114",
+        phone:localStorage.getItem('phone')||"15010825114",
        
 
       },
