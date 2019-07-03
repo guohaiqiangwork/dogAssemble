@@ -17,7 +17,7 @@
             </div>
             <div class="address_item">
             
-                <x-input label-width="5em"  v-model="addressBC.details" :title='`<span style="${style}">收货地址</span>`' :show-clear="false"  @on-blur="onBlur"    placeholder="详细地址" keyboard="number"  >
+                <x-input label-width="5em"  v-model="addressBC.details" :title='`<span style="${style}">收货地址</span>`' :show-clear="false"  @on-blur="onBlur"    placeholder="详细地址" >
                     
                 </x-input>
             </div>

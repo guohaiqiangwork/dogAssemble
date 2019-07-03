@@ -111,19 +111,14 @@ export default {
         },
         //传递购买数量
         change(item,n,arr){
-             console.log(item,'iipipip');
-          this.cartDate.id = item.id;
+            this.cartDate.id = item.id;
             this.cartDate.num = item.count;
             if(item.count <= 0){
-                // console.log(this.goodsNum);
-                //  this.cartDate.id = null;
                 this.chart(item,n);
                 this.cartDate.num = 0;
                 this.postCart(n);
                 this.bottomMsg.checkcount--;
                 this.$emit('changeNum',this.goodsNum);
-                // if(){}s
-                // this.charList.splice(n,1);
                 return
             }else{
                 this.chart(item,n);
@@ -145,73 +140,33 @@ export default {
             
             console.log(arr,'lll')
             this.$fetch.post("fruits/app/cart/getCart",{openId:localStorage.getItem("openId")}).then(res =>{
-                // console.log(res,'dfsf')
+                console.log(res,'dfsf')
                 res.obj.forEach((e,i) => {
-                   
-                    //  if(e.indexOf(this.charList))
-                   
-                   
+                    if(e.state ==1){
+                        this.cartDate.num = 0;
+                        this.cartDate.id = e.id;
+                        this.saveCart();
+                        return
+                    }
                     e.money = 0;
                     e.price = e.price.toFixed(2);
+                   
                     if(!arr.length){
                         e.ischeck = false;
                     }
                     if(arr.length){
                         // debugger
-                        console.log(arr,'jlkjllkjl')
                         arr.forEach((item,ind) =>{
                             if(item.id == e.id){
                                 e.ischeck = true;
-                                // arr.splice(ind,1)
-                                // console.log(13)
                             }
-                            // else{
-                            //     if(item.id!=e.id){
-                            //         // e.ischeck = false;
-                            //     }
-                               
-                            // }
                         })
-                        // if(arr[i]){
-                        //     console.log(arr,'0000000')
-                        //     if( e.id==arr[i].id ){
-                                
-                        //         console.log(e,342)
-                        //     }
-                        //     // else{
-                                
-                        //     }else{
-                        //     }
-                        // }
-                        // console.log(arr[i],'jhjlk')
-                    }else{
-                        // if(!arr.length){
-                        //      e.ischeck = false;
-                        // }
-                       
                     }
-                
-                    // arr.filter(a =>{
-                    //     console.log(a.id == e.id,'kjkl')
-                    //     if(a.id == e.id){
-                    //         e.ischeck = true;
-                    //     }else{
-                    //         e.ischeck = false;
-                    //     }
-                    // })
+                  
+                    this.charList.push(e);
                 });
-               
-                console.log(res.obj)
-                //  if(arr){
-                //     arr.map(e =>{
-                //         res.obj.forEach(a =>{
-                //             if(e.id == a.id){
-                //                 e.ischeck = true;
-                //             }
-                //         })
-                //     })
-                //  }
-                 this.charList = res.obj;
+                console.log(this.charList);
+                //  this.charList = res.obj;
                  this.$emit('package',res.attributes)
             })
         },
@@ -248,14 +203,13 @@ export default {
             // })
             
             this.$fetch.post('fruits/app/cart/changeNum',this.cartDate).then(res =>{
-                console.log(res);
+                console.log(res,'ppp');
                 // this.charList = [...arr]
                 this.getCart(arr);
             })
         },
         saveCart(){
             this.$fetch.post('fruits/app/cart/changeNum',this.cartDate).then(res =>{
-               
             })
         }
     },

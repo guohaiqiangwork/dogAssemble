@@ -244,6 +244,7 @@ export default {
         })
         .then(res => {
           this.$vux.loading.hide();
+          this.name = "";
           if (res.msg == "find_none_user") {
             this.$vux.toast.text("没有找到该用户");
           }
@@ -273,6 +274,7 @@ export default {
             text: "查询中"
           });
         } else {
+          this.name = "";
           this.$vux.toast.text("请输入正确的手机号");
         }
       }, 2500);

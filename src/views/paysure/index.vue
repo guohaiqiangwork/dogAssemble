@@ -151,6 +151,17 @@ export default {
           }
           if(count>3){
             clearInterval(timer)
+             this.$router.push({
+              name: "order",
+              params: {
+                obj: JSON.stringify({
+                  type: "profession",
+                  data: {
+                    id: "参数"
+                  }
+                })
+              }
+            });
           }
         })
       },1000)

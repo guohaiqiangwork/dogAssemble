@@ -13,7 +13,7 @@
           <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%">
         </div>
       </div>
-      <div class="div_display_flex width_m" v-if="type == 2 " @click="goToAddress">
+      <div class="div_display_flex width_m" v-if="type == 2 || type==3 " @click="goToAddress">
         <div class="div_width_50 font_color_1A personal_list_font">地址管理</div>
         <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
           <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%">

@@ -138,6 +138,7 @@ export default {
                 id:'',
                 num:1,
                 pic:'',
+                img:"",
                 price:null,
                 specList:[]
             }
@@ -255,7 +256,8 @@ export default {
                     })
                     
                 })
-                this.form.pic = url.imgUrl + res.obj.picId,
+                this.form.pic = url.imgUrl + res.obj.picId;
+                this.form.img = url.imgUrl + res.obj.picId;
                 console.log(this.form.specList,888)
 
             })
