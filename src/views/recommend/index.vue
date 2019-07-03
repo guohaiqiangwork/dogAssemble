@@ -29,8 +29,20 @@
       </div>
       <div class="div_display_flex margin_left_div3 margin_top_div5">
         <div class="div_width_25 font_size_14 font_color_1A">所属地区：</div>
-        <div class="div_width_70">
-          <input type="text" placeholder="请选择店铺所在地区 " v-model="recommendList.aname1">
+        <div class="div_width_70" @click="showAddress = true">
+          <x-address
+            v-show="false"
+            @on-hide="logHide"
+            @on-show="logShow"
+            :title="title"
+            v-model="addressVal"
+            :list="addressData"
+            @on-shadow-change="onShadowChange"
+            placeholder="请选择地址"
+            inline-desc="可以设置placeholder"
+            :show.sync="showAddress"
+          ></x-address>
+          <!-- <input type="text" placeholder="请选择店铺所在地区 " v-model="recommendList.aname1"> -->
         </div>
       </div>
     </div>
@@ -68,7 +80,9 @@
       <!-- 图片上传 -->
       <div>
         <div>
-          <div class="div_width_25 font_size_14 margin_left_div3 margin_top_div4 font_color_1A font_size_16 font_color_1A">资质信息</div>
+          <div
+            class="div_width_25 font_size_14 margin_left_div3 margin_top_div4 font_color_1A font_size_16 font_color_1A"
+          >资质信息</div>
           <div class="div_width_70"></div>
         </div>
         <div class="div_display_flex margin_left_div3 margin_top_div5 text_center">
@@ -83,16 +97,20 @@
           <div class="margin_left_div3">
             <img src="../../assets/images/111@2x.png" width="12px" alt>
           </div>
-          <div class="font_size_12" style="color:#242E42;margin-left:1%">图片上传类型：jpg、png、gif ; 最多10张；文件大小为5M</div>
+          <div
+            class="font_size_12"
+            style="color:#242E42;margin-left:1%"
+          >图片上传类型：jpg、png、gif ; 最多10张；文件大小为5M</div>
         </div>
-
-        <input
-          @change="fileChange($event)"
-          type="file"
-          id="upload_file"
-          multiple
-          style="display: none"
-        >
+        <form enctype="multipart/form-data" name="fileinfo" id="myForm">
+          <input
+            @change="fileChange($event)"
+            type="file"
+            id="upload_file"
+            multiple
+            style="display: none"
+          >
+        </form>
         <div class="add" @click="chooseType">
           <div class="add-image" align="center">
             <!--按钮中的图片是一个icon字体图标 -->
@@ -119,14 +137,27 @@
         </div>
       </div>
       <!-- 确认 -->
-      <div class="backgroun_color_4A font_color_ff font_size16 text_center" style="line-height:3" @click="getRegister">确认</div>
+      <div
+        class="backgroun_color_4A font_color_ff font_size16 text_center"
+        style="line-height:3"
+        @click="getRegister"
+      >确认</div>
     </div>
   </div>
 </template>
 <script>
 import url from "../../bin/url";
+import axios from "axios";
+import {
+  XAddress,
+  ChinaAddressV4Data,
+  Value2nameFilter as value2name
+} from "vux";
 export default {
   name: "recommend",
+  components: {
+    XAddress
+  },
   data() {
     return {
       showFace: false,
@@ -136,7 +167,7 @@ export default {
       tempImgs: [],
       recommendList: {
         name: "", //商户名称
-        aname1:'',
+        aname1: "",
         type: "", //0：店铺果蔬吧，1：家庭果蔬吧）
         linkman: "", //联系人
         linkPhone: "", //手机号
@@ -150,16 +181,39 @@ export default {
         openId: "",
         picIds: [] //图片list
       },
-      filedata:''
+      filedata: "",
+      fileD: "",
+      title: "",
+      addressData: ChinaAddressV4Data,
+      showAddress: false,
+      addressVal: []
     };
   },
   methods: {
+    logHide(str) {
+      if (str) {
+        console.log(this.addressVal, 9999);
+        console.log(this.address);
+        this.address = value2name(this.addressVal, ChinaAddressV4Data);
+        this.addressF = this.address.split(" ");
+      }
+    },
+    logShow() {},
+    onShadowChange(val) {
+      console.log(val);
+    },
     chooseType() {
       document.getElementById("upload_file").click();
     },
     fileChange(el) {
+      let that = this;
+      console.log(el);
+      that.fileD = el.target.files[0];
+      console.log(that.fileD);
+      that.uplod(); //上传
       if (!el.target.files[0].size) return;
       this.fileList(el.target);
+      console.log("80970s");
       el.target.value = "";
     },
     fileList(fileList) {
@@ -198,7 +252,7 @@ export default {
       });
     },
     fileAdd(file) {
-      let that = this
+      let that = this;
       if (this.limit !== undefined) this.limit--;
       if (this.limit !== undefined && this.limit < 0) return;
       //总大小
@@ -210,7 +264,10 @@ export default {
         let reader = new FileReader();
         let image = new Image();
         let _this = this;
-        reader.readAsDataURL(file);
+        console.log("23423" + file);
+        that.fileD = file;
+        // that.uplod(); //上传
+        // reader.readAsDataURL(file);
         reader.onload = function() {
           file.src = this.result;
           image.onload = function() {
@@ -218,12 +275,12 @@ export default {
             let height = image.height;
             file.width = width;
             file.height = height;
-            that.filedata = file;//获取数据流
+            // that.filedata = file; //获取数据流
             _this.imgList.push({
               file
             });
             console.log(_this.imgList);
-            that.uplod()//上传
+
             // that.recommendList.picIds = _this.imgList
           };
           image.src = file.src;
@@ -237,21 +294,50 @@ export default {
     },
     displayImg() {},
     // 图片上传
-    uplod(){
-          this.$fetch
-        .post("/fruits/app/blank/saveFile", {filedata:this.filedata})
-        .then(res => {
-          if (res.code == 0) {
-            console.log(res.obj);
-          } else {
-            alert(res.msg);
-          }
-        });
-    
+    uplod() {
+      //   this.$fetch
+      // .post("/fruits/app/blank/saveFile", {filedata:this.filedata})
+      // .then(res => {
+      //   if (res.code == 0) {
+      //     console.log(res.obj);
+      //   } else {
+      //     alert(res.msg);
+      //   }
+      // });
+      let formData = new FormData(); // 声明一个FormData对象
+      formData = new window.FormData(); // vue 中使用 window.FormData(),否则会报 'FormData isn't definded'
+      formData.append("filedata", this.fileD); // 'userfile' 这个名字要和后台获取文件的名字一样;
+      console.log(formData + "处理");
+      // var options = {
+      //   // 设置axios的参数
+      //   url: "http://192.168.3.12:80/fruits/app/blank/saveFile",
+      //   data: formData,
+      //   method: "post",
+      //   headers: {
+      //     "Content-Type": "multipart/form-data"
+      //   }
+      // };
+      $.ajax({
+        type: "post",
+        url: "http://192.168.3.12:80/fruits/app/blank/saveFile",
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(data) {
+          console.log(data);
+        }
+      });
+      // axios(options).then(res => {
+      //   console.log(res);
+      // }); // 发送请求
     },
     // 保存推荐信息
     getRegister() {
       this.recommendList.openId = localStorage.getItem("openId");
+      this.recommendList.province = this.addressVal[0];
+      this.recommendList.city = this.addressVal[1];
+      this.recommendList.area = this.addressVal[2];
       this.$fetch
         .post("/fruits/app/user/register", this.recommendList)
         .then(res => {
