@@ -20,7 +20,11 @@ export default {
   },
   methods: {
       newOrderXZ(id,url){
-          this.classA = id
+          this.classA = id;
+          if(id ==1){
+            this.$router.push('/home');
+            return
+          }
           this.$router.push({
         name: url,
         params: {
