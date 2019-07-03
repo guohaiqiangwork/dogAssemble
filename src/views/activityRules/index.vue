@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div>
+    <div class="activeRule">活动规则</div>
+    <div class="activeCont">
       本财年，阿里巴巴集团收入达3768.44亿元，净利润为876亿元；第四季度收入达934.98亿元，同比增长达到51%，净利润为258.3亿元。
       预计2020年营收超过5000亿元，市场预期5090亿元。淘宝天猫过去一财年新增超1亿用户，为品牌和商家带来超过9000亿增量生意。
       此前红星美凯龙发布公告称，公司控股股东红星控股成功发行可交换债券，以43.594亿元人民币被阿里巴巴全额认购。如可交换债换股后，阿里将获得红星美凯龙占总股本比例约10%的A股股份。同时，阿里巴巴在港股收购红星美凯龙3.7%的股份。
@@ -31,4 +32,18 @@ export default {
 };
 </script>
 <style scoped>
+.activeRule{
+  width: 100%;
+  margin-top: .2rem;
+  margin-bottom: .3rem;
+  font-size: .28rem;
+  text-align: center;
+  color: #000000;
+}
+.activeCont{
+  padding: 0rem .4rem;
+  color: #393939;
+  font-size: .24rem;
+  text-align: justify;
+}
 </style>

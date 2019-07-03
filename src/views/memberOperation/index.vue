@@ -177,7 +177,7 @@ export default {
   line-height: 3;
   border-radius: 5px;
   width: 40%;
-  margin-left: 5%;
+  margin-left: 7.5%;
   position: fixed;
   bottom: 8%;
 }
@@ -185,7 +185,7 @@ export default {
   line-height: 3;
   border-radius: 5px;
   width: 40%;
-  margin-left: 50%;
+  margin-left: 52.5%;
   position: fixed;
   bottom: 8%;
 }

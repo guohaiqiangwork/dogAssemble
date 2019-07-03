@@ -22,7 +22,7 @@
                 </x-input>
             </div>
             <div class="address_item">
-                 <x-switch title="设为默认地址" v-model="addressBC.isDefault"></x-switch>
+                 <x-switch style="padding:.28rem 0.1rem .28rem .28rem;" title="设为默认地址" v-model="addressBC.isDefault"></x-switch>
                 <!-- <x-input label-width="4em" :title='`<span style="${style}">手机号</span>`' placeholder="收货人电话" keyboard="number" is-type="china-mobile"></x-input> -->
             </div>
         </div>

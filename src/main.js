@@ -27,14 +27,13 @@ Vue.prototype.toNumber = function (num) {
 Vue.component('toast', Toast)
 window.settitle = settitle;
 
-router.beforeEach((to, from, next) => {
-  if(!localStorage.getItem('user') && to.name !== "login" && to.name !== "shop" && to.name !=="home" && to.name!=="changePassword"){
-    next("/login/1");
-    return 
-  }
-  next();
-})
-/* eslint-disable no-new */
+ router.beforeEach((to, from, next) => {
+   if(!localStorage.getItem('user') && to.name !== "login" && to.name !== "shop" && to.name !=="home"){
+     next("/login/1");
+     return 
+   }
+   next();
+ })/* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,

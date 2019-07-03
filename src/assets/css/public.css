@@ -67,7 +67,7 @@ a{
   margin-top: 8%;
 }
 .margin_top_div12{
-  margin-top: 12%;
+  margin-top: 8%;
 }
 .margin_left_div2 {
   margin-left: 2%;
@@ -418,4 +418,16 @@ border-radius: 10px;
   border-radius: 50%;
   background: #000;
   display: inline-block;
+}
+/* 清楚浮動 */
+.clearfix:before, .clearfix:after {
+  display: block;
+  content: " ";
+  clear: both;
+}
+
+/* for ie67*/
+
+.clearfix {
+  zoom: 1;
 }

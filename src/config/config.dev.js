@@ -1,4 +1,3 @@
-
 //基础配置信息
 // var path = require('path')
 

@@ -15,15 +15,14 @@
             class="font_size_13 font_color_10 text_right"
           >{{myStoreData.distance}}km</div>
         </div>
-        <div class="div_display_flex margin_top_div3">
+	<div class="div_display_flex margin_top_div3">
           <div class="font_size_16 font_color_10 ex_img_b">
             <img src="../../assets/images/1440@2x.png" class="img_width_100">
           </div>
           <div
             style="width:80%"
             class="font_size_13 font_color_10 margin_left_div2"
-          >{{myStoreData.address}}</div>
-        </div>
+          >{{myStoreData.address}}</div>        </div>
         <div class="div_display_flex margin_top_div3">
           <div class="font_size_16 font_color_10 ex_img_b">
             <img src="../../assets/images/电话 (1)@2x.png" class="img_width_100">
@@ -153,11 +152,14 @@ export default {
   color: #e6435a;
   padding: 1%;
   font-size: 12px;
-}
+  float: right;}
 .bt_ex {
-  border: 1px solid #4a7b67;
-  color: #4a7b67;
+ border: 1px solid #4A7B67;
+  color: #4A7B67;
   padding: 1%;
   font-size: 12px;
+  position: absolute;
+  right: 0;
+  top: -6px;
 }
 </style>

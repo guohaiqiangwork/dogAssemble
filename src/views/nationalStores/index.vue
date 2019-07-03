@@ -1,7 +1,7 @@
 <template>
   <div class="backgroun_color_fff" style="min-height:700px">
     <!-- 搜索 -->
-    <div class="search_box">
+    <div class="search_box" style="border:none;box-shadow:0px 3px 10px rgba(136,136,136,0.16);">
       <i class="weui-icon-search search_icon"></i>
       <input
         type="text"
@@ -268,9 +268,9 @@ export default {
 .national_flag_title {
   width: 2px;
   height: 15px;
-  background-color: #ff8156;
+  background-color: #4A7B67;
   margin-top: 1%;
-  border: 1px solid #ff8156;
+  border: 1px solid #4A7B67;
   border-radius: 10px;
 }
 .national_list {

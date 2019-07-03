@@ -305,7 +305,7 @@ export default {
         .cart_btn{
             height: 0.8rem;
             width: 2.64rem;
-            margin-bottom: 0.08rem;
+            margin-bottom: 0.3rem;
             border-radius:0.1rem;
             background: #4A7B67;
             text-align: center;

@@ -165,7 +165,7 @@ export default {
 <style lang="less">
 #address {
   width: 100%;
-  height: calc(100% - 48px);
+  height: calc(100% - .9rem);
   background: #f3f5f8;
   overflow-x: hidden;
   .vux-swipeout-button-primary {
@@ -201,7 +201,7 @@ export default {
           // width: 2rem;
           padding: 0.01rem 0.08rem;
           margin: 0 auto;
-          font-size: 0.2em;
+          font-size: 0.2rem;
           color: #fff;
           // line-height:1.2rem;
           border-radius: 1rem;

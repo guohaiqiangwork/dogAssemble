@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxy: {
       '/fruits':{
-        target:'http://192.168.3.12:80/',
+  		target:'http://192.168.3.12:80/',
         chageOrigin:true,
         pathRewrite:{
           // '^/fruits':''
@@ -21,7 +21,7 @@ module.exports = {
     },
 
     // Various Dev Server settings
-    host:'192.168.3.6', // can be overwritten by process.env.HOST ---6
+    host:'192.168.3.167', // can be overwritten by process.env.HOST ---6
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,

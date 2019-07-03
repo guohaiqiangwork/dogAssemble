@@ -39,13 +39,14 @@
       <!-- 贴心提示 -->
       <div v-if="memberRecipe">
         <div class="font_color_4A margin_left_div6 margin_top_div5">
-          <img src="../../assets/images/tS@2x.png" class="width_16">
+          <img style="vertical-align: middle;" src="../../assets/images/tS@2x.png" class="width_16">
           贴心小提示
         </div>
         <div class="t_S_b">
-          <div class="margin_top_div3">配方：{{memberRecipe.recipeName}}</div>
-          <div class="margin_top_div3">注意事项：{{memberRecipe.notice}}</div>
-          <div class="margin_top_div3">适宜人群：{{memberRecipe.crowd}}</div>
+   
+          <div style="margin-top:0;" class="margin_top_div3">配方：{{memberRecipe.recipeName}}</div>
+          <div style="margin-top:0.2rem;" class="margin_top_div3">注意事项：{{memberRecipe.notice}}</div>
+          <div style="margin-top:0.2rem;" class="margin_top_div3">适宜人群：{{memberRecipe.crowd}}</div>
         </div>
       </div>
       <!-- 按钮 -->
@@ -58,7 +59,6 @@
     <div v-if="classA == '1'">
       <div class="margin_top_div5">
         <span class="font_size_14 font_color_1A margin_left_div6">购买天数：</span>
-        <select v-model="selected" @change="getMemberRecipeDay">
           <option v-for="(option,index) in recipeList" :key="index" :value="option">{{ option.recipe }}</option>
         </select>
       </div>
@@ -448,21 +448,21 @@ export default {
   height: 0.7rem;
   margin: 0 auto;
   position: relative;
-  padding: 0 0.31rem;
+  padding: 0;
   box-sizing: border-box;
   z-index: 1;
   display: flex;
   align-items: center;
-  line-height: 3.5rem;
+  line-height: normal;
   border: 1px solid #888888;
   margin-top: 5%;
   width: 90%;
   border: none;
-  border-bottom: 1px solid rgb(173, 165, 165);
+  border-bottom: 1px solid #E9E9E9;
+  background: #fff;
 }
 .width_16 {
   width: 16px;
-  height: 16px;
   margin-right: 3%;
 }
 .new_order_b1 {
@@ -480,7 +480,7 @@ export default {
   text-align: center;
   background-color: #ffffff;
   color: #4a7b67;
-  margin-left: 14%;
+  margin-left: 8.5%;
   border: 1px solid #4a7b67;
   border-radius: 5px;
   line-height: 2;
