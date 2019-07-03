@@ -45,9 +45,12 @@
       <div v-else style="background:#fff;text-align:center">
         <img
           src="../../assets/images/1546@2x.png"
-          style="width: 80%;margin-left: 10%;margin-top: 10%;"
+          style="width: 65%;margin-left: 0%;margin-top: 20%;"
           alt
         >
+        <span class="nothingWord">
+          这里空空如也哦~
+        </span>
       </div>
     </div>
   </div>
@@ -121,11 +124,19 @@ export default {
     }
     .book-kind {
       margin-left: 0.15rem;
+      font-size: .3rem;
     }
   }
   .opt-list > img {
     height: 0.26rem;
     width: 0.16rem;
+  }
+  .nothingWord{
+    display: block;
+    text-align: center;
+    font-size: .3rem;
+    color: #333;
+    margin-top: 0.2rem;
   }
   .mt-2 {
     margin-top: 0.2rem;

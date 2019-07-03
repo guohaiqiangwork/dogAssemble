@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color:#F3F5F8;min-height:600px">
+  <div style="background-color:#F3F5F8;min-height:600px;width:100%;">
     <div class="div_display_flex backgroun_color_fff personal_title">
       <div v-for="(item,index) in  tabList" @click="tabSwitch(item.id)" :key="index">
         <div :style="{color:(switchFlage != item.id ? '' :'#000000')}">{{item.name}}</div>
@@ -26,19 +26,19 @@
                   >订单编号：{{item.orderNo}}</div>
                   <div class="font_size_14" style="margin-top: 14px;">
                     <span v-if="item.state == 1">
-                      <span class="order_red">*</span>待付款
+                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>待付款
                     </span>
                     <span v-if="item.state == 2">
-                      <span class="order_red">*</span>待发货
+                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>待发货
                     </span>
                     <span v-if="item.state == 3">
-                      <span class="order_red">*</span>待收货
+                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>待收货
                     </span>
                     <span v-if="item.state == 4">
-                      <span class="order_red">*</span>已收货
+                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>已收货
                     </span>
                     <span v-if="item.state == 6">
-                      <span class="order_red">*</span>交易关闭
+                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>交易关闭
                     </span>
                   </div>
                 </div>
@@ -56,7 +56,7 @@
                     <div class="font_color_00 font_size_14">{{items.name}}</div>
                     <div class="div_display_flex margin_top_div3">
                       <div class="order_price_font" style="width:80%">¥{{items.price}}</div>
-                      <div class="text_right">*{{items.count}}</div>
+                      <div class="text_right">x{{items.count}}</div>
                       <!-- order_price_bt -->
                     </div>
                     <div v-for="(itemsg,index) in items.goodsSpecs" :key="index" class="GG_list">
@@ -74,7 +74,7 @@
           </div>
           <div v-if="orderList.length == 0">
             <div class="text_center" style="margin-top16%">
-              <img src="../../assets/images/1581@2x.png" width="80%" alt>
+              <img src="../../assets/images/1581@2x.png" width="65%"  alt>
             </div>
             <div class="text_center font_size_15 font_color_99">暂无订单</div>
           </div>
@@ -91,19 +91,19 @@
                   >订单编号：{{item.orderNo}}</div>
                   <div class="font_size_14" style="margin-top: 14px;">
                     <span v-if="item.state == 1">
-                      <span class="order_red">*</span>待付款
+                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>待付款
                     </span>
                     <span v-if="item.state == 2">
-                      <span class="order_red">*</span>待发货
+                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>待发货
                     </span>
                     <span v-if="item.state == 3">
-                      <span class="order_red">*</span>待收货
+                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>待收货
                     </span>
                     <span v-if="item.state == 4">
-                      <span class="order_red">*</span>已收货
+                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>已收货
                     </span>
                     <span v-if="item.state == 6">
-                      <span class="order_red">*</span>交易关闭
+                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>交易关闭
                     </span>
                   </div>
                 </div>
@@ -121,7 +121,7 @@
                     <div class="font_color_00 font_size_14">{{items.name}}</div>
                     <div class="div_display_flex margin_top_div3">
                       <div class="order_price_font" style="width:80%">¥{{items.price}}</div>
-                      <div class="text_right">*{{items.count}}</div>
+                      <div class="text_right">x{{items.count}}</div>
                       <!-- order_price_bt -->
                     </div>
                     <div v-for="(itemsg,index) in items.goodsSpecs" :key="index" class="GG_list">
@@ -139,7 +139,7 @@
           </div>
           <div v-if="orderList.length == 0">
             <div class="text_center" style="margin-top16%">
-              <img src="../../assets/images/1581@2x.png" width="80%" alt>
+              <img src="../../assets/images/1581@2x.png" width="65%" alt>
             </div>
             <div class="text_center font_size_15 font_color_99">暂无订单</div>
           </div>
@@ -156,19 +156,19 @@
                   >订单编号：{{item.orderNo}}</div>
                   <div class="font_size_14" style="margin-top: 14px;">
                     <span v-if="item.state == 1">
-                      <span class="order_red">*</span>待付款
+                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>待付款
                     </span>
                     <span v-if="item.state == 2">
-                      <span class="order_red">*</span>待发货
+                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>待发货
                     </span>
                     <span v-if="item.state == 3">
-                      <span class="order_red">*</span>待收货
+                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>待收货
                     </span>
                     <span v-if="item.state == 4">
-                      <span class="order_red">*</span>已收货
+                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>已收货
                     </span>
                     <span v-if="item.state == 6">
-                      <span class="order_red">*</span>交易关闭
+                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>交易关闭
                     </span>
                   </div>
                 </div>
@@ -186,7 +186,7 @@
                     <div class="font_color_00 font_size_14">{{items.name}}</div>
                     <div class="div_display_flex margin_top_div3">
                       <div class="order_price_font" style="width:80%">¥{{items.price}}</div>
-                      <div class="text_right">*{{items.count}}</div>
+                      <div class="text_right">x{{items.count}}</div>
                       <!-- order_price_bt -->
                     </div>
                     <div v-for="(itemsg,index) in items.goodsSpecs" :key="index" class="GG_list">
@@ -204,7 +204,7 @@
           </div>
           <div v-if="orderList.length == 0">
             <div class="text_center" style="margin-top16%">
-              <img src="../../assets/images/1581@2x.png" width="80%" alt>
+              <img src="../../assets/images/1581@2x.png" width="65%" alt>
             </div>
             <div class="text_center font_size_15 font_color_99">暂无订单</div>
           </div>
@@ -221,19 +221,19 @@
                   >订单编号：{{item.orderNo}}</div>
                   <div class="font_size_14" style="margin-top: 14px;">
                     <span v-if="item.state == 1">
-                      <span class="order_red">*</span>待付款
+                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>待付款
                     </span>
                     <span v-if="item.state == 2">
-                      <span class="order_red">*</span>待发货
+                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>待发货
                     </span>
                     <span v-if="item.state == 3">
-                      <span class="order_red">*</span>待收货
+                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>待收货
                     </span>
                     <span v-if="item.state == 4">
-                      <span class="order_red">*</span>已收货
+                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>已收货
                     </span>
                     <span v-if="item.state == 6">
-                      <span class="order_red">*</span>交易关闭
+                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>交易关闭
                     </span>
                   </div>
                 </div>
@@ -251,7 +251,7 @@
                     <div class="font_color_00 font_size_14">{{items.name}}</div>
                     <div class="div_display_flex margin_top_div3">
                       <div class="order_price_font" style="width:80%">¥{{items.price}}</div>
-                      <div class="text_right">*{{items.count}}</div>
+                      <div class="text_right">x{{items.count}}</div>
                       <!-- order_price_bt -->
                     </div>
                     <div v-for="(itemsg,index) in items.goodsSpecs" :key="index" class="GG_list">
@@ -269,7 +269,7 @@
           </div>
           <div v-if="orderList.length == 0">
             <div class="text_center" style="margin-top16%">
-              <img src="../../assets/images/1581@2x.png" width="80%" alt>
+              <img src="../../assets/images/1581@2x.png" width="65%" alt>
             </div>
             <div class="text_center font_size_15 font_color_99">暂无订单</div>
           </div>
@@ -286,19 +286,19 @@
                   >订单编号：{{item.orderNo}}</div>
                   <div class="font_size_14" style="margin-top: 14px;">
                     <span v-if="item.state == 1">
-                      <span class="order_red">*</span>待付款
+                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>待付款
                     </span>
                     <span v-if="item.state == 2">
-                      <span class="order_red">*</span>待发货
+                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>待发货
                     </span>
                     <span v-if="item.state == 3">
-                      <span class="order_red">*</span>待收货
+                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>待收货
                     </span>
                     <span v-if="item.state == 4">
-                      <span class="order_red">*</span>已收货
+                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>已收货
                     </span>
                     <span v-if="item.state == 6">
-                      <span class="order_red">*</span>交易关闭
+                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>交易关闭
                     </span>
                   </div>
                 </div>
@@ -316,7 +316,7 @@
                     <div class="font_color_00 font_size_14">{{items.name}}</div>
                     <div class="div_display_flex margin_top_div3">
                       <div class="order_price_font" style="width:80%">¥{{items.price}}</div>
-                      <div class="text_right">*{{items.count}}</div>
+                      <div class="text_right">x{{items.count}}</div>
                       <!-- order_price_bt -->
                     </div>
                     <div v-for="(itemsg,index) in items.goodsSpecs" :key="index" class="GG_list">
@@ -334,7 +334,7 @@
           </div>
           <div v-if="orderList.length == 0">
             <div class="text_center">
-              <img src="../../assets/images/1581@2x.png" width="80%" alt>
+              <img src="../../assets/images/1581@2x.png" width="65%" alt>
             </div>
             <div class="text_center font_size_15 font_color_99">暂无订单</div>
           </div>
@@ -509,7 +509,7 @@ export default {
   margin-left: 2%;
   background-color: #ffffff;
   border-radius: 8px;
-  margin-top: 5%;
+  margin-top: 3%;
 }
 .order_width_height {
   width: 70px;
@@ -553,10 +553,10 @@ export default {
   padding-bottom: 3%;
 }
 .GG_list {
-  width: 35%;
+  /* width: 35%; */
   float: left;
   margin-top: 2%;
-  margin-left: 2%;
+  /* margin-left: 2%; */
   font-size: 13px;
   color: #102023;
 }

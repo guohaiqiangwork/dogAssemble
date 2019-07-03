@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="width:100%;height:100%;background:#F3F5F8;">
     <!-- 头部 -->
     <div class="personal_img_bj">
       <div
@@ -43,8 +43,8 @@
           <div class="national_flag_title margin_left_div3"></div>
           <div class="font_color_00 font_size_14 margin_left_div2" style="margin-top: 0.8%;">推荐返佣</div>
           <div
-            class="font_size_14 font_color_00 margin_top_div1"
-            style="margin-left: 60%;"
+            class="font_size_13 font_color_00 margin_top_div1"
+            style="padding-left: 60%;"
             @click="goToHealthDetail"
           >全部返佣></div>
         </div>
@@ -55,11 +55,11 @@
                 {{item.name}}
                 <span
                   v-if="item.state == 1"
-                  style="border: 1px solid darkgreen; padding: 1%;font-size: 12px;"
+                  style="border: 1px solid #4A7B67; padding: 1%;font-size: 12px;color:#4A7B67;"
                 >开业</span>
                 <span
                   v-if="item.state == 0"
-                  style="border: 1px solid darkgreen; padding: 1%;font-size: 12px;"
+                  style="border: 1px solid #E6435A; padding: 1%;font-size: 12px;color:#E6435A;"
                 >未开店</span>
               </div>
               <div class="div_with_30" style="margin-left:10%" v-if="item.type == 1">家庭版</div>
@@ -69,10 +69,10 @@
           </div>
         </div>
         <div v-if="getRecommendBList.length ==  0">
-          <div class="text_center margin_top_div3">
-            <img src="../../assets/images/1581@2x.png" width="72%" alt>
+          <div class="text_center margin_top_div3" style="margin-top:15%;">
+            <img src="../../assets/images/1581@2x.png" width="45%" alt>
           </div>
-          <div class="text_center font_size_15 font_color_99 margin_top_div3">暂无订单</div>
+          <div class="text_center font_size_15 font_color_99 margin_top_div3">您当前还没有返佣</div>
         </div>
       </div>
     </div>
@@ -95,11 +95,11 @@
                 {{item.name}}
                 <span
                   v-if="item.state == 1"
-                  style="border: 1px solid darkgreen; padding: 1%;font-size: 12px;"
+                  style="border: 1px solid #4A7B67; padding: 1%;font-size: 12px;color:#4A7B67;"
                 >开业</span>
                 <span
                   v-if="item.state == 0"
-                  style="border: 1px solid darkgreen; padding: 1%;font-size: 12px;"
+                  style="border: 1px solid #E6435A; padding: 1%;font-size: 12px;color:#E6435A;"
                 >未开店</span>
               </div>
               <div class="div_with_30" style="margin-left:10%" v-if="item.type == 1">家庭版</div>
@@ -109,10 +109,10 @@
           </div>
         </div>
         <div v-if="getVideoDistriList.length ==  0">
-          <div class="text_center margin_top_div3">
-            <img src="../../assets/images/1581@2x.png" width="72%" alt>
+          <div class="text_center margin_top_div3" style="margin-top:15%;">
+            <img src="../../assets/images/1581@2x.png" width="45%" alt>
           </div>
-          <div class="text_center font_size_15 font_color_99 margin_top_div3">暂无订单</div>
+          <div class="text_center font_size_15 font_color_99 margin_top_div3">您当前还没有返佣</div>
         </div>
       </div>
     </div>
@@ -135,11 +135,11 @@
                 {{item.name}}
                 <span
                   v-if="item.state == 1"
-                  style="border: 1px solid darkgreen; padding: 1%;font-size: 12px;"
+                  style="border: 1px solid #4A7B67; padding: 1%;font-size: 12px;color:#4A7B67;"
                 >开业</span>
                 <span
                   v-if="item.state == 0"
-                  style="border: 1px solid darkgreen; padding: 1%;font-size: 12px;"
+                  style="border: 1px solid #E6435A; padding: 1%;font-size: 12px;color:#E6435A;"
                 >未开店</span>
               </div>
               <div class="div_with_30" style="margin-left:10%" v-if="item.type == 1">家庭版</div>
@@ -149,10 +149,10 @@
           </div>
         </div>
         <div v-if="getOrderDistriList.length ==  0">
-          <div class="text_center margin_top_div3">
-            <img src="../../assets/images/1581@2x.png" width="72%" alt>
+          <div class="text_center margin_top_div3" style="margin-top:15%;">
+            <img src="../../assets/images/1581@2x.png" width="45%" alt>
           </div>
-          <div class="text_center font_size_15 font_color_99 margin_top_div3">暂无订单</div>
+          <div class="text_center font_size_15 font_color_99 margin_top_div3">您当前还没有返佣</div>
         </div>
       </div>
     </div>

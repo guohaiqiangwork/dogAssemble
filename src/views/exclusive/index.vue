@@ -14,7 +14,7 @@
         </div>
         <div style="width:80%" class="font_size_13 font_color_10 margin_left_div2">{{myStoreData.address}}</div>
       </div>
-      <div class="div_display_flex margin_top_div3">
+      <div class="div_display_flex margin_top_div3" style="position:relative;">
         <div class="font_size_16 font_color_10 ex_img_b">
           <img src="../../assets/images/电话 (1)@2x.png" class="img_width_100">
         </div>
@@ -128,12 +128,16 @@ export default {
   border: 1px solid #E6435A;
   color: #E6435A;
   padding: 1%;
-  font-size: 12px
+  font-size: 12px;
+  float: right;
 }
 .bt_ex{
   border: 1px solid #4A7B67;
   color: #4A7B67;
   padding: 1%;
-  font-size: 12px
+  font-size: 12px;
+  position: absolute;
+  right: 0;
+  top: -6px;
 }
 </style>

@@ -21,7 +21,7 @@
           class="div_display_flex font_size_13 font_color_10"
           style="margin-top: 3%;margin-left: 4%;"
         >
-          <div class="s_t"></div>
+          <div class="s_t" style="margin-top:0;"></div>
           <div class="margin_left_div3">
             <datetime
               v-model="valueS"
@@ -233,16 +233,18 @@ export default {
 .personal_title {
   height: 48px;
   font-size: 14px;
-  line-height: 3;
+  line-height: 3.4;
   display: flex;
   color: #908c8c;
   justify-content: space-around;
+  font-weight: 700;
+  position: relative;
 }
 .switchBorder {
   border: 1px solid #d09e56;
   width: 90%;
-  margin-top: 0%;
   background-color: #d09e56;
+  margin-bottom: 0;
   border-radius: 4px;
 }
 .tab_fg_border {
@@ -251,7 +253,7 @@ export default {
 .div_width_45 {
   width: 45%;
   float: left;
-  margin-left: 4%;
+  margin-left: 3.333%;
   margin-top: 3%;
   height: 93px;
 }

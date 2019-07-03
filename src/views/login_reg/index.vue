@@ -189,7 +189,7 @@ export default {
       // this.Logform.password = DesUtils.encode(this.Logform.password,"fruits-app,yuntu,com")
       obj.password = DesUtils.encode(obj.password, "fruits-app,yuntu,com");
       // this.Logform.nickname = ""; this.Logform.headimgurl = "";
-      obj.openId = localStorage.getItem("openId") || 112;
+      obj.openId = localStorage.getItem("openId") || 2229;
       obj.nickname = localStorage.getItem("nickname") || 'fsdf';
       obj.headimgurl = localStorage.getItem("headimgurl") ||'kjlk';
 

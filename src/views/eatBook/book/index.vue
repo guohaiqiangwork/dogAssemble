@@ -7,9 +7,9 @@
                     <slot name='size'></slot>
                 </p>
                 <slot name="content"></slot>
-                <p class="tip-footer"><span>注意事项：</span><span>{{item.notice}}</span></p>
-                <p class="tip-footer"><span>适宜人群：</span><span>{{item.crowd}}</span></p>
-                <p v-if="item.type == 0" class="tip-footer"><span >适应病症：</span><span>{{item.disease}}</span></p>
+                <p class="tip-footer clearfix"><span>注意事项：</span><span>{{item.notice}}</span></p>
+                <p class="tip-footer clearfix"><span>适宜人群：</span><span>{{item.crowd}}</span></p>
+                <p v-if="item.type == 0" class="tip-footer clearfix"><span >适应病症：</span><span>{{item.disease}}</span></p>
             </div>
         <!-- </div> -->
     </div>
@@ -67,6 +67,7 @@ export default {
         .list-name{
             font-size:0.34rem;
             line-height:0.56rem;
+            font-weight: 700;
         }
         .list-name::before{
             content: '';
@@ -89,11 +90,13 @@ export default {
             border-radius: 0.04rem;
             .kind-item{
                 display: inline-block;
-                min-width: 30%;
+                min-width: 33%;
                 // width: 30%;
                 text-align: left;
-               
                 line-height:0.42rem;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
             }
     }
       .before-tag{
@@ -128,8 +131,19 @@ export default {
         }
       }
         .tip-footer{
-            text-indent: 1em;
+            // text-indent: 1em;
+            margin-left: 0.25rem;
             line-height:0.56rem;
+            span{
+                float: left;
+            }
+            span:nth-of-type(2){
+                width: 4rem;
+                
+                // margin-left: 1.5rem;
+                // margin-top: -0.55rem;
+                text-align: left;
+            }
         }
 }
 </style>

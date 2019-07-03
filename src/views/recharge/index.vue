@@ -3,11 +3,11 @@
     <!-- 押金充值 -->
     <div class="recharge_div_b margin_top_div3">
       <div class="div_display_flex padding_top_div6">
-        <div class="div_width_50 margin_left_div6 font_size_16 font_color_1A">押金充值</div>
+        <div class="div_width_50 margin_left_div6 font_size_16 font_color_1A" style="font-weight:700;">押金充值</div>
         <div
           class="div_width_50 text_right margin_right_div6 font_size_14 font_color_4A"
           @click="goToRechargeList(0)"
-        >充值记录</div>
+        >  <span style="text-decoration:underline;">充值记录</span> </div>
       </div>
       <div class="margin_top_div8">
         <input type="text" class="recharge_input_b" placeholder="输入您想充值的金额…">
@@ -17,13 +17,13 @@
       </div>
     </div>
     <!-- 会员充值 -->
-    <div class="recharge_div_b margin_top_div5">
+    <div class="recharge_div_b margin_top_div5" style="margin-top:4%;">
       <div class="div_display_flex padding_top_div6">
-        <div class="div_width_50 margin_left_div6 font_size_16 font_color_1A">会员充值</div>
+        <div class="div_width_50 margin_left_div6 font_size_16 font_color_1A"  style="font-weight:700;">会员充值</div>
         <div
           class="div_width_50 text_right margin_right_div6 font_size_14 font_color_4A"
           @click="goToRechargeList(1)"
-        >充值记录</div>
+        ><span style="text-decoration:underline;">充值记录</span></div>
       </div>
       <div>
         <div class="pass_list_w">
@@ -47,14 +47,14 @@
           class="div_display_flex margin_top_div5"
           v-for="(item,index) in countList"
           :key="index"
-          style="width:50%;"
+          style="width:50%;margin-top:2%;"
         >
           <div
             class="text_center b_t_c"
             :style="{ backgroundColor:(classA  == item.id && item.log ? '#DEE8E3' : ''),width:'90%'}"
             @click="moneyXz(item.id,index,item.topup)"
           >
-            <div class="margin_top_div3 font_color_10 font_size_25">{{item.topup}}</div>
+            <div class="moneyWeight margin_top_div3 font_color_10 font_size_25">{{item.topup}}</div>
             <div
               class="margin_top_div3 font_size_13 font_color_1A padding_bottom_4"
             >充{{item.topup}}返{{item.returnmoney}}元</div>
@@ -64,6 +64,7 @@
       <div>
         <!-- :disabled="ifChoic?true:false" -->
         <input
+        style="margin-top:5%;"
           type="text"
           class="recharge_input_b2 margin_top_div8"
           placeholder="输入其他金额"
@@ -288,6 +289,9 @@ export default {
 </style>
 
 <style scoped>
+.moneyWeight{
+  font-weight: 700;
+}
 .recharge_div_b {
   width: 95%;
   margin-left: 2%;
@@ -347,6 +351,7 @@ export default {
   border: none;
   border-bottom: 1px solid rgb(173, 165, 165);
   margin-left: 4%;
+  background: #fff;
 }
 .width_16 {
   width: 16px;
