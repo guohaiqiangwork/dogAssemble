@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color:#F3F5F8;min-height:600px">
+  <div style="background-color:#F3F5F8;min-height:600px;height:100%;">
     <div class="div_display_flex backgroun_color_fff personal_title">
       <div v-for="(item,index) in  tabList" @click="tabSwitch(item.id)" :key="index">
         <div :style="{color:(switchFlage != item.id ? '' :'#000000')}">{{item.name}}</div>
@@ -487,6 +487,16 @@ export default {
   }
 };
 </script>
+<style>
+.nut-vert-scroll {
+    /* -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: hidden; */
+    height: 500px;
+}
+</style>
+
 <style scoped>
 .personal_title {
   height: 48px;
