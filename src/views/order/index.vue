@@ -414,6 +414,9 @@ export default {
               id: item
             }
           })
+        },
+        query:{
+          switch:this.switchFlage
         }
       });
     },
@@ -487,15 +490,6 @@ export default {
   }
 };
 </script>
-<style>
-.nut-vert-scroll {
-    /* -webkit-box-flex: 1;
-    -webkit-flex: 1;
-    flex: 1;
-    overflow: hidden; */
-    height: 500px;
-}
-</style>
 
 <style scoped>
 .personal_title {

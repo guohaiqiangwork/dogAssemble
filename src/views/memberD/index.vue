@@ -2,10 +2,10 @@
   <div>
     <!-- 会员套餐 展示-->
     <div v-if="memberFalg">
-      <!-- <div class="font_size_12 margin_left_div6 margin_top_div5">
+      <div class="font_size_12 margin_left_div6 margin_top_div5" v-if="userType">
         <img src="../../assets/images/提醒 (3)@2x.png" style="width:19px">
         当前用户为跨店用户
-      </div>-->
+      </div>
       <div class="margin_top_div5">
         <div class="font_size_15 font_color_010 div_display_flex me_d">
           <div class="s_t"></div>
@@ -66,7 +66,7 @@
     </div>
     <!-- 辟谷套餐 -->
     <div v-if="!memberFalg">
-      <div class="font_size_12 margin_left_div6 margin_top_div5" v-if="infoList.userType == '0'">
+      <div class="font_size_12 margin_left_div6 margin_top_div5" v-if="userType">
         <img src="../../assets/images/提醒 (3)@2x.png" style="width:19px">
         当前用户为跨店用户
       </div>
@@ -215,8 +215,13 @@ export default {
       priceHT: "", //会员套餐价格
       orderOverFalge: false, //结束标示
       msgPAW: "",
-      msgLength: 0
+      msgLength: 0,
     };
+  },
+  computed:{
+    userType(){
+      return this.$route.query.transferFlag
+    }
   },
   watch: {
     msgPAW(curVal) {

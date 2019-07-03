@@ -54,7 +54,8 @@ export default {
   data() {
     return {
       memberList: [], //列表数据
-      phone: "" //查询手机号
+      phone: "", //查询手机号
+      transferFlag:false,
     };
   },
   methods: {
@@ -69,6 +70,9 @@ export default {
               item
             }
           })
+        },
+        query:{
+          transferFlag:this.transferFlag
         }
       });
     },
@@ -129,6 +133,9 @@ export default {
           console.log(data);
           if (data.code == 0) {
             this.memberList = data.obj;
+            if (data.obj.type == 3) {
+              this.transferFlag = true;
+            }
           }else{
             var err ={
               'find_none_user':"该用户不存在",

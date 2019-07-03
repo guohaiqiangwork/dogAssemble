@@ -17,7 +17,7 @@
       </div>
     </div>
     <!-- 会员充值 -->
-    <div class="recharge_div_b margin_top_div5" style="margin-top:4%;">
+    <div class="recharge_div_b margin_top_div5" style="margin-top:4%;padding-bottom:1.5rem">
       <div class="div_display_flex padding_top_div6">
         <div class="div_width_50 margin_left_div6 font_size_16 font_color_1A"  style="font-weight:700;">会员充值</div>
         <div
@@ -290,6 +290,7 @@ export default {
         .then(res => {
           if (res.msg == "success") {
             var obj = JSON.parse(res.obj);
+            console.log(obj)
             weiXinPay(
               obj,
               function(val) {

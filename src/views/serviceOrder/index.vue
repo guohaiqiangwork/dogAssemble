@@ -40,6 +40,7 @@
         v-for="(item,index) in huiYList"
         :key="index"
       >
+      <div @click="goToSOrderD('h',item)">
         <div class="div_display_flex margin_top_div5 padding_top_div3 font_size_16">
           <div class="div_width_80 margin_left_div3">{{item.recipe}}</div>
           <div class="div_width_20">{{item.num}}</div>
@@ -51,12 +52,14 @@
         <div class="div_display_flex margin_top_div8 padding_bottom_4 font_size_13">
           <div
             class="div_width_80 margin_left_div2"
-            @click="goToSOrderD('h',item)"
+           
           >适应症：{{item.disease}}</div>
           <div class="div_width_20" v-if="item.state == 0">未开始</div>
           <div class="div_width_20" v-if="item.state == 1">服务中</div>
           <div class="div_width_20" v-if="item.state == 2">已暂停</div>
           <div class="div_width_20" v-if="item.state == 3">已完成</div>
+        </div>
+
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@
   <div>
     <div>
       <div class="pass_list_w">
-        <p v-if="transferFlag" class="red font_size_14">当前用户为跨店会员</p>
+        <!-- <p v-if="transferFlag" class="red font_size_14">当前用户为跨店会员</p> -->
         <div class="search_box">
           <img src="../../assets/images/phone@2x.png" class="width_16">
           <input
@@ -13,7 +13,7 @@
             maxlength="11"
             style="width:100%;height:100%;outline: none;border:none"
           >
-          <span style="max-width: 80px;display: inline-block;height: 38px;flex: 1;white-space: nowrap;line-height: 38px;text-overflow: ellipsis;overflow:hidden;" v-if="checkCustomerName&&this.phone">{{checkCustomerName}}</span>
+          <span style="max-width: 80px;display: inline-block;height: 38px;flex: 1;white-space: nowrap;line-height: 38px;text-overflow: ellipsis;overflow:hidden;min-width: 80px;" v-if="checkCustomerName&&this.phone">{{checkCustomerName}}</span>
           <!-- <span style="width: 50%;" v-if='!checkCustomerName&&this.phone'>未查询到用户</span> -->
         </div>
       </div>
@@ -344,6 +344,7 @@ export default {
     // },
     // 通过手机号查询姓名
     getCheckCustomer(phone) {
+      this.checkCustomerName = "";
       if (this.phone.length != 11) {
         return;
       }
@@ -351,16 +352,17 @@ export default {
         openId: localStorage.getItem("openId"),
         phone: phone
       };
+      
       this.$fetch.post(url.checkCustomer, _obj).then(
         data => {
           if (data.code == 0) {
             this.checkCustomerName = data.obj.name;
-            if (!checkCustomerName && this.phone) {
+            if (!this.checkCustomerName && this.phone) {
               this.$vux.toast.text("未查询到用户");
             }
-            if (data.obj.type == 3) {
-              this.transferFlag = true;
-            }
+            // if (data.obj.type == 3) {
+            //   this.transferFlag = true;
+            // }
           } else {
             alert(data.msg);
           }
@@ -423,6 +425,10 @@ export default {
       if (this.phone.length != 11) {
         this.showPositionValue = true;
         return;
+      }
+      if(this.transferFlag){
+        this.$vux.toast.text('该用户为跨店会员,不能新建套餐');
+        return
       }
       this.newFalge = true;
     }

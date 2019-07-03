@@ -86,29 +86,33 @@ export default {
         });
     },
     // 获取辟谷数据
-    // getItemH() {
-    //   this.$fetch
-    //     .post("/fruits/app/member/getMyBiguOrder", {
-    //       openId: localStorage.getItem("openId"),
-    //       id: this.orderId,
-    //       num: this.num
-    //     })
-    //     .then(res => {
-    //       if (res.code == 0) {
-    //         this.myMemberOrderListB = res.obj;
-    //       } else {
-    //         alert(res.msg);
-    //       }
-    //     });
-    // }
+    getItemB() {
+      this.$fetch
+        .post("/fruits/app/member/getMyBiguOrder", {
+          openId: localStorage.getItem("openId"),
+          id: this.orderId,
+          num: this.num
+        })
+        .then(res => {
+          if (res.code == 0) {
+            this.myMemberOrderListB = res.obj;
+          } else {
+            alert(res.msg);
+          }
+        });
+    }
   },
   created() {
     settitle("套餐详情");
     this.routeParams = JSON.parse(this.$route.params.obj);
-    console.log(this.routeParams.data);
+    // console.log(this.routeParams,'hhkjh');
+    this.num = this.routeParams.data.item.num;
     this.falg = this.routeParams.data.id;
     this.orderId = this.routeParams.data.item.id;
+      // this.num = this.routeParams.data.item.num;
+
     if (this.routeParams.data.item.num) {
+      console.log(454654)
       this.num = this.routeParams.data.item.num;
     }
   },

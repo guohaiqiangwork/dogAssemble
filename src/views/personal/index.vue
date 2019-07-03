@@ -675,6 +675,9 @@ export default {
         openId: localStorage.getItem("openId")
       })
       .then(res => {
+        console.log(res,89080);
+        var state = res.obj.state;
+        localStorage.setItem("state",state);
         this.personalMsg = { ...res.obj };
       });
   },
