@@ -131,7 +131,7 @@
             <!-- class="img_width25" class="img_width_100"-->
             <img src="../../assets/images/1609@2x.png" width="25px"  height="25px">
           </div>
-          <div>切换身份</div>
+          <div>推荐信息</div>
         </div>
       </div>
       <!-- 底部菜单栏 -->
@@ -188,11 +188,11 @@
           </div>
           <div>视频管理</div>
         </div>-->
-        <div class="personal_cd_j text_center" @click="goToPassword">
+        <div class="personal_cd_j text_center" @click="goToSetUp">
           <div class="margin_top28">
             <img src="../../assets/images/1582@2x.png"  width="25px" height="25px">
           </div>
-          <div>修改密码</div>
+          <div>设置中心</div>
         </div>
         <div class="personal_cd_j text_center">
           <div class="margin_top28">

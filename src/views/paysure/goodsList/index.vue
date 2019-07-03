@@ -74,6 +74,7 @@ export default {
         }
     },
     mounted() {
+        settitle('订单详情')
         console.log(this.list)
     },
 }

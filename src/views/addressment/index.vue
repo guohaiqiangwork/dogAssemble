@@ -56,8 +56,18 @@ export default {
   data() {
     return {
       addressList: [
-      ]
+      ],
+      sub:false,
     };
+  },
+    beforeRouteEnter (to, from, next) {
+    if(from.name == 'setUp'){
+      next(vm =>{
+        vm.sub = true;
+      })
+    }else{
+      next();
+    }
   },
   methods: {
     handleEvents() {},
@@ -83,6 +93,9 @@ export default {
       );
     },
     goBack(item){
+      if(this.sub){
+        return
+      }
       console.log(item,'000')
       // this.$router.push('/paysure',{
       //   data:{
