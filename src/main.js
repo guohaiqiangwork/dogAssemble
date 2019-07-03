@@ -33,8 +33,7 @@ window.settitle = settitle;
      return 
    }
    next();
- })
-/* eslint-disable no-new */
+ })/* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,

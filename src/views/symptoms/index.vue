@@ -8,78 +8,76 @@
         placeholder="搜索您想找的配方…"
         v-model="form.name"
         style="width:100%;height:100%;background-color:#EFEFEF; outline: none;border:none"
-        @input="search"
+        @blur="getRecipeList"
       >
       <i></i>
     </div>
-    <div v-if="form.name">
-    <!-- 配方 -->
-    
-    <div class="symptoms_border font_size_14 font_color_1A">
-      <div class="div_display_flex">
-        <div style="  margin-left: -2%;"></div>
-        <div class="margin_left_div3">套餐配方</div>
-      </div>
-      <div class="margin_top_div3 sym_bor">
-        可选用淡竹叶5克、莲子心5克、炒栀子6克、单皮3
-        克，每日一剂即可。
-      </div>
-      <div class="div_display_flex">
-        <div class="backgroun_color_E9 font_color_4A font_size_13 padding_t1_l2">注意事项</div>
-        <div class="font_size_13 font_color_10 margin_left_div3 margin_top_div1">忌酒、忌烟、忌辛辣</div>
-      </div>
-      <div class="div_display_flex margin_top_div3">
-        <div class="backgroun_color_E9 font_color_4A font_size_13 padding_t1_l2">适宜人群</div>
-        <div class="font_size_13 font_color_10 margin_left_div3 margin_top_div1">脾胃不好人群</div>
-      </div>
-      <div class="div_display_flex margin_top_div3">
-        <div class="backgroun_color_E9 font_color_4A font_size_13 padding_t1_l2">适应病症</div>
-        <div class="font_size_13 font_color_10 margin_left_div3 margin_top_div1">糖尿病、高血压</div>
-      </div>
-    </div>
-    <!-- 病症 -->
-    <div class="symptoms_border font_size_14 font_color_1A">
-      <div class="div_display_flex">
-        <div style="width:13px;margin-left:-2%">
-          <img src="../../assets/images/tS@2x.png" class="img_width_100">
-        </div>
-        <div class="margin_left_div2 font_size_14 font_color_4A">贴心小提示</div>
-      </div>
-      <div class="margin_top_div3">多病症需到门店经过营养师面诊，根据对应的进行配餐</div>
-    </div>
-    <!-- 推荐门店 -->
-    <div class="symptoms_border">
-      <div class="div_display_flex">
-        <div style="width:13px;margin-left:-2%">
-          <img src="../../assets/images/门店@2x.png" class="img_width_100">
-        </div>
-        <div class="margin_left_div2 font_size_14 font_color_4A">推荐门店</div>
-      </div>
-
-      <div
-        class="national_list font_color_00 font_size_13 backgroun_color_fff margin_top_div3"
-        v-for="item in [1,3]"
-      >
-        <div class="div_display_flex margin_top_div3">
-          <div class="div_width_70 margin_left_div2">内蒙古包头市昆都仑区钢铁大街店</div>
-          <div class="div_width_30 margin_right_div2 text_right">0.8公里</div>
-        </div>
-        <div class="div_display_flex margin_top_div3">
-          <div class="div_width_70 margin_left_div2">钢铁大街16号</div>
-          <div class="div_width_30 margin_right_div2 text_right" @click="goToMap">
-                <img src="../../assets/images/1440@2x.png" width="12px">
+    <div class="margin_top_div3">
+      <!-- 全部配方 -->
+      <div id="allbook">
+        <div v-for="(item,index) in peiFangList" :key="index">
+          <div class="book-list">
+            <p class="flex-between align-center mb-36">
+              <span class="list-name flex-start align-center">{{item.name}}</span>
+              <slot name="size"></slot>
+            </p>
+            <slot name="content"></slot>
+            <p class="tip-footer">
+              <span>注意事项：</span>
+              <span>{{item.notice}}</span>
+            </p>
+            <p class="tip-footer">
+              <span>适宜人群：</span>
+              <span>{{item.crowd}}</span>
+            </p>
+            <p v-if="item.type == 0" class="tip-footer">
+              <span>适应病症：</span>
+              <span>{{item.disease}}</span>
+            </p>
           </div>
         </div>
-        <div class="div_display_flex margin_top_div3">
-          <div class="div_width_70 margin_left_div2">营业时间</div>
-          <div class="div_width_30 margin_right_div2 text_right">08:30-21:00</div>
-        </div>
-        <div class="div_display_flex margin_top_div3 padding_bottom_4">
-          <div class="div_width_70 margin_left_div2">门店电话</div>
-          <div class="div_width_30 margin_right_div2 text_right">17870987</div>
+        <div class=" backgroun_color_fff" style="border-radius: 8px;padding: 3%;">
+          <div class="div_display_flex">
+            <div class>
+              <img src="../../assets/images/tS@2x.png" width="13px" alt>
+            </div>
+            <div class=" font_color_4A margin_left_div2">贴心小提示</div>
+          </div>
+          <div class=" font_size_14 font_color_1A">
+            多病症需到门店经过营养师面诊，根据对应的
+            进行配餐
+          </div>
         </div>
       </div>
-    </div>
+      <!-- 推荐门店 -->
+      <div class="div_display_flex">
+        <div class="national_list font_color_00 font_size_13 backgroun_color_fff margin_top_div3">
+          <div class="div_display_flex margin_top_div3">
+            <div
+              class="div_width_70 margin_left_div2"
+            >{{recommendStoreList[1].province}}{{recommendStoreList[1].city}}{{recommendStoreList[1].area}}</div>
+            <div
+              class="div_width_30 margin_right_div2 text_right"
+            >{{recommendStoreList[1].distance}}km</div>
+          </div>
+          <div class="div_display_flex margin_top_div3">
+            <div class="div_width_70 margin_left_div2">{{recommendStoreList[1].address}}</div>
+            <div class="div_width_30 margin_right_div2 text_right" @click="goToMap">
+              <img src="../../assets/images/1440@2x.png" width="12px">
+            </div>
+          </div>
+          <div class="div_display_flex margin_top_div3">
+            <div class="div_width_70 margin_left_div2">营业时间</div>
+            <div
+              class="div_width_30 margin_right_div2 text_right"
+            >{{recommendStoreList[1].startTime}}</div>
+          </div>
+          <div class="div_display_flex margin_top_div3 padding_bottom_4">
+            <div class="div_width_70 margin_left_div2">门店电话</div>
+            <div class="div_width_30 margin_right_div2 text_right">{{recommendStoreList[1].phone}}</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -89,19 +87,32 @@ export default {
   name: "symptoms",
   data() {
     return {
-      timer:'',
-      form:{
-        openId:localStorage.getItem("openId"),
-        name:"",
-        size:"10",
-        current:"1"
+      timer: "",
+      form: {
+        openId: "",
+        name: "",
+        size: "10",
+        current: "1"
+      },
+      latitude: "",
+      longitude: "",
+      page: {
+        size: "10",
+        current: "1"
+      },
+      recommendStoreList: "",
+      peiFangList: "",
+      form: {
+        openId: localStorage.getItem("openId"),
+        name: "",
+        size: "10",
+        current: "1"
       }
     };
   },
   methods: {
     // 去地图
     goToMap() {
-      console.log("7897");
       this.$router.push({
         name: "map",
         params: {
@@ -114,28 +125,38 @@ export default {
         }
       });
     },
-    search(val){
+
+    search(val) {
       clearTimeout(this.timer);
-      this.timer = setTimeout(() =>{
-        console.log(this.form.name)
+      this.timer = setTimeout(() => {
+        console.log(this.form.name);
         // this.form.name = val;
         this.getList();
-      },2000);
+      }, 2000);
     },
-    getList(){
-      this.$fetch.post('fruits/app/recipe/getRecipeList',this.form).then(res =>{
-        console.log(res,'dfs')
-        if(res.obj.length){
-          this.$vux.toast.text('暂无数据')
+    //获取数据
+    getRecommendStoreList(item) {
+      let _obj = {
+        openId: localStorage.getItem("openId"),
+        name: item || "",
+        size: this.page.size,
+        current: this.page.current,
+        latitude: this.latitude,
+        longitude: this.longitude
+      };
+      this.$fetch.post(url.getRecommendStoreList, _obj).then(
+        data => {
+          if (data.code == 0) {
+            this.recommendStoreList = data.obj;
+            console.log(this.recommendStoreList);
+          } else {
+            alert(data.msg);
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
         }
-        this.eatBook = res.obj;
-
-      })
-    },
-    getStore(){
-      this.$fetch.post('fruits/app/personal/getRecommendStoreList').then(res =>{
-        console.log(res);
-      })
+      );
     },
     // 未知内容
     setImagePreview() {
@@ -184,6 +205,36 @@ export default {
         }
         (preview.style.display = "none"), document.selection.empty();
       }
+    },
+    //定位获得当前位置信息
+    getMyLocation() {
+      var geolocation = new qq.maps.Geolocation(
+        "JPCBZ-I3W64-FDNUH-XRWFO-MQRFZ-ERBWW",
+        "opo"
+      );
+      geolocation.getIpLocation(this.showPosition, this.showErr);
+    },
+    showPosition(position) {
+      console.log(position);
+      this.latitude = position.lat; //唯独
+      this.longitude = position.lng; //进度
+      this.city = position.city;
+      this.getRecommendStoreList(); //获取全国门店
+    },
+    showErr() {
+      console.log("定位失败");
+      this.getMyLocation(); //定位失败再请求定位，测试使用
+    },
+    //获取全部配方
+    getRecipeList() {
+      this.$fetch
+        .post("fruits/app/recipe/getRecipeList", this.form)
+        .then(res => {
+          if (res.code == 0) {
+            this.peiFangList = res.obj;
+            console.log(this.peiFangList);
+          }
+        });
     }
   },
   created() {
@@ -191,7 +242,9 @@ export default {
   },
 
   mounted() {
-    this.getStore();
+    // this.getStore();
+    this.getRecipeList();
+    this.getMyLocation();
     // this.getList()
     console.log("病症检测");
   }
@@ -235,5 +288,101 @@ export default {
 }
 .national_list {
   border-bottom: 1px solid #e9e9e9;
+}
+.national_list {
+  width: 90%;
+  margin-left: 5%;
+  border: 1px solid #e9e9e9;
+  border-radius: 8px;
+}
+.national_list_w {
+  width: 93%;
+  margin-left: 2%;
+  border: 1px solid #e9e9e9;
+  border-radius: 8px;
+}
+</style>
+<style lang="less">
+#allbook {
+  padding: 0 0.4rem;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  background: #f3f5f8;
+
+  .book-list {
+    padding: 0.3rem 0.4rem;
+    background: #fff;
+    border-radius: 0.12rem;
+    margin-bottom: 0.2rem;
+
+    .mb-36 {
+      margin-bottom: 0.36rem;
+    }
+    .list-name {
+      font-size: 0.34rem;
+      line-height: 0.56rem;
+    }
+    .list-name::before {
+      content: "";
+      display: inline-block;
+      width: 0.08rem;
+      height: 0.4rem;
+      margin-right: 0.18rem;
+      background: rgba(74, 123, 103, 1);
+      border-radius: 0.04rem;
+    }
+    .kind-list {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 0.2rem 0.45rem;
+      margin: 0 0 0.24rem;
+      background: #e9efec;
+      color: #4a7b67;
+      border-radius: 0.04rem;
+      .kind-item {
+        display: inline-block;
+        min-width: 30%;
+        // width: 30%;
+        text-align: left;
+
+        line-height: 0.42rem;
+      }
+    }
+    .before-tag {
+      position: relative;
+    }
+    .before-tag::before {
+      content: "大杯";
+      display: inline-block;
+      position: absolute;
+      top: -0.2rem;
+      left: 0;
+      width: 0.72rem;
+      border: 1px solid;
+      height: 0.4rem;
+      color: #fff;
+      text-align: center;
+      background: rgb(74, 123, 103);
+      border-radius: 0 0.12rem;
+    }
+    .before-tag-sm::before {
+      content: "小杯";
+      display: inline-block;
+      position: absolute;
+      top: -0.2rem;
+      left: 0;
+      width: 0.72rem;
+      border: 1px solid;
+      height: 0.4rem;
+      text-align: center;
+      color: #fff;
+      background: rgb(74, 123, 103);
+    }
+  }
+  .tip-footer {
+    text-indent: 1em;
+    line-height: 0.56rem;
+  }
 }
 </style>

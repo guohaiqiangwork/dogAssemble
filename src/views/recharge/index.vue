@@ -10,10 +10,10 @@
         >  <span style="text-decoration:underline;">充值记录</span> </div>
       </div>
       <div class="margin_top_div8">
-        <input type="text" class="recharge_input_b" placeholder="输入您想充值的金额…">
+        <input type="text" class="recharge_input_b" placeholder="输入您想充值的金额…" v-model="amountMoney">
       </div>
       <div class="div_display_flex margin_top_div6 padding_bottom_4">
-        <div class="recharge_button_b">立即充值</div>
+        <div class="recharge_button_b" @click="getDepositRecharge">立即充值</div>
       </div>
     </div>
     <!-- 会员充值 -->
@@ -37,6 +37,7 @@
               v-model="phone"
             >
             <i
+              v-if="phone"
               style="display: inline-block;height: 0.7rem;width: 120px;line-height: 0.7rem;"
             >{{name}}</i>
           </div>
@@ -86,8 +87,8 @@
 </template>
 <script>
 import url from "../../bin/url";
+import weiXinPay from "../../bin/weiXinPay";
 import { Confirm } from "vux";
-
 export default {
   components: {
     Confirm
@@ -112,7 +113,8 @@ export default {
         payType: ""
       },
       ifHas: false, //判断是否有手机号
-      ifChoic: false
+      ifChoic: false,
+      amountMoney: "" //押金充值金额
     };
   },
   methods: {
@@ -147,8 +149,8 @@ export default {
     },
     // 去充值记录页面
     goToRechargeList: function(e) {
-      if(e ==0){
-         this.$router.push({
+      if (e == 0) {
+        this.$router.push({
           name: "rechargeList",
           params: {
             obj: JSON.stringify({
@@ -159,6 +161,7 @@ export default {
             })
           }
         });
+        return;
       }
       if (this.ifHas) {
         this.$router.push({
@@ -168,7 +171,7 @@ export default {
               type: "profession",
               data: {
                 phone: this.phone,
-                type:e
+                type: e
               }
             })
           }
@@ -215,11 +218,12 @@ export default {
     },
     // 确认充值
     rechargeq(val) {
+      this.form.type = this.amount ? "1" : "0";
       this.form.amount = this.amount ? this.amount : this.form.amount;
       if (this.ifHas) {
         this.rechargeFalge = true;
         this.form.payType = val;
-        this.form.type = this.form.amount ? "1" : "0";
+
         this.form.phone = this.phone;
       } else {
         this.$vux.toast.text("请输入正确的手机号");
@@ -241,6 +245,7 @@ export default {
         })
         .then(res => {
           this.$vux.loading.hide();
+          this.name = "";
           if (res.msg == "find_none_user") {
             this.$vux.toast.text("没有找到该用户");
           }
@@ -255,6 +260,10 @@ export default {
     },
     //查找
     phoneSearch() {
+      if (!this.phone) {
+        clearTimeout(this.timer);
+        return;
+      }
       var reg = /^1[3,4,5,6,7,8,9]\d{9}$/;
       if (this.timer) {
         clearTimeout(this.timer);
@@ -266,9 +275,31 @@ export default {
             text: "查询中"
           });
         } else {
+          this.name = "";
           this.$vux.toast.text("请输入正确的手机号");
         }
       }, 2500);
+    },
+    // 押金充值
+    getDepositRecharge() {
+      this.$fetch
+        .post("/fruits/app/personal/depositRecharge", {
+          openId: localStorage.getItem("openId"),
+          amount: this.amountMoney
+        })
+        .then(res => {
+          if (res.msg == "success") {
+            var obj = JSON.parse(res.obj);
+            weiXinPay(
+              obj,
+              function(val) {
+                alert(val);
+              },
+              function(err) {}
+            );
+          } else {
+          }
+        });
     }
   },
   created() {

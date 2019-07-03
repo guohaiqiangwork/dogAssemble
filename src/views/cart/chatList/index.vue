@@ -111,20 +111,17 @@ export default {
         },
         //传递购买数量
         change(item,n,arr){
-             console.log(item,'iipipip');
-          this.cartDate.id = item.id;
+           
+            this.cartDate.id = item.id;
             this.cartDate.num = item.count;
             if(item.count <= 0){
-                // console.log(this.goodsNum);
-                //  this.cartDate.id = null;
                 this.chart(item,n);
                 this.cartDate.num = 0;
-                this.postCart(n);
+                this.postCart(n,item);
                 this.bottomMsg.checkcount--;
                 this.$emit('changeNum',this.goodsNum);
-                // if(){}s
-                // this.charList.splice(n,1);
                 return
+                
             }else{
                 this.chart(item,n);
             }
@@ -137,80 +134,32 @@ export default {
             // this.cartDate.num = item.count;
             this.bottomMsg.totalprice = this.goodsPrice;
             // this.postCart();
-            this.saveCart();
+            // this.saveCart();
             this.$emit('changeNum',this.goodsNum);
         },
         //获取购买商品的邮费
         getCart(arr = []){
-            
-            console.log(arr,'lll')
             this.$fetch.post("fruits/app/cart/getCart",{openId:localStorage.getItem("openId")}).then(res =>{
-                // console.log(res,'dfsf')
+                console.log(res,'dfsf')
                 res.obj.forEach((e,i) => {
-                   
-                    //  if(e.indexOf(this.charList))
-                   
-                   
+                    if(e.state ==1){
+                        this.cartDate.num = 0;
+                        this.cartDate.id = e.id;
+                        this.saveCart();
+                        return
+                    }
                     e.money = 0;
                     e.price = e.price.toFixed(2);
-                    if(!arr.length){
-                        e.ischeck = false;
-                    }
+                    e.ischeck = false;
                     if(arr.length){
-                        // debugger
-                        console.log(arr,'jlkjllkjl')
                         arr.forEach((item,ind) =>{
                             if(item.id == e.id){
                                 e.ischeck = true;
-                                // arr.splice(ind,1)
-                                // console.log(13)
                             }
-                            // else{
-                            //     if(item.id!=e.id){
-                            //         // e.ischeck = false;
-                            //     }
-                               
-                            // }
                         })
-                        // if(arr[i]){
-                        //     console.log(arr,'0000000')
-                        //     if( e.id==arr[i].id ){
-                                
-                        //         console.log(e,342)
-                        //     }
-                        //     // else{
-                                
-                        //     }else{
-                        //     }
-                        // }
-                        // console.log(arr[i],'jhjlk')
-                    }else{
-                        // if(!arr.length){
-                        //      e.ischeck = false;
-                        // }
-                       
                     }
-                
-                    // arr.filter(a =>{
-                    //     console.log(a.id == e.id,'kjkl')
-                    //     if(a.id == e.id){
-                    //         e.ischeck = true;
-                    //     }else{
-                    //         e.ischeck = false;
-                    //     }
-                    // })
                 });
-               
-                console.log(res.obj)
-                //  if(arr){
-                //     arr.map(e =>{
-                //         res.obj.forEach(a =>{
-                //             if(e.id == a.id){
-                //                 e.ischeck = true;
-                //             }
-                //         })
-                //     })
-                //  }
+              
                  this.charList = res.obj;
                  this.$emit('package',res.attributes)
             })
@@ -226,16 +175,22 @@ export default {
             this.$router.push('/home');
         },
         //给后台存储购物车数量
-        postCart(n){
+        postCart(n,item){
             // console.log(n,9879);
             var arr =[];
-            arr = [...this.charList];
-            arr.splice(n,1);
-            arr.forEach((e,i) =>{
-                if(!e.ischeck){
-                    arr.splice(i,1)
+            // arr = [...this.charList];
+            this.charList.forEach(e =>{
+                if(e.ischeck){
+                    arr.push(e)
                 }
             })
+            // arr.splice(n,1);
+            // console.log(arr,'jhj');
+            // arr.forEach((e,i) =>{
+            //     if(!e.ischeck){
+            //         arr.splice(i,1)
+            //     }
+            // })
             // console.log(arr,8898)
             // this.charList = [...arr]
             // this.charList.forEach(e =>{
@@ -246,16 +201,14 @@ export default {
             //         arr.push(e);
             //     }
             // })
-            
+            // {id:item.id,num:item.count,openId:localStorage.getItem('openId')}
             this.$fetch.post('fruits/app/cart/changeNum',this.cartDate).then(res =>{
-                console.log(res);
-                // this.charList = [...arr]
+                console.log(res,'ppp');
                 this.getCart(arr);
             })
         },
         saveCart(){
             this.$fetch.post('fruits/app/cart/changeNum',this.cartDate).then(res =>{
-               
             })
         }
     },

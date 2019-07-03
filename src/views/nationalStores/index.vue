@@ -113,7 +113,7 @@ export default {
   data() {
     return {
       item: 0,
-      timer: "",
+      timer:"",
       isDefault: "",
       classA: "1", //是否有单选框
       nationSFalg: false, //地址确认
@@ -207,8 +207,8 @@ export default {
         name: item || "",
         size: this.page.size,
         current: this.page.current,
-        latitude: this.latitude,
-        longitude: this.longitude
+        latitude:this.latitude,
+        longitude:this.longitude
       };
       this.$fetch.post(url.getRecommendStoreList, _obj).then(
         data => {
@@ -238,16 +238,13 @@ export default {
     //第一部分
     //定位获得当前位置信息
     getMyLocation() {
-      var geolocation = new qq.maps.Geolocation(
-        "JPCBZ-I3W64-FDNUH-XRWFO-MQRFZ-ERBWW",
-        "opo"
-      );
+      var geolocation = new qq.maps.Geolocation("JPCBZ-I3W64-FDNUH-XRWFO-MQRFZ-ERBWW", "opo");
       geolocation.getIpLocation(this.showPosition, this.showErr);
     },
     showPosition(position) {
       console.log(position);
-      this.latitude = position.lat; //唯独
-      this.longitude = position.lng; //进度
+      this.latitude = position.lat;//唯独
+      this.longitude = position.lng;//进度
       this.city = position.city;
       this.getRecommendStoreList(); //获取全国门店
     },

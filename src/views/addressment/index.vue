@@ -71,6 +71,7 @@ export default {
       this.$fetch.post(url.deleteAddress, _obj).then(
         data => {
           if (data.code == 0) {
+            this.$vux.toast.text('地址删除成功')
             this.getAddress(); //刷新列表
           }else{
              alert(data.msg)
