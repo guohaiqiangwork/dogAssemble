@@ -11,9 +11,9 @@
         </div>
         <div class="address_btm">
             <div class="address_item flex_between"  @click="showAddress = true">
-                <x-input label-width="5em" v-model="address" :title='`<span style="${style}">所在城市</span>`' disabled placeholder="请选择您所在的城市" keyboard="number" ></x-input>
+                <x-input label-width="5em" v-model="address"   :class="[address?'font-color' :'']" :title='`<span style="${style}">所在城市</span>`' disabled placeholder="请选择您所在的城市" keyboard="number" ></x-input>
                 <x-icon type="ios-arrow-right" class="icon_middle"></x-icon>
-                <x-address v-show="false" @on-hide="logHide" @on-show="logShow"  :title="title" v-model="addressVal" :list="addressData" @on-shadow-change="onShadowChange" placeholder="请选择地址" inline-desc="可以设置placeholder" :show.sync="showAddress"></x-address>
+                <x-address v-show="false" @on-hide="logHide" @on-show="logShow"  :title="title" v-model="addressVal"   :list="addressData" @on-shadow-change="onShadowChange" placeholder="请选择地址" inline-desc="可以设置placeholder" :show.sync="showAddress"></x-address>
             </div>
             <div class="address_item">
             
@@ -222,11 +222,10 @@ export default {
 </script>
 <style lang="less">
 @switch-checked-bg-color: #000000;
-//   .weui-input .weui-input {
-//     text-fill-color: #333;
-//     -webkit-text-fill-color: #333;
-//     opacity: 1;
-//     }
+.font-color.vux-x-input.disabled .weui-input{
+   -webkit-text-fill-color: #333 !important;
+  color: #333 !important;
+}
 #opt_address {
   width: 100%;
   height: 100%;

@@ -647,17 +647,8 @@ export default {
     },
     // 修改密码
     goToPassword() {
-      this.$router.push({
-        name: "changePassword",
-        params: {
-          obj: JSON.stringify({
-            type: "profession",
-            data: {
-              id: "蚕丝"
-            }
-          })
-        }
-      });
+      this.$router.push("/changePassword/"+1);
+      
     },
     // 获取验证码
     getAuthCode: function() {

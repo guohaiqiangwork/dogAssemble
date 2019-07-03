@@ -70,17 +70,19 @@ export default {
   methods: {
     //   去修改密码
     goToPassword() {
-      this.$router.push({
-        name: "changePassword",
-        params: {
-          obj: JSON.stringify({
-            type: "profession",
-            data: {
-              id: "参数"
-            }
-          })
-        }
-      });
+      this.$router.push("/changePassword/"+1);
+
+      // this.$router.push({
+      //   name: "changePassword",
+      //   params: {
+      //     obj: JSON.stringify({
+      //       type: "profession",
+      //       data: {
+      //         id: "参数"
+      //       }
+      //     })
+      //   }
+      // });
     },
     Confirm(){
       this.confirmShow = true;

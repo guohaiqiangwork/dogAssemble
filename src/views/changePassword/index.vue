@@ -39,7 +39,7 @@
       <div class="search_box">
         <img src="../../assets/images/密码@2x.png" class="width_16">
         <input
-          type="text"
+          type="password"
           v-model="password"
           maxlength="6"
           placeholder="请设置您的新密码"
@@ -128,8 +128,12 @@ export default {
     }
   },
   created() {
-    settitle("忘记密码");
     this.routeParams = JSON.parse(this.$route.params.obj);
+    if(this.routeParams ==1){
+      settitle("修改密码");
+    }else{
+      settitle("忘记密码");
+    }
   },
 
   mounted() {}

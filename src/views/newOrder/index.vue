@@ -13,7 +13,7 @@
             maxlength="11"
             style="width:100%;height:100%;outline: none;border:none"
           >
-          <span style="width: 20%;" v-if="checkCustomerName&&this.phone">{{checkCustomerName}}</span>
+          <span style="max-width: 80px;display: inline-block;height: 38px;flex: 1;white-space: nowrap;line-height: 38px;text-overflow: ellipsis;overflow:hidden;" v-if="checkCustomerName&&this.phone">{{checkCustomerName}}</span>
           <!-- <span style="width: 50%;" v-if='!checkCustomerName&&this.phone'>未查询到用户</span> -->
         </div>
       </div>
@@ -59,7 +59,7 @@
       <div class="margin_top_div5">
         <span class="font_size_14 font_color_1A margin_left_div6">购买天数：</span>
         <select v-model="selected" @change="getMemberRecipeDay">
-          <option v-for="option in recipeList" :value="option">{{ option.recipe }}</option>
+          <option v-for="(option,index) in recipeList" :key="index" :value="option">{{ option.recipe }}</option>
         </select>
       </div>
       <div class="margin_top_div5 font_size_11 div_display_flex">
@@ -221,12 +221,15 @@ export default {
     change(value) {
       this.startTime = value;
       console.log(this.memberID);
-      dateTemp = value;
-      var dateTemp = dateTemp.split("-");
-      var nDate = new Date(dateTemp[1] + "-" + dateTemp[2] + "-" + dateTemp[0]); //转换为MM-DD-YYYY格式
+      var dateTemp = value;
+      var dataTemp = dateTemp.replace(/\-/g, "/");
+      // var nDate = new Date(dateTemp[1] + "-" + dateTemp[2] + "-" + dateTemp[0]); //转换为MM-DD-YYYY格式
+      var nDate = new Date(dataTemp); //转换为MM-DD-YYYY格式
+   
       var millSeconds =
         Math.abs(nDate) + this.memberIDNumber * 24 * 60 * 60 * 1000;
       var rDate = new Date(millSeconds);
+      
       var year = rDate.getFullYear();
       var month = rDate.getMonth() + 1;
       if (month < 10) month = "0" + month;

@@ -276,8 +276,7 @@ export default {
       });
     },
     editPass() {
-      console.log('dfs')
-      this.$router.push("/changePassword/:obj", { obj: 1 });
+      this.$router.push("/changePassword/"+0);
     },
     regTest() {
       this.$router.push("/login/2");

@@ -258,6 +258,7 @@ export default {
     }
   },
   mounted() {
+    settitle('确认订单');
     console.log(this.option,'ppp')
     //  获取邮费
     this.$fetch
