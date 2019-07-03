@@ -114,7 +114,7 @@ export default {
         data => {
           if (data.code == 0) {
             // 刷新地址列表
-            this.$router.push('/addressment')
+            this.$router.push('/addressment?data='+this.$route.query.data+'&count='+this.$route.query.count+'&price='+this.$route.query.price)
           }else{
              alert(data.msg)
           }

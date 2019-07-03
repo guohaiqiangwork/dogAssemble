@@ -87,9 +87,9 @@ export default {
           type: 2
         })
         .then(res => {
-          console.log(res);
           if(res.msg == "find_none_user"){
             clearInterval(auth_timetimer);
+            this.sendAuthCode = true;
             this.tip = "获取验证码";
             this.$vux.toast.text("当前账号不存在");
             return
