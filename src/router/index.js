@@ -563,7 +563,7 @@ export default new Router({
     },
     {
       // 共享奖金
-      path: '/sharedBonus',
+      path: '/sharedBonus/:obj',
       name: 'sharedBonus',
       meta: {
         title: '共享奖金'
