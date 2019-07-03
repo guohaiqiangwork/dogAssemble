@@ -25,7 +25,7 @@
         </div>
       </div>
     </div>
-    <div
+    <div @click="getSharedBonus"
       class="health_title_f font_size_14 font_color_76 text_center"
       style="margin-top:-8%"
     >赶快邀请好友共赢健康奖金>></div>
@@ -292,6 +292,27 @@ export default {
     // 健康奖金商城
     getOrderDistri() {
       let _obj = {
+        openId: localStorage.getItem("openId"),
+        name: "",
+        size: "10",
+        current: "1"
+      };
+      this.$fetch.post(url.getOrderDistri, _obj).then(
+        data => {
+          if (data.code == 0) {
+            this.getOrderDistriList = data.obj;
+          }else{
+             alert(data.msg)
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
+        }
+      );
+    },
+    // 获取分享参数
+    getSharedBonus(){
+       let _obj = {
         openId: localStorage.getItem("openId"),
         name: "",
         size: "10",

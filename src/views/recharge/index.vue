@@ -27,7 +27,7 @@
       </div>
       <div>
         <div class="pass_list_w">
-          <div class="search_box">
+          <div class="search_box" style="border-radius:none">
             <img src="../../assets/images/phone@2x.png" class="width_16">
             <input
               type="text"

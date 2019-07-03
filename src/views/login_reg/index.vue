@@ -150,7 +150,7 @@ export default {
       maskValue: "",
       codeValue: "获取验证码",
       form: {
-        openId:'',
+        openId: "",
         password: "",
         name: "",
         phone: "",
@@ -159,7 +159,7 @@ export default {
         nickname: ""
       },
       Logform: {
-        openId: '',
+        openId: "",
         password: "",
         phone: "",
         nickname: "",
@@ -189,10 +189,9 @@ export default {
       // this.Logform.password = DesUtils.encode(this.Logform.password,"fruits-app,yuntu,com")
       obj.password = DesUtils.encode(obj.password, "fruits-app,yuntu,com");
 
-      // this.Logform.nickname = ""; this.Logform.headimgurl = "";
-      // obj.openId = localStorage.getItem("openId") || 2229;
-      // obj.nickname = localStorage.getItem("nickname") || 'fsdf';
-      // obj.headimgurl = localStorage.getItem("headimgurl") ||'kjlk';
+      obj.openId = localStorage.getItem("openId");
+      obj.nickname = localStorage.getItem("nickname");
+      obj.headimgurl = localStorage.getItem("headimgurl");
 
       this.$fetch.post("fruits/app/user/login", obj).then(res => {
         this.btnload = false;
@@ -277,7 +276,7 @@ export default {
       });
     },
     editPass() {
-      this.$router.push("/changePassword/"+0);
+      this.$router.push("/changePassword/" + 0);
     },
     regTest() {
       this.$router.push("/login/2");
@@ -336,27 +335,27 @@ export default {
     //   return null;
     // },
     //获取用户openId
-    getOpenId() {
-      var data = {
-        code: this.code,
-        state: ""
-      };
-      this.$fetch.post(url.getOpenId, data).then(res => {
-        console.log(res, "dfsf");
-      });
-    },
-    // getAddress() {
-    //   if (localStorage.getItem("openId") == "null") {
-    //     this.getoptnId = "";
-    //   } else {
-    //     this.getoptnId = localStorage.getItem("openId");
-    //   }
-    //   this.$fetch
-    //     .post("fruits/app/cart/getAddressList", {
-    //       openId: this.getoptnId
-    //     })
-    //     .then(res => {});
+    // getOpenId() {
+    //   var data = {
+    //     code: this.code,
+    //     state: ""
+    //   };
+    //   this.$fetch.post(url.getOpenId, data).then(res => {
+    //  alert(res.msg)
+    //   });
     // },
+    getAddress() {
+      if (localStorage.getItem("openId") == "null") {
+        this.getoptnId = "";
+      } else {
+        this.getoptnId = localStorage.getItem("openId");
+      }
+      this.$fetch
+        .post("fruits/app/cart/getAddressList", {
+          openId: this.getoptnId
+        })
+        .then(res => {});
+    },
     // 协议
     goToPrivacyProtocol() {
       this.$router.push({
@@ -372,15 +371,14 @@ export default {
     settitle("注册与登录");
   },
   mounted() {
-    this.getOpenId(); //获取用户open ID
+    // this.getOpenId(); //获取用户open ID
     if (this.$route.query["parm"]) {
       var obj = JSON.parse(this.$route.query["parm"]);
       this.Logform.phone = obj.phone;
       this.Logform.password = obj.password;
       this.Logform.openId = obj.openId;
     }
-   
-    // this.getAddress();
+    this.getAddress();
   }
 };
 </script>
