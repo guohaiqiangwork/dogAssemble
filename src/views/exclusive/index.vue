@@ -157,9 +157,9 @@ export default {
  border: 1px solid #4A7B67;
   color: #4A7B67;
   padding: 1%;
-  font-size: 12px
   font-size: 12px;
   position: absolute;
   right: 0;
-  top: -6px;}
+  top: -6px;
+}
 </style>
