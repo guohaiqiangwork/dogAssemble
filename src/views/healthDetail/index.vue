@@ -4,7 +4,7 @@
       <i class="weui-icon-search search_icon"></i>
       <input
         type="text"
-        placeholder="请输入手机号"
+        placeholder="搜索您找的店铺"
         v-on:input="getWholeList(name)"
         v-model="name"
         maxlength="11"
@@ -66,6 +66,8 @@
 <script>
 import url from "../../bin/url";
 import { Scroller } from "vux";
+import { setTimeout, clearTimeout } from "timers";
+let timer;
 export default {
   components: {
     Scroller
@@ -89,8 +91,20 @@ export default {
     // 列表查询
     getWholeList(item) {
       this.itemName = item;
-      this.getListF();
+        // this.getListF();
+      if (timer) {
+        window.clearTimeout(timer._id);
+      }
+      timer = setTimeout(() => {
+        console.log( this.itemName)
+        this.getListF();
+        // this.filterList(this.list,this.iptVal);
+        timer = null;
+      }, 2000);
+      // this.itemName = item;
+      // this.getListF();
     },
+
     // 健康奖金--推荐返佣列表
     getRecommendB() {
       let _obj = {
@@ -102,13 +116,13 @@ export default {
       this.$fetch.post(url.getRecommendB, _obj).then(
         data => {
           if (data.code == 0) {
-            if (this.getRecommendBList.length == 0) {
+            // if (this.getRecommendBList.length == 0) {
               this.getRecommendBList = data.obj;
-            } else {
-              this.getRecommendBList.concat(data.obj);
-            }
-          }else{
-             alert(data.msg)
+            // } else {
+              // this.getRecommendBList.concat(data.obj);
+            // }
+          } else {
+            alert(data.msg);
           }
         },
         err => {
@@ -132,8 +146,8 @@ export default {
             } else {
               this.getVideoDistriList.concat(data.obj);
             }
-          }else{
-             alert(data.msg)
+          } else {
+            alert(data.msg);
           }
         },
         err => {
@@ -157,8 +171,8 @@ export default {
             } else {
               this.getOrderDistriList.concat(data.obj);
             }
-          }else{
-             alert(data.msg)
+          } else {
+            alert(data.msg);
           }
         },
         err => {
