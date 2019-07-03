@@ -1,5 +1,13 @@
 <template>
   <div>
+    <!-- 下拉菜单 -->
+    <actionsheet
+      v-model="showAddress1"
+      :menus="menu7"
+      @on-click-menu="click"
+      @on-after-hide="log()"
+      @on-after-show="log()"
+    ></actionsheet>
     <!-- 第一部分 -->
     <div>
       <div class="margin_top_div4 margin_left_div3 font_size_16 font_color_1A">基本信息</div>
@@ -12,7 +20,7 @@
       <div class="div_display_flex margin_left_div3 margin_top_div5">
         <div class="div_width_25 font_size_14 font_color_1A">手机号：</div>
         <div class="div_width_70">
-          <input type="text" placeholder="请输入手机号" v-model="recommendList.linkPhone">
+          <input type="text" placeholder="请输入手机号" maxlength="11" v-model="recommendList.linkPhone">
         </div>
       </div>
       <div class="div_display_flex margin_left_div3 margin_top_div5">
@@ -23,12 +31,13 @@
       </div>
       <div class="div_display_flex margin_left_div3 margin_top_div5">
         <div class="div_width_25 font_size_14 font_color_1A">门店类型：</div>
-        <div class="div_width_70">
-          <input type="text" placeholder="请输入门店类型" v-model="recommendList.type">
+        <div class="div_width_70" @click="showAddress1 = true">
+          <input type="text" placeholder="请输入门店类型" v-model="shopType">
+          <img src="../../assets/images/1599@2x.png" class="img_left_jian" alt>
         </div>
       </div>
       <div class="div_display_flex margin_left_div3 margin_top_div5">
-        <div class="div_width_25 font_size_14 font_color_1A">所属地区：</div>
+        <div class="div_width_25 font_size_14 font_color_1A">所属地区</div>
         <div class="div_width_70" @click="showAddress = true">
           <x-address
             v-show="false"
@@ -42,7 +51,8 @@
             inline-desc="可以设置placeholder"
             :show.sync="showAddress"
           ></x-address>
-          <!-- <input type="text" placeholder="请选择店铺所在地区 " v-model="recommendList.aname1"> -->
+          <input type="text" placeholder="请选择店铺所在地区 " v-model="addressDP">
+          <img src="../../assets/images/1599@2x.png" class="img_left_jian" alt>
         </div>
       </div>
     </div>
@@ -89,7 +99,7 @@
           <!-- <div class="up_div">
             <img src="../../assets/images/Bluetooth.png" alt>
           </div>-->
-          <div class="img_up_list">
+          <div class="img_up_list" @click="chooseType">
             <img src="../../assets/images/000@2x.png" width="20px" style="margin-top:25%" alt>
           </div>
         </div>
@@ -102,46 +112,46 @@
             style="color:#242E42;margin-left:1%"
           >图片上传类型：jpg、png、gif ; 最多10张；文件大小为5M</div>
         </div>
-        <form enctype="multipart/form-data" name="fileinfo" id="myForm">
-          <input
-            @change="fileChange($event)"
-            type="file"
-            id="upload_file"
-            multiple
-            style="display: none"
-          >
-        </form>
-        <div class="add" @click="chooseType">
+        <!-- <form enctype="multipart/form-data" name="fileinfo" id="myForm"> -->
+        <input
+          @change="fileChange($event)"
+          type="file"
+          id="upload_file"
+          multiple
+          style="display: none"
+        >
+        <!-- </form> -->
+        <!-- <div class="add" @click="chooseType">
           <div class="add-image" align="center">
-            <!--按钮中的图片是一个icon字体图标 -->
-            <i class="icon-camera"></i>
             <p class="font13">添加图片</p>
           </div>
-        </div>
+        </div>-->
         <div class="add-img" v-show="imgList.length">
-          <p class="font14">
+          <!-- <p class="font14">
             图片(最多10张，还可上传
             <span v-text="6-imgList.length"></span>张)
-          </p>
+          </p>-->
           <ul class="img-list">
-            <li v-for="(url,index) in imgList" :key="index">
+            <li v-for="(url,index) in imgList" :key="index" style="width:25%">
               <!-- <img
               class="del"
               src="http://img.shtml.net/XGaC5nwBzmaeMPm0J-H12X-G3zjUOlYZmnX0J-H1wPM3gKpTqvYekJohZzYPGROtBz0J-H1wT4uAGgZV.jpg"
               @click.stop="delImg(index)"
               >-->
               <!-- //del删除样式，icon字体图标需要自己找哦 -->
-              <img :src="url.file.src" @click.stop="delImg(index)">
+              <img :src="url.file.src" @click.stop="delImg(index)" width="25px">
             </li>
           </ul>
         </div>
       </div>
       <!-- 确认 -->
-      <div
-        class="backgroun_color_4A font_color_ff font_size16 text_center"
-        style="line-height:3"
-        @click="getRegister"
-      >确认</div>
+      <div>
+        <div
+          class="backgroun_color_4A font_color_ff font_size16 text_center"
+          style="line-height:3 ;float: left;width: 100%;"
+          @click="getRegister"
+        >确认</div>
+      </div>
     </div>
   </div>
 </template>
@@ -151,12 +161,14 @@ import axios from "axios";
 import {
   XAddress,
   ChinaAddressV4Data,
-  Value2nameFilter as value2name
+  Value2nameFilter as value2name,
+  Actionsheet
 } from "vux";
 export default {
   name: "recommend",
   components: {
-    XAddress
+    XAddress,
+    Actionsheet
   },
   data() {
     return {
@@ -167,7 +179,6 @@ export default {
       tempImgs: [],
       recommendList: {
         name: "", //商户名称
-        aname1: "",
         type: "", //0：店铺果蔬吧，1：家庭果蔬吧）
         linkman: "", //联系人
         linkPhone: "", //手机号
@@ -186,34 +197,52 @@ export default {
       title: "",
       addressData: ChinaAddressV4Data,
       showAddress: false,
-      addressVal: []
+      showAddress1: false,
+      addressVal: [],
+      picIds: [],
+      addressDP: "",
+      menu7: {
+        menu1: "店铺果蔬吧",
+        menu2: "家庭果蔬吧"
+      },
+      shopType: ""
     };
   },
   methods: {
+    // 地址选择
     logHide(str) {
       if (str) {
-        console.log(this.addressVal, 9999);
-        console.log(this.address);
-        this.address = value2name(this.addressVal, ChinaAddressV4Data);
-        this.addressF = this.address.split(" ");
+        this.addressDP = value2name(this.addressVal, ChinaAddressV4Data);
+        // this.addressF = this.address.split(" ");
       }
+    },
+    log(str) {
+      console.log(str);
+    },
+    // 下拉菜单
+    click(key) {
+      if (key == "menu1") {
+        this.recommendList.type = 0;
+        this.shopType = "店铺果蔬吧";
+      } else {
+        this.recommendList.type = 1;
+        this.shopType = "家庭果蔬吧";
+      }
+      console.log(key);
+      // console.log('7979')
     },
     logShow() {},
     onShadowChange(val) {
       console.log(val);
     },
     chooseType() {
+      console.log("90797");
       document.getElementById("upload_file").click();
     },
     fileChange(el) {
       let that = this;
-      console.log(el);
-      that.fileD = el.target.files[0];
-      console.log(that.fileD);
-      that.uplod(); //上传
       if (!el.target.files[0].size) return;
       this.fileList(el.target);
-      console.log("80970s");
       el.target.value = "";
     },
     fileList(fileList) {
@@ -259,15 +288,15 @@ export default {
       this.size = this.size + file.size;
       //判断是否为图片文件
       if (file.type.indexOf("image") == -1) {
-        this.$dialog.toast({ mes: "请选择图片文件" });
+        alert("请选择图片格式");
       } else {
         let reader = new FileReader();
         let image = new Image();
         let _this = this;
         console.log("23423" + file);
-        that.fileD = file;
+        // that.fileD = file;
         // that.uplod(); //上传
-        // reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
         reader.onload = function() {
           file.src = this.result;
           image.onload = function() {
@@ -279,11 +308,11 @@ export default {
             _this.imgList.push({
               file
             });
-            console.log(_this.imgList);
-
-            // that.recommendList.picIds = _this.imgList
+            _this.picIds = _this.imgList[0].file.src;
+            _this.uplod(_this.picIds);
           };
           image.src = file.src;
+          // _this.uplod()
         };
       }
     },
@@ -294,43 +323,22 @@ export default {
     },
     displayImg() {},
     // 图片上传
-    uplod() {
-      //   this.$fetch
-      // .post("/fruits/app/blank/saveFile", {filedata:this.filedata})
-      // .then(res => {
-      //   if (res.code == 0) {
-      //     console.log(res.obj);
-      //   } else {
-      //     alert(res.msg);
-      //   }
-      // });
-      let formData = new FormData(); // 声明一个FormData对象
-      formData = new window.FormData(); // vue 中使用 window.FormData(),否则会报 'FormData isn't definded'
-      formData.append("filedata", this.fileD); // 'userfile' 这个名字要和后台获取文件的名字一样;
-      console.log(formData + "处理");
-      // var options = {
-      //   // 设置axios的参数
-      //   url: "http://192.168.3.12:80/fruits/app/blank/saveFile",
-      //   data: formData,
-      //   method: "post",
-      //   headers: {
-      //     "Content-Type": "multipart/form-data"
-      //   }
-      // };
-      $.ajax({
-        type: "post",
-        url: "http://192.168.3.12:80/fruits/app/blank/saveFile",
-        data: formData,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function(data) {
-          console.log(data);
-        }
+    uplod(item) {
+      this.$vux.loading.show({
+        text: "Loading"
       });
-      // axios(options).then(res => {
-      //   console.log(res);
-      // }); // 发送请求
+
+      var that = this;
+      that.$fetch
+        .post("/fruits/app/blank/saveFileNew", { filedata: item })
+        .then(res => {
+          if (res.code == 0) {
+            that.recommendList.picIds.push(res.obj);
+            this.$vux.loading.hide();
+          } else {
+            alert(res.msg);
+          }
+        });
     },
     // 保存推荐信息
     getRegister() {
@@ -339,17 +347,10 @@ export default {
       this.recommendList.city = this.addressVal[1];
       this.recommendList.area = this.addressVal[2];
       this.$fetch
-        .post("/fruits/app/user/register", this.recommendList)
+        .post("/fruits/app/personal/recommendInfo", this.recommendList)
         .then(res => {
           if (res.code == 0) {
-            console.log(res.obj);
-            // res.obj.forEach(item => {
-            //   if (item.type == 0) {
-            //     this.huiYList.push(item);
-            //   } else {
-            //     this.biGList.push(item);
-            //   }
-            // });
+            console.log("878979");
           } else {
             alert(res.msg);
           }
@@ -376,5 +377,15 @@ textarea {
   height: 93px;
   border: 1px solid #e9efec;
   margin-left: 20%;
+}
+ul li {
+  float: left;
+  margin-left: 10px;
+  list-style-type: none;
+}
+.img_left_jian {
+  width: 7px;
+  height: 14px;
+  float: right;
 }
 </style>

@@ -31,7 +31,7 @@
           <div
             style="width:75%"
             class="font_size_13 font_color_10 margin_left_div2"
-          >门店电话：1232132123123{{myStoreData.phone}}</div>
+          >门店电话：{{myStoreData.phone}}</div>
           <div v-if="myStoreData.state == 1" class="bt_ex">营业中</div>
           <div v-if="myStoreData.state == 2" class="bt_ex_G">已关店</div>
         </div>
