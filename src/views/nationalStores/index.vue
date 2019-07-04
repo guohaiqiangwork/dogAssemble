@@ -7,7 +7,7 @@
         type="text"
         placeholder="搜索您想找的门店"
         v-model="productNamr"
-        v-on:input="getRecommendStoreList(productNamr)"
+         @change="getRecommendStoreList(productNamr)"
         style="width:100%;height:100%;background-color:#EFEFEF; outline: none;border:none"
       >
       <i></i>
@@ -202,6 +202,8 @@ export default {
     },
     //获取数据
     getRecommendStoreList(item) {
+      alert(this.latitude + '仅为度')
+       alert(this.longitude + '仅为度')
       let _obj = {
         openId: localStorage.getItem("openId"),
         name: item || "",
@@ -210,10 +212,14 @@ export default {
         latitude:this.latitude,
         longitude:this.longitude
       };
-      this.$fetch.post(url.getRecommendStoreList, _obj).then(
+      this.$fetch.post('fruits/app/blank/getRecommendStoreList', _obj).then(
         data => {
           if (data.code == 0) {
+            alert(data.obj)
             this.recommendStoreList = data.obj;
+            // data.obj.forEach(item => {
+            //   item.SFQY = data.obj.province
+            // });
             console.log(this.recommendStoreList);
           } else {
             alert(data.msg);
