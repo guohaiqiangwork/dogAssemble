@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="height: 100%;overflow-x: hidden;">
     <!-- 详情列表 -->
     <div v-if=" rechargeRecordList.length > 0">
       <div class="data_d_b" v-for="(item,index) in rechargeRecordList" :key="index">

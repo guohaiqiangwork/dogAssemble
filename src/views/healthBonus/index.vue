@@ -9,10 +9,10 @@
       <div class="text_center font_size_12 font_color_ff margin_top_div3">交易总额</div>
       <div
         class="font_size_25 font_color_ff text_center margin_top_div5"
-      >{{getHealthBonusD.recommend}}</div>
+      >{{getHealthBonusD.totalBonus}}</div>
       <div class="div_display_flex margin_top_div5">
         <div class="div_width_33 text_center font_size_12 font_color_ff">
-          <div>{{getHealthBonusD.totalBonus}}</div>
+          <div>{{getHealthBonusD.recommend}}</div>
           <div>推荐返佣金额</div>
         </div>
         <div class="div_width_33 text_center font_size_12 font_color_ff">
@@ -26,6 +26,7 @@
       </div>
     </div>
     <div
+      @click="getSharedBonus"
       class="health_title_f font_size_14 font_color_76 text_center"
       style="margin-top:-8%"
     >赶快邀请好友共赢健康奖金>></div>
@@ -160,6 +161,7 @@
 </template>
 <script>
 import url from "../../bin/url";
+import wexinShare from "../../bin/weiXinShare"
 export default {
   name: "healthBonus",
   data() {
@@ -238,8 +240,8 @@ export default {
         data => {
           if (data.code == 0) {
             this.getHealthBonusD = data.obj;
-          }else{
-             alert(data.msg)
+          } else {
+            alert(data.msg);
           }
         },
         err => {
@@ -259,8 +261,8 @@ export default {
         data => {
           if (data.code == 0) {
             this.getRecommendBList = data.obj;
-          }else{
-             alert(data.msg)
+          } else {
+            alert(data.msg);
           }
         },
         err => {
@@ -280,8 +282,8 @@ export default {
         data => {
           if (data.code == 0) {
             this.getVideoDistriList = data.obj;
-          }else{
-             alert(data.msg)
+          } else {
+            alert(data.msg);
           }
         },
         err => {
@@ -301,8 +303,24 @@ export default {
         data => {
           if (data.code == 0) {
             this.getOrderDistriList = data.obj;
-          }else{
-             alert(data.msg)
+          } else {
+            alert(data.msg);
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
+        }
+      );
+    },
+    // 获取分享参数
+    getSharedBonus() {
+      this.$fetch.post("/fruits/app/bonus/inviteFriends",{openId:localStorage.getItem("openId")}).then(
+        data => {
+          if (data.code == 0) {
+          //  console.log(data)
+           wexinShare(data.obj)
+          } else {
+            alert(data.msg);
           }
         },
         err => {

@@ -3,7 +3,7 @@
         <div class="address_top">
             <div class="address_item">
     
-                <x-input label-width="4em" v-model="addressBC.name"  :title='`<span style="${style}">收货人</span>`' placeholder="姓名"></x-input>
+                <x-input label-width="4em" v-model="addressBC.name"  :title='`<span style="${style}">收货人</span>`'  :show-clear="false" placeholder="姓名"></x-input>
             </div>
             <div class="address_item">
                 <x-input label-width="4em" v-model="addressBC.phone"  :title='`<span style="${style}">手机号</span>`' placeholder="收货人电话" keyboard="number" is-type="china-mobile" :show-clear="false"></x-input>
@@ -13,11 +13,11 @@
             <div class="address_item flex_between"  @click="showAddress = true">
                 <x-input label-width="5em" v-model="address"   :class="[address?'font-color' :'']" :title='`<span style="${style}">所在城市</span>`' disabled placeholder="请选择您所在的城市" keyboard="number" ></x-input>
                 <x-icon type="ios-arrow-right" class="icon_middle"></x-icon>
-                <x-address v-show="false" @on-hide="logHide" @on-show="logShow"  :title="title" v-model="addressVal"   :list="addressData" @on-shadow-change="onShadowChange" placeholder="请选择地址" inline-desc="可以设置placeholder" :show.sync="showAddress"></x-address>
+                <x-address v-show="false" @on-hide="logHide" :title="title" v-model="addressVal"   :list="addressData" @on-shadow-change="onShadowChange" placeholder="请选择地址" inline-desc="可以设置placeholder" :show.sync="showAddress"></x-address>
             </div>
             <div class="address_item">
             
-                <x-input label-width="5em"  v-model="addressBC.details" :title='`<span style="${style}">收货地址</span>`' :show-clear="false"  @on-blur="onBlur"    placeholder="详细地址" >
+                <x-input label-width="5em"  v-model="addressBC.details" :title='`<span style="${style}">收货地址</span>`' :show-clear="false"    placeholder="详细地址" >
                     
                 </x-input>
             </div>
@@ -71,14 +71,10 @@ export default {
     },
     logHide(str) {
       if (str) {
-          console.log(this.addressVal,9999)
-      console.log(this.address)
+     
         this.address = value2name(this.addressVal, ChinaAddressV4Data);
-        this.addressF = this.address.split(" ");
+        // this.addressF = this.address.split(" ");
       }
-    },
-    logShow() {
-    
     },
     onShadowChange(val) {
       console.log(val)

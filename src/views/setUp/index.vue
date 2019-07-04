@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="div_display_flex width_m" @click="accountD" v-if="type != 3 ">
-        <div class="div_width_50 font_color_1A personal_list_font">{{type == 1 ?'冻结账户' :"关闭店铺"}}</div>
+        <div class="div_width_50 font_color_1A personal_list_font">{{type==1&&state!=3?'冻结账户':type==1&&state == 3?"解冻账户" :"关闭店铺"}}</div>
         <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
           <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%">
         </div>
@@ -41,6 +41,12 @@
     <confirm v-model="outPayFalge" title @on-cancel="onCancel" @on-confirm="onConfirm">
       <div style="text-align:center;font-size:18px;">{{type == 1?"您确认将会员卡冻结吗？" :"是否要打烊"}}</div>
     </confirm>
+     <confirm v-model="PayFalge" :title="'您当前用户'+tel+'已被冻结需解冻才可以正常使用'" :hide-on-blur="true" :show-cancel-button="false" confirm-text="确认解冻" @on-confirm="onConfirm">
+      <div style="text-align:center;font-size:18px;display:flex;">
+        <input type="number" class="codeWrite" v-model="code">
+        <span class="font-12" @click="sendCode"><a>{{codeValue}}</a></span>
+      </div>
+    </confirm>
     <!-- 切换身份 -->
     <confirm v-model="confirmShow" title @on-cancel="onCancel" @on-confirm="changeIDE">
       <div style="text-align:center;font-size:18px;">{{'您确定要切换身份吗？'}}</div>
@@ -57,17 +63,60 @@ export default {
   name: "setUp",
   data() {
     return {
+      PayFalge:false,//解冻账户弹窗
       outPayFalge: false, //冻结账户弹窗
       text: "",
       confirmShow:false,
+      code:null,
+      codeValue:'获取验证码',
+      form:{
+        phone:localStorage.getItem('phone')||"15010825114",
+       
+
+      },
+      timer:null,
     };
   },
   computed: {
     type() {
       return localStorage.getItem("type");
+    },
+    state(){
+      return localStorage.getItem("state")
+    },
+    tel(){
+      var str = localStorage.getItem('phone');
+      var reg = /(\d{3})\d{4}(\d{4})/;
+      str = str.replace(reg,'$1****$2');
+      return str
     }
   },
   methods: {
+     //发送验证码
+    sendCode() {
+      var count = 60;
+      this.$fetch
+        .post("fruits/app/user/getSmsCode", {
+          phone: this.form.phone,
+          openId: localStorage.getItem("openId"),
+          type: 1
+        })
+        .then(res => {
+          console.log(res);
+          // this.form.code = "1234";
+        });
+
+      this.timer = setInterval(() => {
+        if (count <= 1) {
+          clearInterval(this.timer);
+          this.codeValue = "重新获取验证码";
+          this.timer = "";
+          return;
+        }
+        count--;
+        this.codeValue = count;
+      }, 1000);
+    },
     //   去修改密码
     goToPassword() {
       this.$router.push("/changePassword/"+1);
@@ -114,7 +163,17 @@ export default {
           if (res.msg == "success") {
             // this.$router.push("/home");
             localStorage.setItem("catnum", res.obj);
-            this.$router.go(0);
+            this.$router.push({
+              name: 'personal',
+              params: {
+                obj: JSON.stringify({
+                  type: "profession",
+                  data: {
+                    id: "参数"
+                  }
+                })
+              }
+            });
           }
         });
     },
@@ -134,7 +193,12 @@ export default {
     },
     //账户冻结
     accountD() {
-      this.outPayFalge = true;
+      if(this.state ==3){
+        this.PayFalge = true;
+      }else{
+         this.outPayFalge = true;
+      }
+     
     },
     // 弹窗取消
     onCancel() {
@@ -143,12 +207,22 @@ export default {
     // 弹窗确认
     onConfirm() {
       if (this.type == 1) {
-        this.$fetch
+        if(this.state == 3 ){
+          this.$fetch.post("fruits/app/personal/thawCustomer",{openId:localStorage.getItem('openId'),code:this.code}).then(res =>{
+            if(res.msg == 'success'){
+              this.$vux.toast.text('解冻成功!');
+              this.$router.go(0)
+            }
+          })
+        }else{
+           this.$fetch
           .post("/fruits/app/personal/freezingCustomer", {
             openId: localStorage.getItem("openId")
           })
           .then(res => {
             if (res.code == 0) {
+              localStorage.setItem('state',3);
+              this.$router.go(0)
               alert("冻结成功");
             } else if (res.msg == "user_has_frozen") {
               alert("该账号已冻结");
@@ -156,6 +230,8 @@ export default {
               alert(res.msg);
             }
           });
+        }
+        
       } else {
       }
       console.log("233");
@@ -182,11 +258,21 @@ export default {
       .then(res => {
         this.personalMsg = { ...res.obj };
       });
-    console.log("设置");
+    console.log("设置",this.tel);
   }
 };
 </script>
 <style scoped>
+.codeWrite{
+    outline: none;
+    box-shadow: none;
+    border: none;
+    border-bottom: 1px solid #fefefe;
+}
+.font-12{
+  white-space: nowrap;
+  font-size: 12px;
+}
 .personal_div_money {
   width: 95%;
   background-color: #ffffff;

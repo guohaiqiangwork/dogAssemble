@@ -123,7 +123,7 @@
     <p
       class="login_tit"
       @click="goToPrivacyProtocol"
-    >{{haslogin == 1 ? '登录' : '注册'}}即代表您已同意《御康商贸用户隐私政策》</p>
+    >{{haslogin == 1 ? '登录' : '注册'}}即代表您已同意<span class="foot-color">《御康商贸用户隐私政策》</span></p>
   </div>
 </template>
 <script>
@@ -150,7 +150,7 @@ export default {
       maskValue: "",
       codeValue: "获取验证码",
       form: {
-        openId:'',
+        openId: "",
         password: "",
         name: "",
         phone: "",
@@ -159,7 +159,7 @@ export default {
         nickname: ""
       },
       Logform: {
-        openId: '',
+        openId: "",
         password: "",
         phone: "",
         nickname: "",
@@ -188,21 +188,18 @@ export default {
       obj = { ...this.Logform };
       // this.Logform.password = DesUtils.encode(this.Logform.password,"fruits-app,yuntu,com")
       obj.password = DesUtils.encode(obj.password, "fruits-app,yuntu,com");
-
-      // this.Logform.nickname = ""; this.Logform.headimgurl = "";
-      obj.openId = localStorage.getItem("openId") || 2229;
-      obj.nickname = localStorage.getItem("nickname") || 'fsdf';
-      obj.headimgurl = localStorage.getItem("headimgurl") ||'kjlk';
-
-      this.$fetch.post("fruits/app/user/login", obj).then(res => {
+		
+ 	  obj.openId = localStorage.getItem("openId");
+      obj.nickname = localStorage.getItem("nickname") || 'dfsf';
+      obj.headimgurl = localStorage.getItem("headimgurl") || 'fsfs';      this.$fetch.post("fruits/app/user/login", obj).then(res => {
         this.btnload = false;
         alert(res.msg);
         if (res.msg == "success") {
-          console.log("success", res);
           this.$vux.toast.text("登录成功");
           localStorage.setItem("user", res.attributes.sessionId);
           localStorage.setItem("type", res.attributes.type);
           localStorage.setItem("appUserId", res.attributes.appUserId); //登陆用户id
+          localStorage.setItem("phone",obj.phone)
           this.getCartNum();
         } else if (res.msg == "password_error") {
           alert("密码错误");
@@ -277,7 +274,7 @@ export default {
       });
     },
     editPass() {
-      this.$router.push("/changePassword/"+0);
+      this.$router.push("/changePassword/" + 0);
     },
     regTest() {
       this.$router.push("/login/2");
@@ -342,7 +339,7 @@ export default {
         state: ""
       };
       this.$fetch.post(url.getOpenId, data).then(res => {
-        console.log(res, "dfsf");
+        // alert(res.msg);
       });
     },
     // getAddress() {
@@ -379,7 +376,6 @@ export default {
       this.Logform.password = obj.password;
       this.Logform.openId = obj.openId;
     }
-   
     // this.getAddress();
   }
 };
@@ -428,6 +424,9 @@ export default {
     font-size: 0.24rem;
     line-height: 0.33rem;
     color: rgba(153, 153, 153, 1);
+  }
+  .foot-color{
+    color: #4a7b67;
   }
 }
 </style>

@@ -65,7 +65,7 @@
       <div class="div_width_50 text_right font_size_13 font_color_10">¥{{shopOrderList.time}}</div>
     </div>
     <!-- 立即支付 -->
-    <div class="orderD_btn" @click="payOrder">立即支付</div>
+    <div class="orderD_btn" @click="payOrder" v-if="switches==1||switches==3">{{switches==1?'立即支付':"立即收货"}}</div>
   </div>
 </template>
 <script>
@@ -87,7 +87,11 @@ export default {
       shopOrderList: "" //重
     };
   },
-  computed: {},
+  computed: {
+    switches(){
+      return this.$route.query.switch
+    } 
+  },
   methods: {
     //   获取订单详情
     getShopOrder(item) {
@@ -133,6 +137,7 @@ export default {
     console.log(wexinPay)
   },
   created() {
+    console.log(this.$route)
     if (this.$route.params.obj) {
       this.routeParams = JSON.parse(this.$route.params.obj);
       console.log(this.routeParams.data.id);

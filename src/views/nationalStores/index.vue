@@ -7,44 +7,12 @@
         type="text"
         placeholder="搜索您想找的门店"
         v-model="productNamr"
-        v-on:input="getRecommendStoreList(productNamr)"
+        @change="getRecommendStoreList(productNamr)"
         style="width:100%;height:100%;background-color:#EFEFEF; outline: none;border:none"
       >
       <i></i>
     </div>
     <!-- 推荐门店列表 -->
-    <div class="div_display_flex margin_left_div3 padding_top_div3">
-      <div class="national_flag_title"></div>
-      <div class="font_color_00 font_size_14 margin_left_div2" style="margin-top: 0.8%;">附1近门店推荐</div>
-    </div>
-    <div class="div_display_flex">
-      <!-- <div @click="checkBtn(index,item.id)" :checked="item.isDefault" class="div_width_8">
-        <check-icon :value.sync="item.isDefault" size="13px" style="padding-top: 64%;color:red"></check-icon>
-      </div>-->
-      <div class="national_list font_color_00 font_size_13 backgroun_color_fff margin_top_div3">
-        <div class="div_display_flex margin_top_div3">
-          <div
-            class="div_width_70 margin_left_div2"
-          >{{recommendStoreList[1].province}}{{recommendStoreList[1].city}}{{recommendStoreList[1].area}}</div>
-          <div class="div_width_30 margin_right_div2 text_right">{{recommendStoreList[1].distance}}</div>
-        </div>
-        <div class="div_display_flex margin_top_div3">
-          <div class="div_width_70 margin_left_div2">{{recommendStoreList[1].address}}</div>
-          <div class="div_width_30 margin_right_div2 text_right" @click="goToMap">
-            <img src="../../assets/images/1440@2x.png" width="12px">
-          </div>
-        </div>
-        <div class="div_display_flex margin_top_div3">
-          <div class="div_width_70 margin_left_div2">营业时间</div>
-          <div class="div_width_30 margin_right_div2 text_right">{{recommendStoreList[1].startTime}}</div>
-        </div>
-        <div class="div_display_flex margin_top_div3 padding_bottom_4">
-          <div class="div_width_70 margin_left_div2">门店电话</div>
-          <div class="div_width_30 margin_right_div2 text_right">{{recommendStoreList[1].phone}}</div>
-        </div>
-      </div>
-    </div>
-    <!-- 其他门店列表 -->
     <nut-scroller
       :is-un-more="isUnMore1"
       :is-loading="isLoading1"
@@ -53,36 +21,77 @@
       @pulldown="pulldown"
     >
       <div slot="list" class="nut-vert-list-panel">
-        <div class="div_display_flex margin_left_div3 margin_top_div3">
+        <div class="div_display_flex margin_left_div3 padding_top_div3">
           <div class="national_flag_title"></div>
-          <div class="font_color_00 font_size_14 margin_left_div2" style="margin-top: 0.8%;">其他门店</div>
+          <div class="font_color_00 font_size_14 margin_left_div2" style="margin-top: 0.8%;">附近门店推荐</div>
         </div>
-        <div v-for="(item,index) in recommendStoreList" :key="index" class="div_display_flex">
-          <!-- <div @click="checkQBtn(index,item.id)" :checked="item.isQDefault" class="div_width_8" v-if="classA  == '1'">
-        <check-icon :value.sync="item.isQDefault" size="13px" style="padding-top: 64%;"></check-icon>
+        <div class="div_display_flex">
+          <!-- <div @click="checkBtn(index,item.id)" :checked="item.isDefault" class="div_width_8">
+        <check-icon :value.sync="item.isDefault" size="13px" style="padding-top: 64%;color:red"></check-icon>
           </div>-->
-          <div
-            class="national_list font_color_00 font_size_13 backgroun_color_fff margin_top_div3"
-            :class="classA  == '1'? 'national_list' : 'national_list_w' "
-          >
+          <div class="national_list font_color_00 font_size_13 backgroun_color_fff margin_top_div3">
             <div class="div_display_flex margin_top_div3">
-              <div class="div_width_70 margin_left_div2">{{item.province}}{{item.city}}{{item.area}}</div>
-              <div class="div_width_30 margin_right_div2 text_right">{{item.distance}}</div>
+              <div
+                class="div_width_70 margin_left_div2"
+              >{{recommendStoreList[1].province}}{{recommendStoreList[1].city}}{{recommendStoreList[1].area}}</div>
+              <div v-if="recommendStoreList[1].state == 2" class="bt_close">已关店</div>
+              <div
+                class="div_width_30 margin_right_div2 text_right"
+              >{{recommendStoreList[1].distance}}km</div>
             </div>
             <div class="div_display_flex margin_top_div3">
-              <div class="div_width_70 margin_left_div2">{{item.address}}</div>
-              <div class="div_width_30 margin_right_div2 text_right">
+              <div class="div_width_70 margin_left_div2">{{recommendStoreList[1].address}}</div>
+              <div class="div_width_30 margin_right_div2 text_right" @click="goToMap">
                 <img src="../../assets/images/1440@2x.png" width="12px">
               </div>
             </div>
             <div class="div_display_flex margin_top_div3">
               <div class="div_width_70 margin_left_div2">营业时间</div>
-              <div class="div_width_30 margin_right_div2 text_right">{{item.startTime}}</div>
+              <div
+                class="div_width_30 margin_right_div2 text_right"
+              >{{recommendStoreList[1].startTime}}</div>
             </div>
             <div class="div_display_flex margin_top_div3 padding_bottom_4">
               <div class="div_width_70 margin_left_div2">门店电话</div>
-              <div class="div_width_30 margin_right_div2 text_right">{{item.phone}}</div>
-              <!-- <div class="div_width_30 margin_right_div2 text_right font_color_4A">已关闭</div> -->
+              <div class="div_width_30 margin_right_div2 text_right">{{recommendStoreList[1].phone}}</div>
+            </div>
+          </div>
+        </div>
+        <!-- 其他门店列表 -->
+        <div>
+          <div class="div_display_flex margin_left_div3 margin_top_div3">
+            <div class="national_flag_title"></div>
+            <div class="font_color_00 font_size_14 margin_left_div2" style="margin-top: 0.8%;">其他门店</div>
+          </div>
+          <div v-for="(item,index) in recommendStoreList" :key="index" class="div_display_flex">
+            <!-- <div @click="checkQBtn(index,item.id)" :checked="item.isQDefault" class="div_width_8" v-if="classA  == '1'">
+        <check-icon :value.sync="item.isQDefault" size="13px" style="padding-top: 64%;"></check-icon>
+            </div>-->
+            <div
+              class="national_list font_color_00 font_size_13 backgroun_color_fff margin_top_div3"
+              :class="classA  == '1'? 'national_list' : 'national_list_w' "
+            >
+              <div class="div_display_flex margin_top_div3">
+                <div
+                  class="div_width_70 margin_left_div2"
+                >{{item.province}}{{item.city}}{{item.area}}</div>
+                <div class="div_width_30 margin_right_div2 text_right">{{item.distance}}km</div>
+              </div>
+              <div class="div_display_flex margin_top_div3">
+                <div class="div_width_70 margin_left_div2">{{item.address}}</div>
+                <div class="div_width_30 margin_right_div2 text_right">
+                  <img src="../../assets/images/1440@2x.png" width="12px">
+                </div>
+              </div>
+              <div class="div_display_flex margin_top_div3">
+                <div class="div_width_70 margin_left_div2">营业时间</div>
+                <div class="div_width_30 margin_right_div2 text_right">{{item.startTime}}</div>
+              </div>
+              <div class="div_display_flex margin_top_div3 padding_bottom_4">
+                <div class="div_width_70 margin_left_div2">门店电话</div>
+                <div class="div_width_30 margin_right_div2 text_right">{{item.phone}}</div>
+                <!-- <div class="div_width_30 margin_right_div2 text_right font_color_4A">已关闭</div> -->
+              </div>
             </div>
           </div>
         </div>
@@ -113,7 +122,7 @@ export default {
   data() {
     return {
       item: 0,
-      timer:"",
+      timer: "",
       isDefault: "",
       classA: "1", //是否有单选框
       nationSFalg: false, //地址确认
@@ -207,13 +216,16 @@ export default {
         name: item || "",
         size: this.page.size,
         current: this.page.current,
-        latitude:this.latitude,
-        longitude:this.longitude
+        latitude: this.latitude,
+        longitude: this.longitude
       };
-      this.$fetch.post(url.getRecommendStoreList, _obj).then(
+      this.$fetch.post("fruits/app/blank/getRecommendStoreList", _obj).then(
         data => {
           if (data.code == 0) {
             this.recommendStoreList = data.obj;
+            // data.obj.forEach(item => {
+            //   item.SFQY = data.obj.province
+            // });
             console.log(this.recommendStoreList);
           } else {
             alert(data.msg);
@@ -235,23 +247,48 @@ export default {
       this.page.current = 1;
       this.getRecommendStoreList();
     },
+
+    // 获取当前位置
+    addressDetail() {
+      //获取地理位置
+      var self = this;
+      //全局的this在方法中不能使用，需要重新定义一下
+      var geolocation = new BMap.Geolocation();
+      //调用百度地图api 中的获取当前位置接口
+      geolocation.getCurrentPosition(function(r) {
+        if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+          //获取当前位置经纬度
+          var myGeo = new BMap.Geocoder();
+          myGeo.getLocation(new BMap.Point(r.point.lng, r.point.lat), function(
+            result
+          ) {
+            if (result) {
+              self.latitude = result.point.lat;
+              self.longitude = result.point.lng;
+              self.getRecommendStoreList(); //获取全国门店
+              // alert(result.point.lat + "获取都仅为度");
+            }
+          });
+        }
+      });
+    }
     //第一部分
     //定位获得当前位置信息
-    getMyLocation() {
-      var geolocation = new qq.maps.Geolocation("JPCBZ-I3W64-FDNUH-XRWFO-MQRFZ-ERBWW", "opo");
-      geolocation.getIpLocation(this.showPosition, this.showErr);
-    },
-    showPosition(position) {
-      console.log(position);
-      this.latitude = position.lat;//唯独
-      this.longitude = position.lng;//进度
-      this.city = position.city;
-      this.getRecommendStoreList(); //获取全国门店
-    },
-    showErr() {
-      console.log("定位失败");
-      this.getMyLocation(); //定位失败再请求定位，测试使用
-    }
+    // getMyLocation() {
+    //   var geolocation = new qq.maps.Geolocation("JPCBZ-I3W64-FDNUH-XRWFO-MQRFZ-ERBWW", "opo");
+    //   geolocation.getIpLocation(this.showPosition, this.showErr);
+    // },
+    // showPosition(position) {
+    //   console.log(position);
+    //   this.latitude = position.lat;//唯独
+    //   this.longitude = position.lng;//进度
+    //   this.city = position.city;
+    //   this.getRecommendStoreList(); //获取全国门店
+    // },
+    // showErr() {
+    //   console.log("定位失败");
+    //   this.getMyLocation(); //定位失败再请求定位，测试使用
+    // }
   },
   created() {
     settitle("全国门店");
@@ -259,7 +296,7 @@ export default {
   },
 
   mounted() {
-    this.getMyLocation();
+    this.addressDetail();
     // this.getRecommendStoreList(); //获取全国门店
   }
 };
@@ -268,9 +305,9 @@ export default {
 .national_flag_title {
   width: 2px;
   height: 15px;
-  background-color: #4A7B67;
+  background-color: #4a7b67;
   margin-top: 1%;
-  border: 1px solid #4A7B67;
+  border: 1px solid #4a7b67;
   border-radius: 10px;
 }
 .national_list {
@@ -301,5 +338,13 @@ export default {
   border: 1px solid #888888;
   margin-top: 5%;
   width: 95%;
+}
+.bt_close {
+  width: 15%;
+  font-size: 12px;
+  color: #e6435a;
+  border: 1px solid #e6435a;
+  /* align-content: center; */
+  text-align: center;
 }
 </style>

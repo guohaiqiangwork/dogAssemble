@@ -126,7 +126,7 @@
           </div>
           <div>设置中心</div>
         </div>
-        <div class="personal_cd text_center" @click="falgQH" v-if="personalMsg.isChange  == 1" style="border-right:0;">
+        <div class="personal_cd text_center" @click="goToRecommend" v-if="personalMsg.isChange  == 1" style="border-right:0;">
           <div class="margin_top28">
             <!-- class="img_width25" class="img_width_100"-->
             <img src="../../assets/images/1609@2x.png" width="25px"  height="25px">
@@ -366,7 +366,7 @@ export default {
     TabBar,
     Confirm
   },
-  name: "personal",
+  // name: "personal",
   data() {
     return {
       personalMsg: {},
@@ -380,8 +380,8 @@ export default {
   },
   created() {
     settitle("个人中心");
-    this.routeParams = JSON.parse(this.$route.params.obj);
-    console.log(this.routeParams);
+    // this.routeParams = JSON.parse(this.$route.params.obj);
+    // console.log(this.routeParams);
   },
   computed: {},
   methods: {
@@ -579,14 +579,14 @@ export default {
     goToAddressment: function() {
       this.$router.push({
         name: "addressment",
-        params: {
-          obj: JSON.stringify({
-            type: "profession",
-            data: {
-              id: "蚕丝"
-            }
-          })
-        }
+        // params: {
+        //   obj: JSON.stringify({
+        //     type: "profession",
+        //     data: {
+        //       id: "蚕丝"
+        //     }
+        //   })
+        // }
       });
     },
     // 押金充值
@@ -650,6 +650,20 @@ export default {
       this.$router.push("/changePassword/"+1);
       
     },
+     // 推荐信息
+    goToRecommend() {
+      this.$router.push({
+        name: "recommend",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: "参数"
+            }
+          })
+        }
+      });
+    },
     // 获取验证码
     getAuthCode: function() {
       this.sendAuthCode = false;
@@ -666,23 +680,17 @@ export default {
 
   mounted() {
     console.log(window.DesUtils.encode("1232313", "fruits-app,yuntu,com"));
-    //  this.$nextTick(() =>{
-    //    this.$refs.TabBar.didClickedItem("2");
-    //  })
-
     this.$fetch
       .post("fruits/app/personal/getPersonalInfo", {
         openId: localStorage.getItem("openId")
       })
       .then(res => {
+        console.log(res,89080);
+        var state = res.obj.state;
+        localStorage.setItem("state",state);
         this.personalMsg = { ...res.obj };
       });
   },
-  updated() {
-    this.$nextTick(() => {
-      this.$refs.TabBar.didClickedItem("2");
-    });
-  }
 };
 </script>
 

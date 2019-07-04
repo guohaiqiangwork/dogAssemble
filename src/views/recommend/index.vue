@@ -350,7 +350,8 @@ export default {
         .post("/fruits/app/personal/recommendInfo", this.recommendList)
         .then(res => {
           if (res.code == 0) {
-            console.log("878979");
+            alert('提交成功')
+            this.$router.push('/personal')
           } else {
             alert(res.msg);
           }

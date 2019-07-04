@@ -49,7 +49,7 @@
                 >
                   <div class="div_width_30 margin_right_div3">
                     <div class="order_width_height">
-                      <img :src="items.picId" width="100%" alt>
+                      <img :src="items.picId" width="70"  height="70"  alt>
                     </div>
                   </div>
                   <div style="width:63%">
@@ -114,7 +114,7 @@
                 >
                   <div class="div_width_30 margin_right_div3">
                     <div class="order_width_height">
-                      <img :src="items.picId" width="100%" alt>
+                      <img :src="items.picId" width="70"  height="70"  alt>
                     </div>
                   </div>
                   <div style="width:63%">
@@ -179,7 +179,7 @@
                 >
                   <div class="div_width_30 margin_right_div3">
                     <div class="order_width_height">
-                      <img :src="items.picId" width="100%" alt>
+                      <img :src="items.picId" width="70"  height="70" alt>
                     </div>
                   </div>
                   <div style="width:63%">
@@ -244,7 +244,7 @@
                 >
                   <div class="div_width_30 margin_right_div3">
                     <div class="order_width_height">
-                      <img :src="items.picId" width="100%" alt>
+                      <img :src="items.picId" width="70"  height="70" alt>
                     </div>
                   </div>
                   <div style="width:63%">
@@ -309,7 +309,7 @@
                 >
                   <div class="div_width_30 margin_right_div3">
                     <div class="order_width_height">
-                      <img :src="items.picId" width="100%" alt>
+                      <img :src="items.picId" width="70"  height="70"  alt>
                     </div>
                   </div>
                   <div style="width:63%">
@@ -414,6 +414,9 @@ export default {
               id: item
             }
           })
+        },
+        query:{
+          switch:this.switchFlage
         }
       });
     },
@@ -433,7 +436,12 @@ export default {
                 items.picId = url.imgUrl + items.picId;
               });
             });
-            this.orderList = data.obj;
+            if(this.page.current > 1){
+            this.orderList.push(data.obj)
+            }else{
+ this.orderList = data.obj;
+            }
+           
           } else {
             alert(data.msg);
           }
@@ -487,6 +495,7 @@ export default {
   }
 };
 </script>
+
 <style scoped>
 .personal_title {
   height: 48px;
@@ -516,7 +525,7 @@ export default {
   width: 70px;
   overflow: hidden;
   height: 70px;
-  border: 1px dashed #707070;
+  /* border: 1px dashed #707070; */
   margin-left: 18%;
 }
 .order_price_bt {

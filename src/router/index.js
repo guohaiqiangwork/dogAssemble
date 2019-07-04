@@ -301,7 +301,7 @@ export default new Router({
     },
     {
       // 个人中心
-      path: '/personal/:obj',
+      path: '/personal',
       name: 'personal',
       meta: {
         title: '个人中心',
@@ -563,7 +563,7 @@ export default new Router({
     },
     {
       // 共享奖金
-      path: '/sharedBonus',
+      path: '/sharedBonus/:obj',
       name: 'sharedBonus',
       meta: {
         title: '共享奖金'

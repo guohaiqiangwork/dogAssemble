@@ -38,13 +38,14 @@ export default {
     },
     goDetail(item) {
        this.$router.push({
-        name: "serviceOrder",
+        name: "serviceOrderD",
         params: {
           obj: JSON.stringify({
             type: "profession",
             data: {
-              id:item.id,
-              state:item.state
+              id:item.type == 1?'b':'h',
+              state:item.state,
+              item:item
             }
           })
         }

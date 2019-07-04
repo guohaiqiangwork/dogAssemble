@@ -25,13 +25,13 @@
         <span
           v-show="sendAuthCode"
           class="margin_left_div3 font_color_4A"
-          style="font-size:6px"
+          style="font-size:12px"
           @click="getAuthCode"
         >{{tip}}</span>
         <span
           v-show="!sendAuthCode"
           class="margin_left_div3 font_color_4A"
-          style="font-size:6px"
+          style="font-size:12px"
         >{{auth_time}}s</span>
       </div>
     </div>
@@ -119,10 +119,16 @@ export default {
       };
       this.$fetch.post(url.changePassword, data).then(res => {
         console.log(res);
-        if ((data.code = 0)) {
-          alert("修改成功");
+        if (res.code == 0) {
+          localStorage.clear();
+          this.$router.push('/login/1');
+          this.$vux.toast.text('修改成功')
+          // alert("修改成功");
         } else {
-          alert(data.msg);
+          if(res.msg == 'smsCode_error'){
+            this.$vux.toast.text('验证码错误')
+          }
+          // alert(data.msg);
         }
       });
     }

@@ -2,10 +2,10 @@
   <div>
     <!-- 会员套餐 展示-->
     <div v-if="memberFalg">
-      <!-- <div class="font_size_12 margin_left_div6 margin_top_div5">
+      <div class="font_size_12 margin_left_div6 margin_top_div5" v-if="infoList.userType ==1">
         <img src="../../assets/images/提醒 (3)@2x.png" style="width:19px">
         当前用户为跨店用户
-      </div>-->
+      </div>
       <div class="margin_top_div5">
         <div class="font_size_15 font_color_010 div_display_flex me_d">
           <div class="s_t"></div>
@@ -28,12 +28,12 @@
             style=" border-bottom:1px solid #e9e9e9;background-color:#DEE8E3 ;border-top-left-radius: 5px; border-top-right-radius: 5px;"
           >{{infoList.recipe}}</div>
           <div
-            class="div_display_flex text_center font_size_13 font_color_1A margin_top_div8 margin_bottom_8"
+            class="div_display_flex text_center space-around font_size_13 font_color_1A margin_top_div8 margin_bottom_8"
           >
             <div
               v-for="(item,index) in infoList.cupTypeLists"
               :key="index"
-              class="div_width_40 btn_ff font_size_13"
+              class="btn_ff font_size_13"
               @click="tabT(item)"
               :class="classA  == item.id? 'backgroun_color_4A font_color_ff' : 'font_color_4A' "
             >
@@ -66,7 +66,7 @@
     </div>
     <!-- 辟谷套餐 -->
     <div v-if="!memberFalg">
-      <div class="font_size_12 margin_left_div6 margin_top_div5" v-if="infoList.userType == '0'">
+      <div class="font_size_12 margin_left_div6 margin_top_div5" v-if="infoList.userType == 1">
         <img src="../../assets/images/提醒 (3)@2x.png" style="width:19px">
         当前用户为跨店用户
       </div>
@@ -218,6 +218,11 @@ export default {
       msgLength: 0
     };
   },
+  computed: {
+    userType() {
+      return this.$route.query.transferFlag;
+    }
+  },
   watch: {
     msgPAW(curVal) {
       console.log(curVal);
@@ -260,11 +265,11 @@ export default {
           if (data.code == 0) {
             this.getInfo(this.parameter.item.id);
             console.log("会员订单结束");
-          }else{
-            if(data.msg =='user_not_allow'){
-              this.$vux.toast.text('跨店订单不允许结束')
+          } else {
+            if (data.msg == "user_not_allow") {
+              this.$vux.toast.text("跨店订单不允许结束");
             }
-             alert(data.msg)
+            alert(data.msg);
           }
         },
         err => {
@@ -292,7 +297,19 @@ export default {
       this.$fetch.post(url.sureBigu, _obj).then(
         data => {
           if (data.code == 0) {
-            this.getInfo(this.parameter.item.id);
+            alert('结束成功')
+            this.$router.push({
+              name: "memberOperation",
+              params: {
+                obj: JSON.stringify({
+                  type: "profession",
+                  data: {
+                    id: "蚕丝"
+                  }
+                })
+              }
+            });
+            // this.getInfo(this.parameter.item.id);
           } else {
             alert(data.msg);
           }
@@ -399,6 +416,9 @@ export default {
 };
 </script>
 <style scoped>
+.space-around {
+  justify-content: space-around;
+}
 .me_d {
   line-height: 3;
   /* border-radius: 5px; */
@@ -443,10 +463,8 @@ export default {
 .btn_ff {
   border: 1px solid;
   border-radius: 5px;
-  text-align: center;
-  margin-left: 3%;
-  margin-right: 3%;
-}
+  text-align: center;  margin-left: 3%;
+  margin-right: 3%;}
 .border_tlr_b {
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;

@@ -4,45 +4,50 @@
     <div class="tabBar_bt flex-between align-center">
       <flexbox style="text-align: center; background-color: #fff;">
         <flexbox-item>
-          <router-link to="/home">
+          <!-- <div to="/home"  @click="didClickedItem(0,'/home')">
             <div class="flex-demo" v-if="actives != '0'">
               <img src="../assets/images/home@2x.png" style="width: .4rem;height:0.4rem;">
             </div>
-          </router-link>
-          <router-link to="/home">
-            <div class="flex-demo" v-if="actives == '0'">
+          </div> -->
+          <div to="/home" >
+            <div class="flex-demo" v-if="actives =='/home'"  @click="didClickedItem(0,'/home')">
               <img src="../assets/images/home_active@2x.png" style="width: .4rem;height:0.4rem;">
             </div>
-            <div :class="{ 'active': actives == '0'}" class="font_color_BF">首页</div>
-          </router-link>
+             <div class="flex-demo" v-else  @click="didClickedItem(0,'/home')">
+              <img src="../assets/images/home@2x.png" style="width: .4rem;height:0.4rem;">
+            </div>
+            <div :class="{ 'active': actives == '/home'}" class="font_color_BF">首页</div>
+          </div>
         </flexbox-item>
 
         <flexbox-item>
-          <div class="flex-demo pos" @click="didClickedItem(1,'cart')" v-if="actives != '1'">
-            <img src="../assets/images/goodsCar.png" style="width: .4rem;height:0.4rem;">
-            <badge class="msg-sign" :text="buyNum" v-if="buyNum!=0"></badge>
-          </div>
-          <div class="flex-demo pos" @click="didClickedItem(1,'cart')" v-if="actives == '1'">
+         
+          <div class="flex-demo pos" @click="didClickedItem(1,'/cart')" v-if="actives == '/cart'">
             <img src="../assets/images/goodsCar_active.png" style="width: .4rem;height:0.4rem;">
             <badge class="msg-sign" :text="buyNum" v-if="buyNum!=0&&user"></badge>
           </div>
-          <div :class="{ 'active': actives == '1'}" class="font_color_BF">购物车</div>
+           <div class="flex-demo pos" @click="didClickedItem(1,'/cart')" v-else>
+            <img src="../assets/images/goodsCar.png" style="width: .4rem;height:0.4rem;">
+            <badge class="msg-sign" :text="buyNum" v-if="buyNum!=0"></badge>
+          </div>
+          <div :class="{ 'active': actives == '/cart'}" class="font_color_BF">购物车</div>
         </flexbox-item>
 
-        <flexbox-item v-if="this.route == '/goodsdetail'">
+        <flexbox-item v-if="route == '/goodsdetail'">
           <div class="flex-start">
             <div class="foot-btn green" @click="addCart('cart')">加入购物车</div>
             <div class="foot-btn yello" @click="ImmeBuy('imme')">立即购买</div>
           </div>
         </flexbox-item>
         <flexbox-item v-else>
-          <div class="flex-demo" @click="didClickedItem(2,'personal')" v-if="actives != '2'">
-            <img src="../assets/images/personCenter.png" style="width: .4rem;height:0.4rem;">
-          </div>
-          <div class="flex-demo" @click="didClickedItem(2,'personal')" v-if="actives == '2'">
+         
+          <div class="flex-demo" @click="didClickedItem(2,'/personal')" v-if="actives == '/personal'">
             <img src="../assets/images/personCenter_active.png" style="width: .4rem;height:0.4rem;">
           </div>
-          <div :class="{ 'active': actives == '2'}" class="font_color_BF">个人中心</div>
+           <div class="flex-demo" @click="didClickedItem(2,'/personal')" v-else>
+            <img src="../assets/images/personCenter.png" style="width: .4rem;height:0.4rem;">
+          </div>
+          <div :class="{ 'active': actives == '/personal'}" class="font_color_BF">个人中心</div>
         </flexbox-item>
       </flexbox>
     </div>
@@ -86,29 +91,36 @@ export default {
       cartNum:localStorage.getItem("catnum")
     };
   },
+
   methods: {
+    //立即购买
     ImmeBuy(word) {
       this.show = true;
       this.title = word;
     },
+    //添加购物车
     addCart(word) {
       this.show = true;
       this.title = word;
-      // this.buyNum++;
+    },
+    setChoose(){
+      this.actives = this.route;
     },
     didClickedItem: function(tag, name) {
-      this.actives = tag;
-      this.$router.push({
-        name: name,
-        params: {
-          obj: JSON.stringify({
-            type: "profession",
-            data: {
-              id: "参数"
-            }
-          })
-        }
-      });
+      this.actives = name;
+    
+         this.$router.push(name)
+      // this.$router.push({
+      //   name: name,
+      //   params: {
+      //     obj: JSON.stringify({
+      //       type: "profession",
+      //       data: {
+      //         id: "参数"
+      //       }
+      //     })
+      //   }
+      // });
     },
     setBage() {
       this.buyNum = localStorage.getItem("catnum");
@@ -116,7 +128,7 @@ export default {
   },
   mounted() {
     this.setBage();
-    // console.log(this.route)
+    this.setChoose()
   }
 };
 </script>
