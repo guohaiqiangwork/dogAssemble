@@ -123,7 +123,7 @@
     <p
       class="login_tit"
       @click="goToPrivacyProtocol"
-    >{{haslogin == 1 ? '登录' : '注册'}}即代表您已同意《御康商贸用户隐私政策》</p>
+    >{{haslogin == 1 ? '登录' : '注册'}}即代表您已同意<span class="foot-color">《御康商贸用户隐私政策》</span></p>
   </div>
 </template>
 <script>
@@ -424,6 +424,9 @@ export default {
     font-size: 0.24rem;
     line-height: 0.33rem;
     color: rgba(153, 153, 153, 1);
+  }
+  .foot-color{
+    color: #4a7b67;
   }
 }
 </style>

@@ -65,7 +65,7 @@
       <div class="div_width_50 text_right font_size_13 font_color_10">¥{{shopOrderList.time}}</div>
     </div>
     <!-- 立即支付 -->
-    <div class="orderD_btn" @click="payOrder" v-if="switches==1||switches==2">{{switches==1?'立即支付':"立即收货"}}</div>
+    <div class="orderD_btn" @click="payOrder" v-if="switches==1||switches==3">{{switches==1?'立即支付':"立即收货"}}</div>
   </div>
 </template>
 <script>
