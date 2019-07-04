@@ -25,7 +25,8 @@
         </div>
       </div>
     </div>
-    <div @click="getSharedBonus"
+    <div
+      @click="getSharedBonus"
       class="health_title_f font_size_14 font_color_76 text_center"
       style="margin-top:-8%"
     >赶快邀请好友共赢健康奖金>></div>
@@ -160,6 +161,7 @@
 </template>
 <script>
 import url from "../../bin/url";
+import wexinShare from "../../bin/weiXinShare"
 export default {
   name: "healthBonus",
   data() {
@@ -238,8 +240,8 @@ export default {
         data => {
           if (data.code == 0) {
             this.getHealthBonusD = data.obj;
-          }else{
-             alert(data.msg)
+          } else {
+            alert(data.msg);
           }
         },
         err => {
@@ -259,8 +261,8 @@ export default {
         data => {
           if (data.code == 0) {
             this.getRecommendBList = data.obj;
-          }else{
-             alert(data.msg)
+          } else {
+            alert(data.msg);
           }
         },
         err => {
@@ -280,8 +282,8 @@ export default {
         data => {
           if (data.code == 0) {
             this.getVideoDistriList = data.obj;
-          }else{
-             alert(data.msg)
+          } else {
+            alert(data.msg);
           }
         },
         err => {
@@ -301,8 +303,8 @@ export default {
         data => {
           if (data.code == 0) {
             this.getOrderDistriList = data.obj;
-          }else{
-             alert(data.msg)
+          } else {
+            alert(data.msg);
           }
         },
         err => {
@@ -311,19 +313,14 @@ export default {
       );
     },
     // 获取分享参数
-    getSharedBonus(){
-       let _obj = {
-        openId: localStorage.getItem("openId"),
-        name: "",
-        size: "10",
-        current: "1"
-      };
-      this.$fetch.post(url.getOrderDistri, _obj).then(
+    getSharedBonus() {
+      this.$fetch.post("/fruits/app/bonus/inviteFriends",{openId:localStorage.getItem("openId")}).then(
         data => {
           if (data.code == 0) {
-            this.getOrderDistriList = data.obj;
-          }else{
-             alert(data.msg)
+          //  console.log(data)
+           wexinShare(data.obj)
+          } else {
+            alert(data.msg);
           }
         },
         err => {

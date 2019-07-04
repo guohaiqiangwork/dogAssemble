@@ -36,6 +36,7 @@
           <div class="margin_left_div3 margin_top_div12">--</div>
           <div class="margin_left_div3">
             <datetime
+             class=" data_colse"
               v-model="valueE"
               @on-change="changeE"
               :title="''"
@@ -226,6 +227,12 @@ export default {
   }
 };
 </script>
+<style>
+.date_choose .weui-cell__ft:after {
+    display: none;
+}
+</style>
+
 <style scoped>
 .personal_img_bj {
   background-image: url(/static/img/bg@3x.b188845.png);
