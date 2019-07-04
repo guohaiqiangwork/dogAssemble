@@ -188,16 +188,13 @@ export default {
       obj = { ...this.Logform };
       // this.Logform.password = DesUtils.encode(this.Logform.password,"fruits-app,yuntu,com")
       obj.password = DesUtils.encode(obj.password, "fruits-app,yuntu,com");
-
       obj.openId = localStorage.getItem("openId");
       obj.nickname = localStorage.getItem("nickname");
       obj.headimgurl = localStorage.getItem("headimgurl");
-
       this.$fetch.post("fruits/app/user/login", obj).then(res => {
         this.btnload = false;
         alert(res.msg);
         if (res.msg == "success") {
-          console.log("success", res);
           this.$vux.toast.text("登录成功");
           localStorage.setItem("user", res.attributes.sessionId);
           localStorage.setItem("type", res.attributes.type);
@@ -336,27 +333,27 @@ export default {
     //   return null;
     // },
     //获取用户openId
-    // getOpenId() {
-    //   var data = {
-    //     code: this.code,
-    //     state: ""
-    //   };
-    //   this.$fetch.post(url.getOpenId, data).then(res => {
-    //  alert(res.msg)
-    //   });
-    // },
-    getAddress() {
-      if (localStorage.getItem("openId") == "null") {
-        this.getoptnId = "";
-      } else {
-        this.getoptnId = localStorage.getItem("openId");
-      }
-      this.$fetch
-        .post("fruits/app/cart/getAddressList", {
-          openId: this.getoptnId
-        })
-        .then(res => {});
+    getOpenId() {
+      var data = {
+        code: this.code,
+        state: ""
+      };
+      this.$fetch.post(url.getOpenId, data).then(res => {
+        // alert(res.msg);
+      });
     },
+    // getAddress() {
+    //   if (localStorage.getItem("openId") == "null") {
+    //     this.getoptnId = "";
+    //   } else {
+    //     this.getoptnId = localStorage.getItem("openId");
+    //   }
+    //   this.$fetch
+    //     .post("fruits/app/cart/getAddressList", {
+    //       openId: this.getoptnId
+    //     })
+    //     .then(res => {});
+    // },
     // 协议
     goToPrivacyProtocol() {
       this.$router.push({
@@ -372,14 +369,14 @@ export default {
     settitle("注册与登录");
   },
   mounted() {
-    // this.getOpenId(); //获取用户open ID
+    this.getOpenId(); //获取用户open ID
     if (this.$route.query["parm"]) {
       var obj = JSON.parse(this.$route.query["parm"]);
       this.Logform.phone = obj.phone;
       this.Logform.password = obj.password;
       this.Logform.openId = obj.openId;
     }
-    this.getAddress();
+    // this.getAddress();
   }
 };
 </script>
