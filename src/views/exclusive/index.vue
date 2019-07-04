@@ -69,15 +69,7 @@ export default {
     // 门店更换
     goToNationalStores() {
       this.$router.push({
-        name: "nationalStores",
-        params: {
-          obj: JSON.stringify({
-            type: "profession",
-            data: {
-              id: "蚕丝"
-            }
-          })
-        }
+        name: "changeShop",
       });
     },
     // 获取专属门店数据
