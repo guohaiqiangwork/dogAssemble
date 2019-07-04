@@ -436,7 +436,12 @@ export default {
                 items.picId = url.imgUrl + items.picId;
               });
             });
-            this.orderList = data.obj;
+            if(this.page.current > 1){
+            this.orderList.push(data.obj)
+            }else{
+ this.orderList = data.obj;
+            }
+           
           } else {
             alert(data.msg);
           }
