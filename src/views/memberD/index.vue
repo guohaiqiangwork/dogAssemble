@@ -460,10 +460,13 @@ export default {
   margin-left: 5%;
 }
 .btn_ff {
-  border: 1px solid;
-  border-radius: 5px;
-  text-align: center;  margin-left: 3%;
-  margin-right: 3%;}
+    border: 1px solid #4a7b67;
+    border-radius: 5px;
+    text-align: center;  
+    margin-left: 3%;
+    margin-right: 3%;
+    padding: 0 0.2rem;
+}
 .border_tlr_b {
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;

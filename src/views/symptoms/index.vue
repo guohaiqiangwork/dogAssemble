@@ -36,14 +36,14 @@
             </p>
           </div>
         </div>
-        <div class="backgroun_color_fff" style="border-radius: 8px;padding: 3%;">
+        <div class="backgroun_color_fff" style="border-radius: 8px;padding: 0.4rem;">
           <div class="div_display_flex">
             <div class>
               <img src="../../assets/images/tS@2x.png" width="13px" alt>
             </div>
             <div class="font_color_4A margin_left_div2">贴心小提示</div>
           </div>
-          <div class="font_size_14 font_color_1A">
+          <div class="font_size_14 font_color_1A" style="text-indent:0.6rem;">
             多病症需到门店经过营养师面诊，根据对应的
             进行配餐
           </div>
@@ -413,8 +413,13 @@ export default {
     }
   }
   .tip-footer {
-    text-indent: 1em;
+    // text-indent: 1em;
     line-height: 0.56rem;
   }
+}
+.div_display_flex .national_list {
+  width: 5.9rem;
+  margin-left: 0.4rem;
+  padding: .3rem .4rem;
 }
 </style>

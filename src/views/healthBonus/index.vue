@@ -28,7 +28,6 @@
     <div
       @click="getSharedBonus"
       class="health_title_f font_size_14 font_color_76 text_center"
-      style="margin-top:-8%"
     >赶快邀请好友共赢健康奖金>></div>
     <!-- tab -->
     <div class="div_display_flex backgroun_color_fff personal_title">
@@ -45,7 +44,6 @@
           <div class="font_color_00 font_size_14 margin_left_div2" style="margin-top: 0.8%;">推荐返佣</div>
           <div
             class="font_size_13 font_color_00 margin_top_div1"
-            style="padding-left: 60%;"
             @click="goToHealthDetail"
           >全部返佣></div>
         </div>
@@ -344,7 +342,7 @@ export default {
 <style scoped>
 .personal_img_bj {
   background-image: url("../../assets/images/bg@2x.png");
-  background-size: 100%;
+  background-size: 100% 100%;
   height: 200px;
   background-repeat: no-repeat;
 }
@@ -373,5 +371,9 @@ export default {
   margin-top: 1%;
   border: 1px solid #4a7b67;
   border-radius: 10px;
+}
+.margin_top_div1{
+  position: absolute;
+  right: 0.1rem;
 }
 </style>
