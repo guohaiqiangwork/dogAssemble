@@ -60,14 +60,6 @@ export default {
   components: {
     Confirm
   },
-  comouted:{
-    tel(){
-      var str = localStorage.getItem('phone');
-      var reg = /(\d{3})\d{4}(\d{4})/;
-      str = str.replace(reg,'$1****$2');
-      return str
-    }
-  },
   name: "setUp",
   data() {
     return {
@@ -92,6 +84,12 @@ export default {
     state(){
       return localStorage.getItem("state")
     },
+    tel(){
+      var str = localStorage.getItem('phone');
+      var reg = /(\d{3})\d{4}(\d{4})/;
+      str = str.replace(reg,'$1****$2');
+      return str
+    }
   },
   methods: {
      //发送验证码
@@ -260,7 +258,7 @@ export default {
       .then(res => {
         this.personalMsg = { ...res.obj };
       });
-    console.log("设置");
+    console.log("设置",this.tel);
   }
 };
 </script>

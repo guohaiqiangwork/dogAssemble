@@ -47,9 +47,9 @@
         </book-list>
       </div>
       </template>
-      <div v-else class="nodata">
+      <!-- <div v-else class="nodata">
         暂无数据
-      </div>
+      </div> -->
     </div>
     <!-- </div> -->
   </nut-scroller>
@@ -159,8 +159,9 @@ export default {
     align-self: center;
 }
 .weui-toast {
-  width: 200px;
+  width: 3rem;
   min-height: 50px;
+  max-height: 250px;
 }
 #book {
   // margin: 0.4rem;

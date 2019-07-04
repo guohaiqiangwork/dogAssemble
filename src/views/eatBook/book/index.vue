@@ -131,11 +131,12 @@ export default {
         }
       }
         .tip-footer{
+            display: flex;
             // text-indent: 1em;
             margin-left: 0.25rem;
             line-height:0.56rem;
             span{
-                float: left;
+                // float: left;
             }
             span:nth-of-type(2){
                 width: 4rem;

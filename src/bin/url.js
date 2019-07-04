@@ -46,5 +46,5 @@ module.exports = {
   changeCustomer: '/fruits/app/personal/changeCustomer',//身份切换
   getRecommendStoreList: '/fruits/app/personal/getRecommendStoreList', //获取全国门店
   getOpenId:'/fruits/app/weChat/getOpenId',//获取openid
-  changePassword: '/fruits/app/member/changePassword'//修改密码
+  changePassword: '/fruits/app/personal/changePassword'//修改密码
 };

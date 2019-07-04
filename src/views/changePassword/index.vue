@@ -119,10 +119,15 @@ export default {
       };
       this.$fetch.post(url.changePassword, data).then(res => {
         console.log(res);
-        if ((data.code = 0)) {
-          alert("修改成功");
+        if (res.code = 0) {
+          localStorage.clear();
+          this.$router.push('/login/1');
+          // alert("修改成功");
         } else {
-          alert(data.msg);
+          if(res.msg == 'smsCode_error'){
+            this.$vux.toast.text('验证码错误')
+          }
+          // alert(data.msg);
         }
       });
     }

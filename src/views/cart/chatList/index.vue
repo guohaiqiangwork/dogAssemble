@@ -145,6 +145,9 @@ export default {
                     if(e.state ==1){
                         this.cartDate.num = 0;
                         this.cartDate.id = e.id;
+                        var num = localStorage.getItem('catnum');
+                        num = num - e.count;
+                        localStorage.setItem('catnum',num)
                         this.saveCart();
                         return
                     }
