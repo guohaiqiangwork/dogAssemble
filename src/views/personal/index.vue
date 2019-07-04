@@ -366,7 +366,7 @@ export default {
     TabBar,
     Confirm
   },
-  name: "personal",
+  // name: "personal",
   data() {
     return {
       personalMsg: {},
@@ -380,8 +380,8 @@ export default {
   },
   created() {
     settitle("个人中心");
-    this.routeParams = JSON.parse(this.$route.params.obj);
-    console.log(this.routeParams);
+    // this.routeParams = JSON.parse(this.$route.params.obj);
+    // console.log(this.routeParams);
   },
   computed: {},
   methods: {
@@ -666,10 +666,6 @@ export default {
 
   mounted() {
     console.log(window.DesUtils.encode("1232313", "fruits-app,yuntu,com"));
-    //  this.$nextTick(() =>{
-    //    this.$refs.TabBar.didClickedItem("2");
-    //  })
-
     this.$fetch
       .post("fruits/app/personal/getPersonalInfo", {
         openId: localStorage.getItem("openId")
@@ -681,11 +677,6 @@ export default {
         this.personalMsg = { ...res.obj };
       });
   },
-  updated() {
-    this.$nextTick(() => {
-      this.$refs.TabBar.didClickedItem("2");
-    });
-  }
 };
 </script>
 

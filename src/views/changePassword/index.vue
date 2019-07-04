@@ -31,7 +31,7 @@
         <span
           v-show="!sendAuthCode"
           class="margin_left_div3 font_color_4A"
-          style="font-size:6px"
+          style="font-size:12px"
         >{{auth_time}}s</span>
       </div>
     </div>

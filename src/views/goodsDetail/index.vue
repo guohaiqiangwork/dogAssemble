@@ -62,7 +62,7 @@
                         
                         <p class="flex-between align-center mt-space">
                             <span>购买数量</span>
-                            <inline-x-number width="30px" :title="('Quantity')" :min="0"  v-model="form.num"></inline-x-number>
+                            <inline-x-number width="30px" :title="('Quantity')" :min="1"  v-model="form.num"></inline-x-number>
                         </p>
                     </div>
                     <div class="buy_btn" @click="buyGoods">确认</div>
@@ -229,7 +229,6 @@ export default {
                   
                     });
                 // })
-                console.log(res,666)
                 this.goodsDetail = {...res.obj};
                 this.goodsDetail.price = this.goodsDetail.price.toFixed(2);
                 this.goodsDetail.original = this.goodsDetail.original.toFixed(2);
