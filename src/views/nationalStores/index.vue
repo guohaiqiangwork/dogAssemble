@@ -14,6 +14,7 @@
     </div>
     <!-- 推荐门店列表 -->
     <nut-scroller
+    style="margin-top:5%;"
       :is-un-more="isUnMore1"
       :is-loading="isLoading1"
       :type="'vertical'"
@@ -336,7 +337,8 @@ export default {
   background: #efefef;
   line-height: 3.5rem;
   border: 1px solid #888888;
-  margin-top: 5%;
+  margin-top: 0.2rem;
+  /* padding-bottom: 0.2rem; */
   width: 95%;
 }
 .bt_close {
