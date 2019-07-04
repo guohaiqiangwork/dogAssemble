@@ -579,14 +579,14 @@ export default {
     goToAddressment: function() {
       this.$router.push({
         name: "addressment",
-        params: {
-          obj: JSON.stringify({
-            type: "profession",
-            data: {
-              id: "蚕丝"
-            }
-          })
-        }
+        // params: {
+        //   obj: JSON.stringify({
+        //     type: "profession",
+        //     data: {
+        //       id: "蚕丝"
+        //     }
+        //   })
+        // }
       });
     },
     // 押金充值

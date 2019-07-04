@@ -61,7 +61,7 @@ export default {
     };
   },
     beforeRouteEnter (to, from, next) {
-    if(from.name == 'setUp' || from.name == 'personal' || from.name == 'addressopt'){
+    if(from.name == 'paysure'){
       next(vm =>{
         vm.sub = true;
       })
@@ -93,18 +93,9 @@ export default {
       );
     },
     goBack(item){
-      if(this.sub){
+      if(!this.sub){
         return
       }
-      // this.$router.push('/paysure',{
-      //   data:{
-          
-      //   }
-        
-      // })
-      console.log(this.$route.query.data,'jkj')
-      // this.$route.query.data = JSON.stringify(this.$route.query.data);
-      console.log(this.$route,888);
       this.$router.push({
         name: "paysure",
         params: {
