@@ -8,30 +8,32 @@
         :type="'vertical'"
         @loadMore="selPullUp"
         @pulldown="pulldown"
-      > -->
-        <div>
-          <div slot="list" class="nut-vert-list-panel">
-            <div class="data_d_b" v-for="(item,index) in dataChargeList" :key="index">
-              <div class="div_display_flex font_size_16 font_color_33 margin_top_div5">
-                <div class="div_width_50">{{item.spare}}</div>
-                <div class="div_width_50 text_right">{{item.recharge}}</div>
-              </div>
-              <div
-                class="font_size_13 font_color_A1 margin_top_div3 padding_bottom_4"
-              >{{item.rechargeTime}}</div>
+      >-->
+      <div>
+        <div slot="list" class="nut-vert-list-panel">
+          <div class="data_d_b" v-for="(item,index) in dataChargeList" :key="index">
+            <div class="div_display_flex font_size_16 font_color_33 margin_top_div5">
+              <div class="div_width_50">{{item.spare}}</div>
+              <div class="div_width_50 text_right">{{item.recharge}}</div>
             </div>
+            <div
+              class="font_size_13 font_color_A1 margin_top_div3 padding_bottom_4"
+            >{{item.rechargeTime}}</div>
           </div>
         </div>
+      </div>
       <!-- </nut-scroller> -->
     </div>
-      <div v-if="dataChargeList.length == 0">
-        <div>
-          <img src="../../assets/images/1546@2x.png" style=" width: 80%; margin-left: 10%;margin-top: 30%;" alt>
-        </div>
-        <div class=" text_center">
-          暂无数据
-        </div>
+    <div v-if="dataChargeList.length == 0">
+      <div>
+        <img
+          src="../../assets/images/1546@2x.png"
+          style=" width: 80%; margin-left: 10%;margin-top: 30%;"
+          alt
+        >
       </div>
+      <div class="text_center">暂无数据</div>
+    </div>
   </div>
 </template>
 <script>
@@ -62,8 +64,8 @@ export default {
       this.$fetch.post(url.getChargeList, _obj).then(data => {
         if (data.code == 0) {
           // this.dataChargeList = this.dataChargeList.concat(data.obj);
-           this.dataChargeList  = data.obj
-           console.log( this.dataChargeList)
+          this.dataChargeList = data.obj;
+          console.log(this.dataChargeList);
         } else {
           alert(data.msg);
         }

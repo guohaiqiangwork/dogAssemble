@@ -8,7 +8,7 @@
         placeholder="搜索您想找的配方…"
         v-model="form.name"
         style="width:100%;height:100%;background-color:#EFEFEF; outline: none;border:none"
-        @blur="getRecipeList"
+        v-on:input="input"
       >
       <i></i>
     </div>
@@ -83,6 +83,8 @@
 </template>
 <script>
 import url from "../../bin/url";
+import { setTimeout, clearTimeout } from "timers";
+let timer;
 export default {
   name: "symptoms",
   data() {
@@ -144,7 +146,7 @@ export default {
         latitude: this.latitude,
         longitude: this.longitude
       };
-      this.$fetch.post(url.getRecommendStoreList, _obj).then(
+      this.$fetch.post('fruits/app/blank/getRecommendStoreList', _obj).then(
         data => {
           if (data.code == 0) {
             this.recommendStoreList = data.obj;
@@ -224,6 +226,16 @@ export default {
     showErr() {
       console.log("定位失败");
       this.getMyLocation(); //定位失败再请求定位，测试使用
+    },
+    input(){
+      if (timer) {
+        window.clearTimeout(timer._id);
+      }
+      timer = setTimeout(() => {
+        this.getRecipeList();
+        // this.filterList(this.list,this.iptVal);
+        timer = null;
+      }, 2000);
     },
     //获取全部配方
     getRecipeList() {

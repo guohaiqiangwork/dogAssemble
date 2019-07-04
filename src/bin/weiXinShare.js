@@ -9,8 +9,8 @@ import wx from 'weixin-jsapi'
 */
 let wexinShare = (data, cb, errorCb) => {
     let appId = data.appId;
-    let timestamp = data.timeStamp;
-    let nonceStr = data.nonceStr;
+    let timestamp = data.timestamp;
+    let nonceStr = data.noncestr;
     let signature = data.signature;
     let packages = data.package;
     let paySign = data.paySign;
@@ -34,7 +34,7 @@ let wexinShare = (data, cb, errorCb) => {
                 // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
             }
         });
-        var shareUrl = 'http://mxp.chinacmcp.com/html';
+        // var shareUrl = 'http://mxp.chinacmcp.com/html';
         var obj = {//朋友圈
             title: shareUserPhone1 + '给您的悄悄话', // 分享标题
             desc: '点击查看那些未曾对你说出口的话吧！', // 分享描述

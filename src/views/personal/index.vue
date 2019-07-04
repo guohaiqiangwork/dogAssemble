@@ -126,7 +126,7 @@
           </div>
           <div>设置中心</div>
         </div>
-        <div class="personal_cd text_center" @click="falgQH" v-if="personalMsg.isChange  == 1" style="border-right:0;">
+        <div class="personal_cd text_center" @click="goToRecommend" v-if="personalMsg.isChange  == 1" style="border-right:0;">
           <div class="margin_top28">
             <!-- class="img_width25" class="img_width_100"-->
             <img src="../../assets/images/1609@2x.png" width="25px"  height="25px">
@@ -649,6 +649,20 @@ export default {
     goToPassword() {
       this.$router.push("/changePassword/"+1);
       
+    },
+     // 推荐信息
+    goToRecommend() {
+      this.$router.push({
+        name: "recommend",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: "参数"
+            }
+          })
+        }
+      });
     },
     // 获取验证码
     getAuthCode: function() {

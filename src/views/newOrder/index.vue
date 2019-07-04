@@ -59,6 +59,7 @@
     <div v-if="classA == '1'">
       <div class="margin_top_div5">
         <span class="font_size_14 font_color_1A margin_left_div6">购买天数：</span>
+        <select>
           <option v-for="(option,index) in recipeList" :key="index" :value="option">{{ option.recipe }}</option>
         </select>
       </div>

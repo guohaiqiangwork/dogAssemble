@@ -16,7 +16,9 @@
         >{{orderByIdListHY.obj.price}}</div>
         <div class="div_display_flex margin_top_div3 font_size_13 padding_bottom_4">
           <div class="div_width_75 padding_left_div3">适应症状：{{orderByIdListHY.obj.disease}}</div>
-          <div
+           <div
+            class="div_width_25 text_right pdiing_right8" >已消费</div>
+          <!-- <div
             class="div_width_25 text_right pdiing_right8"
             v-if="orderByIdListHY.obj.state == 1"
           >服务中</div>
@@ -27,7 +29,7 @@
           <div
             class="div_width_25 text_right pdiing_right8"
            v-if="orderByIdListHY.obj.state == 3"
-          >已消费</div>
+          >已消费</div> -->
         </div>
       </div>
     </div>
