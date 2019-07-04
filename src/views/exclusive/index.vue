@@ -101,33 +101,57 @@ export default {
       );
     },
     //第一部分
+         // 获取当前位置
+    addressDetail() {
+      //获取地理位置
+      var self = this;
+      //全局的this在方法中不能使用，需要重新定义一下
+      var geolocation = new BMap.Geolocation();
+      //调用百度地图api 中的获取当前位置接口
+      geolocation.getCurrentPosition(function(r) {
+        if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+          //获取当前位置经纬度
+          var myGeo = new BMap.Geocoder();
+          myGeo.getLocation(new BMap.Point(r.point.lng, r.point.lat), function(
+            result
+          ) {
+            if (result) {
+              self.latitude = result.point.lat;
+              self.longitude = result.point.lng;
+              self.getMyStore(); //获取全国门店
+              // alert(result.point.lat + "获取都仅为度");
+            }
+          });
+        }
+      });
+    },
     //定位获得当前位置信息
-    getMyLocation() {
-      var geolocation = new qq.maps.Geolocation(
-        "JPCBZ-I3W64-FDNUH-XRWFO-MQRFZ-ERBWW",
-        "opo"
-      );
-      geolocation.getIpLocation(this.showPosition, this.showErr);
-    },
-    showPosition(position) {
-      console.log(position);
-      this.latitude = position.lat; //唯独
-      this.longitude = position.lng; //进度
-      this.city = position.city;
-      this.getMyStore(); //获取专属门店信息
-    },
-    showErr() {
-      console.log("定位失败");
-      this.getMyLocation(); //定位失败再请求定位，测试使用
-    }
+    // getMyLocation() {
+    //   var geolocation = new qq.maps.Geolocation(
+    //     "JPCBZ-I3W64-FDNUH-XRWFO-MQRFZ-ERBWW",
+    //     "opo"
+    //   );
+    //   geolocation.getIpLocation(this.showPosition, this.showErr);
+    // },
+    // showPosition(position) {
+    //   console.log(position);
+    //   this.latitude = position.lat; //唯独
+    //   this.longitude = position.lng; //进度
+    //   this.city = position.city;
+    //   this.getMyStore(); //获取专属门店信息
+    // },
+    // showErr() {
+    //   console.log("定位失败");
+    //   this.getMyLocation(); //定位失败再请求定位，测试使用
+    // }
   },
   created() {
-    settitle("我是专属门店");
+    settitle("专属门店");
     this.routeParams = JSON.parse(this.$route.params.obj);
   },
 
   mounted() {
-    this.getMyLocation();
+    this.addressDetail();
 
     console.log("专属门店");
   }

@@ -202,8 +202,6 @@ export default {
     },
     //获取数据
     getRecommendStoreList(item) {
-      alert(this.latitude + '仅为度')
-       alert(this.longitude + '仅为度')
       let _obj = {
         openId: localStorage.getItem("openId"),
         name: item || "",
@@ -215,7 +213,6 @@ export default {
       this.$fetch.post('fruits/app/blank/getRecommendStoreList', _obj).then(
         data => {
           if (data.code == 0) {
-            alert(data.obj)
             this.recommendStoreList = data.obj;
             // data.obj.forEach(item => {
             //   item.SFQY = data.obj.province
@@ -241,23 +238,48 @@ export default {
       this.page.current = 1;
       this.getRecommendStoreList();
     },
+
+       // 获取当前位置
+    addressDetail() {
+      //获取地理位置
+      var self = this;
+      //全局的this在方法中不能使用，需要重新定义一下
+      var geolocation = new BMap.Geolocation();
+      //调用百度地图api 中的获取当前位置接口
+      geolocation.getCurrentPosition(function(r) {
+        if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+          //获取当前位置经纬度
+          var myGeo = new BMap.Geocoder();
+          myGeo.getLocation(new BMap.Point(r.point.lng, r.point.lat), function(
+            result
+          ) {
+            if (result) {
+              self.latitude = result.point.lat;
+              self.longitude = result.point.lng;
+              self.getRecommendStoreList(); //获取全国门店
+              // alert(result.point.lat + "获取都仅为度");
+            }
+          });
+        }
+      });
+    },
     //第一部分
     //定位获得当前位置信息
-    getMyLocation() {
-      var geolocation = new qq.maps.Geolocation("JPCBZ-I3W64-FDNUH-XRWFO-MQRFZ-ERBWW", "opo");
-      geolocation.getIpLocation(this.showPosition, this.showErr);
-    },
-    showPosition(position) {
-      console.log(position);
-      this.latitude = position.lat;//唯独
-      this.longitude = position.lng;//进度
-      this.city = position.city;
-      this.getRecommendStoreList(); //获取全国门店
-    },
-    showErr() {
-      console.log("定位失败");
-      this.getMyLocation(); //定位失败再请求定位，测试使用
-    }
+    // getMyLocation() {
+    //   var geolocation = new qq.maps.Geolocation("JPCBZ-I3W64-FDNUH-XRWFO-MQRFZ-ERBWW", "opo");
+    //   geolocation.getIpLocation(this.showPosition, this.showErr);
+    // },
+    // showPosition(position) {
+    //   console.log(position);
+    //   this.latitude = position.lat;//唯独
+    //   this.longitude = position.lng;//进度
+    //   this.city = position.city;
+    //   this.getRecommendStoreList(); //获取全国门店
+    // },
+    // showErr() {
+    //   console.log("定位失败");
+    //   this.getMyLocation(); //定位失败再请求定位，测试使用
+    // }
   },
   created() {
     settitle("全国门店");
@@ -265,7 +287,7 @@ export default {
   },
 
   mounted() {
-    this.getMyLocation();
+    this.addressDetail();
     // this.getRecommendStoreList(); //获取全国门店
   }
 };

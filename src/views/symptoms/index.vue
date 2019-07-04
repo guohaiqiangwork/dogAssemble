@@ -36,14 +36,14 @@
             </p>
           </div>
         </div>
-        <div class=" backgroun_color_fff" style="border-radius: 8px;padding: 3%;">
+        <div class="backgroun_color_fff" style="border-radius: 8px;padding: 3%;">
           <div class="div_display_flex">
             <div class>
               <img src="../../assets/images/tS@2x.png" width="13px" alt>
             </div>
-            <div class=" font_color_4A margin_left_div2">贴心小提示</div>
+            <div class="font_color_4A margin_left_div2">贴心小提示</div>
           </div>
-          <div class=" font_size_14 font_color_1A">
+          <div class="font_size_14 font_color_1A">
             多病症需到门店经过营养师面诊，根据对应的
             进行配餐
           </div>
@@ -53,12 +53,8 @@
       <div class="div_display_flex">
         <div class="national_list font_color_00 font_size_13 backgroun_color_fff margin_top_div3">
           <div class="div_display_flex margin_top_div3">
-            <div
-              class="div_width_70 margin_left_div2"
-            >{{recommendStoreList[1].province}}{{recommendStoreList[1].city}}{{recommendStoreList[1].area}}</div>
-            <div
-              class="div_width_30 margin_right_div2 text_right"
-            >{{recommendStoreList[1].distance}}km</div>
+            <div class="div_width_70 margin_left_div2">{{recommendStoreList[1].province}}{{recommendStoreList[1].city}}{{recommendStoreList[1].area}}</div>
+            <div class="div_width_30 margin_right_div2 text_right">{{recommendStoreList[1].distance}}km</div>
           </div>
           <div class="div_display_flex margin_top_div3">
             <div class="div_width_70 margin_left_div2">{{recommendStoreList[1].address}}</div>
@@ -68,9 +64,7 @@
           </div>
           <div class="div_display_flex margin_top_div3">
             <div class="div_width_70 margin_left_div2">营业时间</div>
-            <div
-              class="div_width_30 margin_right_div2 text_right"
-            >{{recommendStoreList[1].startTime}}</div>
+            <div class="div_width_30 margin_right_div2 text_right">{{recommendStoreList[1].startTime}}</div>
           </div>
           <div class="div_display_flex margin_top_div3 padding_bottom_4">
             <div class="div_width_70 margin_left_div2">门店电话</div>
@@ -105,7 +99,7 @@ export default {
       recommendStoreList: "",
       peiFangList: "",
       form: {
-        openId: localStorage.getItem("openId"),
+        openId: "",
         name: "",
         size: "10",
         current: "1"
@@ -146,7 +140,7 @@ export default {
         latitude: this.latitude,
         longitude: this.longitude
       };
-      this.$fetch.post('fruits/app/blank/getRecommendStoreList', _obj).then(
+      this.$fetch.post("fruits/app/blank/getRecommendStoreList", _obj).then(
         data => {
           if (data.code == 0) {
             this.recommendStoreList = data.obj;
@@ -209,25 +203,25 @@ export default {
       }
     },
     //定位获得当前位置信息
-    getMyLocation() {
-      var geolocation = new qq.maps.Geolocation(
-        "JPCBZ-I3W64-FDNUH-XRWFO-MQRFZ-ERBWW",
-        "opo"
-      );
-      geolocation.getIpLocation(this.showPosition, this.showErr);
-    },
-    showPosition(position) {
-      console.log(position);
-      this.latitude = position.lat; //唯独
-      this.longitude = position.lng; //进度
-      this.city = position.city;
-      this.getRecommendStoreList(); //获取全国门店
-    },
-    showErr() {
-      console.log("定位失败");
-      this.getMyLocation(); //定位失败再请求定位，测试使用
-    },
-    input(){
+    // getMyLocation() {
+    //   var geolocation = new qq.maps.Geolocation(
+    //     "JPCBZ-I3W64-FDNUH-XRWFO-MQRFZ-ERBWW",
+    //     "opo"
+    //   );
+    //   geolocation.getIpLocation(this.showPosition, this.showErr);
+    // },
+    // showPosition(position) {
+    //   console.log(position);
+    //   this.latitude = position.lat ; //唯独
+    //   this.longitude = position.lng; //进度
+    //   this.city = position.city;
+    //   this.getRecommendStoreList(); //获取全国门店
+    // },
+    // showErr() {
+    //   console.log("定位失败");
+    //   this.getMyLocation(); //定位失败再请求定位，测试使用
+    // },
+    input() {
       if (timer) {
         window.clearTimeout(timer._id);
       }
@@ -239,26 +233,52 @@ export default {
     },
     //获取全部配方
     getRecipeList() {
+      this.form.openId = localStorage.getItem("openId");
       this.$fetch
-        .post("fruits/app/recipe/getRecipeList", this.form)
+        .post("fruits/app/blank/getRecipeList", this.form)
         .then(res => {
           if (res.code == 0) {
             this.peiFangList = res.obj;
-            console.log(this.peiFangList);
           }
         });
+    },
+
+    // 获取当前位置
+    addressDetail() {
+      //获取地理位置
+      var self = this;
+      //全局的this在方法中不能使用，需要重新定义一下
+      var geolocation = new BMap.Geolocation();
+      //调用百度地图api 中的获取当前位置接口
+      geolocation.getCurrentPosition(function(r) {
+        if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+          //获取当前位置经纬度
+          var myGeo = new BMap.Geocoder();
+          myGeo.getLocation(new BMap.Point(r.point.lng, r.point.lat), function(
+            result
+          ) {
+            if (result) {
+              self.latitude = result.point.lat;
+              self.longitude = result.point.lng;
+              self.getRecommendStoreList(); //获取全国门店
+              // alert(result.point.lat + "获取都仅为度");
+            }
+          });
+        }
+      });
     }
   },
   created() {
-    settitle("我是病症检测");
+    settitle("智能体检");
   },
 
   mounted() {
     // this.getStore();
     this.getRecipeList();
-    this.getMyLocation();
+    // this.getMyLocation();
+    this.addressDetail();
     // this.getList()
-    console.log("病症检测");
+    // console.log("病症检测");
   }
 };
 </script>
