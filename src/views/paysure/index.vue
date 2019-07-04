@@ -13,7 +13,7 @@
           <x-icon @click="goAddress" type="ios-arrow-right" size="30"></x-icon>
         </div>
         <div class="address_msg">
-          <div class="topic_box" v-if="goodsMsg.isDefault == 1">
+          <div style="display:inline-block;" class="topic_box" v-if="goodsMsg.isDefault == 1">
             <span class="defalut_toic">默认</span>
           </div>
           <span>{{goodsMsg.receiveAddress}}</span>
@@ -350,9 +350,15 @@ export default {
       width: 0.8rem;
       margin: 0 0.11rem;
       white-space: nowrap;
+      float: left;
       // display: flex;
       // flex-wrap: nowrap;
     }
+
+  }
+  .address_msg>span{
+    width: 5rem;
+    word-break: break-all;
   }
   .form_box {
     background: #fff;

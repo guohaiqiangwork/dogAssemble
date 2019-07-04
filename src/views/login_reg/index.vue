@@ -194,10 +194,10 @@ export default {
       obj = { ...this.Logform };
       // this.Logform.password = DesUtils.encode(this.Logform.password,"fruits-app,yuntu,com")
       obj.password = DesUtils.encode(obj.password, "fruits-app,yuntu,com");
-      obj.openId = localStorage.getItem("openId");
+		
+ 	  obj.openId = localStorage.getItem("openId");
       obj.nickname = localStorage.getItem("nickname") || 'dfsf';
-      obj.headimgurl = localStorage.getItem("headimgurl") || 'fsfs';
-      this.$fetch.post("fruits/app/user/login", obj).then(res => {
+      obj.headimgurl = localStorage.getItem("headimgurl") || 'fsfs';      this.$fetch.post("fruits/app/user/login", obj).then(res => {
         this.btnload = false;
         alert(res.msg);
         if (res.msg == "success") {

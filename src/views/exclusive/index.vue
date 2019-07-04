@@ -31,11 +31,11 @@
             style="width:75%"
             class="font_size_13 font_color_10 margin_left_div2"
           >门店电话：{{myStoreData.phone}}</div>
-          <div v-if="myStoreData.state == 1" class="bt_ex">营业中</div>
-          <div v-if="myStoreData.state == 2" class="bt_ex_G">已关店</div>
+          <!-- <div v-if="myStoreData.state == 1" class="bt_ex">营业中</div> -->
+          <!-- <div v-if="myStoreData.state == 2" class="bt_ex_G">已关店</div> -->
         </div>
       </div>
-      <div class="margin_top_div5" @click="goToNationalStores" style="margin-top: 20%;">
+      <div class="margin_top_div5 changeBtn" @click="goToNationalStores">
         <div
           class="backgroun_color_4A font_color_ff font_size_14 text_center"
           style="line-height:3"
@@ -69,15 +69,7 @@ export default {
     // 门店更换
     goToNationalStores() {
       this.$router.push({
-        name: "nationalStores",
-        params: {
-          obj: JSON.stringify({
-            type: "profession",
-            data: {
-              id: "蚕丝"
-            }
-          })
-        }
+        name: "changeShop",
       });
     },
     // 获取专属门店数据
@@ -166,6 +158,13 @@ export default {
 .ex_border {
   width: 95%;
   margin-left: 2%;
+}
+.changeBtn{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  
 }
 .ex_img_b {
   width: 15px;

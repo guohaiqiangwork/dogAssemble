@@ -49,6 +49,7 @@ import orderDetails from '@/views/orderDetails/index' //商城订单详情
 import sharedBonus from '@/views/sharedBonus/index'//共享奖金
 import privacyProtocol from '@/views/privacyProtocol/index'//协议
 import successful from '@/views/successful/index'
+import changeShop from '@/views/changeShop/index'
 Vue.use(Router)
 
 export default new Router({
@@ -560,6 +561,15 @@ export default new Router({
         title: '充值成功'
       },
       component: successful
+    },
+    {
+      // 全部会员详情
+      path: '/changeShop',
+      name: 'changeShop',
+      meta: {
+        title: '充值成功'
+      },
+      component: changeShop
     },
     {
       // 共享奖金

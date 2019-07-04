@@ -194,5 +194,9 @@ export default {
   font-size: 14px;
   line-height: 4;
   margin-top: 5%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 }
 </style>

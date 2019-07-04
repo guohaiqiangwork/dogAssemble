@@ -47,7 +47,7 @@
           </div>
         </div>
         <!-- 支付 -->
-        <div class="div_display_flex" style="position: fixed;bottom: 0;width: 100%;line-height: 3;">
+        <div class="div_display_flex" style="position: fixed;bottom: 0;width: 100%;line-height: 3.5;">
           <div class="div_width_70 backgroun_color_E9 padding_left_div3">
             金额：
             <span class="red">{{priceHT}}</span>
@@ -263,8 +263,18 @@ export default {
       this.$fetch.post(url.closeMemberOrder, _obj).then(
         data => {
           if (data.code == 0) {
-            this.getInfo(this.parameter.item.id);
-            console.log("会员订单结束");
+           alert('结束成功')
+            this.$router.push({
+              name: "memberOperation",
+              params: {
+                obj: JSON.stringify({
+                  type: "profession",
+                  data: {
+                    id: "蚕丝"
+                  }
+                })
+              }
+            });
           } else {
             if (data.msg == "user_not_allow") {
               this.$vux.toast.text("跨店订单不允许结束");
@@ -297,18 +307,7 @@ export default {
       this.$fetch.post(url.sureBigu, _obj).then(
         data => {
           if (data.code == 0) {
-            alert('结束成功')
-            this.$router.push({
-              name: "memberOperation",
-              params: {
-                obj: JSON.stringify({
-                  type: "profession",
-                  data: {
-                    id: "蚕丝"
-                  }
-                })
-              }
-            });
+           
             // this.getInfo(this.parameter.item.id);
           } else {
             alert(data.msg);
@@ -463,10 +462,8 @@ export default {
 .btn_ff {
   border: 1px solid;
   border-radius: 5px;
-  text-align: center;
-  max-width: 30%;
-  width: 30%;
-}
+  text-align: center;  margin-left: 3%;
+  margin-right: 3%;}
 .border_tlr_b {
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;

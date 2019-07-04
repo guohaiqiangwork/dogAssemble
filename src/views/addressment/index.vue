@@ -169,6 +169,7 @@ export default {
   }
   .address_container {
     padding: 0.2rem;
+    padding-bottom: 1.2rem;
     .del_btn {
       // border-radius:0rem 1rem 1rem 0rem;
     }
@@ -199,7 +200,18 @@ export default {
         }
       }
       .msg_mr {
-        margin-right: 0.2rem;
+        width: 4.5rem;
+        // background: red;
+        position: absolute;
+        left: 1.5rem;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+          
+        p:nth-of-type(2){
+          margin-top: .15rem;
+          word-break: break-all;
+        }
       }
       .option {
         display: flex;
@@ -221,7 +233,7 @@ export default {
   }
   .add_button {
     position: fixed;
-    bottom: 2.04rem;
+    bottom:.9rem;
     left: 50%;
     display: flex;
     align-items: center;
