@@ -5,7 +5,7 @@
       <i class="weui-icon-search search_icon"></i>
       <input
         type="text"
-        placeholder="搜索您想找的配方…"
+        placeholder="搜索您想找的病症…"
         v-model="form.name"
         style="width:100%;height:100%;background-color:#EFEFEF; outline: none;border:none"
         v-on:input="input"
@@ -238,6 +238,9 @@ export default {
         .post("fruits/app/blank/getRecipeList", this.form)
         .then(res => {
           if (res.code == 0) {
+            if(this.form.name == ""){
+              return
+            }
             this.peiFangList = res.obj;
           }
         });

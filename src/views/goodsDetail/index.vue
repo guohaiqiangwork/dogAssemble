@@ -69,7 +69,7 @@
                 </div> 
             </popup>
         </div>
-        <div  class="bottom-tip" v-if="goodsDetail.state == 1">已下架</div>
+        <!-- <div  class="bottom-tip" v-if="goodsDetail.state == 1">已下架</div> -->
     </div>
     
 </template>

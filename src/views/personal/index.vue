@@ -201,46 +201,34 @@
         </div>-->
         <div class="personal_cd_j text_center" @click="goToSetUp">
           <div class="margin_top28">
-<<<<<<< HEAD
             <img src="../../assets/images/1579@2x.png"  width="25px" height="25px">
-=======
-            <img src="../../assets/images/1582@2x.png" width="25px" height="25px" />
->>>>>>> ade2d97a00c4a65a59943d9e4612187e83e1258a
           </div>
           <div>设置中心</div>
         </div>
         <div class="personal_cd_j text_center"  @click="goToRecommend">
           <div class="margin_top28">
-<<<<<<< HEAD
             <img src="../../assets/images/1609@2x.png"  width="25px" height="25px">
-=======
-            <img src="../../assets/images/1578@2x.png" width="25px" height="25px" />
->>>>>>> ade2d97a00c4a65a59943d9e4612187e83e1258a
           </div>
           <div>推荐信息</div>
         </div>
         <div class="personal_cd_j text_center" @click="falgQH" v-if="personalMsg.isChange  == 1">
           <div class="margin_top28">
-<<<<<<< HEAD
             <img src="../../assets/images/1609.png"  width="25px" height="25px">
-=======
-            <img src="../../assets/images/1609@2x.png" width="25px" height="25px" />
->>>>>>> ade2d97a00c4a65a59943d9e4612187e83e1258a
           </div>
           <div>切换身份</div>
         </div>
-        <div
+        <!-- <div
           class="personal_cd text_center"
           @click="goToRecommend"
           v-if="personalMsg.isChange  == 1"
           style="border-right:0;"
         >
           <div class="margin_top28">
-            <!-- class="img_width25" class="img_width_100"-->
+            class="img_width25" class="img_width_100"
             <img src="../../assets/images/1609@2x.png" width="25px" height="25px" />
           </div>
           <div>推荐信息</div>
-        </div>
+        </div> -->
       </div>
       <!-- 底部菜单栏 -->
       <!-- <TabBar ref="TabBar"/> -->
