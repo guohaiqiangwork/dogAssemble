@@ -119,9 +119,10 @@ export default {
       };
       this.$fetch.post(url.changePassword, data).then(res => {
         console.log(res);
-        if (res.code = 0) {
+        if (res.code == 0) {
           localStorage.clear();
           this.$router.push('/login/1');
+          this.$vux.toast.text('修改成功')
           // alert("修改成功");
         } else {
           if(res.msg == 'smsCode_error'){

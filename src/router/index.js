@@ -301,7 +301,7 @@ export default new Router({
     },
     {
       // 个人中心
-      path: '/personal/:obj',
+      path: '/personal',
       name: 'personal',
       meta: {
         title: '个人中心',

@@ -44,7 +44,7 @@
           <div class="flex-demo" @click="didClickedItem(2,'/personal')" v-if="actives == '/personal'">
             <img src="../assets/images/personCenter_active.png" style="width: .4rem;height:0.4rem;">
           </div>
-           <div class="flex-demo" @click="didClickedItem(2,'/personal/')" v-else>
+           <div class="flex-demo" @click="didClickedItem(2,'/personal')" v-else>
             <img src="../assets/images/personCenter.png" style="width: .4rem;height:0.4rem;">
           </div>
           <div :class="{ 'active': actives == '/personal'}" class="font_color_BF">个人中心</div>
@@ -108,19 +108,19 @@ export default {
     },
     didClickedItem: function(tag, name) {
       this.actives = name;
-         if(tag == 2){
-            this.$router.push({
-            path: name+JSON.stringify({
-                type: "profession",
-                data: {
-                  id: "参数"
-                }
-              }),
-          });
-         }else{
-           this.$router.push(name)
-         }
-      
+    
+         this.$router.push(name)
+      // this.$router.push({
+      //   name: name,
+      //   params: {
+      //     obj: JSON.stringify({
+      //       type: "profession",
+      //       data: {
+      //         id: "参数"
+      //       }
+      //     })
+      //   }
+      // });
     },
     setBage() {
       this.buyNum = localStorage.getItem("catnum");
