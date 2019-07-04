@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="div_display_flex width_m" @click="accountD" v-if="type != 3 ">
-        <div class="div_width_50 font_color_1A personal_list_font">{{type==1&&state!=3?'冻结账户':type==1&&state == 3?"解冻账户" :"关闭店铺"}}</div>
+        <div class="div_width_50 font_color_1A personal_list_font">{{type==1&&state!=3?'冻结账户':type==1&&state == 3?"解冻账户" :storeState == 2?  "开始营业": "关闭店铺"}}</div>
         <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
           <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%">
         </div>
@@ -39,7 +39,7 @@
     </div>
     <!-- 账户冻结 -->
     <confirm v-model="outPayFalge" title @on-cancel="onCancel" @on-confirm="onConfirm">
-      <div style="text-align:center;font-size:18px;">{{type == 1?"您确认将会员卡冻结吗？" :"是否要打烊"}}</div>
+      <div style="text-align:center;font-size:18px;">{{type == 1?"您确认将会员卡冻结吗？" : storeState == 2?"是否要开店": "是否要打烊" }}</div>
     </confirm>
      <confirm v-model="PayFalge" :title="'您当前用户'+tel+'已被冻结需解冻才可以正常使用'" :hide-on-blur="true" :show-cancel-button="false" confirm-text="确认解冻" @on-confirm="onConfirm">
       <div style="text-align:center;font-size:18px;display:flex;">
@@ -89,6 +89,9 @@ export default {
       var reg = /(\d{3})\d{4}(\d{4})/;
       str = str.replace(reg,'$1****$2');
       return str
+    },
+    storeState(){
+      return localStorage.getItem('storeState');
     }
   },
   methods: {
@@ -233,6 +236,22 @@ export default {
         }
         
       } else {
+        var obj={}
+        if(this.storeState == 2){
+          obj = {openId:localStorage.getItem('openId'),state:"1"}
+        }else{
+          obj = {openId:localStorage.getItem('openId'),state:"2"}
+        }
+         this.$fetch.post('fruits/app/personal/changeStoreState',obj).then(res =>{
+          console.log(res,'gfdgd')
+          if(res.code ==0){
+            this.$router.push('/personal');
+            this.$vux.toast.text(obj.state == 2?'店铺已打烊':'已经开始营业');
+            localStorage.setItem('storeState',res.obj);
+          }
+            
+        })
+        console.log('打烊')
       }
       console.log("233");
     },

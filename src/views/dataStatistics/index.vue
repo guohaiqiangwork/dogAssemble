@@ -48,6 +48,7 @@
           </div>
         </div>
         <div
+          v-if="type!=3"
           class="div_width_45 font_color_ff text_center backgroun_color_76"
           @click="goTODataDetails('1')"
         >
@@ -55,6 +56,7 @@
           <div class="font_size_13 margin_top_div5">会员充值(元)</div>
         </div>
         <div
+          v-if="type!=3"
           class="div_width_45 font_color_ff text_center backgroun_color_17"
           @click="goTODataDetails('2')"
         >
@@ -94,6 +96,7 @@
           <div class="font_size_13 margin_top_div5">商城返佣(元)</div>
         </div>
         <div
+          v-if="type!=3"
           class="div_width_45 font_color_ff text_center"
           style="background-color:#FFB469"
           @click="goTODataDetails('7')"
@@ -102,6 +105,7 @@
           <div class="font_size_13 margin_top_div5">转店收入(元)</div>
         </div>
         <div
+        ` v-if="type!=3"
           class="div_width_45 font_color_ff text_center"
           style="background-color:#FF776C"
           @click="goTODataDetails('8')"

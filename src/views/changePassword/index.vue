@@ -5,6 +5,7 @@
         <img src="../../assets/images/phone@2x.png" class="width_16">
         <input
           type="text"
+          :show-clear="false"
           placeholder="请输⼊您的手机号"
           maxlength="11"
           v-model="phone"
@@ -18,6 +19,7 @@
         <img src="../../assets/images/验证码@2x.png" class="width_16">
         <input
           type="text"
+          :show-clear="false"
           v-model="code"
           placeholder="请输⼊验证码"
           style="width:56%;height:100%;outline: none;border:none"
@@ -149,6 +151,7 @@ export default {
 .pass_list_w {
   width: 95%;
   margin-left: 2%;
+  background: #fff;
 }
 .search_box {
   height: 0.7rem;

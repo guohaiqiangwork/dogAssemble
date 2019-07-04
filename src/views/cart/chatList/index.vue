@@ -262,8 +262,10 @@ export default {
             background:rgba(165,165,165,1);
         }
         .gooods_avatar{
-            width: 1.4rem;
-            height: 1.4rem;
+            // width: 1.4rem;
+            // height: 1.4rem;
+            width: 70px;
+            height: 70px;
             margin-left: 0.28rem;
         }
         .goods_item{

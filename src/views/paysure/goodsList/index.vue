@@ -8,16 +8,16 @@
            
             <div class="goods-msg">
                 <p>{{item.name}}</p>
-                <p class="mt-12 flex-between">
-                    <span class="flex-between align-center wrap">
-                        <span class="goods-price">¥{{item.price}}</span>
-                        <span v-for="(el,ind) in item.specList" :key="ind">
+                <div class="mt-12 flex-between">
+                    <div class="flex-between align-center wrap">
+                        <p class="goods-price">¥{{item.price}}</p>
+                        <p v-for="(el,ind) in item.specList" :key="ind">
                             <span class="ml-2">{{el.specName}}:{{el.value}}</span>
                             <!-- <span class="ml-2">规格:800g</span> -->
-                        </span>
-                    </span>
+                        </p>
+                    </div>
                     <span>X{{item.num}}</span>
-                </p>
+                </div>
             </div>
         </div>
 

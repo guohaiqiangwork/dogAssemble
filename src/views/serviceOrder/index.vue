@@ -27,7 +27,7 @@
           <div class="service_width_25">{{items.num}}</div>
           <div class="service_width_25">{{items.time}}</div>
           <div class="service_width_25" v-if="item.state == 0">未开始</div>
-          <div class="service_width_25" v-if="item.state == 1">服务中</div>
+          <div class="service_width_25" v-if="item.state == 1">已消费</div>
           <div class="service_width_25" v-if="item.state == 2">已暂停</div>
           <div class="service_width_25" v-if="item.state == 3">已完成</div>
         </div>
@@ -55,7 +55,7 @@
            
           >适应症：{{item.disease}}</div>
           <div class="div_width_20" v-if="item.state == 0">未开始</div>
-          <div class="div_width_20" v-if="item.state == 1">服务中</div>
+          <div class="div_width_20" v-if="item.state == 1">已消费</div>
           <div class="div_width_20" v-if="item.state == 2">已暂停</div>
           <div class="div_width_20" v-if="item.state == 3">已完成</div>
         </div>

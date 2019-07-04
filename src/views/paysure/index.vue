@@ -40,7 +40,7 @@
         </div>-->
 
         <div class="flex-between" v-for="(item,index) in option.goodList" :key="index">
-          <div class="flex-between flex-clo align-center items">
+          <div class="flex-between flex-clo align-center items" v-if="index<=3">
             <img :src="item.img" alt>
             <p>¥{{item.price}}</p>
           </div>
@@ -260,6 +260,11 @@ export default {
   mounted() {
     settitle('确认订单');
     console.log(this.option,'ppp')
+    //  this.option.goodList.forEach((e,i) => {
+    //       if(i<=4){
+    //         this.form.goodList.push(e)
+    //       }
+    //   });
     //  获取邮费
     this.$fetch
       .post("fruits/app/cart/getDefaultAddr", this.option)

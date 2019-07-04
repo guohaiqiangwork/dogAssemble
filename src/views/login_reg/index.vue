@@ -11,6 +11,7 @@
         placeholder="请输入您的真实姓名"
         v-model="form.name"
         required
+        :show-clear="false"
         @on-change="change"
         :max="6"
         ref="name"
@@ -23,6 +24,7 @@
       </x-input>
       <x-input
         class="mt-40"
+        :show-clear="false"
         placeholder="请输入手机号"
         @on-click-clear-icon="clear"
         ref="inputTel"
@@ -40,6 +42,7 @@
       <x-input
         class="mt-40"
         ref="code"
+        :show-clear="false"
         keyboard="number"
         placeholder="请输⼊验证码"
         :min="4"
@@ -63,6 +66,7 @@
         type="password"
         :min="6"
         :max="6"
+        :show-clear="false"
         placeholder="请设置您的密码,用于套餐支付和登录"
         @on-click-clear-icon="clear"
         required
@@ -79,6 +83,7 @@
     <div class="form" v-else>
       <x-input
         keyboard="number"
+        :show-clear="false"
         is-type="china-mobile"
         placeholder="请输入手机号码"
         ref="inputTel"
@@ -95,6 +100,7 @@
       <x-input
         class="mt-40"
         type="password"
+        :show-clear="false"
         placeholder="请输入密码"
         @on-click-clear-icon="clear"
         ref="inputPas"
@@ -397,6 +403,7 @@ export default {
     }
   }
   .form {
+    background: #fff;
     overflow: hidden;
     a {
       color: #4a7b67;
