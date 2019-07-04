@@ -59,7 +59,7 @@
     <div v-if="classA == '1'">
       <div class="margin_top_div5">
         <span class="font_size_14 font_color_1A margin_left_div6">购买天数：</span>
-        <select>
+      <select v-model="selected" @change="getMemberRecipeDay">
           <option v-for="(option,index) in recipeList" :key="index" :value="option">{{ option.recipe }}</option>
         </select>
       </div>
@@ -229,8 +229,9 @@ export default {
    
       var millSeconds =
         Math.abs(nDate) + this.memberIDNumber * 24 * 60 * 60 * 1000;
+      console.log(millSeconds)
       var rDate = new Date(millSeconds);
-      
+      console.log(rDate)
       var year = rDate.getFullYear();
       var month = rDate.getMonth() + 1;
       if (month < 10) month = "0" + month;
@@ -386,7 +387,7 @@ export default {
           if (data.code == 0) {
             this.recipeList = data.obj;
           } else {
-            alert(data.msg);
+            // alert(data.msg);
           }
         },
         err => {
@@ -415,11 +416,10 @@ export default {
       );
     },
     // 辟谷天数
-    getMemberRecipeDay() {
+    getMemberRecipeDay(item) {
       this.memberID = this.selected.id;
       this.memberIDNumber = this.selected.recipe;
       this.payMoney = this.selected.retail;
-      console.log(this.memberIDNumber);
     },
     //订单保存
     newOrderq() {
