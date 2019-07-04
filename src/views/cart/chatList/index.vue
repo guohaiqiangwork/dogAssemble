@@ -1,10 +1,10 @@
 <template>
     <div id="cartList">
         <div v-if="charList.length">
-            <div  class= "cartlist"  v-for="(item,index) in charList" :key="index" @click.prevent="goDetail(item)">
+            <div  class= "cartlist"   v-for="(item,index) in charList" :key="index" @click.prevent="goDetail(item)">
                <!-- <div class="foods_select"></div> -->
-               <i v-if="item.state ==1" class="distroy">失效</i>
-               <span v-else @click.stop="chooseBuy(item,index)">
+               <!-- <i v-if="item.state ==1" class="distroy">失效</i> -->
+               <span  @click.stop="chooseBuy(item,index)">
                     <i  :class="['weui-icon', 'weui_icon_success', 'weui-icon-success',item.ischeck?'checked' : 'normal']" ></i>
                </span>
               
@@ -147,7 +147,9 @@ export default {
                         this.cartDate.id = e.id;
                         var num = localStorage.getItem('catnum');
                         num = num - e.count;
-                        localStorage.setItem('catnum',num)
+                        localStorage.setItem('catnum',num);
+                        res.obj.splice(i,1);
+                        this.$parent.$parent.buyNum -= e.count;
                         this.saveCart();
                         return
                     }
@@ -212,6 +214,9 @@ export default {
         },
         saveCart(){
             this.$fetch.post('fruits/app/cart/changeNum',this.cartDate).then(res =>{
+                if(res.code ==0){
+                    // this.$router.go(0);
+                }
             })
         }
     },

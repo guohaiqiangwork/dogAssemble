@@ -61,7 +61,7 @@ export default {
     };
   },
     beforeRouteEnter (to, from, next) {
-    if(from.name == 'setUp'){
+    if(from.name == 'setUp' || from.name == 'personal' || from.name == 'addressopt'){
       next(vm =>{
         vm.sub = true;
       })
@@ -96,7 +96,6 @@ export default {
       if(this.sub){
         return
       }
-      console.log(item,'000')
       // this.$router.push('/paysure',{
       //   data:{
           

@@ -3,7 +3,7 @@
         <div class="address_top">
             <div class="address_item">
     
-                <x-input label-width="4em" v-model="addressBC.name"  :title='`<span style="${style}">收货人</span>`' placeholder="姓名"></x-input>
+                <x-input label-width="4em" v-model="addressBC.name"  :title='`<span style="${style}">收货人</span>`'  :show-clear="false" placeholder="姓名"></x-input>
             </div>
             <div class="address_item">
                 <x-input label-width="4em" v-model="addressBC.phone"  :title='`<span style="${style}">手机号</span>`' placeholder="收货人电话" keyboard="number" is-type="china-mobile" :show-clear="false"></x-input>
