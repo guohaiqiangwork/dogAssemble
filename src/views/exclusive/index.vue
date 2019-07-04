@@ -89,7 +89,7 @@ export default {
       };
       this.$fetch.post("/fruits/app/personal/myStore", _obj).then(
         data => {
-          if (data.code == 0) {
+          if (data.msg == 'success') {
             this.myStoreData = data.obj;
           } else {
             alert(data.msg);

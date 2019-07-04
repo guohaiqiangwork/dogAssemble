@@ -33,7 +33,7 @@
               :max-year="2300"
             ></datetime>
           </div>
-          <div class="margin_left_div3">--</div>
+          <div class="margin_left_div3 margin_top_div12">--</div>
           <div class="margin_left_div3">
             <datetime
               v-model="valueE"
@@ -179,10 +179,13 @@ export default {
     },
     //  时间事件
     changeS(value) {
-      console.log("change", value);
+      console.log("chan3ge", value);
+      this.getStatistics()//获取数据
+
     },
     changeE(value) {
-      console.log("change", value);
+      console.log("chang2e", value);
+       this.getStatistics()//获取数据
     },
     //时间
     setToday(value) {
