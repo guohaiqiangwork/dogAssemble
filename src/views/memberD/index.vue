@@ -47,7 +47,7 @@
           </div>
         </div>
         <!-- 支付 -->
-        <div class="div_display_flex" style="position: fixed;bottom: 0;width: 100%;line-height: 3;">
+        <div class="div_display_flex" style="position: fixed;bottom: 0;width: 100%;line-height: 3.5;">
           <div class="div_width_70 backgroun_color_E9 padding_left_div3">
             金额：
             <span class="red">{{priceHT}}</span>
@@ -444,7 +444,8 @@ export default {
   border: 1px solid;
   border-radius: 5px;
   text-align: center;
-  margin-left: 7%;
+  margin-left: 3%;
+  margin-right: 3%;
 }
 .border_tlr_b {
   border-top-right-radius: 5px;

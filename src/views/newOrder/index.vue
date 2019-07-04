@@ -78,11 +78,11 @@
       </div>
       <!-- 按钮 -->
       <div class="div_display_flex" style="position: fixed;bottom: 0;width: 100%;line-height: 3;">
-        <div class="div_width_70 backgroun_color_E9 padding_left_div3">
+        <div style="line-height:3.5;" class="div_width_70 backgroun_color_E9 padding_left_div3">
           金额：
           <span class="red">{{payMoney}}</span>
         </div>
-        <div
+        <div style="line-height:3.5;"
           class="div_width_30 text_center backgroun_color_4A font_color_ff font_size_14"
           @click="payPassW"
         >确认支付</div>
@@ -470,7 +470,7 @@ export default {
   text-align: center;
   background-color: #4a7b67;
   color: #ffffff;
-  margin-left: 14%;
+  margin-left: 11%;
   border: 1px solid #4a7b67;
   border-radius: 5px;
   line-height: 2;
@@ -480,7 +480,7 @@ export default {
   text-align: center;
   background-color: #ffffff;
   color: #4a7b67;
-  margin-left: 8.5%;
+  margin-left: 11%;
   border: 1px solid #4a7b67;
   border-radius: 5px;
   line-height: 2;

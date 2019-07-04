@@ -16,7 +16,7 @@
     <!-- 列表 -->
     <div>
       <div style="margin-left: 3%;margin-top: 5%;">共{{allUserList.attributes.total}}个会员</div>
-      <div
+      <div style="height:25px;line-height:25px;"
         class="div_display_flex margin_top_div5 font_size_14 font_color_1A"
         v-for="(item,index) in allUserList.obj"
         :key="index"

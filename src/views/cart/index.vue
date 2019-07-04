@@ -1,7 +1,7 @@
 <template>
   <div id="cart">
     <div class="package_tit">
-      <div class="if_post red" v-if="freeState.isFree == 1">包邮条件</div>
+      <div style="border-radius:5px;" class="if_post red" v-if="freeState.isFree == 1">包邮条件</div>
       <p class="word_tit">{{freeState.free == 0?'全场包邮':`全场满${freeState.free}包邮，欢迎抢购`}}</p>
     </div>
     <cart-list

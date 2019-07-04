@@ -498,11 +498,12 @@ export default {
 }
 .switchBorder {
   border: 1px solid #4a7b67;
-  height: 3px;
-  width: 90%;
+  height: 5px;
+  width: 100%;
   margin-top: 0%;
   background-color: #4a7b67;
-  border-radius: 4px;
+  border-radius: 5px;
+  box-sizing: border-box;
 }
 .order_block {
   width: 95%;

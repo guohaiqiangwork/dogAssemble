@@ -1,5 +1,5 @@
 <template>
-  <div class="backgroun_color_fff" style="min-height: 700px;">
+  <div class="backgroun_color_fff" style="min-height: 700px;padding-bottom:.9rem;">
     <!-- 账单列表 -->
     <div v-if="customerRecordList.length > 0">
       <div v-for="(item,index) in customerRecordList" :key="index">

@@ -190,9 +190,9 @@ export default {
       obj.password = DesUtils.encode(obj.password, "fruits-app,yuntu,com");
 
       // this.Logform.nickname = ""; this.Logform.headimgurl = "";
-      // obj.openId = localStorage.getItem("openId") || 2229;
-      // obj.nickname = localStorage.getItem("nickname") || 'fsdf';
-      // obj.headimgurl = localStorage.getItem("headimgurl") ||'kjlk';
+      obj.openId = localStorage.getItem("openId") || 2229;
+      obj.nickname = localStorage.getItem("nickname") || 'fsdf';
+      obj.headimgurl = localStorage.getItem("headimgurl") ||'kjlk';
 
       this.$fetch.post("fruits/app/user/login", obj).then(res => {
         this.btnload = false;
