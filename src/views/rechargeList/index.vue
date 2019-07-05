@@ -13,7 +13,7 @@
       </div>
     </div>
     <div v-if=" depositRecordList.length > 0">
-      <div class="data_d_b" v-for="(item,index) in rechargeRecordList" :key="index">
+      <div class="data_d_b" v-for="(item,index) in depositRecordList" :key="index">
         <div class="div_display_flex font_size_16 font_color_33 margin_top_div5">
           <div class="div_width_50">{{item.payType == 3?"现金充值":item.payType == 2?"支付宝充值":item.payType == 4?"微信充值":""}}</div>
           <div class="div_width_50 text_right">+ {{item.recharge}}</div>
@@ -23,7 +23,7 @@
         >{{item.rechargeTime}}</div>
       </div>
     </div>
-    <div v-if=" depositRecordList.length == 0 && rechargeRecordList.length == 0">
+    <div v-if=" depositRecordList.length == 0 && depositRecordList.length == 0">
       <img
         src="../../assets/images/1581@2x.png"
         style="width: 80%;margin-left: 10%;margin-top: 30%;"
@@ -56,6 +56,7 @@ export default {
         .then(res => {
           console.log(res);
           if (res.msg == "success") {
+            console.log( this.rechargeRecordList)
             this.rechargeRecordList = [...res.obj];
           } else {
             alert(res.msg);
@@ -76,6 +77,7 @@ export default {
         .then(res => {
           console.log(res);
           if (res.msg == "success") {
+            console.log( this.depositRecordList)
             this.depositRecordList = [...res.obj];
           } else {
             alert(res.msg);
