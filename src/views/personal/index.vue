@@ -34,7 +34,7 @@
               <div>
                 <img src="../../assets/images/td@2x.png" width="30px">
               </div>
-            </div>-->
+            </!--> -->
           </div>
         </div>
         <div class="div_display_flex" style="margin-top:-13%">
@@ -44,8 +44,17 @@
             @click="goToRecharge"
             style="margin-left: -3%; margin-top: 2%;"
           >
-            <div class="font_color_E8 font_size_15" style="width:60%;margin-top:-5%;text-indent:5%;">押金：{{personalMsg.deposit}}元</div>
-            <div class="personal_falg_m">{{personalMsg.storeState == 1 ? "营业中":"已打烊"}}</div>
+            <div
+              class="font_color_E8 font_size_15"
+              style="width:60%;margin-top:-5%;text-indent:5%;"
+            >押金：{{personalMsg.deposit}}元</div>
+            <div class="personal_falg_m" style="margin-left:15%" v-if="personalMsg.storeState == 1"> 营业中
+              <!-- {{personalMsg.storeState == 1 ? "营业中":"已打烊"}} -->
+              </div>
+              <div class="personal_falg_m" v-if="personalMsg.storeState == 2">
+                已打烊
+                <!-- {{personalMsg.storeState == 1 ? "营业中":"已打烊"}} -->
+                </div>
           </div>
         </div>
         <!-- 账户 -->
@@ -201,19 +210,19 @@
         </div>-->
         <div class="personal_cd_j text_center" @click="goToSetUp">
           <div class="margin_top28">
-            <img src="../../assets/images/1579@2x.png"  width="25px" height="25px">
+            <img src="../../assets/images/1579@2x.png" width="25px" height="25px" />
           </div>
           <div>设置中心</div>
         </div>
-        <div class="personal_cd_j text_center"  @click="goToRecommend">
+        <div class="personal_cd_j text_center" @click="goToRecommend">
           <div class="margin_top28">
-            <img src="../../assets/images/1609@2x.png"  width="25px" height="25px">
+            <img src="../../assets/images/1609@2x.png" width="25px" height="25px" />
           </div>
           <div>推荐信息</div>
         </div>
         <div class="personal_cd_j text_center" @click="falgQH" v-if="personalMsg.isChange  == 1">
           <div class="margin_top28">
-            <img src="../../assets/images/1609.png"  width="25px" height="25px">
+            <img src="../../assets/images/1609.png" width="25px" height="25px" />
           </div>
           <div>切换身份</div>
         </div>
@@ -228,7 +237,7 @@
             <img src="../../assets/images/1609@2x.png" width="25px" height="25px" />
           </div>
           <div>推荐信息</div>
-        </div> -->
+        </div>-->
       </div>
       <!-- 底部菜单栏 -->
       <!-- <TabBar ref="TabBar"/> -->

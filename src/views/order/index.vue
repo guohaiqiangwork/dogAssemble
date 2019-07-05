@@ -66,8 +66,11 @@
                   </div>
                 </div>
                 <div class="order_border margin_top_div5"></div>
-                <div class="order_bt_p margin_top_div3" @click="goToPay(items.id)">
+                 <div class="order_bt_p margin_top_div3" @click="goToPay(items.id)" v-if="item.state == 1" >
                   <div class="oreder_bt_pay backgroun_color_4A">去支付</div>
+                </div>
+                <div class="order_bt_p margin_top_div3" @click="sureReceiving(items)" v-if="item.state == 3" >
+                  <div class="oreder_bt_pay backgroun_color_4A">确认收货</div>
                 </div>
               </div>
             </div>
@@ -131,8 +134,11 @@
                   </div>
                 </div>
                 <div class="order_border margin_top_div5"></div>
-                <div class="order_bt_p margin_top_div3" @click="goToPay(items.id)">
+                 <div class="order_bt_p margin_top_div3" @click="goToPay(items.id)" v-if="item.state == 1" >
                   <div class="oreder_bt_pay backgroun_color_4A">去支付</div>
+                </div>
+                <div class="order_bt_p margin_top_div3" @click="sureReceiving(items)" v-if="item.state == 3" >
+                  <div class="oreder_bt_pay backgroun_color_4A">确认收货</div>
                 </div>
               </div>
             </div>
@@ -199,6 +205,12 @@
                 <!-- <div class="order_bt_p margin_top_div3" @click="sureReceiving(item)">
                   <div class="oreder_bt_pay backgroun_color_4A">确认收货</div>
                 </div> -->
+                 <div class="order_bt_p margin_top_div3" @click="goToPay(items.id)" v-if="item.state == 1" >
+                  <div class="oreder_bt_pay backgroun_color_4A">去支付</div>
+                </div>
+                <div class="order_bt_p margin_top_div3" @click="sureReceiving(items)" v-if="item.state == 3" >
+                  <div class="oreder_bt_pay backgroun_color_4A">确认收货</div>
+                </div>
               </div>
             </div>
           </div>
@@ -261,7 +273,10 @@
                   </div>
                 </div>
                 <div class="order_border margin_top_div5"></div>
-                <div class="order_bt_p margin_top_div3" @click="sureReceiving(items.id)">
+                 <div class="order_bt_p margin_top_div3" @click="goToPay(items.id)" v-if="item.state == 1" >
+                  <div class="oreder_bt_pay backgroun_color_4A">去支付</div>
+                </div>
+                <div class="order_bt_p margin_top_div3" @click="sureReceiving(items)" v-if="item.state == 3" >
                   <div class="oreder_bt_pay backgroun_color_4A">确认收货</div>
                 </div>
               </div>
@@ -326,8 +341,11 @@
                   </div>
                 </div>
                 <div class="order_border margin_top_div5"></div>
-                <div class="order_bt_p margin_top_div3" @click="goToPay(items.id)">
+                  <div class="order_bt_p margin_top_div3" @click="goToPay(items.id)" v-if="item.state == 1" >
                   <div class="oreder_bt_pay backgroun_color_4A">去支付</div>
+                </div>
+                <div class="order_bt_p margin_top_div3" @click="sureReceiving(items)" v-if="item.state == 3" >
+                  <div class="oreder_bt_pay backgroun_color_4A">确认收货</div>
                 </div>
               </div>
             </div>

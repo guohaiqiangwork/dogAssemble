@@ -17,7 +17,7 @@
     >
       <div class="div_width_30 margin_right_div3">
         <div class="order_width_height">
-          <img :src="items.picId" width="100%" alt>
+          <img :src="items.picId" width="100%" alt />
         </div>
       </div>
       <div style="width:63%">
@@ -65,12 +65,14 @@
       <div class="div_width_50 text_right font_size_13 font_color_10">¥{{shopOrderList.time}}</div>
     </div>
     <!-- 立即支付 -->
-    <div class="orderD_btn" @click="payOrder" v-if="switches==1||switches==3">{{switches==1?'立即支付':"立即收货"}}</div>
+    <div class="orderD_btn" @click="payOrder" v-if="shopOrderList.state==1">立即支付</div>
+    <div class="orderD_btn" @click="sureReceiving" v-if="shopOrderList.state==3">确认收货</div>
+    <!-- <div class="orderD_btn" @click="payOrder" v-if="switches==1||switches==3">{{switches==1?'立即支付':"立即收货"}}</div> -->
   </div>
 </template>
 <script>
 import url from "../../bin/url";
-import wexinPay from '../../bin/weiXinPay'
+import wexinPay from "../../bin/weiXinPay";
 import { XTextarea } from "vux";
 export default {
   name: "orderDetails",
@@ -88,9 +90,9 @@ export default {
     };
   },
   computed: {
-    switches(){
-      return this.$route.query.switch
-    } 
+    switches() {
+      return this.$route.query.switch;
+    }
   },
   methods: {
     //   获取订单详情
@@ -106,38 +108,61 @@ export default {
           });
 
           this.shopOrderList = data.obj;
-        }else{
-             alert(data.msg)
-          }
+        } else {
+          alert(data.msg);
+        }
       });
     },
     // 立即支付
     payOrder() {
       let _obj = {
-        openId:localStorage.getItem("openId"),
+        openId: localStorage.getItem("openId"),
         id: this.routeParams.data.id
       };
       this.$fetch.post(url.payOrder, _obj).then(data => {
         if (data.code == 0) {
-          //  var obj = eval("(" + data.obj + ")"); 
-             var objPay =JSON.parse(res.obj)
-          weiXinPay(objPay,function(val){
-            console.log(val)
-          },function(err){
-            alert(JSON.stringify(err));
-          })
-          wexinPay(obj)
-        }else{
-             alert(data.msg)
-          }
+          //  var obj = eval("(" + data.obj + ")");
+          var objPay = JSON.parse(res.obj);
+          weiXinPay(
+            objPay,
+            function(val) {
+              console.log(val);
+            },
+            function(err) {
+              alert(JSON.stringify(err));
+            }
+          );
+          wexinPay(obj);
+        } else {
+          alert(data.msg);
+        }
       });
-    }
+    },
+       // 确认收货
+    sureReceiving() {
+      let _obj = {
+        openId: localStorage.getItem("openId"),
+        id: this.routeParams.data.id
+      };
+      this.$fetch.post(url.sureReceiving, _obj).then(
+        data => {
+          if (data.code == 0) {
+           alert('收货成功')
+          } else {
+            alert(data.msg);
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
+        }
+      );
+    },
   },
   mounted() {
-    console.log(wexinPay)
+    console.log(wexinPay);
   },
   created() {
-    console.log(this.$route)
+    console.log(this.$route);
     if (this.$route.params.obj) {
       this.routeParams = JSON.parse(this.$route.params.obj);
       console.log(this.routeParams.data.id);
