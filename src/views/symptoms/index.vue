@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color:#F8F8F8;min-height:700px">
+  <div style="background-color:#F8F8F8;min-height:700px;width:100%;height:100%;overflow-x:hidden;">
     <!-- 搜索 -->
     <div class="search_box">
       <i class="weui-icon-search search_icon"></i>
@@ -12,7 +12,7 @@
       >
       <i></i>
     </div>
-    <div class="margin_top_div3">
+    <div class="margin_top_div3" v-show="false">
       <!-- 全部配方 -->
       <div id="allbook">
         <div v-for="(item,index) in peiFangList" :key="index">
@@ -72,6 +72,10 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="nodata" style="height: calc(100% - 0.7rem);    background-color: rgb(248, 248, 248);">
+      <img src="../../assets/images/1546.png" alt="" style="width:4.78rem;height:3.23rem;">
+      <p style="font-size:12px">暂无数据</p>
     </div>
   </div>
 </template>
