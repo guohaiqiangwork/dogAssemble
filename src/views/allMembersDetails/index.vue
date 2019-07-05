@@ -13,12 +13,12 @@
       @click="goTOallMembersDD(item.id)"
     >
       <div class="div_display_flex margin_top_div5 font_size_14 font_color_1A margin_left_div3">
-        <div class="div_width_25 margin_left_div3" @click="goToDetails(item.id)">{{item.recipe}}</div>
+        <div class="div_width_25 margin_left_div3" @click="goToDetails(item.id)"> {{item.recipe}}</div>
         <div class="div_width_70 text_right">{{item.time}}</div>
         <div class="div_width_8 text_right">></div>
       </div>
       <div class="div_display_flex font_size_14 margin_top_div2 margin_left_div3">
-        <div class="div_width_50 margin_left_div3">¥{{item.price}}</div>
+        <div class="div_width_50 margin_left_div3"> {{item.num}} | ¥{{item.price}}</div>
         <div
           class="div_width_50 text_right"
           style="color:#4A7B67;padding-right:8%"
