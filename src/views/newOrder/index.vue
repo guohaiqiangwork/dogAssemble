@@ -416,10 +416,11 @@ export default {
       );
     },
     // 辟谷天数
-    getMemberRecipeDay(item) {
+    getMemberRecipeDay(item) {  
       this.memberID = this.selected.id;
       this.memberIDNumber = this.selected.recipe;
       this.payMoney = this.selected.retail;
+      // this.change();
     },
     //订单保存
     newOrderq() {
