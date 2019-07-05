@@ -7,7 +7,7 @@
         type="text"
         placeholder="搜索您想找的门店"
         v-model="productNamr"
-        @change="getRecommendStoreList(productNamr)"
+        @input="getRecommendStoreList(productNamr)"
         style="width:100%;height:100%;background-color:#EFEFEF; outline: none;border:none"
       >
       <i></i>
@@ -220,15 +220,25 @@ export default {
         latitude: this.latitude,
         longitude: this.longitude
       };
-      this.isLoading1 = true;
-      this.$fetch.post("fruits/app/blank/getRecommendStoreList", _obj).then(
+      if(this.timer){
+        clearTimeout(this.timer);
+      }
+
+      this.timer = setTimeout(() =>{
+
+         this.isLoading1 = true;
+         this.recommendStoreList =[];
+         this.$fetch.post("fruits/app/blank/getRecommendStoreList", _obj).then(
         data => {
           this.isLoading1 = false;
+          this.timer = "";
           if (data.code == 0) {
-
-            data.obj.forEach(e =>{
+            if(data.obj.length){
+               data.obj.forEach(e =>{
               this.recommendStoreList.push(e);
             })
+            }
+           
             // data.obj.forEach(item => {
             //   item.SFQY = data.obj.province
             // });
@@ -241,6 +251,9 @@ export default {
           alert("网络缓慢。。");
         }
       );
+      },2000)
+     
+    
     },
     // 上拉加载
     selPullUp() {

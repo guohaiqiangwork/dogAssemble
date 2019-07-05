@@ -270,6 +270,7 @@ export default {
       })
       .then(res => {
         this.personalMsg = { ...res.obj };
+        localStorage.setItem('storeState',res.obj.storeState)
       },err =>{
         alert(err);
       });

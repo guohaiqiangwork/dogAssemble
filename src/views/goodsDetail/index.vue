@@ -1,7 +1,7 @@
 <template>
     <div id="goods_detail">
         <div class="goods_picbox"> 
-            <swiper :list="imgList" v-show="imgList.length"   @on-index-change="onIndexChange" auto loop height='100%' :show-dots='false'></swiper>
+            <swiper :list="imgList" v-show="imgList.length"   @on-index-change="onIndexChange"  height='100%' :show-dots='false'></swiper>
             <!-- <img  src="../../assets/images/WechatIMG101(1).png" alt=""> -->
             <div class="circle_num">
                 <span>{{num}}</span>
@@ -26,7 +26,7 @@
         </div> 
          <!-- <div class="foryou">为您推荐</div> -->
         <!-- <hot v-on:goToDetail="goDetail" class="hot-btn-space"></hot> -->
-        <div id="hot" class=" margin_top_div3">
+        <!-- <div id="hot" class=" margin_top_div3">
             <div class="hot_tit" v-if="home&&hotList.length">热门推荐</div>
                 <div class="foryou" v-if="!home&&hotList.length">为您推荐</div>
                 <div class="hot_item">
@@ -40,7 +40,7 @@
                     </p>
                 </div>
                 </div>
-        </div>
+        </div> -->
         <div v-transfer-dom>
             <popup v-model="popupshow" position="bottom" @on-hide='close'>
                 <div class="popup_box ">
