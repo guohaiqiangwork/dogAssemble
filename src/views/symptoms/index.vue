@@ -12,7 +12,7 @@
       >
       <i></i>
     </div>
-    <div class="margin_top_div3" v-show="false">
+    <div class="margin_top_div3" v-show="peiFangList.length">
       <!-- 全部配方 -->
       <div id="allbook">
         <div v-for="(item,index) in peiFangList" :key="index">
@@ -281,9 +281,9 @@ export default {
 
   mounted() {
     // this.getStore();
-    this.getRecipeList();
+    // this.getRecipeList();
     // this.getMyLocation();
-    this.addressDetail();
+    // this.addressDetail();
     // this.getList()
     // console.log("病症检测");
   }

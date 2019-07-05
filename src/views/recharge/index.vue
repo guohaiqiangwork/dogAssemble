@@ -70,6 +70,7 @@
           class="recharge_input_b2 margin_top_div8"
           placeholder="输入其他金额"
           v-model="amount"
+          @blur ="onBlur"
           @focus="otherFocus"
         >
       </div>
@@ -118,6 +119,9 @@ export default {
     };
   },
   methods: {
+    onBlur(){
+      window.scroll(0,0)
+    },
     // 选择金额
     moneyXz(falge, index, topup) {
       // console.log(,890)
