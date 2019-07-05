@@ -14,9 +14,9 @@
       @pulldown="pulldown"
       style="height: calc(100% - 48px);"
     >
-      <div slot="list" class="nut-vert-list-panel" style="height:100%">
+      <div slot="list" class="nut-vert-list-panel" style="display:flex;height:100%;align-items: center;margin-top: -110px;">
         <!-- 全部订单 -->
-        <div v-if="switchFlage == '0'">
+        <div v-if="switchFlage == '0'" style="width: 100%;">
           <div v-if="orderList.length != 0">
             <div v-for="(item,index) in orderList" :key="index">
               <div class="order_block" @click="goToOrderDetails(item.id)">
@@ -78,13 +78,13 @@
           </div>
           <div v-if="orderList.length == 0" style="height:100%">
             <div class="text_center" style="margin-top16% height:100%;" >
-              <img src="../../assets/images/1581@2x.png" width="65%"  alt>
+              <img src="../../assets/images/1581@2x.png" width="55%"  alt>
             </div>
-            <div class="text_center font_size_15 font_color_99">暂无订单</div>
+            <div class="text_center font_size_15 font_color_99" style="margin-top: 20px;">暂无订单</div>
           </div>
         </div>
         <!-- 待付款 -->
-        <div v-if="switchFlage == '1'">
+        <div v-if="switchFlage == '1'" style="width: 100%;">
           <div v-if="orderList.length != 0">
             <div v-for="(item,index) in orderList" :key="index">
               <div class="order_block" @click="goToOrderDetails(item.id)">
@@ -146,13 +146,13 @@
           </div>
           <div v-if="orderList.length == 0" style="height:100%">
             <div class="text_center" style="margin-top16%;height:100%">
-              <img src="../../assets/images/1581@2x.png" width="65%" alt>
+              <img src="../../assets/images/1581@2x.png" width="55%" alt>
             </div>
-            <div class="text_center font_size_15 font_color_99">暂无订单</div>
+            <div class="text_center font_size_15 font_color_99" style="margin-top: 20px;">暂无订单</div>
           </div>
         </div>
         <!-- 待收费 -->
-        <div v-if="switchFlage == '2'">
+        <div v-if="switchFlage == '2'" style="width: 100%;">
           <div v-if="orderList.length != 0">
             <div v-for="(item,index) in orderList" :key="index">
               <div class="order_block" @click="goToOrderDetails(item.id)">
@@ -217,13 +217,13 @@
           </div>
           <div v-if="orderList.length == 0" style="height:100%">
             <div class="text_center" style="margin-top16%;height:100%">
-              <img src="../../assets/images/1581@2x.png" width="65%" alt>
+              <img src="../../assets/images/1581@2x.png" width="55%" alt>
             </div>
-            <div class="text_center font_size_15 font_color_99">暂无订单</div>
+            <div class="text_center font_size_15 font_color_99" style="margin-top: 20px;">暂无订单</div>
           </div>
         </div>
         <!-- 待收货 -->
-        <div v-if="switchFlage == '3'">
+        <div v-if="switchFlage == '3'" style="width: 100%;">
           <div v-if="orderList.length != 0">
             <div v-for="(item,index) in orderList" :key="index">
               <div class="order_block" @click="goToOrderDetails(item.id)">
@@ -285,13 +285,13 @@
           </div>
           <div v-if="orderList.length == 0" style = "height:100%">
             <div class="text_center" style="margin-top16%;height:100%">
-              <img src="../../assets/images/1581@2x.png" width="65%" alt>
+              <img src="../../assets/images/1581@2x.png" width="55%" alt>
             </div>
-            <div class="text_center font_size_15 font_color_99">暂无订单</div>
+            <div class="text_center font_size_15 font_color_99" style="margin-top: 20px;">暂无订单</div>
           </div>
         </div>
         <!-- 已完成 -->
-        <div v-if="switchFlage == '4'">
+        <div v-if="switchFlage == '4'" style="width: 100%;">
           <div v-if="orderList.length != 0">
             <div v-for="(item,index) in orderList" :key="index">
               <div class="order_block" @click="goToOrderDetails(item.id)">
@@ -353,8 +353,8 @@
           </div>
           <div v-if="orderList.length == 0" style="height:100%">
             <div class="text_center " style="height:100%;">
-              <img src="../../assets/images/1581@2x.png" width="65%" alt>
-              <div class="text_center font_size_15 font_color_99">暂无订单</div>
+              <img src="../../assets/images/1581@2x.png" width="55%" alt>
+              <div class="text_center font_size_15 font_color_99" style="margin-top: 20px;">暂无订单</div>
             </div>
             
           </div>
