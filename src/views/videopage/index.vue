@@ -5,10 +5,11 @@
       <iframe
         id="video"
         style="width:100%;height:220px;display:block"
-        :src="videolUrl"
         frameborder="0"
+        src="http://player.youku.com/embed/XNDEyMTAwNjE0MA=="
         allowfullscreen
       ></iframe>
+       <!-- :src="videolUrl" -->
     </div>
     <!-- 视频选集 -->
     <!-- <choose-num></choose-num> -->
@@ -16,7 +17,7 @@
       <div class="piece_box">
         <p class="flex-between align-center">
           <span class="case_tit">{{videoList.classTwo}}</span>
-          <img class="icon_size" src="../../assets/images/share.png" alt>
+          <img class="icon_size" src="../../assets/images/share.png" alt />
         </p>
         <div class="introduce">
           <p class="tit">简介</p>
@@ -83,12 +84,13 @@
         </div>
       </popup>
     </div>
-    <span @click="show = true">出来吧，弹窗！</span>
+    <!-- <span @click="show = true">出来吧，弹窗！</span> -->
   </div>
 </template>
 <script>
 import url from "../../bin/url";
 import { TransferDom, Popup, XButton } from "vux";
+import wexinPay from "../../bin/weiXinPay";
 export default {
   directives: {
     TransferDom
@@ -107,7 +109,7 @@ export default {
       videoListObj: "",
       videoIdPay: "",
       modelData: "",
-      videolUrl:''
+      videolUrl: ""
     };
   },
   methods: {
@@ -122,8 +124,8 @@ export default {
           if (data.code == 0) {
             this.videoList = data.attributes;
             this.videoListObj = data.obj;
-          }else{
-             alert(data.msg)
+          } else {
+            alert(data.msg);
           }
         },
         err => {
@@ -133,16 +135,18 @@ export default {
     },
     // 购买视频
     saveVideoOrder() {
-       let _obj = {
+      let _obj = {
         openId: localStorage.getItem("openId"),
         id: this.videoIdPay
       };
       this.$fetch.post(url.saveVideoOrder, _obj).then(
         data => {
           if (data.code == 0) {
-            console.log(data)
-          }else{
-             alert(data.msg)
+          var obj = eval("(" + data.obj + ")");
+          console.log(obj);
+          wexinPay(obj);
+          } else {
+            alert(data.msg);
           }
         },
         err => {
