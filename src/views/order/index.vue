@@ -14,7 +14,7 @@
       @pulldown="pulldown"
       style="height: calc(100% - 48px);overflow-x:hidden;"
     >
-      <div slot="list" class="nut-vert-list-panel" style="display:flex;height:100%;align-items: center;">
+      <div slot="list" class="nut-vert-list-panel" style="">
         <!-- 全部订单 -->
         <div v-if="switchFlage == '0'" style="width:100%;height: auto;">
           <div v-if="orderList.length != 0">
