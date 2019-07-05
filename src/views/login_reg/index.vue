@@ -1,7 +1,7 @@
 <template>
   <div id="login">
     <div class="logo_box">
-      <img style="border-radius:50%;" class="logo" src="../../assets/images/zsbj.png" alt>
+      <img style="border-radius:50%;" class="logo" src="../../assets/images/zsbj.png" alt />
       <p class="logo_title">果蔬精萃吧</p>
     </div>
 
@@ -20,7 +20,7 @@
           slot="label"
           style="padding-right:10px;display:block;with:0.33rem;height:0.33rem"
           src="../../assets/images/name.png"
-        >
+        />
       </x-input>
       <x-input
         class="mt-40"
@@ -37,7 +37,7 @@
           slot="label"
           style="padding-right:10px;display:block;with:0.33rem;height:0.33rem"
           src="../../assets/images/phone@2x.png"
-        >
+        />
       </x-input>
       <x-input
         class="mt-40"
@@ -55,7 +55,7 @@
           slot="label"
           style="padding-right:10px;display:block;with:0.33rem;height:0.33rem"
           src="../../assets/images/验证码@2x.png"
-        >
+        />
         <a slot="right" class="code_btn" href="#" @click="sendCode">{{codeValue}}</a>
       </x-input>
       <x-input
@@ -75,7 +75,7 @@
           slot="label"
           style="padding-right:10px;display:block;with:0.33rem;height:0.33rem"
           src="../../assets/images/密码@2x.png"
-        >
+        />
       </x-input>
       <x-input disabled v-model="disVal"></x-input>
     </div>
@@ -95,7 +95,7 @@
           slot="label"
           style="padding-right:10px;display:block;with:0.33rem;height:0.33rem"
           src="../../assets/images/phone@2x.png"
-        >
+        />
       </x-input>
       <x-input
         class="mt-40"
@@ -111,7 +111,7 @@
           slot="label"
           style="padding-right:10px;display:block;with:0.33rem;height:0.33rem"
           src="../../assets/images/密码@2x.png"
-        >
+        />
       </x-input>
       <x-input disabled v-model="disVal"></x-input>
       <p class="flex-between px-15">
@@ -126,10 +126,10 @@
       @click.native="LoginOrReg"
     >{{haslogin == 1 ? '登录' : '注册'}}</x-button>
     <!-- <div  @click="LoginOrReg"  >{{haslogin == 1 ? '登录'  : '注册'}}</div> -->
-    <p
-      class="login_tit"
-      @click="goToPrivacyProtocol"
-    >{{haslogin == 1 ? '登录' : '注册'}}即代表您已同意<span class="foot-color">《御康商贸用户隐私政策》</span></p>
+    <p class="login_tit" @click="goToPrivacyProtocol">
+      {{haslogin == 1 ? '登录' : '注册'}}即代表您已同意
+      <span class="foot-color">《御康商贸用户隐私政策》</span>
+    </p>
   </div>
 </template>
 <script>
@@ -194,10 +194,11 @@ export default {
       obj = { ...this.Logform };
       // this.Logform.password = DesUtils.encode(this.Logform.password,"fruits-app,yuntu,com")
       obj.password = DesUtils.encode(obj.password, "fruits-app,yuntu,com");
-		
- 	  obj.openId = localStorage.getItem("openId");
-      obj.nickname = localStorage.getItem("nickname") || 'dfsf';
-      obj.headimgurl = localStorage.getItem("headimgurl") || 'fsfs';      this.$fetch.post("fruits/app/user/login", obj).then(res => {
+
+      obj.openId = localStorage.getItem("openId");
+      obj.nickname = localStorage.getItem("nickname") || "dfsf";
+      obj.headimgurl = localStorage.getItem("headimgurl") || "fsfs";
+      this.$fetch.post("fruits/app/user/login", obj).then(res => {
         this.btnload = false;
         alert(res.msg);
         if (res.msg == "success") {
@@ -205,7 +206,7 @@ export default {
           localStorage.setItem("user", res.attributes.sessionId);
           localStorage.setItem("type", res.attributes.type);
           localStorage.setItem("appUserId", res.attributes.appUserId); //登陆用户id
-          localStorage.setItem("phone",obj.phone)
+          localStorage.setItem("phone", obj.phone);
           this.getCartNum();
         } else if (res.msg == "password_error") {
           alert("密码错误");
@@ -283,7 +284,7 @@ export default {
       this.$router.push("/changePassword/" + 0);
     },
     regTest() {
-      console.log('686876')
+      console.log("686876");
       this.$router.push("/login/2");
     },
     //发送验证码
@@ -349,6 +350,22 @@ export default {
         // alert(res.msg);
       });
     },
+    //   获取数据
+    getClassfications() {
+      let _obj = {
+        openId: localStorage.getItem("openId")
+      };
+      this.$fetch.post(url.getClassfications, _obj).then(
+        data => {
+          if (data.code == 0) {
+          } else {
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
+        }
+      );
+    },
     // getAddress() {
     //   if (localStorage.getItem("openId") == "null") {
     //     this.getoptnId = "";
@@ -376,7 +393,7 @@ export default {
     settitle("注册与登录");
   },
   mounted() {
-    this.getOpenId(); //获取用户open ID
+    this.getClassfications(); //获取用户open ID
     if (this.$route.query["parm"]) {
       var obj = JSON.parse(this.$route.query["parm"]);
       this.Logform.phone = obj.phone;
@@ -433,7 +450,7 @@ export default {
     line-height: 0.33rem;
     color: rgba(153, 153, 153, 1);
   }
-  .foot-color{
+  .foot-color {
     color: #4a7b67;
   }
 }
