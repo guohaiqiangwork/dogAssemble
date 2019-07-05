@@ -10,30 +10,33 @@
     ></actionsheet>
     <!-- 第一部分 -->
     <div>
-      <div class="margin_top_div4 margin_left_div3 font_size_16 font_color_1A" style="font-weight:700;">基本信息</div>
+      <div
+        class="margin_top_div4 margin_left_div3 font_size_16 font_color_1A"
+        style="font-weight:700;"
+      >基本信息</div>
       <div class="div_display_flex margin_left_div3 margin_top_div5">
         <div class="div_width_25 font_size_14 font_color_1A">联系人：</div>
         <div class="div_width_70">
-          <input type="text" placeholder="请输入姓名" v-model="recommendList.linkman">
+          <input type="text" placeholder="请输入姓名" v-model="recommendList.linkman" />
         </div>
       </div>
       <div class="div_display_flex margin_left_div3 margin_top_div5">
         <div class="div_width_25 font_size_14 font_color_1A">手机号：</div>
         <div class="div_width_70">
-          <input type="text" placeholder="请输入手机号" maxlength="11" v-model="recommendList.linkPhone">
+          <input type="text" placeholder="请输入手机号" maxlength="11" v-model="recommendList.linkPhone" />
         </div>
       </div>
       <div class="div_display_flex margin_left_div3 margin_top_div5">
         <div class="div_width_25 font_size_14 font_color_1A">商户名称：</div>
         <div class="div_width_70">
-          <input type="text" placeholder="请输入商户名称" v-model="recommendList.name">
+          <input type="text" placeholder="请输入商户名称" v-model="recommendList.name" />
         </div>
       </div>
       <div class="div_display_flex margin_left_div3 margin_top_div5">
         <div class="div_width_25 font_size_14 font_color_1A">门店类型：</div>
         <div class="div_width_70" @click="showAddress1 = true">
-          <input type="text" placeholder="请输入门店类型" v-model="shopType">
-          <img src="../../assets/images/1599@2x.png" class="img_left_jian" alt>
+          <input type="text" placeholder="请输入门店类型" v-model="shopType" />
+          <img src="../../assets/images/1599@2x.png" class="img_left_jian" alt />
         </div>
       </div>
       <div class="div_display_flex margin_left_div3 margin_top_div5">
@@ -51,30 +54,33 @@
             inline-desc="可以设置placeholder"
             :show.sync="showAddress"
           ></x-address>
-          <input type="text" placeholder="请选择店铺所在地区 " v-model="addressDP">
-          <img src="../../assets/images/1599@2x.png" class="img_left_jian" alt>
+          <input type="text" placeholder="请选择店铺所在地区 " v-model="addressDP" />
+          <img src="../../assets/images/1599@2x.png" class="img_left_jian" alt />
         </div>
       </div>
     </div>
     <!-- 第二部分 -->
     <div>
-      <div class="margin_top_div4 margin_left_div3 font_size_16 font_color_1A" style="font-weight:700;">账户信息</div>
+      <div
+        class="margin_top_div4 margin_left_div3 font_size_16 font_color_1A"
+        style="font-weight:700;"
+      >账户信息</div>
       <div class="div_display_flex margin_left_div3 margin_top_div5">
         <div class="div_width_25 font_size_14 font_color_1A">姓名：</div>
         <div class="div_width_70">
-          <input type="text" placeholder="请输入姓名" v-model="recommendList.accountName">
+          <input type="text" placeholder="请输入姓名" v-model="recommendList.accountName" />
         </div>
       </div>
       <div class="div_display_flex margin_left_div3 margin_top_div5">
         <div class="div_width_25 font_size_14 font_color_1A">银行名称：</div>
         <div class="div_width_70">
-          <input type="text" placeholder="请输入银行名称"  v-model="recommendList.bankName">
+          <input type="text" placeholder="请输入银行名称" v-model="recommendList.bankName" />
         </div>
       </div>
       <div class="div_display_flex margin_left_div3 margin_top_div5">
         <div class="div_width_25 font_size_14 font_color_1A">银行帐户：</div>
         <div class="div_width_70">
-          <input type="text" placeholder="请输入银行帐户" maxlength="19"  v-model="recommendList.bankNum">
+          <input type="text" placeholder="请输入银行帐户" maxlength="19" v-model="recommendList.bankNum" />
         </div>
       </div>
       <div class="div_display_flex margin_left_div3 margin_top_div5">
@@ -84,7 +90,14 @@
       <div class="div_display_flex margin_left_div3 margin_top_div5">
         <!-- <div class="div_width_25 font_size_14 font_color_1A"></div>
         <div class="div_width_70">-->
-        <textarea placeholder="请输入开户地址" name id rows="5" v-model="recommendList.bankAddress" style="width:95%"></textarea>
+        <textarea
+          placeholder="请输入开户地址"
+          name
+          id
+          rows="5"
+          v-model="recommendList.bankAddress"
+          style="width:95%"
+        ></textarea>
         <!-- </div> -->
       </div>
       <!-- 图片上传 -->
@@ -102,7 +115,7 @@
           id="upload_file"
           multiple
           style="display: none"
-        >
+        />
         <!-- </form> -->
         <!-- <div class="add" @click="chooseType">
           <div class="add-image" align="center">
@@ -115,28 +128,40 @@
             <span v-text="6-imgList.length"></span>张)
           </p>-->
           <ul class="img-list clearfix" style="margin-top:.5rem;text-algin:center;">
-            <li v-for="(url,index) in imgList" :key="index" style="width:35%;height:3.2rem;margin-top:0.5rem;border:1px solid #eee;margin-left:10%;">
+            <li
+              v-for="(url,index) in imgList"
+              :key="index"
+              style="width:35%;height:3.2rem;margin-top:0.5rem;border:1px solid #eee;margin-left:10%;"
+            >
               <!-- <img
               class="del"
               src="http://img.shtml.net/XGaC5nwBzmaeMPm0J-H12X-G3zjUOlYZmnX0J-H1wPM3gKpTqvYekJohZzYPGROtBz0J-H1wT4uAGgZV.jpg"
               @click.stop="delImg(index)"
               >-->
               <!-- //del删除样式，icon字体图标需要自己找哦 -->
-              <img :src="url.file.src" @click.stop="delImg(index)" width="100%" height="100%">
+              <img :src="url.file.src" @click.stop="delImg(index)" width="100%" height="100%" />
             </li>
-             <div v-show="imgList.length < 10 " class="div_display_flex margin_left_div3 margin_top_div5 text_center" style="height:3.2rem;width:35%;margin-left:10%;display:inline-block;margin-top:0.5rem;">
+            <div
+              v-show="imgList.length < 10 "
+              class="div_display_flex margin_left_div3 margin_top_div5 text_center"
+              style="height:3.2rem;width:35%;margin-left:10%;display:inline-block;margin-top:0.5rem;"
+            >
               <!-- <div class="up_div">
                 <img src="../../assets/images/Bluetooth.png" alt>
               </div>-->
-              <div class="img_up_list" @click="chooseType" style="margin:0 auto;width:100%;height:100%;">
-                <img src="../../assets/images/000@2x.png" width="20px" style="margin-top:50%;" >
+              <div
+                class="img_up_list"
+                @click="chooseType"
+                style="margin:0 auto;width:100%;height:100%;"
+              >
+                <img src="../../assets/images/000@2x.png" width="20px" style="margin-top:50%;" />
               </div>
             </div>
           </ul>
         </div>
         <div class="div_display_flex margin_top_div4">
           <div class="margin_left_div3">
-            <img src="../../assets/images/111@2x.png" width="12px">
+            <img src="../../assets/images/111@2x.png" width="12px" />
           </div>
           <div
             class="font_size_12"
@@ -145,11 +170,11 @@
         </div>
       </div>
       <!-- 确认 -->
-        <div
-          class="backgroun_color_4A font_color_ff font_size16 text_center"
-          style="line-height:3.5 ;float: left;width: 100%;position:fixed;bottom:0;left:0;font-size:16px;"
-          @click="getRegister"
-        >确认</div>
+      <div
+        class="backgroun_color_4A font_color_ff font_size16 text_center"
+        style="line-height:3.5 ;float: left;width: 100%;position:fixed;bottom:0;left:0;font-size:16px;"
+        @click="getRegister"
+      >确认</div>
     </div>
   </div>
 </template>
@@ -340,14 +365,39 @@ export default {
     },
     // 保存推荐信息
     getRegister() {
-      var reg = /^1[3,4,5,6,7,8,9]\d{9}/;
-      if(!reg.test(this.recommendList.linkPhone)){
-        this.$vux.toast.text('手机号输入不正确');
-        return
+      if (this.recommendList.name) {
+        this.$vux.toast.text("请输入姓名");
+        return;
+      } else if (this.recommendList.name) {
+        this.$vux.toast.text("请选择商户类型");
+        return;
+      } else if (this.recommendList.linkman) {
+        this.$vux.toast.text("请输入联系人");
+        return;
+      } else if (this.recommendList.linkPhone) {
+        this.$vux.toast.text("请输入手机号");
+        return;
+      } else if (this.recommendList.accountName) {
+        this.$vux.toast.text("请输入账户名称");
+        return;
+      } else if (this.recommendList.bankName) {
+        this.$vux.toast.text("请输入银行账户");
+        return;
+      } else if (this.recommendList.bankAddress) {
+        this.$vux.toast.text("请输入开户地址");
+        return;
+      } else if (this.recommendList.bankNum) {
+        this.$vux.toast.text("请输入银行账户");
+        return;
       }
-      if(this.recommendList.bankNum.length<16){
-        this.$vux.toast.text('银行账户至少为16位数字');
-        return
+      var reg = /^1[3,4,5,6,7,8,9]\d{9}/;
+      if (!reg.test(this.recommendList.linkPhone)) {
+        this.$vux.toast.text("手机号输入不正确");
+        return;
+      }
+      if (this.recommendList.bankNum.length < 16) {
+        this.$vux.toast.text("银行账户至少为16位数字");
+        return;
       }
       this.recommendList.openId = localStorage.getItem("openId");
       this.recommendList.province = this.addressVal[0];
@@ -357,8 +407,8 @@ export default {
         .post("/fruits/app/personal/recommendInfo", this.recommendList)
         .then(res => {
           if (res.code == 0) {
-            alert('提交成功')
-            this.$router.push('/personal')
+            alert("提交成功");
+            this.$router.push("/personal");
           } else {
             alert(res.msg);
           }
@@ -403,7 +453,7 @@ ul li {
   line-height: 25px;
   /* background: rgba(122, 99, 99, 0.363); */
 }
-input{
+input {
   outline: none;
   border: none;
   height: 25px;
