@@ -200,6 +200,7 @@ export default {
     };
   },
   watch: {
+  
     msgPAW(curVal) {
       console.log(curVal);
       if (/[^\d]/g.test(curVal)) {
@@ -215,11 +216,15 @@ export default {
     }
   },
   methods: {
+      numChange(n){
+      console.log(n,'jlkjl')
+    },
     focus() {
       this.$refs.pwd.focus();
     },
     // 日期选择
     change(value) {
+      console.log(this.memberIDNumber,132)
       this.startTime = value;
       console.log(this.memberID);
       var dateTemp = value;
@@ -228,7 +233,7 @@ export default {
       var nDate = new Date(dataTemp); //转换为MM-DD-YYYY格式
    
       var millSeconds =
-        Math.abs(nDate) + this.memberIDNumber * 24 * 60 * 60 * 1000;
+        Math.abs(nDate) + (this.memberIDNumber/1-1) * 24 * 60 * 60 * 1000;
       console.log(millSeconds)
       var rDate = new Date(millSeconds);
       console.log(rDate)
@@ -417,10 +422,15 @@ export default {
     },
     // 辟谷天数
     getMemberRecipeDay(item) {  
+      console.log(2232)
       this.memberID = this.selected.id;
       this.memberIDNumber = this.selected.recipe;
       this.payMoney = this.selected.retail;
-      // this.change();
+      console.log(this.memberIDNumber,'dfs')
+      if(this.startTime !== "请选择"){
+        this.change(this.startTime);
+      }
+      
     },
     //订单保存
     newOrderq() {
