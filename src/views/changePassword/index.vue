@@ -117,12 +117,15 @@ export default {
       let data = {
         openId: localStorage.getItem("openId"),
         code: this.code,
+        phone:this.phone,
         password: DesUtils.encode(this.password, "fruits-app,yuntu,com")
       };
       this.$fetch.post(url.changePassword, data).then(res => {
         console.log(res);
         if (res.code == 0) {
-          localStorage.clear();
+          if(localStorage.getItem('user')){
+             localStorage.clear();
+          }
           this.$router.push('/login/1');
           this.$vux.toast.text('修改成功')
           // alert("修改成功");
