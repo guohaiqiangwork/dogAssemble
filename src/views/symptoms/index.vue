@@ -9,7 +9,7 @@
         v-model="form.name"
         style="width:100%;height:100%;background-color:#EFEFEF; outline: none;border:none"
         v-on:input="input"
-      >
+      />
       <i></i>
     </div>
     <div class="margin_top_div3" v-show="peiFangList.length">
@@ -39,7 +39,7 @@
         <div class="backgroun_color_fff" style="border-radius: 8px;padding: 0.4rem;">
           <div class="div_display_flex">
             <div class>
-              <img src="../../assets/images/tS@2x.png" width="13px" alt>
+              <img src="../../assets/images/tS@2x.png" width="13px" alt />
             </div>
             <div class="font_color_4A margin_left_div2">贴心小提示</div>
           </div>
@@ -53,18 +53,24 @@
       <div class="div_display_flex">
         <div class="national_list font_color_00 font_size_13 backgroun_color_fff margin_top_div3">
           <div class="div_display_flex margin_top_div3">
-            <div class="div_width_70 margin_left_div2">{{recommendStoreList[1].province}}{{recommendStoreList[1].city}}{{recommendStoreList[1].area}}</div>
-            <div class="div_width_30 margin_right_div2 text_right">{{recommendStoreList[1].distance}}km</div>
+            <div
+              class="div_width_70 margin_left_div2"
+            >{{recommendStoreList[1].province}}{{recommendStoreList[1].city}}{{recommendStoreList[1].area}}</div>
+            <div
+              class="div_width_30 margin_right_div2 text_right"
+            >{{recommendStoreList[1].distance}}km</div>
           </div>
           <div class="div_display_flex margin_top_div3">
             <div class="div_width_70 margin_left_div2">{{recommendStoreList[1].address}}</div>
             <div class="div_width_30 margin_right_div2 text_right" @click="goToMap">
-              <img src="../../assets/images/1440@2x.png" width="12px">
+              <img src="../../assets/images/1440@2x.png" width="12px" />
             </div>
           </div>
           <div class="div_display_flex margin_top_div3">
             <div class="div_width_70 margin_left_div2">营业时间</div>
-            <div class="div_width_30 margin_right_div2 text_right">{{recommendStoreList[1].startTime}}</div>
+            <div
+              class="div_width_30 margin_right_div2 text_right"
+            >{{recommendStoreList[1].startTime}}</div>
           </div>
           <div class="div_display_flex margin_top_div3 padding_bottom_4">
             <div class="div_width_70 margin_left_div2">门店电话</div>
@@ -73,8 +79,11 @@
         </div>
       </div>
     </div>
-    <div class="nodata" style="height: calc(100% - 0.7rem);    background-color: rgb(248, 248, 248);">
-      <img src="../../assets/images/1546.png" alt="" style="width:4.78rem;height:3.23rem;">
+    <div
+      class="nodata"
+      style="height: calc(100% - 0.7rem);    background-color: rgb(248, 248, 248);"
+    >
+      <img src="../../assets/images/1546.png" alt style="width:4.78rem;height:3.23rem;" />
       <p style="font-size:12px">暂无数据</p>
     </div>
   </div>
@@ -242,8 +251,8 @@ export default {
         .post("fruits/app/blank/getRecipeList", this.form)
         .then(res => {
           if (res.code == 0) {
-            if(this.form.name == ""){
-              return
+            if (this.form.name == "") {
+              return;
             }
             this.peiFangList = res.obj;
           }
@@ -283,7 +292,7 @@ export default {
     // this.getStore();
     // this.getRecipeList();
     // this.getMyLocation();
-    // this.addressDetail();
+    this.addressDetail(); //获取地理位置
     // this.getList()
     // console.log("病症检测");
   }
@@ -427,6 +436,6 @@ export default {
 .div_display_flex .national_list {
   width: 5.9rem;
   margin-left: 0.4rem;
-  padding: .3rem .4rem;
+  padding: 0.3rem 0.4rem;
 }
 </style>
