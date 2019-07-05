@@ -140,7 +140,7 @@ export default {
       ],
       page: {
         current: "1",
-        size: "3"
+        size: "2"
       },
       recommendStoreList: [],
       productNamr: "",
