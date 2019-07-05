@@ -4,6 +4,9 @@ a{
 .div_display_flex {
   display: flex;
 }
+iframe{
+  display: none;
+}
 /* 背景色 */
 .backgroun_color_fff {
   background-color: #ffffff
