@@ -1,8 +1,8 @@
 <template>
   <!-- style="background-color:#F3F5F8; min-height:700px" -->
-  <div>
+  <div >
     <!-- 商铺 -->
-    <div class="backgroun_color_f3" v-if="personalMsg.type == 2">
+    <div class="backgroun_color_f3" style="background:#fff;" v-if="personalMsg.type == 2">
       <!-- 头部 -->
       <div class="personal_img_bj">
         <div class="div_display_flex">
@@ -24,8 +24,9 @@
               />
               <img
                 src="../../assets/images/td@2x.png"
-                width="60px"
+                width="33px"
                 v-if="personalMsg.storeState != 1"
+                style="margin-top:0.2rem;margin-left:1.2rem;"
               />
             </div>
             <!-- 打烊 -->
@@ -51,8 +52,8 @@
             <div class="personal_falg_m" style="margin-left:15%" v-if="personalMsg.storeState == 1"> 营业中
               <!-- {{personalMsg.storeState == 1 ? "营业中":"已打烊"}} -->
               </div>
-              <div class="personal_falg_m" v-if="personalMsg.storeState == 2">
-                已打烊
+              <div class="personal_falg_m" v-if="personalMsg.storeState == 2" style="margin-top:-0.5rem;color:#AD8852;margin-left:0.1rem;">
+                打烊中...
                 <!-- {{personalMsg.storeState == 1 ? "营业中":"已打烊"}} -->
                 </div>
           </div>
@@ -71,7 +72,7 @@
       </div>
 
       <!-- 菜单列表 -->
-      <div style="margin-top:0%">
+      <div style="margin-top:0%;padding-bottom:1rem;background:#fff;" class="clearfix">
         <!-- <div class=""> -->
         <div class="personal_cd text_center" @click="goToNewOrder">
           <div class="margin_top28">
