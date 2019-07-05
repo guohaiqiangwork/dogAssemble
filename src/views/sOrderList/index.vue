@@ -5,7 +5,7 @@
         <div class="div_display_flex margin_top_div3">
           <div class="div_width_30 margin_left_div3">{{item.recipe}}</div>
           <div class="div_width_70 text_right margin_right_div3">{{item.time}}</div>
-          <span @click="goDetail(item)">></span>
+          <!-- <span @click="goDetail(item)">></span> -->
         </div>
         <div class="div_display_flex margin_top_div3">
           <div class="div_width_30 margin_left_div3">￥ {{item.price}}</div>
