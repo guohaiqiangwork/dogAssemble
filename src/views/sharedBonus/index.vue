@@ -7,7 +7,7 @@
 </template>
 <script>
 import url from "../../bin/url";
-import wxShare from '../../bin/weChat_jsSdk'
+import wxShare from '../../bin/weiXinShare'
 export default {
   components: {},
   name: "sharedBonus",

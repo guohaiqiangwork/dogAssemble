@@ -89,19 +89,19 @@ export default {
     if (this.routeParams.data.id == 1) {
       var title = "会员充值";
     } else if (this.routeParams.data.id == 2) {
-      var title = "跨店服务费";
-    } else if (this.routeParams.data.id == 3) {
-      var title = "视频收入";
-    } else if (this.routeParams.data.id == 4) {
-      var title = "视频返佣";
-    } else if (this.routeParams.data.id == 5) {
-      var title = "推荐返佣";
-    } else if (this.routeParams.data.id == 6) {
-      var title = "商城返佣";
-    } else if (this.routeParams.data.id == 6) {
-      var title = "转店收入";
-    } else if (this.routeParams.data.id == 6) {
       var title = "押金支出";
+    } else if (this.routeParams.data.id == 3) {
+      var title = "转店收入";
+    } else if (this.routeParams.data.id == 4) {
+      var title = "跨店服务费";
+    } else if (this.routeParams.data.id == 5) {
+      var title = "视频收入";
+    } else if (this.routeParams.data.id == 6) {
+      var title = "视频返佣";
+    } else if (this.routeParams.data.id == 7) {
+      var title = "推荐返佣";
+    } else if (this.routeParams.data.id == 8) {
+      var title = "商城返佣";
     }
     settitle(title);
   },
