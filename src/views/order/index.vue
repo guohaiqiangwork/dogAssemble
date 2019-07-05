@@ -12,11 +12,11 @@
       :type="'vertical'"
       @loadMore="selPullUp"
       @pulldown="pulldown"
-      style="height: calc(100% - 48px);"
+      style="height: calc(100% - 48px);overflow-x:hidden;"
     >
-      <div slot="list" class="nut-vert-list-panel" style="display:flex;height:100%;align-items: center;margin-top: -110px;">
+      <div slot="list" class="nut-vert-list-panel" style="display:flex;height:100%;align-items: center;">
         <!-- 全部订单 -->
-        <div v-if="switchFlage == '0'" style="width: 100%;">
+        <div v-if="switchFlage == '0'" style="width:100%;height: auto;">
           <div v-if="orderList.length != 0">
             <div v-for="(item,index) in orderList" :key="index">
               <div class="order_block" @click="goToOrderDetails(item.id)">
@@ -84,7 +84,7 @@
           </div>
         </div>
         <!-- 待付款 -->
-        <div v-if="switchFlage == '1'" style="width: 100%;">
+        <div v-if="switchFlage == '1'" style="width: 100%;height: auto;">
           <div v-if="orderList.length != 0">
             <div v-for="(item,index) in orderList" :key="index">
               <div class="order_block" @click="goToOrderDetails(item.id)">
@@ -145,14 +145,14 @@
             </div>
           </div>
           <div v-if="orderList.length == 0" style="height:100%">
-            <div class="text_center" style="margin-top16%;height:100%">
+            <div class="text_center" style="margin-top16%;height:100%;overflow-x:hidden;">
               <img src="../../assets/images/1581@2x.png" width="55%" alt>
             </div>
             <div class="text_center font_size_15 font_color_99" style="margin-top: 20px;">暂无订单</div>
           </div>
         </div>
         <!-- 待收费 -->
-        <div v-if="switchFlage == '2'" style="width: 100%;">
+        <div v-if="switchFlage == '2'" style="width: 100%;height: auto;">
           <div v-if="orderList.length != 0">
             <div v-for="(item,index) in orderList" :key="index">
               <div class="order_block" @click="goToOrderDetails(item.id)">
@@ -223,7 +223,7 @@
           </div>
         </div>
         <!-- 待收货 -->
-        <div v-if="switchFlage == '3'" style="width: 100%;">
+        <div v-if="switchFlage == '3'" style="width: 100%;height: auto;">
           <div v-if="orderList.length != 0">
             <div v-for="(item,index) in orderList" :key="index">
               <div class="order_block" @click="goToOrderDetails(item.id)">
@@ -291,7 +291,7 @@
           </div>
         </div>
         <!-- 已完成 -->
-        <div v-if="switchFlage == '4'" style="width: 100%;">
+        <div v-if="switchFlage == '4'" style="width: 100%;height: auto;">
           <div v-if="orderList.length != 0">
             <div v-for="(item,index) in orderList" :key="index">
               <div class="order_block" @click="goToOrderDetails(item.id)">
@@ -392,10 +392,10 @@ export default {
         }
       ],
       switchFlage: "0",
-      orderList: "",
+      orderList: [],
       page: {
         current: "1",
-        size: "10"
+        size: "2"
       },
       isUnMore1: false,
       isLoading1: false
@@ -451,16 +451,21 @@ export default {
       this.$fetch.post(url.getOrderList, _obj).then(
         data => {
           if (data.code == 0) {
-            data.obj.forEach(item => {
+            if(data.obj.length){
+                data.obj.forEach(item => {
               item.goodsList.forEach(items => {
                 items.picId = url.imgUrl + items.picId;
               });
+              this.orderList.push(item);
             });
-            if(this.page.current > 1){
-            this.orderList.push(data.obj)
-            }else{
- this.orderList = data.obj;
             }
+          
+            // if(this.page.current > 1&&data.obj.length){
+            //   this.orderList.push(data.obj)
+            // }
+//             else{
+//  this.orderList = data.obj;
+//             }
            
           } else {
             alert(data.msg);
