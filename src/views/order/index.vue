@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color:#F3F5F8;min-height:600px;width:100%;">
+  <div style="background-color:#F3F5F8;width:100%;height:100%">
     <div class="div_display_flex backgroun_color_fff personal_title">
       <div v-for="(item,index) in  tabList" @click="tabSwitch(item.id)" :key="index">
         <div :style="{color:(switchFlage != item.id ? '' :'#000000')}">{{item.name}}</div>
@@ -12,8 +12,9 @@
       :type="'vertical'"
       @loadMore="selPullUp"
       @pulldown="pulldown"
+      style="height: calc(100% - 48px);"
     >
-      <div slot="list" class="nut-vert-list-panel">
+      <div slot="list" class="nut-vert-list-panel" style="height:100%">
         <!-- 全部订单 -->
         <div v-if="switchFlage == '0'">
           <div v-if="orderList.length != 0">
@@ -75,8 +76,8 @@
               </div>
             </div>
           </div>
-          <div v-if="orderList.length == 0">
-            <div class="text_center" style="margin-top16%">
+          <div v-if="orderList.length == 0" style="height:100%">
+            <div class="text_center" style="margin-top16% height:100%;" >
               <img src="../../assets/images/1581@2x.png" width="65%"  alt>
             </div>
             <div class="text_center font_size_15 font_color_99">暂无订单</div>
@@ -143,8 +144,8 @@
               </div>
             </div>
           </div>
-          <div v-if="orderList.length == 0">
-            <div class="text_center" style="margin-top16%">
+          <div v-if="orderList.length == 0" style="height:100%">
+            <div class="text_center" style="margin-top16%;height:100%">
               <img src="../../assets/images/1581@2x.png" width="65%" alt>
             </div>
             <div class="text_center font_size_15 font_color_99">暂无订单</div>
@@ -214,8 +215,8 @@
               </div>
             </div>
           </div>
-          <div v-if="orderList.length == 0">
-            <div class="text_center" style="margin-top16%">
+          <div v-if="orderList.length == 0" style="height:100%">
+            <div class="text_center" style="margin-top16%;height:100%">
               <img src="../../assets/images/1581@2x.png" width="65%" alt>
             </div>
             <div class="text_center font_size_15 font_color_99">暂无订单</div>
@@ -282,8 +283,8 @@
               </div>
             </div>
           </div>
-          <div v-if="orderList.length == 0">
-            <div class="text_center" style="margin-top16%">
+          <div v-if="orderList.length == 0" style = "height:100%">
+            <div class="text_center" style="margin-top16%;height:100%">
               <img src="../../assets/images/1581@2x.png" width="65%" alt>
             </div>
             <div class="text_center font_size_15 font_color_99">暂无订单</div>
@@ -350,11 +351,12 @@
               </div>
             </div>
           </div>
-          <div v-if="orderList.length == 0">
-            <div class="text_center">
+          <div v-if="orderList.length == 0" style="height:100%">
+            <div class="text_center " style="height:100%;">
               <img src="../../assets/images/1581@2x.png" width="65%" alt>
+              <div class="text_center font_size_15 font_color_99">暂无订单</div>
             </div>
-            <div class="text_center font_size_15 font_color_99">暂无订单</div>
+            
           </div>
         </div>
       </div>
@@ -513,6 +515,11 @@ export default {
   }
 };
 </script>
+<style>
+.nut-vert-list{
+  height: 100% !important;
+}
+</style>
 
 <style scoped>
 .personal_title {
