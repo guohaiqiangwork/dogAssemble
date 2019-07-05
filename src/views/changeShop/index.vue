@@ -80,7 +80,7 @@
                 <div
                   class="div_width_70 margin_left_div2 over_hidde"
                 >{{item.province}}{{item.city}}{{item.area}}{{item.name}}</div>
-                  <div v-if="recommendStoreList[0].state == 2" class="bt_close">已关店</div>
+                <div v-if="recommendStoreList[0].state == 2" class="bt_close">已关店</div>
                 <div class="div_width_30 margin_right_div2 text_right">{{item.distance}}km</div>
               </div>
               <div class="div_display_flex margin_top_div3">
@@ -106,8 +106,18 @@
     <!-- 店铺更换提示 -->
     <confirm v-model="nationSFalg" title @on-cancel="onCancel" @on-confirm="onConfirm">
       <div style="text-align:center;font-size:18px;">
-        您当前余额为<span>800.00元</span> <br/>
+        您当前余额为
+        <span>{{yMoney}}元</span>
+        <br />
         确认要"{{shopName}}"吗？
+      </div>
+    </confirm>
+     <!-- 店铺更换提示 -->
+    <confirm v-model="nationSFalgC" title @on-cancel="onCancelC" @on-confirm="onConfirmC">
+      <div style="text-align:center;font-size:18px;">
+        转店失败
+        <br />
+       请联系您的专属门店
       </div>
     </confirm>
     <div id="container" style="width:600px;height:500px;"></div>
@@ -132,6 +142,7 @@ export default {
       isDefault: "",
       classA: "1", //是否有单选框
       nationSFalg: false, //地址确认
+      nationSFalgC: false, //地址确认
       nationList: [
         { isDefault: false },
         { isDefault: true },
@@ -154,7 +165,8 @@ export default {
       latitude: 0, //纬度
       isDefaultT: false,
       shopId: "",
-      shopName:''
+      shopName: "",
+      yMoney:''//余额
     };
   },
   methods: {
@@ -180,7 +192,7 @@ export default {
       });
       this.isDefaultT = true;
       this.shopId = this.recommendStoreList[0].id;
-      this.shopName = this.recommendStoreList[0].name
+      this.shopName = this.recommendStoreList[0].name;
       this.nationq();
     },
     // 其他门店
@@ -195,7 +207,7 @@ export default {
       // 设置值，以供传递
       this.recommendStoreList[index].isQDefault = true;
       this.shopId = this.recommendStoreList[index].id;
-      this.shopName = this.recommendStoreList[index].name
+      this.shopName = this.recommendStoreList[index].name;
       this.nationq();
     },
     //订单新建
@@ -215,15 +227,24 @@ export default {
       this.$fetch.post("fruits/app/personal/transferStore", _obj).then(
         data => {
           if (data.code == 0) {
-           alert('转店成功')
+            alert("转店成功");
           } else {
-            alert(data.msg);
+            this.nationSFalgC =true
           }
         },
         err => {
           alert("网络缓慢。。");
         }
       );
+    },
+
+     // 弹窗取消
+    onCancelC() {
+      console.log("2");
+    },
+    // 弹窗确认
+    onConfirmC() {
+        this.$router.push('/home')
     },
     //获取数据
     getRecommendStoreList(item) {
@@ -287,6 +308,20 @@ export default {
           });
         }
       });
+    },
+    // 获取此人余额
+    getMoney() {
+      this.$fetch
+        .post("fruits/app/personal/getPersonalInfo", {
+          openId: localStorage.getItem("openId")
+        })
+        .then(res => {
+          this.yMoney = res.obj.remain
+          console.log(res)
+          // var state = res.obj.state;
+          // localStorage.setItem("state", state);
+          // this.personalMsg = { ...res.obj };
+        });
     }
   },
   created() {
@@ -296,6 +331,7 @@ export default {
 
   mounted() {
     this.addressDetail();
+    this.getMoney();
     // this.getRecommendStoreList(); //获取全国门店
   }
 };
@@ -312,7 +348,7 @@ export default {
 .div_width_30 {
   width: auto !important;
 }
-.bt_close{
+.bt_close {
   margin-right: 0.2rem;
 }
 .national_list {
@@ -352,9 +388,9 @@ export default {
   /* align-content: center; */
   text-align: center;
 }
-.over_hidde{
+.over_hidde {
   overflow: hidden;
-white-space: nowrap;
- text-overflow: ellipsis;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 </style>
