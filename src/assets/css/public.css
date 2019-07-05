@@ -428,7 +428,14 @@ border-radius: 10px;
   content: " ";
   clear: both;
 }
-
+.weui-cell:before{
+  height:0 !important;
+  border: 0 !important;
+}
+.vux-1px-t:before{
+  height: 0 !important;
+  border: 0 !important;
+}
 /* for ie67*/
 
 .clearfix {

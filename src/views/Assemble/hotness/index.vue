@@ -123,11 +123,11 @@ export default {
         display: inline-block;
         white-space: wrap;
         color: #000;
-        font-size: .28rem;
+        font-size: .24rem;
       }
       .hot_price {
         color: #E6435A;
-        font-size: 0.28rem;
+        font-size: 0.3rem;
         padding: 0.1rem 0rem;
       }
      
