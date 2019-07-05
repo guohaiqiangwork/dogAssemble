@@ -12,7 +12,7 @@
       :type="'vertical'"
       @loadMore="selPullUp"
       @pulldown="pulldown"
-      style="height: calc(100% - 48px);overflow-x:hidden;"
+      style="min-height: calc(100% - 48px);height:auto;overflow-x:hidden;"
     >
       <div slot="list" class="nut-vert-list-panel" style="">
         <!-- 全部订单 -->
@@ -505,6 +505,7 @@ export default {
     pulldown() {
       this.isUnMore1 = false;
       this.page.current = 1;
+      this.orderList = [];
       this.getOrderList();
     }
   },
