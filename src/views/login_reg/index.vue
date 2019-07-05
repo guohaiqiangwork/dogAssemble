@@ -1,7 +1,7 @@
 <template>
   <div id="login">
     <div class="logo_box">
-      <img class="logo" src="../../assets/images/logo.png" alt>
+      <img style="border-radius:50%;" class="logo" src="../../assets/images/zsbj.png" alt>
       <p class="logo_title">果蔬精萃吧</p>
     </div>
 
@@ -114,7 +114,7 @@
         >
       </x-input>
       <x-input disabled v-model="disVal"></x-input>
-      <p class="flex-between px-15">
+      <p class="flex-between px-15" style="margin-top:-0.5rem;">
         <a href="#" @click="editPass">忘记密码</a>
         <a href="#" @click="regTest">立即注册</a>
       </p>

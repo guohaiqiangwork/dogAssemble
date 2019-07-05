@@ -43,12 +43,12 @@
           </div>
         </div>
       </div>
-      <div style="display:flex;justify-content:space-between;flex-wrap:wrap">
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;padding:0.25rem;">
         <div
           class="div_display_flex margin_top_div5"
           v-for="(item,index) in countList"
           :key="index"
-          style="width:50%;margin-top:2%;"
+          style="width:50%;margin-top:2%"
         >
           <div
             class="text_center b_t_c"
@@ -73,7 +73,7 @@
           @focus="otherFocus"
         >
       </div>
-      <div class="div_display_flex margin_top_div8 flex-around">
+      <div class="div_display_flex margin_top_div8 flex-around" style="padding:0.1rem;">
         <div class="div_width_43 backgroun_color_4A bt_d_c" @click="rechargeq('2')">支付宝充值</div>
         <div class="div_width_43 backgroun_color_4A bt_d_c" @click="rechargeq('3')">现金充值</div>
         <div class="div_width_43 backgroun_color_4A bt_d_c" @click="rechargeq('4')">微信充值</div>
@@ -334,26 +334,28 @@ export default {
 
 .recharge_input_b {
   width: 90%;
-  margin-left: 4%;
+  margin-left: 5%;
   background-color: #dee8e3;
   border-radius: 5px;
   border: none;
   font-size: 13px;
   color: #000;
   height: 48px;
-  padding-left: 2%;
+  /* padding-left: 2%; */
+  text-indent:0.2rem;
 }
 .recharge_input_b2 {
-  width: 90%;
-  margin-left: 3%;
+  width: 87%;
+  margin-left: 6%;
   border-radius: 5px;
   border: none;
   font-size: 13px;
   color: #000;
   height: 48px;
-  padding-left: 2%;
+  /* padding-left: 2%; */
   background-color: #ffffff;
   border: 1px solid #4a7b67;
+  text-indent:0.2rem;
 }
 .recharge_button_b {
   text-align: center;
@@ -361,8 +363,8 @@ export default {
   color: #fff;
   line-height: 3;
   border-radius: 5px;
-  margin-left: 4%;
-  width: 92%;
+  margin-left: 5%;
+  width: 90%;
 }
 /* 图标输入框 */
 .pass_list_w {
@@ -405,5 +407,6 @@ export default {
   color: #fff;
   line-height: 3;
   text-align: center;
+  width: 24% !important;
 }
 </style>

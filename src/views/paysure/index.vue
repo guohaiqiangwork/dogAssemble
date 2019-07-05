@@ -428,7 +428,6 @@ export default {
       font-size: 0.3rem;
       line-height: 0.56rem;
       color: rgba(26, 32, 44, 1);
-      border-bottom: 1px solid #e9e9e9;
       .vux-x-textarea.weui-cell {
         border: 1px solid #e2e2e2;
         // height: 6.05rem;
@@ -451,6 +450,7 @@ export default {
     position: fixed;
     bottom: .9rem;
     background: #fff;
+    border-top: 1px solid #E9E9E9;
     // padding: 1rem 1.5rem;
     .buybutton {
       width: 2.24rem;

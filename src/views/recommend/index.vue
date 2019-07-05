@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="padding-bottom:100px;">
     <!-- 下拉菜单 -->
     <actionsheet
       v-model="showAddress1"
@@ -10,7 +10,7 @@
     ></actionsheet>
     <!-- 第一部分 -->
     <div>
-      <div class="margin_top_div4 margin_left_div3 font_size_16 font_color_1A">基本信息</div>
+      <div class="margin_top_div4 margin_left_div3 font_size_16 font_color_1A" style="font-weight:700;">基本信息</div>
       <div class="div_display_flex margin_left_div3 margin_top_div5">
         <div class="div_width_25 font_size_14 font_color_1A">联系人：</div>
         <div class="div_width_70">
@@ -58,7 +58,7 @@
     </div>
     <!-- 第二部分 -->
     <div>
-      <div class="margin_top_div4 margin_left_div3 font_size_16 font_color_1A">账户信息</div>
+      <div class="margin_top_div4 margin_left_div3 font_size_16 font_color_1A" style="font-weight:700;">账户信息</div>
       <div class="div_display_flex margin_left_div3 margin_top_div5">
         <div class="div_width_25 font_size_14 font_color_1A">姓名：</div>
         <div class="div_width_70">
@@ -84,33 +84,16 @@
       <div class="div_display_flex margin_left_div3 margin_top_div5">
         <!-- <div class="div_width_25 font_size_14 font_color_1A"></div>
         <div class="div_width_70">-->
-        <textarea name id rows="5" v-model="recommendList.bankAddress" style="width:95%"></textarea>
+        <textarea placeholder="请输入开户地址" name id rows="5" v-model="recommendList.bankAddress" style="width:95%"></textarea>
         <!-- </div> -->
       </div>
       <!-- 图片上传 -->
-      <div>
+      <div style="margin-top:1rem;">
         <div>
           <div
             class="div_width_25 font_size_14 margin_left_div3 margin_top_div4 font_color_1A font_size_16 font_color_1A"
           >资质信息</div>
           <div class="div_width_70"></div>
-        </div>
-        <div class="div_display_flex margin_left_div3 margin_top_div5 text_center">
-          <!-- <div class="up_div">
-            <img src="../../assets/images/Bluetooth.png" alt>
-          </div>-->
-          <div class="img_up_list" @click="chooseType">
-            <img src="../../assets/images/000@2x.png" width="20px" style="margin-top:25%" alt>
-          </div>
-        </div>
-        <div class="div_display_flex margin_top_div4">
-          <div class="margin_left_div3">
-            <img src="../../assets/images/111@2x.png" width="12px" alt>
-          </div>
-          <div
-            class="font_size_12"
-            style="color:#242E42;margin-left:1%"
-          >图片上传类型：jpg、png、gif ; 最多10张；文件大小为5M</div>
         </div>
         <!-- <form enctype="multipart/form-data" name="fileinfo" id="myForm"> -->
         <input
@@ -126,32 +109,47 @@
             <p class="font13">添加图片</p>
           </div>
         </div>-->
-        <div class="add-img" v-show="imgList.length">
+        <div class="add-img">
           <!-- <p class="font14">
             图片(最多10张，还可上传
             <span v-text="6-imgList.length"></span>张)
           </p>-->
-          <ul class="img-list">
-            <li v-for="(url,index) in imgList" :key="index" style="width:25%">
+          <ul class="img-list clearfix" style="margin-top:.5rem;text-algin:center;">
+            <li v-for="(url,index) in imgList" :key="index" style="width:35%;height:3.2rem;margin-top:0.5rem;border:1px solid #eee;margin-left:10%;">
               <!-- <img
               class="del"
               src="http://img.shtml.net/XGaC5nwBzmaeMPm0J-H12X-G3zjUOlYZmnX0J-H1wPM3gKpTqvYekJohZzYPGROtBz0J-H1wT4uAGgZV.jpg"
               @click.stop="delImg(index)"
               >-->
               <!-- //del删除样式，icon字体图标需要自己找哦 -->
-              <img :src="url.file.src" @click.stop="delImg(index)" width="25px">
+              <img :src="url.file.src" @click.stop="delImg(index)" width="100%" height="100%">
             </li>
+             <div v-show="imgList.length < 10 " class="div_display_flex margin_left_div3 margin_top_div5 text_center" style="height:3.2rem;width:35%;margin-left:10%;display:inline-block;margin-top:0.5rem;">
+              <!-- <div class="up_div">
+                <img src="../../assets/images/Bluetooth.png" alt>
+              </div>-->
+              <div class="img_up_list" @click="chooseType" style="margin:0 auto;width:100%;height:100%;">
+                <img src="../../assets/images/000@2x.png" width="20px" style="margin-top:50%;" >
+              </div>
+            </div>
           </ul>
+        </div>
+        <div class="div_display_flex margin_top_div4">
+          <div class="margin_left_div3">
+            <img src="../../assets/images/111@2x.png" width="12px">
+          </div>
+          <div
+            class="font_size_12"
+            style="color:#242E42;margin-left:1%;font-size:0.28rem;"
+          >图片上传类型：jpg、png、gif ; 最多10张；文件大小为5M</div>
         </div>
       </div>
       <!-- 确认 -->
-      <div>
         <div
           class="backgroun_color_4A font_color_ff font_size16 text_center"
-          style="line-height:3 ;float: left;width: 100%;"
+          style="line-height:3.5 ;float: left;width: 100%;position:fixed;bottom:0;left:0;font-size:16px;"
           @click="getRegister"
         >确认</div>
-      </div>
     </div>
   </div>
 </template>
@@ -371,6 +369,7 @@ export default {
 <style scoped>
 textarea {
   border: 1px solid #f4f4f4;
+  height: 1.3rem;
 }
 .img_up_list {
   background-color: #e9efec;
@@ -388,5 +387,17 @@ ul li {
   width: 7px;
   height: 14px;
   float: right;
+  margin-top: 5px;
+}
+.div_display_flex {
+  height: 25px;
+  line-height: 25px;
+  /* background: rgba(122, 99, 99, 0.363); */
+}
+input{
+  outline: none;
+  border: none;
+  height: 25px;
+  line-height: normal;
 }
 </style>

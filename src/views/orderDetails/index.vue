@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="padding-bottom:60px;">
     <!-- 地址 -->
     <div class="margin_left_div6">
       <div class="div_display_flex font_size_14 font_color_66 padding_top_div3">
@@ -17,14 +17,14 @@
     >
       <div class="div_width_30 margin_right_div3">
         <div class="order_width_height">
-          <img :src="items.picId" width="100%" alt />
+          <img :src="items.picId" width="100%" />
         </div>
       </div>
       <div style="width:63%">
         <div class="font_color_00 font_size_14">{{items.name}}</div>
         <div class="div_display_flex margin_top_div3">
           <div class="order_price_font" style="width:80%">¥{{items.price}}</div>
-          <div class="text_right">*{{items.count}}</div>
+          <div class="text_right">x{{items.count}}</div>
           <!-- order_price_bt -->
         </div>
         <div v-for="(itemsg,index) in items.goodsSpecs" :key="index" class="GG_list">

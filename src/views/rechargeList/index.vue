@@ -1,6 +1,6 @@
 <template>
   <div style="height: 100%;overflow-x: hidden;">
-    <!-- 详情列表 -->
+    <!-- 充值记录 -->
     <div v-if=" rechargeRecordList.length > 0">
       <div class="data_d_b" v-for="(item,index) in rechargeRecordList" :key="index">
         <div class="div_display_flex font_size_16 font_color_33 margin_top_div5">
@@ -12,6 +12,7 @@
         >{{item.rechargeTime}}</div>
       </div>
     </div>
+    <!-- 押金记录 -->
     <div v-if=" depositRecordList.length > 0">
       <div class="data_d_b" v-for="(item,index) in rechargeRecordList" :key="index">
         <div class="div_display_flex font_size_16 font_color_33 margin_top_div5">
@@ -23,12 +24,10 @@
         >{{item.rechargeTime}}</div>
       </div>
     </div>
-    <div v-if=" depositRecordList.length == 0 && rechargeRecordList.length == 0">
-      <img
-        src="../../assets/images/1581@2x.png"
-        style="width: 80%;margin-left: 10%;margin-top: 30%;"
-        alt
-      >
+    <!-- 空列表 -->
+    <div v-if=" depositRecordList.length == 0 && rechargeRecordList.length == 0" style="text-align:center;">
+      <img src="../../assets/images/1581@2x.png" style="width: 65%;margin-top:30%;">
+      <div style="margin-top:0.2rem;font-size:0.3rem;color:#999;">暂无充值记录</div>
     </div>
   </div>
 </template>
