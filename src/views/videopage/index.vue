@@ -4,7 +4,7 @@
     <div class="video_box">
       <iframe
         id="video"
-        style="width:100%;height:220px;"
+        style="width:100%;height:220px;display:block"
         :src="videolUrl"
         frameborder="0"
         allowfullscreen

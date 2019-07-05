@@ -87,15 +87,15 @@ export default {
   methods: {
     handleScroll() {},
     getRecipeList() {
-      this.$vux.loading.show({
-        text: "Loading"
-      });
+      // this.$vux.loading.show({
+      //   text: "Loading"
+      // });
 
       this.$fetch
         .post("fruits/app/recipe/getRecipeList", this.form)
         .then(res => {
           console.log(res, 999);
-          this.$vux.loading.hide();
+          // this.$vux.loading.hide();
 
           if (res.code.length == 0) {
             this.isUnMore1 = true;

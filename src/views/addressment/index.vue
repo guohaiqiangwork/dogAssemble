@@ -16,7 +16,7 @@
             >{{'删除'}}</swipeout-button>
             <!-- <swipeout-button @click.native="onButtonClick('delete')" type="warn">{{$t('Right')}}</swipeout-button> -->
           </div>
-          <div slot="content" class="vux-1px-t address_list"  @click="goBack(item)">
+          <div slot="content" class=" address_list"  @click="goBack(item)">
             <div class="name_size">
               <p>{{item.receiver}}</p>
               <p class="defalut_address" v-show="item.isDefault == 1">默认</p>

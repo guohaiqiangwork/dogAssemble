@@ -141,6 +141,7 @@ export default {
     },
     //切换身份
     changeIDE(){
+      
        let _obj = {
         openId: localStorage.getItem("openId")
       };
@@ -149,6 +150,7 @@ export default {
           if (data.code == 0) {
             localStorage.setItem("type", data.attributes.type);
             this.getCartNum();
+
           }
         },
         err => {
@@ -163,21 +165,14 @@ export default {
           openId: localStorage.getItem("openId")
         })
         .then(res => {
-          if (res.msg == "success") {
-            // this.$router.push("/home");
-            localStorage.setItem("catnum", res.obj);
-            this.$router.push({
-              name: 'personal',
-              params: {
-                obj: JSON.stringify({
-                  type: "profession",
-                  data: {
-                    id: "参数"
-                  }
-                })
-              }
-            });
+          if(res.code == 0){
+              localStorage.setItem("catnum", res.obj);
+              this.$vux.toast.text('身份已切换')
+              setTimeout(() =>{
+                this.$router.push('/home');
+              },1000)
           }
+         
         });
     },
     // 去地址管理

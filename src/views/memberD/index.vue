@@ -307,7 +307,7 @@ export default {
       this.$fetch.post(url.sureBigu, _obj).then(
         data => {
           if (data.code == 0) {
-           
+            this.getInfo(this.parameter.item.id); 
             // this.getInfo(this.parameter.item.id);
           } else {
             alert(data.msg);

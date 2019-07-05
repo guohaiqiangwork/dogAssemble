@@ -17,7 +17,7 @@
             </div>
             <div class="address_item">
             
-                <x-input label-width="5em"  v-model="addressBC.details" :title='`<span style="${style}">收货地址</span>`' :show-clear="false"    placeholder="详细地址" >
+                <x-input label-width="5em"  v-model="addressBC.details"   :title='`<span style="${style}">收货地址</span>`' :show-clear="false"    placeholder="详细地址" >
                     
                 </x-input>
             </div>
@@ -127,6 +127,12 @@ export default {
     },
     // 修改地址保存
     addressoptX() {
+    
+      var validTel = this.$refs.inputTel.valid;
+      if(!validTel){
+        this.$vux.toast.text('手机号格式不正确');
+        return
+      }
       let _obj = {
         openId: localStorage.getItem("openId"),
          id: this.addressBC.id,

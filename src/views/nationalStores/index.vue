@@ -1,5 +1,5 @@
 <template>
-  <div class="backgroun_color_fff" style="min-height:700px;overflow-x:hidden;">
+  <div class="backgroun_color_fff" style="min-height:100%;overflow-x:hidden;">
     <!-- 搜索 -->
     <div class="search_box" style="border:none;box-shadow:0px 3px 10px rgba(136,136,136,0.16);">
       <i class="weui-icon-search search_icon"></i>
@@ -14,7 +14,7 @@
     </div>
     <!-- 推荐门店列表 -->
     <nut-scroller
-    style="margin-top:5%;"
+    style="margin-top:5%;overflow-x:hidden;"
       :is-un-more="isUnMore1"
       :is-loading="isLoading1"
       :type="'vertical'"
@@ -310,6 +310,12 @@ export default {
   }
 };
 </script>
+<style>
+.nut-vert-list{
+  height: 100% !important;
+}
+</style>
+
 <style scoped>
 .national_flag_title {
   width: 2px;

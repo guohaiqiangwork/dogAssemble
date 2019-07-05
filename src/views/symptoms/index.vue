@@ -12,9 +12,9 @@
       />
       <i></i>
     </div>
-    <div class="margin_top_div3" >
+    <div class="margin_top_div3" v-show="peiFangList.length">
       <!-- 全部配方 -->
-      <div id="allbook " v-if="peiFangList.length">
+      <div id="allbook" >
         <div v-for="(item,index) in peiFangList" :key="index">
           <div class="book-list">
             <p class="flex-between align-center mb-36">
