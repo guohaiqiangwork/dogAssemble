@@ -25,7 +25,22 @@
          
         </div> 
          <!-- <div class="foryou">为您推荐</div> -->
-        <hot v-on:goToDetail="goDetail" class="hot-btn-space"></hot>
+        <!-- <hot v-on:goToDetail="goDetail" class="hot-btn-space"></hot> -->
+        <div id="hot" class=" margin_top_div3">
+            <div class="hot_tit" v-if="home&&hotList.length">热门推荐</div>
+                <div class="foryou" v-if="!home&&hotList.length">为您推荐</div>
+                <div class="hot_item">
+                <div v-for="(item,index) in hotList" :key="index" class="mt_size" @click="goDetail(item)">
+                    <img class="hot_logo" :src="item.picId" alt>
+                    <p class="hot_msg">
+                    <span>{{item.name}}</span>
+                    <br>
+                    <span class="hot_price">{{`￥${type == 1?item.original:item.price}`}}</span>
+                    <span class="goods_discount" v-if="type!=1&&type">¥{{item.original}}</span>
+                    </p>
+                </div>
+                </div>
+        </div>
         <div v-transfer-dom>
             <popup v-model="popupshow" position="bottom" @on-hide='close'>
                 <div class="popup_box ">
@@ -110,10 +125,14 @@ export default {
         },
         type(){
             return localStorage.getItem('type');
-        }
+        },
+         home(){
+      return this.$route.path == '/home'
+    }
     },
     data() {
         return {
+            hotList:[],
             imgList: [
                 // {
                 //   img:"",
@@ -148,6 +167,41 @@ export default {
       settitle('商品详情');
     },
     methods: {
+    goDetail(item) {
+    //   this.$router.push("/goodsdetail?id=" + item.id);
+      this.$router.push({
+          name:'shop',
+          query:{
+              id :item.id
+          }
+      });
+    },
+        getRecommend() {
+      let _obj = {
+        openId: localStorage.getItem("openId")
+      };
+      this.$fetch.post(url.getRecommend, _obj).then(
+        data => {
+          if (data.code == 0) {
+            this.hotList = data.obj;
+            this.hotList.forEach(item => {
+              item.price = item.price.toFixed(2);
+              item.original = item.original.toFixed(2);
+              item.picId = url.imgUrl + item.picId;
+              console.log(item.picId);
+            });
+          }else{
+             alert(data.msg)
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
+        }
+      );
+    },
+    goToDetail(id) {
+      this.$emit("goToDetail", id);
+    },
         //商品详情页
         goDetail(item) {
             this.$router.push("/goodsdetail?id=" + item.id);
@@ -277,13 +331,76 @@ export default {
         })
         
         this.getSpecs();
+        this.getRecommend(); //获取推荐列表
     },
-    updated(){
-        // this.getGood();
-    }
 }
 </script>
 <style lang="less">
+#hot {
+  background: #fff;
+.foryou {
+    padding: 0.64rem 0 0.52rem 0;
+    font-size: 0.3rem;
+    color: #4a7b67;
+    text-align: center;
+    background: #fff;
+  }
+  .foryou:before {
+    content: "";
+    display: inline-block;
+    width: 1.7rem;
+    margin: 0 0.26rem 0.1rem 0;
+    border-top: 1px solid rgb(222, 222, 222);
+  }
+  .foryou:after {
+    content: "";
+    display: inline-block;
+    width: 1.7rem;
+    margin: 0 0 0.1rem 0.26rem;
+    border-top: 1px solid rgb(222, 222, 222);
+  }
+  .hot_item {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 0 0.42rem;
+    .mt_size {
+      margin: 0.2rem 0;
+      min-width: 30%;
+      max-width: 30%;
+    }
+    .hot_logo {
+      height: 1.8rem;
+      width: 1.8rem;
+    }
+    .hot_msg {
+      text-align: left;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      
+      span {
+        display: inline-block;
+        white-space: wrap;
+        color: #000;
+        font-size: .28rem;
+      }
+      .hot_price {
+        color: #E6435A;
+        font-size: 0.28rem;
+        padding: 0.1rem 0rem;
+      }
+     
+    }
+  }
+   .goods_discount{
+        color:rgb(16,32,35);
+        opacity:0.52;
+        text-decoration: line-through;
+        margin-right: 0.2rem;
+        font-size: 0.13rem;
+      }
+}
       .goods_discount{
         color:rgb(16,32,35);
         opacity:0.52;
