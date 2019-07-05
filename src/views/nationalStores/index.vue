@@ -1,5 +1,5 @@
 <template>
-  <div class="backgroun_color_fff" style="min-height:700px">
+  <div class="backgroun_color_fff" style="min-height:700px;overflow-x:hidden;">
     <!-- 搜索 -->
     <div class="search_box" style="border:none;box-shadow:0px 3px 10px rgba(136,136,136,0.16);">
       <i class="weui-icon-search search_icon"></i>
@@ -141,7 +141,7 @@ export default {
         current: "1",
         size: "10"
       },
-      recommendStoreList: "",
+      recommendStoreList: [],
       productNamr: "",
       isUnMore1: false,
       isLoading1: true,
@@ -223,7 +223,9 @@ export default {
       this.$fetch.post("fruits/app/blank/getRecommendStoreList", _obj).then(
         data => {
           if (data.code == 0) {
-            this.recommendStoreList = data.obj;
+            data.obj.forEach(e =>{
+              this.recommendStoreList.push(e);
+            })
             // data.obj.forEach(item => {
             //   item.SFQY = data.obj.province
             // });

@@ -215,7 +215,7 @@ export default {
             if(res.msg == 'success'){
               this.$vux.toast.text('解冻成功!');
               // this.$router.go(0);
-              window.go(0)
+             window.location.reload();
             }
           })
         }else{
@@ -227,7 +227,7 @@ export default {
             if (res.code == 0) {
               localStorage.setItem('state',3);
               // this.$router.go(0)
-              window.go(0)
+             window.location.reload();
               alert("冻结成功");
             } else if (res.msg == "user_has_frozen") {
               alert("该账号已冻结");
