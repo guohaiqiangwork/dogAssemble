@@ -365,29 +365,29 @@ export default {
     },
     // 保存推荐信息
     getRegister() {
-      if (this.recommendList.name) {
-        this.$vux.toast.text("请输入姓名");
+      if (!this.recommendList.name) {
+        this.$vux.toast.text("请输入商户名称");
         return;
-      } else if (this.recommendList.name) {
+      } else if (!this.shopType) {
         this.$vux.toast.text("请选择商户类型");
         return;
-      } else if (this.recommendList.linkman) {
+      } else if (!this.recommendList.linkman) {
         this.$vux.toast.text("请输入联系人");
         return;
-      } else if (this.recommendList.linkPhone) {
+      } else if (!this.recommendList.linkPhone) {
         this.$vux.toast.text("请输入手机号");
         return;
-      } else if (this.recommendList.accountName) {
+      } else if (!this.recommendList.accountName) {
         this.$vux.toast.text("请输入账户名称");
         return;
-      } else if (this.recommendList.bankName) {
+      } else if (!this.recommendList.bankName) {
         this.$vux.toast.text("请输入银行账户");
         return;
-      } else if (this.recommendList.bankAddress) {
+      } else if (!this.recommendList.bankAddress) {
         this.$vux.toast.text("请输入开户地址");
         return;
-      } else if (this.recommendList.bankNum) {
-        this.$vux.toast.text("请输入银行账户");
+      } else if (this.addressVal.length == 0) {
+        this.$vux.toast.text("请选择地区");
         return;
       }
       var reg = /^1[3,4,5,6,7,8,9]\d{9}/;
