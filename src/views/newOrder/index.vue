@@ -320,7 +320,7 @@ export default {
       this.$fetch.post(url.saveInediaRecipe, _obj).then(
         data => {
           if (data.code == 0) {
-            console.log("7897907");
+            alert('新建成功')
           } else {
             alert(data.msg);
           }
