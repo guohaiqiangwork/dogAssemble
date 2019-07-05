@@ -661,10 +661,10 @@ export default {
     },
     // 会员操作
     goToMemberOperation() {
-      //   if(this.personalMsg.storeState != 1){
-      //     this.$vux.toast.text("店铺已打烊，该功能无法操作");
-      //   return
-      // }
+        if(this.personalMsg.storeState != 1){
+          this.$vux.toast.text("店铺已打烊，该功能无法操作");
+        return
+      }
       this.$router.push({
         name: "memberOperation",
         params: {
