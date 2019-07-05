@@ -68,13 +68,13 @@
       <div class="div_display_flex margin_left_div3 margin_top_div5">
         <div class="div_width_25 font_size_14 font_color_1A">银行名称：</div>
         <div class="div_width_70">
-          <input type="text" placeholder="请输入银行名称" v-model="recommendList.bankName">
+          <input type="text" placeholder="请输入银行名称"  v-model="recommendList.bankName">
         </div>
       </div>
       <div class="div_display_flex margin_left_div3 margin_top_div5">
         <div class="div_width_25 font_size_14 font_color_1A">银行帐户：</div>
         <div class="div_width_70">
-          <input type="text" placeholder="请输入银行帐户" v-model="recommendList.bankNum">
+          <input type="text" placeholder="请输入银行帐户" maxlength="19"  v-model="recommendList.bankNum">
         </div>
       </div>
       <div class="div_display_flex margin_left_div3 margin_top_div5">
@@ -342,6 +342,15 @@ export default {
     },
     // 保存推荐信息
     getRegister() {
+      var reg = /^1[3,4,5,6,7,8,9]\d{9}/;
+      if(!reg.test(this.recommendList.linkPhone)){
+        this.$vux.toast.text('手机号输入不正确');
+        return
+      }
+      if(this.recommendList.bankNum.length<16){
+        this.$vux.toast.text('银行账户至少为16位数字');
+        return
+      }
       this.recommendList.openId = localStorage.getItem("openId");
       this.recommendList.province = this.addressVal[0];
       this.recommendList.city = this.addressVal[1];
