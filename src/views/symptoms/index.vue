@@ -49,19 +49,29 @@
           </div>
         </div>
       </div>
-      <!-- 推荐门店 -->
+    
+    </div>
+    <div
+      class="nodata"
+      style="height: calc(100% - 0.7rem);    background-color: rgb(248, 248, 248);"
+    >
+      <img src="../../assets/images/1546.png" alt style="width:4.78rem;height:3.23rem;" />
+      <p style="font-size:12px">暂无数据</p>
+    </div>
+    <div>
+        <!-- 推荐门店 -->
       <div class="div_display_flex">
         <div class="national_list font_color_00 font_size_13 backgroun_color_fff margin_top_div3">
           <div class="div_display_flex margin_top_div3">
             <div
               class="div_width_70 margin_left_div2"
-            >{{recommendStoreList[1].province}}{{recommendStoreList[1].city}}{{recommendStoreList[1].area}}</div>
+            >{{recommendStoreList[0].province}}{{recommendStoreList[0].city}}{{recommendStoreList[0].area}}</div>
             <div
               class="div_width_30 margin_right_div2 text_right"
-            >{{recommendStoreList[1].distance}}km</div>
+            >{{recommendStoreList[0].distance}}km</div>
           </div>
           <div class="div_display_flex margin_top_div3">
-            <div class="div_width_70 margin_left_div2">{{recommendStoreList[1].address}}</div>
+            <div class="div_width_70 margin_left_div2">{{recommendStoreList[0].address}}</div>
             <div class="div_width_30 margin_right_div2 text_right" @click="goToMap">
               <img src="../../assets/images/1440@2x.png" width="12px" />
             </div>
@@ -70,21 +80,14 @@
             <div class="div_width_70 margin_left_div2">营业时间</div>
             <div
               class="div_width_30 margin_right_div2 text_right"
-            >{{recommendStoreList[1].startTime}}</div>
+            >{{recommendStoreList[0].startTime}}</div>
           </div>
           <div class="div_display_flex margin_top_div3 padding_bottom_4">
             <div class="div_width_70 margin_left_div2">门店电话</div>
-            <div class="div_width_30 margin_right_div2 text_right">{{recommendStoreList[1].phone}}</div>
+            <div class="div_width_30 margin_right_div2 text_right">{{recommendStoreList[0].phone}}</div>
           </div>
         </div>
       </div>
-    </div>
-    <div
-      class="nodata"
-      style="height: calc(100% - 0.7rem);    background-color: rgb(248, 248, 248);"
-    >
-      <img src="../../assets/images/1546.png" alt style="width:4.78rem;height:3.23rem;" />
-      <p style="font-size:12px">暂无数据</p>
     </div>
   </div>
 </template>
