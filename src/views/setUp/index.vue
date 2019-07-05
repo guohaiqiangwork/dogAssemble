@@ -214,7 +214,8 @@ export default {
           this.$fetch.post("fruits/app/personal/thawCustomer",{openId:localStorage.getItem('openId'),code:this.code}).then(res =>{
             if(res.msg == 'success'){
               this.$vux.toast.text('解冻成功!');
-              this.$router.go(0)
+              // this.$router.go(0);
+              window.go(0)
             }
           })
         }else{
@@ -225,7 +226,8 @@ export default {
           .then(res => {
             if (res.code == 0) {
               localStorage.setItem('state',3);
-              this.$router.go(0)
+              // this.$router.go(0)
+              window.go(0)
               alert("冻结成功");
             } else if (res.msg == "user_has_frozen") {
               alert("该账号已冻结");
