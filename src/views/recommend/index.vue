@@ -381,7 +381,7 @@ export default {
         this.$vux.toast.text("请输入账户名称");
         return;
       } else if (!this.recommendList.bankName) {
-        this.$vux.toast.text("请输入银行账户");
+        this.$vux.toast.text("请输入银行名称");
         return;
       } else if (!this.recommendList.bankAddress) {
         this.$vux.toast.text("请输入开户地址");
