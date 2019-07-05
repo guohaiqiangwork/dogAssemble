@@ -6,7 +6,7 @@
                 <x-input label-width="4em" v-model="addressBC.name"  :title='`<span style="${style}">收货人</span>`' :max="4"  :show-clear="false" placeholder="姓名"></x-input>
             </div>
             <div class="address_item">
-                <x-input label-width="4em" v-model="addressBC.phone"  :title='`<span style="${style}">手机号</span>`' placeholder="收货人电话" keyboard="number" is-type="china-mobile" :show-clear="false"></x-input>
+                <x-input label-width="4em" v-model="addressBC.phone" ref="inputTel"  :title='`<span style="${style}">手机号</span>`' placeholder="收货人电话" keyboard="number" is-type="china-mobile" :show-clear="false"></x-input>
             </div>
         </div>
         <div class="address_btm">
@@ -91,6 +91,11 @@ export default {
     },
     // 新增地址保存
     addressopt() {
+      var validTel = this.$refs.inputTel.valid;
+      if(!validTel){
+        this.$vux.toast.text('手机号格式不正确');
+        return
+      }
       let _obj = {
         openId: localStorage.getItem("openId"),
         receiver: this.addressBC.name, //收货人

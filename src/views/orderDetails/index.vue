@@ -17,8 +17,7 @@
     >
       <div class="div_width_30 margin_right_div3">
         <div class="order_width_height">
-          <img :src="items.picId" width="100%" />
-        </div>
+          <img :src="items.picId" width="100%" alt /> <img :src="items.picId" width="70px" height="70px" alt />        </div>
       </div>
       <div style="width:63%">
         <div class="font_color_00 font_size_14">{{items.name}}</div>
@@ -103,6 +102,7 @@ export default {
       };
       this.$fetch.post(url.getShopOrder, _obj).then(data => {
         if (data.code == 0) {
+          console.log(data,'jkl')
           data.obj.goodsList.forEach(item => {
             item.picId = url.imgUrl + item.picId;
           });

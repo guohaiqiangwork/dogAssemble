@@ -36,7 +36,7 @@
           <div class="margin_left_div3 margin_top_div12">--</div>
           <div class="margin_left_div3">
             <datetime
-             class=" data_colse"
+              class="data_colse"
               v-model="valueE"
               @on-change="changeE"
               :title="''"
@@ -58,7 +58,7 @@
         <div
           v-if="type!=3"
           class="div_width_45 font_color_ff text_center backgroun_color_17"
-          @click="goTODataDetails('2')"
+          @click="goTODataDetails('4')"
         >
           <div class="font_size_25 margin_top_div8">{{moneyList.crossCharge}}</div>
           <div class="font_size_13 margin_top_div5">跨店服务费(元)</div>
@@ -66,7 +66,7 @@
         <div
           class="div_width_45 font_color_ff text_center"
           style="background-color:#B691FD"
-          @click="goTODataDetails('3')"
+          @click="goTODataDetails('5')"
         >
           <div class="font_size_25 margin_top_div8">{{moneyList.videoCharge}}</div>
           <div class="font_size_13 margin_top_div5">视频收入(元)</div>
@@ -74,7 +74,7 @@
         <div
           class="div_width_45 font_color_ff text_center"
           style="background-color:#E091FD"
-          @click="goTODataDetails('4')"
+          @click="goTODataDetails('6')"
         >
           <div class="font_size_25 margin_top_div8">{{moneyList.videoCommission}}</div>
           <div class="font_size_13 margin_top_div5">视频返佣(元)</div>
@@ -82,7 +82,7 @@
         <div
           class="div_width_45 font_color_ff text_center"
           style="background-color:#88C3FD"
-          @click="goTODataDetails('5')"
+          @click="goTODataDetails('7')"
         >
           <div class="font_size_25 margin_top_div8">{{moneyList.recommendCommission}}</div>
           <div class="font_size_13 margin_top_div5">推荐返佣(元)</div>
@@ -90,7 +90,7 @@
         <div
           class="div_width_45 font_color_ff text_center"
           style="background-color:#E8BB7A"
-          @click="goTODataDetails('6')"
+          @click="goTODataDetails('8')"
         >
           <div class="font_size_25 margin_top_div8">{{moneyList.shopCommission}}</div>
           <div class="font_size_13 margin_top_div5">商城返佣(元)</div>
@@ -99,14 +99,13 @@
           v-if="type!=3"
           class="div_width_45 font_color_ff text_center"
           style="background-color:#FFB469"
-          @click="goTODataDetails('7')"
+          @click="goTODataDetails('3')"
         >
           <div class="font_size_25 margin_top_div8">{{moneyList.transferCharge}}</div>
           <div class="font_size_13 margin_top_div5">转店收入(元)</div>
         </div>
         <div
-         v-if="type!=3"
-          class="div_width_45 font_color_ff text_center"
+        	v-if="type!=3"          class="div_width_45 font_color_ff text_center"
           style="background-color:#FF776C"
           @click="goTODataDetails('8')"
         >
@@ -169,7 +168,7 @@ export default {
     },
     // 去数据详情
     goTODataDetails(item) {
-      console.log(item)
+      console.log(item);
       this.$router.push({
         name: "dataDetails",
         params: {
@@ -185,12 +184,11 @@ export default {
     //  时间事件
     changeS(value) {
       console.log("chan3ge", value);
-      this.getStatistics()//获取数据
-
+      this.getStatistics(); //获取数据
     },
     changeE(value) {
       console.log("chang2e", value);
-       this.getStatistics()//获取数据
+      this.getStatistics(); //获取数据
     },
     //时间
     setToday(value) {
@@ -214,9 +212,9 @@ export default {
       this.$fetch.post(url.getStatistics, _obj).then(data => {
         if (data.code == 0) {
           this.moneyList = data.obj;
-        }else{
-             alert(data.msg)
-          }
+        } else {
+          alert(data.msg);
+        }
       });
     }
   },
@@ -233,7 +231,7 @@ export default {
 </script>
 <style>
 .date_choose .weui-cell__ft:after {
-    display: none;
+  display: none;
 }
 </style>
 

@@ -70,6 +70,7 @@
           class="recharge_input_b2 margin_top_div8"
           placeholder="输入其他金额"
           v-model="amount"
+          @blur ="onBlur"
           @focus="otherFocus"
         >
       </div>
@@ -118,6 +119,9 @@ export default {
     };
   },
   methods: {
+    onBlur(){
+      window.scroll(0,0)
+    },
     // 选择金额
     moneyXz(falge, index, topup) {
       // console.log(,890)
@@ -190,11 +194,15 @@ export default {
           openId: localStorage.getItem("openId")
         })
         .then(res => {
-          res.obj.forEach(item => {
+          this.$vux.loading.hide();
+          if(res.obj.length){
+             res.obj.forEach(item => {
             item.log = false;
             this.countList.push(item);
-          });
-          this.$vux.loading.hide();
+            });
+          }else{
+            this.$vux.toast.text('暂无数据')
+          }
         });
     },
     // 点击充值

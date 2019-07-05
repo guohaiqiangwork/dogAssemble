@@ -25,7 +25,7 @@
          
         </div> 
          <!-- <div class="foryou">为您推荐</div> -->
-        <hot @goToDetail="goDetail" class="hot-btn-space"></hot>
+        <hot v-on:goToDetail="goDetail" class="hot-btn-space"></hot>
         <div v-transfer-dom>
             <popup v-model="popupshow" position="bottom" @on-hide='close'>
                 <div class="popup_box ">

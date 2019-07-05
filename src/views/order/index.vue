@@ -49,7 +49,7 @@
                 >
                   <div class="div_width_30 margin_right_div3">
                     <div class="order_width_height">
-                      <img :src="items.picId" width="70"  height="70"  alt>
+                      <img :src="items.picId" width="100%"  alt>
                     </div>
                   </div>
                   <div style="width:63%">
@@ -117,7 +117,7 @@
                 >
                   <div class="div_width_30 margin_right_div3">
                     <div class="order_width_height">
-                      <img :src="items.picId" width="70"  height="70"  alt>
+                      <img :src="items.picId" width="100%"  alt>
                     </div>
                   </div>
                   <div style="width:63%">
@@ -185,7 +185,7 @@
                 >
                   <div class="div_width_30 margin_right_div3">
                     <div class="order_width_height">
-                      <img :src="items.picId" width="70"  height="70" alt>
+                      <img :src="items.picId" width="100%"  alt>
                     </div>
                   </div>
                   <div style="width:63%">
@@ -256,7 +256,7 @@
                 >
                   <div class="div_width_30 margin_right_div3">
                     <div class="order_width_height">
-                      <img :src="items.picId" width="70"  height="70" alt>
+                      <img :src="items.picId" width="100%" alt>
                     </div>
                   </div>
                   <div style="width:63%">
@@ -324,7 +324,7 @@
                 >
                   <div class="div_width_30 margin_right_div3">
                     <div class="order_width_height">
-                      <img :src="items.picId" width="70"  height="70"  alt>
+                      <img :src="items.picId" width="100%" alt>
                     </div>
                   </div>
                   <div style="width:63%">
@@ -540,9 +540,9 @@ export default {
   margin-top: 3%;
 }
 .order_width_height {
-  width: 70px;
+  width: 90px;
   overflow: hidden;
-  height: 70px;
+  height: 90px;
   /* border: 1px dashed #707070; */
   margin-left: 18%;
 }

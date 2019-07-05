@@ -267,6 +267,7 @@ export default {
             width: 70px;
             height: 70px;
             margin-left: 0.28rem;
+            border: 1px solid #fff;
         }
         .goods_item{
              width: 100%;

@@ -40,28 +40,30 @@
         v-for="(item,index) in huiYList"
         :key="index"
       >
-      <div @click="goToSOrderD('h',item)">
-        <div class="div_display_flex margin_top_div5 padding_top_div3 font_size_16">
-          <div class="div_width_80 margin_left_div3">{{item.recipe}}</div>
-          <div class="div_width_20">{{item.num}}</div>
-        </div>
-        <div class="div_display_flex margin_top_div3 font_size_13">
-          <div class="div_width_80 margin_left_div3">{{item.time}}</div>
-          <div class="div_width_20">已喝次数</div>
-        </div>
-        <div class="div_display_flex margin_top_div8 padding_bottom_4 font_size_13">
-          <div
-            class="div_width_80 margin_left_div2"
-           
-          >适应症：{{item.disease}}</div>
-          <div class="div_width_20" v-if="item.state == 0">未开始</div>
-          <div class="div_width_20" v-if="item.state == 1">已消费</div>
-          <div class="div_width_20" v-if="item.state == 2">已暂停</div>
-          <div class="div_width_20" v-if="item.state == 3">已完成</div>
-        </div>
-
+        <div @click="goToSOrderD('h',item)">
+          <div class="div_display_flex margin_top_div5 padding_top_div3 font_size_16">
+            <div class="div_width_80 margin_left_div3">{{item.recipe}}</div>
+            <div class="div_width_20">{{item.num}}</div>
+          </div>
+          <div class="div_display_flex margin_top_div3 font_size_13">
+            <div class="div_width_80 margin_left_div3">{{item.time}}</div>
+            <div class="div_width_20">已喝次数</div>
+          </div>
+          <div class="div_display_flex margin_top_div8 padding_bottom_4 font_size_13">
+            <div class="div_width_80 margin_left_div2">适应症：{{item.disease}}</div>
+            <div class="div_width_20" v-if="item.state == 0">未开始</div>
+            <div class="div_width_20" v-if="item.state == 1">已消费</div>
+            <div class="div_width_20" v-if="item.state == 2">已暂停</div>
+            <div class="div_width_20" v-if="item.state == 3">已完成</div>
+          </div>
         </div>
       </div>
+    </div>
+    <div v-if="noneList.length == 0 ">
+      <div class="text_center" style="margin-top16%">
+        <img src="../../assets/images/1581@2x.png" width="65%" alt />
+      </div>
+      <div class="text_center font_size_15 font_color_99">暂无数据</div>
     </div>
   </div>
 </template>
@@ -74,7 +76,8 @@ export default {
     return {
       list: [],
       huiYList: [],
-      biGList: []
+      biGList: [],
+      noneList:''
     };
   },
   methods: {
@@ -102,6 +105,7 @@ export default {
         .then(res => {
           if (res.code == 0) {
             console.log(res.obj);
+            this.noneList = res.obj
             res.obj.forEach(item => {
               if (item.type == 0) {
                 this.huiYList.push(item);

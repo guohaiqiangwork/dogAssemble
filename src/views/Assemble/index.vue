@@ -79,6 +79,11 @@ export default {
     }
   },
   methods: {
+    clearCart(){
+      if(!localStorage.getItem('user')){
+        localStorage.setItem('catnum',0);
+      }
+    },
     goDetail(item) {
       this.$router.push("/goodsdetail?id=" + item.id);
     },
@@ -199,6 +204,7 @@ export default {
         });
       });
     this.getGoodsList(); //
+    this.clearCart()
   }
 };
 </script>

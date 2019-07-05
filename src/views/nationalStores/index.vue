@@ -1,5 +1,5 @@
 <template>
-  <div class="backgroun_color_fff" style="min-height:700px">
+  <div class="backgroun_color_fff" style="min-height:700px;overflow-x:hidden;">
     <!-- 搜索 -->
     <div class="search_box" style="border:none;box-shadow:0px 3px 10px rgba(136,136,136,0.16);">
       <i class="weui-icon-search search_icon"></i>
@@ -32,16 +32,15 @@
           </div>-->
           <div class="national_list font_color_00 font_size_13 backgroun_color_fff margin_top_div3">
             <div class="div_display_flex margin_top_div3">
-              <div
-                class="div_width_70 margin_left_div2"
-              >{{recommendStoreList[1].province}}{{recommendStoreList[1].city}}{{recommendStoreList[1].area}}</div>
-              <div v-if="recommendStoreList[1].state == 2" class="bt_close">已关店</div>
+              <div class="div_width_70 margin_left_div2 over_hidde">
+              {{recommendStoreList[0].province}}{{recommendStoreList[0].city}}{{recommendStoreList[0].area}}{{recommendStoreList[0].name}}</div>
+              <div v-if="recommendStoreList[0].state == 2" class="bt_close">已关店</div>
               <div
                 class="div_width_30 margin_right_div2 text_right"
-              >{{recommendStoreList[1].distance}}km</div>
+              >{{recommendStoreList[0].distance}}km</div>
             </div>
             <div class="div_display_flex margin_top_div3">
-              <div class="div_width_70 margin_left_div2">{{recommendStoreList[1].address}}</div>
+              <div class="div_width_70 margin_left_div2">{{recommendStoreList[0].address}}</div>
               <div class="div_width_30 margin_right_div2 text_right" @click="goToMap">
                 <img src="../../assets/images/1440@2x.png" width="12px">
               </div>
@@ -50,11 +49,11 @@
               <div class="div_width_70 margin_left_div2">营业时间</div>
               <div
                 class="div_width_30 margin_right_div2 text_right"
-              >{{recommendStoreList[1].startTime}}</div>
+              >{{recommendStoreList[0].startTime}}</div>
             </div>
             <div class="div_display_flex margin_top_div3 padding_bottom_4">
               <div class="div_width_70 margin_left_div2">门店电话</div>
-              <div class="div_width_30 margin_right_div2 text_right">{{recommendStoreList[1].phone}}</div>
+              <div class="div_width_30 margin_right_div2 text_right">{{recommendStoreList[0].phone}}</div>
             </div>
           </div>
         </div>
@@ -74,8 +73,9 @@
             >
               <div class="div_display_flex margin_top_div3">
                 <div
-                  class="div_width_70 margin_left_div2"
-                >{{item.province}}{{item.city}}{{item.area}}</div>
+                  class="div_width_70 margin_left_div2 over_hidde"
+                >{{item.province}}{{item.city}}{{item.area}}{{item.name}}</div>
+                  <div v-if="item.state == 2" class="bt_close">已关店</div>
                 <div class="div_width_30 margin_right_div2 text_right">{{item.distance}}km</div>
               </div>
               <div class="div_display_flex margin_top_div3">
@@ -139,12 +139,12 @@ export default {
       ],
       page: {
         current: "1",
-        size: "10"
+        size: "2"
       },
-      recommendStoreList: "",
+      recommendStoreList: [],
       productNamr: "",
       isUnMore1: false,
-      isLoading1: true,
+      isLoading1: false,
       longitude: 0, //经度
       latitude: 0 //纬度
     };
@@ -220,10 +220,15 @@ export default {
         latitude: this.latitude,
         longitude: this.longitude
       };
+      this.isLoading1 = true;
       this.$fetch.post("fruits/app/blank/getRecommendStoreList", _obj).then(
         data => {
+          this.isLoading1 = false;
           if (data.code == 0) {
-            this.recommendStoreList = data.obj;
+
+            data.obj.forEach(e =>{
+              this.recommendStoreList.push(e);
+            })
             // data.obj.forEach(item => {
             //   item.SFQY = data.obj.province
             // });
@@ -240,10 +245,13 @@ export default {
     // 上拉加载
     selPullUp() {
       this.page.current++;
+     
       this.getRecommendStoreList();
     },
     // 下拉刷新
     pulldown() {
+       this.recommendStoreList = [];
+      console.log('klk')
       this.isUnMore1 = false;
       this.page.current = 1;
       this.getRecommendStoreList();
@@ -348,5 +356,10 @@ export default {
   border: 1px solid #e6435a;
   /* align-content: center; */
   text-align: center;
+}
+.over_hidde{
+  overflow: hidden;
+white-space: nowrap;
+ text-overflow: ellipsis;
 }
 </style>

@@ -19,7 +19,7 @@
           <div slot="content" class="vux-1px-t address_list"  @click="goBack(item)">
             <div class="name_size">
               <p>{{item.receiver}}</p>
-              <span class="defalut_address" v-show="item.isDefault == 1">默认</span>
+              <p class="defalut_address" v-show="item.isDefault == 1">默认</p>
             </div>
             <div class="msg_mr">
               <p>{{item.phone}}</p>
@@ -61,13 +61,20 @@ export default {
     };
   },
     beforeRouteEnter (to, from, next) {
+      console.log(from,79879);
     if(from.name == 'paysure'){
       next(vm =>{
-        vm.sub = true;
+        localStorage.setItem('cloudClick',true);
       })
-    }else{
-      next();
     }
+    if(from.name == 'setUp' || from.name == 'personal'){
+      localStorage.setItem('cloudClick',false);
+    }
+    next();
+    // else{
+    //   // localStorage.setItem('cloudClick',false);
+    //   next();
+    // }
   },
   methods: {
     handleEvents() {},
@@ -93,7 +100,8 @@ export default {
       );
     },
     goBack(item){
-      if(!this.sub){
+      var cloudClick = localStorage.getItem("cloudClick");
+      if(cloudClick == 'false'){
         return
       }
       this.$router.push({
@@ -202,8 +210,8 @@ export default {
       .msg_mr {
         width: 4.5rem;
         // background: red;
-        position: absolute;
-        left: 1.5rem;
+        // position: absolute;
+        // left: 1.5rem;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -211,6 +219,7 @@ export default {
         p:nth-of-type(2){
           margin-top: .15rem;
           word-break: break-all;
+          white-space: normal;
         }
       }
       .option {

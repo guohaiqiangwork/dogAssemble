@@ -30,7 +30,7 @@
         <div
           class="div_width_50 personal_list_font"
           style=" text-align: right; margin-right: 4%;"
-        >4008382727</div>
+        ><a href="tel:4008382727">4008382727</a></div>
       </div>
     </div>
     <!-- 推出按钮 -->
@@ -214,7 +214,7 @@ export default {
           this.$fetch.post("fruits/app/personal/thawCustomer",{openId:localStorage.getItem('openId'),code:this.code}).then(res =>{
             if(res.msg == 'success'){
               this.$vux.toast.text('解冻成功!');
-              this.$router.go(0)
+              this.$router.push('/personal');
             }
           })
         }else{
@@ -225,7 +225,7 @@ export default {
           .then(res => {
             if (res.code == 0) {
               localStorage.setItem('state',3);
-              this.$router.go(0)
+              this.$router.push('/personal');
               alert("冻结成功");
             } else if (res.msg == "user_has_frozen") {
               alert("该账号已冻结");
@@ -266,7 +266,6 @@ export default {
   },
   created() {
     settitle("设置");
-    this.routeParams = JSON.parse(this.$route.params.obj);
   },
 
   mounted() {
@@ -276,6 +275,8 @@ export default {
       })
       .then(res => {
         this.personalMsg = { ...res.obj };
+      },err =>{
+        alert(err);
       });
     console.log("设置",this.tel);
   }

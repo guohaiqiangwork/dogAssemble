@@ -14,6 +14,7 @@
         src="http://player.youku.com/embed/XNDEyMTAwNjE0MA=="
         frameborder="0"
         allowfullscreen
+        style="display:block"
       ></iframe>
     </div>我的
     <!-- <video

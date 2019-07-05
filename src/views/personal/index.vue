@@ -548,14 +548,14 @@ export default {
     goToStatistics: function() {
       this.$router.push({
         name: "dataStatistics",
-        params: {
-          obj: JSON.stringify({
-            type: "profession",
-            data: {
-              id: "蚕丝"
-            }
-          })
-        }
+        // params: {
+        //   obj: JSON.stringify({
+        //     type: "profession",
+        //     data: {
+        //       id: "蚕丝"
+        //     }
+        //   })
+        // }
       });
     },
     // 健康奖金
@@ -662,10 +662,10 @@ export default {
     },
     // 会员操作
     goToMemberOperation() {
-      //   if(this.personalMsg.storeState != 1){
-      //     this.$vux.toast.text("店铺已打烊，该功能无法操作");
-      //   return
-      // }
+        if(this.personalMsg.storeState != 1){
+          this.$vux.toast.text("店铺已打烊，该功能无法操作");
+        return
+      }
       this.$router.push({
         name: "memberOperation",
         params: {
