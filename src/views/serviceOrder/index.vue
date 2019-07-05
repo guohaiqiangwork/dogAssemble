@@ -25,12 +25,12 @@
           class="div_display_flex font_color_00 font_size_13 text_center service_list_border"
         >
           <!-- <div class="service_width_25" >{{index + 1}}</div> -->
-          <div class="service_width_50" @click="goToSOrderD('b',item)"> 第{{items.num}}天</div>
+          <div class="service_width_50" @click="goToSOrderD('b',item,items.num)"> 第{{items.num}}天</div>
           <!-- <div class="service_width_25">{{items.time}}</div> -->
-          <div class="service_width_51" @click="goToSOrderD('b',item)" v-if="item.state == 0">未开始  <img src="../../assets/images/right.png" style="width:8px;height:13px;margin-left: 4%" alt=""></div>
-          <div class="service_width_51" @click="goToSOrderD('b',item)" style="color:#000000" v-if="item.state == 1">已消费  <img src="../../assets/images/right.png" style="width:8px;height:13px;margin-left: 4%" alt=""></div>
-          <div class="service_width_51" @click="goToSOrderD('b',item)" style="color:#E6435A" v-if="item.state == 2">已暂停  <img src="../../assets/images/right.png" style="width:8px;height:13px;margin-left: 4%" alt=""></div>
-          <div class="service_width_51" @click="goToSOrderD('b',item)" style="color:#4AB67" v-if="item.state == 3">已完成  <img src="../../assets/images/right.png" style="width:8px;height:13px;margin-left: 4%" alt=""></div>
+          <div class="service_width_51" @click="goToSOrderD('b',item,items.num)" v-if="item.state == 0">未开始  <img src="../../assets/images/right.png" style="width:8px;height:13px;margin-left: 4%" alt=""></div>
+          <div class="service_width_51" @click="goToSOrderD('b',item,items.num)" style="color:#000000" v-if="item.state == 1">已消费  <img src="../../assets/images/right.png" style="width:8px;height:13px;margin-left: 4%" alt=""></div>
+          <div class="service_width_51" @click="goToSOrderD('b',item,items.num)" style="color:#E6435A" v-if="item.state == 2">已暂停  <img src="../../assets/images/right.png" style="width:8px;height:13px;margin-left: 4%" alt=""></div>
+          <div class="service_width_51" @click="goToSOrderD('b',item,items.num)" style="color:#4AB67" v-if="item.state == 3">已完成  <img src="../../assets/images/right.png" style="width:8px;height:13px;margin-left: 4%" alt=""></div>
         </div>
       </div>
     </div>
@@ -82,7 +82,7 @@ export default {
     };
   },
   methods: {
-    goToSOrderD(falg, item) {
+    goToSOrderD(falg, item,num) {
       this.$router.push({
         name: "serviceOrderD",
         params: {
@@ -90,7 +90,8 @@ export default {
             type: "profession",
             data: {
               id: falg,
-              item: item
+              item: item,
+              num:num
             }
           })
         }
