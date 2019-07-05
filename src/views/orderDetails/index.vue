@@ -103,6 +103,7 @@ export default {
       };
       this.$fetch.post(url.getShopOrder, _obj).then(data => {
         if (data.code == 0) {
+          console.log(data,'jkl')
           data.obj.goodsList.forEach(item => {
             item.picId = url.imgUrl + item.picId;
           });

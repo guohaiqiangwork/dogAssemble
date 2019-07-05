@@ -266,7 +266,6 @@ export default {
   },
   created() {
     settitle("设置");
-    this.routeParams = JSON.parse(this.$route.params.obj);
   },
 
   mounted() {
@@ -276,6 +275,8 @@ export default {
       })
       .then(res => {
         this.personalMsg = { ...res.obj };
+      },err =>{
+        alert(err);
       });
     console.log("设置",this.tel);
   }
