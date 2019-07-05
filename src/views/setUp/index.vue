@@ -30,7 +30,7 @@
         <div
           class="div_width_50 personal_list_font"
           style=" text-align: right; margin-right: 4%;"
-        >4008382727</div>
+        ><a href="tel:4008382727">4008382727</a></div>
       </div>
     </div>
     <!-- 推出按钮 -->
