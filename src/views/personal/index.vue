@@ -484,7 +484,10 @@ export default {
           if (res.msg == "success") {
             // this.$router.push("/home");
             localStorage.setItem("catnum", res.obj);
-            this.$router.go(0);
+            this.$vux.toast.text('身份已切换')
+            setTimeout(() =>{
+              this.$router.push('/home');
+            },1000)
           }
         });
     },
