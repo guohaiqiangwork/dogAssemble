@@ -114,7 +114,7 @@
         >
       </x-input>
       <x-input disabled v-model="disVal"></x-input>
-      <p class="flex-between px-15" style="margin-top:-0.5rem;">
+      <p class="flex-between px-15">
         <a href="#" @click="editPass">忘记密码</a>
         <a href="#" @click="regTest">立即注册</a>
       </p>
@@ -283,6 +283,7 @@ export default {
       this.$router.push("/changePassword/" + 0);
     },
     regTest() {
+      console.log('686876')
       this.$router.push("/login/2");
     },
     //发送验证码
