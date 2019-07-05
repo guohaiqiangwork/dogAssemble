@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="height:100%;">
     <div class="search_box">
       <i class="weui-icon-search search_icon"></i>
       <input
@@ -18,45 +18,52 @@
       :type="'vertical'"
       @loadMore="selPullUp"
       @pulldown="pulldown"
+      style = "height:100%;"
     >
       <div slot="list" class="nut-vert-list-panel">
         <div v-if="routeParams.data.id == '001'">
           <div
             class="div_display_flex margin_left_div6 margin_top_div3"
+                 style="display: flex;
+    justify-content: space-between;"
             v-for="(item,index) in getRecommendBList"
             :key="index"
           >
             <div class="div_width_70 font_size_14">
               {{item.name}}
-              <span class="font_size_12 font_color_A1">{{item.time}}</span>
+              <span class="font_size_12 font_color_A1" style="margin-left: 10px;">{{item.time}}</span>
             </div>
-            <div class="div_with_30 red margin_left_div6">¥{{item.money}}</div>
+            <div class="div_with_30 red margin_left_div6" style="margin-right: 8%;">¥{{item.money}}</div>
           </div>
         </div>
         <div v-if="routeParams.data.id == '002'">
           <div
             class="div_display_flex margin_left_div6 margin_top_div3"
+          style="display: flex;
+    justify-content: space-between;"
             v-for="(item,index) in getVideoDistriList"
             :key="index"
           >
             <div class="div_width_70 font_size_14">
               {{item.name}}
-              <span class="font_size_12 font_color_A1">{{item.time}}</span>
+              <span class="font_size_12 font_color_A1" style="margin-left: 10px;">{{item.time}}</span>
             </div>
-            <div class="div_with_30 red margin_left_div6">¥{{item.money}}</div>
+            <div class="div_with_30 red margin_left_div6" style="margin-right: 8%;">¥{{item.money}}</div>
           </div>
         </div>
         <div v-if="routeParams.data.id == '003'">
           <div
+            style="display: flex;
+    justify-content: space-between;"
             class="div_display_flex margin_left_div6 margin_top_div3"
             v-for="(item,index) in getOrderDistriList"
             :key="index"
           >
             <div class="div_width_70 font_size_14">
               {{item.name}}
-              <span class="font_size_12 font_color_A1">{{item.time}}</span>
+              <span class="font_size_12 font_color_A1" style="margin-left: 10px;">{{item.time}}</span>
             </div>
-            <div class="div_with_30 red margin_left_div6">¥{{item.money}}</div>
+            <div class="div_with_30 red margin_left_div6"  style="margin-right: 8%;">¥{{item.money}}</div>
           </div>
         </div>
       </div>

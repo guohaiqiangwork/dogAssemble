@@ -30,7 +30,7 @@
             <div class="goods_msg">
               <p class="goods_name">{{item.name}}</p>
               <p>
-                <span class="red" >¥{{type==1?item.original:item.price}}</span>
+                <span class="red" >¥{{type==1||!user?item.original:item.price}}</span>
                 <span class="goods_discount" v-if="type!=1&&type">¥{{item.original}}</span>
               </p>
             </div>
@@ -76,6 +76,9 @@ export default {
   computed: {
     type(){
       return localStorage.getItem("type");
+    },
+    user(){
+      return localStorage.getItem("user");
     }
   },
   methods: {
