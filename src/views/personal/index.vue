@@ -547,14 +547,14 @@ export default {
     goToStatistics: function() {
       this.$router.push({
         name: "dataStatistics",
-        params: {
-          obj: JSON.stringify({
-            type: "profession",
-            data: {
-              id: "蚕丝"
-            }
-          })
-        }
+        // params: {
+        //   obj: JSON.stringify({
+        //     type: "profession",
+        //     data: {
+        //       id: "蚕丝"
+        //     }
+        //   })
+        // }
       });
     },
     // 健康奖金

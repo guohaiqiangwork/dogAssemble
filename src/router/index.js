@@ -410,7 +410,7 @@ export default new Router({
     },
     {
       // 健康奖金
-      path: '/healthBonus/:obj',
+      path: '/healthBonus',
       name: 'healthBonus',
       meta: {
         title: '健康奖金',
