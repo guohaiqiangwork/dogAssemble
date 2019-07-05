@@ -10,26 +10,27 @@
         <div class="div_display_flex font_color_ff backgroun_color_4A service_list">
           <div class="font_size_15 service_font">{{item.recipe}}</div>
           <div class="font_size_13 service_title_font">{{item.time}}</div>
+             <div class="font_size_13 service_title_fontP">¥{{item.price}}</div>
         </div>
 
-        <div class="div_display_flex font_color_00 font_size_13 text_center service_list_border">
+        <!-- <div class="div_display_flex font_color_00 font_size_13 text_center service_list_border">
           <div class="service_width_25" @click="goToSOrderD('b',item.id)">序号</div>
           <div class="service_width_25">次数</div>
           <div class="service_width_25">食用时间</div>
           <div class="service_width_25">状态</div>
-        </div>
+        </div> -->
         <div
           v-for="(items,index) in item.biguDayLists"
           :key="index"
           class="div_display_flex font_color_00 font_size_13 text_center service_list_border"
         >
-          <div class="service_width_25" @click="goToSOrderD('b')">{{index + 1}}</div>
-          <div class="service_width_25">{{items.num}}</div>
-          <div class="service_width_25">{{items.time}}</div>
-          <div class="service_width_25" v-if="item.state == 0">未开始</div>
-          <div class="service_width_25" v-if="item.state == 1">已消费</div>
-          <div class="service_width_25" v-if="item.state == 2">已暂停</div>
-          <div class="service_width_25" v-if="item.state == 3">已完成</div>
+          <!-- <div class="service_width_25" >{{index + 1}}</div> -->
+          <div class="service_width_50" @click="goToSOrderD('b',item)"> 第{{items.num}}天</div>
+          <!-- <div class="service_width_25">{{items.time}}</div> -->
+          <div class="service_width_51" @click="goToSOrderD('b',item)" v-if="item.state == 0">未开始  <img src="../../assets/images/right.png" style="width:8px;height:13px;margin-left: 4%" alt=""></div>
+          <div class="service_width_51" @click="goToSOrderD('b',item)" style="color:#000000" v-if="item.state == 1">已消费  <img src="../../assets/images/right.png" style="width:8px;height:13px;margin-left: 4%" alt=""></div>
+          <div class="service_width_51" @click="goToSOrderD('b',item)" style="color:#E6435A" v-if="item.state == 2">已暂停  <img src="../../assets/images/right.png" style="width:8px;height:13px;margin-left: 4%" alt=""></div>
+          <div class="service_width_51" @click="goToSOrderD('b',item)" style="color:#4AB67" v-if="item.state == 3">已完成  <img src="../../assets/images/right.png" style="width:8px;height:13px;margin-left: 4%" alt=""></div>
         </div>
       </div>
     </div>
@@ -134,8 +135,15 @@ export default {
 </script>
 <style scoped>
 .service_title_font {
-  width: 60%;
+  width: 100%;
+  /* text-align: right; */
+  margin-right: 3%;
+  padding-top: 1%;
+}
+.service_title_fontP {
+  width: 30%;
   text-align: right;
+  font-size: 18px;
   margin-right: 3%;
   padding-top: 1%;
 }
@@ -145,11 +153,21 @@ export default {
   border-radius: 8px;
 }
 .service_font {
-  width: 40%;
+  width: 20%;
   padding-left: 3%;
 }
 .service_width_25 {
   width: 25%;
+}
+.service_width_50 {
+  width: 50%;
+  text-align: left;
+    margin-left: 3%;
+}
+.service_width_51 {
+  width: 50%;
+      text-align: right;
+    margin-right: 3%;
 }
 .service_list_border {
   border-bottom: 1px solid #e9e9e9;
