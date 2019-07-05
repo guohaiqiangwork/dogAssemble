@@ -309,6 +309,12 @@ export default {
   border: 1px solid #4a7b67;
   border-radius: 10px;
 }
+.div_width_30 {
+  width: auto !important;
+}
+.bt_close{
+  margin-right: 0.2rem;
+}
 .national_list {
   width: 85%;
   margin-left: 2%;

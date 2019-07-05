@@ -30,7 +30,7 @@
 
     <!--会员套餐 -->
     <div v-if="falg == 'h'">
-      <div
+      <div v-if="myMemberOrderListH.length > 0"
         class="font_size_14 font_color_ff backgroun_color_4A padding_left_div3"
         style="line-height:2;"
       >会员套餐</div>
@@ -41,17 +41,24 @@
         style="border-bottom: 1px solid #E9E9E9;padding-bottom: 3%;"
       >
         <div class="div_display_flex margin_top_div3 font_color_4A">
-          <div class="div_width_30" @click="goToSOrderD('b')">{{index + 1}}价格：{{item.price}}</div>
-          <div class="div_width_20 div_text_left" style="margin-left:-4%">（{{item.cupType}}）</div>
-          <div class="div_width_50 text_right" @click="goToSOrderD('b')">{{item.time}}</div>
+          <div class="div_width_30" style="text-align:left;text-indent:0.3rem;" @click="goToSOrderD('b')"><span style="display:inline-block;margin-left:-.5rem;">{{index + 1+"."}}</span>价格：{{item.price}}</div>
+          <div class="div_width_20 div_text_left" style="margin-left:-10%">（{{item.cupType}}）</div>
+          <div class="div_width_50 text_right" style="margin-left:5%" @click="goToSOrderD('b')">{{item.time}}</div>
         </div>
         <div class="div_display_flex margin_top_div3">
           <!-- <div class="div_width_30" @click="goToSOrderD('b')">{{item.time}}</div> -->
-          <div class="div_width_30">{{item.area}}</div>
-          <div class="div_width_20 div_text_left" style="margin-left:-4%">{{item.store}}</div>
-          <div class="div_width_50 text_right" v-if="item.state == 1">正常</div>
-          <div class="div_width_50 text_right" v-if="item.state == 2" style="color:#E6435A">已退款</div>
+          <div class="div_width_30" style="text-align:left;text-indent:0.3rem;">{{item.area}}</div>
+          <div class="div_width_50 div_text_left" style="margin-left:-12%">{{item.store}}</div>
+          <div class="div_width_20 text_right" style="margin-left:7%" v-if="item.state == 1">正常</div>
+          <div class="div_width_20 text_right" style="margin-left:7%;color:#E6435A;" v-if="item.state == 2">已退款</div>
         </div>
+      </div>
+    </div>
+
+    <div v-if="myMemberOrderListH.length == 0 && myMemberOrderListB.length ==0">
+      <div class="nothingImg">
+        <img src="../../assets/images/1546@2x.png">
+        <div class="nothing_word">您当前还没有开始套餐</div>
       </div>
     </div>
   </div>
@@ -80,6 +87,7 @@ export default {
         .then(res => {
           if (res.code == 0) {
             this.myMemberOrderListH = res.obj;
+            // console.log(this.myMemberOrderListH.length);
           } else {
             alert(res.msg);
           }
@@ -96,8 +104,10 @@ export default {
         .then(res => {
           if (res.code == 0) {
             this.myMemberOrderListB = res.obj;
+            //  console.log(this.myMemberOrderListB.length);
           } else {
             alert(res.msg);
+              // console.log(this.num);
           }
         });
     }
@@ -112,7 +122,7 @@ export default {
       // this.num = this.routeParams.data.item.num;
 
     if (this.routeParams.data.item.num) {
-      console.log(454654)
+      // console.log(454654)
       this.num = this.routeParams.data.item.num;
     }
   },
@@ -129,5 +139,18 @@ export default {
 <style scoped>
 .service_width_25 {
   width: 25%;
+}
+.nothingImg{
+  position: relative;
+  text-align: center;
+}
+.nothingImg img{
+  display: inline-block;
+  width: 4.8rem;
+  margin:3.5rem auto 0.5rem;
+}
+.nothing_word{
+  font-size: .3rem;
+  color: #333333;
 }
 </style>

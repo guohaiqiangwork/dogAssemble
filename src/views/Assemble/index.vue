@@ -306,7 +306,7 @@ export default {
     }
     .goods_msg {
       width: 2.57rem;
-      font-size: 0.28rem;
+      font-size: 0.3rem;
       padding: 0.21rem 0.31rem;
       .goods_name {
         color: #000;
@@ -321,7 +321,7 @@ export default {
         opacity:0.52;
         text-decoration: line-through;
         margin-right: 0.2rem;
-        font-size: 0.18rem;
+        font-size: 0.24rem;
       }
     }
   }
