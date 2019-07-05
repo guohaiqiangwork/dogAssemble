@@ -12,9 +12,9 @@
       />
       <i></i>
     </div>
-    <div class="margin_top_div3" >
+    <div class="margin_top_div3" v-show="peiFangList.length">
       <!-- 全部配方 -->
-      <div id="allbook " v-if="peiFangList.length">
+      <div id="allbook" >
         <div v-for="(item,index) in peiFangList" :key="index">
           <div class="book-list">
             <p class="flex-between align-center mb-36">
@@ -56,8 +56,8 @@
       class="nodata"
       style="height: calc(100% - 0.7rem);    background-color: rgb(248, 248, 248);"
     >
-      <img src="../../assets/images/1546.png" alt style="width:4.78rem;height:3.23rem;" />
-      <p style="font-size:12px">暂无数据</p>
+      <img src="../../assets/images/1546.png" alt style="width:4.78rem;height:3.23rem;margin-top:-4rem;" />
+      <p style="font-size:.3rem;color:#999;margin-top:0.5rem;">暂无数据</p>
     </div>
     <div  v-if="peiFangList.length&&recommendStoreList[0].province">
         <!-- 推荐门店 -->
