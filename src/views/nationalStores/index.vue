@@ -140,12 +140,12 @@ export default {
       ],
       page: {
         current: "1",
-        size: "10"
+        size: "3"
       },
       recommendStoreList: [],
       productNamr: "",
       isUnMore1: false,
-      isLoading1: true,
+      isLoading1: false,
       longitude: 0, //经度
       latitude: 0 //纬度
     };
@@ -221,9 +221,12 @@ export default {
         latitude: this.latitude,
         longitude: this.longitude
       };
+      this.isLoading1 = true;
       this.$fetch.post("fruits/app/blank/getRecommendStoreList", _obj).then(
         data => {
+          this.isLoading1 = false;
           if (data.code == 0) {
+
             data.obj.forEach(e =>{
               this.recommendStoreList.push(e);
             })
@@ -243,10 +246,13 @@ export default {
     // 上拉加载
     selPullUp() {
       this.page.current++;
+     
       this.getRecommendStoreList();
     },
     // 下拉刷新
     pulldown() {
+       this.recommendStoreList = [];
+      console.log('klk')
       this.isUnMore1 = false;
       this.page.current = 1;
       this.getRecommendStoreList();
