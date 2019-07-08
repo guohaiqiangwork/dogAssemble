@@ -38,14 +38,14 @@
                         <span class="item_num">×3</span>
                     </p>
         </div>-->
-
+        <div class="goods_cont">
         <div class="flex-between" v-for="(item,index) in option.goodList" :key="index">
           <div class="flex-between flex-clo align-center items" v-if="index<=3">
             <img :src="item.img" alt>
             <p>¥{{item.price}}</p>
           </div>
         </div>
-
+</div>
         <div class="flex-start align-center" @click="goList">
           <span style="white-space:nowrap;">共{{count}}件</span>
           <x-icon type="ios-arrow-right" size="30"></x-icon>
@@ -293,6 +293,10 @@ export default {
 #paysure {
   width: 100%;
   height: 100%;
+  .goods_cont{
+    width: 100%;
+    display: flex;
+  }
   // background: #F6F6F6;
   .icon_right {
     width: 0.16rem;
