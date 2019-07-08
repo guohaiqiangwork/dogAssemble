@@ -15,14 +15,14 @@
       </div>
     </div>
     <div class="pass_list_w">
-      <div class="">
+      <div class="search_box">
         <img src="../../assets/images/验证码@2x.png" class="width_16">
         <input
           type="text"
           :show-clear="false"
           v-model="code"
           placeholder="请输⼊验证码"
-          style="width:56%;height:100%;outline: none;border:none"
+          style="width:56%;height:100%;outline: none;border:none;borer-bottom:1px solid;"
         >
         <span
           v-show="sendAuthCode"

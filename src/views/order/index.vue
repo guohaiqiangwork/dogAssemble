@@ -536,6 +536,7 @@ export default {
   height: 100% !important;
 }
 .nut-scroller{
+  height: calc(100% - 48px);
   overflow-x: hidden;
 }
 </style>
@@ -543,14 +544,14 @@ export default {
 <style scoped>
 .personal_title {
   height: 48px;
-  width: 100%;
+  /* width: 100%; */
   font-size: 14px;
   line-height: 3;
   display: flex;
   color: #908c8c;
   justify-content: space-around;
-  position: fixed;
-  z-index: 10000000000000000;
+  /* position: fixed;
+  z-index: 10000000000000000; */
 }
 .switchBorder {
   border: 1px solid #4a7b67;
