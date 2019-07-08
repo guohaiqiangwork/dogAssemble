@@ -101,7 +101,7 @@ export default {
     } else if (this.routeParams.data.id == 7) {
       var title = "推荐返佣";
     } else if (this.routeParams.data.id == 8) {
-      var title = "商城返佣";
+      var title = "押金支出";
     }
     settitle(title);
   },
