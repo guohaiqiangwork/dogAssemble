@@ -15,7 +15,7 @@
           <div class="video_img">
               <img src="../../../assets/images/1602@2x.png" width="100%" alt="">
           </div>
-          <div class="flex-around flex-clo">
+          <div class="flex-around flex-clo" style="width:50%">
             <p class="video_name">{{item.name}}</p>
             <p>{{item.description}}</p>
           </div>
