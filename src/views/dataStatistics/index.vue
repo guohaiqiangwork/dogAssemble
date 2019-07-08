@@ -33,7 +33,7 @@
               :max-year="2300"
             ></datetime>
           </div>
-          <div class="margin_left_div3 margin_top_div12">--</div>
+          <div class="margin_left_div3">--</div>
           <div class="margin_left_div3">
             <datetime
               class="data_colse"

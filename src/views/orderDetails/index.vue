@@ -122,8 +122,8 @@ export default {
       this.$fetch.post(url.payOrder, _obj).then(data => {
         if (data.code == 0) {
           //  var obj = eval("(" + data.obj + ")");
-          var objPay = JSON.parse(res.obj);
-          weiXinPay(
+          var objPay = JSON.parse(data.obj);
+          weixinPay(
             objPay,
             function(val) {
               console.log(val);

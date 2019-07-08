@@ -464,7 +464,6 @@ export default {
 }
 .search_box {
   height: 0.7rem;
-  margin: 0 auto;
   position: relative;
   padding: 0;
   box-sizing: border-box;
@@ -473,7 +472,7 @@ export default {
   align-items: center;
   line-height: normal;
   border: 1px solid #888888;
-  margin-top: 5%;
+  margin: 5% auto;
   width: 90%;
   border: none;
   border-bottom: 1px solid #E9E9E9;

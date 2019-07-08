@@ -377,7 +377,7 @@ export default new Router({
     },
     // 数据统计
     {
-      path: '/dataStatistics/:obj',
+      path: '/dataStatistics',
       name: 'dataStatistics',
       meta: {
         title: '数据统计',
