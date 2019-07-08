@@ -100,6 +100,14 @@ export default new Router({
           },
           component: personal
         },
+        {
+          path: '/goodsdetail',
+          name: 'shop',
+          meta: {
+            title: '商品详情'
+          },
+          component: resolve => require(['@/views/goodsDetail/index'], resolve),
+        },
      
       
       ]
@@ -112,14 +120,7 @@ export default new Router({
       },
       component: resolve => require(['@/views/paysure/index'], resolve),
     },
-    {
-      path: '/goodsdetail',
-      name: 'shop',
-      meta: {
-        title: '商品详情'
-      },
-      component: resolve => require(['@/views/goodsDetail/index'], resolve),
-    },
+  
     {
       path: '/addressopt',
       name: 'addressopt',
