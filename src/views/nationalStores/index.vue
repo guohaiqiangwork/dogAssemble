@@ -1,20 +1,9 @@
 <template>
   <div class="backgroun_color_fff" style="min-height:100%;overflow-x:hidden;">
-    <!-- 搜索 -->
-    <div class="search_box" style="border:none;box-shadow:0px 3px 10px rgba(136,136,136,0.16);">
-      <i class="weui-icon-search search_icon"></i>
-      <input
-        type="text"
-        placeholder="搜索您想找的门店"
-        v-model="productNamr"
-        @input="getRecommendStoreList(productNamr)"
-        style="width:100%;height:100%;background-color:#EFEFEF; outline: none;border:none"
-      />
-      <i></i>
-    </div>
-    <!-- 推荐门店列表 -->
+
+  
     <nut-scroller
-      style="margin-top:5%;overflow-x:hidden;"
+      style="width:100%;height:100%;overflow-x:hidden;"
       :is-un-more="isUnMore1"
       :is-loading="isLoading1"
       :type="'vertical'"
@@ -22,6 +11,19 @@
       @pulldown="pulldown"
     >
       <div slot="list" class="nut-vert-list-panel">
+            <!-- 搜索 -->
+        <div class="search_box" style="border:none;box-shadow:0px 3px 10px rgba(136,136,136,0.16);">
+          <i class="weui-icon-search search_icon"></i>
+          <input
+            type="text"
+            placeholder="搜索您想找的门店"
+            v-model="productNamr"
+            @input="getRecommendStoreList(productNamr)"
+            style="width:100%;height:100%;background-color:#EFEFEF; outline: none;border:none"
+          />
+          <i></i>
+        </div>
+      <!-- 推荐门店列表 -->
         <div class="div_display_flex margin_left_div3 padding_top_div3">
           <div class="national_flag_title" v-if="recommendStoreList.length"></div>
           <div
