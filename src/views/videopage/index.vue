@@ -188,6 +188,9 @@ export default {
     },
     // 打开购买弹窗
     openBuy(item) {
+      if(item.isVIP == 0){
+         this.videolUrl = item.videoLink;
+      }
       this.videoIdPay = item.id;
       let _obj = {
         openId: localStorage.getItem("openId"),
@@ -200,8 +203,7 @@ export default {
             if (data.obj.state == 0) {
               this.show = true;
             } else {
-              this.videolUrl =
-                "http://player.youku.com/embed/XNDEyMTAwNjE0MA==";
+                this.videolUrl  = data.obj.videoLink
             }
           }
         },
@@ -216,7 +218,6 @@ export default {
   },
   created() {
     this.routeParams = JSON.parse(this.$route.query.obj);
-    console.log("567890-");
     this.videoId = this.routeParams.data.id;
   }
 };
