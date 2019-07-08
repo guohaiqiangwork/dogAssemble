@@ -5,7 +5,7 @@
       <div
         class="font_size_14 font_color_ff backgroun_color_4A padding_left_div3"
         style="line-height:2;"
-      >{{myMemberOrderListB.num}}/{{myMemberOrderListB.date}}</div>
+      >第{{myMemberOrderListB.num}}天/{{myMemberOrderListB.date}}</div>
       <!-- v-for="(item,index) in myMemberOrderListB.memberBiguLists"
       :key="index"-->
       <div

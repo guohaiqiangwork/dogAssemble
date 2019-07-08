@@ -7,8 +7,9 @@
                <span  @click.stop="chooseBuy(item,index)">
                     <i  :class="['weui-icon', 'weui_icon_success', 'weui-icon-success',item.ischeck?'checked' : 'normal']" ></i>
                </span>
-              
-                <img class="gooods_avatar"   :src="'http://www.gsb.yuntunet.cn/fruits/app/blank/showPicture?attachmentId='+item.picId" alt="">
+                <div style="min-width:70px;min-height:70px;">
+                    <img class="gooods_avatar" :src="'http://www.gsb.yuntunet.cn/fruits/app/blank/showPicture?attachmentId='+item.picId" alt="">
+                </div>
                 <div class="goods_item">
                     <p class="goods_title">{{item.name}}</p>
                     <p class="goods_flex">

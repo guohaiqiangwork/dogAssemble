@@ -157,6 +157,7 @@ export default {
   background: #fff;
 }
 .search_box {
+  background: #fff;
   height: 0.7rem;
   margin: 0 auto;
   position: relative;

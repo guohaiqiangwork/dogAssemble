@@ -12,9 +12,8 @@
       :type="'vertical'"
       @loadMore="selPullUp"
       @pulldown="pulldown"
-      style="min-height: calc(100% - 48px);height:auto;overflow-x:hidden;"
     >
-      <div slot="list" class="nut-vert-list-panel" style="">
+      <div slot="list" class="nut-vert-list-panel" style="width:100%;height:100%;overflow-x:hidden;background: #f3f4f5;">
         <!-- 全部订单 -->
         <div v-if="switchFlage == '0'" style="width:100%;height: auto;">
           <div v-if="orderList.length != 0">
