@@ -253,7 +253,7 @@ export default {
       left: 0.3rem;
       height: 0.7rem;
       width: 6.9rem;
-      margin: 1.5rem auto;
+      margin:0 auto;
       padding: 0 0.31rem;
       // margin: 0.65rem 1.5rem 0;
       border-radius: 0.35rem;
