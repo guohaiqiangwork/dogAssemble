@@ -9,12 +9,12 @@
         v-model="productNamr"
         @input="getRecommendStoreList(productNamr)"
         style="width:100%;height:100%;background-color:#EFEFEF; outline: none;border:none"
-      >
+      />
       <i></i>
     </div>
     <!-- 推荐门店列表 -->
     <nut-scroller
-    style="margin-top:5%;overflow-x:hidden;"
+      style="margin-top:5%;overflow-x:hidden;"
       :is-un-more="isUnMore1"
       :is-loading="isLoading1"
       :type="'vertical'"
@@ -23,17 +23,25 @@
     >
       <div slot="list" class="nut-vert-list-panel">
         <div class="div_display_flex margin_left_div3 padding_top_div3">
-          <div class="national_flag_title"  v-if="recommendStoreList.length"></div>
-          <div class="font_color_00 font_size_14 margin_left_div2" style="margin-top: 0.8%;" v-if="recommendStoreList.length">附近门店推荐</div>
+          <div class="national_flag_title" v-if="recommendStoreList.length"></div>
+          <div
+            class="font_color_00 font_size_14 margin_left_div2"
+            style="margin-top: 0.8%;"
+            v-if="recommendStoreList.length"
+          >附近门店推荐</div>
         </div>
         <div class="div_display_flex">
           <!-- <div @click="checkBtn(index,item.id)" :checked="item.isDefault" class="div_width_8">
         <check-icon :value.sync="item.isDefault" size="13px" style="padding-top: 64%;color:red"></check-icon>
           </div>-->
-          <div class="national_list font_color_00 font_size_13 backgroun_color_fff margin_top_div3" v-if="recommendStoreList.length">
+          <div
+            class="national_list font_color_00 font_size_13 backgroun_color_fff margin_top_div3"
+            v-if="recommendStoreList.length"
+          >
             <div class="div_display_flex margin_top_div3">
-              <div class="div_width_70 margin_left_div2 over_hidde">
-              {{recommendStoreList[0].province}}{{recommendStoreList[0].city}}{{recommendStoreList[0].area}}{{recommendStoreList[0].name}}</div>
+              <div
+                class="div_width_70 margin_left_div2 over_hidde"
+              >{{recommendStoreList[0].province}}{{recommendStoreList[0].city}}{{recommendStoreList[0].area}}{{recommendStoreList[0].name}}</div>
               <div v-if="recommendStoreList[0].state == 2" class="bt_close">已关店</div>
               <div
                 class="div_width_30 margin_right_div2 text_right"
@@ -41,8 +49,8 @@
             </div>
             <div class="div_display_flex margin_top_div3">
               <div class="div_width_70 margin_left_div2">{{recommendStoreList[0].address}}</div>
-              <div class="div_width_30 margin_right_div2 text_right" @click="goToMap">
-                <img src="../../assets/images/1440@2x.png" width="12px">
+              <div class="div_width_30 margin_right_div2 text_right" @click="goToMap(recommendStoreList[0])">
+                <img src="../../assets/images/1440@2x.png" width="12px" />
               </div>
             </div>
             <div class="div_display_flex margin_top_div3">
@@ -60,8 +68,12 @@
         <!-- 其他门店列表 -->
         <div>
           <div class="div_display_flex margin_left_div3 margin_top_div3">
-            <div class="national_flag_title"  v-if="recommendStoreList.length"></div>
-            <div class="font_color_00 font_size_14 margin_left_div2" style="margin-top: 0.8%;" v-if="recommendStoreList.length">其他门店</div>
+            <div class="national_flag_title" v-if="recommendStoreList.length"></div>
+            <div
+              class="font_color_00 font_size_14 margin_left_div2"
+              style="margin-top: 0.8%;"
+              v-if="recommendStoreList.length"
+            >其他门店</div>
           </div>
           <div v-for="(item,index) in recommendStoreList" :key="index" class="div_display_flex">
             <!-- <div @click="checkQBtn(index,item.id)" :checked="item.isQDefault" class="div_width_8" v-if="classA  == '1'">
@@ -71,17 +83,17 @@
               class="national_list font_color_00 font_size_13 backgroun_color_fff margin_top_div3"
               :class="classA  == '1'? 'national_list' : 'national_list_w' "
             >
-              <div class="div_display_flex margin_top_div3">
+              <div class="div_display_flex margin_top_div3" @click="goToMap(item)">
                 <div
                   class="div_width_70 margin_left_div2 over_hidde"
                 >{{item.province}}{{item.city}}{{item.area}}{{item.name}}</div>
-                  <div v-if="item.state == 2" class="bt_close">已关店</div>
+                <div v-if="item.state == 2" class="bt_close">已关店</div>
                 <div class="div_width_30 margin_right_div2 text_right">{{item.distance}}km</div>
               </div>
               <div class="div_display_flex margin_top_div3">
                 <div class="div_width_70 margin_left_div2">{{item.address}}</div>
                 <div class="div_width_30 margin_right_div2 text_right">
-                  <img src="../../assets/images/1440@2x.png" width="12px">
+                  <img src="../../assets/images/1440@2x.png" width="12px" />
                 </div>
               </div>
               <div class="div_display_flex margin_top_div3">
@@ -99,20 +111,20 @@
       </div>
     </nut-scroller>
     <div v-if="recommendStoreList.length ==0">
-        <div
-      v-if="!recommendStoreList.length"
-      class="nodata"
-      style="height: calc(100% - 0.7rem);    background-color:#fff;"
-    >
-      <img src="../../assets/images/1546.png" alt style="width:4.78rem;height:3.23rem;" />
-      <p style="font-size:.3rem;color:#999;margin-top:0.5rem;">暂无数据</p>
-    </div>
+      <div
+        v-if="!recommendStoreList.length"
+        class="nodata"
+        style="height: calc(100% - 0.7rem);    background-color:#fff;"
+      >
+        <img src="../../assets/images/1546.png" alt style="width:4.78rem;height:3.23rem;" />
+        <p style="font-size:.3rem;color:#999;margin-top:0.5rem;">暂无数据</p>
+      </div>
     </div>
     <!-- 店铺更换提示 -->
     <confirm v-model="nationSFalg" title @on-cancel="onCancel" @on-confirm="onConfirm">
       <div style="text-align:center;font-size:18px;">
         您确认转到
-        <br>"东河王中店”吗？
+        <br />"东河王中店”吗？
       </div>
     </confirm>
     <div id="container" style="width:600px;height:500px;"></div>
@@ -158,26 +170,29 @@ export default {
       longitude: 0, //经度
       latitude: 0 //纬度
     };
-   
   },
-   watch: {
-      recommendStoreList:{
-        handler(newVal){
-          this.recommendStoreList = newVal;
-          console.log(newVal,'kl');
-        }
+  watch: {
+    recommendStoreList: {
+      handler(newVal) {
+        this.recommendStoreList = newVal;
+        console.log(newVal, "kl");
       }
-    },
+    }
+  },
   methods: {
-    goToMap() {
-      console.log("7897");
+    goToMap(item) {
+      if(!item.lat){
+        alert('该数据不存在坐标')
+        return
+      }
       this.$router.push({
         name: "Tmap",
         params: {
           obj: JSON.stringify({
             type: "profession",
             data: {
-              id: "参数"
+              latitude: item.lat,
+              longitude: item.lng
             }
           })
         }
@@ -240,13 +255,12 @@ export default {
         latitude: this.latitude,
         longitude: this.longitude
       };
-      if(this.timer){
+      if (this.timer) {
         clearTimeout(this.timer);
       }
-     
-      this.timer = setTimeout(() =>{
 
-         this.isLoading1 = true;
+      this.timer = setTimeout(() => {
+        this.isLoading1 = true;
         //  this.recommendStoreList =[];
          this.$fetch.post("fruits/app/blank/getRecommendStoreList", _obj).then(
         data => {
@@ -274,25 +288,20 @@ export default {
             // }else{
             // console.log(4546)
 
-            //  this.recommendStoreList=data.obj;
-            // }
-           
-            // data.obj.forEach(item => {
-            //   item.SFQY = data.obj.province
-            // });
-            // this.$set(this.recommendStoreList,this.recommendStoreList);
-            console.log(this.recommendStoreList,'jlkjljkljl');
-          } else {
-            alert(data.msg);
+              // data.obj.forEach(item => {
+              //   item.SFQY = data.obj.province
+              // });
+              // this.$set(this.recommendStoreList,this.recommendStoreList);
+              console.log(this.recommendStoreList, "jlkjljkljl");
+            } else {
+              alert(data.msg);
+            }
+          },
+          err => {
+            alert("网络缓慢。。");
           }
-        },
-        err => {
-          alert("网络缓慢。。");
-        }
-      );
-      },2000)
-     
-    
+        );
+      }, 2000);
     },
     // 上拉加载
     selPullUp() {
@@ -304,8 +313,8 @@ export default {
     },
     // 下拉刷新
     pulldown() {
-       this.recommendStoreList = [];
-      console.log('klk')
+      this.recommendStoreList = [];
+      console.log("klk");
       this.isUnMore1 = false;
       this.page.current = 1;
       this.getRecommendStoreList();
@@ -365,7 +374,7 @@ export default {
 };
 </script>
 <style>
-.nut-vert-list{
+.nut-vert-list {
   height: 100% !important;
 }
 </style>
@@ -404,6 +413,7 @@ export default {
 /* 搜索框 */
 .search_box {
   height: 0.7rem;
+  margin: 0 auto;
   border-radius: 0.35rem;
   position: relative;
   padding: 0 0.31rem;
@@ -414,7 +424,7 @@ export default {
   background: #efefef;
   line-height: 3.5rem;
   border: 1px solid #888888;
-  margin: 0.2rem auto;
+  margin-top: 0.2rem;
   /* padding-bottom: 0.2rem; */
   width: 95%;
 }
@@ -426,9 +436,9 @@ export default {
   /* align-content: center; */
   text-align: center;
 }
-.over_hidde{
+.over_hidde {
   overflow: hidden;
-white-space: nowrap;
- text-overflow: ellipsis;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 </style>
