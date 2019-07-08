@@ -211,6 +211,8 @@ export default {
       }
       if (this.msgLength == 6) {
           this.payShowD = false;
+          this.msgLength=0;
+          this.curVal =''
         this.payPassWGB();
       }
     }
