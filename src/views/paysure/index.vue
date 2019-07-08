@@ -293,6 +293,7 @@ export default {
 #paysure {
   width: 100%;
   height: 100%;
+  overflow-x: hidden;
   .goods_cont{
     width: 100%;
     display: flex;
@@ -366,6 +367,7 @@ export default {
   }
   .form_box {
     background: #fff;
+    padding-bottom: 1rem;
     // height: calc(100% - 9.5rem);
     .goods_list {
       display: flex;
@@ -452,7 +454,7 @@ export default {
     height: 1.09rem;
     width: 100%;
     position: fixed;
-    bottom: .9rem;
+    bottom: 0;
     background: #fff;
     border-top: 1px solid #E9E9E9;
     // padding: 1rem 1.5rem;
