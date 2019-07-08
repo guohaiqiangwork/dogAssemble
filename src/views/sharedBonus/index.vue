@@ -12,6 +12,7 @@
         <div class="shared_B_D">
           <img :src="imgUrl" width="50%" />
           <img
+            @click="showToast=true"
             src="../../assets/images/bJbutton12@2x.png"
             style="padding-bottom: 10%;width:50%"
             alt
@@ -21,12 +22,12 @@
     </div>
     <x-dialog v-model="showToast" class="dialog-demo">
       <div style="padding:15px;background-color:rgba(0, 0, 0, 0.6)">
-        <img src="../../assets/images/fengX.png" alt class="fengX_c_l" @click="showToast=false"/>
+        <img src="../../assets/images/fengX.png" alt class="fengX_c_l" @click="showToast=false" />
         <!-- <x-button @click.native="doShowToast" type="primary">show toast</x-button> -->
       </div>
       <!-- <div @click="showToast=false">
         <span class="vux-close"></span>
-      </div> -->
+      </div>-->
     </x-dialog>
   </div>
 </template>
@@ -45,7 +46,7 @@ export default {
     return {
       code: "",
       imgUrl: "",
-      showToast: true
+      showToast: false
     };
   },
 
