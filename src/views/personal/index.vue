@@ -48,7 +48,7 @@
             <div
               class="font_color_E8 font_size_15"
               style="width:60%;margin-top:-5%;text-indent:5%;"
-            >押金：{{personalMsg.deposit}}元</div>
+            >押金：{{personalMsg.deposit.toFixed(2)}}元</div>
             <div class="personal_falg_m" style="margin-left:15%" v-if="personalMsg.storeState == 1"> 营业中
               <!-- {{personalMsg.storeState == 1 ? "营业中":"已打烊"}} -->
               </div>

@@ -268,17 +268,21 @@ export default {
           this.timer = "";
           if (data.code == 0) {
             console.log(4546,data)
-             this.$nextTick(() => {
+            
          if(data.obj.length == 0){
            this.isUnMore1 = true;
            return
          }else{
+          this.$nextTick(() => {
            data.obj.forEach(e =>{
+              
               this.recommendStoreList.push(e);
-            })
+              
+              });
+          })
          }
         //  this.recommendStoreList=data.obj;
-      });
+   
             // this.recommendStoreList=data.obj;
             // if(data.obj.length){
             //   console.log(13213)

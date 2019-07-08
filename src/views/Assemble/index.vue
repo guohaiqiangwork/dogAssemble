@@ -5,7 +5,7 @@
       <swiper :min-moving-distance="120" @on-index-change="onIndexChange" >
         <!-- auto loop -->
         <swiper-item class="swiper-demo-img" v-for="(item, index) in imgList" :key="index">
-          <img :src="item.img" />
+          <img :src="item.img" class="swiper-img"/>
         </swiper-item>
       </swiper>
       <div class="search_box">
@@ -214,6 +214,10 @@ export default {
 <style lang="less">
 #home {
   height: auto;
+  .swiper-img{
+    width: 100%;
+    height:3.51rem;
+  }
   .mt-space {
     margin-top: 0.35rem;
   }
