@@ -107,7 +107,7 @@
         <div
         	v-if="type!=3"          class="div_width_45 font_color_ff text_center"
           style="background-color:#FF776C"
-          @click="goTODataDetails('8')"
+          @click="goTODataDetails('2')"
         >
           <div class="font_size_25 margin_top_div8">{{moneyList.expendCharge}}</div>
           <div class="font_size_13 margin_top_div5">押金支出(元)</div>
