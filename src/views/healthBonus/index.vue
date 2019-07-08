@@ -42,10 +42,7 @@
         <div class="div_display_flex padding_top_div3 backgroun_color_f3">
           <div class="national_flag_title margin_left_div3"></div>
           <div class="font_color_00 font_size_14 margin_left_div2" style="margin-top: 0.8%;">推荐返佣</div>
-          <div
-            class="font_size_14 font_color_00 margin_top_div1"
-            @click="goToHealthDetail"
-          >全部返佣></div>
+          <div class="font_size_13 font_color_00 margin_top_div1" @click="goToHealthDetail">全部返佣></div>
         </div>
         <div v-if="getRecommendBList.length !=  0">
           <div v-for="(item,index) in getRecommendBList" :key="index">
@@ -69,7 +66,7 @@
         </div>
         <div v-if="getRecommendBList.length ==  0">
           <div class="text_center margin_top_div3" style="margin-top:15%;">
-            <img src="../../assets/images/1581@2x.png" width="45%" alt>
+            <img src="../../assets/images/1581@2x.png" width="45%" alt />
           </div>
           <div class="text_center font_size_15 font_color_99 margin_top_div3">您当前还没有返佣</div>
         </div>
@@ -109,7 +106,7 @@
         </div>
         <div v-if="getVideoDistriList.length ==  0">
           <div class="text_center margin_top_div3" style="margin-top:15%;">
-            <img src="../../assets/images/1581@2x.png" width="45%" alt>
+            <img src="../../assets/images/1581@2x.png" width="45%" alt />
           </div>
           <div class="text_center font_size_15 font_color_99 margin_top_div3">您当前还没有返佣</div>
         </div>
@@ -149,7 +146,7 @@
         </div>
         <div v-if="getOrderDistriList.length ==  0">
           <div class="text_center margin_top_div3" style="margin-top:15%;">
-            <img src="../../assets/images/1581@2x.png" width="45%" alt>
+            <img src="../../assets/images/1581@2x.png" width="45%" alt />
           </div>
           <div class="text_center font_size_15 font_color_99 margin_top_div3">您当前还没有返佣</div>
         </div>
@@ -159,7 +156,7 @@
 </template>
 <script>
 import url from "../../bin/url";
-import wexinShare from "../../bin/weiXinShare"
+import wexinShare from "../../bin/weiXinShare";
 export default {
   name: "healthBonus",
   data() {
@@ -312,24 +309,38 @@ export default {
     },
     // 获取分享参数
     getSharedBonus() {
-      this.$fetch.post("/fruits/app/bonus/inviteFriends",{openId:localStorage.getItem("openId")}).then(
-        data => {
-          if (data.code == 0) {
-          //  console.log(data)
-           wexinShare(data.obj)
-          } else {
-            alert(data.msg);
-          }
-        },
-        err => {
-          alert("网络缓慢。。");
+      this.$router.push({
+        name: "sharedBonus",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              openId: localStorage.getItem("openId"),
+              shareId: localStorage.getItem("appUserId")
+            }
+          })
         }
-      );
+      });
+      // this.$fetch.post("/fruits/app/bonus/inviteFriends",{openId:localStorage.getItem("openId")}).then(
+      //   data => {
+      //     if (data.code == 0) {
+      //     //  console.log(data)
+      //      wexinShare(data.obj)
+      //     } else {
+      //       alert(data.msg);
+      //     }
+      //   },
+      //   err => {
+      //     alert("网络缓慢。。");
+      //   }
+      // );
     }
   },
   created() {
     settitle("健康奖金");
-    this.routeParams = JSON.parse(this.$route.params.obj);
+    if (this.$route.params.obj) {
+      this.routeParams = JSON.parse(this.$route.params.obj);
+    }
   },
 
   mounted() {
@@ -372,11 +383,8 @@ export default {
   border: 1px solid #4a7b67;
   border-radius: 10px;
 }
-.margin_top_div1{
+.margin_top_div1 {
   position: absolute;
   right: 0.1rem;
-}
-.div_display_flex {
-  position: relative;
 }
 </style>
