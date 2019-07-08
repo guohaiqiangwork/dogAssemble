@@ -1,6 +1,58 @@
 <template>
     <div id="immediately">
-        <div class="owner_msg">
+        <nut-scroller
+    :is-un-more="isUnMore1" 
+    :is-loading="isLoading1"
+    :type="'vertical'"
+    @loadMore="loadMoreVert"
+    @pulldown="pulldown"
+> 
+    <div slot="list" class="nut-vert-list-panel">
+        <div>fsfsfsdffds</div>
+        <div class="nut-vert-list-item" v-for="(item, index) of listData1" :key="index">
+            <!-- <dl class="nut-scroller-item-info">
+                <dt>防水升级版 蓝牙音箱 低音炮 IPX7设计 户外便携音响 迷你小音</dt>
+                <dd>2018-02-25</dd>
+            </dl>
+        </div> -->
+         <!-- <div class="owner_msg">
+            <p class="font_gray">王佳宇 13654550023</p>
+            <p class="line_hieigher">
+                <span class="circle_defalut">默认</span>
+                <span>内蒙古包头市青山区青山区包商会大厦2710</span>
+            </p>
+        </div> -->
+
+        <div class="order_msg nut-vert-list-panel">
+            <div class="goods_detail">
+                <img class="goods_img" src="../../assets/images/WechatIMG106_看图王.png" alt="">
+                <div class="flex_clomn">
+                    <p>熊孩子综合蔬菜干香菇脆秋葵干330g袋果蔬脆{{item.a}}</p>
+                    <p>
+                        <span class="goods_price">￥14.9</span>
+                        <span>×3</span>
+                    </p>
+                </div>
+            </div>
+            <div class="post_detail">
+                <div class="post_list">
+                    <span>合计金额</span>
+                    <span>￥200.00</span>
+                </div>
+                <div class="post_list">
+                    <span>运费</span>
+                    <span>￥10.00</span>
+                </div>
+            </div>
+            <div class="order_foot">
+                <span>实际支付:</span>
+                <span class="special_word">￥10.00</span>
+            </div>
+        </div>
+        </div>
+    </div>
+</nut-scroller>
+        <!-- <div class="owner_msg">
             <p class="font_gray">王佳宇 13654550023</p>
             <p class="line_hieigher">
                 <span class="circle_defalut">默认</span>
@@ -52,7 +104,7 @@
                 <span>2019-03-25  19:14:18</span>
             </p>
           
-        </div>
+        </div> -->
         <div class="pay_btn">立即支付</div>
     </div>
 </template>
@@ -60,13 +112,22 @@
 export default {
     data() {
         return {
-            key: 'value'
+            isUnMore1: false,
+            isLoading1:false,
+            listData1:[{
+                a:1
+            },
+           ],
         }
     },
     methods: {
-        name() {
-            
-        }
+        loadMoreVert() {
+            this.listData1.push({a:2})
+        },
+        pulldown(){
+
+        },
+    
     },
     mounted() {
         

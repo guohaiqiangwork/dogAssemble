@@ -77,7 +77,7 @@
               v-if="recommendStoreList.length"
             >其他门店</div>
           </div>
-          <div v-for="(item,index) in recommendStoreList" :key="index" class="div_display_flex">
+          <div v-for="(item,index) in recommendStoreList" :key="index" class="div_display_flex nut-vert-list-item">
             <!-- <div @click="checkQBtn(index,item.id)" :checked="item.isQDefault" class="div_width_8" v-if="classA  == '1'">
         <check-icon :value.sync="item.isQDefault" size="13px" style="padding-top: 64%;"></check-icon>
             </div>-->

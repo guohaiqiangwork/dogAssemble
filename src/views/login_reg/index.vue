@@ -144,6 +144,9 @@ export default {
   computed: {
     haslogin() {
       return this.$route.params.id;
+    },
+    shareId(){
+      return localStorage.getItem('shareId');
     }
   },
   data() {
@@ -162,7 +165,8 @@ export default {
         phone: "",
         code: "",
         headimgurl: "",
-        nickname: ""
+        nickname: "",
+        shareId:""
       },
       Logform: {
         openId: "",
@@ -239,6 +243,7 @@ export default {
       this.form.openId = localStorage.getItem("openId");
       this.form.nickname = localStorage.getItem("nickname");
       this.form.headimgurl = localStorage.getItem("headimgurl");
+      this.form.shareId = this.shareId ||"";
       this.$fetch.post("fruits/app/user/register", this.form).then(res => {
         if (res.msg == "registered") {
           this.$vux.toast.text("手机号已经被注册");
@@ -383,6 +388,16 @@ export default {
       this.$router.push({
         name: "privacyProtocol"
       });
+    },
+    getShare(){
+      // window.location.href
+      var href = 'http://www.gsb.yuntunet.cn/#/login/2?shareId=24ef4b771231427ba958f8728e53f2a2';
+      var reg = /shareId/g;
+      // console.log(reg.test(href))
+      if(reg.test(href)){
+        var arr= /(\?shareId=)(\w*)/.exec(href);
+        localStorage.setItem('shareId',arr[2]);
+      }
     }
   },
   created() {
@@ -390,6 +405,7 @@ export default {
     // this.routeParams = JSON.parse(this.$route.params.obj);
   },
   created() {
+    this.getShare();
     settitle("注册与登录");
   },
   mounted() {

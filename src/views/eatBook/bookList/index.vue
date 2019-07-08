@@ -22,7 +22,7 @@
       <template v-if="bookList.length">
 
       
-      <div v-for="(item,index) in bookList" :key="index" >
+      <div v-for="(item,index) in bookList" :key="index" class="nut-vert-list-item">
         <book-list :item="item">
           <div slot="content">
             <div v-for="(iten,ind) in item.memberRecipes" :key="ind" v-show="item.type == 0">

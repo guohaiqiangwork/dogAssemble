@@ -299,7 +299,7 @@
           </div>
         </div>
         <!-- 菜单列表 -->
-        <div class="margin_top_div3 personal_div_money" style=" margin-bottom: 24%;height:auto;overflow-x:hidden;">
+        <div class="margin_top_div3 personal_div_money" style=" padding-bottom: 24%;height:auto;overflow-x:hidden;">
           <div class="div_display_flex" @click="goToOrder">
             <div class="div_width_50 font_color_1A personal_list_font">我的订单</div>
             <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
