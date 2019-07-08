@@ -23,9 +23,9 @@
             消费时间:
             <span class="font_color_4A">{{item.actualTime}}</span>
           </div>
-          <div class="div_width_30 text_right" v-if="item.state == 0" style="color:#4A7B67">待完成</div>
-          <div class="div_width_30 text_right" v-if="item.state == 1" style="color:#102023">已完成</div>
-          <div class="div_width_30 text_right" v-if="item.state == 2" style="color:#E6435A">已作废</div>
+          <div class="div_width_30 text_right" v-if="item.state == 1" style="color:#4A7B67">待完成</div>
+          <div class="div_width_30 text_right" v-if="item.state == 2" style="color:#102023">已完成</div>
+          <div class="div_width_30 text_right" v-if="item.state == 3" style="color:#E6435A">已作废</div>
         </div>
         <div class="div_display_flex margin_top_div3">
           <div class="div_width_30">{{item.area}}</div>
