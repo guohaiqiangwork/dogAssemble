@@ -82,14 +82,7 @@ export default new Router({
           },
           component: resolve => require(['@/views/Assemble/index'], resolve),
         },
-        {
-          path: '/goodsdetail',
-          name: 'shop',
-          meta: {
-            title: '商品详情'
-          },
-          component: resolve => require(['@/views/goodsDetail/index'], resolve),
-        },
+     
         {
           path: '/cart',
           name: 'cart',
@@ -99,30 +92,49 @@ export default new Router({
           component: resolve => require(['@/views/cart/index'], resolve),
         },
         {
-          path: '/paysure',
-          name: 'paysure',
+          // 个人中心
+          path: '/personal',
+          name: 'personal',
           meta: {
-            title: '确认支付页面'
+            title: '个人中心',
           },
-          component: resolve => require(['@/views/paysure/index'], resolve),
+          component: personal
         },
-        {
-          path: '/addressment',
-          name: 'addressment',
-          meta: {
-            title: '地址管理页面'
-          },
-          component: resolve => require(['@/views/addressment/index'], resolve),
-        },
-        {
-          path: '/addressopt',
-          name: 'addressopt',
-          meta: {
-            title: '添加地址'
-          },
-          component: resolve => require(['@/views/addressment/option'], resolve),
-        },
+     
+      
       ]
+    },
+    {
+      path: '/paysure',
+      name: 'paysure',
+      meta: {
+        title: '确认支付页面'
+      },
+      component: resolve => require(['@/views/paysure/index'], resolve),
+    },
+    {
+      path: '/goodsdetail',
+      name: 'shop',
+      meta: {
+        title: '商品详情'
+      },
+      component: resolve => require(['@/views/goodsDetail/index'], resolve),
+    },
+    {
+      path: '/addressopt',
+      name: 'addressopt',
+      meta: {
+        title: '添加地址'
+      },
+      component: resolve => require(['@/views/addressment/option'], resolve),
+    },
+    {
+      path: '/addressment',
+      name: 'addressment',
+      meta: {
+        title: '地址管理页面'
+      },
+      component: resolve => require(['@/views/addressment/index'], resolve),
     },
     {
       // 登陆
@@ -300,15 +312,15 @@ export default new Router({
       },
       component: symptoms
     },
-    {
-      // 个人中心
-      path: '/personal',
-      name: 'personal',
-      meta: {
-        title: '个人中心',
-      },
-      component: personal
-    },
+    // {
+    //   // 个人中心
+    //   path: '/personal',
+    //   name: 'personal',
+    //   meta: {
+    //     title: '个人中心',
+    //   },
+    //   component: personal
+    // },
     {
       // 我的钱包
       path: '/myWallet/:obj',
