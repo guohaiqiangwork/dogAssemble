@@ -5,36 +5,62 @@
     </div>-->
     <div>
       <div>
-        <img src="../../assets/images/bjJJ12@2x.png" style="width: 100%;    padding-top: 5%;" alt />
+        <img src="../../assets/images/bjJJ12@2x.png" style="width: 100%;" alt />
         <!-- <div>
           <img :src=imgUrl >
         </div>-->
         <div class="shared_B_D">
           <img :src="imgUrl" width="50%" />
-          <img src="../../assets/images/bJbutton12@2x.png" style="padding-bottom: 10%;width:50%" alt />
+          <img
+            @click="showToast=true"
+            src="../../assets/images/bJbutton12@2x.png"
+            style="padding-bottom: 10%;width:50%"
+            alt
+          />
         </div>
       </div>
     </div>
+    <x-dialog v-model="showToast" class="dialog-demo">
+      <div style="padding:15px;background-color:rgba(0, 0, 0, 0.6)">
+        <img src="../../assets/images/fengX.png" alt class="fengX_c_l" @click="showToast=false" />
+        <!-- <x-button @click.native="doShowToast" type="primary">show toast</x-button> -->
+      </div>
+      <!-- <div @click="showToast=false">
+        <span class="vux-close"></span>
+      </div>-->
+    </x-dialog>
   </div>
 </template>
 <script>
 import url from "../../bin/url";
 import wxShare from "../../bin/weiXinShare";
+import { XDialog, XButton } from "vux";
+
 export default {
-  components: {},
+  components: {
+    XDialog,
+    XButton
+  },
   name: "sharedBonus",
   data() {
     return {
       code: "",
-      imgUrl: ""
+      imgUrl: "",
+      showToast: false
     };
   },
+
   methods: {
+    doShowToast() {
+      this.$vux.toast.show({
+        text: "toast"
+      });
+    },
     getEr() {
       this.$fetch
         .post("/fruits/app/bonus/getCusQRCode", {
-          openId: localStorage.getItem("openId"),
-          shareId: localStorage.getItem("appUserId")
+          openId: this.routeParams.data.openId,
+          shareId: this.routeParams.data.shareId
         })
         .then(res => {
           if (res.code == 0) {
@@ -52,6 +78,9 @@ export default {
   },
 
   mounted() {
+    this.routeParams = JSON.parse(this.$route.params.obj);
+    console.log(this.routeParams.data.openId);
+    console.log(this.routeParams.data.shareId);
     this.getEr();
     console.log(wxShare);
   }
@@ -72,5 +101,11 @@ export default {
   width: 80%;
   margin-left: 10%;
   text-align: center;
+}
+.fengX_c_l {
+  position: fixed;
+  top: 10%;
+  left: 10%;
+  width: 80%;
 }
 </style>
