@@ -220,7 +220,10 @@ export default {
   },
   created() {
     settitle("数据统计");
-    this.routeParams = JSON.parse(this.$route.params.obj);
+    if(this.$route.params.obj){
+   this.routeParams = JSON.parse(this.$route.params.obj);
+    }
+ 
   },
 
   mounted() {
