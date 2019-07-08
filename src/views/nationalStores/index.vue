@@ -254,7 +254,18 @@ export default {
           this.timer = "";
           if (data.code == 0) {
             console.log(4546,data)
-            this.recommendStoreList=data.obj;
+             this.$nextTick(() => {
+         if(data.obj.length == 0){
+           this.isUnMore1 = true;
+           return
+         }else{
+           data.obj.forEach(e =>{
+              this.recommendStoreList.push(e);
+            })
+         }
+        //  this.recommendStoreList=data.obj;
+      });
+            // this.recommendStoreList=data.obj;
             // if(data.obj.length){
             //   console.log(13213)
             //    data.obj.forEach(e =>{
@@ -286,8 +297,10 @@ export default {
     // 上拉加载
     selPullUp() {
       this.page.current++;
-     
-      this.getRecommendStoreList();
+       this.$nextTick(() => {
+        this.getRecommendStoreList();
+      });
+      // this.getRecommendStoreList();
     },
     // 下拉刷新
     pulldown() {

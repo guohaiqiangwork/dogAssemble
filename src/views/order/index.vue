@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color:#F3F5F8;width:100%;height:100%">
+  <div style="background-color:#F3F5F8;width:100%;height:100%;overflow-x:hidden;overflow-y:auto;" id="reflow">
     <div class="div_display_flex backgroun_color_fff personal_title">
       <div v-for="(item,index) in  tabList" @click="tabSwitch(item.id)" :key="index">
         <div :style="{color:(switchFlage != item.id ? '' :'#000000')}">{{item.name}}</div>
@@ -15,7 +15,7 @@
     >
       <div slot="list" class="nut-vert-list-panel" style="width:100%;height:100%;overflow-x:hidden;background: #f3f4f5;">
         <!-- 全部订单 -->
-        <div v-if="switchFlage == '0'" style="width:100%;height: auto;">
+        <div v-if="switchFlage == '0'" style="width:100%;height: auto;margin-bottom: 100px;">
           <div v-if="orderList.length != 0">
             <div v-for="(item,index) in orderList" :key="index">
               <div class="order_block" @click="goToOrderDetails(item.id)">
@@ -83,7 +83,7 @@
           </div>
         </div>
         <!-- 待付款 -->
-        <div v-if="switchFlage == '1'" style="width: 100%;height: auto;">
+        <div v-if="switchFlage == '1'" style="width: 100%;height: auto;margin-bottom: 100px;">
           <div v-if="orderList.length != 0">
             <div v-for="(item,index) in orderList" :key="index">
               <div class="order_block" @click="goToOrderDetails(item.id)">
@@ -151,7 +151,7 @@
           </div>
         </div>
         <!-- 待收费 -->
-        <div v-if="switchFlage == '2'" style="width: 100%;height: auto;">
+        <div v-if="switchFlage == '2'" style="width: 100%;height: auto;margin-bottom: 100px;">
           <div v-if="orderList.length != 0">
             <div v-for="(item,index) in orderList" :key="index">
               <div class="order_block" @click="goToOrderDetails(item.id)">
@@ -222,7 +222,7 @@
           </div>
         </div>
         <!-- 待收货 -->
-        <div v-if="switchFlage == '3'" style="width: 100%;height: auto;">
+        <div v-if="switchFlage == '3'" style="width:100%;height:auto;margin-bottom: 100px;">
           <div v-if="orderList.length != 0">
             <div v-for="(item,index) in orderList" :key="index">
               <div class="order_block" @click="goToOrderDetails(item.id)">
@@ -290,7 +290,7 @@
           </div>
         </div>
         <!-- 已完成 -->
-        <div v-if="switchFlage == '4'" style="width: 100%;height: auto;">
+        <div v-if="switchFlage == '4'" style="width: 100%;height: auto;margin-bottom: 100px;">
           <div v-if="orderList.length != 0">
             <div v-for="(item,index) in orderList" :key="index">
               <div class="order_block" @click="goToOrderDetails(item.id)">
@@ -394,7 +394,7 @@ export default {
       orderList: [],
       page: {
         current: "1",
-        size: "2"
+        size: "3"
       },
       isUnMore1: false,
       isLoading1: false
@@ -453,12 +453,15 @@ export default {
         data => {
           if (data.code == 0) {
             if(data.obj.length){
-                data.obj.forEach(item => {
+               this.$nextTick(() => {
+                  data.obj.forEach(item => {
               item.goodsList.forEach(items => {
                 items.picId = url.imgUrl + items.picId;
               });
               this.orderList.push(item);
             });
+               })
+               
             }else{
               this.isUnMore1 = true;
             }
@@ -502,7 +505,10 @@ export default {
     // 上拉加载
     selPullUp() {
       this.page.current++;
-      this.getOrderList();
+      // var a = document.getElementById('#reflow').offsetWidth;
+       this.$nextTick(() => {
+        this.getOrderList();
+      });
     },
     // 下拉刷新
     pulldown() {
@@ -537,11 +543,14 @@ export default {
 <style scoped>
 .personal_title {
   height: 48px;
+  width: 100%;
   font-size: 14px;
   line-height: 3;
   display: flex;
   color: #908c8c;
   justify-content: space-around;
+  position: fixed;
+  z-index: 10000000000000000;
 }
 .switchBorder {
   border: 1px solid #4a7b67;
