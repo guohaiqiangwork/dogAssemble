@@ -1,5 +1,5 @@
 <template>
-  <div class="backgroun_color_fff" style="min-height:100%;overflow-x:hidden;">
+  <div class="backgroun_color_fff" style="min-height:100%;overflow-x:hidden;" id="store">
 
   
     <nut-scroller
@@ -380,12 +380,16 @@ export default {
 };
 </script>
 <style>
-.nut-vert-list {
+#store .nut-vert-list {
   height: 100% !important;
+}
+#store .nut-vert-scroll{
+  overflow-x: hidden;
 }
 </style>
 
 <style scoped>
+
 /* .nodata{
     width: 100%;
     height: 9rem;

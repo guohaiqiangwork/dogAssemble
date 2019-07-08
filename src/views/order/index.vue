@@ -17,7 +17,7 @@
     </div>
         <!-- 全部订单 -->
         <div v-if="switchFlage == '0'" style="width:100%;height: auto;margin-bottom: 100px;overflow-x:hidden;">
-          <div v-if="orderList.length != 0">
+          <div v-if="orderList.length != 0" style="overflow-x:hidden">
             <div v-for="(item,index) in orderList" :key="index">
               <div class="order_block" @click="goToOrderDetails(item.id)">
                 <div class="div_display_flex">
@@ -454,7 +454,7 @@ export default {
         data => {
           if (data.code == 0) {
             if(data.obj.length){
-               this.$nextTick(() => {
+              //  this.$nextTick(() => {
                  alert('success')
                   data.obj.forEach(item => {
               item.goodsList.forEach(items => {
@@ -462,7 +462,7 @@ export default {
               });
               this.orderList.push(item);
             });
-               })
+              //  })
                
             }else{
               alert('没数据')
@@ -507,9 +507,10 @@ export default {
     },
     // 上拉加载
     selPullUp() {
-      this.page.current++;
+      
       // var a = document.getElementById('#reflow').offsetWidth;
        this.$nextTick(() => {
+         this.page.current++;
         this.getOrderList();
       });
     },
@@ -539,8 +540,8 @@ export default {
   height: 100% !important;
 }
 .nut-scroller{
-  height: calc(100% - 48px);
-  overflow-x: hidden;
+  /* height: calc(100% - 48px);
+  overflow-x: hidden; */
 }
 </style>
 
