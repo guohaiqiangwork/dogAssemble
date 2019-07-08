@@ -6,9 +6,10 @@
         id="video"
         style="width:100%;height:220px;display:block"
         frameborder="0"
-        src="http://player.youku.com/embed/XNDEyMTAwNjE0MA=="
+         :src="videolUrl"
         allowfullscreen
       ></iframe>
+       <!-- src="http://player.youku.com/embed/XNDEyMTAwNjE0MA==" -->
        <!-- :src="videolUrl" -->
     </div>
     <!-- 视频选集 -->
@@ -109,7 +110,8 @@ export default {
       videoListObj: "",
       videoIdPay: "",
       modelData: "",
-      videolUrl: ""
+      videolUrl: "",
+      videoOrderId:''
     };
   },
   methods: {
@@ -133,6 +135,34 @@ export default {
         }
       );
     },
+     //轮询支付状态
+    redirect(val){
+      var count = 0;
+      var timer = setInterval(()=>{
+        this.$fetch.post('fruits/app/video/getOrderState',{openId:localStorage.getItem('openId'),orderId:this.videoOrderId}).then(res =>{
+          count++;
+          if(res.obj){
+           this.$vux.toast.text('购买成功')
+            // this.$router.push('/home');
+            clearInterval(timer)
+          }
+          if(count>3){
+            clearInterval(timer)
+            //  this.$router.push({
+            //   name: "order",
+            //   params: {
+            //     obj: JSON.stringify({
+            //       type: "profession",
+            //       data: {
+            //         id: "参数"
+            //       }
+            //     })
+            //   }
+            // });
+          }
+        })
+      },1000)
+    },
     // 购买视频
     saveVideoOrder() {
       let _obj = {
@@ -142,9 +172,11 @@ export default {
       this.$fetch.post(url.saveVideoOrder, _obj).then(
         data => {
           if (data.code == 0) {
+          this.videoOrderId = data.attributes.orderId
           var obj = eval("(" + data.obj + ")");
           console.log(obj);
           wexinPay(obj);
+          this.redirect()
           } else {
             alert(data.msg);
           }
