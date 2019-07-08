@@ -93,7 +93,6 @@ export default {
 /* 搜索框 */
 .search_box {
   height: 0.7rem;
-  margin: 0 auto;
   border-radius: 0.35rem;
   position: relative;
   padding: 0 0.31rem;
@@ -103,7 +102,7 @@ export default {
   align-items: center;
   background: #efefef;
   line-height: 3.5rem;
-  margin-top: 5%;
+  margin: 5% auto;
   width: 94%;
 }
 .bt_m_o {

@@ -36,7 +36,7 @@
               <p class="goods_name">{{item.name}}</p>
               <p>
                 <span class="red" >¥{{type==1||!user?item.original:item.price}}</span>
-                <span class="goods_discount" v-if="type!=1&&type">¥{{item.original}}</span>
+                <span class="goods_discount" v-if="type!=1&&user">¥{{item.original}}</span>
               </p>
             </div>
           </div>
@@ -253,7 +253,7 @@ export default {
       left: 0.3rem;
       height: 0.7rem;
       width: 6.9rem;
-      margin: 0 auto;
+      margin: 1.5rem auto;
       padding: 0 0.31rem;
       // margin: 0.65rem 1.5rem 0;
       border-radius: 0.35rem;

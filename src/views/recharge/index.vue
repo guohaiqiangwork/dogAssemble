@@ -388,7 +388,7 @@ export default {
   align-items: center;
   line-height: 3.5rem;
   border: 1px solid #888888;
-  margin-top: 5%;
+  margin: 5% auto;
   width: 92%;
   border: none;
   border-bottom: 1px solid rgb(173, 165, 165);

@@ -119,7 +119,7 @@ export default {
   align-items: center;
   background: #efefef;
   line-height: 3.5rem;
-  margin-top: 5%;
+  margin: 5% auto;
   width: 68%;
   margin-left: 6%;
 }

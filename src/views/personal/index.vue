@@ -860,8 +860,8 @@ a:link {
 }
 .search_box {
   width: 90%;
+  margin: 5% auto;
   margin-left: 5%;
-  margin-top: 5%;
   padding-left: -5%;
   height: 30px;
   border-bottom: 1px solid rgb(173, 165, 165);

@@ -77,7 +77,7 @@ export default {
   background: #efefef;
   line-height: 3.5rem;
   border: 1px solid #efefef;
-  margin-top: 5%;
+  margin: 5% auto;
   width: 94%;
   margin-left: 3%;
 }

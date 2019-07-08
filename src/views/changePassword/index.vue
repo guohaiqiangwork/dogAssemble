@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="pass_list_w">
-      <div class="search_box">
+      <div class="">
         <img src="../../assets/images/验证码@2x.png" class="width_16">
         <input
           type="text"
@@ -159,7 +159,6 @@ export default {
 .search_box {
   background: #fff;
   height: 0.7rem;
-  margin: 0 auto;
   position: relative;
   padding: 0 0.31rem;
   box-sizing: border-box;
@@ -168,7 +167,7 @@ export default {
   align-items: center;
   line-height: 3.5rem;
   border: 1px solid #888888;
-  margin-top: 5%;
+  margin: 5% auto;
   width: 95%;
   border: none;
   border-bottom: 1px solid rgb(173, 165, 165);

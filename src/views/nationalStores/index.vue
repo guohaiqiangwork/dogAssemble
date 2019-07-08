@@ -404,7 +404,6 @@ export default {
 /* 搜索框 */
 .search_box {
   height: 0.7rem;
-  margin: 0 auto;
   border-radius: 0.35rem;
   position: relative;
   padding: 0 0.31rem;
@@ -415,7 +414,7 @@ export default {
   background: #efefef;
   line-height: 3.5rem;
   border: 1px solid #888888;
-  margin-top: 0.2rem;
+  margin: 0.2rem auto;
   /* padding-bottom: 0.2rem; */
   width: 95%;
 }

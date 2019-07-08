@@ -377,7 +377,7 @@ export default {
   background: #efefef;
   line-height: 3.5rem;
   border: 1px solid #888888;
-  margin-top: 5%;
+  margin: 5% auto;
   width: 95%;
 }
 .bt_close {
