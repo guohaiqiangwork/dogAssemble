@@ -23,14 +23,14 @@
     >
       <div slot="list" class="nut-vert-list-panel">
         <div class="div_display_flex margin_left_div3 padding_top_div3">
-          <div class="national_flag_title"></div>
-          <div class="font_color_00 font_size_14 margin_left_div2" style="margin-top: 0.8%;">附近门店推荐</div>
+          <div class="national_flag_title"  v-if="recommendStoreList.length"></div>
+          <div class="font_color_00 font_size_14 margin_left_div2" style="margin-top: 0.8%;" v-if="recommendStoreList.length">附近门店推荐</div>
         </div>
         <div class="div_display_flex">
           <!-- <div @click="checkBtn(index,item.id)" :checked="item.isDefault" class="div_width_8">
         <check-icon :value.sync="item.isDefault" size="13px" style="padding-top: 64%;color:red"></check-icon>
           </div>-->
-          <div class="national_list font_color_00 font_size_13 backgroun_color_fff margin_top_div3">
+          <div class="national_list font_color_00 font_size_13 backgroun_color_fff margin_top_div3" v-if="recommendStoreList.length">
             <div class="div_display_flex margin_top_div3">
               <div class="div_width_70 margin_left_div2 over_hidde">
               {{recommendStoreList[0].province}}{{recommendStoreList[0].city}}{{recommendStoreList[0].area}}{{recommendStoreList[0].name}}</div>
@@ -60,8 +60,8 @@
         <!-- 其他门店列表 -->
         <div>
           <div class="div_display_flex margin_left_div3 margin_top_div3">
-            <div class="national_flag_title"></div>
-            <div class="font_color_00 font_size_14 margin_left_div2" style="margin-top: 0.8%;">其他门店</div>
+            <div class="national_flag_title"  v-if="recommendStoreList.length"></div>
+            <div class="font_color_00 font_size_14 margin_left_div2" style="margin-top: 0.8%;" v-if="recommendStoreList.length">其他门店</div>
           </div>
           <div v-for="(item,index) in recommendStoreList" :key="index" class="div_display_flex">
             <!-- <div @click="checkQBtn(index,item.id)" :checked="item.isQDefault" class="div_width_8" v-if="classA  == '1'">
@@ -98,6 +98,16 @@
         </div>
       </div>
     </nut-scroller>
+    <div v-if="recommendStoreList.length ==0">
+        <div
+      v-if="!recommendStoreList.length"
+      class="nodata"
+      style="height: calc(100% - 0.7rem);    background-color:#fff;"
+    >
+      <img src="../../assets/images/1546.png" alt style="width:4.78rem;height:3.23rem;" />
+      <p style="font-size:.3rem;color:#999;margin-top:0.5rem;">暂无数据</p>
+    </div>
+    </div>
     <!-- 店铺更换提示 -->
     <confirm v-model="nationSFalg" title @on-cancel="onCancel" @on-confirm="onConfirm">
       <div style="text-align:center;font-size:18px;">
@@ -148,7 +158,16 @@ export default {
       longitude: 0, //经度
       latitude: 0 //纬度
     };
+   
   },
+   watch: {
+      recommendStoreList:{
+        handler(newVal){
+          this.recommendStoreList = newVal;
+          console.log(newVal,'kl');
+        }
+      }
+    },
   methods: {
     goToMap() {
       console.log("7897");
@@ -212,6 +231,7 @@ export default {
     },
     //获取数据
     getRecommendStoreList(item) {
+      //  this.recommendStoreList=[];
       let _obj = {
         openId: localStorage.getItem("openId"),
         name: item || "",
@@ -223,26 +243,34 @@ export default {
       if(this.timer){
         clearTimeout(this.timer);
       }
-
+     
       this.timer = setTimeout(() =>{
 
          this.isLoading1 = true;
-         this.recommendStoreList =[];
+        //  this.recommendStoreList =[];
          this.$fetch.post("fruits/app/blank/getRecommendStoreList", _obj).then(
         data => {
           this.isLoading1 = false;
           this.timer = "";
           if (data.code == 0) {
-            if(data.obj.length){
-               data.obj.forEach(e =>{
-              this.recommendStoreList.push(e);
-            })
-            }
+            console.log(4546,data)
+            this.recommendStoreList=data.obj;
+            // if(data.obj.length){
+            //   console.log(13213)
+            //    data.obj.forEach(e =>{
+            //   this.recommendStoreList.push(e);
+            // })
+            // }else{
+            // console.log(4546)
+
+            //  this.recommendStoreList=data.obj;
+            // }
            
             // data.obj.forEach(item => {
             //   item.SFQY = data.obj.province
             // });
-            console.log(this.recommendStoreList);
+            // this.$set(this.recommendStoreList,this.recommendStoreList);
+            console.log(this.recommendStoreList,'jlkjljkljl');
           } else {
             alert(data.msg);
           }
@@ -330,6 +358,16 @@ export default {
 </style>
 
 <style scoped>
+/* .nodata{
+    width: 100%;
+    height: 9rem;
+    display: flex;
+    font-size: 12px;
+     background: #f3f5f8;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+} */
 .national_flag_title {
   width: 2px;
   height: 15px;
