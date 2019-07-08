@@ -110,13 +110,13 @@ export default {
           phone: "1"
         })
         .then(res => {
-          console.log(res);
+          // console.log(res);
         });
     },
     onIndexChange(currentIndex) {},
     debounce(func, time, ctx) {},
     queryImg(str) {
-      console.log(str,'klk')
+      // console.log(str,'klk')
       // this.imgList = [];
       this.imgList.push(
         {
@@ -133,7 +133,7 @@ export default {
         window.clearTimeout(timer._id);
       }
       timer = setTimeout(() => {
-        console.log(this.iptVal);
+        // console.log(this.iptVal);
         this.getGoods(this.iptVal)
         // this.filterList(this.list,this.iptVal);
         timer = null;
@@ -176,7 +176,7 @@ export default {
       };
       this.$fetch.post(url.getGoodsList, _obj).then(
         data => {
-          console.log(data,'kjljlk');
+          // console.log(data,'kjljlk');
           if (data.code == 0) {
             this.goodsList = data.obj;
             this.goodsList.forEach(item => {
@@ -201,7 +201,7 @@ export default {
     this.$fetch
       .post("fruits/app/blank/getBannerImg", { openId: localStorage.getItem("openId")})
       .then(res => {
-        console.log(res);
+        // console.log(res);
         res.obj.forEach(e => {
           this.queryImg(e);
         });

@@ -18,7 +18,7 @@
       <div>
         <div
           v-if="switchFlage == '4'"
-          class="div_display_flex font_size_13 font_color_10"
+          class="div_display_flex font_size_13 font_color_10 align-center"
           style="margin-top: 3%;margin-left: 4%;"
         >
           <div class="s_t" style="margin-top:0;"></div>

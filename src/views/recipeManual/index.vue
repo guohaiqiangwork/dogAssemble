@@ -11,7 +11,7 @@
       <i></i>
     </div>
     <!-- 配方列表 -->
-    <div class="font_size_14 font_color_10 recie_border_w" v-for="item in [1,2,3,4,]">
+    <div class="font_size_14 font_color_10 recie_border_w" v-for="(item,index) in [1,2,3,4,]" :key="index">
       <div class="div_display_flex">
         <div class="margin_left_div3 sy_s_t"></div>
         <div class="margin_top_div1 margin_left_div3">套餐配方</div>
