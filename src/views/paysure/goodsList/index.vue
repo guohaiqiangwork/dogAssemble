@@ -12,7 +12,8 @@
                     <div class="flex-between align-center wrap">
                         <p class="goods-price">¥{{item.price}}</p>
                         <p v-for="(el,ind) in item.specList" :key="ind">
-                            <span class="ml-2">{{el.specName}}:{{el.value}}</span>
+                            <span class="ml-2">{{el.value}}</span>
+                            <!-- {{el.specName}}: -->
                             <!-- <span class="ml-2">规格:800g</span> -->
                         </p>
                     </div>

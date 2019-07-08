@@ -2,7 +2,12 @@
   <div id="home">
     <div class="head_box">
       <!-- <img :src="'//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId='+this.str" alt="" width="500" height="500"> -->
-      <swiper :list="imgList" :min-moving-distance="120" @on-index-change="onIndexChange" auto loop></swiper>
+      <swiper :min-moving-distance="120" @on-index-change="onIndexChange" >
+        <!-- auto loop -->
+        <swiper-item class="swiper-demo-img" v-for="(item, index) in imgList" :key="index">
+          <img :src="item.img" />
+        </swiper-item>
+      </swiper>
       <div class="search_box">
         <i class="weui-icon-search search_icon"></i>
         <input type="text" placeholder="搜索您想找的产品" v-model="iptVal" @input="input">
@@ -43,13 +48,13 @@
   </div>
 </template>
 <script>
-import { Swiper } from "vux";
+import { Swiper,SwiperItem } from "vux";
 import { setTimeout, clearTimeout } from "timers";
 import url from "../../bin/url";
 let timer;
 export default {
   components: {
-    Swiper,
+    Swiper,SwiperItem,
     Itemes: resolve => require(["./goods/index.vue"], resolve),
     hot: resolve => require(["./hotness/index.vue"], resolve),
     whoel: resolve => require(["./wholegoods/index.vue"], resolve)
@@ -67,7 +72,7 @@ export default {
     return {
       str: "",
       iptVal: null,
-      imgList: [{}, {}],
+      imgList: [],
       listId2: "",
       key: "value",
       goodsList: ""
@@ -111,8 +116,8 @@ export default {
     onIndexChange(currentIndex) {},
     debounce(func, time, ctx) {},
     queryImg(str) {
-      this.str = str;
-      this.imgList = [];
+      console.log(str,'klk')
+      // this.imgList = [];
       this.imgList.push(
         {
           url: "javascript:",
@@ -121,11 +126,6 @@ export default {
             str
           // title: "送你一朵fua"
         },
-        {
-          url: "javascript:",
-          img: "http://m.imeitou.com/uploads/allimg/2019021309/ipijc3xjpfo.jpg"
-          // title: "送你一朵fua1"
-        }
       );
     },
     input() {

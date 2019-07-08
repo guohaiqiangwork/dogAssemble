@@ -16,8 +16,8 @@
       </div>
     </div>-->
     <!-- <img  src="../../assets/images/WechatIMG101(1).png" alt=""> -->
-    <div>
-      <swiper @on-index-change="onIndexChange" v-model="swiperItemIndex">
+    <div class="goods_picbox">
+      <swiper @on-index-change="onIndexChange" v-model="swiperItemIndex" :show-dots="false">
         <swiper-item class="swiper-demo-img" v-for="(item, index) in imgList" :key="index">
           <img :src="item.img" />
         </swiper-item>
@@ -194,7 +194,7 @@ export default {
         price: null,
         specList: []
       },
-      swiperItemIndex: ""
+      swiperItemIndex: 0
     };
   },
   created() {
@@ -380,7 +380,16 @@ export default {
 };
 </script>
 <style lang="less">
+//   .vux-slider > .vux-swiper{
+//     height: 100% !important;
+// }  
+#goods_detail{
+      .vux-slider > .vux-swiper{
+    height: 100% !important;
+}  
+}
 #hot {
+
   background: #fff;
   .foryou {
     padding: 0.64rem 0 0.52rem 0;
