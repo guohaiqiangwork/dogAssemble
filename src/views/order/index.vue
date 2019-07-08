@@ -401,6 +401,7 @@ export default {
     };
   },
   methods: {
+    handleScroll(){},
     // tab切换
     tabSwitch(id) {
       this.switchFlage = id;
@@ -518,6 +519,7 @@ export default {
   },
 
   mounted() {
+     window.addEventListener("scroll", this.handleScroll);
     console.log("我的订单");
     this.getOrderList(); //获取商城订单
   }
@@ -526,6 +528,9 @@ export default {
 <style>
 .nut-vert-list{
   height: 100% !important;
+}
+.nut-scroller{
+  overflow-x: hidden;
 }
 </style>
 

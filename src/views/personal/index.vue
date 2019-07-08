@@ -487,6 +487,7 @@ export default {
             this.$vux.toast.text('身份已切换')
             setTimeout(() =>{
               this.$router.push('/home');
+              this.$router.go(0)
             },1000)
           }
         });

@@ -104,6 +104,8 @@ export default {
       this.title = word;
     },
     setChoose(){
+      console.log(this.$route);
+      console.log(this.route,'fdsfs')
       this.actives = this.route;
     },
     didClickedItem: function(tag, name) {
