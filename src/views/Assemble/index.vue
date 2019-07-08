@@ -294,6 +294,11 @@ export default {
   .wrap {
     flex-wrap: wrap;
   }
+   .goods_img {
+        width: 2.57rem;
+        height: 2.57rem;
+        padding: 0.3rem 0.3rem;
+      }
   .goods_item {
     border-radius: 0.12rem;
     background: #fff;
@@ -301,11 +306,7 @@ export default {
     margin-bottom: 7px;
     .img_box {
       border-bottom: 1px solid #e9e9e9;
-      .goods_img {
-        width: 2.57rem;
-        height: 2.57rem;
-        padding: 0.3rem 0.3rem;
-      }
+     
     }
     .goods_msg {
       width: 2.57rem;

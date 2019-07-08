@@ -63,6 +63,11 @@ export default {
 </script>
 <style lang="less">
 #whole {
+    .goods_img {
+        width: 2.57rem;
+        height: 2.57rem;
+        padding: 0.3rem 0.3rem;
+      }
   padding: 0.35rem 0.42rem 0;
   .wrap {
     flex-wrap: wrap;
@@ -74,11 +79,7 @@ export default {
     margin-bottom: 7px;
     .img_box {
       border-bottom: 1px solid #e9e9e9;
-      .goods_img {
-        width: 2.57rem;
-        height: 2.57rem;
-        padding: 0.3rem 0.3rem;
-      }
+    
     }
     .goods_msg {
       font-size: 0.28rem;

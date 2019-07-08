@@ -105,17 +105,17 @@ export default {
        
         margin-top: 0.16rem;
         background: #fff;
-       
+       .goods_img{
+                width: 1.4rem;
+                height: 1.4rem;
+                margin-right: 0.25rem;
+            }
         .goods_detail{
             display: flex;
             justify-content: space-between;
              padding: 0.42rem  0.35rem;
             font-size: 0.28rem;
-            .goods_img{
-                width: 1.4rem;
-                height: 1.4rem;
-                margin-right: 0.25rem;
-            }
+            
             .flex_clomn{
                 display: flex;
                 justify-content: space-between;
