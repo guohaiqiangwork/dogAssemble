@@ -114,7 +114,7 @@
       <div
         v-if="!recommendStoreList.length"
         class="nodata"
-        style="height: calc(100% - 0.7rem);    background-color:#fff;"
+        style="height: calc(100% - 0.7rem);background-color:#fff;overflow-x:hidden"
       >
         <img src="../../assets/images/1546.png" alt style="width:4.78rem;height:3.23rem;" />
         <p style="font-size:.3rem;color:#999;margin-top:0.5rem;">暂无数据</p>

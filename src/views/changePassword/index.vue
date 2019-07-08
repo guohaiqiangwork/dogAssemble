@@ -166,7 +166,7 @@ export default {
   display: flex;
   align-items: center;
   line-height: 3.5rem;
-  border: 1px solid #888888;
+  /* border: 1px solid #888888; */
   margin: 5% auto;
   width: 95%;
   border: none;
