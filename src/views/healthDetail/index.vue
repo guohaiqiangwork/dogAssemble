@@ -33,7 +33,9 @@
               {{item.name}}
               <span class="font_size_12 font_color_A1" style="margin-left: 10px;">{{item.time}}</span>
             </div>
-            <div class="div_with_30 red margin_left_div6" style="margin-right: 8%;">¥{{item.money}}</div>
+            <!-- <div class="div_with_30 red margin_left_div6" style="margin-right: 8%;">¥{{item.money}}</div> -->
+               <div class="div_with_30" style="margin-right:6%" v-if="item.type == 1">家庭版</div>
+              <div class="div_with_30" style="margin-right:6%" v-if="item.type == 0">店铺版</div>
           </div>
         </div>
         <div v-if="routeParams.data.id == '002'">
