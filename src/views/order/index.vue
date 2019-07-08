@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color:#F3F5F8;width:100%;height:100%;overflow-x:hidden;overflow-y:auto;" id="reflow">
+  <div style="background-color:#F3F5F8;width:100%;height:100%;overflow-x:hidden;" id="reflow">
     
     <nut-scroller
       :is-un-more="isUnMore1"
@@ -455,6 +455,7 @@ export default {
           if (data.code == 0) {
             if(data.obj.length){
                this.$nextTick(() => {
+                 alert('success')
                   data.obj.forEach(item => {
               item.goodsList.forEach(items => {
                 items.picId = url.imgUrl + items.picId;
@@ -464,6 +465,7 @@ export default {
                })
                
             }else{
+              alert('没数据')
               this.isUnMore1 = true;
             }
           
