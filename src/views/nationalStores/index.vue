@@ -1,5 +1,5 @@
 <template>
-  <div class="backgroun_color_fff " style="min-height:100%;" id="store">
+  <div class="backgroun_color_fff " style="height:100%;overflow-x:hidden" id="store">
      <!-- 搜索 -->
         <div class="search_box" style="border:none;box-shadow:0px 3px 10px rgba(136,136,136,0.16);">
           <i class="weui-icon-search search_icon"></i>
@@ -120,7 +120,7 @@
         <br />"东河王中店”吗？
       </div>
     </confirm>
-    <div id="container" style="width:600px;height:500px;"></div>
+    <!-- <div id="container" style="width:600px;height:500px;"></div> -->
   </div>
 </template>
 <script>
@@ -177,9 +177,72 @@ export default {
   },
   methods: {
 
-  loadTop(){
-    alert('下拉')
-    this.$refs.loadmore.onTopLoaded();
+  loadTop(item){
+      this.recommendStoreList = [];
+      let _obj = {
+        openId: localStorage.getItem("openId"),
+        name: item || "",
+        size: this.page.size,
+        current: 1,
+        latitude: this.latitude,
+        longitude: this.longitude
+      };
+      if (this.timer) {
+        clearTimeout(this.timer);
+      }
+    
+      this.timer = setTimeout(() => {
+        this.isLoading1 = true;
+        //  this.recommendStoreList =[];
+         this.$fetch.post("fruits/app/blank/getRecommendStoreList", _obj).then(
+        data => {
+          this.isLoading1 = false;
+          this.timer = "";
+          if (data.code == 0) {
+            console.log(4546,data)
+            
+         if(data.obj.length == 0){
+           this.isUnMore1 = true;
+           return
+         }else{
+          this.$nextTick(() => {
+           data.obj.forEach(e =>{
+              
+              this.recommendStoreList.push(e);
+              
+              });
+          })
+           alert('下拉')
+          // this.allLoaded = true;// 若数据已全部获取完毕
+         
+         }
+        //  this.recommendStoreList=data.obj;
+   
+            // this.recommendStoreList=data.obj;
+            // if(data.obj.length){
+            //   console.log(13213)
+            //    data.obj.forEach(e =>{
+            //   this.recommendStoreList.push(e);
+            // })
+            // }else{
+            // console.log(4546)
+
+              // data.obj.forEach(item => {
+              //   item.SFQY = data.obj.province
+              // });
+              // this.$set(this.recommendStoreList,this.recommendStoreList);
+              console.log(this.recommendStoreList, "jlkjljkljl");
+            } else {
+              alert(data.msg);
+            }
+            this.$refs.loadmore.onTopLoaded()
+          },
+          err => {
+            alert("网络缓慢。。");
+          }
+        );
+      }, 2000);
+    // this.$refs.loadmore.onTopLoaded();
   },
   loadBottom(item){
      let _obj = {
