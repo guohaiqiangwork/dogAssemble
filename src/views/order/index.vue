@@ -14,11 +14,11 @@
       </div>
     </div>
     <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore" :auto-fill="false"  >
-      <div  class="nut-vert-list-panel" style="width:100%;height:100%;overflow-x:hidden;background: #f3f4f5;">
-       
-        <!-- 全部订单 -->
-        <div v-if="switchFlage == '0'" style="width:100%;height: auto;margin-bottom: 20px;overflow-x:hidden;">
-          <div v-if="orderList.length != 0" style="overflow-x:hidden">
+      <div  class="nut-vert-list-panel" style="width:100%;height:100%;background: #f3f4f5;">
+       <!-- overflow-x:hidden; -->
+        <!-- 全部订单  margin-bottom: 20px;-->
+        <div v-if="switchFlage == '0'" style="width:100%;">
+          <div v-if="orderList.length != 0" >
             <div v-for="(item,index) in orderList" :key="index">
               <div class="order_block" @click="goToOrderDetails(item.id)">
                 <div class="div_display_flex">
@@ -77,7 +77,7 @@
               </div>
             </div>
           </div>
-          <div v-if="orderList.length == 0" style="height:100%;overflow-x:hidden;">
+          <div v-if="orderList.length == 0" style="height:100%;">
             <div class="text_center" style="margin-top:110px; height:100%;" >
  
  
@@ -87,7 +87,7 @@
           </div>
         </div>
         <!-- 待付款 -->
-        <div v-if="switchFlage == '1'" style="width: 100%;height: auto;margin-bottom: 20px;overflow-x:hidden;">
+        <div v-if="switchFlage == '1'" style="width: 100%;margin-bottom: 20px;">
           <div v-if="orderList.length != 0">
             <div v-for="(item,index) in orderList" :key="index">
               <div class="order_block" @click="goToOrderDetails(item.id)">
@@ -147,7 +147,7 @@
               </div>
             </div>
           </div>
-          <div v-if="orderList.length == 0" style="height:100%;overflow-x:hidden;">
+          <div v-if="orderList.length == 0" style="height:100%;">
             <div class="text_center" style="margin-top:110px;height:100%;">
               <img src="../../assets/images/1546.png" width="55%" alt>
             </div>
@@ -155,7 +155,7 @@
           </div>
         </div>
         <!-- 待收费 -->
-        <div v-if="switchFlage == '2'" style="width: 100%;height: auto;margin-bottom: 20px;overflow-x:hidden;">
+        <div v-if="switchFlage == '2'" style="width: 100%;height: auto;margin-bottom: 20px;">
           <div v-if="orderList.length != 0">
             <div v-for="(item,index) in orderList" :key="index">
               <div class="order_block" @click="goToOrderDetails(item.id)">
@@ -218,7 +218,7 @@
               </div>
             </div>
           </div>
-          <div v-if="orderList.length == 0" style="height:100%;overflow-x:hidden;">
+          <div v-if="orderList.length == 0" style="height:100%;">
             <div class="text_center" style="margin-top:110px;;height:100%">
               <img src="../../assets/images/1546.png" width="55%" alt>
             </div>
@@ -226,7 +226,7 @@
           </div>
         </div>
         <!-- 待收货 -->
-        <div v-if="switchFlage == '3'" style="width:100%;height:auto;margin-bottom: 20px;overflow-x:hidden;">
+        <div v-if="switchFlage == '3'" style="width:100%;margin-bottom: 20px;">
           <div v-if="orderList.length != 0">
             <div v-for="(item,index) in orderList" :key="index">
               <div class="order_block" @click="goToOrderDetails(item.id)">
@@ -286,7 +286,7 @@
               </div>
             </div>
           </div>
-          <div v-if="orderList.length == 0" style = "height:100%;overflow-x:hidden;">
+          <div v-if="orderList.length == 0" style = "height:100%;">
             <div class="text_center" style="margin-top:110px;height:100%">
               <img src="../../assets/images/1546.png" width="55%" alt>
             </div>
@@ -294,7 +294,7 @@
           </div>
         </div>
         <!-- 已完成 -->
-        <div v-if="switchFlage == '4'" style="width: 100%;height: auto;margin-bottom: 20px;overflow-x:hidden;">
+        <div v-if="switchFlage == '4'" style="width: 100%;margin-bottom: 20px;">
           <div v-if="orderList.length != 0">
             <div v-for="(item,index) in orderList" :key="index">
               <div class="order_block" @click="goToOrderDetails(item.id)">

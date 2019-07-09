@@ -91,12 +91,12 @@ export default {
   },
   methods: {
     loadTop(){
-      this.page.current++;
+      this.form.current++;
       this.getRecipeList('drop');
     },
     loadBottom(){
       this.orderList = [];
-      this.page.current = 1;
+      this.form.current = 1;
       this.getRecipeList('pull')
     },
     handleScroll() {},
@@ -121,7 +121,7 @@ export default {
             this.isUnMore1 = true;
             if(str == 'pull'){
               this.allLoaded = true;
-              this.page.current--;
+              this.form.current--;
               this.$vux.toast.text('没有更多数据了')
             }
            
@@ -179,7 +179,7 @@ export default {
   /* 加上这个才会有当数据充满整个屏幕，可以进行上拉加载更多的操作 */
   position: absolute;
   left:0;
-  top: 48px;
+  top: 0;
   overflow: auto;
   width: 100%;
   height: calc(100% - 0.9rem);

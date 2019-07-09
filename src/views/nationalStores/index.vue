@@ -516,17 +516,7 @@ export default {
   }
 };
 </script>
-<style>
-#store .nut-vert-list {
-  height: 100% !important;
-}
-#store .nut-vert-scroll{
-  overflow-x: hidden;
-}
-#store .nut-vert-list-panel{
-  overflow-x: hidden;
-}
-</style>
+
 
 <style scoped>
 .main-body {
