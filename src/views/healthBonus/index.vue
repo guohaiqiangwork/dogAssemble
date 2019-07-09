@@ -154,7 +154,8 @@
     </div>
     <!-- 分享提示 -->
     <x-dialog v-model="showToast" class="dialog-demo">
-      <div style="padding:15px;background-color:rgba(0, 0, 0, 0.6);">
+      <div
+        style="padding: 15px; background-color: rgba(0, 0, 0, 0.6);width: 100%;height: 500px;">
         <img src="../../assets/images/fengX.png" alt class="fengX_c_l" @click="showToast=false" />
       </div>
     </x-dialog>
@@ -163,7 +164,7 @@
 <script>
 import url from "../../bin/url";
 import wexinShare from "../../bin/weiXinShare";
-import { XDialog ,  XButton} from "vux";
+import { XDialog, XButton } from "vux";
 export default {
   components: {
     XDialog,

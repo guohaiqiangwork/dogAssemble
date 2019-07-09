@@ -21,7 +21,8 @@
       </div>
     </div>
     <x-dialog v-model="showToast" class="dialog-demo">
-      <div style="padding:15px;background-color:rgba(0, 0, 0, 0.6)">
+      <div
+        style="padding: 15px; background-color: rgba(0, 0, 0, 0.6);width: 100%;height: 500px;">
         <img src="../../assets/images/fengX.png" alt class="fengX_c_l" @click="showToast=false" />
       </div>
     </x-dialog>
@@ -60,7 +61,6 @@ export default {
         })
         .then(res => {
           if (res.code == 0) {
-            console.log(res.obj);
             this.imgUrl = url.imgUrl + res.obj;
             console.log(this.imgUrl);
           } else {
@@ -101,7 +101,6 @@ export default {
     console.log(this.routeParams[0].split("=")[1]);
     console.log(this.routeParams[1].split("=")[1]);
     this.getEr();
-    console.log(wxShare);
   }
 };
 </script>
