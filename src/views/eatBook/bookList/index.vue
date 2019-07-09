@@ -1,11 +1,13 @@
 <template>
-  <nut-scroller
+  <!-- <nut-scroller
     :is-un-more="isUnMore1"
     :is-loading="isLoading1"
     :type="'vertical'"
     @loadMore=" selPullUp"
     @pulldown="pulldown"
-  >
+  > -->
+  <div class="main-body">
+   <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore" :auto-fill="false"  >
     <!-- <div  class="nut-vert-list-panel"> -->
     <!-- <div class="nut-vert-list-item" v-for="(item, index) of listData1" :key="index">
             <dl class="nut-scroller-item-info">
@@ -51,8 +53,10 @@
         暂无数据
       </div> -->
     </div>
-    <!-- </div> -->
-  </nut-scroller>
+   
+  <!-- </nut-scroller> -->
+    </mt-loadmore>
+   </div>
 </template>
 <script>
 export default {
@@ -70,6 +74,7 @@ export default {
   },
   data() {
     return {
+      allLoaded:false,
       isUnMore1: false,
       isLoading1: false,
       show: "da",
@@ -85,8 +90,17 @@ export default {
     };
   },
   methods: {
+    loadTop(){
+      this.page.current++;
+      this.getRecipeList('drop');
+    },
+    loadBottom(){
+      this.orderList = [];
+      this.page.current = 1;
+      this.getRecipeList('pull')
+    },
     handleScroll() {},
-    getRecipeList() {
+    getRecipeList(str = "") {
       // this.$vux.loading.show({
       //   text: "Loading"
       // });
@@ -94,11 +108,20 @@ export default {
       this.$fetch
         .post("fruits/app/recipe/getRecipeList", this.form)
         .then(res => {
+          if(str == 'pull'){
+            this.$refs.loadmore.onBottomLoaded()
+          }else if(str == 'drop'){
+            this.allLoaded = false;
+            this.$refs.loadmore.onTopLoaded();
+          }
           console.log(res, 999);
           // this.$vux.loading.hide();
 
           if (res.code.length == 0) {
             this.isUnMore1 = true;
+            this.allLoaded = true;
+            this.page.current--;
+            this.$vux.toast.text('没有更多数据了')
             return;
           }
         //    else {
@@ -148,6 +171,19 @@ export default {
 <style lang="less">
 .nut-scroller {
   background: #f3f5f8;
+}
+.main-body {
+  /* 加上这个才会有当数据充满整个屏幕，可以进行上拉加载更多的操作 */
+  position: absolute;
+  left:0;
+  top: 48px;
+  overflow: auto;
+  width: 100%;
+  height: calc(100% - 0.9rem);
+  padding-bottom: 70px;
+  
+    -webkit-overflow-scrolling: touch;
+  touch-action: none;
 }
 .nodata{
     width: 100%;
