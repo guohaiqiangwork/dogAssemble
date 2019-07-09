@@ -134,7 +134,7 @@ export default {
     display: table;
     z-index: 5000;
     width: 100%;
-    max-width: 300px;
+    min-width: 300px;
     top: 0;
     right: 0;
     bottom: 0;
