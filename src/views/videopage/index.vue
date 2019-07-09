@@ -1,16 +1,22 @@
 <template>
   <div id="videopage">
     <!-- 视频页面 -->
-    <div class="video_box">
+    <div class="video_box" v-if="stateVIP == 0">
       <iframe
         id="video"
         style="width:100%;height:220px;display:block"
         frameborder="0"
-         :src="videolUrl"
+        :src="videolUrl"
         allowfullscreen
       ></iframe>
-       <!-- src="http://player.youku.com/embed/XNDEyMTAwNjE0MA==" -->
-       <!-- :src="videolUrl" -->
+      <!-- src="http://player.youku.com/embed/XNDEyMTAwNjE0MA==" -->
+      <!-- :src="videolUrl" -->
+    </div>
+    <div class="video_box" style="background-color:#000000;text-align: center"  v-if="stateVIP != 0">
+      <img src="../../assets/images/videoP@2x.png" style="margin-top:15%" alt />
+      <div>
+        <img src="../../assets/images/videoB@2x.png"  width="30%" alt   @click="buyVide()"/>
+      </div>
     </div>
     <!-- 视频选集 -->
     <!-- <choose-num></choose-num> -->
@@ -35,7 +41,7 @@
               tabindex="0"
             >
               <span>{{item.episode}}</span>
-              <span class="pay_flag"></span>
+              <span class="pay_flag" v-if="item.isVIP == 1"></span>
             </li>
           </ul>
         </div>
@@ -45,31 +51,6 @@
     <div v-transfer-dom>
       <popup v-model="show" position="bottom" max-height="50%">
         <div class="popup_box">
-          <!-- <div class="search_list">
-                        <div class="list_item">
-                            <div class="video_img"></div>
-                            <div class="flex-around flex-clo ">
-                                <p class="video_name">王阳案例1</p>
-                                <p>查看此视频对糖尿病患者有帮助</p>
-                            </div>
-                            <x-icon type="ios-close-empty" size="30" class="icon_pos" @click="show = false"></x-icon>
-                        </div>
-                    </div>
-        
-                    <div class="piece_list">
-                        <p class="tit">选择课程集数（可多集购买）</p>
-                        <ul class="flex-start">
-                            <li :class="['piece_sig', 'piece_focus']" v-for="(item,index) in list" :key="index"> <span>{{item}}</span>  <span class="pay_flag" ></span></li>
-                        </ul>
-                        
-                    </div>
-                
-            
-                    <div class="pay_price">
-                        <img class="icon_size" src="../../assets/images/scan.png" alt="">
-                        ¥19.90
-          </div>-->
-
           <p class="text-right">
             <x-icon type="ios-close-empty" size="30" @click="show = false"></x-icon>
           </p>
@@ -111,7 +92,8 @@ export default {
       videoIdPay: "",
       modelData: "",
       videolUrl: "",
-      videoOrderId:''
+      videoOrderId: "",
+      stateVIP:''
     };
   },
   methods: {
@@ -124,8 +106,11 @@ export default {
       this.$fetch.post(url.getVideoList, _obj).then(
         data => {
           if (data.code == 0) {
+            console.log(data);
             this.videoList = data.attributes;
             this.videoListObj = data.obj;
+            this.videoIdPay = this.videoListObj[0].id;
+            this.openBuy(this.videoListObj[0]);
           } else {
             alert(data.msg);
           }
@@ -135,33 +120,40 @@ export default {
         }
       );
     },
-     //轮询支付状态
-    redirect(val){
+    //轮询支付状态
+    redirect(val) {
       var count = 0;
-      var timer = setInterval(()=>{
-        this.$fetch.post('fruits/app/video/getOrderState',{openId:localStorage.getItem('openId'),orderId:this.videoOrderId}).then(res =>{
-          count++;
-          if(res.obj){
-           this.$vux.toast.text('购买成功')
-            // this.$router.push('/home');
-            clearInterval(timer)
-          }
-          if(count>3){
-            clearInterval(timer)
-            //  this.$router.push({
-            //   name: "order",
-            //   params: {
-            //     obj: JSON.stringify({
-            //       type: "profession",
-            //       data: {
-            //         id: "参数"
-            //       }
-            //     })
-            //   }
-            // });
-          }
-        })
-      },1000)
+      var timer = setInterval(() => {
+        this.$fetch
+          .post("fruits/app/video/getOrderState", {
+            openId: localStorage.getItem("openId"),
+            orderId: this.videoOrderId
+          })
+          .then(res => {
+            count++;
+            if (res.obj) {
+              this.$vux.toast.text("购买成功");
+              // this.$router.push('/home');
+              clearInterval(timer);
+                this.getVideoList();
+            }
+            if (count > 3) {
+              clearInterval(timer);
+                this.getVideoList();
+              //  this.$router.push({
+              //   name: "order",
+              //   params: {
+              //     obj: JSON.stringify({
+              //       type: "profession",
+              //       data: {
+              //         id: "参数"
+              //       }
+              //     })
+              //   }
+              // });
+            }
+          });
+      }, 1000);
     },
     // 购买视频
     saveVideoOrder() {
@@ -172,11 +164,11 @@ export default {
       this.$fetch.post(url.saveVideoOrder, _obj).then(
         data => {
           if (data.code == 0) {
-          this.videoOrderId = data.attributes.orderId
-          var obj = eval("(" + data.obj + ")");
-          console.log(obj);
-          wexinPay(obj);
-          this.redirect()
+            this.videoOrderId = data.attributes.orderId;
+            var obj = eval("(" + data.obj + ")");
+            console.log(obj);
+            wexinPay(obj);
+            this.redirect();
           } else {
             alert(data.msg);
           }
@@ -188,8 +180,10 @@ export default {
     },
     // 打开购买弹窗
     openBuy(item) {
-      if(item.isVIP == 0){
-         this.videolUrl = item.videoLink;
+      this.stateVIP = item.isVIP 
+      console.log( this.stateVIP)
+      if (item.isVIP == 0) {
+        this.videolUrl = item.videoLink;
       }
       this.videoIdPay = item.id;
       let _obj = {
@@ -201,9 +195,31 @@ export default {
           if (data.code == 0) {
             this.modelData = data.obj;
             if (data.obj.state == 0) {
+              // this.show = true;
+            } else {
+              this.videolUrl = data.obj.videoLink;
+            }
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
+        }
+      );
+    },
+    // buyVideo
+    buyVide(){
+      let _obj = {
+        openId: localStorage.getItem("openId"),
+        id: this.videoIdPay
+      };
+      this.$fetch.post(url.getVideoLink, _obj).then(
+        data => {
+          if (data.code == 0) {
+            this.modelData = data.obj;
+            if (data.obj.state == 0) {
               this.show = true;
             } else {
-                this.videolUrl  = data.obj.videoLink
+              this.videolUrl = data.obj.videoLink;
             }
           }
         },
@@ -215,6 +231,7 @@ export default {
   },
   mounted() {
     this.getVideoList();
+    //
   },
   created() {
     this.routeParams = JSON.parse(this.$route.query.obj);
