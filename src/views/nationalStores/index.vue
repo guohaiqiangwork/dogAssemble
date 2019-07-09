@@ -12,24 +12,26 @@
           />
           <i></i>
         </div>
-<div class="main-body" ref="wrapper"  >
+<div class="main-body" ref="wrapper" :style="{ height: (wrapperHeight-50) + 'px'}" >
   <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
      <!-- 推荐门店列表 -->
         <div class="div_display_flex margin_left_div3 padding_top_div3">
-          <div class="national_flag_title" v-if="recommendStoreList.length"></div>
+          <div class="national_flag_title" ></div>
+            <!-- v-if="recommendStoreList.length" -->
           <div
             class="font_color_00 font_size_14 margin_left_div2"
             style="margin-top: 0.8%;"
-            v-if="recommendStoreList.length"
+          
           >附近门店推荐</div>
         </div>
         <div class="div_display_flex">
           <!-- <div @click="checkBtn(index,item.id)" :checked="item.isDefault" class="div_width_8">
         <check-icon :value.sync="item.isDefault" size="13px" style="padding-top: 64%;color:red"></check-icon>
           </div>-->
+           <!-- v-if="recommendStoreList.length" -->
           <div
             class="national_list font_color_00 font_size_13 backgroun_color_fff margin_top_div3"
-            v-if="recommendStoreList.length"
+           
           >
             <div class="div_display_flex margin_top_div3">
               <div
@@ -60,8 +62,9 @@
         </div>
         <!-- 其他门店列表 -->
         <div>
+          <!-- v-if="recommendStoreList.length" -->
           <div class="div_display_flex margin_left_div3 margin_top_div3">
-            <div class="national_flag_title" v-if="recommendStoreList.length"></div>
+            <div class="national_flag_title" ></div>
             <div
               class="font_color_00 font_size_14 margin_left_div2"
               style="margin-top: 0.8%;"
@@ -101,7 +104,7 @@
             </div>
           </div>
         </div>
-        <div v-if="recommendStoreList.length ==0">
+        <!-- <div v-if="recommendStoreList.length ==0">
       <div
         v-if="!recommendStoreList.length"
         class="nodata"
@@ -110,7 +113,7 @@
         <img src="../../assets/images/1546.png" alt style="width:4.78rem;height:3.23rem;" />
         <p style="font-size:.3rem;color:#999;margin-top:0.5rem;">暂无数据</p>
       </div>
-    </div>
+    </div> -->
 </mt-loadmore>
 </div>
     
@@ -263,6 +266,8 @@ export default {
         //  this.recommendStoreList =[];
          this.$fetch.post("fruits/app/blank/getRecommendStoreList", _obj).then(
         data => {
+           document.documentElement.clientHeight -
+      this.$refs.wrapper.getBoundingClientRect().top;
           this.isLoading1 = false;
           this.timer = "";
           if (data.code == 0) {
@@ -280,7 +285,7 @@ export default {
               });
           })
            alert('上拉')
-          // this.allLoaded = true;// 若数据已全部获取完毕
+          this.allLoaded = true;// 若数据已全部获取完毕
          
          }
         //  this.recommendStoreList=data.obj;
@@ -545,6 +550,7 @@ export default {
 .main-body {
   /* 加上这个才会有当数据充满整个屏幕，可以进行上拉加载更多的操作 */
   overflow: scroll;
+  height: calc(100% - 0.9rem);
 }
 /* .nodata{
     width: 100%;
