@@ -204,7 +204,7 @@ export default {
       obj.headimgurl = localStorage.getItem("headimgurl") || "fsfs";
       this.$fetch.post("fruits/app/user/login", obj).then(res => {
         this.btnload = false;
-        alert(res.msg);
+        // alert(res.msg);
         if (res.msg == "success") {
           this.$vux.toast.text("登录成功");
           localStorage.setItem("user", res.attributes.sessionId);
