@@ -1,6 +1,5 @@
 <template>
-  <div style="background-color:#F3F5F8;width:100%;height:100%;overflow:auto;" id="reflow">
-    
+  <div style="background-color:#F3F5F8;width:100%;height:100%;overflow:auto; -webkit-overflow-scrolling: touch;touch-action: none;;" id="reflow">
     <!-- <nut-scroller
       :is-un-more="isUnMore1"
       :is-loading="isLoading1"
@@ -8,8 +7,8 @@
       @loadMore="selPullUp"
       @pulldown="pulldown"
     > -->
-    <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
-      <div slot="list" class="nut-vert-list-panel" style="width:100%;height:100%;overflow-x:hidden;background: #f3f4f5;">
+    <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore" :auto-fill="false"  >
+      <div  class="nut-vert-list-panel" style="width:100%;height:100%;overflow-x:hidden;background: #f3f4f5;">
         <div class="div_display_flex backgroun_color_fff personal_title">
       <div v-for="(item,index) in  tabList" @click="tabSwitch(item.id)" :key="index">
         <div :style="{color:(switchFlage != item.id ? '' :'#000000')}">{{item.name}}</div>
@@ -17,7 +16,7 @@
       </div>
     </div>
         <!-- 全部订单 -->
-        <div v-if="switchFlage == '0'" style="width:100%;height: auto;margin-bottom: 100px;overflow-x:hidden;">
+        <div v-if="switchFlage == '0'" style="width:100%;height: auto;margin-bottom: 20px;overflow-x:hidden;">
           <div v-if="orderList.length != 0" style="overflow-x:hidden">
             <div v-for="(item,index) in orderList" :key="index">
               <div class="order_block" @click="goToOrderDetails(item.id)">
@@ -87,7 +86,7 @@
           </div>
         </div>
         <!-- 待付款 -->
-        <div v-if="switchFlage == '1'" style="width: 100%;height: auto;margin-bottom: 100px;overflow-x:hidden;">
+        <div v-if="switchFlage == '1'" style="width: 100%;height: auto;margin-bottom: 20px;overflow-x:hidden;">
           <div v-if="orderList.length != 0">
             <div v-for="(item,index) in orderList" :key="index">
               <div class="order_block" @click="goToOrderDetails(item.id)">
@@ -155,7 +154,7 @@
           </div>
         </div>
         <!-- 待收费 -->
-        <div v-if="switchFlage == '2'" style="width: 100%;height: auto;margin-bottom: 100px;overflow-x:hidden;">
+        <div v-if="switchFlage == '2'" style="width: 100%;height: auto;margin-bottom: 20px;overflow-x:hidden;">
           <div v-if="orderList.length != 0">
             <div v-for="(item,index) in orderList" :key="index">
               <div class="order_block" @click="goToOrderDetails(item.id)">
@@ -226,7 +225,7 @@
           </div>
         </div>
         <!-- 待收货 -->
-        <div v-if="switchFlage == '3'" style="width:100%;height:auto;margin-bottom: 100px;overflow-x:hidden;">
+        <div v-if="switchFlage == '3'" style="width:100%;height:auto;margin-bottom: 20px;overflow-x:hidden;">
           <div v-if="orderList.length != 0">
             <div v-for="(item,index) in orderList" :key="index">
               <div class="order_block" @click="goToOrderDetails(item.id)">
@@ -294,7 +293,7 @@
           </div>
         </div>
         <!-- 已完成 -->
-        <div v-if="switchFlage == '4'" style="width: 100%;height: auto;margin-bottom: 100px;overflow-x:hidden;">
+        <div v-if="switchFlage == '4'" style="width: 100%;height: auto;margin-bottom: 20px;overflow-x:hidden;">
           <div v-if="orderList.length != 0">
             <div v-for="(item,index) in orderList" :key="index">
               <div class="order_block" @click="goToOrderDetails(item.id)">
@@ -408,10 +407,13 @@ export default {
   },
   methods: {
     loadBottom(){
-      this.getOrderList();
+      this.page.current++;
+      this.getOrderList('pull');
     },
     loadTop(){
-      this.getOrderList();
+      this.orderList = [];
+      this.page.current = 1;
+      this.getOrderList('drop');
     },
     handleScroll(){},
     // tab切换
@@ -454,7 +456,7 @@ export default {
       });
     },
     // 获取商城订单
-    getOrderList() {
+    getOrderList(str = "") {
       let _obj = {
         openId: localStorage.getItem("openId"),
         state: this.switchFlage,
@@ -463,6 +465,12 @@ export default {
       };
       this.$fetch.post(url.getOrderList, _obj).then(
         data => {
+          if(str == 'pull'){
+            this.$refs.loadmore.onBottomLoaded();
+          }else if(str == "drop"){
+            this.allLoaded = false;
+            this.$refs.loadmore.onTopLoaded();
+          }
           if (data.code == 0) {
             if(data.obj.length){
               //  this.$nextTick(() => {
@@ -476,7 +484,10 @@ export default {
               //  })
                
             }else{
-              
+              this.allLoaded = true;
+              this.page.current--;
+              this.$vux.toast.text('没有更多数据了')
+              // this.$refs.loadmore.onBottomLoaded()
               this.isUnMore1 = true;
             }
           
@@ -540,7 +551,7 @@ export default {
   },
 
   mounted() {
-     window.addEventListener("scroll", this.handleScroll);
+    //  window.addEventListener("scroll", this.handleScroll);
     console.log("我的订单");
     this.getOrderList(); //获取商城订单
   }
