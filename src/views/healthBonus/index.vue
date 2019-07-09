@@ -152,12 +152,23 @@
         </div>
       </div>
     </div>
+    <!-- 分享提示 -->
+    <x-dialog v-model="showToast" class="dialog-demo">
+      <div style="padding:15px;background-color:rgba(0, 0, 0, 0.6);">
+        <img src="../../assets/images/fengX.png" alt class="fengX_c_l" @click="showToast=false" />
+      </div>
+    </x-dialog>
   </div>
 </template>
 <script>
 import url from "../../bin/url";
 import wexinShare from "../../bin/weiXinShare";
+import { XDialog ,  XButton} from "vux";
 export default {
+  components: {
+    XDialog,
+    XButton
+  },
   name: "healthBonus",
   data() {
     return {
@@ -179,7 +190,8 @@ export default {
       getRecommendBList: "", //推荐返佣
       getVideoDistriList: "", //视频返佣
       getOrderDistriList: "", //订单返佣
-      getHealthBonusD: "" //返佣
+      getHealthBonusD: "", //返佣
+      showToast: false
     };
   },
   methods: {
@@ -321,19 +333,25 @@ export default {
       //     })
       //   }
       // });
-      this.$fetch.post("/fruits/app/bonus/inviteFriends",{openId:localStorage.getItem("openId"),url:window.location.href.split('#')[0]}).then(
-        data => {
-          if (data.code == 0) {
-           console.log(data)
-           wexinShare(data.obj)
-          } else {
-            alert(data.msg);
+      this.showToast = true;
+      this.$fetch
+        .post("/fruits/app/bonus/inviteFriends", {
+          openId: localStorage.getItem("openId"),
+          url: window.location.href.split("#")[0]
+        })
+        .then(
+          data => {
+            if (data.code == 0) {
+              console.log(data);
+              wexinShare(data.obj);
+            } else {
+              alert(data.msg);
+            }
+          },
+          err => {
+            alert("网络缓慢。。");
           }
-        },
-        err => {
-          alert("网络缓慢。。");
-        }
-      );
+        );
     }
   },
   created() {
@@ -386,5 +404,11 @@ export default {
 .margin_top_div1 {
   position: absolute;
   right: 0.1rem;
+}
+.fengX_c_l {
+  position: fixed;
+  top: 10%;
+  left: 10%;
+  width: 80%;
 }
 </style>
