@@ -15,7 +15,7 @@
                 <dd>2018-02-25</dd>
             </dl>
     </div>-->
-    <div id="book" slot="list" class="nut-vert-list-panel">
+    <div id="book" >
       <div class="search_box">
         <i class="weui-icon-search search_icon"></i>
         <input type="text" placeholder="搜索您想找的配方" v-model="iptVal" @input="input">
@@ -24,7 +24,7 @@
       <template v-if="bookList.length">
 
       
-      <div v-for="(item,index) in bookList" :key="index" class="nut-vert-list-item">
+      <div v-for="(item,index) in bookList" :key="index" >
         <book-list :item="item">
           <div slot="content">
             <div v-for="(iten,ind) in item.memberRecipes" :key="ind" v-show="item.type == 0">
@@ -82,7 +82,7 @@ export default {
       form: {
         openId: localStorage.getItem("openId"),
         name: "",
-        size: "3",
+        size: "10",
         current: "1"
       },
       iptVal: "",
@@ -119,9 +119,12 @@ export default {
 
           if (res.code.length == 0) {
             this.isUnMore1 = true;
-            this.allLoaded = true;
-            this.page.current--;
-            this.$vux.toast.text('没有更多数据了')
+            if(str == 'pull'){
+              this.allLoaded = true;
+              this.page.current--;
+              this.$vux.toast.text('没有更多数据了')
+            }
+           
             return;
           }
         //    else {

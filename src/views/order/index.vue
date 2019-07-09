@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color:#F3F5F8;width:100%;height:100%;overflow:auto; -webkit-overflow-scrolling: touch;" id="reflow">
+  <div style="background-color:#F3F5F8;width:100%;height:100%;overflow:auto; -webkit-overflow-scrolling:touch;position:absolute;top:0;left:0;" id="reflow">
     <!-- <nut-scroller
       :is-un-more="isUnMore1"
       :is-loading="isLoading1"
@@ -7,14 +7,15 @@
       @loadMore="selPullUp"
       @pulldown="pulldown"
     > -->
-    <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore" :auto-fill="false"  >
-      <div  class="nut-vert-list-panel" style="width:100%;height:100%;overflow-x:hidden;background: #f3f4f5;">
-        <div class="div_display_flex backgroun_color_fff personal_title">
+     <div class="div_display_flex backgroun_color_fff personal_title">
       <div v-for="(item,index) in  tabList" @click="tabSwitch(item.id)" :key="index">
         <div :style="{color:(switchFlage != item.id ? '' :'#000000')}">{{item.name}}</div>
         <div class="switchBorder" v-if="switchFlage == item.id"></div>
       </div>
     </div>
+    <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore" :auto-fill="false"  >
+      <div  class="nut-vert-list-panel" style="width:100%;height:100%;overflow-x:hidden;background: #f3f4f5;">
+       
         <!-- 全部订单 -->
         <div v-if="switchFlage == '0'" style="width:100%;height: auto;margin-bottom: 20px;overflow-x:hidden;">
           <div v-if="orderList.length != 0" style="overflow-x:hidden">
@@ -398,7 +399,7 @@ export default {
       orderList: [],
       page: {
         current: "1",
-        size: "3"
+        size: "10"
       },
       allLoaded:false,
       isUnMore1: false,
@@ -473,7 +474,7 @@ export default {
           }
           if (data.code == 0) {
             if(data.obj.length){
-              //  this.$nextTick(() => {
+               this.$nextTick(() => {
                 
                   data.obj.forEach(item => {
               item.goodsList.forEach(items => {
@@ -481,12 +482,15 @@ export default {
               });
               this.orderList.push(item);
             });
-              //  })
+               })
                
             }else{
-              this.allLoaded = true;
-              this.page.current--;
-              this.$vux.toast.text('没有更多数据了')
+              if(str == "pull"){
+                this.allLoaded = true;
+                this.page.current--;
+                this.$vux.toast.text('没有更多数据了')
+              }
+            
               // this.$refs.loadmore.onBottomLoaded()
               this.isUnMore1 = true;
             }
