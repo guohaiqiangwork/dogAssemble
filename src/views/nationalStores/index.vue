@@ -1,5 +1,5 @@
 <template>
-  <div class="backgroun_color_fff " style="height:100%;overflow-x:hidden" id="store">
+  <div class="backgroun_color_fff " style="height:100%;overflow:scroll" id="store">
      <!-- 搜索 -->
         <div class="search_box" style="border:none;box-shadow:0px 3px 10px rgba(136,136,136,0.16);">
           <i class="weui-icon-search search_icon"></i>
@@ -12,8 +12,8 @@
           />
           <i></i>
         </div>
-<div class="main-body" ref="wrapper" :style="{ height: (wrapperHeight-50) + 'px'}" :autoFill ="false" >
-  <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
+<div class="main-body" ref="wrapper" :style="{ height: (wrapperHeight-50) + 'px'}">
+  <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :auto-fill="false" :bottom-all-loaded="allLoaded" ref="loadmore" :bottomDistance="10" bottom-status-change="handelChange">
      <!-- 推荐门店列表 -->
         <div class="div_display_flex margin_left_div3 padding_top_div3">
           <div class="national_flag_title" v-if="recommendStoreList.length"></div>
@@ -161,7 +161,7 @@ export default {
       ],
       page: {
         current: "1",
-        size: "3"
+        size: "10"
       },
       recommendStoreList: [],
       productNamr: "",
@@ -180,7 +180,9 @@ export default {
     }
   },
   methods: {
-
+    handelChange(state){
+      console.log(state,'dfs')
+    },
   loadTop(item){
       this.recommendStoreList = [];
       let _obj = {
@@ -216,26 +218,9 @@ export default {
               
               });
           })
-           alert('下拉')
-          // this.allLoaded = true;// 若数据已全部获取完毕
          
          }
-        //  this.recommendStoreList=data.obj;
-   
-            // this.recommendStoreList=data.obj;
-            // if(data.obj.length){
-            //   console.log(13213)
-            //    data.obj.forEach(e =>{
-            //   this.recommendStoreList.push(e);
-            // })
-            // }else{
-            // console.log(4546)
-
-              // data.obj.forEach(item => {
-              //   item.SFQY = data.obj.province
-              // });
-              // this.$set(this.recommendStoreList,this.recommendStoreList);
-              console.log(this.recommendStoreList, "jlkjljkljl");
+    
             } else {
               alert(data.msg);
             }
@@ -249,7 +234,7 @@ export default {
     // this.$refs.loadmore.onTopLoaded();
   },
   loadBottom(item){
-    this.recommendStoreList = [];
+    this.page.current++;
      let _obj = {
         openId: localStorage.getItem("openId"),
         name: item || "",
@@ -262,9 +247,8 @@ export default {
         clearTimeout(this.timer);
       }
     
-      // this.timer = setTimeout(() => {
+      this.timer = setTimeout(() => {
         this.isLoading1 = true;
-        //  this.recommendStoreList =[];
          this.$fetch.post("fruits/app/blank/getRecommendStoreList", _obj).then(
         data => {
       //      document.documentElement.clientHeight -
@@ -275,6 +259,10 @@ export default {
             console.log(4546,data)
             
          if(data.obj.length == 0){
+           this.allLoaded = true;
+           this.page.current--;
+           this.$vux.toast.text('没有更多数据了')
+           this.$refs.loadmore.onBottomLoaded()
            this.isUnMore1 = true;
            return
          }else{
@@ -283,28 +271,14 @@ export default {
               
               this.recommendStoreList.push(e);
               
-              });
-               this.allLoaded = true;
+              
+               console.log(this.allLoaded);
           })
-           alert('上拉')
+          });
          // 若数据已全部获取完毕
-         
+        //  this.allLoaded = true;
          }
-        //  this.recommendStoreList=data.obj;
-   
-            // this.recommendStoreList=data.obj;
-            // if(data.obj.length){
-            //   console.log(13213)
-            //    data.obj.forEach(e =>{
-            //   this.recommendStoreList.push(e);
-            // })
-            // }else{
-            // console.log(4546)
-
-              // data.obj.forEach(item => {
-              //   item.SFQY = data.obj.province
-              // });
-              // this.$set(this.recommendStoreList,this.recommendStoreList);
+      
               console.log(this.recommendStoreList, "jlkjljkljl");
             } else {
               alert(data.msg);
@@ -315,7 +289,7 @@ export default {
             alert("网络缓慢。。");
           }
         );
-      // }, 2000);
+      }, 2000);
     
     
   },
@@ -424,7 +398,7 @@ export default {
           this.isLoading1 = false;
           this.timer = "";
           if (data.code == 0) {
-            console.log(4546,data)
+            console.log(_obj,4546,data)
             
          if(data.obj.length == 0){
            this.isUnMore1 = true;
@@ -554,6 +528,7 @@ export default {
   overflow: scroll;
   height: calc(100% - 0.9rem);
   padding-bottom: 70px;
+  touch-action: none;
 }
 /* .nodata{
     width: 100%;
