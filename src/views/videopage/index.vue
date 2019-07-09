@@ -24,7 +24,7 @@
       <div class="piece_box">
         <p class="flex-between align-center">
           <span class="case_tit">{{videoList.classTwo}}</span>
-          <img class="icon_size" src="../../assets/images/share.png" alt />
+          <img class="icon_size" src="../../assets/images/share.png" alt  />
         </p>
         <div class="introduce">
           <p class="tit">简介</p>
@@ -198,6 +198,7 @@ export default {
               // this.show = true;
             } else {
               this.videolUrl = data.obj.videoLink;
+               this.stateVIP = 0;
             }
           }
         },

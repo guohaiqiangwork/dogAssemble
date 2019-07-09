@@ -155,7 +155,7 @@
     <!-- 分享提示 -->
     <x-dialog v-model="showToast" class="dialog-demo">
       <div
-        style="padding: 15px; background-color: rgba(0, 0, 0, 0);width: 100%;height: 500px;">
+        style=" background-color: rgba(0, 0, 0, 0);width: 100%;height: 500px;">
         <img src="../../assets/images/fengX.png" alt class="fengX_c_l" @click="showToast=false" />
       </div>
     </x-dialog>
@@ -428,7 +428,6 @@ export default {
     background:none !important;
     text-align: center;
     border-radius: 3px;
-    /* overflow: hidden; */
     }
 </style>
 
