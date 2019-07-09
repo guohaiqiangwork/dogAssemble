@@ -266,8 +266,8 @@ export default {
         //  this.recommendStoreList =[];
          this.$fetch.post("fruits/app/blank/getRecommendStoreList", _obj).then(
         data => {
-           document.documentElement.clientHeight -
-      this.$refs.wrapper.getBoundingClientRect().top;
+      //      document.documentElement.clientHeight -
+      // this.$refs.wrapper.getBoundingClientRect().top;
           this.isLoading1 = false;
           this.timer = "";
           if (data.code == 0) {
