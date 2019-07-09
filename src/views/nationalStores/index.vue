@@ -9,9 +9,12 @@
       :type="'vertical'"
       @loadMore="selPullUp"
       @pulldown="pulldown"
+      
     >
+        
+  
       <div slot="list" class="nut-vert-list-panel">
-            <!-- 搜索 -->
+        <!-- 搜索 -->
         <div class="search_box" style="border:none;box-shadow:0px 3px 10px rgba(136,136,136,0.16);">
           <i class="weui-icon-search search_icon"></i>
           <input
@@ -384,6 +387,9 @@ export default {
   height: 100% !important;
 }
 #store .nut-vert-scroll{
+  overflow-x: hidden;
+}
+#store .nut-vert-list-panel{
   overflow-x: hidden;
 }
 </style>
