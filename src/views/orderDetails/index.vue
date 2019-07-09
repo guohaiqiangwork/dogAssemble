@@ -123,7 +123,7 @@ export default {
         if (data.code == 0) {
           //  var obj = eval("(" + data.obj + ")");
           var objPay = JSON.parse(data.obj);
-          weixinPay(
+          wexinPay(
             objPay,
             function(val) {
               console.log(val);
