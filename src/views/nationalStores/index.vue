@@ -185,11 +185,12 @@ export default {
     },
   loadTop(item){
       this.recommendStoreList = [];
+      this.page.current = 1;
       let _obj = {
         openId: localStorage.getItem("openId"),
         name: item || "",
         size: this.page.size,
-        current: 1,
+        current: this.page.current,
         latitude: this.latitude,
         longitude: this.longitude
       };
@@ -530,10 +531,16 @@ export default {
 <style scoped>
 .main-body {
   /* 加上这个才会有当数据充满整个屏幕，可以进行上拉加载更多的操作 */
-  overflow: scroll;
+  position: absolute;
+  left:0;
+  top: 48px;
+  overflow: auto;
+  width: 100%;
   height: calc(100% - 0.9rem);
   padding-bottom: 70px;
-  touch-action: none;
+  
+    -webkit-overflow-scrolling: touch;
+  /* touch-action: none; */
 }
 /* .nodata{
     width: 100%;
