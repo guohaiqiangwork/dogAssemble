@@ -216,10 +216,12 @@ export default {
         data => {
           if (data.code == 0) {
             this.modelData = data.obj;
+            console.log(this.modelData )
             if (data.obj.state == 0) {
               this.show = true;
             } else {
               this.videolUrl = data.obj.videoLink;
+              this.stateVIP = 0;
             }
           }
         },
