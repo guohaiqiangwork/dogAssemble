@@ -12,7 +12,7 @@
           />
           <i></i>
         </div>
-<div class="main-body" ref="wrapper" :style="{ height: (wrapperHeight-50) + 'px'}" >
+<div class="main-body" ref="wrapper"  >
   <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
      <!-- 推荐门店列表 -->
         <div class="div_display_flex margin_left_div3 padding_top_div3">
@@ -101,9 +101,7 @@
             </div>
           </div>
         </div>
-</mt-loadmore>
-</div>
-    <div v-if="recommendStoreList.length ==0">
+        <div v-if="recommendStoreList.length ==0">
       <div
         v-if="!recommendStoreList.length"
         class="nodata"
@@ -113,6 +111,9 @@
         <p style="font-size:.3rem;color:#999;margin-top:0.5rem;">暂无数据</p>
       </div>
     </div>
+</mt-loadmore>
+</div>
+    
     <!-- 店铺更换提示 -->
     <confirm v-model="nationSFalg" title @on-cancel="onCancel" @on-confirm="onConfirm">
       <div style="text-align:center;font-size:18px;">
@@ -279,7 +280,7 @@ export default {
               });
           })
            alert('上拉')
-          this.allLoaded = true;// 若数据已全部获取完毕
+          // this.allLoaded = true;// 若数据已全部获取完毕
          
          }
         //  this.recommendStoreList=data.obj;
