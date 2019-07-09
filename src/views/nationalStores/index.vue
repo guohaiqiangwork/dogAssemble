@@ -507,7 +507,7 @@ export default {
     settitle("全国门店");
     // this.routeParams = JSON.parse(this.$route.params.obj);
   },
-
+ 
   mounted() {
     this.addressDetail();
      document.documentElement.clientHeight -
@@ -540,7 +540,7 @@ export default {
   padding-bottom: 70px;
   
     -webkit-overflow-scrolling: touch;
-  touch-action: none;
+  /* touch-action: none; */
 }
 /* .nodata{
     width: 100%;

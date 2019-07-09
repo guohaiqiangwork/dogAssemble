@@ -183,7 +183,7 @@ export default {
   padding-bottom: 70px;
   
     -webkit-overflow-scrolling: touch;
-  touch-action: none;
+  // touch-action: none;
 }
 .nodata{
     width: 100%;

@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color:#F3F5F8;width:100%;height:100%;overflow:auto; -webkit-overflow-scrolling: touch;touch-action: none;;" id="reflow">
+  <div style="background-color:#F3F5F8;width:100%;height:100%;overflow:auto; -webkit-overflow-scrolling: touch;" id="reflow">
     <!-- <nut-scroller
       :is-un-more="isUnMore1"
       :is-loading="isLoading1"
