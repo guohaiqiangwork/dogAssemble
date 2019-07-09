@@ -12,7 +12,7 @@
           />
           <i></i>
         </div>
-<div class="main-body" ref="wrapper" :style="{ height: (wrapperHeight-50) + 'px'}" >
+<div class="main-body" ref="wrapper" :style="{ height: (wrapperHeight-50) + 'px'}" :autoFill ="false" >
   <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
      <!-- 推荐门店列表 -->
         <div class="div_display_flex margin_left_div3 padding_top_div3">
