@@ -26,7 +26,7 @@
           alt
         >
       </div>
-      <div style="text-align: center;margin-top: 6%;">暂无订单</div>
+      <div style="text-align: center;margin-top: 6%;">暂无账单记录</div>
     </div>
     <!-- 底部菜单栏 -->
     <!-- <TabBar ref="TabBar"/> -->
