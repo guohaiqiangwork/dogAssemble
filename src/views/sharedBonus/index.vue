@@ -59,8 +59,8 @@ export default {
     getEr() {
       this.$fetch
         .post("/fruits/app/bonus/getCusQRCode", {
-          openId: this.routeParams.data.openId,
-          shareId: this.routeParams.data.shareId
+          openId:this.routeParams[0].split('=')[1],
+          shareId: this.routeParams[1].split('=')[1]
         })
         .then(res => {
           if (res.code == 0) {
@@ -78,9 +78,10 @@ export default {
   },
 
   mounted() {
-    this.routeParams = JSON.parse(this.$route.params.obj);
-    console.log(this.routeParams.data.openId);
-    console.log(this.routeParams.data.shareId);
+    this.routeParams = this.$route.params.obj.split("&");
+    console.log(this.routeParams);
+    console.log(this.routeParams[0].split('=')[1]);
+    console.log(this.routeParams[1].split('=')[1]);
     this.getEr();
     console.log(wxShare);
   }

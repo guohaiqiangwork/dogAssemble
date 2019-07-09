@@ -309,31 +309,31 @@ export default {
     },
     // 获取分享参数
     getSharedBonus() {
-      this.$router.push({
-        name: "sharedBonus",
-        params: {
-          obj: JSON.stringify({
-            type: "profession",
-            data: {
-              openId: localStorage.getItem("openId"),
-              shareId: localStorage.getItem("appUserId")
-            }
-          })
-        }
-      });
-      // this.$fetch.post("/fruits/app/bonus/inviteFriends",{openId:localStorage.getItem("openId")}).then(
-      //   data => {
-      //     if (data.code == 0) {
-      //     //  console.log(data)
-      //      wexinShare(data.obj)
-      //     } else {
-      //       alert(data.msg);
-      //     }
-      //   },
-      //   err => {
-      //     alert("网络缓慢。。");
+      // this.$router.push({
+      //   name: "sharedBonus",
+      //   params: {
+      //     obj: JSON.stringify({
+      //       type: "profession",
+      //       data: {
+      //         openId: localStorage.getItem("openId"),
+      //         shareId: localStorage.getItem("appUserId")
+      //       }
+      //     })
       //   }
-      // );
+      // });
+      this.$fetch.post("/fruits/app/bonus/inviteFriends",{openId:localStorage.getItem("openId"),url:window.location.href.split('#')[0]}).then(
+        data => {
+          if (data.code == 0) {
+           console.log(data)
+           wexinShare(data.obj)
+          } else {
+            alert(data.msg);
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
+        }
+      );
     }
   },
   created() {
