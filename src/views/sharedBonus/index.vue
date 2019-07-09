@@ -12,7 +12,7 @@
         <div class="shared_B_D">
           <img :src="imgUrl" width="50%" />
           <img
-            @click="showToast=true"
+            @click="getSharedBonus"
             src="../../assets/images/bJbutton12@2x.png"
             style="padding-bottom: 10%;width:50%"
             alt
@@ -23,11 +23,7 @@
     <x-dialog v-model="showToast" class="dialog-demo">
       <div style="padding:15px;background-color:rgba(0, 0, 0, 0.6)">
         <img src="../../assets/images/fengX.png" alt class="fengX_c_l" @click="showToast=false" />
-        <!-- <x-button @click.native="doShowToast" type="primary">show toast</x-button> -->
       </div>
-      <!-- <div @click="showToast=false">
-        <span class="vux-close"></span>
-      </div>-->
     </x-dialog>
   </div>
 </template>
@@ -59,8 +55,8 @@ export default {
     getEr() {
       this.$fetch
         .post("/fruits/app/bonus/getCusQRCode", {
-          openId:this.routeParams[0].split('=')[1],
-          shareId: this.routeParams[1].split('=')[1]
+          openId: this.routeParams[0].split("=")[1],
+          shareId: this.routeParams[1].split("=")[1]
         })
         .then(res => {
           if (res.code == 0) {
@@ -71,6 +67,28 @@ export default {
             alert(res.msg);
           }
         });
+    },
+    // 获取分享参数
+    getSharedBonus() {
+      this.showToast = true;
+      this.$fetch
+        .post("/fruits/app/bonus/inviteFriends", {
+          openId: localStorage.getItem("openId"),
+          url: window.location.href.split("#")[0]
+        })
+        .then(
+          data => {
+            if (data.code == 0) {
+              console.log(data);
+              wexinShare(data.obj);
+            } else {
+              alert(data.msg);
+            }
+          },
+          err => {
+            alert("网络缓慢。。");
+          }
+        );
     }
   },
   created() {
@@ -80,8 +98,8 @@ export default {
   mounted() {
     this.routeParams = this.$route.params.obj.split("&");
     console.log(this.routeParams);
-    console.log(this.routeParams[0].split('=')[1]);
-    console.log(this.routeParams[1].split('=')[1]);
+    console.log(this.routeParams[0].split("=")[1]);
+    console.log(this.routeParams[1].split("=")[1]);
     this.getEr();
     console.log(wxShare);
   }
