@@ -12,16 +12,16 @@
           />
           <i></i>
         </div>
-<div class="main-body" ref="wrapper" :style="{ height: (wrapperHeight-50) + 'px'}" >
+<div class="main-body" ref="wrapper" :style="{ height: (wrapperHeight-50) + 'px'}" :autoFill ="false" >
   <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
      <!-- 推荐门店列表 -->
         <div class="div_display_flex margin_left_div3 padding_top_div3">
-          <div class="national_flag_title" ></div>
+          <div class="national_flag_title" v-if="recommendStoreList.length"></div>
             <!-- v-if="recommendStoreList.length" -->
           <div
             class="font_color_00 font_size_14 margin_left_div2"
             style="margin-top: 0.8%;"
-          
+          v-if="recommendStoreList.length"
           >附近门店推荐</div>
         </div>
         <div class="div_display_flex">
@@ -31,7 +31,7 @@
            <!-- v-if="recommendStoreList.length" -->
           <div
             class="national_list font_color_00 font_size_13 backgroun_color_fff margin_top_div3"
-           
+           v-if="recommendStoreList.length"
           >
             <div class="div_display_flex margin_top_div3">
               <div
@@ -64,7 +64,7 @@
         <div>
           <!-- v-if="recommendStoreList.length" -->
           <div class="div_display_flex margin_left_div3 margin_top_div3">
-            <div class="national_flag_title" ></div>
+            <div class="national_flag_title" v-if="recommendStoreList.length"></div>
             <div
               class="font_color_00 font_size_14 margin_left_div2"
               style="margin-top: 0.8%;"
@@ -249,6 +249,7 @@ export default {
     // this.$refs.loadmore.onTopLoaded();
   },
   loadBottom(item){
+    this.recommendStoreList = [];
      let _obj = {
         openId: localStorage.getItem("openId"),
         name: item || "",
@@ -283,9 +284,10 @@ export default {
               this.recommendStoreList.push(e);
               
               });
+               this.allLoaded = true;
           })
            alert('上拉')
-          this.allLoaded = true;// 若数据已全部获取完毕
+         // 若数据已全部获取完毕
          
          }
         //  this.recommendStoreList=data.obj;
