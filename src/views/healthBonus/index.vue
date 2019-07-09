@@ -428,6 +428,7 @@ export default {
     background:none !important;
     text-align: center;
     border-radius: 3px;
-    overflow: hidden;}
+    /* overflow: hidden; */
+    }
 </style>
 
