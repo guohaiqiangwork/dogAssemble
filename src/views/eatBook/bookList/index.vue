@@ -1,4 +1,11 @@
 <template>
+<div>
+    <div class="search_box">
+        <i class="weui-icon-search search_icon"></i>
+        <input type="text" placeholder="搜索您想找的配方" v-model="iptVal" @input="input">
+        <i></i>
+      </div>
+
   <!-- <nut-scroller
     :is-un-more="isUnMore1"
     :is-loading="isLoading1"
@@ -6,6 +13,7 @@
     @loadMore=" selPullUp"
     @pulldown="pulldown"
   > -->
+  
   <div class="main-body">
    <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore" :auto-fill="false"  >
     <!-- <div  class="nut-vert-list-panel"> -->
@@ -16,11 +24,7 @@
             </dl>
     </div>-->
     <div id="book" >
-      <div class="search_box">
-        <i class="weui-icon-search search_icon"></i>
-        <input type="text" placeholder="搜索您想找的配方" v-model="iptVal" @input="input">
-        <i></i>
-      </div>
+    
       <template v-if="bookList.length">
 
       
@@ -57,6 +61,7 @@
   <!-- </nut-scroller> -->
     </mt-loadmore>
    </div>
+   </div>
 </template>
 <script>
 export default {
@@ -91,12 +96,12 @@ export default {
   },
   methods: {
     loadTop(){
-      this.form.current++;
+      this.orderList = [];
+      this.form.current = 1;
       this.getRecipeList('drop');
     },
     loadBottom(){
-      this.orderList = [];
-      this.form.current = 1;
+      this.form.current++;
       this.getRecipeList('pull')
     },
     handleScroll() {},
