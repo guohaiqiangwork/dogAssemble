@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="xDiooo">
     <!-- <div class="background_img">
       <img :src=imgUrl >
     </div>-->
@@ -126,4 +126,22 @@ export default {
   left: 10%;
   width: 80%;
 }
+
+</style>
+<style>
+ #xDiooo .weui-dialog {
+    position: fixed;
+    display: table;
+    z-index: 5000;
+    width: 100%;
+    min-width: 300px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    background:none !important;
+    text-align: center;
+    border-radius: 3px;
+    overflow: hidden;}
 </style>
