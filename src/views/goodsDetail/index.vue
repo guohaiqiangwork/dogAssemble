@@ -36,7 +36,7 @@
         <span class="goods_discount" v-if="type!=1&&type">￥{{goodsDetail.original}}</span>
       </p>
     </div>
-    <div class>
+    <div class="img_box">
       <div class="goods_tit">商品详情图</div>
       <div v-for="(item,index) in goodsDetail.imgDetailsList" :key="index">
         <img
@@ -383,6 +383,9 @@ export default {
 //   .vux-slider > .vux-swiper{
 //     height: 100% !important;
 // }  
+.img_box{
+  padding-bottom: 20px;
+}
 #goods_detail{
       .vux-slider > .vux-swiper{
     height: 100% !important;

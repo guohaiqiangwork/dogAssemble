@@ -198,9 +198,14 @@ export default {
     settitle("商城");
   },
   mounted() {
+    if(this.$route.query.id){
+      this.$router.go(0);
+    }
+     console.log(this.$route,'jkkjl');
     this.$fetch
       .post("fruits/app/blank/getBannerImg", { openId: localStorage.getItem("openId")})
       .then(res => {
+       
         // console.log(res);
         res.obj.forEach(e => {
           this.queryImg(e);

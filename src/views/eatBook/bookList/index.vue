@@ -16,7 +16,7 @@
     <div id="book" slot="list" class="nut-vert-list-panel">
       <div class="search_box">
         <i class="weui-icon-search search_icon"></i>
-        <input type="text" placeholder="搜索您想找的产品" v-model="iptVal" @input="input">
+        <input type="text" placeholder="搜索您想找的配方" v-model="iptVal" @input="input">
         <i></i>
       </div>
       <template v-if="bookList.length">
@@ -139,6 +139,7 @@ export default {
     }
   },
   mounted() {
+    settitle('全部配方');
     window.addEventListener("scroll", this.handleScroll);
     this.getRecipeList();
   }

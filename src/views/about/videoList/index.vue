@@ -2,7 +2,7 @@
   <div id="video-list">
     <div class="search_box">
       <i class="weui-icon-search search_icon"></i>
-      <input type="text" placeholder="搜索您想找的视频">
+      <input type="text" placeholder="搜索您想找的视频" @input="input" v-model="videoName">
     </div>
     <div v-if="searchList.length != 0">
       <div class="search_list">
@@ -33,6 +33,8 @@
   </div>
 </template>
 <script>
+import { setTimeout, clearTimeout } from "timers";
+let timer;
 import url from "../../../bin/url";
 export default {
   data() {
@@ -51,7 +53,8 @@ export default {
           videodes: "查看此视频对糖尿病患者有帮助"
         }
       ],
-      videoId: ""
+      videoId: "",
+      videoName:"",
     };
   },
   methods: {
@@ -69,15 +72,32 @@ export default {
         }
       });
     },
+    input(){
+        if (timer) {
+        window.clearTimeout(timer._id);
+      }
+      timer = setTimeout(() => {
+        // console.log(this.iptVal);
+        this.getVideoTwo();
+        // this.filterList(this.list,this.iptVal);
+        timer = null;
+      }, 2000);
+    },
     // 获取列表
     getVideoTwo() {
       let _obj = {
         openId: localStorage.getItem("openId"),
-        id: this.videoId
+        id: this.videoId,
+        name:this.videoName
       };
       this.$fetch.post(url.getVideoTwo, _obj).then(
         data => {
           if (data.code == 0) {
+            data.obj.forEach(el => {
+              if(el.description.length>15){
+                el.description = el.description.substring(0,15) + '...'
+              }
+            });
             this.searchList = data.obj;
           console.log(this.searchList);
             

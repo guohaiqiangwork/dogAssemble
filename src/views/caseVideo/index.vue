@@ -6,7 +6,9 @@
         <input
           type="text"
           placeholder="搜索您想找的视频…"
+          v-model="videoName"
           style="width:100%;height:100%;background-color:#EFEFEF; outline: none;border:none"
+          @input="input"
         >
         <i></i>
         <!-- v-on:input="getCheckMember()"
@@ -23,13 +25,16 @@
   </div>
 </template>
 <script>
+import { setTimeout, clearTimeout } from "timers";
 import url from "../../bin/url";
+let timer;
 export default {
   name: "caseVideo",
   data() {
     return {
       videoOneList: "", //列表
-      videoId: ""
+      videoId: "",
+      videoName:"",
     };
   },
   methods: {
@@ -46,6 +51,18 @@ export default {
           })
         }
       });
+    },
+    input(){
+       if (timer) {
+        window.clearTimeout(timer._id);
+      }
+      timer = setTimeout(() => {
+        // console.log(this.iptVal);
+        this.getVideoOne();
+        // this.filterList(this.list,this.iptVal);
+        timer = null;
+      }, 2000);
+     
     },
     // 去视频列表
     goToVOrder(item) {
@@ -64,7 +81,8 @@ export default {
     // 获取列表
     getVideoOne() {
       let _obj = {
-        openId: localStorage.getItem("openId")
+        openId: localStorage.getItem("openId"),
+        name:this.videoName
       };
       this.$fetch.post(url.getVideoOne, _obj).then(
         data => {

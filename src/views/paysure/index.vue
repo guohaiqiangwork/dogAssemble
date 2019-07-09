@@ -151,7 +151,8 @@ export default {
           }
           if(count>3){
             clearInterval(timer)
-             this.$router.push({
+          setTimeout(() =>{
+            this.$router.push({
               name: "order",
               params: {
                 obj: JSON.stringify({
@@ -162,6 +163,8 @@ export default {
                 })
               }
             });
+          },1000)
+             
           }
         })
       },1000)

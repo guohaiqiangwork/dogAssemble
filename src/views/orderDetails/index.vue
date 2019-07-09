@@ -61,7 +61,7 @@
     <!-- 下单时间 -->
     <div class="div_display_flex money_orderD_h">
       <div class="div_width_50 font_size_14 font_color_1A">下单时间</div>
-      <div class="div_width_50 text_right font_size_13 font_color_10">¥{{shopOrderList.time}}</div>
+      <div class="div_width_50 text_right font_size_13 font_color_10">{{shopOrderList.time}}</div>
     </div>
     <!-- 立即支付 -->
     <div class="orderD_btn" @click="payOrder" v-if="shopOrderList.state==1">立即支付</div>
@@ -132,7 +132,7 @@ export default {
               alert(JSON.stringify(err));
             }
           );
-          wexinPay(obj);
+          // wexinPay(obj);
         } else {
           alert(data.msg);
         }
@@ -184,7 +184,7 @@ export default {
   width: 70px;
   overflow: hidden;
   height: 70px;
-  border: 1px dashed #707070;
+  /* border: 1px dashed #707070; */
   margin-left: 18%;
 }
 .order_price_font {

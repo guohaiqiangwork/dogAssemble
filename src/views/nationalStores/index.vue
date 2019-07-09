@@ -196,12 +196,13 @@ export default {
       if (this.timer) {
         clearTimeout(this.timer);
       }
-    
+
       this.timer = setTimeout(() => {
         this.isLoading1 = true;
         //  this.recommendStoreList =[];
          this.$fetch.post("fruits/app/blank/getRecommendStoreList", _obj).then(
         data => {
+          this.allLoaded = false;
           this.isLoading1 = false;
           this.timer = "";
           if (data.code == 0) {
@@ -405,6 +406,10 @@ export default {
            return
          }else{
           this.$nextTick(() => {
+            if(item){
+               this.recommendStoreList =[];
+            }
+           
            data.obj.forEach(e =>{
               
               this.recommendStoreList.push(e);
@@ -436,7 +441,7 @@ export default {
             alert("网络缓慢。。");
           }
         );
-      }, 2000);
+      }, 1000);
     },
     // 上拉加载
     selPullUp() {

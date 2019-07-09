@@ -25,7 +25,7 @@
         <div style="text-align:left;margin-left:5%;float:left;" class="margin_left_div3 overflow_word" @click="goToMemberD(item)">{{item.name}}</div>
         <div style="margin-left:2%;" class="div_width_25"  @click="goToMemberD(item)">{{item.phone}}</div>
         <div style="text-align:right;position:absolute;right:5%;" class="div_width_45 text_right overflow_word" v-if="item.type == 0"  @click="goToMemberD(item)">会员{{item.recipe}}</div>
-        <div style="text-align:right;position:absolute;right:5%;" class="div_width_45 text_right overflow_word" v-if="item.type == 1"  @click="goToMemberD(item)">辟谷{{item.recipe}}</div>
+        <div style="text-align:right;position:absolute;right:5%;" class="div_width_45 text_right overflow_word" v-if="item.type == 1"  @click="goToMemberD(item)">辟谷套餐</div>
       <!-- </div> -->
       </div>
     </div>

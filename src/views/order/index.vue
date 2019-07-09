@@ -78,7 +78,9 @@
           </div>
           <div v-if="orderList.length == 0" style="height:100%;overflow-x:hidden;">
             <div class="text_center" style="margin-top:110px; height:100%;" >
-              <img src="../../assets/images/1581@2x.png" width="55%"  alt>
+ 
+ 
+              <img src="../../assets/images/1546.png" width="55%"  alt>
             </div>
             <div class="text_center font_size_15 font_color_99" style="margin-top: 20px;">暂无订单</div>
           </div>
@@ -146,7 +148,7 @@
           </div>
           <div v-if="orderList.length == 0" style="height:100%;overflow-x:hidden;">
             <div class="text_center" style="margin-top:110px;height:100%;">
-              <img src="../../assets/images/1581@2x.png" width="55%" alt>
+              <img src="../../assets/images/1546.png" width="55%" alt>
             </div>
             <div class="text_center font_size_15 font_color_99" style="margin-top: 20px;">暂无订单</div>
           </div>
@@ -217,7 +219,7 @@
           </div>
           <div v-if="orderList.length == 0" style="height:100%;overflow-x:hidden;">
             <div class="text_center" style="margin-top:110px;;height:100%">
-              <img src="../../assets/images/1581@2x.png" width="55%" alt>
+              <img src="../../assets/images/1546.png" width="55%" alt>
             </div>
             <div class="text_center font_size_15 font_color_99" style="margin-top: 20px;">暂无订单</div>
           </div>
@@ -285,7 +287,7 @@
           </div>
           <div v-if="orderList.length == 0" style = "height:100%;overflow-x:hidden;">
             <div class="text_center" style="margin-top:110px;height:100%">
-              <img src="../../assets/images/1581@2x.png" width="55%" alt>
+              <img src="../../assets/images/1546.png" width="55%" alt>
             </div>
             <div class="text_center font_size_15 font_color_99" style="margin-top: 20px;">暂无订单</div>
           </div>
@@ -353,7 +355,7 @@
           </div>
           <div v-if="orderList.length == 0" style="height:100%;overflow-x:hidden">
             <div class="text_center " style="height:100%;margin-top:110px">
-              <img src="../../assets/images/1581@2x.png" width="55%" alt>
+              <img src="../../assets/images/1546.png" width="55%" alt>
               <div class="text_center font_size_15 font_color_99" style="margin-top: 20px;">暂无订单</div>
             </div>
             
@@ -524,7 +526,7 @@ export default {
   },
 
   created() {
-    settitle("我的订单");
+    settitle("订单详情");
     // this.routeParams = JSON.parse(this.$route.params.obj);
   },
 

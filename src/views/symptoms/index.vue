@@ -60,9 +60,17 @@
       <p style="font-size:.3rem;color:#999;margin-top:0.5rem;">暂无数据</p>
     </div>
     <div  v-if="peiFangList.length&&recommendStoreList[0].province">
-        <!-- 推荐门店 -->
+        <!-- 推荐门店 门店@2x-->
+       
       <div class="div_display_flex">
+        
         <div class="national_list font_color_00 font_size_13 backgroun_color_fff margin_top_div3">
+           <div class="div_display_flex">
+            <div class>
+              <img src="../../assets/images/门店@2x.png" width="13px" alt />
+            </div>
+            <div class="font_color_4A margin_left_div2">推荐门店</div>
+        </div>
           <div class="div_display_flex margin_top_div3">
             <div
               class="div_width_70 margin_left_div2"
@@ -145,7 +153,7 @@ export default {
         console.log(this.form.name);
         // this.form.name = val;
         this.getList();
-      }, 2000);
+      }, 1000);
     },
     //获取数据
     getRecommendStoreList(item) {

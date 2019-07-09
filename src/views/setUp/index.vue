@@ -43,10 +43,12 @@
     </confirm>
      <confirm v-model="PayFalge" :title="'您当前用户'+tel+'已被冻结需解冻才可以正常使用'" :hide-on-blur="true" :show-cancel-button="false" confirm-text="确认解冻" @on-confirm="onConfirm">
       <div style="text-align:center;font-size:18px;display:flex;">
+         <img src="../../assets/images/验证码@2x.png" class="width_16">
         <input type="number" class="codeWrite" v-model="code">
         <span class="font-12" @click="sendCode"><a>{{codeValue}}</a></span>
       </div>
     </confirm>
+    
     <!-- 切换身份 -->
     <confirm v-model="confirmShow" title @on-cancel="onCancel" @on-confirm="changeIDE">
       <div style="text-align:center;font-size:18px;">{{'您确定要切换身份吗？'}}</div>
@@ -278,8 +280,22 @@ export default {
   }
 };
 </script>
+<style>
+.weui-dialog__bd{
+  /* padding: 0 !important; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
+
 <style scoped>
+.width_16 {
+  width: 16px;
+  height: 16px;
+}
 .codeWrite{
+    text-align: center;
     outline: none;
     box-shadow: none;
     border: none;
