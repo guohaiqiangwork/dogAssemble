@@ -551,6 +551,7 @@ export default {
   /* 加上这个才会有当数据充满整个屏幕，可以进行上拉加载更多的操作 */
   overflow: scroll;
   height: calc(100% - 0.9rem);
+  padding-bottom: 70px;
 }
 /* .nodata{
     width: 100%;
