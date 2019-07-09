@@ -58,7 +58,7 @@ export default {
               console.log(item.picId);
             });
           }else{
-             alert(data.msg)
+            //  alert(data.msg)
           }
         },
         err => {

@@ -56,7 +56,7 @@ export default {
               item.picId = url.imgUrl + item.picId;
             });
           }else{
-             alert(data.msg)
+            //  alert(data.msg)
           }
         },
         err => {

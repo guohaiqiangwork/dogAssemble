@@ -158,7 +158,7 @@ export default {
               item.picId = url.imgUrl + item.picId;
             });
           }else{
-             alert(data.msg)
+            //  alert(data.msg)
           }
         },
         err => {
@@ -185,7 +185,7 @@ export default {
               item.picId = url.imgUrl + item.picId;
             });
           }else{
-             alert(data.msg)
+            //  alert(data.msg)
           }
         },
         err => {
@@ -198,9 +198,9 @@ export default {
     settitle("商城");
   },
   mounted() {
-    if(this.$route.query.id){
-      this.$router.go(0);
-    }
+    // if(this.$route.query.id){
+    //   this.$router.go(0);
+    // }
      console.log(this.$route,'jkkjl');
     this.$fetch
       .post("fruits/app/blank/getBannerImg", { openId: localStorage.getItem("openId")})
