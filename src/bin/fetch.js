@@ -7,11 +7,12 @@ Vue.use(ToastPlugin)
 const config = require('../config/config.dev')
 // 创建axios实例
 let options = {
-  baseURL: config.product,
+  // baseURL: config.baseURL,
+  baseURL: config.product,//服务器
   timeout: 300000,
   headers: {
     'Content-Type': 'application/json',
-    'AuthorizationKey': window.localStorage.user || '',
+    'AuthorizationKey': window.localStorage.user ,
   }
 
 }
@@ -45,9 +46,8 @@ service
     if (response.data.msg == "openId_none!") {
       window.location.href = response.data.obj
     }
- 
-  
-    if (response.data.msg == "no_login") {
+    console.log(response.data.msg)
+    if(response.data.msg == 'no_login'){
       router.push('/login/1');
     }
     if (response.data.code == 300) {

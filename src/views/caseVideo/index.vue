@@ -13,6 +13,8 @@
         <i></i>
         <!-- v-on:input="getCheckMember()"
         v-model="phone"-->
+           <!-- on-keyup =getCheckMember
+          v-model="videoType" -->
       </div>
       <div class="case_font" @click="goToVOrder">视频订单></div>
     </div>
@@ -35,6 +37,7 @@ export default {
       videoOneList: "", //列表
       videoId: "",
       videoName:"",
+      videoType:''
     };
   },
   methods: {

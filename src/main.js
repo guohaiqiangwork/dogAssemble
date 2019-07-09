@@ -7,8 +7,9 @@ import service from "./bin/fetch";
 import wxapi from "./bin/wxapi"
 import settitle from "./assets/Tool/settitle"
 import "./assets/css/public.css"
-import we from "./bin/weChat_jsSdk.js"
+// import we from "./bin/weChat_jsSdk.js"
 import sha1 from "./bin/jquery.sha1"
+import qs from 'qs'
 import { ToastPlugin, LoadingPlugin } from 'vux'
 import { Toast } from 'vux'
 import { Scroller } from '@nutui/nutui';
@@ -20,7 +21,8 @@ Vue.use(MintUI);
 Vue.component(Loadmore.name, Loadmore);
 Vue.use(ToastPlugin, { position: 'middle' })
 Vue.use(sha1);
-Vue.use(we);
+// Vue.use(we);
+Vue.use(qs);
 Vue.use(LoadingPlugin, { position: 'absolute' })
 Vue.config.productionTip = false
 Vue.prototype.$fetch = service;
