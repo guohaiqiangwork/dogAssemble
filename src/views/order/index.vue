@@ -1,13 +1,14 @@
 <template>
-  <div style="background-color:#F3F5F8;width:100%;height:100%;overflow-x:hidden;" id="reflow">
+  <div style="background-color:#F3F5F8;width:100%;height:100%;overflow:auto;" id="reflow">
     
-    <nut-scroller
+    <!-- <nut-scroller
       :is-un-more="isUnMore1"
       :is-loading="isLoading1"
       :type="'vertical'"
       @loadMore="selPullUp"
       @pulldown="pulldown"
-    >
+    > -->
+    <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
       <div slot="list" class="nut-vert-list-panel" style="width:100%;height:100%;overflow-x:hidden;background: #f3f4f5;">
         <div class="div_display_flex backgroun_color_fff personal_title">
       <div v-for="(item,index) in  tabList" @click="tabSwitch(item.id)" :key="index">
@@ -362,7 +363,8 @@
           </div>
         </div>
       </div>
-    </nut-scroller>
+    <!-- </nut-scroller> -->
+    </mt-loadmore>
   </div>
 </template>
 <script>
@@ -399,11 +401,18 @@ export default {
         current: "1",
         size: "3"
       },
+      allLoaded:false,
       isUnMore1: false,
       isLoading1: false
     };
   },
   methods: {
+    loadBottom(){
+      this.getOrderList();
+    },
+    loadTop(){
+      this.getOrderList();
+    },
     handleScroll(){},
     // tab切换
     tabSwitch(id) {
