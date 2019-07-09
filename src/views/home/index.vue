@@ -22,10 +22,20 @@
     <button @click="goToPersonal">个人中心</button>
     <button @click="goToRecommend">推荐信息</button>
     <button @click="goToExclusive">专属门店</button>-->
-    <button @click="goTol">获取当前路径</button>
+    <!-- <button @click="goTol">获取当前路径</button> -->
     <!-- <button @click="goToPrivacyProtocol">协议</button>
     <button @click="goToSuccessful">支付成功页面</button>
     <router-link to="/sharedBonus">共享奖金</router-link>-->
+    <!-- <button @click="goToSymptoms">检测病症</button>
+    <button @click="goToNationalStores">全国门店</button>
+    <button @click="goToRecommend">推荐信息</button>
+    <button @click="goToExclusive">专属门店</button>
+     <router-link to="/sharedBonus">共享奖金</router-link>
+       <button @click="goTocaseVideo">案例视频</button>
+       <button @click="goToSharedBonus">共享奖金</button> -->
+        <button @click="goToSymptoms">检测病症</button>
+           <button @click="goToSharedBonus">共享奖金</button>
+       <button @click="goTocaseVideo">案例视频</button>
   </div>
 </template>
 <script>
@@ -78,6 +88,20 @@ export default {
             type: "profession",
             data: {
               id: "我就是参数"
+            }
+          })
+        }
+      });
+    },
+     //   去分享
+    goToSharedBonus(id) {
+      this.$router.push({
+        name: "sharedBonus",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              shareId: "我就是参数"
             }
           })
         }
@@ -230,13 +254,15 @@ export default {
 
     //获取用户openId
     getOpenId() {
+      if (this.code == null) {
+        this.code = "";
+      }
       var data = {
         code: this.code,
         state: ""
       };
       this.$fetch.post(url.getOpenId, data).then(res => {
         if (res.code == 0) {
-          console.log(res);
           localStorage.setItem("openId", res.obj.openid);
           localStorage.setItem("nickname", res.obj.nickname);
           localStorage.setItem("headimgurl", res.obj.headimgurl);
@@ -255,8 +281,8 @@ export default {
 
   mounted() {
     this.code = this.getQueryString("code");
-    setTimeout(() =>{
-      // this.getOpenId();
+    setTimeout(() => {
+      this.getOpenId();
     }, 1000);
   }
 };

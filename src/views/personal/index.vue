@@ -717,13 +717,12 @@ export default {
   },
 
   mounted() {
-    console.log(window.DesUtils.encode("1232313", "fruits-app,yuntu,com"));
+    console.log(window.location.href.split('#')[0])
     this.$fetch
       .post("fruits/app/personal/getPersonalInfo", {
         openId: localStorage.getItem("openId")
       })
       .then(res => {
-        console.log(res, 89080);
         var state = res.obj.state;
         localStorage.setItem("state", state);
         this.personalMsg = { ...res.obj };

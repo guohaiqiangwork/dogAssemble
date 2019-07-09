@@ -7,11 +7,12 @@ Vue.use(ToastPlugin)
 const config = require('../config/config.dev')
 // 创建axios实例
 let options = {
-  baseURL: config.baseURL,
+  // baseURL: config.baseURL,
+  baseURL: config.product,//服务器
   timeout: 300000,
   headers: {
     'Content-Type': 'application/json',
-    'AuthorizationKey': window.localStorage.user || '',
+    'AuthorizationKey': window.localStorage.user ,
   }
 
 }
@@ -39,23 +40,16 @@ service
     /**
      * code为非200是错误的请求
      */
-    // if (response.data.code == "702") {
-    //   window.location.href = response.data.obj
-    // }
-    // if (response.data.msg == "openId_none!") {
-    //   window.location.href = response.data.obj
-    // }
-    // if (response.data.msg == "openId_error") {
-    //   alert(response.data.obj + '接口返回链接')
-    //   window.location.href = response.data.obj
-    // }
-    // if (response.data.msg == "openId_none!") {
-    //   alert(response.data.obj + '接口返回链接')
-    //   window.location.href = response.data.obj
-    // }
-    // if (response.data.msg == "no_login") {
-    //   router.push('/login/1');
-    // }
+    if (response.data.code == "702") {
+      window.location.href = response.data.obj
+    }
+    if (response.data.msg == "openId_none!") {
+      window.location.href = response.data.obj
+    }
+    console.log(response.data.msg)
+    if(response.data.msg == 'no_login'){
+      router.push('/login/1');
+    }
     if (response.data.code == 300) {
       // alert(response.data.message)
       // Vue.$vux.toast.show({

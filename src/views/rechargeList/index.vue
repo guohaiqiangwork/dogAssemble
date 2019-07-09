@@ -4,7 +4,9 @@
     <div v-if=" rechargeRecordList.length > 0">
       <div class="data_d_b" v-for="(item,index) in rechargeRecordList" :key="index">
         <div class="div_display_flex font_size_16 font_color_33 margin_top_div5">
-          <div class="div_width_50">{{item.payType == 3?"现金充值":item.payType == 2?"支付宝充值":item.payType == 4?"微信充值":""}}</div>
+          <div
+            class="div_width_50"
+          >{{item.payType == 3?"现金充值":item.payType == 2?"支付宝充值":item.payType == 4?"微信充值":""}}</div>
           <div class="div_width_50 text_right">+ {{item.recharge}}</div>
         </div>
         <div
@@ -16,7 +18,10 @@
     <div v-if=" depositRecordList.length > 0">
       <div class="data_d_b" v-for="(item,index) in depositRecordList" :key="index">
         <div class="div_display_flex font_size_16 font_color_33 margin_top_div5">
-          <div class="div_width_50">{{item.payType == 3?"现金充值":item.payType == 2?"支付宝充值":item.payType == 4?"微信充值":""}}</div>
+          <!-- <div
+            class="div_width_50"
+          >{{item.payType == 3?"现金充值":item.payType == 2?"支付宝充值":item.payType == 4?"微信充值":""}}</div>-->
+          <div class="div_width_50">押金充值</div>
           <div class="div_width_50 text_right">+ {{item.recharge}}</div>
         </div>
         <div
@@ -24,11 +29,14 @@
         >{{item.rechargeTime}}</div>
       </div>
     </div>
- <!-- 空列表 -->
-    <div v-if=" depositRecordList.length == 0 && rechargeRecordList.length == 0" style="text-align:center;">
-      <img src="../../assets/images/1581@2x.png" style="width: 65%;margin-top:30%;">
+    <!-- 空列表 -->
+    <div
+      v-if=" depositRecordList.length == 0 && rechargeRecordList.length == 0"
+      style="text-align:center;"
+    >
+      <img src="../../assets/images/1581@2x.png" style="width: 65%;margin-top:30%;" />
       <div style="margin-top:0.2rem;font-size:0.3rem;color:#999;">暂无充值记录</div>
-</div>    </div>
+    </div>
   </div>
 </template>
 <script>
@@ -55,7 +63,7 @@ export default {
         .then(res => {
           console.log(res);
           if (res.msg == "success") {
-            console.log( this.rechargeRecordList)
+            console.log(this.rechargeRecordList);
             this.rechargeRecordList = [...res.obj];
           } else {
             alert(res.msg);
@@ -76,7 +84,7 @@ export default {
         .then(res => {
           console.log(res);
           if (res.msg == "success") {
-            console.log( this.depositRecordList)
+            console.log(this.depositRecordList);
             this.depositRecordList = [...res.obj];
           } else {
             alert(res.msg);

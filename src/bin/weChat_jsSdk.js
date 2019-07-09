@@ -6,11 +6,11 @@
 // {/* <script src="${path }/platform/common/js/jquery.sha1.js" type="text/javascript"></script>
 // <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" type="text/javascript"></script> */}
 // {/* <script> */}
-	var dataForWeixin = {
+	var dataForWeixin  = {
 			appId : "",
-			MsgImg : '${basePath_no_port }/module/weChat/img/logo_03.jpg',//图标
-			TLImg : '${basePath_no_port }/module/weChat/img/logo_03.jpg',//图标
-			url : '${basePath_no_port }/weChat/goCompanyIndex',//分享的链接 
+			MsgImg : '',//图标
+			TLImg : '',//图标
+			url : '',//分享的链接 
 			title : "有活有人",
 			desc : "欢迎您的光临",
 			desc_tl : "",
@@ -24,11 +24,12 @@
 				url:'http://192.168.3.2:8085/weChat/weChat/setJsSdkMsg',
 				type:'post',
 				success:function(res){
-					console.log(res,1111111111111111111111);
+					console.log(res + '分享返回参数')
 					dataForWeixin.appId = res.obj.appId;
-					var no_sha1_String = `jsapi_ticket=${res.obj.ticket}&noncestr=${res.obj.nonceStr}&timestamp=${res.obj.timeStamp}&url=" + window.location.href`;
+					var no_sha1_String = `jsapi_ticket=${res.obj.ticket}&noncestr=${res.obj.nonceStr}&timestamp=${res.obj.timeStamp}&url=" +window.location.href.split('#')[0]`;
+					console.log(no_sha1_String)
 					wx.config({
-						debug : false, //调式模式，设置为ture后会直接在网页上弹出调试信息，用于排查问题
+						debug : true, //调式模式，设置为ture后会直接在网页上弹出调试信息，用于排查问题
 						appId : `${res.obj.appId}`,// 必填，公众号的唯一标识
 						timestamp : `${res.obj.timeStamp}`,// 必填，生成签名的时间戳
 						nonceStr : `${res.obj.nonceStr}`,// 必填，生成签名的随机串
@@ -119,17 +120,18 @@
 		        // 用户取消分享后执行的回调函数
 		    }
 		});
-		wx.hideMenuItems({
-			menuList: ["menuItem:copyUrl",
-						"menuItem:readMode",
-						"menuItem:openWithSafari",
-						"menuItem:openWithQQBrowser",
-						"menuItem:favorite",
-						"menuItem:share:email"
-					] // 要显示的菜单项，所有menu项见附录3
-		});
+		// wx.hideMenuItems({
+		// 	menuList: ["menuItem:copyUrl",
+		// 				"menuItem:readMode",
+		// 				"menuItem:openWithSafari",
+		// 				"menuItem:openWithQQBrowser",
+		// 				"menuItem:favorite",
+		// 				"menuItem:share:email"
+		// 			] // 要显示的菜单项，所有menu项见附录3
+		// });
 	});
 	wx.error(function(res) {
 		// alert(res.errMsg); //打印错误消息。及把 debug:false,设置为debug:ture就可以直接在网页上看到弹出的错误提示
-	}); 
+	});
+	export default dataForWeixin; 
 // </script>

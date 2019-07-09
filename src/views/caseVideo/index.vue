@@ -7,10 +7,13 @@
           type="text"
           placeholder="搜索您想找的视频…"
           style="width:100%;height:100%;background-color:#EFEFEF; outline: none;border:none"
+       
         >
         <i></i>
         <!-- v-on:input="getCheckMember()"
         v-model="phone"-->
+           <!-- on-keyup =getCheckMember
+          v-model="videoType" -->
       </div>
       <div class="case_font" @click="goToVOrder">视频订单></div>
     </div>
@@ -29,7 +32,8 @@ export default {
   data() {
     return {
       videoOneList: "", //列表
-      videoId: ""
+      videoId: "",
+      videoType:''
     };
   },
   methods: {

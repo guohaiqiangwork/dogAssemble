@@ -1,8 +1,8 @@
 //页面请求的路径地址
 module.exports = {
   openId:localStorage.getItem("openId"),//测试openId
-  // imgUrl: "//www.gsb.yuntunet.cn/fruits/app/blank/showPicture?attachmentId=",//图片
-  imgUrl: "http://192.168.3.12:80/fruits/app/blank/showPicture?attachmentId=",//图片
+  imgUrl: "//www.gsb.yuntunet.cn/fruits/app/blank/showPicture?attachmentId=",//图片
+  //imgUrl: "http://192.168.3.12:80/fruits/app/blank/showPicture?attachmentId=",//图片
   getMemberList: '/fruits/app/member/getMemberList',//会员操作--查询服务中订单的会员列表
   getOrderInfo: '/fruits/app/member/getOrderInfo',//会员操作--查看服务中订单详情
   checkMember: '/fruits/app/member/checkMember', //查询订单会员
@@ -31,7 +31,7 @@ module.exports = {
   getVideoList: '/fruits/app/video/getVideoList',//查询二级下分类
   getVideoOrder: '/fruits/app/video/getVideoOrder',//案例视频--视频订单
   getVideoLink: '/fruits/app/video/getVideoLink',//获取视频链接
-  saveVideoOrder: '/fruits/app/personal/saveVideoOrder',//购买视频
+  saveVideoOrder: '/fruits/app/video/saveVideoOrder',//购买视频
   getRecommendB: '/fruits/app/bonus/getRecommend',//健康奖金推荐返佣
   getHealthBonus: '/fruits/app/bonus/getHealthBonus',//健康奖金金额统计
   getOrderDistri: '/fruits/app/bonus/getOrderDistri',//商城返佣列
