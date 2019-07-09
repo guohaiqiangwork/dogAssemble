@@ -161,7 +161,7 @@ export default {
       ],
       page: {
         current: "1",
-        size: "2"
+        size: "3"
       },
       recommendStoreList: [],
       productNamr: "",
