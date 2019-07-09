@@ -261,7 +261,7 @@ export default {
         clearTimeout(this.timer);
       }
     
-      this.timer = setTimeout(() => {
+      // this.timer = setTimeout(() => {
         this.isLoading1 = true;
         //  this.recommendStoreList =[];
          this.$fetch.post("fruits/app/blank/getRecommendStoreList", _obj).then(
@@ -313,7 +313,7 @@ export default {
             alert("网络缓慢。。");
           }
         );
-      }, 2000);
+      // }, 2000);
     
     
   },
