@@ -21,8 +21,7 @@
       </div>
     </div>
     <x-dialog v-model="showToast" class="dialog-demo">
-      <div
-        style="background-color: rgba(0, 0, 0, 0.6);width: 100%;height: 500px;">
+      <div style="background-color: rgba(0, 0, 0, 0.6);width: 100%;height: 500px;">
         <img src="../../assets/images/fengX.png" alt class="fengX_c_l" @click="showToast=false" />
       </div>
     </x-dialog>
@@ -126,23 +125,22 @@ export default {
   left: 10%;
   width: 80%;
 }
-
 </style>
 <style>
- #xDiooo .weui-dialog {
-    position: fixed;
-    display: table;
-    z-index: 5000;
-    width: 100%;
-    min-width: 300px;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-    background:none !important;
-    text-align: center;
-    border-radius: 3px;
-    /* overflow: hidden */
-    }
+#xDiooo .weui-dialog {
+  position: fixed;
+  display: table;
+  z-index: 5000;
+  width: 100%;
+  min-width: 300px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  background: none !important;
+  text-align: center;
+  border-radius: 3px;
+  overflow: unset !important;
+}
 </style>
