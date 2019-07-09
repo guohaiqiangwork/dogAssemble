@@ -391,7 +391,7 @@ export default {
     },
     getShare(){
       // window.location.href
-      var href = 'http://www.gsb.yuntunet.cn/#/login/2?shareId=24ef4b771231427ba958f8728e53f2a2';
+      var href = window.location.href;
       var reg = /shareId/g;
       // console.log(reg.test(href))
       if(reg.test(href)){

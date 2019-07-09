@@ -1,20 +1,6 @@
 <template>
-  <div class="backgroun_color_fff" style="min-height:100%;overflow-x:hidden;" id="store">
-
-  
-    <nut-scroller
-      style="width:100%;height:100%;overflow-x:hidden;"
-      :is-un-more="isUnMore1"
-      :is-loading="isLoading1"
-      :type="'vertical'"
-      @loadMore="selPullUp"
-      @pulldown="pulldown"
-      
-    >
-        
-  
-      <div slot="list" class="nut-vert-list-panel">
-        <!-- 搜索 -->
+  <div class="backgroun_color_fff " style="min-height:100%;" id="store">
+     <!-- 搜索 -->
         <div class="search_box" style="border:none;box-shadow:0px 3px 10px rgba(136,136,136,0.16);">
           <i class="weui-icon-search search_icon"></i>
           <input
@@ -26,7 +12,9 @@
           />
           <i></i>
         </div>
-      <!-- 推荐门店列表 -->
+<div class="main-body" ref="wrapper" :style="{ height: (wrapperHeight-50) + 'px'}" >
+  <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
+     <!-- 推荐门店列表 -->
         <div class="div_display_flex margin_left_div3 padding_top_div3">
           <div class="national_flag_title" v-if="recommendStoreList.length"></div>
           <div
@@ -113,8 +101,8 @@
             </div>
           </div>
         </div>
-      </div>
-    </nut-scroller>
+</mt-loadmore>
+</div>
     <div v-if="recommendStoreList.length ==0">
       <div
         v-if="!recommendStoreList.length"
@@ -149,6 +137,9 @@ export default {
   name: "nationalStor",
   data() {
     return {
+      allLoaded:false,
+      wrapperHeight:0,
+
       item: 0,
       timer: "",
       isDefault: "",
@@ -185,6 +176,96 @@ export default {
     }
   },
   methods: {
+
+  loadTop(){
+    alert('下拉')
+    this.$refs.loadmore.onTopLoaded();
+  },
+  loadBottom(item){
+     let _obj = {
+        openId: localStorage.getItem("openId"),
+        name: item || "",
+        size: this.page.size,
+        current: this.page.current,
+        latitude: this.latitude,
+        longitude: this.longitude
+      };
+      if (this.timer) {
+        clearTimeout(this.timer);
+      }
+    
+      this.timer = setTimeout(() => {
+        this.isLoading1 = true;
+        //  this.recommendStoreList =[];
+         this.$fetch.post("fruits/app/blank/getRecommendStoreList", _obj).then(
+        data => {
+          this.isLoading1 = false;
+          this.timer = "";
+          if (data.code == 0) {
+            console.log(4546,data)
+            
+         if(data.obj.length == 0){
+           this.isUnMore1 = true;
+           return
+         }else{
+          this.$nextTick(() => {
+           data.obj.forEach(e =>{
+              
+              this.recommendStoreList.push(e);
+              
+              });
+          })
+           alert('上拉')
+          this.allLoaded = true;// 若数据已全部获取完毕
+         
+         }
+        //  this.recommendStoreList=data.obj;
+   
+            // this.recommendStoreList=data.obj;
+            // if(data.obj.length){
+            //   console.log(13213)
+            //    data.obj.forEach(e =>{
+            //   this.recommendStoreList.push(e);
+            // })
+            // }else{
+            // console.log(4546)
+
+              // data.obj.forEach(item => {
+              //   item.SFQY = data.obj.province
+              // });
+              // this.$set(this.recommendStoreList,this.recommendStoreList);
+              console.log(this.recommendStoreList, "jlkjljkljl");
+            } else {
+              alert(data.msg);
+            }
+            this.$refs.loadmore.onBottomLoaded()
+          },
+          err => {
+            alert("网络缓慢。。");
+          }
+        );
+      }, 2000);
+    
+    
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     goToMap(item) {
       if(!item.lat){
         alert('该数据不存在坐标')
@@ -378,6 +459,8 @@ export default {
 
   mounted() {
     this.addressDetail();
+     document.documentElement.clientHeight -
+      this.$refs.wrapper.getBoundingClientRect().top;
     // this.getRecommendStoreList(); //获取全国门店
   }
 };
@@ -395,7 +478,10 @@ export default {
 </style>
 
 <style scoped>
-
+.main-body {
+  /* 加上这个才会有当数据充满整个屏幕，可以进行上拉加载更多的操作 */
+  overflow: scroll;
+}
 /* .nodata{
     width: 100%;
     height: 9rem;
