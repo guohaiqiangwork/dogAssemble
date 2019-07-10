@@ -4,13 +4,13 @@
       <div>
         <img src="../../assets/images/bjJJ12@2x.png" style="width: 100%;" alt />
         <div class="shared_B_D">
-          <img :src="imgUrl" width="50%" />
-          <img
+          <img :src="imgUrl" width="100%" />
+          <!-- <img
             @click="getSharedBonus"
             src="../../assets/images/bJbutton12@2x.png"
             style="padding-bottom: 10%;width:50%"
             alt
-          />
+          /> -->
         </div>
       </div>
     </div>
@@ -65,27 +65,27 @@ export default {
     //     });
     // },
     // 获取分享参数
-    getSharedBonus() {
-      this.showToast = true;
-      this.$fetch
-        .post("/fruits/app/bonus/inviteFriends", {
-          openId: localStorage.getItem("openId"),
-          url: window.location.href.split("#")[0]
-        })
-        .then(
-          data => {
-            if (data.code == 0) {
-              console.log(data);
-              wexinShare(data.obj);
-            } else {
-              alert(data.msg);
-            }
-          },
-          err => {
-            alert("网络缓慢。。");
-          }
-        );
-    }
+    // getSharedBonus() {
+    //   this.showToast = true;
+    //   this.$fetch
+    //     .post("/fruits/app/bonus/inviteFriends", {
+    //       openId: localStorage.getItem("openId") || this.routeParams[1].split("=")[1],
+    //       url: window.location.href.split("#")[0]
+    //     })
+    //     .then(
+    //       data => {
+    //         if (data.code == 0) {
+    //           console.log(data);
+    //           wexinShare(data.obj);
+    //         } else {
+    //           alert(data.msg);
+    //         }
+    //       },
+    //       err => {
+    //         alert("网络缓慢。。");
+    //       }
+    //     );
+    // }
   },
   created() {
     settitle("共享奖金");
