@@ -60,7 +60,7 @@
               <p class="video_name">{{videoList.classTwo}}</p>
               <p>{{videoList.description}}</p>
             </div>
-            <p class="pay_price">￥{{modelData.price}}</p>
+            <p class="pay_price">￥{{modelData.price.toFixed(2)}}</p>
           </div>
           <div class="pay_btn" @click="saveVideoOrder">立即购买</div>
         </div>
