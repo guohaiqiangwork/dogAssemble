@@ -562,6 +562,7 @@ export default new Router({
       // 全部会员详情
       path: '/privacyProtocol',
       name: 'privacyProtocol',
+      redirect:"/login/1",
       meta: {
         title: '协议'
       },
