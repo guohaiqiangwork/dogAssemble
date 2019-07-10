@@ -12,10 +12,10 @@
       <!-- src="http://player.youku.com/embed/XNDEyMTAwNjE0MA==" -->
       <!-- :src="videolUrl" -->
     </div>
-    <div class="video_box" style="background-color:#000000;text-align: center"  v-if="stateVIP != 0">
+    <div class="video_box" style="background-color:#000000;text-align: center" v-if="stateVIP != 0">
       <img src="../../assets/images/videoP@2x.png" style="margin-top:15%" alt />
       <div>
-        <img src="../../assets/images/videoB@2x.png"  width="30%" alt   @click="buyVide()"/>
+        <img src="../../assets/images/videoB@2x.png" width="30%" alt @click="buyVide()" />
       </div>
     </div>
     <!-- 视频选集 -->
@@ -24,7 +24,7 @@
       <div class="piece_box">
         <p class="flex-between align-center">
           <span class="case_tit">{{videoList.classTwo}}</span>
-          <img class="icon_size" src="../../assets/images/share.png" alt  />
+          <!-- <img class="icon_size" src="../../assets/images/share.png" alt  /> -->
         </p>
         <div class="introduce">
           <p class="tit">简介</p>
@@ -93,7 +93,7 @@ export default {
       modelData: "",
       videolUrl: "",
       videoOrderId: "",
-      stateVIP:''
+      stateVIP: ""
     };
   },
   methods: {
@@ -135,11 +135,11 @@ export default {
               this.$vux.toast.text("购买成功");
               // this.$router.push('/home');
               clearInterval(timer);
-                this.getVideoList();
+              this.getVideoList();
             }
             if (count > 3) {
               clearInterval(timer);
-                this.getVideoList();
+              this.getVideoList();
               //  this.$router.push({
               //   name: "order",
               //   params: {
@@ -180,8 +180,8 @@ export default {
     },
     // 打开购买弹窗
     openBuy(item) {
-      this.stateVIP = item.isVIP 
-      console.log( this.stateVIP)
+      this.stateVIP = item.isVIP;
+      console.log(this.stateVIP);
       if (item.isVIP == 0) {
         this.videolUrl = item.videoLink;
       }
@@ -198,7 +198,7 @@ export default {
               // this.show = true;
             } else {
               this.videolUrl = data.obj.videoLink;
-               this.stateVIP = 0;
+              this.stateVIP = 0;
             }
           }
         },
@@ -208,7 +208,7 @@ export default {
       );
     },
     // buyVideo
-    buyVide(){
+    buyVide() {
       let _obj = {
         openId: localStorage.getItem("openId"),
         id: this.videoIdPay
@@ -217,7 +217,7 @@ export default {
         data => {
           if (data.code == 0) {
             this.modelData = data.obj;
-            console.log(this.modelData )
+            console.log(this.modelData);
             if (data.obj.state == 0) {
               this.show = true;
             } else {
