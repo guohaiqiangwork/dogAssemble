@@ -63,7 +63,7 @@ export default {
         .then(res => {
           if (res.code == 0) {
             this.imgUrl = url.imgUrl + res.obj;
-            localStorage.setItem("imgUrlShared", this.imgUrl);
+            localStorage.setItem("imgUrlShared", res.obj);
           } else {
             alert(res.msg);
           }

@@ -22,8 +22,8 @@ let wexinShare = (data, cb, errorCb) => {
     });
     wx.ready(function () {
         wx.onMenuShareTimeline({
-            title: '果蔬吧3', // 分享标题
-            link: window.location.href.split('#')[0] + '#' + '/sharedBonusTwo/' + 'imgUrl=' + localStorage.getItem("imgUrlShared"), // 分享链接
+            title: '果蔬吧1', // 分享标题
+            link: window.location.href.split('#')[0] + '#' + '/sharedBonusTwo/' + 'openId=' + localStorage.getItem("imgUrlShared") + '&shareId=' + localStorage.getItem("appUserId"), // 分享链接
             imgUrl: '../assets/images/000@3x.png', // 分享图标
             success: function () {
                 dataForWeixin.callback();
@@ -34,9 +34,9 @@ let wexinShare = (data, cb, errorCb) => {
             }
         });
         wx.onMenuShareAppMessage({//分享给朋友
-            title: '果蔬吧4', // 分享标题
+            title: '果蔬吧2', // 分享标题
             desc: '果蔬吧介绍', // 分享描述
-            link: window.location.href.split('#')[0] + '#' + '/sharedBonusTwo/' + 'openId=' + localStorage.getItem("imgUrlShared"), // 分享链接
+            link: window.location.href.split('#')[0] + '#' + '/sharedBonusTwo/' + 'openId=' + localStorage.getItem("imgUrlShared") + '&shareId=' + localStorage.getItem("appUserId"), // 分享链接
             imgUrl: '../assets/images/000@3x.png', // 分享图标
             type: 'link', // 分享类型,music、video或link，不填默认为link
             dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
