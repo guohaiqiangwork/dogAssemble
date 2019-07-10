@@ -7,7 +7,7 @@
                <span  @click.stop="chooseBuy(item,index)">
                     <i  :class="['weui-icon', 'weui_icon_success', 'weui-icon-success',item.ischeck?'checked' : 'normal']" ></i>
                </span>
-                <div style="min-width:70px;min-height:70px;">
+                <div style="min-width:70px;min-height:70px;width:70px;height:70px;margin-left: 0.28rem;">
                     <img class="gooods_avatar" :src="'http://www.gsb.yuntunet.cn/fruits/app/blank/showPicture?attachmentId='+item.picId" alt="">
                 </div>
                 <div class="goods_item">
@@ -20,6 +20,7 @@
                     </p>
                     <div v-if="item.cartGoodsSpecs.length&&item.state !=1" style="display:flex">
                         <p v-for="(ite,ind) in item.cartGoodsSpecs" :key="ind">
+                            <span>{{ite.specName}}:</span>
                             <span>{{ite.specValue}}</span>
                         </p>
                     </div>
@@ -267,7 +268,7 @@ export default {
             // height: 1.4rem;
             width: 70px;
             height: 70px;
-            margin-left: 0.28rem;
+            // margin-left: 0.28rem;
             border: 1px solid #fff;
         }
         .goods_item{

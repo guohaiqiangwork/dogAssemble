@@ -17,7 +17,7 @@
     </div>-->
     <!-- <img  src="../../assets/images/WechatIMG101(1).png" alt=""> -->
     <div class="goods_picbox">
-      <swiper @on-index-change="onIndexChange" v-model="swiperItemIndex" :show-dots="false">
+      <swiper @on-index-change="onIndexChange" v-model="swiperItemIndex" :show-dots="false" auto loop>
         <swiper-item class="swiper-demo-img" v-for="(item, index) in imgList" :key="index">
           <img :src="item.img" />
         </swiper-item>

@@ -230,7 +230,7 @@ export default {
 <style lang="less">
 @switch-checked-bg-color: #000000;
 .font-color.vux-x-input.disabled .weui-input{
-   -webkit-text-fill-color: #333 !important;
+  -webkit-text-fill-color: #333 !important;
   color: #333 !important;
 }
 #opt_address {

@@ -2,7 +2,7 @@
   <div id="home">
     <div class="head_box">
       <!-- <img :src="'//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId='+this.str" alt="" width="500" height="500"> -->
-      <swiper :min-moving-distance="120" @on-index-change="onIndexChange" >
+      <swiper :min-moving-distance="120" @on-index-change="onIndexChange" auto loop>
         <!-- auto loop -->
         <swiper-item class="swiper-demo-img" v-for="(item, index) in imgList" :key="index">
           <img :src="item.img" class="swiper-img"/>
@@ -20,7 +20,7 @@
     <!-- <div class="hot_tit">热门推荐</div> -->
     <hot v-on:goToDetail="goToDetail1"></hot>
     <div class="bg_gray">
-      <div class="hot_tit mt-space" @click="Test" v-if="goodsList.length">全部商品</div>
+      <div class="hot_tit mt-space" @click="Test" v-if="goodsList.length" id="whole">全部商品</div>
       <div id="whole">
         <div class="flex-between wrap" style="margin-bottom: 0.9rem;">
           <div
@@ -92,6 +92,7 @@ export default {
         localStorage.setItem('catnum',0);
       }
     },
+    //跳转商品详情
     goDetail(item) {
       this.$router.push("/goodsdetail?id=" + item.id);
     },
@@ -100,9 +101,11 @@ export default {
       this.listId2 = id;
       this.getGoodsList();
     },
+    //跳转商品详情
     goToDetail1(item) {
       this.goDetail(item);
     },
+
     Test() {
       this.$fetch
         .post("fruits/app/personal/checkCustomer", {
@@ -115,6 +118,7 @@ export default {
     },
     onIndexChange(currentIndex) {},
     debounce(func, time, ctx) {},
+    //请求图片
     queryImg(str) {
       // console.log(str,'klk')
       // this.imgList = [];
@@ -128,17 +132,17 @@ export default {
         },
       );
     },
+    //搜索事件
     input() {
       if (timer) {
         window.clearTimeout(timer._id);
       }
       timer = setTimeout(() => {
-        // console.log(this.iptVal);
-        this.getGoods(this.iptVal)
-        // this.filterList(this.list,this.iptVal);
+        this.getGoods(this.iptVal);
         timer = null;
       }, 2000);
     },
+    //获取商品列表
     getGoods(val=''){
       let _obj = {
         openId: localStorage.getItem("openId"),
@@ -147,6 +151,13 @@ export default {
         size: "10",
         current: "1"
       };
+      if(val){
+        var wrapper = document.querySelector('#whole');
+        
+        var app = document.querySelector('#app');
+        app.scrollTop = wrapper.offsetTop;
+        // console.log(this.$el.parentNode.scrollTop);
+      }
       this.$fetch.post(url.getGoodsList, _obj).then(
         data => {
           console.log(data,'kjljlk');

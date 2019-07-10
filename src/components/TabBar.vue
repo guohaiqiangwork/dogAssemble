@@ -41,7 +41,7 @@
         </flexbox-item>
         <flexbox-item v-else>
          
-          <div class="flex-demo" @click="didClickedItem(2,'/personal')" v-if="actives == '/personal'">
+          <div class="flex-demo"  v-if="actives == '/personal'"@click="didClickedItem(2,'/personal')">
             <img src="../assets/images/personCenter_active.png" style="width: .4rem;height:0.4rem;">
           </div>
            <div class="flex-demo" @click="didClickedItem(2,'/personal')" v-else>
@@ -104,11 +104,12 @@ export default {
       this.title = word;
     },
     setChoose(){
-      console.log(this.$route);
-      console.log(this.route,'fdsfs')
-      this.actives = this.route;
+      // console.log(this.$route);
+      // console.log(this.route,'fdsfs')
+      this.actives = this.$route.path;
     },
     didClickedItem: function(tag, name) {
+      console.log(name,'ll')
       this.actives = name;
     
          this.$router.push(name)
@@ -128,9 +129,11 @@ export default {
       this.buyNum = localStorage.getItem("catnum");
     }
   },
-  mounted() {
-    this.setBage();
+  created() {
+    console.log(this.$route);
     this.setChoose()
+    this.setBage();
+    
   }
 };
 </script>

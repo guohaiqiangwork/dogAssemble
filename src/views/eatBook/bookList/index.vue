@@ -1,5 +1,5 @@
 <template>
-<div>
+<div id="book">
     <div class="search_box">
         <i class="weui-icon-search search_icon"></i>
         <input type="text" placeholder="搜索您想找的配方" v-model="iptVal" @input="input">
@@ -23,7 +23,7 @@
                 <dd>2018-02-25</dd>
             </dl>
     </div>-->
-    <div id="book" >
+    <div >
     
       <template v-if="bookList.length">
 
@@ -184,7 +184,7 @@ export default {
   /* 加上这个才会有当数据充满整个屏幕，可以进行上拉加载更多的操作 */
   position: absolute;
   left:0;
-  top: 0;
+  top: 48px;
   overflow: auto;
   width: 100%;
   height: calc(100% - 0.9rem);

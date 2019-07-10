@@ -187,6 +187,10 @@ export default {
     },
     //点击确认支付
     paysure() {
+      if(!this.goodsMsg.receiver){
+        this.$vux.toast.text('请选择收货地址')
+        return
+      }
       this.form.addressId = this.goodsMsg.id;
       this.form.goodList = [...this.option.goodList];
       this.form.type = this.option.type;
@@ -243,6 +247,7 @@ export default {
     //   },
     // 获取地址
     getSelectAddress(item) {
+    
       // 会员订单保存
       let _obj = {
         openId: localStorage.getItem("openId"),

@@ -17,7 +17,7 @@
       <i class></i>
    
       <hot class="mb-space" v-on:goToDetail="goDetail"></hot>
-      <div class="cart_btm" v-if="Object.keys(bottomMsge).length">
+      <div class="cart_btm" v-if="Object.keys(bottomMsge).length&&this.$parent.buyNum!=0">
         <span>已选{{bottomMsge.checkcount}}</span>
         <div class="flex_countrow">
           <span class="count_box">
