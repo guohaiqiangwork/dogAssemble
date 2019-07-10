@@ -253,9 +253,10 @@ export default {
       console.log("233");
     },
     goOut() {
-      // localStorage.clear();
+      
       this.$fetch.post("/fruits/app/logout").then(res => {
         if (res == "{code=301, message=退出登录成功!}") {
+         localStorage.setItem('catnum',0);
           this.$router.push("/login/1");
         }
       });
