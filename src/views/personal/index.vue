@@ -1,6 +1,6 @@
 <template>
   <!-- style="background-color:#F3F5F8; min-height:700px" -->
-  <div >
+  <div>
     <!-- 商铺 -->
     <div class="backgroun_color_f3" style="background:#fff;" v-if="personalMsg.type == 2">
       <!-- 头部 -->
@@ -35,7 +35,8 @@
               <div>
                 <img src="../../assets/images/td@2x.png" width="30px">
               </div>
-            </!--> -->
+            </!-->
+            -->
           </div>
         </div>
         <div class="div_display_flex" style="margin-top:-13%">
@@ -49,13 +50,18 @@
               class="font_color_E8 font_size_15"
               style="width:60%;margin-top:-5%;text-indent:5%;"
             >押金：{{personalMsg.deposit.toFixed(2)}}元</div>
-            <div class="personal_falg_m" style="margin-left:15%" v-if="personalMsg.storeState == 1"> 营业中
+            <div class="personal_falg_m" style="margin-left:15%" v-if="personalMsg.storeState == 1">
+              营业中
               <!-- {{personalMsg.storeState == 1 ? "营业中":"已打烊"}} -->
-              </div>
-              <div class="personal_falg_m" v-if="personalMsg.storeState == 2" style="margin-top:-0.5rem;color:#AD8852;margin-left:0.1rem;">
-                打烊中...
-                <!-- {{personalMsg.storeState == 1 ? "营业中":"已打烊"}} -->
-                </div>
+            </div>
+            <div
+              class="personal_falg_m"
+              v-if="personalMsg.storeState == 2"
+              style="margin-top:-0.5rem;color:#AD8852;margin-left:0.1rem;"
+            >
+              打烊中...
+              <!-- {{personalMsg.storeState == 1 ? "营业中":"已打烊"}} -->
+            </div>
           </div>
         </div>
         <!-- 账户 -->
@@ -299,7 +305,10 @@
           </div>
         </div>
         <!-- 菜单列表 -->
-        <div class="margin_top_div3 personal_div_money" style=" padding-bottom: 24%;height:auto;overflow-x:hidden;">
+        <div
+          class="margin_top_div3 personal_div_money"
+          style=" padding-bottom: 24%;height:auto;overflow-x:hidden;"
+        >
           <div class="div_display_flex" @click="goToOrder">
             <div class="div_width_50 font_color_1A personal_list_font">我的订单</div>
             <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
@@ -321,15 +330,15 @@
             </div>
           </div>
           <div class="personal_div_border"></div>
-           <div class="div_display_flex" @click="falgQH" v-if="personalMsg.isChange  == 1">
+          <div class="div_display_flex" @click="falgQH" v-if="personalMsg.isChange  == 1">
             <div class="div_width_50 font_color_1A personal_list_font">切换身份</div>
             <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
               <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%" />
             </div>
           </div>
-        
+
           <div class="personal_div_border"></div>
-            <div class="div_display_flex" @click="goToSetUp">
+          <div class="div_display_flex" @click="goToSetUp">
             <div class="div_width_50 font_color_1A personal_list_font">设置</div>
             <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
               <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%" />
@@ -337,7 +346,6 @@
           </div>
 
           <div class="personal_div_border" v-if="personalMsg.isChange  == 1"></div>
-         
         </div>
       </div>
       <!-- 冻结账户 -->
@@ -468,6 +476,8 @@ export default {
         data => {
           if (data.code == 0) {
             localStorage.setItem("type", data.attributes.type);
+            localStorage.setItem("appUserId", data.attributes.appUserId);
+
             this.getCartNum();
           }
         },
@@ -485,11 +495,11 @@ export default {
         .then(res => {
           if (res.msg == "success") {
             localStorage.setItem("catnum", res.obj);
-            this.$vux.toast.text('身份已切换')
-            setTimeout(() =>{
-              this.$router.push('/home?id='+1);
+            this.$vux.toast.text("身份已切换");
+            setTimeout(() => {
+              this.$router.push("/home?id=" + 1);
               // this.$router.go(0)
-            },1000)
+            }, 1000);
           }
         });
     },
@@ -552,7 +562,7 @@ export default {
     // 数据统计healthBonus
     goToStatistics: function() {
       this.$router.push({
-        name: "dataStatistics",
+        name: "dataStatistics"
         // params: {
         //   obj: JSON.stringify({
         //     type: "profession",
@@ -667,9 +677,9 @@ export default {
     },
     // 会员操作
     goToMemberOperation() {
-        if(this.personalMsg.storeState != 1){
-          this.$vux.toast.text("店铺已打烊，该功能无法操作");
-        return
+      if (this.personalMsg.storeState != 1) {
+        this.$vux.toast.text("店铺已打烊，该功能无法操作");
+        return;
       }
       this.$router.push({
         name: "memberOperation",
@@ -716,7 +726,7 @@ export default {
   },
 
   mounted() {
-    console.log(window.location.href.split('#')[0])
+    console.log(window.location.href.split("#")[0]);
     this.$fetch
       .post("fruits/app/personal/getPersonalInfo", {
         openId: localStorage.getItem("openId")
