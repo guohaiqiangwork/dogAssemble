@@ -94,7 +94,9 @@ export default {
   mounted() {
     this.routeParams = this.$route.params.obj.split("&");
     console.log(this.routeParams);
-
+    this.imgUrl =
+      "//www.gsb.yuntunet.cn/fruits/app/blank/showPicture?attachmentId=" +
+      this.routeParams[0].split("=")[1];
     // console.log(this.routeParams[0].split("=")[1]);
     // console.log(this.routeParams[1].split("=")[1]);
     // this.getEr(); //获取二维码
