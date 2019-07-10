@@ -41,7 +41,7 @@
         </flexbox-item>
         <flexbox-item v-else>
          
-          <div class="flex-demo"  v-if="actives == '/personal'"@click="didClickedItem(2,'/personal')">
+          <div class="flex-demo"  v-if="actives == '/personal'" @click="didClickedItem(2,'/personal')">
             <img src="../assets/images/personCenter_active.png" style="width: .4rem;height:0.4rem;">
           </div>
            <div class="flex-demo" @click="didClickedItem(2,'/personal')" v-else>
