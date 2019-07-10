@@ -135,10 +135,12 @@ export default {
               this.$vux.toast.text("购买成功");
               // this.$router.push('/home');
               clearInterval(timer);
+              this.show = false;
               this.getVideoList();
             }
             if (count > 3) {
               clearInterval(timer);
+              this.show = false;
               this.getVideoList();
               //  this.$router.push({
               //   name: "order",
