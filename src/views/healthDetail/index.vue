@@ -31,7 +31,15 @@
           >
             <div class="div_width_70 font_size_14">
               {{item.name}}
-              <span class="font_size_12 font_color_A1" style="margin-left: 10px;">{{item.time}}</span>
+              <!-- <span class="font_size_12 font_color_A1" style="margin-left: 10px;">{{item.time}}</span> -->
+              <span
+                  v-if="item.state == 1"
+                  style="border: 1px solid #4A7B67; padding: 1%;font-size: 12px;color:#4A7B67;"
+                >开业</span>
+                <span
+                  v-if="item.state == 0"
+                  style="border: 1px solid #E6435A; padding: 1%;font-size: 12px;color:#E6435A;"
+                >未开店</span>
             </div>
             <!-- <div class="div_with_30 red margin_left_div6" style="margin-right: 8%;">¥{{item.money}}</div> -->
                <div class="div_with_30" style="margin-right:6%" v-if="item.type == 1">家庭版</div>
