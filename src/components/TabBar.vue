@@ -28,7 +28,7 @@
           </div>
            <div class="flex-demo pos" @click="didClickedItem(1,'/cart')" v-else>
             <img src="../assets/images/goodsCar.png" style="width: .4rem;height:0.4rem;">
-            <badge class="msg-sign" :text="buyNum" v-if="buyNum!=0"></badge>
+            <badge class="msg-sign" :text="buyNum" v-if="buyNum!=0&&user"></badge>
           </div>
           <div :class="{ 'active': actives == '/cart'}" class="font_color_BF">购物车</div>
         </flexbox-item>
