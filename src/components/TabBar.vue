@@ -1,15 +1,15 @@
 <template>
   <div id="TabBar">
-    <router-view class="routeview"></router-view>
+    <router-view class="routeview" @change="change"></router-view>
     <div class="tabBar_bt flex-between align-center">
       <flexbox style="text-align: center; background-color: #fff;">
-        <flexbox-item>
+        <flexbox-item key="/home">
           <!-- <div to="/home"  @click="didClickedItem(0,'/home')">
             <div class="flex-demo" v-if="actives != '0'">
               <img src="../assets/images/home@2x.png" style="width: .4rem;height:0.4rem;">
             </div>
           </div> -->
-          <div to="/home" >
+          <!-- <div> -->
             <div class="flex-demo" v-if="actives =='/home'"  @click="didClickedItem(0,'/home')">
               <img src="../assets/images/home_active@2x.png" style="width: .4rem;height:0.4rem;">
             </div>
@@ -17,10 +17,10 @@
               <img src="../assets/images/home@2x.png" style="width: .4rem;height:0.4rem;">
             </div>
             <div :class="{ 'active': actives == '/home'}" class="font_color_BF">首页</div>
-          </div>
+          <!-- </div> -->
         </flexbox-item>
 
-        <flexbox-item>
+        <flexbox-item key="/cart">
          
           <div class="flex-demo pos" @click="didClickedItem(1,'/cart')" v-if="actives == '/cart'">
             <img src="../assets/images/goodsCar_active.png" style="width: .4rem;height:0.4rem;">
@@ -33,15 +33,15 @@
           <div :class="{ 'active': actives == '/cart'}" class="font_color_BF">购物车</div>
         </flexbox-item>
 
-        <flexbox-item v-if="route == '/goodsdetail'">
+        <flexbox-item v-if="route == '/goodsdetail'" key="/goodsdetail">
           <div class="flex-start">
             <div class="foot-btn green" @click="addCart('cart')">加入购物车</div>
             <div class="foot-btn yello" @click="ImmeBuy('imme')">立即购买</div>
           </div>
         </flexbox-item>
-        <flexbox-item v-else>
+        <flexbox-item v-else key="/personal">
          
-          <div class="flex-demo"  v-if="actives == '/personal'"@click="didClickedItem(2,'/personal')">
+          <div class="flex-demo"  v-if="actives == '/personal'" @click="didClickedItem(2,'/personal')">
             <img src="../assets/images/personCenter_active.png" style="width: .4rem;height:0.4rem;">
           </div>
            <div class="flex-demo" @click="didClickedItem(2,'/personal')" v-else>
@@ -93,6 +93,24 @@ export default {
   },
 
   methods: {
+    //获取购物车数量
+    getCartNum() {
+     
+    },
+    change(tag,name){
+      this.actives = name;
+      console.log(1)
+       this.$fetch
+        .post("fruits/app/cart/getCartNum", {
+          openId: localStorage.getItem("openId")
+        })
+        .then(res => {
+          if (res.msg == "success") {
+            this.buyNum =  res.obj;
+            localStorage.setItem("catnum", res.obj);
+          }
+        });
+    },
     //立即购买
     ImmeBuy(word) {
       this.show = true;

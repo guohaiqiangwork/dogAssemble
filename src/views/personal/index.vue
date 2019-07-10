@@ -486,9 +486,8 @@ export default {
           if (res.msg == "success") {
             localStorage.setItem("catnum", res.obj);
             this.$vux.toast.text('身份已切换')
-            this.$router.push('/home');
             setTimeout(() =>{
-              this.$router.push('/home');
+              this.$router.push('/home?id='+1);
               // this.$router.go(0)
             },1000)
           }

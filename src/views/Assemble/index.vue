@@ -209,9 +209,10 @@ export default {
     settitle("商城");
   },
   mounted() {
-    // if(this.$route.query.id){
-    //   this.$router.go(0);
-    // }
+    if(this.$route.query.id){
+       this.$emit('change',1,this.$route.path)
+    }
+   
      console.log(this.$route,'jkkjl');
     this.$fetch
       .post("fruits/app/blank/getBannerImg", { openId: localStorage.getItem("openId")})
