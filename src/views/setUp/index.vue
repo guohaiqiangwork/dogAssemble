@@ -151,6 +151,7 @@ export default {
         data => {
           if (data.code == 0) {
             localStorage.setItem("type", data.attributes.type);
+             localStorage.setItem("appUserId", data.attributes.appUserId);
             this.getCartNum();
 
           }
