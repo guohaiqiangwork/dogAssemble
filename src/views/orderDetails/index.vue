@@ -17,7 +17,7 @@
     >
       <div class="div_width_30 margin_right_div3">
         <div class="order_width_height">
-          <img :src="items.picId" width="100%" alt /> <img :src="items.picId" width="70px" height="70px" alt />        </div>
+          <img :src="items.picId" width="70" height="70" alt />     </div>
       </div>
       <div style="width:63%">
         <div class="font_color_00 font_size_14">{{items.name}}</div>
@@ -27,7 +27,7 @@
           <!-- order_price_bt -->
         </div>
         <div v-for="(itemsg,index) in items.goodsSpecs" :key="index" class="GG_list">
-          <span>{{itemsg.specName}}</span>
+          <span>{{itemsg.specName}}:</span>
           <span>{{itemsg.specValue}}</span>
         </div>
       </div>

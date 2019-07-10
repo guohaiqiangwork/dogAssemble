@@ -62,8 +62,7 @@
                       <!-- order_price_bt -->
                     </div>
                     <div v-for="(itemsg,index) in items.goodsSpecs" :key="index" class="GG_list">
-                      <span>{{itemsg.specName}}：</span>
-                      <span>{{itemsg.specValue}}</span>
+                      <p>{{itemsg.specName}}:{{itemsg.specValue}}</p>
                     </div>
                   </div>
                 </div>
@@ -132,8 +131,7 @@
                       <!-- order_price_bt -->
                     </div>
                     <div v-for="(itemsg,index) in items.goodsSpecs" :key="index" class="GG_list">
-                      <span>{{itemsg.specName}}：</span>
-                      <span>{{itemsg.specValue}}</span>
+                      <p>{{itemsg.specName}}:{{itemsg.specValue}}</p>
                     </div>
                   </div>
                 </div>
@@ -200,8 +198,7 @@
                       <!-- order_price_bt -->
                     </div>
                     <div v-for="(itemsg,index) in items.goodsSpecs" :key="index" class="GG_list">
-                      <span>{{itemsg.specName}}：</span>
-                      <span>{{itemsg.specValue}}</span>
+                      <p>{{itemsg.specName}}:{{itemsg.specValue}}</p>
                     </div>
                   </div>
                 </div>
@@ -271,8 +268,7 @@
                       <!-- order_price_bt -->
                     </div>
                     <div v-for="(itemsg,index) in items.goodsSpecs" :key="index" class="GG_list">
-                      <span>{{itemsg.specName}}：</span>
-                      <span>{{itemsg.specValue}}</span>
+                      <p>{{itemsg.specName}}:{{itemsg.specValue}}</p>
                     </div>
                   </div>
                 </div>
@@ -339,8 +335,7 @@
                       <!-- order_price_bt -->
                     </div>
                     <div v-for="(itemsg,index) in items.goodsSpecs" :key="index" class="GG_list">
-                      <span>{{itemsg.specName}}：</span>
-                      <span>{{itemsg.specValue}}</span>
+                      <p>{{itemsg.specName}}:{{itemsg.specValue}}</p>
                     </div>
                   </div>
                 </div>
@@ -642,9 +637,10 @@ export default {
 }
 .GG_list {
   /* width: 35%; */
+  display: flex;
   float: left;
   margin-top: 2%;
-  /* margin-left: 2%; */
+  margin-right: 0.2rem;
   font-size: 13px;
   color: #102023;
 }

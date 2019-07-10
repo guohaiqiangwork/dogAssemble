@@ -11,7 +11,7 @@
                 <div class="mt-12 flex-between">
                     <div class="flex-between align-center wrap">
                         <p class="goods-price">¥{{item.price}}</p>
-                        <p v-for="(el,ind) in item.specList" :key="ind">
+                        <p v-for="(el,ind) in item.specList" :key="ind"  style="margin-right:0.2rem;">
                              <span>{{el.specName}}:</span>
                             <span>{{el.value}}</span>
                            

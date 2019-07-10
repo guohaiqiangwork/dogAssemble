@@ -19,7 +19,7 @@
                         </span>
                     </p>
                     <div v-if="item.cartGoodsSpecs.length&&item.state !=1" style="display:flex">
-                        <p v-for="(ite,ind) in item.cartGoodsSpecs" :key="ind">
+                        <p v-for="(ite,ind) in item.cartGoodsSpecs" :key="ind" style="margin-right:0.2rem;">
                             <span>{{ite.specName}}:</span>
                             <span>{{ite.specValue}}</span>
                         </p>
