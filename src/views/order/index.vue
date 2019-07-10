@@ -37,7 +37,7 @@
                       <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>待收货
                     </span>
                     <span v-if="item.state == 4">
-                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>已收货
+                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>已完成
                     </span>
                     <span v-if="item.state == 6">
                       <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>交易关闭
