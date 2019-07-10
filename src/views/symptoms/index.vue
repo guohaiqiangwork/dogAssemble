@@ -81,7 +81,7 @@
           </div>
           <div class="div_display_flex margin_top_div3">
             <div class="div_width_70 margin_left_div2">{{recommendStoreList[0].address}}</div>
-            <div class="div_width_30 margin_right_div2 text_right" @click="goToMap">
+            <div class="div_width_30 margin_right_div2 text_right" @click="goToMap(recommendStoreList[0])">
               <img src="../../assets/images/1440@2x.png" width="12px" />
             </div>
           </div>
@@ -133,14 +133,20 @@ export default {
   },
   methods: {
     // 去地图
-    goToMap() {
+    goToMap(item) {
+      console.log(item)
+       if(!item.lat){
+        alert('该数据不存在坐标')
+        return
+      }
       this.$router.push({
-        name: "map",
+        name: "Tmap",
         params: {
           obj: JSON.stringify({
             type: "profession",
             data: {
-              id: "参数"
+              latitude: item.lat,
+              longitude: item.lng
             }
           })
         }

@@ -11,7 +11,7 @@
         </div>
         <p class="order-foot flex-between pt-space">
           <span>已买集数：第{{item.episode}}集</span>
-          <span class="red">¥{{item.episode}}</span>
+          <span class="red">¥{{item.payMoney}}</span>
         </p>
       </div>
     </div>
