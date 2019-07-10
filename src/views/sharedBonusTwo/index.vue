@@ -1,14 +1,8 @@
 <template>
   <div id="xDiooo">
-    <!-- <div class="background_img">
-      <img :src=imgUrl >
-    </div>-->
     <div>
       <div>
         <img src="../../assets/images/bjJJ12@2x.png" style="width: 100%;" alt />
-        <!-- <div>
-          <img :src=imgUrl >
-        </div>-->
         <div class="shared_B_D">
           <img :src="imgUrl" width="50%" />
           <img
@@ -20,8 +14,9 @@
         </div>
       </div>
     </div>
+    <!-- 分享提示 -->
     <x-dialog v-model="showToast" class="dialog-demo">
-      <div style="background-color: rgba(0, 0, 0, 0.6);width: 100%;height: 500px;">
+      <div style=" background-color: rgba(0, 0, 0, 0);width: 100%;height: 500px;">
         <img src="../../assets/images/fengX.png" alt class="fengX_c_l" @click="showToast=false" />
       </div>
     </x-dialog>
@@ -37,7 +32,7 @@ export default {
     XDialog,
     XButton
   },
-  name: "sharedBonus",
+  name: "sharedBonusTwo",
   data() {
     return {
       code: "",
@@ -52,23 +47,23 @@ export default {
         text: "toast"
       });
     },
-    getEr() {
-      this.$fetch
-        .post("/fruits/app/bonus/getCusQRCode", {
-          // openId: this.routeParams[0].split("=")[1],
-          // shareId: this.routeParams[1].split("=")[1]
-          openId: localStorage.getItem("openId"),
-          shareId: localStorage.getItem("appUserId")
-        })
-        .then(res => {
-          if (res.code == 0) {
-            this.imgUrl = url.imgUrl + res.obj;
-            localStorage.setItem("imgUrlShared", this.imgUrl);
-          } else {
-            alert(res.msg);
-          }
-        });
-    },
+    // getEr() {
+    //   this.$fetch
+    //     .post("/fruits/app/bonus/getCusQRCode", {
+    //       // openId: this.routeParams[0].split("=")[1],
+    //       // shareId: this.routeParams[1].split("=")[1]
+    //       openId: localStorage.getItem("openId"),
+    //       shareId: localStorage.getItem("appUserId")
+    //     })
+    //     .then(res => {
+    //       if (res.code == 0) {
+    //         this.imgUrl = url.imgUrl + res.obj;
+    //         localStorage.setItem("imgUrlShared", this.imgUrl);
+    //       } else {
+    //         alert(res.msg);
+    //       }
+    //     });
+    // },
     // 获取分享参数
     getSharedBonus() {
       this.showToast = true;
@@ -98,10 +93,11 @@ export default {
 
   mounted() {
     this.routeParams = this.$route.params.obj.split("&");
-    // console.log(this.routeParams);
+    console.log(this.routeParams);
+
     // console.log(this.routeParams[0].split("=")[1]);
     // console.log(this.routeParams[1].split("=")[1]);
-    this.getEr();
+    // this.getEr(); //获取二维码
   }
 };
 </script>
@@ -146,3 +142,4 @@ export default {
   overflow: unset !important;
 }
 </style>
+

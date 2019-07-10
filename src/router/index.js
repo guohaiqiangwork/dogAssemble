@@ -47,6 +47,7 @@ import allMembersDetails from '@/views/allMembersDetails/index'//全部订单详
 import allMembersDetailsD from '@/views/allMembersDetailsD/index'//全部订单详情中详情
 import orderDetails from '@/views/orderDetails/index' //商城订单详情
 import sharedBonus from '@/views/sharedBonus/index'//共享奖金
+import sharedBonusTwo from '@/views/sharedBonusTwo/index'//共享奖金
 import privacyProtocol from '@/views/privacyProtocol/index'//协议
 import successful from '@/views/successful/index'
 import changeShop from '@/views/changeShop/index'
@@ -585,13 +586,22 @@ export default new Router({
       component: changeShop
     },
     {
-      // 共享奖金
+      // 共享奖金   
       path: '/sharedBonus/:obj',
       name: 'sharedBonus',
       meta: {
         title: '共享奖金'
       },
       component: sharedBonus
+    },
+    {
+      // 共享奖金   
+      path: '/sharedBonusTwo/:obj',
+      name: 'sharedBonusTwo',
+      meta: {
+        title: '共享奖金'
+      },
+      component: sharedBonusTwo
     },
     {
       path: '/404',

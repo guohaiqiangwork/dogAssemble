@@ -152,12 +152,7 @@
         </div>
       </div>
     </div>
-    <!-- 分享提示 -->
-    <x-dialog v-model="showToast" class="dialog-demo">
-      <div style=" background-color: rgba(0, 0, 0, 0);width: 100%;height: 500px;">
-        <img src="../../assets/images/fengX.png" alt class="fengX_c_l" @click="showToast=false" />
-      </div>
-    </x-dialog>
+  
   </div>
 </template>
 <script>
@@ -321,37 +316,37 @@ export default {
     },
     // 获取分享参数
     getSharedBonus() {
-      // this.$router.push({
-      //   name: "sharedBonus",
-      //   params: {
-      //     obj: JSON.stringify({
-      //       type: "profession",
-      //       data: {
-      //         openId: localStorage.getItem("openId"),
-      //         shareId: localStorage.getItem("appUserId")
-      //       }
-      //     })
-      //   }
-      // });
-      this.showToast = true;
-      this.$fetch
-        .post("/fruits/app/bonus/inviteFriends", {
-          openId: localStorage.getItem("openId"),
-          url: window.location.href.split("#")[0]
-        })
-        .then(
-          data => {
-            if (data.code == 0) {
-              console.log(data);
-              wexinShare(data.obj);
-            } else {
-              alert(data.msg);
+      this.$router.push({
+        name: "sharedBonus",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              openId: localStorage.getItem("openId"),
+              shareId: localStorage.getItem("appUserId")
             }
-          },
-          err => {
-            alert("网络缓慢。。");
-          }
-        );
+          })
+        }
+      });
+      // this.showToast = true;
+      // this.$fetch
+      //   .post("/fruits/app/bonus/inviteFriends", {
+      //     openId: localStorage.getItem("openId"),
+      //     url: window.location.href.split("#")[0]
+      //   })
+      //   .then(
+      //     data => {
+      //       if (data.code == 0) {
+      //         console.log(data);
+      //         wexinShare(data.obj);
+      //       } else {
+      //         alert(data.msg);
+      //       }
+      //     },
+      //     err => {
+      //       alert("网络缓慢。。");
+      //     }
+      //   );
     }
   },
   created() {
