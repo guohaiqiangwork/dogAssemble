@@ -35,7 +35,7 @@
     <button @click="goToSharedBonus">共享奖金</button>-->
     <!-- <button @click="goToSymptoms">检测病症</button>
            <button @click="goToSharedBonus">共享奖金</button>
-    <button @click="goTocaseVideo">案例视频</button>-->
+    <button @click="goTocaseVideo">案例视频</button> -->
   </div>
 </template>
 <script>
