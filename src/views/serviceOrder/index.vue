@@ -50,6 +50,10 @@
             <div class="div_width_80 margin_left_div3">{{item.time}}</div>
             <div class="div_width_20">已喝次数</div>
           </div>
+          <div class="div_display_flex margin_top_div3 font_size_13">
+            <div class="div_width_80 margin_left_div3"></div>
+            <div class="div_width_20">{{item.price}}</div>
+          </div>
           <div class="div_display_flex margin_top_div8 padding_bottom_4 font_size_13">
             <div class="div_width_80 margin_left_div2">适应症：{{item.disease}}</div>
             <div class="div_width_20" v-if="item.state == 0">未开始</div>
