@@ -77,9 +77,9 @@
     <!-- 充值按钮 -->
     <div >
       <div class="wallet_cz_bt backgroun_color_4A font_color_ff font_size_16" @click="paysure">立即充值</div>
-      <div class="font_size_12 margin_top_div5 text_center">
+      <!-- <div class="font_size_12 margin_top_div5 text_center">
         <span class="font_color_4A">点击[立即充值]</span>,表示您已同意《购卡协议》 和 《购卡流程》
-      </div>
+      </div> -->
     </div>
     <!--  -->
   </div>
