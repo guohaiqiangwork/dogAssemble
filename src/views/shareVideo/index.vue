@@ -66,7 +66,7 @@ export default {
     }
   },
   created() {
-    settitle("我是视频分享");
+    settitle("视频分享");
     this.routeParams = JSON.parse(this.$route.params.obj);
   },
 

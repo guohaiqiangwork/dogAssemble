@@ -22,12 +22,12 @@ export default {
   },
   methods: {},
   created() {
-    settitle("我是活动规则");
+    settitle("活动规则");
     this.routeParams = JSON.parse(this.$route.params.obj);
   },
 
   mounted() {
-    console.log("我是活动规则");
+   
   }
 };
 </script>

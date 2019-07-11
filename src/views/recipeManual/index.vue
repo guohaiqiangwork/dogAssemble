@@ -54,7 +54,7 @@ export default {
   },
   methods: {},
   created() {
-    settitle("我是配方手册");
+    settitle("配方手册");
     this.routeParams = JSON.parse(this.$route.params.obj);
   },
 
