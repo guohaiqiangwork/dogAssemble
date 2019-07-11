@@ -384,7 +384,7 @@ export default {
 //     height: 100% !important;
 // }  
 .img_box{
-  padding-bottom: 20px;
+  padding-bottom: 10%;
 }
 #goods_detail{
       .vux-slider > .vux-swiper{
