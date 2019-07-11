@@ -475,6 +475,7 @@ export default {
       this.$fetch.post(url.changeCustomer, _obj).then(
         data => {
           if (data.code == 0) {
+            console.log(data)
             localStorage.setItem("type", data.attributes.type);
             localStorage.setItem("appUserId", data.attributes.appUserId);
 
@@ -505,17 +506,17 @@ export default {
     },
     // 去我的钱包
     goToWallet: function() {
-      // this.$router.push({
-      //   name: "myWallet",
-      //   params: {
-      //     obj: JSON.stringify({
-      //       type: "profession",
-      //       data: {
-      //         id: "参数"
-      //       }
-      //     })
-      //   }
-      // });
+      this.$router.push({
+        name: "myWallet",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: "参数"
+            }
+          })
+        }
+      });
     },
     // 去我的订单
     goToOrder: function() {
