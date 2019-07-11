@@ -133,11 +133,6 @@
               :key="index"
               style="width:35%;height:3.2rem;margin-top:0.5rem;border:1px solid #eee;margin-left:10%;"
             >
-              <!-- <img
-              class="del"
-              src="http://img.shtml.net/XGaC5nwBzmaeMPm0J-H12X-G3zjUOlYZmnX0J-H1wPM3gKpTqvYekJohZzYPGROtBz0J-H1wT4uAGgZV.jpg"
-              @click.stop="delImg(index)"
-              >-->
               <!-- //del删除样式，icon字体图标需要自己找哦 -->
               <img :src="url.file.src" @click.stop="delImg(index)" width="100%" height="100%" />
             </li>
@@ -259,7 +254,6 @@ export default {
       console.log(val);
     },
     chooseType() {
-      console.log("90797");
       document.getElementById("upload_file").click();
     },
     fileChange(el) {
@@ -342,7 +336,7 @@ export default {
     delImg(index) {
       this.size = this.size - this.imgList[index].file.size; //总大小
       this.imgList.splice(index, 1);
-      if (this.limit !== undefined) this.limit = 6 - this.imgList.length;
+      if (this.limit !== undefined) this.limit = 10 - this.imgList.length;
     },
     displayImg() {},
     // 图片上传
