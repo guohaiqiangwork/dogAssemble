@@ -13,14 +13,24 @@
       <i></i>
     </div>
     <!-- 推荐门店列表 -->
-    <nut-scroller
+    <!-- <nut-scroller
       :is-un-more="isUnMore1"
       :is-loading="isLoading1"
       :type="'vertical'"
       @loadMore="selPullUp"
       @pulldown="pulldown"
     >
-      <div slot="list" class="nut-vert-list-panel">
+    <div slot="list" class="nut-vert-list-panel">-->
+    <div class="main-body" ref="wrapper" :style="{ height: (wrapperHeight-50) + 'px'}">
+      <mt-loadmore
+        :top-method="loadTop"
+        :bottom-method="loadBottom"
+        :auto-fill="false"
+        :bottom-all-loaded="allLoaded"
+        ref="loadmore"
+        :bottomDistance="10"
+        bottom-status-change="handelChange"
+      >
         <div class="div_display_flex margin_left_div3 padding_top_div3">
           <div class="national_flag_title"></div>
           <div class="font_color_00 font_size_14 margin_left_div2" style="margin-top: 0.8%;">附近门店推荐</div>
@@ -41,7 +51,10 @@
             </div>
             <div class="div_display_flex margin_top_div3">
               <div class="div_width_70 margin_left_div2">{{recommendStoreList[0].address}}</div>
-              <div class="div_width_30 margin_right_div2 text_right" @click="goToMap">
+              <div
+                class="div_width_30 margin_right_div2 text_right"
+                @click="goToMap(recommendStoreList[0])"
+              >
                 <img src="../../assets/images/1440@2x.png" width="12px" />
               </div>
             </div>
@@ -85,7 +98,7 @@
               </div>
               <div class="div_display_flex margin_top_div3">
                 <div class="div_width_70 margin_left_div2">{{item.address}}</div>
-                <div class="div_width_30 margin_right_div2 text_right">
+                <div class="div_width_30 margin_right_div2 text_right" @click="goToMap(item)">
                   <img src="../../assets/images/1440@2x.png" width="12px" />
                 </div>
               </div>
@@ -101,8 +114,10 @@
             </div>
           </div>
         </div>
-      </div>
-    </nut-scroller>
+      </mt-loadmore>
+    </div>
+    <!-- </div>
+    </nut-scroller>-->
     <!-- 店铺更换提示 -->
     <confirm v-model="nationSFalg" title @on-cancel="onCancel" @on-confirm="onConfirm">
       <div style="text-align:center;font-size:18px;">
@@ -112,12 +127,11 @@
         确认要"{{shopName}}"吗？
       </div>
     </confirm>
-     <!-- 店铺更换提示 -->
+    <!-- 店铺更换提示 -->
     <confirm v-model="nationSFalgC" title @on-cancel="onCancelC" @on-confirm="onConfirmC">
       <div style="text-align:center;font-size:18px;">
         转店失败
-        <br />
-       请联系您的专属门店
+        <br />请联系您的专属门店
       </div>
     </confirm>
     <div id="container" style="width:600px;height:500px;"></div>
@@ -166,19 +180,132 @@ export default {
       isDefaultT: false,
       shopId: "",
       shopName: "",
-      yMoney:''//余额
+      yMoney: "", //余额
+      allLoaded: false,
+      wrapperHeight: 0
     };
   },
   methods: {
-    goToMap() {
-      console.log("7897");
+    handelChange(state) {
+      console.log(state, "dfs");
+    },
+    loadTop(item) {
+      this.recommendStoreList = [];
+      this.page.current = 1;
+      let _obj = {
+        openId: localStorage.getItem("openId"),
+        name: item || "",
+        size: this.page.size,
+        current: this.page.current,
+        latitude: this.latitude,
+        longitude: this.longitude
+      };
+      if (this.timer) {
+        clearTimeout(this.timer);
+      }
+
+      this.timer = setTimeout(() => {
+        this.isLoading1 = true;
+        //  this.recommendStoreList =[];
+        this.$fetch.post("fruits/app/blank/getRecommendStoreList", _obj).then(
+          data => {
+            this.allLoaded = false;
+            this.isLoading1 = false;
+            this.timer = "";
+            if (data.code == 0) {
+              console.log(4546, data);
+
+              if (data.obj.length == 0) {
+                this.isUnMore1 = true;
+                return;
+              } else {
+                this.$nextTick(() => {
+                  data.obj.forEach(e => {
+                    this.recommendStoreList.push(e);
+                  });
+                });
+              }
+            } else {
+              alert(data.msg);
+            }
+            this.$refs.loadmore.onTopLoaded();
+          },
+          err => {
+            alert("网络缓慢。。");
+          }
+        );
+      }, 2000);
+      // this.$refs.loadmore.onTopLoaded();
+    },
+    loadBottom(item) {
+      this.page.current++;
+      let _obj = {
+        openId: localStorage.getItem("openId"),
+        name: item || "",
+        size: this.page.size,
+        current: this.page.current,
+        latitude: this.latitude,
+        longitude: this.longitude
+      };
+      if (this.timer) {
+        clearTimeout(this.timer);
+      }
+
+      this.timer = setTimeout(() => {
+        this.isLoading1 = true;
+        this.$fetch.post("fruits/app/blank/getRecommendStoreList", _obj).then(
+          data => {
+            //      document.documentElement.clientHeight -
+            // this.$refs.wrapper.getBoundingClientRect().top;
+            this.isLoading1 = false;
+            this.timer = "";
+            if (data.code == 0) {
+              console.log(4546, data);
+
+              if (data.obj.length == 0) {
+                this.allLoaded = true;
+                this.page.current--;
+                this.$vux.toast.text("没有更多数据了");
+                this.$refs.loadmore.onBottomLoaded();
+                this.isUnMore1 = true;
+                return;
+              } else {
+                this.$nextTick(() => {
+                  data.obj.forEach(e => {
+                    this.recommendStoreList.push(e);
+
+                    console.log(this.allLoaded);
+                  });
+                });
+                // 若数据已全部获取完毕
+                //  this.allLoaded = true;
+              }
+
+              console.log(this.recommendStoreList, "jlkjljkljl");
+            } else {
+              alert(data.msg);
+            }
+            this.$refs.loadmore.onBottomLoaded();
+          },
+          err => {
+            alert("网络缓慢。。");
+          }
+        );
+      }, 2000);
+    },
+    goToMap(item) {
+      if (!item.lat) {
+        alert("该数据不存在坐标");
+        return;
+      }
       this.$router.push({
         name: "Tmap",
         params: {
           obj: JSON.stringify({
             type: "profession",
             data: {
-              id: "参数"
+              latitude: item.lat,
+              longitude: item.lng
             }
           })
         }
@@ -229,7 +356,7 @@ export default {
           if (data.code == 0) {
             alert("转店成功");
           } else {
-            this.nationSFalgC =true
+            this.nationSFalgC = true;
           }
         },
         err => {
@@ -238,13 +365,13 @@ export default {
       );
     },
 
-     // 弹窗取消
+    // 弹窗取消
     onCancelC() {
       console.log("2");
     },
     // 弹窗确认
     onConfirmC() {
-        this.$router.push('/home')
+      this.$router.push("/home");
     },
     //获取数据
     getRecommendStoreList(item) {
@@ -316,8 +443,8 @@ export default {
           openId: localStorage.getItem("openId")
         })
         .then(res => {
-          this.yMoney = res.obj.remain
-          console.log(res)
+          this.yMoney = res.obj.remain;
+          console.log(res);
           // var state = res.obj.state;
           // localStorage.setItem("state", state);
           // this.personalMsg = { ...res.obj };
