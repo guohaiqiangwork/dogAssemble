@@ -220,6 +220,10 @@ export default {
               this.$vux.toast.text("押金不足");
               return;
             }
+             if (res.msg == "user_has_frozen") {
+              this.$vux.toast.text("用户已冻结");
+              return;
+            }
             this.$vux.toast.text("遇到了错误，请重试");
           }
         });
