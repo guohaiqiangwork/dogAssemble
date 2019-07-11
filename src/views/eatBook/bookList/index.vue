@@ -39,7 +39,7 @@
                   class="kind-item"
                   v-for="(info,inx) in iten.cupInfos"
                   :key="inx"
-                >{{info.foodName+info.gram+'克'}}</span>
+                >{{info.foodName+info.gram+'ml '}}</span>
               </div>
             </div>
             <div class="kind-list" v-show="item.type == 1">
@@ -47,7 +47,7 @@
                 class="kind-item"
                 v-for="(info,inx) in item.biguFoods"
                 :key="inx"
-              >{{info.foodName+info.gram+'克'}}</span>
+              >{{info.foodName+info.gram+'ml'}}</span>
             </div>
           </div>
         </book-list>
