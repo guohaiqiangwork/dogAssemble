@@ -3,7 +3,7 @@
     <!-- 会员套餐 展示-->
     <div v-if="memberFalg">
       <div class="font_size_12 margin_left_div6 margin_top_div5" v-if="infoList.userType ==1">
-        <img src="../../assets/images/提醒 (3)@2x.png" style="width:19px">
+        <img src="../../assets/images/提醒 (3)@2x.png" style="width:19px" />
         当前用户为跨店用户
       </div>
       <div class="margin_top_div5">
@@ -47,7 +47,10 @@
           </div>
         </div>
         <!-- 支付 -->
-        <div class="div_display_flex" style="position: fixed;bottom: 0;width: 100%;line-height: 3.5;">
+        <div
+          class="div_display_flex"
+          style="position: fixed;bottom: 0;width: 100%;line-height: 3.5;"
+        >
           <div class="div_width_70 backgroun_color_E9 padding_left_div3">
             金额：
             <span class="red">{{priceHT}}</span>
@@ -67,7 +70,7 @@
     <!-- 辟谷套餐 -->
     <div v-if="!memberFalg">
       <div class="font_size_12 margin_left_div6 margin_top_div5" v-if="infoList.userType == 1">
-        <img src="../../assets/images/提醒 (3)@2x.png" style="width:19px">
+        <img src="../../assets/images/提醒 (3)@2x.png" style="width:19px" />
         当前用户为跨店用户
       </div>
       <div class="margin_top_div5">
@@ -161,7 +164,7 @@
             maxlength="6"
             v-model="msgPAW"
             style="position: absolute;z-index: -1;left:-100%;opacity: 0"
-          >
+          />
           <ul class="pwd-wrap" @click="focus">
             <li>
               <i v-if="msgLength > 0"></i>
@@ -184,7 +187,7 @@
           </ul>
           <div class="div_display_flex margin_left_div8 margin_top_div3 padding_bottom_4">
             <div>
-              <img src="../../assets/images/til@2x.png" width="14px">
+              <img src="../../assets/images/til@2x.png" width="14px" />
             </div>
             <div class="font_color_4A margin_left_div2" style="line-height: 1;">密码为会员消费/登录时设置的密码</div>
           </div>
@@ -263,7 +266,7 @@ export default {
       this.$fetch.post(url.closeMemberOrder, _obj).then(
         data => {
           if (data.code == 0) {
-           alert('结束成功')
+            alert("结束成功");
             this.$router.push({
               name: "memberOperation",
               params: {
@@ -307,7 +310,7 @@ export default {
       this.$fetch.post(url.sureBigu, _obj).then(
         data => {
           if (data.code == 0) {
-            this.getInfo(this.parameter.item.id); 
+            this.getInfo(this.parameter.item.id);
             // this.getInfo(this.parameter.item.id);
           } else {
             alert(data.msg);
@@ -366,6 +369,17 @@ export default {
             this.curVal = "";
             if (data.msg == "password_error") {
               alert("密码错误");
+              this.$router.push({
+                name: "memberOperation",
+                params: {
+                  obj: JSON.stringify({
+                    type: "profession",
+                    data: {
+                      id: "蚕丝"
+                    }
+                  })
+                }
+              });
             } else if (data.msg == "credit_is_running_low") {
               alert("用户余额不足");
             } else {
@@ -460,12 +474,12 @@ export default {
   margin-left: 5%;
 }
 .btn_ff {
-    border: 1px solid #4a7b67;
-    border-radius: 5px;
-    text-align: center;  
-    margin-left: 3%;
-    margin-right: 3%;
-    padding: 0 0.2rem;
+  border: 1px solid #4a7b67;
+  border-radius: 5px;
+  text-align: center;
+  margin-left: 3%;
+  margin-right: 3%;
+  padding: 0 0.2rem;
 }
 .border_tlr_b {
   border-top-right-radius: 5px;

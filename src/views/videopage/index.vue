@@ -60,7 +60,7 @@
               <p class="video_name">{{videoList.classTwo}}</p>
               <p>{{videoList.description}}</p>
             </div>
-            <p class="pay_price">￥{{modelData.price.toFixed(2)}}</p>
+            <p class="pay_price">￥{{modelData.price}}</p>
           </div>
           <div class="pay_btn" @click="saveVideoOrder">立即购买</div>
         </div>
@@ -219,7 +219,9 @@ export default {
         data => {
           if (data.code == 0) {
             this.modelData = data.obj;
-            console.log(this.modelData);
+            if (data.obj.price) {
+              this.modelData.price = data.obj.price.toFixed(2);
+            }
             if (data.obj.state == 0) {
               this.show = true;
             } else {

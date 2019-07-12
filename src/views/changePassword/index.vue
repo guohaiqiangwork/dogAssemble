@@ -1,29 +1,48 @@
 <template>
   <div>
-    <div class="pass_list_w">
-      <div class="search_box">
-        <img src="../../assets/images/phone@2x.png" class="width_16">
-        <input
-          type="text"
-          :show-clear="false"
-          placeholder="请输⼊您的手机号"
-          maxlength="11"
-          v-model="phone"
-          style="width:100%;height:100%;outline: none;border:none"
-        >
-        <i></i>
+    <div v-if="falgPassWD == 1">
+      <div class="pass_list_w">
+        <div class="search_box">
+          <img src="../../assets/images/phone@2x.png" class="width_16" />
+          <input
+            type="text"
+            :show-clear="false"
+            placeholder="请输⼊您的手机号"
+            maxlength="11"
+            v-model="phone"
+            disabled
+            style="width:100%;height:100%;outline: none;border:none"
+          />
+          <i></i>
+        </div>
+      </div>
+    </div>
+    <div v-if="falgPassWD != 1">
+      <div class="pass_list_w">
+        <div class="search_box">
+          <img src="../../assets/images/phone@2x.png" class="width_16" />
+          <input
+            type="text"
+            :show-clear="false"
+            placeholder="请输⼊您的手机号"
+            maxlength="11"
+            v-model="phone"
+            style="width:100%;height:100%;outline: none;border:none"
+          />
+          <i></i>
+        </div>
       </div>
     </div>
     <div class="pass_list_w">
       <div class="search_box">
-        <img src="../../assets/images/验证码@2x.png" class="width_16">
+        <img src="../../assets/images/验证码@2x.png" class="width_16" />
         <input
           type="text"
           :show-clear="false"
           v-model="code"
           placeholder="请输⼊验证码"
           style="width:56%;height:100%;outline: none;border:none;borer-bottom:1px solid;"
-        >
+        />
         <span
           v-show="sendAuthCode"
           class="margin_left_div3 font_color_4A"
@@ -39,14 +58,14 @@
     </div>
     <div class="pass_list_w">
       <div class="search_box">
-        <img src="../../assets/images/密码@2x.png" class="width_16">
+        <img src="../../assets/images/密码@2x.png" class="width_16" />
         <input
           type="password"
           v-model="password"
           maxlength="6"
           placeholder="请设置您的新密码"
           style="width:100%;height:100%;outline: none;border:none"
-        >
+        />
         <i></i>
       </div>
     </div>
@@ -67,7 +86,9 @@ export default {
       tip: "获取验证码",
       phone: "",
       password: "",
-      code: ""
+      code: "",
+      falgPassWD: "",
+      phoneX:''
     };
   },
   methods: {
@@ -81,7 +102,7 @@ export default {
         return;
       }
       // this.sendAuthCode = false;
-      
+
       this.$fetch
         .post("fruits/app/user/getSmsCode", {
           phone: this.phone,
@@ -89,16 +110,16 @@ export default {
           type: 2
         })
         .then(res => {
-          if(res.msg == "find_none_user"){
+          if (res.msg == "find_none_user") {
             clearInterval(auth_timetimer);
             this.sendAuthCode = true;
             this.tip = "获取验证码";
             this.$vux.toast.text("当前账号不存在");
-            return
+            return;
           }
           // this.form.code = "1234";
         });
-        this.sendAuthCode = false;
+      this.sendAuthCode = false;
       this.auth_time = 60;
       var auth_timetimer = setInterval(() => {
         this.auth_time--;
@@ -117,21 +138,22 @@ export default {
       let data = {
         openId: localStorage.getItem("openId"),
         code: this.code,
-        phone:this.phone,
+        phone: this.phone,
         password: DesUtils.encode(this.password, "fruits-app,yuntu,com")
       };
       this.$fetch.post(url.changePassword, data).then(res => {
-        console.log(res);
+        // console.log(res);
         if (res.code == 0) {
-          if(localStorage.getItem('user')){
-             localStorage.clear();
-          }
-          this.$router.push('/login/1');
-          this.$vux.toast.text('修改成功')
+          // if (localStorage.getItem("user")) {
+          //   localStorage.clear();
+           
+          // }
+          this.$router.push("/login/1");
+          this.$vux.toast.text("修改成功");
           // alert("修改成功");
         } else {
-          if(res.msg == 'smsCode_error'){
-            this.$vux.toast.text('验证码错误')
+          if (res.msg == "smsCode_error") {
+            this.$vux.toast.text("验证码错误");
           }
           // alert(data.msg);
         }
@@ -140,11 +162,15 @@ export default {
   },
   created() {
     this.routeParams = JSON.parse(this.$route.params.obj);
-    if(this.routeParams ==1){
+    this.falgPassWD = this.routeParams;
+    console.log(this.routeParams + '9087907')
+    if (this.routeParams == 1) {
       settitle("修改密码");
-    }else{
+       this.phone = localStorage.getItem("phone")
+    } else {
       settitle("忘记密码");
     }
+   
   },
 
   mounted() {}

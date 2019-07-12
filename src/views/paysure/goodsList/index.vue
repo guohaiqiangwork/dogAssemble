@@ -3,9 +3,7 @@
 
         
         <div  class="goods-item flex-between align-center" v-for="(item,index) in list.goodList" :key="index">
-           
             <img class="goods-img" :src="item.img" alt="">
-           
             <div class="goods-msg">
                 <p>{{item.name}}</p>
                 <div class="mt-12 flex-between">
@@ -76,7 +74,7 @@ export default {
         }
     },
     mounted() {
-        settitle('订单详情')
+        settitle('商品清单')
         console.log(this.list)
     },
 }

@@ -289,7 +289,6 @@ export default {
       this.$router.push("/changePassword/" + 0);
     },
     regTest() {
-      console.log("686876");
       this.$router.push("/login/2");
     },
     //发送验证码
@@ -401,7 +400,7 @@ export default {
     }
   },
   created() {
-    settitle("我是登录页面");
+    settitle("登录页面");
     // this.routeParams = JSON.parse(this.$route.params.obj);
   },
   created() {

@@ -1,24 +1,33 @@
 <template>
-  <div style="background-color:#F3F5F8;width:100%;height:100%;overflow:auto; -webkit-overflow-scrolling:touch;position:absolute;top:0;left:0;" id="reflow">
+  <div
+    style="background-color:#F3F5F8;width:100%;height:100%;overflow:auto; -webkit-overflow-scrolling:touch;position:absolute;top:0;left:0;"
+    id="reflow"
+  >
     <!-- <nut-scroller
       :is-un-more="isUnMore1"
       :is-loading="isLoading1"
       :type="'vertical'"
       @loadMore="selPullUp"
       @pulldown="pulldown"
-    > -->
-     <div class="div_display_flex backgroun_color_fff personal_title">
+    >-->
+    <div class="div_display_flex backgroun_color_fff personal_title">
       <div v-for="(item,index) in  tabList" @click="tabSwitch(item.id)" :key="index">
         <div :style="{color:(switchFlage != item.id ? '' :'#000000')}">{{item.name}}</div>
         <div class="switchBorder" v-if="switchFlage == item.id"></div>
       </div>
     </div>
-    <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore" :auto-fill="false"  >
-      <div  class="nut-vert-list-panel" style="width:100%;height:100%;background: #f3f4f5;">
-       <!-- overflow-x:hidden; -->
+    <mt-loadmore
+      :top-method="loadTop"
+      :bottom-method="loadBottom"
+      :bottom-all-loaded="allLoaded"
+      ref="loadmore"
+      :auto-fill="false"
+    >
+      <div class="nut-vert-list-panel" style="width:100%;height:100%;background: #f3f4f5;">
+        <!-- overflow-x:hidden; -->
         <!-- 全部订单  margin-bottom: 20px;-->
         <div v-if="switchFlage == '0'" style="width:100%;">
-          <div v-if="orderList.length != 0" >
+          <div v-if="orderList.length != 0">
             <div v-for="(item,index) in orderList" :key="index">
               <div class="order_block" @click="goToOrderDetails(item.id)">
                 <div class="div_display_flex">
@@ -28,19 +37,44 @@
                   >订单编号：{{item.orderNo}}</div>
                   <div class="font_size_14" style="margin-top: 14px;">
                     <span v-if="item.state == 1">
-                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>待付款
+                      <span class="order_red">
+                        <img
+                          style="vertical-align:middle;width:20px;height:20px;float:left;"
+                          src="../../assets/images/icon_dot.png"
+                        />
+                      </span>待付款
                     </span>
                     <span v-if="item.state == 2">
-                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>待发货
+                      <span class="order_red">
+                        <img
+                          style="vertical-align:middle;width:20px;height:20px;float:left;"
+                          src="../../assets/images/icon_dot.png"
+                        />
+                      </span>待发货
                     </span>
                     <span v-if="item.state == 3">
-                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>待收货
+                      <span class="order_red">
+                        <img
+                          style="vertical-align:middle;width:20px;height:20px;float:left;"
+                          src="../../assets/images/icon_dot.png"
+                        />
+                      </span>待收货
                     </span>
                     <span v-if="item.state == 4">
-                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>已完成
+                      <span class="order_red">
+                        <img
+                          style="vertical-align:middle;width:20px;height:20px;float:left;"
+                          src="../../assets/images/icon_dot.png"
+                        />
+                      </span>已完成
                     </span>
                     <span v-if="item.state == 6">
-                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>交易关闭
+                      <span class="order_red">
+                        <img
+                          style="vertical-align:middle;width:20px;height:20px;float:left;"
+                          src="../../assets/images/icon_dot.png"
+                        />
+                      </span>交易关闭
                     </span>
                   </div>
                 </div>
@@ -51,7 +85,7 @@
                 >
                   <div class="div_width_30 margin_right_div3">
                     <div class="order_width_height">
-                      <img :src="items.picId" width="100%"  alt>
+                      <img :src="items.picId" width="100%" alt />
                     </div>
                   </div>
                   <div style="width:63%">
@@ -67,20 +101,26 @@
                   </div>
                 </div>
                 <div class="order_border margin_top_div5"></div>
-                 <div class="order_bt_p margin_top_div3" @click="goToPay(items.id)" v-if="item.state == 1" >
+                <div
+                  class="order_bt_p margin_top_div3"
+                  @click="goToPay(items.id)"
+                  v-if="item.state == 1"
+                >
                   <div class="oreder_bt_pay backgroun_color_4A">去支付</div>
                 </div>
-                <div class="order_bt_p margin_top_div3" @click="sureReceiving(items)" v-if="item.state == 3" >
+                <div
+                  class="order_bt_p margin_top_div3"
+                  @click="sureReceiving(items)"
+                  v-if="item.state == 3"
+                >
                   <div class="oreder_bt_pay backgroun_color_4A">确认收货</div>
                 </div>
               </div>
             </div>
           </div>
           <div v-if="orderList.length == 0" style="height:100%;">
-            <div class="text_center" style="margin-top:110px; height:100%;" >
- 
- 
-              <img src="../../assets/images/1546.png" width="55%"  alt>
+            <div class="text_center" style="margin-top:110px; height:100%;">
+              <img src="../../assets/images/1546.png" width="55%" alt />
             </div>
             <div class="text_center font_size_15 font_color_99" style="margin-top: 20px;">暂无订单</div>
           </div>
@@ -97,19 +137,44 @@
                   >订单编号：{{item.orderNo}}</div>
                   <div class="font_size_14" style="margin-top: 14px;">
                     <span v-if="item.state == 1">
-                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>待付款
+                      <span class="order_red">
+                        <img
+                          style="vertical-align:middle;width:20px;height:20px;float:left;"
+                          src="../../assets/images/icon_dot.png"
+                        />
+                      </span>待付款
                     </span>
                     <span v-if="item.state == 2">
-                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>待发货
+                      <span class="order_red">
+                        <img
+                          style="vertical-align:middle;width:20px;height:20px;float:left;"
+                          src="../../assets/images/icon_dot.png"
+                        />
+                      </span>待发货
                     </span>
                     <span v-if="item.state == 3">
-                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>待收货
+                      <span class="order_red">
+                        <img
+                          style="vertical-align:middle;width:20px;height:20px;float:left;"
+                          src="../../assets/images/icon_dot.png"
+                        />
+                      </span>待收货
                     </span>
                     <span v-if="item.state == 4">
-                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>已收货
+                      <span class="order_red">
+                        <img
+                          style="vertical-align:middle;width:20px;height:20px;float:left;"
+                          src="../../assets/images/icon_dot.png"
+                        />
+                      </span>已收货
                     </span>
                     <span v-if="item.state == 6">
-                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>交易关闭
+                      <span class="order_red">
+                        <img
+                          style="vertical-align:middle;width:20px;height:20px;float:left;"
+                          src="../../assets/images/icon_dot.png"
+                        />
+                      </span>交易关闭
                     </span>
                   </div>
                 </div>
@@ -120,7 +185,7 @@
                 >
                   <div class="div_width_30 margin_right_div3">
                     <div class="order_width_height">
-                      <img :src="items.picId" width="100%"  alt>
+                      <img :src="items.picId" width="100%" alt />
                     </div>
                   </div>
                   <div style="width:63%">
@@ -136,10 +201,18 @@
                   </div>
                 </div>
                 <div class="order_border margin_top_div5"></div>
-                 <div class="order_bt_p margin_top_div3" @click="goToPay(items.id)" v-if="item.state == 1" >
+                <div
+                  class="order_bt_p margin_top_div3"
+                  @click="goToPay(items.id)"
+                  v-if="item.state == 1"
+                >
                   <div class="oreder_bt_pay backgroun_color_4A">去支付</div>
                 </div>
-                <div class="order_bt_p margin_top_div3" @click="sureReceiving(items)" v-if="item.state == 3" >
+                <div
+                  class="order_bt_p margin_top_div3"
+                  @click="sureReceiving(items)"
+                  v-if="item.state == 3"
+                >
                   <div class="oreder_bt_pay backgroun_color_4A">确认收货</div>
                 </div>
               </div>
@@ -147,7 +220,7 @@
           </div>
           <div v-if="orderList.length == 0" style="height:100%;">
             <div class="text_center" style="margin-top:110px;height:100%;">
-              <img src="../../assets/images/1546.png" width="55%" alt>
+              <img src="../../assets/images/1546.png" width="55%" alt />
             </div>
             <div class="text_center font_size_15 font_color_99" style="margin-top: 20px;">暂无订单</div>
           </div>
@@ -164,19 +237,44 @@
                   >订单编号：{{item.orderNo}}</div>
                   <div class="font_size_14" style="margin-top: 14px;">
                     <span v-if="item.state == 1">
-                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>待付款
+                      <span class="order_red">
+                        <img
+                          style="vertical-align:middle;width:20px;height:20px;float:left;"
+                          src="../../assets/images/icon_dot.png"
+                        />
+                      </span>待付款
                     </span>
                     <span v-if="item.state == 2">
-                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>待发货
+                      <span class="order_red">
+                        <img
+                          style="vertical-align:middle;width:20px;height:20px;float:left;"
+                          src="../../assets/images/icon_dot.png"
+                        />
+                      </span>待发货
                     </span>
                     <span v-if="item.state == 3">
-                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>待收货
+                      <span class="order_red">
+                        <img
+                          style="vertical-align:middle;width:20px;height:20px;float:left;"
+                          src="../../assets/images/icon_dot.png"
+                        />
+                      </span>待收货
                     </span>
                     <span v-if="item.state == 4">
-                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>已收货
+                      <span class="order_red">
+                        <img
+                          style="vertical-align:middle;width:20px;height:20px;float:left;"
+                          src="../../assets/images/icon_dot.png"
+                        />
+                      </span>已收货
                     </span>
                     <span v-if="item.state == 6">
-                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>交易关闭
+                      <span class="order_red">
+                        <img
+                          style="vertical-align:middle;width:20px;height:20px;float:left;"
+                          src="../../assets/images/icon_dot.png"
+                        />
+                      </span>交易关闭
                     </span>
                   </div>
                 </div>
@@ -187,7 +285,7 @@
                 >
                   <div class="div_width_30 margin_right_div3">
                     <div class="order_width_height">
-                      <img :src="items.picId" width="100%"  alt>
+                      <img :src="items.picId" width="100%" alt />
                     </div>
                   </div>
                   <div style="width:63%">
@@ -205,11 +303,19 @@
                 <div class="order_border margin_top_div5"></div>
                 <!-- <div class="order_bt_p margin_top_div3" @click="sureReceiving(item)">
                   <div class="oreder_bt_pay backgroun_color_4A">确认收货</div>
-                </div> -->
-                 <div class="order_bt_p margin_top_div3" @click="goToPay(items.id)" v-if="item.state == 1" >
+                </div>-->
+                <div
+                  class="order_bt_p margin_top_div3"
+                  @click="goToPay(items.id)"
+                  v-if="item.state == 1"
+                >
                   <div class="oreder_bt_pay backgroun_color_4A">去支付</div>
                 </div>
-                <div class="order_bt_p margin_top_div3" @click="sureReceiving(items)" v-if="item.state == 3" >
+                <div
+                  class="order_bt_p margin_top_div3"
+                  @click="sureReceiving(items)"
+                  v-if="item.state == 3"
+                >
                   <div class="oreder_bt_pay backgroun_color_4A">确认收货</div>
                 </div>
               </div>
@@ -217,7 +323,7 @@
           </div>
           <div v-if="orderList.length == 0" style="height:100%;">
             <div class="text_center" style="margin-top:110px;;height:100%">
-              <img src="../../assets/images/1546.png" width="55%" alt>
+              <img src="../../assets/images/1546.png" width="55%" alt />
             </div>
             <div class="text_center font_size_15 font_color_99" style="margin-top: 20px;">暂无订单</div>
           </div>
@@ -234,19 +340,44 @@
                   >订单编号：{{item.orderNo}}</div>
                   <div class="font_size_14" style="margin-top: 14px;">
                     <span v-if="item.state == 1">
-                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>待付款
+                      <span class="order_red">
+                        <img
+                          style="vertical-align:middle;width:20px;height:20px;float:left;"
+                          src="../../assets/images/icon_dot.png"
+                        />
+                      </span>待付款
                     </span>
                     <span v-if="item.state == 2">
-                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>待发货
+                      <span class="order_red">
+                        <img
+                          style="vertical-align:middle;width:20px;height:20px;float:left;"
+                          src="../../assets/images/icon_dot.png"
+                        />
+                      </span>待发货
                     </span>
                     <span v-if="item.state == 3">
-                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>待收货
+                      <span class="order_red">
+                        <img
+                          style="vertical-align:middle;width:20px;height:20px;float:left;"
+                          src="../../assets/images/icon_dot.png"
+                        />
+                      </span>待收货
                     </span>
                     <span v-if="item.state == 4">
-                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>已收货
+                      <span class="order_red">
+                        <img
+                          style="vertical-align:middle;width:20px;height:20px;float:left;"
+                          src="../../assets/images/icon_dot.png"
+                        />
+                      </span>已收货
                     </span>
                     <span v-if="item.state == 6">
-                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>交易关闭
+                      <span class="order_red">
+                        <img
+                          style="vertical-align:middle;width:20px;height:20px;float:left;"
+                          src="../../assets/images/icon_dot.png"
+                        />
+                      </span>交易关闭
                     </span>
                   </div>
                 </div>
@@ -257,7 +388,7 @@
                 >
                   <div class="div_width_30 margin_right_div3">
                     <div class="order_width_height">
-                      <img :src="items.picId" width="100%" alt>
+                      <img :src="items.picId" width="100%" alt />
                     </div>
                   </div>
                   <div style="width:63%">
@@ -273,18 +404,26 @@
                   </div>
                 </div>
                 <div class="order_border margin_top_div5"></div>
-                 <div class="order_bt_p margin_top_div3" @click="goToPay(items.id)" v-if="item.state == 1" >
+                <div
+                  class="order_bt_p margin_top_div3"
+                  @click="goToPay(items.id)"
+                  v-if="item.state == 1"
+                >
                   <div class="oreder_bt_pay backgroun_color_4A">去支付</div>
                 </div>
-                <div class="order_bt_p margin_top_div3" @click="sureReceiving(items)" v-if="item.state == 3" >
+                <div
+                  class="order_bt_p margin_top_div3"
+                  @click="sureReceiving(items)"
+                  v-if="item.state == 3"
+                >
                   <div class="oreder_bt_pay backgroun_color_4A">确认收货</div>
                 </div>
               </div>
             </div>
           </div>
-          <div v-if="orderList.length == 0" style = "height:100%;">
+          <div v-if="orderList.length == 0" style="height:100%;">
             <div class="text_center" style="margin-top:110px;height:100%">
-              <img src="../../assets/images/1546.png" width="55%" alt>
+              <img src="../../assets/images/1546.png" width="55%" alt />
             </div>
             <div class="text_center font_size_15 font_color_99" style="margin-top: 20px;">暂无订单</div>
           </div>
@@ -301,19 +440,44 @@
                   >订单编号：{{item.orderNo}}</div>
                   <div class="font_size_14" style="margin-top: 14px;">
                     <span v-if="item.state == 1">
-                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>待付款
+                      <span class="order_red">
+                        <img
+                          style="vertical-align:middle;width:20px;height:20px;float:left;"
+                          src="../../assets/images/icon_dot.png"
+                        />
+                      </span>待付款
                     </span>
                     <span v-if="item.state == 2">
-                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>待发货
+                      <span class="order_red">
+                        <img
+                          style="vertical-align:middle;width:20px;height:20px;float:left;"
+                          src="../../assets/images/icon_dot.png"
+                        />
+                      </span>待发货
                     </span>
                     <span v-if="item.state == 3">
-                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>待收货
+                      <span class="order_red">
+                        <img
+                          style="vertical-align:middle;width:20px;height:20px;float:left;"
+                          src="../../assets/images/icon_dot.png"
+                        />
+                      </span>待收货
                     </span>
                     <span v-if="item.state == 4">
-                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>已完成
+                      <span class="order_red">
+                        <img
+                          style="vertical-align:middle;width:20px;height:20px;float:left;"
+                          src="../../assets/images/icon_dot.png"
+                        />
+                      </span>已完成
                     </span>
                     <span v-if="item.state == 6">
-                      <span class="order_red"><img style="vertical-align:middle;width:20px;height:20px;float:left;" src="../../assets/images/icon_dot.png"></span>交易关闭
+                      <span class="order_red">
+                        <img
+                          style="vertical-align:middle;width:20px;height:20px;float:left;"
+                          src="../../assets/images/icon_dot.png"
+                        />
+                      </span>交易关闭
                     </span>
                   </div>
                 </div>
@@ -324,7 +488,7 @@
                 >
                   <div class="div_width_30 margin_right_div3">
                     <div class="order_width_height">
-                      <img :src="items.picId" width="100%" alt>
+                      <img :src="items.picId" width="100%" alt />
                     </div>
                   </div>
                   <div style="width:63%">
@@ -340,25 +504,32 @@
                   </div>
                 </div>
                 <div class="order_border margin_top_div5"></div>
-                  <div class="order_bt_p margin_top_div3" @click="goToPay(items.id)" v-if="item.state == 1" >
+                <div
+                  class="order_bt_p margin_top_div3"
+                  @click="goToPay(items.id)"
+                  v-if="item.state == 1"
+                >
                   <div class="oreder_bt_pay backgroun_color_4A">去支付</div>
                 </div>
-                <div class="order_bt_p margin_top_div3" @click="sureReceiving(items)" v-if="item.state == 3" >
+                <div
+                  class="order_bt_p margin_top_div3"
+                  @click="sureReceiving(items)"
+                  v-if="item.state == 3"
+                >
                   <div class="oreder_bt_pay backgroun_color_4A">确认收货</div>
                 </div>
               </div>
             </div>
           </div>
           <div v-if="orderList.length == 0" style="height:100%;overflow-x:hidden">
-            <div class="text_center " style="height:100%;margin-top:110px">
-              <img src="../../assets/images/1546.png" width="55%" alt>
+            <div class="text_center" style="height:100%;margin-top:110px">
+              <img src="../../assets/images/1546.png" width="55%" alt />
               <div class="text_center font_size_15 font_color_99" style="margin-top: 20px;">暂无订单</div>
             </div>
-            
           </div>
         </div>
       </div>
-    <!-- </nut-scroller> -->
+      <!-- </nut-scroller> -->
     </mt-loadmore>
   </div>
 </template>
@@ -396,24 +567,26 @@ export default {
         current: "1",
         size: "10"
       },
-      allLoaded:false,
+      allLoaded: false,
       isUnMore1: false,
       isLoading1: false
     };
   },
   methods: {
-    loadBottom(){
+    loadBottom() {
       this.page.current++;
-      this.getOrderList('pull');
+      this.getOrderList("pull");
     },
-    loadTop(){
+    loadTop() {
       this.orderList = [];
       this.page.current = 1;
-      this.getOrderList('drop');
+      this.getOrderList("drop");
     },
-    handleScroll(){},
+    handleScroll() {},
     // tab切换
     tabSwitch(id) {
+      this.page.current = "1";
+      this.page.size = "10";
       this.switchFlage = id;
       this.orderList = [];
       this.getOrderList(); //切换时获取数据
@@ -446,8 +619,8 @@ export default {
             }
           })
         },
-        query:{
-          switch:this.switchFlage
+        query: {
+          switch: this.switchFlage
         }
       });
     },
@@ -461,42 +634,39 @@ export default {
       };
       this.$fetch.post(url.getOrderList, _obj).then(
         data => {
-          if(str == 'pull'){
+          if (str == "pull") {
             this.$refs.loadmore.onBottomLoaded();
-          }else if(str == "drop"){
+          } else if (str == "drop") {
             this.allLoaded = false;
             this.$refs.loadmore.onTopLoaded();
           }
           if (data.code == 0) {
-            if(data.obj.length){
-               this.$nextTick(() => {
-                
-                  data.obj.forEach(item => {
-              item.goodsList.forEach(items => {
-                items.picId = url.imgUrl + items.picId;
+            if (data.obj.length) {
+              this.$nextTick(() => {
+                data.obj.forEach(item => {
+                  item.goodsList.forEach(items => {
+                    items.picId = url.imgUrl + items.picId;
+                  });
+                  this.orderList.push(item);
+                });
               });
-              this.orderList.push(item);
-            });
-               })
-               
-            }else{
-              if(str == "pull"){
+            } else {
+              if (str == "pull") {
                 this.allLoaded = true;
                 this.page.current--;
-                this.$vux.toast.text('没有更多数据了')
+                this.$vux.toast.text("没有更多数据了");
               }
-            
+
               // this.$refs.loadmore.onBottomLoaded()
               this.isUnMore1 = true;
             }
-          
+
             // if(this.page.current > 1&&data.obj.length){
             //   this.orderList.push(data.obj)
             // }
-//             else{
-//  this.orderList = data.obj;
-//             }
-           
+            //             else{
+            //  this.orderList = data.obj;
+            //             }
           } else {
             alert(data.msg);
           }
@@ -528,10 +698,9 @@ export default {
     },
     // 上拉加载
     selPullUp() {
-      
       // var a = document.getElementById('#reflow').offsetWidth;
-       this.$nextTick(() => {
-         this.page.current++;
+      this.$nextTick(() => {
+        this.page.current++;
         this.getOrderList();
       });
     },
@@ -557,10 +726,10 @@ export default {
 };
 </script>
 <style>
-.nut-vert-list{
+.nut-vert-list {
   height: 100% !important;
 }
-.nut-scroller{
+.nut-scroller {
   /* height: calc(100% - 48px);
   overflow-x: hidden; */
 }
