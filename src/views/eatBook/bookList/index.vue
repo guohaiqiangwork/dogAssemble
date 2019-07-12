@@ -4,7 +4,7 @@
         <i class="weui-icon-search search_icon"></i>
         <input type="text" placeholder="搜索您想找的配方" v-model="iptVal" @input="input">
         <i></i>
-      </div>
+    </div>
 
   <!-- <nut-scroller
     :is-un-more="isUnMore1"
@@ -23,13 +23,13 @@
                 <dd>2018-02-25</dd>
             </dl>
     </div>-->
-    <div >
+    <!-- <div> -->
     
-      <template v-if="bookList.length">
+      <template v-if="bookList.length" style="margin-top:10px;">
 
       
       <div v-for="(item,index) in bookList" :key="index" >
-        <book-list :item="item">
+        <book-list :item="item" v-if="bookList.length">
           <div slot="content">
             <div v-for="(iten,ind) in item.memberRecipes" :key="ind" v-show="item.type == 0">
               <div
@@ -56,7 +56,7 @@
       <!-- <div v-else class="nodata">
         暂无数据
       </div> -->
-    </div>
+    <!-- </div> -->
    
   <!-- </nut-scroller> -->
     </mt-loadmore>

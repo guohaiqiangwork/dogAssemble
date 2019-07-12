@@ -36,7 +36,7 @@
                 <img src="../../assets/images/td@2x.png" width="30px">
               </div>
             </!-->
-            -->
+     
           </div>
         </div>
         <div class="div_display_flex" style="margin-top:-13%">
@@ -603,6 +603,7 @@ export default {
     },
     // 去配方
     goToTBook: function() {
+      console.log(1329)
       if (this.personalMsg.storeState != 1) {
         this.$vux.toast.text("店铺已打烊，该功能无法操作");
         return;

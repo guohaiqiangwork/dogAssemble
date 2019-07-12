@@ -55,8 +55,6 @@ export default {
       bottomMsge: {},
       arr: [],
       goodList: []
-      //  objectList: [{key: '1', value: '001 value'}, {key: '2', value: '002 value'}, {key: '3', value: '003 value'}],
-      //  objectListValue:null,
     };
   },
   watch: {
@@ -69,23 +67,14 @@ export default {
   methods: {
     //去支付页面
     payPage() { 
-      var arr = [];
-      var picList =[];
-      var cartsids = [];
-      var count = 0,
+      var arr = [],
+          cartsids = [],
+          count = 0,
           price = 0;
-      console.log(this.goodList,'lll')
       this.goodList.forEach(e => {
         if (e.ischeck) {
           count += e.count;
           price += (e.count*e.price).toFixed(2)/1;
-          e.cartGoodsSpecs.forEach(el =>{
-            picList.push({
-                specId:el.id,
-                specName:el.specName,
-                value:el.specValue,
-              })
-          })
           if(e.cartGoodsSpecs.length){
             arr.push({
             id: e.goodsId,
@@ -93,7 +82,11 @@ export default {
             name:e.name,
             img:url.imgUrl + e.picId,
             price:e.price,
-            specList:picList,
+            specList:[{
+                specId:e.cartGoodsSpecs[0].id,
+                specName:e.cartGoodsSpecs[0].specName,
+                value:e.cartGoodsSpecs[0].specValue,
+            }],
 
           });
           }else{
@@ -108,14 +101,6 @@ export default {
             
           }
           cartsids.push(e.id)
-          // picList.push(e.picId);
-          // e.cartGoodsSpecs.forEach(item =>{
-          //   specList.push({
-          //       specId:item.id,
-          //       specName:item.specName,
-          //       value:item.specValue,
-          //   });
-          // })
         }
       });
       if (!arr.length) {
@@ -126,7 +111,6 @@ export default {
         goodList: arr,
         type:'0',
         cartsIds:cartsids,
-        // name:
       };
       obj = JSON.stringify(obj);
       this.$router.push("/paysure?data=" + obj + "&count="+count + "&price="+price);
