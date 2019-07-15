@@ -129,6 +129,7 @@ export default {
             }
             if(item.ischeck){
                 item.money = (item.count * item.price).toFixed(2)/1;
+                this.saveCart();
             }else{
                 // item.money = 0;
             }
@@ -166,7 +167,6 @@ export default {
                         })
                     }
                 });
-              
                  this.charList = res.obj;
                  this.$emit('package',res.attributes)
             })
@@ -215,6 +215,8 @@ export default {
             })
         },
         saveCart(){
+            console.log(this.cartDate,'kkk');
+            
             this.$fetch.post('fruits/app/cart/changeNum',this.cartDate).then(res =>{
                 if(res.code ==0){
                     // this.$router.go(0);

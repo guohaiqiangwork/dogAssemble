@@ -76,6 +76,7 @@ export default {
   methods: {
         //添加购物车
     addCart(item) {
+      return
       this.$fetch.post("fruits/app/cart/joinCart", item).then(res => {
         this.$parent.buyNum = this.$parent.buyNum / 1;
         this.$parent.buyNum += this.form.num / 1;
@@ -90,41 +91,46 @@ export default {
       var arr = [],
           cartsids = [],
           count = 0,
+          specList=[],
           price = 0;
       this.goodList.forEach(e => {
         // console.log(e)
         // return
+        specList =[];
         if (e.ischeck) {
           count += e.count;
           price += (e.count*e.price).toFixed(2)/1;
           if(e.cartGoodsSpecs.length){
+            e.cartGoodsSpecs.forEach(item =>{
+              specList.push({
+                specId:item.id,
+                specName:item.specName,
+                value:item.specValue,
+              })
+            })
             arr.push({
             id: e.goodsId,
             num: e.count,
             name:e.name,
             img:url.imgUrl + e.picId,
             price:e.price,
-            specList:[{
-                specId:e.cartGoodsSpecs[0].id,
-                specName:e.cartGoodsSpecs[0].specName,
-                value:e.cartGoodsSpecs[0].specValue,
-            }],
+            specList:specList,
 
           });
-          this.addCart({
-            openId:localStorage.getItem('openId'),
-            id: e.goodsId,
-            num: e.count,
-            name:e.name,
-            img:url.imgUrl + e.picId,
-            price:e.price,
-            specList:[{
-                specId:e.cartGoodsSpecs[0].id,
-                specName:e.cartGoodsSpecs[0].specName,
-                value:e.cartGoodsSpecs[0].specValue,
-            }],
+          // this.addCart({
+          //   openId:localStorage.getItem('openId'),
+          //   id: e.goodsId,
+          //   num: e.count,
+          //   name:e.name,
+          //   img:url.imgUrl + e.picId,
+          //   price:e.price,
+          //   specList:[{
+          //       specId:e.cartGoodsSpecs[0].id,
+          //       specName:e.cartGoodsSpecs[0].specName,
+          //       value:e.cartGoodsSpecs[0].specValue,
+          //   }],
 
-          });
+          // });
           }else{
             arr.push({
               id: e.goodsId,
@@ -134,15 +140,15 @@ export default {
               img:url.imgUrl + e.picId,
               specList:[]
             });
-             this.addCart({
-              openId:localStorage.getItem('openId'),
-              id: e.goodsId,
-              num: e.count,
-              name:e.name,
-              price:e.price,
-              img:url.imgUrl + e.picId,
-              specList:[]
-            });
+            //  this.addCart({
+            //   openId:localStorage.getItem('openId'),
+            //   id: e.goodsId,
+            //   num: e.count,
+            //   name:e.name,
+            //   price:e.price,
+            //   img:url.imgUrl + e.picId,
+            //   specList:[]
+            // });
           }
           cartsids.push(e.id)
          
@@ -176,6 +182,7 @@ export default {
     },
     //购物车数据
     getArray(arr, n) {
+      console.log(arr,'777')
       if (!arr.length) {
         this.goodList = arr;
         return;
