@@ -1,7 +1,7 @@
 <template>
   <div style="background-color:#F8F8F8;min-height:700px;width:100%;height:100%;overflow-x:hidden;">
-    <!-- 搜索 -->
-    <div class="search_box">
+    <!-- 搜索 商户配方-->
+    <div class="search_box" v-if="inputSearch == 3 || inputSearch == 2">
       <i class="weui-icon-search search_icon"></i>
       <input
         type="text"
@@ -12,9 +12,21 @@
       />
       <i></i>
     </div>
+    <!-- 搜索 个人病症-->
+    <div class="search_box" v-if="inputSearch == 0 || inputSearch == 1">
+      <i class="weui-icon-search search_icon"></i>
+      <input
+        type="text"
+        placeholder="搜索您想找的病症…"
+        v-model="form.name"
+        style="width:100%;height:100%;background-color:#EFEFEF; outline: none;border:none"
+        v-on:input="input"
+      />
+      <i></i>
+    </div>
     <div class="margin_top_div3" v-show="peiFangList.length">
       <!-- 全部配方 -->
-      <div id="allbook" >
+      <div id="allbook">
         <div v-for="(item,index) in peiFangList" :key="index">
           <div class="book-list">
             <p class="flex-between align-center mb-36">
@@ -49,28 +61,30 @@
           </div>
         </div>
       </div>
-    
     </div>
     <div
       v-if="!peiFangList.length"
       class="nodata"
       style="height: calc(100% - 0.7rem);    background-color: rgb(248, 248, 248);"
     >
-      <img src="../../assets/images/1546.png" alt style="width:4.78rem;height:3.23rem;margin-top:-4rem;" />
+      <img
+        src="../../assets/images/1546.png"
+        alt
+        style="width:4.78rem;height:3.23rem;margin-top:-4rem;"
+      />
       <p style="font-size:.3rem;color:#999;margin-top:0.5rem;">暂无数据</p>
     </div>
-    <div  v-if="peiFangList.length&&recommendStoreList[0].province">
-        <!-- 推荐门店 门店@2x-->
-       
+    <div v-if="peiFangList.length&&recommendStoreList[0].province">
+      <!-- 推荐门店 门店@2x-->
+
       <div class="div_display_flex">
-        
         <div class="national_list font_color_00 font_size_13 backgroun_color_fff margin_top_div3">
-           <div class="div_display_flex">
+          <div class="div_display_flex">
             <div class>
               <img src="../../assets/images/门店@2x.png" width="13px" alt />
             </div>
             <div class="font_color_4A margin_left_div2">推荐门店</div>
-        </div>
+          </div>
           <div class="div_display_flex margin_top_div3">
             <div
               class="div_width_70 margin_left_div2"
@@ -81,7 +95,10 @@
           </div>
           <div class="div_display_flex margin_top_div3">
             <div class="div_width_70 margin_left_div2">{{recommendStoreList[0].address}}</div>
-            <div class="div_width_30 margin_right_div2 text_right" @click="goToMap(recommendStoreList[0])">
+            <div
+              class="div_width_30 margin_right_div2 text_right"
+              @click="goToMap(recommendStoreList[0])"
+            >
               <img src="../../assets/images/1440@2x.png" width="12px" />
             </div>
           </div>
@@ -113,7 +130,8 @@ export default {
         openId: "",
         name: "",
         size: "10",
-        current: "1"
+        current: "1",
+        disName: ""
       },
       latitude: "",
       longitude: "",
@@ -128,16 +146,17 @@ export default {
         name: "",
         size: "10",
         current: "1"
-      }
+      },
+      inputSearch:''//判断展示个人还是商铺
     };
   },
   methods: {
     // 去地图
     goToMap(item) {
-      console.log(item)
-       if(!item.lat){
-        alert('该数据不存在坐标')
-        return
+      console.log(item);
+      if (!item.lat) {
+        alert("该数据不存在坐标");
+        return;
       }
       this.$router.push({
         name: "Tmap",
@@ -311,6 +330,12 @@ export default {
     // this.getRecipeList();
     // this.getMyLocation();
     this.addressDetail(); //获取地理位置
+    if (localStorage.getItem("type")) {
+      this.inputSearch = localStorage.getItem("type");
+    } else {
+      this.inputSearch = "0";
+    }
+
     // this.getList()
     // console.log("病症检测");
   }
