@@ -108,28 +108,33 @@ export default {
         },
         //传递购物车数据
         chart(item,n){
+            // this.postCart(n,item);
+
             var arr = [...this.charList];
             this.$emit('receiveArray',arr);
         },
         //传递购买数量
         change(item,n,arr){
-           
+            console.log(111)
             this.cartDate.id = item.id;
             this.cartDate.num = item.count;
+            this.postCart(n,item);
+            
             if(item.count <= 0){
                 this.chart(item,n);
                 this.cartDate.num = 0;
-                this.postCart(n,item);
+                // this.postCart(n,item);
                 this.bottomMsg.checkcount--;
                 this.$emit('changeNum',this.goodsNum);
                 return
                 
             }else{
+               
                 this.chart(item,n);
             }
             if(item.ischeck){
                 item.money = (item.count * item.price).toFixed(2)/1;
-                this.saveCart();
+                 this.saveCart();
             }else{
                 // item.money = 0;
             }
@@ -183,7 +188,7 @@ export default {
         },
         //给后台存储购物车数量
         postCart(n,item){
-            // console.log(n,9879);
+            console.log(n,9879);
             var arr =[];
             // arr = [...this.charList];
             this.charList.forEach(e =>{

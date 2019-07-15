@@ -94,8 +94,6 @@ export default {
           specList=[],
           price = 0;
       this.goodList.forEach(e => {
-        // console.log(e)
-        // return
         specList =[];
         if (e.ischeck) {
           count += e.count;
