@@ -112,6 +112,7 @@ export default {
 
           });
           this.addCart({
+            openId:localStorage.getItem('openId'),
             id: e.goodsId,
             num: e.count,
             name:e.name,
@@ -134,6 +135,7 @@ export default {
               specList:[]
             });
              this.addCart({
+              openId:localStorage.getItem('openId'),
               id: e.goodsId,
               num: e.count,
               name:e.name,
