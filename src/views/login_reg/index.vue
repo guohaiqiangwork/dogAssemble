@@ -56,7 +56,7 @@
           style="padding-right:10px;display:block;with:0.33rem;height:0.33rem"
           src="../../assets/images/验证码@2x.png"
         />
-        <a slot="right" class="code_btn" href="#" @click="sendCode">{{codeValue}}</a>
+        <a slot="right" class="code_btn" href="javascript:void(0)" @click="sendCode">{{codeValue}}</a>
       </x-input>
       <x-input
         class="mt-40"
@@ -115,8 +115,8 @@
       </x-input>
       <x-input disabled v-model="disVal"></x-input>
       <p class="flex-between px-15">
-        <a href="#" @click="editPass">忘记密码</a>
-        <a href="#" @click="regTest">立即注册</a>
+        <a href="javascript:void(0)" @click="editPass">忘记密码</a>
+        <a href="javascript:void(0)" @click="regTest">立即注册</a>
       </p>
     </div>
     <x-button
@@ -408,6 +408,7 @@ export default {
     settitle("注册与登录");
   },
   mounted() {
+    console.log(this.$route,'jlkjl')
     this.getClassfications(); //获取用户open ID
     if (this.$route.query["parm"]) {
       var obj = JSON.parse(this.$route.query["parm"]);
