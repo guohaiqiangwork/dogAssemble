@@ -191,6 +191,7 @@ export default {
         this.$vux.toast.text('请选择收货地址')
         return
       }
+     
       this.form.addressId = this.goodsMsg.id;
       this.form.goodList = [...this.option.goodList];
       this.form.type = this.option.type;
@@ -198,7 +199,6 @@ export default {
         this.form.goodList =[];
         this.form.cartsIds = this.option.cartsIds;
       }
-      console.log(this.form, "oooo",this.form);
       this.$fetch.post("fruits/app/cart/saveShopOrder", this.form).then(res => {
         if (res.msg == "success") {
           this.getCartNum(res.attributes.orderId)

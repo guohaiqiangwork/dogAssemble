@@ -54,7 +54,16 @@ export default {
       freeState: {},
       bottomMsge: {},
       arr: [],
-      goodList: []
+      goodList: [],
+      form: {
+        openId: localStorage.getItem("openId"),
+        id: "",
+        num: null,
+        pic: "",
+        img: "",
+        price: null,
+        specList: []
+      },
     };
   },
   watch: {
@@ -65,18 +74,44 @@ export default {
     }
   },
   methods: {
+        //添加购物车
+    addCart(item) {
+      this.$fetch.post("fruits/app/cart/joinCart", item).then(res => {
+        this.$parent.buyNum = this.$parent.buyNum / 1;
+        this.$parent.buyNum += this.form.num / 1;
+        localStorage.setItem("catnum", this.$parent.buyNum);
+        // this.$router.push('/paysure?data='+obj + "&count="+this.form.num + "&price="+this.goodsDetail.price/1*this.form.num/1)
+      });
+    },
     //去支付页面
     payPage() { 
+      // console.log(this.$parent.buyNum)
+      // return
       var arr = [],
           cartsids = [],
           count = 0,
           price = 0;
       this.goodList.forEach(e => {
+        // console.log(e)
+        // return
         if (e.ischeck) {
           count += e.count;
           price += (e.count*e.price).toFixed(2)/1;
           if(e.cartGoodsSpecs.length){
             arr.push({
+            id: e.goodsId,
+            num: e.count,
+            name:e.name,
+            img:url.imgUrl + e.picId,
+            price:e.price,
+            specList:[{
+                specId:e.cartGoodsSpecs[0].id,
+                specName:e.cartGoodsSpecs[0].specName,
+                value:e.cartGoodsSpecs[0].specValue,
+            }],
+
+          });
+          this.addCart({
             id: e.goodsId,
             num: e.count,
             name:e.name,
@@ -98,9 +133,17 @@ export default {
               img:url.imgUrl + e.picId,
               specList:[]
             });
-            
+             this.addCart({
+              id: e.goodsId,
+              num: e.count,
+              name:e.name,
+              price:e.price,
+              img:url.imgUrl + e.picId,
+              specList:[]
+            });
           }
           cartsids.push(e.id)
+         
         }
       });
       if (!arr.length) {
