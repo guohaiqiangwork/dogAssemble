@@ -6,7 +6,7 @@
         <div class="div_display_flex font_size_16 font_color_33 margin_top_div5">
           <div
             class="div_width_50"
-          >{{item.payType == 3?"现金充值":item.payType == 2?"支付宝充值":item.payType == 4?"微信充值":""}}</div>
+          >{{item.payType == 3?"现金充值":item.payType == 2?"支付宝充值":item.payType == 4?"微信充值":item.payType == 1?"线上充值":""}}</div>
           <div class="div_width_50 text_right">+ {{item.recharge}}</div>
         </div>
         <div

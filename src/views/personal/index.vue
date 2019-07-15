@@ -36,7 +36,6 @@
                 <img src="../../assets/images/td@2x.png" width="30px">
               </div>
             </!-->
-     
           </div>
         </div>
         <div class="div_display_flex" style="margin-top:-13%">
@@ -49,7 +48,10 @@
             <div
               class="font_color_E8 font_size_15"
               style="width:60%;margin-top:-5%;text-indent:5%;"
-            >押金：{{personalMsg.deposit.toFixed(2)}}元</div>
+            >
+              押金：{{personalMsg.deposit.toFixed(2)}}元
+              <div class="money_falg_y" v-if="personalMsg.deposit.toFixed(2) < '600' ">押金不足</div>
+            </div>
             <div class="personal_falg_m" style="margin-left:15%" v-if="personalMsg.storeState == 1">
               营业中
               <!-- {{personalMsg.storeState == 1 ? "营业中":"已打烊"}} -->
@@ -475,7 +477,7 @@ export default {
       this.$fetch.post(url.changeCustomer, _obj).then(
         data => {
           if (data.code == 0) {
-            console.log(data)
+            console.log(data);
             localStorage.setItem("type", data.attributes.type);
             localStorage.setItem("appUserId", data.attributes.appUserId);
 
@@ -899,6 +901,17 @@ a:link {
 }
 .margin_top28 {
   margin-top: 28%;
+}
+.money_falg_y {
+  margin-top: -20%;
+  width: 32%;
+  color: red;
+  border: 1px solid #e6435a;
+  border-radius: 15px;
+  font-size: 9px;
+  color: #fff;
+  background-color: #e6435a;
+  margin-left: 54%;
 }
 </style>
 
