@@ -212,12 +212,15 @@ export default {
     getListF() {
       switch (this.routeParams.data.id) {
         case "001":
+          settitle('推荐返佣列表');
           this.getRecommendB();
           break;
         case "002":
+          settitle('视频返佣列表');
           this.getVideoDistri();
           break;
         case "003":
+          settitle('商城返佣列表');
           this.getOrderDistri();
           break;
       }
