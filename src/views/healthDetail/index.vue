@@ -157,6 +157,9 @@ export default {
               if(this.itemName && !str){
                 this.getRecommendBList =[];
               }
+               if(!this.itemName){
+                this.getRecommendBList =[];
+              }
               this.getRecommendBList = this.getRecommendBList.concat(data.obj);
             }
           } else {
@@ -196,6 +199,9 @@ export default {
               if(this.itemName && !str){
                 this.getVideoDistriList =[];
               }
+              if(!this.itemName){
+                this.getVideoDistriList =[];
+              }
               this.getVideoDistriList = this.getVideoDistriList.concat(data.obj);
             }
           } else {
@@ -215,6 +221,7 @@ export default {
         size: this.page.size,
         current: this.page.current
       };
+   
       this.$fetch.post(url.getOrderDistri, _obj).then(
         data => {
           if(str == 'pull'){
@@ -235,7 +242,10 @@ export default {
               if(this.itemName && !str){
                 this.getOrderDistriList =[];
               }
-              this.getOrderDistriList.concat(data.obj);
+              if(!this.itemName){
+                this.getOrderDistriList =[];
+              }
+              this.getOrderDistriList = this.getOrderDistriList.concat(data.obj);
             }
           } else {
             alert(data.msg);
