@@ -51,7 +51,8 @@ import sharedBonusTwo from '@/views/sharedBonusTwo/index'//共享奖金
 import privacyProtocol from '@/views/privacyProtocol/index'//协议
 import successful from '@/views/successful/index'
 import changeShop from '@/views/changeShop/index'
-Vue.use(Router)
+import answer from '@/views/answer/index' //答题
+Vue.use(Router) 
 
 export default new Router({
   routes: [
@@ -603,6 +604,15 @@ export default new Router({
         title: '共享奖金'
       },
       component: sharedBonusTwo
+    },
+    {
+      // 共享奖金   
+      path: '/answer',
+      name: 'answer',
+      meta: {
+        title: '答题'
+      },
+      component: answer
     },
     {
       path: '/404',
