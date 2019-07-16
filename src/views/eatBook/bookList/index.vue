@@ -122,7 +122,7 @@ export default {
           console.log(res, 999);
           // this.$vux.loading.hide();
 
-          if (res.code.length == 0) {
+          if (res.obj.length == 0) {
             this.isUnMore1 = true;
             if(str == 'pull'){
               this.allLoaded = true;

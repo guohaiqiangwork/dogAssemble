@@ -1,5 +1,5 @@
 <template>
-  <div style="height:100%;">
+  <div style="height:100%;overflow-x:hidden">
     <div class="search_box">
       <i class="weui-icon-search search_icon"></i>
       <input
@@ -12,15 +12,17 @@
       >
       <i></i>
     </div>
-    <nut-scroller
+    <!-- <nut-scroller
       :is-un-more="isUnMore1"
       :is-loading="isLoading1"
       :type="'vertical'"
       @loadMore="selPullUp"
       @pulldown="pulldown"
       style = "height:100%;"
-    >
-      <div slot="list" class="nut-vert-list-panel">
+    > -->
+    <div class="main-body">
+      <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore" :auto-fill="false"  >
+      <div  class="nut-vert-list-panel">
         <div v-if="routeParams.data.id == '001'">
           <div
             class="div_display_flex margin_left_div6 margin_top_div3"
@@ -77,7 +79,9 @@
           </div>
         </div>
       </div>
-    </nut-scroller>
+    <!-- </nut-scroller> -->
+     </mt-loadmore>
+   </div>
   </div>
 </template>
 <script>
@@ -96,6 +100,7 @@ export default {
       getRecommendBList: [],
       getVideoDistriList: [],
       name: "",
+      allLoaded:false,
       isUnMore1: false,
       isLoading1: false,
       page: {
@@ -123,7 +128,7 @@ export default {
     },
 
     // 健康奖金--推荐返佣列表
-    getRecommendB() {
+    getRecommendB(str) {
       let _obj = {
         openId: localStorage.getItem("openId"),
         name: this.itemName,
@@ -132,12 +137,28 @@ export default {
       };
       this.$fetch.post(url.getRecommendB, _obj).then(
         data => {
+          if(str == 'pull'){
+            this.$refs.loadmore.onBottomLoaded()
+          }else if(str == 'drop'){
+            this.allLoaded = false;
+            this.$refs.loadmore.onTopLoaded();
+          }
           if (data.code == 0) {
             // if (this.getRecommendBList.length == 0) {
-              this.getRecommendBList = data.obj;
-            // } else {
-              // this.getRecommendBList.concat(data.obj);
-            // }
+              if(data.obj.length == 0 && str == 'pull'){
+                this.allLoaded = true;
+                this.page.current--;
+                this.$vux.toast.text('没有更多数据了')
+              }
+            
+              if (this.getRecommendBList.length == 0) {
+                this.getRecommendBList = data.obj;
+            } else {
+              if(this.itemName && !str){
+                this.getRecommendBList =[];
+              }
+              this.getRecommendBList = this.getRecommendBList.concat(data.obj);
+            }
           } else {
             alert(data.msg);
           }
@@ -148,7 +169,7 @@ export default {
       );
     },
     // 视频返佣列表
-    getVideoDistri() {
+    getVideoDistri(str) {
       let _obj = {
         openId: localStorage.getItem("openId"),
         name: this.itemName,
@@ -157,11 +178,25 @@ export default {
       };
       this.$fetch.post(url.getVideoDistri, _obj).then(
         data => {
+          if(str == 'pull'){
+            this.$refs.loadmore.onBottomLoaded()
+          }else if(str == 'drop'){
+            this.allLoaded = false;
+            this.$refs.loadmore.onTopLoaded();
+          }
           if (data.code == 0) {
+            if(data.obj.length == 0 && str == 'pull'){
+                this.allLoaded = true;
+                this.page.current--;
+                this.$vux.toast.text('没有更多数据了')
+            }
             if (this.getVideoDistriList.length == 0) {
               this.getVideoDistriList = data.obj;
             } else {
-              this.getVideoDistriList.concat(data.obj);
+              if(this.itemName && !str){
+                this.getVideoDistriList =[];
+              }
+              this.getVideoDistriList = this.getVideoDistriList.concat(data.obj);
             }
           } else {
             alert(data.msg);
@@ -173,7 +208,7 @@ export default {
       );
     },
     // 健康奖金商城
-    getOrderDistri() {
+    getOrderDistri(str) {
       let _obj = {
         openId: localStorage.getItem("openId"),
         name: this.itemName,
@@ -182,10 +217,24 @@ export default {
       };
       this.$fetch.post(url.getOrderDistri, _obj).then(
         data => {
+          if(str == 'pull'){
+            this.$refs.loadmore.onBottomLoaded()
+          }else if(str == 'drop'){
+            this.allLoaded = false;
+            this.$refs.loadmore.onTopLoaded();
+          }
           if (data.code == 0) {
+             if(data.obj.length == 0 && str == 'pull'){
+                this.allLoaded = true;
+                this.page.current--;
+                this.$vux.toast.text('没有更多数据了')
+            }
             if (this.getOrderDistriList.length == 0) {
               this.getOrderDistriList = data.obj;
             } else {
+              if(this.itemName && !str){
+                this.getOrderDistriList =[];
+              }
               this.getOrderDistriList.concat(data.obj);
             }
           } else {
@@ -198,30 +247,34 @@ export default {
       );
     },
     // 上拉加载
-    selPullUp() {
+    loadBottom() {
       this.page.current++;
-      this.getListF();
+      this.getListF('pull');
     },
     // 下拉刷新
-    pulldown() {
+    loadTop() {
+      this.getOrderDistriList =[];
+      this.getVideoDistriList = [];
+      this.getRecommendBList = [];
       this.isUnMore1 = false;
       this.page.current = 1;
-      this.getListF();
+      this.getListF('drop');
     },
     // 判断调用那个
-    getListF() {
+    getListF(str = '') {
       switch (this.routeParams.data.id) {
         case "001":
           settitle('推荐返佣列表');
-          this.getRecommendB();
+          this.getRecommendB(str);
           break;
         case "002":
           settitle('视频返佣列表');
-          this.getVideoDistri();
+          console.log(this.itemName,'jljljl')
+          this.getVideoDistri(str);
           break;
         case "003":
           settitle('商城返佣列表');
-          this.getOrderDistri();
+          this.getOrderDistri(str);
           break;
       }
     }
