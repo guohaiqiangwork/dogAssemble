@@ -4,7 +4,7 @@
       <i class="weui-icon-search search_icon"></i>
       <input
         type="text"
-        placeholder="搜索您找的店铺"
+        placeholder="搜索您找的人名"
         v-on:input="getWholeList(name)"
         v-model="name"
         maxlength="11"
@@ -92,9 +92,9 @@ export default {
   name: "healthDetail",
   data() {
     return {
-      getOrderDistriList: "",
-      getRecommendBList: "",
-      getVideoDistriList: "",
+      getOrderDistriList: [],
+      getRecommendBList: [],
+      getVideoDistriList: [],
       name: "",
       isUnMore1: false,
       isLoading1: false,

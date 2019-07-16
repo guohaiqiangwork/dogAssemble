@@ -39,7 +39,7 @@
     <!-- 推荐返佣 -->
     <div v-if="switchFlage == '001'">
       <div class="backgroun_color_f3" style="min-height:400px">
-        <div class="div_display_flex padding_top_div3 backgroun_color_f3">
+        <div class="div_display_flex padding_top_div3 backgroun_color_f3" style="position:relative">
           <div class="national_flag_title margin_left_div3"></div>
           <div class="font_color_00 font_size_14 margin_left_div2" style="margin-top: 0.8%;">推荐返佣</div>
           <div class="font_size_13 font_color_00 margin_top_div1" @click="goToHealthDetail">全部返佣></div>
@@ -75,7 +75,7 @@
     <!-- 视频返佣 -->
     <div v-if="switchFlage == '002'">
       <div class="backgroun_color_f3" style="min-height:400px">
-        <div class="div_display_flex padding_top_div3 backgroun_color_f3">
+        <div class="div_display_flex padding_top_div3 backgroun_color_f3" style="position:relative">
           <div class="national_flag_title margin_left_div3"></div>
           <div class="font_color_00 font_size_14 margin_left_div2" style="margin-top: 0.8%;">视频返佣</div>
           <div
@@ -115,7 +115,7 @@
     <!-- 商城返佣 -->
     <div v-if="switchFlage == '003'">
       <div class="backgroun_color_f3" style="min-height:400px">
-        <div class="div_display_flex padding_top_div3 backgroun_color_f3">
+        <div class="div_display_flex padding_top_div3 backgroun_color_f3" style="position:relative">
           <div class="national_flag_title margin_left_div3"></div>
           <div class="font_color_00 font_size_14 margin_left_div2" style="margin-top: 0.8%;">商城返佣</div>
           <div
@@ -399,6 +399,7 @@ export default {
 .margin_top_div1 {
   position: absolute;
   right: 0.1rem;
+  top: 0.2rem;
 }
 .fengX_c_l {
   position: fixed;
