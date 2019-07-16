@@ -157,7 +157,7 @@ export default {
               if(this.itemName && !str){
                 this.getRecommendBList =[];
               }
-               if(!this.itemName){
+              if(!this.itemName && !str){
                 this.getRecommendBList =[];
               }
               this.getRecommendBList = this.getRecommendBList.concat(data.obj);
@@ -199,7 +199,7 @@ export default {
               if(this.itemName && !str){
                 this.getVideoDistriList =[];
               }
-              if(!this.itemName){
+              if(!this.itemName && !str){
                 this.getVideoDistriList =[];
               }
               this.getVideoDistriList = this.getVideoDistriList.concat(data.obj);
@@ -242,7 +242,7 @@ export default {
               if(this.itemName && !str){
                 this.getOrderDistriList =[];
               }
-              if(!this.itemName){
+              if(!this.itemName && !str){
                 this.getOrderDistriList =[];
               }
               this.getOrderDistriList = this.getOrderDistriList.concat(data.obj);
