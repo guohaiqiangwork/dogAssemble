@@ -304,8 +304,13 @@ export default {
   border:1px solid #fff;
 }
 .main-body{
-    margin-top: 50px;
     overflow-x: hidden;
+    position: fixed;
+    top: 50px;
+    width: 100%;
+    height: calc(100% - 50px);
+    z-index: 1;
+
 }
 .search_box {
   height: 0.7rem;
@@ -313,11 +318,11 @@ export default {
   border-radius: 0.35rem !important;
   position: fixed;
   top: 0;
-  left: 2%;
+  left: 3%;
   overflow: hidden;
   padding: 0 0.31rem;
   box-sizing: border-box;
-  z-index: 1;
+  z-index: 3;
   display: flex;
   align-items: center;
   background: #efefef;
