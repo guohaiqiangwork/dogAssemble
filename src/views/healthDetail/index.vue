@@ -22,7 +22,7 @@
     > -->
     <div class="main-body">
       <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore" :auto-fill="false"  >
-      <div  class="nut-vert-list-panel" style="margin-top:50px;overflow:hidden">
+      <div  class="nut-vert-list-panel">
         <div v-if="routeParams.data.id == '001'">
           <div
             class="div_display_flex margin_left_div6 margin_top_div3"
@@ -136,7 +136,8 @@ export default {
         size: this.page.size,
         current: this.page.current
       };
-      this.$fetch.post(url.getRecommendB, _obj).then(         
+      this.$fetch.post(url.getRecommendB, _obj).then(  
+           
         data => {
           if(str == 'pull'){
             this.$refs.loadmore.onBottomLoaded()
@@ -302,11 +303,18 @@ export default {
 .mint-loadmore-content{
   border:1px solid #fff;
 }
+.main-body{
+    margin-top: 50px;
+    overflow-x: hidden;
+}
 .search_box {
   height: 0.7rem;
   margin: 0 auto;
   border-radius: 0.35rem !important;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 2%;
+  overflow: hidden;
   padding: 0 0.31rem;
   box-sizing: border-box;
   z-index: 1;
