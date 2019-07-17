@@ -1,16 +1,18 @@
 <template>
   <div style="height:100%;overflow:hidden">
-    <div class="search_box">
-      <i class="weui-icon-search search_icon"></i>
-      <input
-        type="text"
-        placeholder="搜索您找的人名"
-        v-on:input="getWholeList(name)"
-        v-model="name"
-        maxlength="11"
-        style="width:100%;height:100%;background-color:#EFEFEF; outline: none;border:none"
-      >
-      <i></i>
+    <div style="background:#fff;width:100%;height:60px;">
+      <div class="search_box">
+        <i class="weui-icon-search search_icon"></i>
+        <input
+          type="text"
+          placeholder="搜索您找的人名"
+          v-on:input="getWholeList(name)"
+          v-model="name"
+          maxlength="11"
+          style="width:100%;height:100%;background-color:#EFEFEF; outline: none;border:none"
+        >
+        <i></i>
+      </div>
     </div>
     <!-- <nut-scroller
       :is-un-more="isUnMore1"
@@ -21,7 +23,7 @@
       style = "height:100%;"
     > -->
     <div class="main-body">
-      <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore" :auto-fill="false"  >
+      <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore" :auto-fill="false" >
       <div  class="nut-vert-list-panel">
         <div v-if="routeParams.data.id == '001'">
           <div
@@ -104,7 +106,7 @@ export default {
       isUnMore1: false,
       isLoading1: false,
       page: {
-        size: 10,
+        size: 20,
         current: 1
       }
     };
