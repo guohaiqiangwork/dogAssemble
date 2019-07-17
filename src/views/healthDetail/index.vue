@@ -1,5 +1,5 @@
 <template>
-  <div style="height:100%;overflow:hidden">
+  <div style="height:100%;overflow:hidden" id="box">
     <div style="background:#fff;width:100%;height:60px;position:fixed;top:0;z-index:20;margin-bottom:20px;">
       <div class="search_box">
         <i class="weui-icon-search search_icon"></i>
@@ -127,7 +127,10 @@ export default {
         this.getListF();
         // this.filterList(this.list,this.iptVal);
         var wrapper = document.querySelector('.main-body');
+        var box = document.querySelector('#box');
+        box.scrollTop = 0;
         wrapper.scrollTop = 0;
+        wrapper.style.top = 80 + 'px';
         var app = document.querySelector('#app');
         app.scrollTop = 0;
         console.log(wrapper.scrollTop,app.scrollTop)
