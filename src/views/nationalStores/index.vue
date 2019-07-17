@@ -1,5 +1,5 @@
 <template>
-  <div class="backgroun_color_fff " style="height:100%;overflow:scroll" id="store">
+  <div class="backgroun_color_fff " style="height:100%;overflow:hidden" id="store">
      <!-- 搜索 -->
         <div class="search_box" style="border:none;box-shadow:0px 3px 10px rgba(136,136,136,0.16);">
           <i class="weui-icon-search search_icon"></i>
@@ -528,8 +528,8 @@ export default {
   width: 100%;
   height: calc(100% - 0.9rem);
   padding-bottom: 70px;
-  
-    -webkit-overflow-scrolling: touch;
+  z-index: 1;
+  -webkit-overflow-scrolling: touch;
   /* touch-action: none; */
 }
 /* .nodata{
@@ -567,10 +567,12 @@ export default {
   height: 0.7rem;
   margin: 0 auto;
   border-radius: 0.35rem;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 2.5%;
   padding: 0 0.31rem;
   box-sizing: border-box;
-  z-index: 1;
+  z-index: 3;
   display: flex;
   align-items: center;
   background: #efefef;

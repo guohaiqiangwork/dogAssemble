@@ -1,5 +1,5 @@
 <template>
-  <div style="height:100%;overflow-x:hidden">
+  <div style="height:100%;overflow:hidden">
     <div class="search_box">
       <i class="weui-icon-search search_icon"></i>
       <input
@@ -306,9 +306,9 @@ export default {
 .main-body{
     overflow-x: hidden;
     position: fixed;
-    top: 50px;
+    top: 60px;
     width: 100%;
-    height: calc(100% - 50px);
+    height: calc(100% - 60px);
     z-index: 1;
 
 }
