@@ -22,12 +22,12 @@
     > -->
     <div class="main-body">
       <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore" :auto-fill="false"  >
-      <div  class="nut-vert-list-panel">
+      <div  class="nut-vert-list-panel" style="margin-top:50px;overflow:hidden">
         <div v-if="routeParams.data.id == '001'">
           <div
             class="div_display_flex margin_left_div6 margin_top_div3"
-                 style="display: flex;
-    justify-content: space-between;"
+                style="display: flex;
+                justify-content: space-between;"
             v-for="(item,index) in getRecommendBList"
             :key="index"
           >
@@ -51,8 +51,8 @@
         <div v-if="routeParams.data.id == '002'">
           <div
             class="div_display_flex margin_left_div6 margin_top_div3"
-          style="display: flex;
-    justify-content: space-between;"
+            style="display: flex;
+            justify-content: space-between;"
             v-for="(item,index) in getVideoDistriList"
             :key="index"
           >
@@ -118,6 +118,7 @@ export default {
         window.clearTimeout(timer._id);
       }
       timer = setTimeout(() => {
+        this.page.current = 1;
         console.log( this.itemName)
         this.getListF();
         // this.filterList(this.list,this.iptVal);
@@ -135,7 +136,7 @@ export default {
         size: this.page.size,
         current: this.page.current
       };
-      this.$fetch.post(url.getRecommendB, _obj).then(
+      this.$fetch.post(url.getRecommendB, _obj).then(         
         data => {
           if(str == 'pull'){
             this.$refs.loadmore.onBottomLoaded()
@@ -143,14 +144,13 @@ export default {
             this.allLoaded = false;
             this.$refs.loadmore.onTopLoaded();
           }
-          if (data.code == 0) {
+          if (data.code == 0) { 
             // if (this.getRecommendBList.length == 0) {
               if(data.obj.length == 0 && str == 'pull'){
                 this.allLoaded = true;
                 this.page.current--;
                 this.$vux.toast.text('没有更多数据了')
               }
-            
               if (this.getRecommendBList.length == 0) {
                 this.getRecommendBList = data.obj;
             } else {
@@ -299,6 +299,9 @@ export default {
 };
 </script>
 <style scope>
+.mint-loadmore-content{
+  border:1px solid #fff;
+}
 .search_box {
   height: 0.7rem;
   margin: 0 auto;
