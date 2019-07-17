@@ -1,6 +1,6 @@
 <template>
   <div style="height:100%;overflow:hidden">
-    <div style="background:#fff;width:100%;height:60px;">
+    <div style="background:#fff;width:100%;height:60px;position:fixed;top:0;z-index:20;">
       <div class="search_box">
         <i class="weui-icon-search search_icon"></i>
         <input
