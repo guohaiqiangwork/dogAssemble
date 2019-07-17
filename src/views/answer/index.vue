@@ -62,10 +62,14 @@ export default {
     };
   },
   methods: {
-    getDN(Nid, Tid,index) {
+    getDN(Nid, Tid, index) {
       this.classA = Tid;
       this.classB = Nid;
-      this.TiM[Tid].daAn[index].checked = !this.TiM[Tid].daAn[index].checked;
+      this.TiM[Tid].daAn.forEach(element => {
+        element.checked = false;
+      });
+      this.TiM[Tid].daAn[index].checked = true;
+      // 多选  this.TiM[Tid].daAn[index].checked = !this.TiM[Tid].daAn[index].checked;
       this.dnList[Tid] = Nid;
     },
     getSubmit() {
