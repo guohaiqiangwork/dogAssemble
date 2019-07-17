@@ -23,7 +23,7 @@
       @pulldown="pulldown"
     >
     <div slot="list" class="nut-vert-list-panel">-->
-    <div class="main-body" ref="wrapper" :style="{ height: (wrapperHeight-50) + 'px'}">
+    <div class="main-body" ref="wrapper">
       <mt-loadmore
         :top-method="loadTop"
         :bottom-method="loadBottom"

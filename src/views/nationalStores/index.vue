@@ -15,7 +15,7 @@
         </div>
       </div>
 <div class="main-body" ref="wrapper">
-  <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :auto-fill="false" :bottom-all-loaded="allLoaded" ref="loadmore" :bottomDistance="10" bottom-status-change="handelChange">
+  <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :auto-fill="false" :bottom-all-loaded="allLoaded" ref="loadmore" bottom-status-change="handelChange">
      <!-- 推荐门店列表 -->
         <div class="div_display_flex margin_left_div3 padding_top_div3">
           <div class="national_flag_title" v-if="recommendStoreList.length"></div>
