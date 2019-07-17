@@ -5,7 +5,7 @@
         <i class="weui-icon-search search_icon"></i>
         <input
           type="text"
-          placeholder="搜索您找的人名"
+          :placeholder="routeParams.data.id == '001'?'搜索您找的店铺':'搜索您找的人名'"
           v-on:input="getWholeList(name)"
           v-model="name"
           maxlength="11"
@@ -30,7 +30,8 @@
           <div
             class="div_display_flex margin_left_div6 margin_top_div3"
                 style="display: flex;
-                justify-content: space-between;"
+                justify-content: space-between;
+                height:26px;"
             v-for="(item,index) in getRecommendBList"
             :key="index"
           >
@@ -125,6 +126,11 @@ export default {
         console.log( this.itemName)
         this.getListF();
         // this.filterList(this.list,this.iptVal);
+        var wrapper = document.querySelector('.main-body');
+        wrapper.scrollTop = 0;
+        var app = document.querySelector('#app');
+        app.scrollTop = 0;
+        console.log(wrapper.scrollTop,app.scrollTop)
         timer = null;
       }, 2000);
       // this.itemName = item;
