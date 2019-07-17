@@ -130,7 +130,7 @@ export default {
         // wrapper.style.top = 80 + 'px';
         var app = document.querySelector('.main-body');
         app.scrollTop = wrapper.offsetTop;
-        app.offsetTop = 80
+        document.documentElement.scrollTop = document.body.scrollTop = 0;
          let nowTop = document.body.scrollTop + document.documentElement.scrollTop; // 获取当前滚动条位置;
          alert(nowTop)
         this.getListF();
@@ -319,8 +319,13 @@ export default {
   },
 
   mounted() {
+    
+  // window.addEventListener('scroll', this.scrollToTop)
     // document.documentElement.clientHeight -
     //   this.$refs.wrapper.getBoundingClientRect().top;
+  },
+  destroyed () {
+  // window.removeEventListener('scroll', this.scrollToTop)
   }
 };
 </script>
