@@ -459,8 +459,8 @@ export default {
   },
 
   mounted() {
-    document.documentElement.clientHeight -
-      this.$refs.wrapper.getBoundingClientRect().top;
+    // document.documentElement.clientHeight -
+    //   this.$refs.wrapper.getBoundingClientRect().top;
     this.addressDetail();
     this.getMoney();
     // this.getRecommendStoreList(); //获取全国门店
