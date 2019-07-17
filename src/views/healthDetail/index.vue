@@ -123,13 +123,15 @@ export default {
       }
       timer = setTimeout(() => {
         this.page.current = 1;
-        var wrapper = document.querySelector('.main-body');
-        var box = document.querySelector('#box');
-        box.scrollTop = 0;
-        wrapper.scrollTop = 0;
-        wrapper.style.top = 80 + 'px';
-        var app = document.querySelector('#app');
-        app.scrollTop = 0;
+        // var wrapper = document.querySelector('.main-body');
+        // var box = document.querySelector('#box');
+        // box.scrollTop = 0;
+        // wrapper.scrollTop = 0;
+        // wrapper.style.top = 80 + 'px';
+        // var app = document.querySelector('#app');
+        // app.scrollTop = 0;
+        this.$refs.loadmore.onBottomLoaded()
+        this.allLoaded = true;
         this.getListF();
         // this.filterList(this.list,this.iptVal);
      
@@ -286,6 +288,7 @@ export default {
       this.getRecommendBList = [];
       this.isUnMore1 = false;
       this.page.current = 1;
+      this.allLoaded = false;
       this.getListF('drop');
       this.$refs.loadmore.onTopLoaded();
     },
