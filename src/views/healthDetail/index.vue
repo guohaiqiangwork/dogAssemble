@@ -35,7 +35,7 @@
             v-for="(item,index) in getRecommendBList"
             :key="index"
           >
-            <div class="div_width_70 font_size_14">
+            <div class="div_width_70 font_size_14" id="boxer">
               {{item.name}}
               <!-- <span class="font_size_12 font_color_A1" style="margin-left: 10px;">{{item.time}}</span> -->
               <span
@@ -123,13 +123,13 @@ export default {
       }
       timer = setTimeout(() => {
         this.page.current = 1;
-        // var wrapper = document.querySelector('.main-body');
+        var wrapper = document.querySelector('#boxer');
         // var box = document.querySelector('#box');
         // box.scrollTop = 0;
         // wrapper.scrollTop = 0;
         // wrapper.style.top = 80 + 'px';
-        // var app = document.querySelector('#app');
-        // app.scrollTop = 0;
+        var app = document.querySelector('#app');
+        app.scrollTop = wrapper.offsetTop;
         this.$refs.loadmore.onBottomLoaded()
         this.allLoaded = true;
         this.getListF();
