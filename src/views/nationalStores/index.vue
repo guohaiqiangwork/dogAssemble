@@ -1,7 +1,7 @@
 <template>
   <div class="backgroun_color_fff " style="height:100%;overflow:hidden" id="store">
      <!-- 搜索 -->
-     <!-- <div style="background:#fff"> -->
+     <div style="background:#fff;width:100%;height:60px;position:fixed;top:0;z-index:20;">
         <div class="search_box" style="border:none;box-shadow:0px 3px 10px rgba(136,136,136,0.16);">
           <i class="weui-icon-search search_icon"></i>
           <input
@@ -13,7 +13,7 @@
           />
           <i></i>
         </div>
-      <!-- </div> -->
+      </div>
 <div class="main-body" ref="wrapper" :style="{ height: (wrapperHeight-50) + 'px'}">
   <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :auto-fill="false" :bottom-all-loaded="allLoaded" ref="loadmore" :bottomDistance="10" bottom-status-change="handelChange">
      <!-- 推荐门店列表 -->

@@ -14,6 +14,7 @@
         <i></i>
       </div>
     </div>
+    <!-- <div style="width:100%;heigth:70px;position:relative;"></div> -->
     <!-- <nut-scroller
       :is-un-more="isUnMore1"
       :is-loading="isLoading1"
@@ -106,7 +107,7 @@ export default {
       isUnMore1: false,
       isLoading1: false,
       page: {
-        size: 20,
+        size: 15,
         current: 1
       }
     };
@@ -143,6 +144,9 @@ export default {
         data => {
           if(str == 'pull'){
             this.$refs.loadmore.onBottomLoaded()
+            // var a =document.querySelector('.main-body');
+            // a.style.top = 80 + 'px';
+            // console.log(a);
           }else if(str == 'drop'){
             this.allLoaded = false;
             this.$refs.loadmore.onTopLoaded();
@@ -307,11 +311,13 @@ export default {
 }
 .main-body{
     overflow-x: hidden;
-    position: fixed;
+    position: absolute;
     top: 80px;
+    left: 0;
     width: 100%;
-    height: calc(100% - 80px);
+    /* height: calc(100% - 80px); */
     z-index: 1;
+    padding-top: 70px;
 
 }
 .search_box {
