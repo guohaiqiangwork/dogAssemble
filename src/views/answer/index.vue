@@ -2,7 +2,10 @@
   <div>
     <!-- 题目 -->
     <div v-for="(item,index) in TiM" :key="index">
-      <div class="answer_T">{{item.names}}</div>
+      <div class="answer_T">
+        <div class="hot_tit"></div>
+        <div>{{item.names}}</div>
+      </div>
       <div
         class="answer_an"
         v-for="(itm ,index) in item.daAn"
@@ -103,5 +106,13 @@ export default {
   width: 90%;
   margin-left: 5%;
   margin-top: 3%;
+  display: flex;
+}
+.hot_tit {
+  background-color: red;
+  width: 0.15rem;
+  height: 0.3rem;
+  border-radius: 1rem;
+  margin-right: 2%;
 }
 </style>
