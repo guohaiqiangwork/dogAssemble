@@ -1,11 +1,12 @@
 <template>
 <div id="book">
+  <div style="background:#f3f5f8;width:100%;height:60px;position:fixed;top:0;z-index:20;">
     <div class="search_box">
         <i class="weui-icon-search search_icon"></i>
         <input type="text" placeholder="搜索您想找的配方" v-model="iptVal" @input="input">
         <i></i>
     </div>
-
+</div>
   <!-- <nut-scroller
     :is-un-more="isUnMore1"
     :is-loading="isLoading1"

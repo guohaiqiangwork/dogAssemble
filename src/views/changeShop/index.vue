@@ -512,7 +512,7 @@ export default {
   border-radius: 0.35rem;
   position: fixed;
   top: 0;
-  left: 2.5%;
+  /* left: 2.5%; */
   padding: 0 0.31rem;
   box-sizing: border-box;
   z-index: 1;
