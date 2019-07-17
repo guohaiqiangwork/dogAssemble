@@ -1,6 +1,6 @@
 <template>
   <div style="height:100%;overflow:hidden">
-    <div style="background:#fff;width:100%;height:60px;position:fixed;top:0;z-index:20;">
+    <div style="background:#fff;width:100%;height:60px;position:fixed;top:0;z-index:20;margin-bottom:20px;">
       <div class="search_box">
         <i class="weui-icon-search search_icon"></i>
         <input
@@ -323,7 +323,7 @@ export default {
     width: 100%;
     /* height: calc(100% - 80px); */
     z-index: 1;
-    padding-top: 70px;
+    /* padding-top: 70px; */
     -webkit-overflow-scrolling: touch;
 
 }
