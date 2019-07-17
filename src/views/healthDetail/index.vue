@@ -231,12 +231,12 @@ export default {
    
       this.$fetch.post(url.getOrderDistri, _obj).then(
         data => {
-          if(str == 'pull'){
-            this.$refs.loadmore.onBottomLoaded()
-          }else if(str == 'drop'){
-            this.allLoaded = false;
-            this.$refs.loadmore.onTopLoaded();
-          }
+          // if(str == 'pull'){
+          //   this.$refs.loadmore.onBottomLoaded()
+          // }else if(str == 'drop'){
+          //   this.allLoaded = false;
+          //   this.$refs.loadmore.onTopLoaded();
+          // }
           if (data.code == 0) {
              if(data.obj.length == 0 && str == 'pull'){
                 this.allLoaded = true;
@@ -267,6 +267,8 @@ export default {
     loadBottom() {
       this.page.current++;
       this.getListF('pull');
+      this.$refs.loadmore.onBottomLoaded()
+
     },
     // 下拉刷新
     loadTop() {
@@ -276,6 +278,7 @@ export default {
       this.isUnMore1 = false;
       this.page.current = 1;
       this.getListF('drop');
+      this.$refs.loadmore.onTopLoaded();
     },
     // 判断调用那个
     getListF(str = '') {

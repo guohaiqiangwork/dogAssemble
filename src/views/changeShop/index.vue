@@ -1,16 +1,18 @@
 <template>
   <div class="backgroun_color_fff" style="min-height:700px">
     <!-- 搜索 -->
-    <div class="search_box" style="border:none;box-shadow:0px 3px 10px rgba(136,136,136,0.16);">
-      <i class="weui-icon-search search_icon"></i>
-      <input
-        type="text"
-        placeholder="搜索您想找的门店"
-        v-model="productNamr"
-        @change="getRecommendStoreList(productNamr)"
-        style="width:100%;height:100%;background-color:#EFEFEF; outline: none;border:none"
-      />
-      <i></i>
+    <div style="background:#fff;width:100%;height:60px;position:fixed;top:0;z-index:20;">
+      <div class="search_box" style="border:none;box-shadow:0px 3px 10px rgba(136,136,136,0.16);">
+        <i class="weui-icon-search search_icon"></i>
+        <input
+          type="text"
+          placeholder="搜索您想找的门店"
+          v-model="productNamr"
+          @change="getRecommendStoreList(productNamr)"
+          style="width:100%;height:100%;background-color:#EFEFEF; outline: none;border:none"
+        />
+        <i></i>
+    </div>
     </div>
     <!-- 推荐门店列表 -->
     <!-- <nut-scroller
@@ -457,6 +459,8 @@ export default {
   },
 
   mounted() {
+    document.documentElement.clientHeight -
+      this.$refs.wrapper.getBoundingClientRect().top;
     this.addressDetail();
     this.getMoney();
     // this.getRecommendStoreList(); //获取全国门店
