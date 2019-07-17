@@ -123,9 +123,6 @@ export default {
       }
       timer = setTimeout(() => {
         this.page.current = 1;
-        console.log( this.itemName)
-        this.getListF();
-        // this.filterList(this.list,this.iptVal);
         var wrapper = document.querySelector('.main-body');
         var box = document.querySelector('#box');
         box.scrollTop = 0;
@@ -133,6 +130,9 @@ export default {
         wrapper.style.top = 80 + 'px';
         var app = document.querySelector('#app');
         app.scrollTop = 0;
+        this.getListF();
+        // this.filterList(this.list,this.iptVal);
+     
         console.log(wrapper.scrollTop,app.scrollTop)
         timer = null;
       }, 2000);
@@ -326,7 +326,7 @@ export default {
 }
 .main-body{
     overflow: auto;
-    position: absolute;
+    position: fixed;
     top: 80px;
     left: 0;
     width: 100%;
