@@ -1,5 +1,5 @@
 <template>
-  <div class="backgroun_color_fff" style="min-height:700px">
+  <div class="backgroun_color_fff" style="min-height:700px;overflow-y:scroll">
     <!-- 搜索 -->
     <div style="background:#fff;width:100%;height:60px;position:fixed;top:0;z-index:20;">
       <div class="search_box" style="border:none;box-shadow:0px 3px 10px rgba(136,136,136,0.16);">
@@ -468,6 +468,17 @@ export default {
 };
 </script>
 <style scoped>
+.main-body{
+    overflow: auto;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    /* height: calc(100% - 80px); */
+    z-index: 1;
+    -webkit-overflow-scrolling: touch;
+
+}
 .national_flag_title {
   width: 2px;
   height: 15px;
@@ -499,7 +510,9 @@ export default {
   height: 0.7rem;
   margin: 0 auto;
   border-radius: 0.35rem;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 2.5%;
   padding: 0 0.31rem;
   box-sizing: border-box;
   z-index: 1;
