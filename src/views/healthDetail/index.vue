@@ -128,10 +128,11 @@ export default {
         // box.scrollTop = 0;
         // wrapper.scrollTop = 0;
         // wrapper.style.top = 80 + 'px';
-        var app = document.querySelector('#app');
+        var app = document.querySelector('.main-body');
         app.scrollTop = wrapper.offsetTop;
-        this.$refs.loadmore.onBottomLoaded()
-        this.allLoaded = true;
+        app.offsetTop = 80
+         let nowTop = document.body.scrollTop + document.documentElement.scrollTop; // 获取当前滚动条位置;
+         alert(nowTop)
         this.getListF();
         // this.filterList(this.list,this.iptVal);
      
@@ -318,8 +319,8 @@ export default {
   },
 
   mounted() {
-    document.documentElement.clientHeight -
-      this.$refs.wrapper.getBoundingClientRect().top;
+    // document.documentElement.clientHeight -
+    //   this.$refs.wrapper.getBoundingClientRect().top;
   }
 };
 </script>
