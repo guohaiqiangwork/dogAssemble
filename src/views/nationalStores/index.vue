@@ -14,7 +14,7 @@
           <i></i>
         </div>
       </div>
-<div class="main-body" ref="wrapper" :style="{ height: (wrapperHeight-50) + 'px'}">
+<div class="main-body" ref="wrapper">
   <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :auto-fill="false" :bottom-all-loaded="allLoaded" ref="loadmore" :bottomDistance="10" bottom-status-change="handelChange">
      <!-- 推荐门店列表 -->
         <div class="div_display_flex margin_left_div3 padding_top_div3">

@@ -23,7 +23,7 @@
       @pulldown="pulldown"
       style = "height:100%;"
     > -->
-    <div class="main-body">
+    <div class="main-body" ref="wrapper">
       <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore" :auto-fill="false" >
       <div  class="nut-vert-list-panel">
         <div v-if="routeParams.data.id == '001'">
@@ -302,7 +302,10 @@ export default {
     this.getListF(); //判断调用那个方法
   },
 
-  mounted() {}
+  mounted() {
+    document.documentElement.clientHeight -
+      this.$refs.wrapper.getBoundingClientRect().top;
+  }
 };
 </script>
 <style scope>
@@ -310,7 +313,7 @@ export default {
   border:1px solid #fff;
 }
 .main-body{
-    overflow-x: hidden;
+    overflow: auto;
     position: absolute;
     top: 80px;
     left: 0;
@@ -318,6 +321,7 @@ export default {
     /* height: calc(100% - 80px); */
     z-index: 1;
     padding-top: 70px;
+    -webkit-overflow-scrolling: touch;
 
 }
 .search_box {
