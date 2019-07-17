@@ -1,5 +1,5 @@
 <template>
-  <div style="height:100%;overflow:hidden" id="box">
+  <div style="overflow:hidden" id="box">
     <div style="background:#fff;width:100%;height:60px;position:fixed;top:0;z-index:20;margin-bottom:20px;">
       <div class="search_box">
         <i class="weui-icon-search search_icon"></i>
@@ -56,6 +56,7 @@
           <div
             class="div_display_flex margin_left_div6 margin_top_div3"
             style="display: flex;
+            height: calc(100% - 80px)
             justify-content: space-between;"
             v-for="(item,index) in getVideoDistriList"
             :key="index"
@@ -131,7 +132,7 @@ export default {
         var app = document.querySelector('.main-body');
         app.scrollTop = wrapper.offsetTop;
         document.documentElement.scrollTop = document.body.scrollTop = 0;
-         let nowTop = document.body.scrollTop + document.documentElement.scrollTop; // 获取当前滚动条位置;
+        let nowTop = document.body.scrollTop + document.documentElement.scrollTop; // 获取当前滚动条位置;
         this.getListF();
         // this.filterList(this.list,this.iptVal);
      
@@ -333,8 +334,8 @@ export default {
   border:1px solid #fff;
 }
 .main-body{
-    overflow: auto;
-    position: fixed;
+    overflow: scroll;
+    position: absolute;
     top: 80px;
     left: 0;
     width: 100%;
