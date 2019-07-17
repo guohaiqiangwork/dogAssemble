@@ -308,9 +308,9 @@ export default {
 .main-body{
     overflow-x: hidden;
     position: fixed;
-    top: 60px;
+    top: 80px;
     width: 100%;
-    height: calc(100% - 60px);
+    height: calc(100% - 80px);
     z-index: 1;
 
 }
