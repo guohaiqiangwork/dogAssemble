@@ -52,6 +52,7 @@ import privacyProtocol from '@/views/privacyProtocol/index'//协议
 import successful from '@/views/successful/index'
 import changeShop from '@/views/changeShop/index'
 import answer from '@/views/answer/index' //答题
+import result from '@/views/result/index' //答题结果展示页面
 Vue.use(Router) 
 
 export default new Router({
@@ -606,13 +607,22 @@ export default new Router({
       component: sharedBonusTwo
     },
     {
-      // 共享奖金   
+      // 答题  
       path: '/answer',
       name: 'answer',
       meta: {
         title: '答题'
       },
       component: answer
+    },
+    {
+      // 答题结果展示  
+      path: '/result/:obj',
+      name: 'result',
+      meta: {
+        title: '答题结果'
+      },
+      component: result
     },
     {
       path: '/404',

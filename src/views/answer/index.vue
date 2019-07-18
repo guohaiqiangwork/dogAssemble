@@ -407,6 +407,7 @@ export default {
       classB: "",
       classAA: "",
       classBB: "",
+      resultFalg:'',
       AFaly: true
     };
   },
@@ -452,6 +453,7 @@ export default {
     getSubmitB() {
       console.log(this.dnListB);
       console.log(eval(this.dnListB.join("+")));
+      this.getSaveDetection()
       // let A = 0;
       // for (var j = 0; j < this.bdnListB.length; j++) {
       //   if (this.bdnListB[j] == this.dnListB[j]) {
@@ -462,23 +464,42 @@ export default {
     },
     // 提交数据
     getSaveDetection() {
+      this.resultFalg = eval(this.dnListB.join("+")) + eval(this.dnListA.join("+"));
+      console.log(this.resultFalg)
       let _obj = {
         openId: localStorage.getItem("openId"),
         phone: localStorage.getItem("phone"),
         coldScore: eval(this.dnListB.join("+")),
         thermalScore: eval(this.dnListA.join("+"))
       };
-      this.$fetch.post("fruits/app/blank/saveDetection", _obj).then(
-        data => {
-          if (data.code == 0) {
-          } else {
-            alert(data.msg);
-          }
-        },
-        err => {
-          alert("网络缓慢。。");
+      console.log(_obj)
+      this.goToResult();
+      // this.$fetch.post("fruits/app/blank/saveDetection", _obj).then(
+      //   data => {
+      //     if (data.code == 0) {
+      //     } else {
+      //       alert(data.msg);
+      //     }
+      //   },
+      //   err => {
+      //     alert("网络缓慢。。");
+      //   }
+      // );
+    },
+    // 去答题结果页面
+     // 推荐信息
+    goToResult() {
+      this.$router.push({
+        name: "result",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: this.resultFalg
+            }
+          })
         }
-      );
+      });
     },
     // 展示第二套题
     goToB() {
