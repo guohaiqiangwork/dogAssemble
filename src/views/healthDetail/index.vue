@@ -133,6 +133,12 @@ export default {
         app.scrollTop = wrapper.offsetTop;
         document.documentElement.scrollTop = document.body.scrollTop = 0;
         let nowTop = document.body.scrollTop + document.documentElement.scrollTop; // 获取当前滚动条位置;
+        var h = app.offsetHeight;
+        var b = app.scrollHeight;
+        // app.offsetHeight = 0;
+        app.style.height = ' calc( 100% - 80px )';
+        alert(h)
+        alert(b)
         this.getListF();
         // this.filterList(this.list,this.iptVal);
      
