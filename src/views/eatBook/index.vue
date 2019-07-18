@@ -3,7 +3,7 @@
     <div class="opt-list flex-between align-center" @click="goAllBook">
       <div class>
         <img class="kind-icon" src="../../assets/images/bottle.png" alt>
-        <span class="book-kind">全部配方</span>
+        <span class="book-kind">全部食方</span>
       </div>
       <img src="../../assets/images/right.png" alt>
     </div>
@@ -82,7 +82,7 @@ export default {
           }
         });
     },
-    // 全部配方
+    // 全部食方
     goAllBook() {
       this.$router.push("/bookList");
     },

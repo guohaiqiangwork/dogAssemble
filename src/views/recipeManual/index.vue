@@ -7,11 +7,15 @@
         type="text"
         placeholder="搜索您想找的配方…"
         style="width:100%;height:100%; outline: none;border:none;background-color:#EFEFEF;color:#999999"
-      >
+      />
       <i></i>
     </div>
     <!-- 配方列表 -->
-    <div class="font_size_14 font_color_10 recie_border_w" v-for="(item,index) in [1,2,3,4,]" :key="index">
+    <div
+      class="font_size_14 font_color_10 recie_border_w"
+      v-for="(item,index) in [1,2,3,4,]"
+      :key="index"
+    >
       <div class="div_display_flex">
         <div class="margin_left_div3 sy_s_t"></div>
         <div class="margin_top_div1 margin_left_div3">套餐配方</div>
@@ -25,24 +29,22 @@
       <div class="div_display_flex">
         <div
           class="backgroun_color_E9 font_color_4A font_size_13 padding_t1_l2 margin_left_div6 margin_top_div3"
-        >注意事项</div>
+        >食方说明</div>
         <div class="font_size_13 font_color_10 margin_left_div3 margin_top_div3">忌酒、忌烟、忌辛辣</div>
       </div>
-        <div class="div_display_flex">
+      <div class="div_display_flex">
         <div
           class="backgroun_color_E9 font_color_4A font_size_13 padding_t1_l2 margin_left_div6 margin_top_div3"
         >适宜人群</div>
         <div class="font_size_13 font_color_10 margin_left_div3 margin_top_div3">忌酒、忌烟、忌辛辣</div>
       </div>
-         <div class="div_display_flex">
-        <div
+      <div class="div_display_flex">
+        <!-- <div
           class="backgroun_color_E9 font_color_4A font_size_13 padding_t1_l2 margin_left_div6 margin_top_div3"
         >适应病症</div>
-        <div class="font_size_13 font_color_10 margin_left_div3 margin_top_div3">忌酒、忌烟、忌辛辣</div>
+        <div class="font_size_13 font_color_10 margin_left_div3 margin_top_div3">忌酒、忌烟、忌辛辣</div> -->
       </div>
     </div>
-    </div>
-
   </div>
 </template>
 <script>

@@ -250,7 +250,7 @@ export default new Router({
     {
       path: '/bookList',
       meta: {
-        title: '全部配方'
+        title: '全部食方'
       },
       component: resolve => require(['@/views/eatBook/bookList/index'], resolve),
     },
