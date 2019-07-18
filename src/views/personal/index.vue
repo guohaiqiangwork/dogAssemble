@@ -508,17 +508,17 @@ export default {
     },
     // 去我的钱包
     goToWallet: function() {
-      this.$router.push({
-        name: "myWallet",
-        params: {
-          obj: JSON.stringify({
-            type: "profession",
-            data: {
-              id: "参数"
-            }
-          })
-        }
-      });
+      // this.$router.push({
+      //   name: "myWallet",
+      //   params: {
+      //     obj: JSON.stringify({
+      //       type: "profession",
+      //       data: {
+      //         id: "参数"
+      //       }
+      //     })
+      //   }
+      // });
     },
     // 去我的订单
     goToOrder: function() {
