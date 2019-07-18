@@ -1,5 +1,6 @@
 <template>
   <div>
+     <div id="target"></div>
     <!-- 题目 A-->
     <div v-if="AFaly">
       <div class="answer_B_T">
@@ -470,15 +471,15 @@ export default {
     // B求分数
     getSubmitB() {
       if (this.dnListB.length == 16) {
-         this.resultFalgB = eval(this.dnListB.join("+"));
-      this.getSaveDetection();
+        this.resultFalgB = eval(this.dnListB.join("+"));
+        this.getSaveDetection();
       } else {
         alert("请检查试题");
         return;
       }
       console.log(this.dnListB);
       console.log(eval(this.dnListB.join("+")));
-    
+
       // let A = 0;
       // for (var j = 0; j < this.bdnListB.length; j++) {
       //   if (this.bdnListB[j] == this.dnListB[j]) {
@@ -534,13 +535,26 @@ export default {
     },
     // 展示第二套题
     goToB() {
-      if (this.dnListA.length == 16) {
+      if (this.dnListA.length == 1) {
+         target.scrollIntoView();
         this.AFaly = false;
         this.getSubmit(); //A试卷求和
       } else {
         alert("请检查试题");
         return;
       }
+    },
+    // 页面滚动
+    backTop() {
+      let that = this;
+      let timer = setInterval(() => {
+        let ispeed = Math.floor(-that.scrollTop / 5);
+        document.documentElement.scrollTop = document.body.scrollTop =
+          that.scrollTop + ispeed;
+        if (that.scrollTop === 0) {
+          clearInterval(timer);
+        }
+      }, 16);
     }
   },
   created() {
