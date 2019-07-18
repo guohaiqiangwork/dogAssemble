@@ -6,7 +6,7 @@
       <div class="answer_B_T">
         <div>
           <img
-            src="../../assets/images/answerTIT@2x(1).png"
+               src="../../assets/images/answerTITB@2x.png"
             style="margin-top: 36%; width: 90%; margin-left: 5%;"
             alt
           />
@@ -15,7 +15,7 @@
           <div v-for="(item,index) in TiMONe" :key="index">
             <div class="answer_T">
               <div class="hot_tit"></div>
-              <div class="font_size_16 font_color_10">{{item.names}}</div>
+              <div class="font_size_16 font_color_10" style="font-weight: 900;">{{item.names}}</div>
             </div>
             <div
               class="answer_an"
@@ -39,7 +39,8 @@
       <div class="answer_B_T">
         <div>
           <img
-            src="../../assets/images/answerTITB@2x.png"
+        
+            src="../../assets/images/answerTIT@2x(1).png"
             style="margin-top: 36%; width: 90%; margin-left: 5%;"
             alt
           />
@@ -48,7 +49,7 @@
           <div v-for="(item,index) in TiMTwo" :key="index">
             <div class="answer_T">
               <div class="hot_tit"></div>
-              <div class="font_size_16 font_color_10">{{item.names}}</div>
+              <div class="font_size_16 font_color_10" style="font-weight: 900;">{{item.names}}</div>
             </div>
             <div
               class="answer_an"
@@ -78,7 +79,7 @@ export default {
     return {
       TiMONe: [
         {
-          names: "1.手脚冰凉",
+          names: "1.手脚冰冷",
           id: "0",
           daAn: [
             { name: "A 严重", id: 3, checked: false },
@@ -535,7 +536,7 @@ export default {
     },
     // 展示第二套题
     goToB() {
-      if (this.dnListA.length == 1) {
+      if (this.dnListA.length == 16) {
          target.scrollIntoView();
         this.AFaly = false;
         this.getSubmit(); //A试卷求和
