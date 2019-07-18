@@ -130,15 +130,13 @@ export default {
         // wrapper.scrollTop = 0;
         // wrapper.style.top = 80 + 'px';
         var app = document.querySelector('.main-body');
-        app.scrollTop = wrapper.offsetTop;
+        // app.scrollTop = wrapper.offsetTop;
         document.documentElement.scrollTop = document.body.scrollTop = 0;
         let nowTop = document.body.scrollTop + document.documentElement.scrollTop; // 获取当前滚动条位置;
         var h = app.offsetHeight;
         var b = app.scrollHeight;
         // app.offsetHeight = 0;
-        app.style.height = ' calc( 100% - 80px )';
-        alert(h)
-        alert(b)
+        // app.style.height = ' calc( 100% - 80px )';
         this.getListF();
         // this.filterList(this.list,this.iptVal);
      
@@ -301,6 +299,7 @@ export default {
     },
     // 判断调用那个
     getListF(str = '') {
+      console.log(13213)
       switch (this.routeParams.data.id) {
         case "001":
           settitle('推荐返佣列表');
@@ -325,7 +324,8 @@ export default {
   },
 
   mounted() {
-    
+     var app = document.querySelector('.main-body');
+     app.style.height = ' calc( 100% - 80px )';
   // window.addEventListener('scroll', this.scrollToTop)
     // document.documentElement.clientHeight -
     //   this.$refs.wrapper.getBoundingClientRect().top;
