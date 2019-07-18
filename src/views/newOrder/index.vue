@@ -45,7 +45,7 @@
         <div class="t_S_b">
    
           <div style="margin-top:0;" class="margin_top_div3">配方：{{memberRecipe.recipeName}}</div>
-          <div style="margin-top:0.2rem;" class="margin_top_div3">注意事项：{{memberRecipe.notice}}</div>
+          <div style="margin-top:0.2rem;" class="margin_top_div3">食方说明：{{memberRecipe.notice}}</div>
           <div style="margin-top:0.2rem;" class="margin_top_div3">适宜人群：{{memberRecipe.crowd}}</div>
         </div>
       </div>

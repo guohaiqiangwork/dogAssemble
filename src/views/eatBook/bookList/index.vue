@@ -171,7 +171,7 @@ export default {
     }
   },
   mounted() {
-    settitle('全部配方');
+    settitle('全部食方');
     window.addEventListener("scroll", this.handleScroll);
     this.getRecipeList();
   }

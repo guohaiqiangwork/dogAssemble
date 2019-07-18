@@ -25,7 +25,7 @@
       <i></i>
     </div>
     <div class="margin_top_div3" v-show="peiFangList.length">
-      <!-- 全部配方 -->
+      <!-- 全部食方 -->
       <div id="allbook">
         <div v-for="(item,index) in peiFangList" :key="index">
           <div class="book-list">
@@ -42,10 +42,10 @@
               <span>适宜人群：</span>
               <span>{{item.crowd}}</span>
             </p>
-            <p v-if="item.type == 0" class="tip-footer">
+            <!-- <p v-if="item.type == 0" class="tip-footer">
               <span>适应病症：</span>
               <span>{{item.disease}}</span>
-            </p>
+            </p> -->
           </div>
         </div>
         <div class="backgroun_color_fff" style="border-radius: 8px;padding: 0.4rem;">
