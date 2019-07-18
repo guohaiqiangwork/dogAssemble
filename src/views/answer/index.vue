@@ -420,10 +420,10 @@ export default {
   methods: {
     // A选中状态
     getDN(Nid, Tid, index) {
-      if ((Tid == 10 && Nid == 2) || (Tid == 11 && Nid == 2)) {
+      if ((Tid == 10 && Nid > 2) || (Tid == 11 && Nid > 2)) {
         this.titleFalgA = true;
       }
-      if ((Tid == 10 && Nid != 2) || (Tid == 11 && Nid != 2)) {
+      if ((Tid == 10 && Nid <= 2) || (Tid == 11 && Nid <= 2)) {
         this.titleFalgA = false;
       }
       this.classA = Tid;
@@ -451,10 +451,10 @@ export default {
     },
     // B选中状态
     getDNB(Nid, Tid, index) {
-      if (Tid == 1 && Nid == 2) {
+      if (Tid == 1 && Nid > 2) {
         this.titleFalgB = true;
       }
-      if (Tid == 1 && Nid != 2) {
+      if (Tid == 1 && Nid <= 2) {
         this.titleFalgB = false;
       }
       this.classAB = Tid;

@@ -5,7 +5,9 @@
       <div class="backgroun_color_4A all_dd_border font_color_ff margin_top_div5">
         <div class="div_display_flex font_size_16 padding_top_div5">
           <div class="div_width_50 padding_left_div3">{{orderByIdListHY.obj.recipe}}</div>
-          <div class="div_width_50 font_size_18 text_right pdiing_right8">{{orderByIdListHY.obj.num}}</div>
+          <div
+            class="div_width_50 font_size_18 text_right pdiing_right8"
+          >{{orderByIdListHY.obj.num}}</div>
         </div>
         <div class="div_display_flex margin_top_div3 font_size_13">
           <div class="div_width_50 padding_left_div3">{{orderByIdListHY.obj.time}}</div>
@@ -15,9 +17,8 @@
           class="font_size_18 text_right pdiing_right8 margin_top_div3"
         >{{orderByIdListHY.obj.price}}</div>
         <div class="div_display_flex margin_top_div3 font_size_13 padding_bottom_4">
-          <div class="div_width_75 padding_left_div3">适应症状：{{orderByIdListHY.obj.disease}}</div>
-           <div
-            class="div_width_25 text_right pdiing_right8" >已消费</div>
+          <div class="div_width_75 padding_left_div3">适应症：{{orderByIdListHY.obj.disease}}</div>
+          <div class="div_width_25 text_right pdiing_right8">已消费</div>
           <!-- <div
             class="div_width_25 text_right pdiing_right8"
             v-if="orderByIdListHY.obj.state == 1"
@@ -29,12 +30,27 @@
           <div
             class="div_width_25 text_right pdiing_right8"
            v-if="orderByIdListHY.obj.state == 3"
-          >已消费</div> -->
+          >已消费</div>-->
+        </div>
+      </div>
+      <div style="border-bottom: 1px solid #E9E9E9;" v-for="(item,index) in orderByIdListHY.obj.meOrders" :key="index">
+        <div class="div_display_flex font_color_00 margin_top_div3">
+          <div class="div_width_45 font_size_15 padding_left_div3">{{item.recipe}}</div>
+          <div class="div_width_50 font_size_14 text_right">{{item.time}}</div>
+        </div>
+        <div class="div_display_flex margin_top_div3 padding_bottom_4">
+          <div
+            class="div_width_45 padding_left_div3"
+            style="font-weight: 400;"
+          >{{item.num}}次|{{item.cupType}}|¥{{item.price}}</div>
+          <div class="div_width_50 text_right">
+            <div class="z_fei" v-if="item.state == 2">已作废</div>
+            <div class="w_fei" v-if="item.state == 1" @click="getCancel(item.id)">作废订单</div>
+          </div>
         </div>
       </div>
     </div>
     <!-- 辟谷套餐  -->
-
     <div v-if="ordertypeF == 1">
       <div v-for="(item,index) in orderByIdList.obj" :key="index">
         <div
@@ -83,18 +99,55 @@ export default {
     return {
       orderByIdList: "",
       ordertypeF: "",
-      orderByIdListHY:{
-        obj:{
-          recipe:'',
-          num:'',
-          time:'',
-          price:'',
-          state:'',
-          disease:''
+      orderByIdListHY: {
+        obj: {
+          recipe: "",
+          num: "",
+          time: "",
+          price: "",
+          state: "",
+          disease: ""
         }
       },
-      faly:''
-
+      // meOrders: [
+      //   {
+      //     id: "abd9c2897fb74059bf928b1a32245127",
+      //     recipe: "会员一改",
+      //     num: 4,
+      //     price: 18,
+      //     cupType: "小杯",
+      //     time: "2019.15.01 14:15:01",
+      //     state: "1"
+      //   },
+      //   {
+      //     id: "912c78b7aef54ea78874113acdd76db8",
+      //     recipe: "会员一改",
+      //     num: 3,
+      //     price: 18,
+      //     cupType: "小杯",
+      //     time: "2019.13.01 14:13:41",
+      //     state: "1"
+      //   },
+      //   {
+      //     id: "8a90cb1515604c4b9c1b6fad0deb4431",
+      //     recipe: "会员一改",
+      //     num: 2,
+      //     price: 18,
+      //     cupType: "小杯",
+      //     time: "2019.09.01 14:09:23",
+      //     state: "1"
+      //   },
+      //   {
+      //     id: "15cdca00041e45fb8d8031671d384bb6",
+      //     recipe: "会员一改",
+      //     num: 1,
+      //     price: 20,
+      //     cupType: "大杯",
+      //     time: "2019.08.01 14:08:58",
+      //     state: "1"
+      //   }
+      // ],
+      faly: ""
     };
   },
   methods: {
@@ -106,18 +159,19 @@ export default {
       };
       this.$fetch.post(url.getOrderById, keywords).then(
         data => {
+          console.log(data);
           if (data.code == 0) {
             this.ordertypeF = data.attributes.type;
             if (this.ordertypeF == 1) {
               this.orderByIdList = data;
             } else {
               this.orderByIdListHY = data;
-              this.faly = data.obj.state
+              this.faly = data.obj.state;
             }
 
             console.log(this.orderByIdList);
-          }else{
-             alert(data.msg)
+          } else {
+            alert(data.msg);
           }
         },
         err => {
@@ -133,9 +187,35 @@ export default {
       this.$fetch.post(url.sureBigu, _obj).then(
         data => {
           if (data.code == 0) {
-            this.getOrderById()//获取列表
+            this.getOrderById(); //获取列表
           } else {
             alert(data.msg);
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
+        }
+      );
+    },
+    // 订单作废
+    getCancel(id) {
+      console.log(id);
+      let _obj = {
+        openId: localStorage.getItem("openId"),
+        id: id
+      };
+      this.$fetch.post("/fruits/app/member/cancel", _obj).then(
+        data => {
+          if (data.code == 0) {
+            this.getOrderById(); //获取列表
+          } else {
+            if (data.msg == "store_none") {
+              alert("跨店店铺不存在");
+            } else if (data.msg == "cash_pledge") {
+              alert("跨店店铺押金不足");
+            } else {
+              alert(data.msg);
+            }
           }
         },
         err => {
@@ -215,5 +295,25 @@ export default {
 .backgroun_color_E9 {
   background-color: #e9e9e9;
   border: 1px solid #e9e9e9;
+}
+.z_fei {
+  width: 45%;
+  border: 1px solid #e6435a;
+  text-align: center;
+  padding: 1%;
+  border-radius: 4px;
+  color: #e6435a;
+  margin-left: 49%;
+  font-size: 13px;
+}
+.w_fei {
+  width: 45%;
+  border: 1px solid #4a7b67;
+  text-align: center;
+  padding: 1%;
+  border-radius: 4px;
+  color: #4a7b67;
+  margin-left: 49%;
+  font-size: 13px;
 }
 </style>
