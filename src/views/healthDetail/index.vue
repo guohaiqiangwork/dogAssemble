@@ -31,6 +31,7 @@
             class="div_display_flex margin_left_div6 margin_top_div3"
                 style="display: flex;
                 justify-content: space-between;
+                align-items:center;
                 height:26px;"
             v-for="(item,index) in getRecommendBList"
             :key="index"

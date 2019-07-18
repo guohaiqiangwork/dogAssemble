@@ -1,5 +1,5 @@
 <template>
-  <div class="backgroun_color_fff " style="height:100%;overflow:hidden" id="store">
+  <div class="backgroun_color_fff " style="min-height:100%;overflow:hidden;height:auto" id="store">
      <!-- 搜索 -->
      <div style="background:#fff;width:100%;height:60px;position:fixed;top:0;z-index:20;">
         <div class="search_box" style="border:none;box-shadow:0px 3px 10px rgba(136,136,136,0.16);">
@@ -525,11 +525,11 @@ export default {
   /* 加上这个才会有当数据充满整个屏幕，可以进行上拉加载更多的操作 */
   position: absolute;
   left:0;
-  top: 48px;
-  overflow: auto;
+  top: 80px;
+  overflow: scroll;
   width: 100%;
   height: calc(100% - 0.9rem);
-  padding-bottom: 70px;
+  /* padding-bottom: 70px; */
   z-index: 1;
   -webkit-overflow-scrolling: touch;
   /* touch-action: none; */
