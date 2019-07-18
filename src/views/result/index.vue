@@ -1,15 +1,35 @@
 <template>
   <div style="background-color: #4A7B67;">
     <div class="result_B">
-      <!-- 寒性1 -->
-      <div>
-        <img src="../../assets/images/han1@2x.png" class="img_result" alt />
-        <div class="result_bt">去附近门店看看</div>
+      <!-- 寒性1有提示 -->
+      <div v-if=" idFalge < -2">
+        <!-- 有提示 -->
+        <img src="../../assets/images/han1@2x.png" class="img_result" alt v-if="!idFalgeT" />
+        <!-- 无提示 -->
+        <img src="../../assets/images/han2@2x.png" class="img_result" alt v-if="idFalgeT" />
+        <div class="result_bt" @click="goToNearby">去附近门店看看</div>
       </div>
-       <!-- 寒性2-->
-      <div>
-        <img src="../../assets/images/han1@2x.png" class="img_result" alt />
-        <div class="result_bt">去附近门店看看</div>
+      <!-- 热信2 无提示-->
+      <div v-if=" idFalge > 2">
+        <!-- 有提示 -->
+        <img src="../../assets/images/re1@2x.png" class="img_result" alt v-if="!idFalgeT" />
+        <!-- 无提示 -->
+        <img src="../../assets/images/re2@3x.png" class="img_result" alt v-if="idFalgeT" />
+        <div class="result_bt" @click="goToNearby">去附近门店看看</div>
+      </div>
+      <!-- 平行 -->
+      <div v-if="0 <= idFalge <=  2 && -2 <= idFalge < 0">
+        <!-- 有提示 -->
+        <img src="../../assets/images/ping2@2x.png" class="img_result" alt v-if="!idFalgeT" />
+        <!-- 无提示 -->
+        <img src="../../assets/images/ping1@2x.png" class="img_result" alt v-if="idFalgeT" />
+        <div class="result_bt" @click="goToNearby">去附近门店看看</div>
+      </div>
+      <!-- 不用检查 -->
+      <div v-if="  resultFalgA >  15 && resultFalgB < -15">
+        <!-- 有提示 -->
+        <img src="../../assets/images/zhuanshu@2x.png" class="img_result" alt />
+        <div class="result_bt" @click="goToNearby">去附近门店看看</div>
       </div>
     </div>
   </div>
@@ -20,14 +40,37 @@ import { Alert } from "vux";
 export default {
   name: "result",
   data() {
-    return {};
+    return {
+      idFalge: "",
+      idFalgeT: "",
+      resultFalgA: "",
+      resultFalgB: ""
+    };
   },
 
-  methods: {},
+  methods: {
+    //   去附近门店
+    goToNearby() {
+      this.$router.push({
+        name: "nearby"
+        // params: {
+        //   obj: JSON.stringify({
+        //     type: "profession",
+        //     data: {
+        //       id: "我就是参数"
+        //     }
+        //   })
+        // }
+      });
+    },
+  },
   created() {
     settitle("答题结果");
     this.routeParams = JSON.parse(this.$route.params.obj);
-    console.log(this.routeParams.data.id);
+    this.idFalge = this.routeParams.data.id;
+    this.idFalgeT = this.routeParams.data.flage;
+    this.resultFalgA = this.routeParams.data.resultFalgA;
+    this.resultFalgB = this.routeParams.data.resultFalgB;
   },
 
   mounted() {}

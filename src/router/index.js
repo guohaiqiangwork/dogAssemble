@@ -53,7 +53,8 @@ import successful from '@/views/successful/index'
 import changeShop from '@/views/changeShop/index'
 import answer from '@/views/answer/index' //答题
 import result from '@/views/result/index' //答题结果展示页面
-Vue.use(Router) 
+import nearby from '@/views/nearby/index'//附近门店
+Vue.use(Router)
 
 export default new Router({
   routes: [
@@ -85,7 +86,7 @@ export default new Router({
           },
           component: resolve => require(['@/views/Assemble/index'], resolve),
         },
-     
+
         {
           path: '/cart',
           name: 'cart',
@@ -111,8 +112,8 @@ export default new Router({
           },
           component: resolve => require(['@/views/goodsDetail/index'], resolve),
         },
-     
-      
+
+
       ]
     },
     {
@@ -123,7 +124,7 @@ export default new Router({
       },
       component: resolve => require(['@/views/paysure/index'], resolve),
     },
-  
+
     {
       path: '/addressopt',
       name: 'addressopt',
@@ -623,6 +624,15 @@ export default new Router({
         title: '答题结果'
       },
       component: result
+    },
+    {
+      // 附近门店  
+      path: '/nearby',
+      name: 'nearby',
+      meta: {
+        title: '附近门店'
+      },
+      component: nearby
     },
     {
       path: '/404',

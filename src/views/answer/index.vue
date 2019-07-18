@@ -407,14 +407,25 @@ export default {
       classB: "",
       classAA: "",
       classBB: "",
-      resultFalg:'',
-      AFaly: true
+      resultFalg: "",
+      resultFalgA: "",
+      resultFalgB: "",
+      AFaly: true,
+      titleFalgA: "",
+      titleFalgB: "",
+      titleFalgC: ""
     };
   },
   // A 热 B寒
   methods: {
     // A选中状态
     getDN(Nid, Tid, index) {
+      if ((Tid == 10 && Nid == 2) || (Tid == 11 && Nid == 2)) {
+        this.titleFalgA = true;
+      }
+      if ((Tid == 10 && Nid != 2) || (Tid == 11 && Nid != 2)) {
+        this.titleFalgA = false;
+      }
       this.classA = Tid;
       this.classB = Nid;
       this.TiMONe[Tid].daAn.forEach(element => {
@@ -429,6 +440,7 @@ export default {
     getSubmit() {
       console.log(this.dnListA);
       console.log(eval(this.dnListA.join("+")));
+      this.resultFalgA = eval(this.dnListA.join("+"));
       // let A = 0;
       // for (var j = 0; j < this.bdnListA.length; j++) {
       //   if (this.bdnListA[j] == this.dnListA[j]) {
@@ -439,6 +451,12 @@ export default {
     },
     // B选中状态
     getDNB(Nid, Tid, index) {
+      if (Tid == 1 && Nid == 2) {
+        this.titleFalgB = true;
+      }
+      if (Tid == 1 && Nid != 2) {
+        this.titleFalgB = false;
+      }
       this.classAB = Tid;
       this.classBB = Nid;
       this.TiMTwo[Tid].daAn.forEach(element => {
@@ -451,9 +469,16 @@ export default {
     },
     // B求分数
     getSubmitB() {
+      if (this.dnListB.length == 16) {
+         this.resultFalgB = eval(this.dnListB.join("+"));
+      this.getSaveDetection();
+      } else {
+        alert("请检查试题");
+        return;
+      }
       console.log(this.dnListB);
       console.log(eval(this.dnListB.join("+")));
-      this.getSaveDetection()
+    
       // let A = 0;
       // for (var j = 0; j < this.bdnListB.length; j++) {
       //   if (this.bdnListB[j] == this.dnListB[j]) {
@@ -464,15 +489,15 @@ export default {
     },
     // 提交数据
     getSaveDetection() {
-      this.resultFalg = eval(this.dnListB.join("+")) + eval(this.dnListA.join("+"));
-      console.log(this.resultFalg)
+      this.resultFalg =
+        eval(this.dnListB.join("+")) + eval(this.dnListA.join("+"));
       let _obj = {
         openId: localStorage.getItem("openId"),
         phone: localStorage.getItem("phone"),
         coldScore: eval(this.dnListB.join("+")),
         thermalScore: eval(this.dnListA.join("+"))
       };
-      console.log(_obj)
+      console.log(_obj);
       this.goToResult();
       // this.$fetch.post("fruits/app/blank/saveDetection", _obj).then(
       //   data => {
@@ -487,15 +512,21 @@ export default {
       // );
     },
     // 去答题结果页面
-     // 推荐信息
+    // 推荐信息
     goToResult() {
+      if (this.titleFalgA || this.titleFalgB) {
+        this.titleFalgC = true;
+      }
       this.$router.push({
         name: "result",
         params: {
           obj: JSON.stringify({
             type: "profession",
             data: {
-              id: this.resultFalg
+              id: this.resultFalg,
+              flage: this.titleFalgC,
+              resultFalgA: this.resultFalgA,
+              resultFalgB: this.resultFalgB
             }
           })
         }
@@ -503,8 +534,13 @@ export default {
     },
     // 展示第二套题
     goToB() {
-      this.AFaly = false;
-      this.getSubmit(); //A试卷求和
+      if (this.dnListA.length == 16) {
+        this.AFaly = false;
+        this.getSubmit(); //A试卷求和
+      } else {
+        alert("请检查试题");
+        return;
+      }
     }
   },
   created() {
