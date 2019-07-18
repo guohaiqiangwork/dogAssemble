@@ -325,7 +325,7 @@ export default {
 
   mounted() {
      var app = document.querySelector('.main-body');
-     app.style.height = ' calc( 100% - 80px )';
+     app.style.height = ' calc( 100% - 160px )';
   // window.addEventListener('scroll', this.scrollToTop)
     // document.documentElement.clientHeight -
     //   this.$refs.wrapper.getBoundingClientRect().top;
