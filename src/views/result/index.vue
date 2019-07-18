@@ -4,25 +4,25 @@
       <!-- 寒性1有提示 -->
       <div v-if=" idFalge < -2">
         <!-- 有提示 -->
-        <img src="../../assets/images/han1@2x.png" class="img_result" alt v-if="!idFalgeT" />
+        <img src="../../assets/images/han1@2x.png" class="img_result" alt v-if="idFalgeT" />
         <!-- 无提示 -->
-        <img src="../../assets/images/han2@2x.png" class="img_result" alt v-if="idFalgeT" />
+        <img src="../../assets/images/han2@2x.png" class="img_result" alt v-if="!idFalgeT" />
         <div class="result_bt" @click="goToNearby">去附近门店看看</div>
       </div>
       <!-- 热信2 无提示-->
       <div v-if=" idFalge > 2">
         <!-- 有提示 -->
-        <img src="../../assets/images/re1@2x.png" class="img_result" alt v-if="!idFalgeT" />
+        <img src="../../assets/images/re1@2x.png" class="img_result" alt v-if="idFalgeT" />
         <!-- 无提示 -->
-        <img src="../../assets/images/re2@3x.png" class="img_result" alt v-if="idFalgeT" />
+        <img src="../../assets/images/re2@3x.png" class="img_result" alt v-if="!idFalgeT" />
         <div class="result_bt" @click="goToNearby">去附近门店看看</div>
       </div>
       <!-- 平行 -->
-      <div v-if="0 <= idFalge <=  2 && -2 <= idFalge < 0">
+      <div v-if="0 <= idFalge <=  2 || -2 <= idFalge < 0">
         <!-- 有提示 -->
-        <img src="../../assets/images/ping2@2x.png" class="img_result" alt v-if="!idFalgeT" />
+        <img src="../../assets/images/ping2@2x.png" class="img_result" alt v-if="idFalgeT" />
         <!-- 无提示 -->
-        <img src="../../assets/images/ping1@2x.png" class="img_result" alt v-if="idFalgeT" />
+        <img src="../../assets/images/ping1@2x.png" class="img_result" alt v-if="!idFalgeT" />
         <div class="result_bt" @click="goToNearby">去附近门店看看</div>
       </div>
       <!-- 不用检查 -->

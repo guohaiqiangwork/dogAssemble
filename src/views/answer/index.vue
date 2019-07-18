@@ -1,12 +1,12 @@
 <template>
   <div>
-     <div id="target"></div>
+    <div id="target"></div>
     <!-- 题目 A-->
     <div v-if="AFaly">
       <div class="answer_B_T">
         <div>
           <img
-               src="../../assets/images/answerTITB@2x.png"
+            src="../../assets/images/answerTITB@2x.png"
             style="margin-top: 36%; width: 90%; margin-left: 5%;"
             alt
           />
@@ -39,7 +39,6 @@
       <div class="answer_B_T">
         <div>
           <img
-        
             src="../../assets/images/answerTIT@2x(1).png"
             style="margin-top: 36%; width: 90%; margin-left: 5%;"
             alt
@@ -80,161 +79,161 @@ export default {
       TiMONe: [
         {
           names: "1.手脚冰冷",
-          id: "0",
+          id: 0,
           daAn: [
-            { name: "A 严重", id: 3, checked: false },
-            { name: "B 普通", id: 2, checked: false },
-            { name: "C 轻微", id: 1, checked: false },
+            { name: "A 严重", id: -3, checked: false },
+            { name: "B 普通", id: -2, checked: false },
+            { name: "C 轻微", id: -1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         },
         {
           names: "2.低血压",
-          id: "1",
+          id: 1,
           daAn: [
-            { name: "A 严重", id: 3, checked: false },
-            { name: "B 普通", id: 2, checked: false },
-            { name: "C 轻微", id: 1, checked: false },
+            { name: "A 严重", id: -3, checked: false },
+            { name: "B 普通", id: -2, checked: false },
+            { name: "C 轻微", id: -1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         },
         {
           names: "3.贫血、脸色苍白",
-          id: "2",
+          id: 2,
           daAn: [
-            { name: "A 严重", id: 3, checked: false },
-            { name: "B 普通", id: 2, checked: false },
-            { name: "C 轻微", id: 1, checked: false },
+            { name: "A 严重", id: -3, checked: false },
+            { name: "B 普通", id: -2, checked: false },
+            { name: "C 轻微", id: -1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         },
         {
           names: "4.常头晕",
-          id: "3",
+          id: 3,
           daAn: [
-            { name: "A 严重", id: 3, checked: false },
-            { name: "B 普通", id: 2, checked: false },
-            { name: "C 轻微", id: 1, checked: false },
+            { name: "A 严重", id: -3, checked: false },
+            { name: "B 普通", id: -2, checked: false },
+            { name: "C 轻微", id: -1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         },
         {
           names: "5.常想困、爱睡",
-          id: "4",
+          id: 4,
           daAn: [
-            { name: "A 严重", id: 3, checked: false },
-            { name: "B 普通", id: 2, checked: false },
-            { name: "C 轻微", id: 1, checked: false },
+            { name: "A 严重", id: -3, checked: false },
+            { name: "B 普通", id: -2, checked: false },
+            { name: "C 轻微", id: -1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         },
         {
           names: "6.常感冒、抵抗力差",
-          id: "5",
+          id: 5,
           daAn: [
-            { name: "A 严重", id: 3, checked: false },
-            { name: "B 普通", id: 2, checked: false },
-            { name: "C 轻微", id: 1, checked: false },
+            { name: "A 严重", id: -3, checked: false },
+            { name: "B 普通", id: -2, checked: false },
+            { name: "C 轻微", id: -1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         },
         {
           names: "7.舌淡白",
-          id: "6",
+          id: 6,
           daAn: [
-            { name: "A 严重", id: 3, checked: false },
-            { name: "B 普通", id: 2, checked: false },
-            { name: "C 轻微", id: 1, checked: false },
+            { name: "A 严重", id: -3, checked: false },
+            { name: "B 普通", id: -2, checked: false },
+            { name: "C 轻微", id: -1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         },
         {
           names: "8.脉搏细弱",
-          id: "7",
+          id: 7,
           daAn: [
-            { name: "A 严重", id: 3, checked: false },
-            { name: "B 普通", id: 2, checked: false },
-            { name: "C 轻微", id: 1, checked: false },
+            { name: "A 严重", id: -3, checked: false },
+            { name: "B 普通", id: -2, checked: false },
+            { name: "C 轻微", id: -1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         },
         {
           names: "9.不喜冷饮、喜喝热饮",
-          id: "8",
+          id: 8,
           daAn: [
-            { name: "A 严重", id: 3, checked: false },
-            { name: "B 普通", id: 2, checked: false },
-            { name: "C 轻微", id: 1, checked: false },
+            { name: "A 严重", id: -3, checked: false },
+            { name: "B 普通", id: -2, checked: false },
+            { name: "C 轻微", id: -1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         },
         {
           names: "10.不常口渴、不爱喝水",
-          id: "9",
+          id: 9,
           daAn: [
-            { name: "A 严重", id: 3, checked: false },
-            { name: "B 普通", id: 2, checked: false },
-            { name: "C 轻微", id: 1, checked: false },
+            { name: "A 严重", id: -3, checked: false },
+            { name: "B 普通", id: -2, checked: false },
+            { name: "C 轻微", id: -1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         },
         {
           names: "11.常腹泻",
-          id: "10",
+          id: 10,
           daAn: [
-            { name: "A 严重", id: 3, checked: false },
-            { name: "B 普通", id: 2, checked: false },
-            { name: "C 轻微", id: 1, checked: false },
+            { name: "A 严重", id: -3, checked: false },
+            { name: "B 普通", id: -2, checked: false },
+            { name: "C 轻微", id: -1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         },
         {
           names: "12.消化不良、脾胃虚寒",
-          id: "11",
+          id: 11,
           daAn: [
-            { name: "A 严重", id: 3, checked: false },
-            { name: "B 普通", id: 2, checked: false },
-            { name: "C 轻微", id: 1, checked: false },
+            { name: "A 严重", id: -3, checked: false },
+            { name: "B 普通", id: -2, checked: false },
+            { name: "C 轻微", id: -1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         },
         {
           names: "13.大便稀薄",
-          id: "12",
+          id: 12,
           daAn: [
-            { name: "A 严重", id: 3, checked: false },
-            { name: "B 普通", id: 2, checked: false },
-            { name: "C 轻微", id: 1, checked: false },
+            { name: "A 严重", id: -3, checked: false },
+            { name: "B 普通", id: -2, checked: false },
+            { name: "C 轻微", id: -1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         },
         {
           names: "14.妇女月经不正常，常延迟",
-          id: "13",
+          id: 13,
           daAn: [
-            { name: "A 严重", id: 3, checked: false },
-            { name: "B 普通", id: 2, checked: false },
-            { name: "C 轻微", id: 1, checked: false },
+            { name: "A 严重", id: -3, checked: false },
+            { name: "B 普通", id: -2, checked: false },
+            { name: "C 轻微", id: -1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         },
         {
           names: "15.尿多而色淡",
-          id: "14",
+          id: 14,
           daAn: [
-            { name: "A 严重", id: 3, checked: false },
-            { name: "B 普通", id: 2, checked: false },
-            { name: "C 轻微", id: 1, checked: false },
+            { name: "A 严重", id: -3, checked: false },
+            { name: "B 普通", id: -2, checked: false },
+            { name: "C 轻微", id: -1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         },
         {
           names: "16.腰膝酸软，乏力",
-          id: "15",
+          id: 15,
           daAn: [
-            { name: "A 严重", id: 3, checked: false },
-            { name: "B 普通", id: 2, checked: false },
-            { name: "C 轻微", id: 1, checked: false },
+            { name: "A 严重", id: -3, checked: false },
+            { name: "B 普通", id: -2, checked: false },
+            { name: "C 轻微", id: -1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         }
@@ -242,161 +241,161 @@ export default {
       TiMTwo: [
         {
           names: "1.常口干舌燥",
-          id: "0",
+          id: 0,
           daAn: [
-            { name: "A 严重", id: -3, checked: false },
-            { name: "B 普通", id: -2, checked: false },
-            { name: "C 轻微", id: -1, checked: false },
+            { name: "A 严重", id: 3, checked: false },
+            { name: "B 普通", id: 2, checked: false },
+            { name: "C 轻微", id: 1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         },
         {
           names: "2.常便秘",
-          id: "1",
+          id: 1,
           daAn: [
-            { name: "A 严重", id: -3, checked: false },
-            { name: "B 普通", id: -2, checked: false },
-            { name: "C 轻微", id: -1, checked: false },
+            { name: "A 严重", id: 3, checked: false },
+            { name: "B 普通", id: 2, checked: false },
+            { name: "C 轻微", id: 1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         },
         {
           names: "3.常头部发热、面部潮红",
-          id: "2",
+          id: 2,
           daAn: [
-            { name: "A 严重", id: -3, checked: false },
-            { name: "B 普通", id: -2, checked: false },
-            { name: "C 轻微", id: -1, checked: false },
+            { name: "A 严重", id: 3, checked: false },
+            { name: "B 普通", id: 2, checked: false },
+            { name: "C 轻微", id: 1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         },
         {
           names: "4.常体温比别人高、易流汗",
-          id: "3",
+          id: 3,
           daAn: [
-            { name: "A 严重", id: -3, checked: false },
-            { name: "B 普通", id: -2, checked: false },
-            { name: "C 轻微", id: -1, checked: false },
+            { name: "A 严重", id: 3, checked: false },
+            { name: "B 普通", id: 2, checked: false },
+            { name: "C 轻微", id: 1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         },
         {
           names: "5.十分怕热",
-          id: "4",
+          id: 4,
           daAn: [
-            { name: "A 严重", id: -3, checked: false },
-            { name: "B 普通", id: -2, checked: false },
-            { name: "C 轻微", id: -1, checked: false },
+            { name: "A 严重", id: 3, checked: false },
+            { name: "B 普通", id: 2, checked: false },
+            { name: "C 轻微", id: 1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         },
         {
           names: "6.身体容易上火发炎",
-          id: "5",
+          id: 5,
           daAn: [
-            { name: "A 严重", id: -3, checked: false },
-            { name: "B 普通", id: -2, checked: false },
-            { name: "C 轻微", id: -1, checked: false },
+            { name: "A 严重", id: 3, checked: false },
+            { name: "B 普通", id: 2, checked: false },
+            { name: "C 轻微", id: 1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         },
         {
           names: "7.不喜欢喝热饮，喜喝冷饮",
-          id: "6",
+          id: 6,
           daAn: [
-            { name: "A 严重", id: -3, checked: false },
-            { name: "B 普通", id: -2, checked: false },
-            { name: "C 轻微", id: -1, checked: false },
+            { name: "A 严重", id: 3, checked: false },
+            { name: "B 普通", id: 2, checked: false },
+            { name: "C 轻微", id: 1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         },
         {
           names: "8.舌苔较厚，颜色偏黄",
-          id: "7",
+          id: 7,
           daAn: [
-            { name: "A 严重", id: -3, checked: false },
-            { name: "B 普通", id: -2, checked: false },
-            { name: "C 轻微", id: -1, checked: false },
+            { name: "A 严重", id: 3, checked: false },
+            { name: "B 普通", id: 2, checked: false },
+            { name: "C 轻微", id: 1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         },
         {
           names: "9.腺体亢进、代谢旺盛、容易饿",
-          id: "8",
+          id: 8,
           daAn: [
-            { name: "A 严重", id: -3, checked: false },
-            { name: "B 普通", id: -2, checked: false },
-            { name: "C 轻微", id: -1, checked: false },
+            { name: "A 严重", id: 3, checked: false },
+            { name: "B 普通", id: 2, checked: false },
+            { name: "C 轻微", id: 1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         },
         {
           names: "10.性急易怒，易烦躁不安",
-          id: "9",
+          id: 9,
           daAn: [
-            { name: "A 严重", id: -3, checked: false },
-            { name: "B 普通", id: -2, checked: false },
-            { name: "C 轻微", id: -1, checked: false },
+            { name: "A 严重", id: 3, checked: false },
+            { name: "B 普通", id: 2, checked: false },
+            { name: "C 轻微", id: 1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         },
         {
           names: "11.尿少而色黄",
-          id: "10",
+          id: 10,
           daAn: [
-            { name: "A 严重", id: -3, checked: false },
-            { name: "B 普通", id: -2, checked: false },
-            { name: "C 轻微", id: -1, checked: false },
+            { name: "A 严重", id: 3, checked: false },
+            { name: "B 普通", id: 2, checked: false },
+            { name: "C 轻微", id: 1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         },
         {
           names: "12.眼睛布满血丝",
-          id: "11",
+          id: 11,
           daAn: [
-            { name: "A 严重", id: -3, checked: false },
-            { name: "B 普通", id: -2, checked: false },
-            { name: "C 轻微", id: -1, checked: false },
+            { name: "A 严重", id: 3, checked: false },
+            { name: "B 普通", id: 2, checked: false },
+            { name: "C 轻微", id: 1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         },
         {
           names: "13.易兴奋紧张，心跳速度加快",
-          id: "12",
+          id: 12,
           daAn: [
-            { name: "A 严重", id: -3, checked: false },
-            { name: "B 普通", id: -2, checked: false },
-            { name: "C 轻微", id: -1, checked: false },
+            { name: "A 严重", id: 3, checked: false },
+            { name: "B 普通", id: 2, checked: false },
+            { name: "C 轻微", id: 1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         },
         {
           names: "14.汗味浓、有体臭",
-          id: "13",
+          id: 13,
           daAn: [
-            { name: "A 严重", id: -3, checked: false },
-            { name: "B 普通", id: -2, checked: false },
-            { name: "C 轻微", id: -1, checked: false },
+            { name: "A 严重", id: 3, checked: false },
+            { name: "B 普通", id: 2, checked: false },
+            { name: "C 轻微", id: 1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         },
         {
           names: "15.妇女生理周期提早",
-          id: "14",
+          id: 14,
           daAn: [
-            { name: "A 严重", id: -3, checked: false },
-            { name: "B 普通", id: -2, checked: false },
-            { name: "C 轻微", id: -1, checked: false },
+            { name: "A 严重", id: 3, checked: false },
+            { name: "B 普通", id: 2, checked: false },
+            { name: "C 轻微", id: 1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         },
         {
           names: "16.女性分泌物浓而有异味",
-          id: "15",
+          id: 15,
           daAn: [
-            { name: "A 严重", id: -3, checked: false },
-            { name: "B 普通", id: -2, checked: false },
-            { name: "C 轻微", id: -1, checked: false },
+            { name: "A 严重", id: 3, checked: false },
+            { name: "B 普通", id: 2, checked: false },
+            { name: "C 轻微", id: 1, checked: false },
             { name: "D 无", id: 0, checked: false }
           ]
         }
@@ -415,10 +414,10 @@ export default {
       AFaly: true,
       titleFalgA: "",
       titleFalgB: "",
-      titleFalgC: ""
+      titleFalgC: false
     };
   },
-  // A 热 B寒
+  // A 寒 B热
   methods: {
     // A选中状态
     getDN(Nid, Tid, index) {
@@ -436,7 +435,7 @@ export default {
       this.TiMONe[Tid].daAn[index].checked = true;
       // 多选  this.TiM[Tid].daAn[index].checked = !this.TiM[Tid].daAn[index].checked;
       // this.dnListA[Tid] = Nid;
-      this.dnListA.push(this.classB);
+      this.dnListA[Tid] = this.classB;
     },
     // A求分数
     getSubmit() {
@@ -465,7 +464,8 @@ export default {
         element.checked = false;
       });
       this.TiMTwo[Tid].daAn[index].checked = true;
-      this.dnListB.push(this.classBB);
+      // this.dnListB.push(this.classBB);
+      this.dnListB[Tid] = this.classBB;
       // 多选  this.TiM[Tid].daAn[index].checked = !this.TiM[Tid].daAn[index].checked;
       // this.dnListB[Tid] = Nid;
     },
@@ -496,8 +496,8 @@ export default {
       let _obj = {
         openId: localStorage.getItem("openId"),
         phone: localStorage.getItem("phone"),
-        coldScore: eval(this.dnListB.join("+")),
-        thermalScore: eval(this.dnListA.join("+"))
+        coldScore: eval(this.dnListA.join("+")),
+        thermalScore: eval(this.dnListB.join("+"))
       };
       console.log(_obj);
       this.goToResult();
@@ -527,8 +527,8 @@ export default {
             data: {
               id: this.resultFalg,
               flage: this.titleFalgC,
-              resultFalgA: this.resultFalgA,
-              resultFalgB: this.resultFalgB
+              resultFalgA: this.resultFalgB,
+              resultFalgB: this.resultFalgA
             }
           })
         }
@@ -537,7 +537,7 @@ export default {
     // 展示第二套题
     goToB() {
       if (this.dnListA.length == 16) {
-         target.scrollIntoView();
+        target.scrollIntoView();
         this.AFaly = false;
         this.getSubmit(); //A试卷求和
       } else {
@@ -545,18 +545,6 @@ export default {
         return;
       }
     },
-    // 页面滚动
-    backTop() {
-      let that = this;
-      let timer = setInterval(() => {
-        let ispeed = Math.floor(-that.scrollTop / 5);
-        document.documentElement.scrollTop = document.body.scrollTop =
-          that.scrollTop + ispeed;
-        if (that.scrollTop === 0) {
-          clearInterval(timer);
-        }
-      }, 16);
-    }
   },
   created() {
     settitle("答题");
