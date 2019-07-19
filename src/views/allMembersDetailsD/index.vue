@@ -33,6 +33,7 @@
           >已消费</div>-->
         </div>
       </div>
+      <!-- -->
       <div style="border-bottom: 1px solid #E9E9E9;" v-for="(item,index) in orderByIdListHY.obj.meOrders" :key="index">
         <div class="div_display_flex font_color_00 margin_top_div3">
           <div class="div_width_45 font_size_15 padding_left_div3">{{item.recipe}}</div>
@@ -89,16 +90,31 @@
         </div>
       </div>
     </div>
+
+        <!-- 作废订单 -->
+    <confirm v-model="outPayFalge1" title @on-cancel="onCancel1" @on-confirm="onConfirm1">
+      <div style="text-align:center;font-size:18px;">
+        您确认要作废订单吗？<br>
+        <div style="font-size: 14px;color: #4A7B67;margin-top: 4%;">套餐金额将原路返回</div>
+
+      </div>
+    </confirm>
   </div>
 </template>
 <script>
 import url from "../../bin/url";
+import { Confirm } from "vux";
 export default {
+    components: {
+    Confirm
+  },
   name: "allMembersDetailsD",
   data() {
     return {
       orderByIdList: "",
       ordertypeF: "",
+       outPayFalge1: false ,//作废
+       orderIdZ:'',
       orderByIdListHY: {
         obj: {
           recipe: "",
@@ -197,12 +213,15 @@ export default {
         }
       );
     },
-    // 订单作废
-    getCancel(id) {
-      console.log(id);
-      let _obj = {
+      // 弹窗取消
+    onCancel1() {
+      console.log("2");
+    },
+    // 弹窗确认
+    onConfirm1() {
+       let _obj = {
         openId: localStorage.getItem("openId"),
-        id: id
+        id: this.orderIdZ
       };
       this.$fetch.post("/fruits/app/member/cancel", _obj).then(
         data => {
@@ -222,6 +241,11 @@ export default {
           alert("网络缓慢。。");
         }
       );
+    },
+    // 订单作废
+    getCancel(id) {
+    this.orderIdZ = id;
+     this.outPayFalge1 = true;
     }
   },
   created() {
