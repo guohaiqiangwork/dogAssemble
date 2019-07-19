@@ -7,7 +7,7 @@
                     <slot name='size'></slot>
                 </p>
                 <slot name="content"></slot>
-                <p class="tip-footer clearfix"><span>注意事项：</span><span>{{item.notice}}</span></p>
+                <p class="tip-footer clearfix"><span>食方说明：</span><span>{{item.notice}}</span></p>
                 <p class="tip-footer clearfix"><span>适宜人群：</span><span>{{item.crowd}}</span></p>
                 <!-- <p v-if="item.type == 0" class="tip-footer clearfix"><span >适应病症：</span><span>{{item.disease}}</span></p> -->
             </div>

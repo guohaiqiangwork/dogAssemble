@@ -36,11 +36,11 @@
       </div>
 
       <!-- 不用检查 resultFalgA >  15 && resultFalgB < -15-->
-      <div v-if=" resultFalgC ">
+      <div v-if="resultFalgC">
         <!-- 有提示 -->
         <img src="../../assets/images/zhuanshu@2x.png" class="img_result" alt />
-        <div class="result_bt" @click="goToNearby">去附近门店看看</div>
-        <!-- <div class="result_bt_A" @click="goToNearby">去附近门店看看</div> -->
+        <!-- <div class="result_bt" @click="goToNearby">去附近门店看看</div> -->
+        <div class="result_bt_A" @click="goToNearby">去附近门店看看</div>
       </div>
     </div>
   </div>
@@ -86,7 +86,7 @@ export default {
     console.log(this.resultFalgA);
     this.resultFalgB = this.routeParams.data.resultFalgB;
     console.log(this.resultFalgB);
-    if (this.resultFalgB > 15 && this.resultFalgA < -15) {
+    if (this.resultFalgA > 15 && this.resultFalgB < -15) {
       this.resultFalgC = true;
     }
   },

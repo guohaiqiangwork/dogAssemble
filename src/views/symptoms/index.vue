@@ -35,7 +35,7 @@
             </p>
             <slot name="content"></slot>
             <p class="tip-footer">
-              <span>注意事项：</span>
+              <span>食方说明：</span>
               <span>{{item.notice}}</span>
             </p>
             <p class="tip-footer">
