@@ -559,13 +559,13 @@ export default {
   text-align: center;
   float: left;
   margin-left: 5%;
-  margin-top: 3%;
+  margin-top: 4%;
 }
 .answer_T {
   float: left;
   width: 90%;
   margin-left: 5%;
-  margin-top: 3%;
+  margin-top: 5%;
   display: flex;
 }
 .hot_tit {
