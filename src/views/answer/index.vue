@@ -414,19 +414,37 @@ export default {
       AFaly: true,
       titleFalgA: "",
       titleFalgB: "",
-      titleFalgC: false
+      titleFalgC: false,
+      titleFalgA10: "",
+      titleFalgA11: ""
     };
   },
   // A 寒 B热
   methods: {
     // A选中状态
     getDN(Nid, Tid, index) {
-      if ((Tid == 10 && Nid > 2) || (Tid == 11 && Nid > 2)) {
-        this.titleFalgA = true;
+      if (Tid == 10 && Nid < -2) {
+        this.titleFalgA10 = true;
       }
-      if ((Tid == 10 && Nid <= 2) || (Tid == 11 && Nid <= 2)) {
-        this.titleFalgA = false;
+      if (Tid == 11 && Nid < -2) {
+        this.titleFalgA11 = true;
       }
+
+      if (Tid == 10 && Nid >= -2) {
+        // this.titleFalgA = false;
+        this.titleFalgA10 = false;
+      }
+      if (Tid == 11 && Nid >= -2) {
+        this.titleFalgA11 = false;
+      }
+
+      // console.log(this.titleFalgA);
+      //  if (Tid == 1 && Nid > 2) {
+      //   this.titleFalgB = true;
+      // }
+      // if (Tid == 1 && Nid <= 2) {
+      //   this.titleFalgB = false;
+      // }
       this.classA = Tid;
       this.classB = Nid;
       this.TiMONe[Tid].daAn.forEach(element => {
@@ -516,6 +534,9 @@ export default {
     // 去答题结果页面
     // 推荐信息
     goToResult() {
+      if (this.titleFalgA10 || this.titleFalgA11) {
+        this.titleFalgA = true;
+      }
       if (this.titleFalgA || this.titleFalgB) {
         this.titleFalgC = true;
       }
@@ -544,7 +565,7 @@ export default {
         alert("请检查试题");
         return;
       }
-    },
+    }
   },
   created() {
     settitle("答题");

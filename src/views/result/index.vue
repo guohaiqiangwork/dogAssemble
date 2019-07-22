@@ -5,33 +5,35 @@
       <div v-if=" !resultFalgC ">
         <div v-if=" idFalge < -2">
           <!-- 有提示 -->
-          <img src="../../assets/images/han1@2x.png" class="img_result" alt v-if="!idFalgeT" />
+          <img src="../../assets/images/han1@2x.png" class="img_result" alt v-if="idFalgeT" />
           <!-- 无提示 -->
-          <img src="../../assets/images/han2@2x.png" class="img_result" alt v-if="idFalgeT" />
-          <div class="result_bt" @click="goToNearby" v-if="!idFalgeT">去附近门店看看</div>
-          <div class="result_bt_A" @click="goToNearby" v-if="idFalgeT">去附近门店看看</div>
+          <img src="../../assets/images/han2@2x.png" class="img_result" alt v-if="!idFalgeT" />
+          <div class="result_btH" @click="goToNearby" v-if="!idFalgeT">去附近门店看看</div>
+          <div class="result_bt_ABH" @click="goToNearby" v-if="idFalgeT">去附近门店看看</div>
         </div>
       </div>
       <!-- 热信2 无提示-->
       <div v-if=" !resultFalgC ">
         <div v-if=" idFalge > 2">
           <!-- 有提示 -->
-          <img src="../../assets/images/re1@2x.png" class="img_result" alt v-if="!idFalgeT" />
+          <img src="../../assets/images/re1@2x.png" class="img_result" alt v-if="idFalgeT" />
           <!-- 无提示 -->
-          <img src="../../assets/images/re2@3x.png" class="img_result" alt v-if="idFalgeT" />
+          <img src="../../assets/images/re2@3x.png" class="img_result" alt v-if="!idFalgeT" />
           <div class="result_bt" @click="goToNearby" v-if="!idFalgeT">去附近门店看看</div>
-          <div class="result_bt_A" @click="goToNearby" v-if="idFalgeT">去附近门店看看</div>
+          <div class="result_bt_AB" @click="goToNearby" v-if="idFalgeT">去附近门店看看</div>
         </div>
       </div>
       <!-- 平行 -->
       <div v-if=" !resultFalgC ">
-        <div v-if="0 <= idFalge <=  2 || -2 <= idFalge < 0">
-          <!-- 有提示 -->
-          <img src="../../assets/images/ping2@2x.png" class="img_result" alt v-if="!idFalgeT" />
+        <!-- idFalgeP -->
+        <!-- <=  2 || -2 <= idFalge < 0 -->
+        <div v-if=" 0 <= idFalge &&   idFalge<=  2 ||  -2 <= idFalge && idFalge < 0 ">
           <!-- 无提示 -->
+          <img src="../../assets/images/ping2@2x.png" class="img_result" alt v-if="!idFalgeT" />
+          <!-- 有提示 -->
           <img src="../../assets/images/ping1@2x.png" class="img_result" alt v-if="idFalgeT" />
-          <div class="result_bt" @click="goToNearby" v-if="!idFalgeT">去附近门店看看</div>
-          <div class="result_bt_A" @click="goToNearby" v-if="idFalgeT">去附近门店看看</div>
+          <div class="result_bt" @click="goToNearby" v-if="idFalgeT">去附近门店看看</div>
+          <div class="result_bt_AB" @click="goToNearby" v-if="!idFalgeT">去附近门店看看</div>
         </div>
       </div>
 
@@ -57,7 +59,8 @@ export default {
       resultFalgA: "",
       resultFalgB: "",
       resultFalgC: false,
-      resultFalgD: false
+      resultFalgD: false,
+      idFalgeP: false
     };
   },
 
@@ -81,14 +84,27 @@ export default {
     settitle("答题结果");
     this.routeParams = JSON.parse(this.$route.params.obj);
     this.idFalge = this.routeParams.data.id;
-    this.idFalgeT = this.routeParams.data.flage;
-    this.resultFalgA = this.routeParams.data.resultFalgA;
-    console.log(this.resultFalgA);
-    this.resultFalgB = this.routeParams.data.resultFalgB;
-    console.log(this.resultFalgB);
+    if (0 <= this.idFalge) {
+      if (this.idFalge <= 2) {
+        this.idFalgeP = true;
+      }
+    }
+    if (-2 <= this.idFalge) {
+      if (this.idFalge < 0) {
+        this.idFalgeP = true;
+      }
+    }
+    console.log(this.idFalge + "总分");
+    this.idFalgeT = this.routeParams.data.flage; //总分
+    console.log(this.idFalgeT + "是否展示提示");
+    this.resultFalgA = this.routeParams.data.resultFalgA; //寒性
+    console.log(this.resultFalgA + "寒性");
+    this.resultFalgB = this.routeParams.data.resultFalgB; //热性
+    console.log(this.resultFalgB + "热性");
     if (this.resultFalgA > 15 && this.resultFalgB < -15) {
       this.resultFalgC = true;
     }
+    console.log(this.resultFalgC);
   },
 
   mounted() {}
@@ -128,6 +144,42 @@ export default {
   font-size: 16px;
   margin-left: 20%;
   margin-top: -48%;
+  position: relative;
+  line-height: 3;
+}
+.result_btH {
+  width: 60%;
+  background-color: #4a7b67;
+  color: #fff;
+  text-align: center;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-left: 20%;
+  margin-top: -21%;
+  position: relative;
+  line-height: 3;
+}
+.result_bt_AB {
+  width: 60%;
+  background-color: #4a7b67;
+  color: #fff;
+  text-align: center;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-left: 20%;
+  margin-top: -30%;
+  position: relative;
+  line-height: 3;
+}
+.result_bt_ABH {
+  width: 60%;
+  background-color: #4a7b67;
+  color: #fff;
+  text-align: center;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-left: 20%;
+  margin-top: -20%;
   position: relative;
   line-height: 3;
 }
