@@ -34,7 +34,7 @@ Vue.component('toast', Toast)
 window.settitle = settitle;
 
  router.beforeEach((to, from, next) => {
-   if(!localStorage.getItem('user') && to.name !== "login" && to.name !== "shop" && to.name !=="home" && to.name!="changePassword" && to.name!="answer" && to.name!="result"){
+   if(!localStorage.getItem('user') && to.name !== "login" && to.name !== "shop" && to.name !=="home" && to.name!="changePassword" && to.name!="answer" && to.name!="result"&& to.name!="nearby"){
      next("/login/1");
      return 
    }
