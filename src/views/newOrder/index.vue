@@ -82,7 +82,7 @@
       </div>
       <div class="margin_top_div5">
         <span class="font_size_14 font_color_1A margin_left_div6">结束时间：</span>
-        {{memberIDNumber==1 ?startTime :endTime }}
+       <span style="margin-left:-1%">{{memberIDNumber==1 ?startTime :endTime }}</span> 
       </div>
       <!-- 按钮 -->
       <div class="div_display_flex" style="position: fixed;bottom: 0;width: 100%;line-height: 3;">
@@ -337,7 +337,7 @@ export default {
           if (data.code == 0) {
             alert("新建成功");
           } else {
-            // alert(data.msg);
+            alert(data.msg);
           }
         },
         err => {
