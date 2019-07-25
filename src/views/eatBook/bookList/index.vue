@@ -97,7 +97,7 @@ export default {
   },
   methods: {
     loadTop(){
-      this.orderList = [];
+      this.bookList = [];
       this.form.current = 1;
       this.getRecipeList('drop');
     },
@@ -110,7 +110,7 @@ export default {
       // this.$vux.loading.show({
       //   text: "Loading"
       // });
-
+      console.log(str)
       this.$fetch
         .post("fruits/app/recipe/getRecipeList", this.form)
         .then(res => {
