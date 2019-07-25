@@ -3,14 +3,16 @@
     <!-- 押金充值 -->
     <div class="recharge_div_b margin_top_div3">
       <div class="div_display_flex padding_top_div6">
-        <div class="div_width_50 margin_left_div6 font_size_16 font_color_1A" style="font-weight:700;">押金充值</div>
         <div
-          class="div_width_50 text_right margin_right_div6 font_size_14 font_color_4A"
-          
-        >  <span style="text-decoration:underline;"  @click="goToRechargeList(0)">充值记录</span> </div>
+          class="div_width_50 margin_left_div6 font_size_16 font_color_1A"
+          style="font-weight:700;"
+        >押金充值</div>
+        <div class="div_width_50 text_right margin_right_div6 font_size_14 font_color_4A">
+          <span style="text-decoration:underline;" @click="goToRechargeList(0)">充值记录</span>
+        </div>
       </div>
       <div class="margin_top_div8">
-        <input type="text" class="recharge_input_b" placeholder="输入您想充值的金额…" v-model="amountMoney">
+        <input type="text" class="recharge_input_b" placeholder="输入您想充值的金额…" v-model="amountMoney" />
       </div>
       <div class="div_display_flex margin_top_div6 padding_bottom_4">
         <div class="recharge_button_b" @click="getDepositRecharge">立即充值</div>
@@ -19,23 +21,25 @@
     <!-- 会员充值 -->
     <div class="recharge_div_b margin_top_div5" style="margin-top:4%;padding-bottom:1.5rem">
       <div class="div_display_flex padding_top_div6">
-        <div class="div_width_50 margin_left_div6 font_size_16 font_color_1A"  style="font-weight:700;">会员充值</div>
         <div
-          class="div_width_50 text_right margin_right_div6 font_size_14 font_color_4A"
-         
-        ><span style="text-decoration:underline;"  @click="goToRechargeList(1)">充值记录</span></div>
+          class="div_width_50 margin_left_div6 font_size_16 font_color_1A"
+          style="font-weight:700;"
+        >会员充值</div>
+        <div class="div_width_50 text_right margin_right_div6 font_size_14 font_color_4A">
+          <span style="text-decoration:underline;" @click="goToRechargeList(1)">充值记录</span>
+        </div>
       </div>
       <div>
         <div class="pass_list_w">
           <div class="search_box12" style="border-radius:none">
-            <img src="../../assets/images/phone@2x.png" class="width_16">
+            <img src="../../assets/images/phone@2x.png" class="width_16" />
             <input
               type="text"
               placeholder="请输⼊您的手机号"
               style="width:100%;height:100%;outline: none;border:none"
               @input="phoneSearch"
               v-model="phone"
-            >
+            />
             <i
               v-if="phone"
               style="display: inline-block;height: 0.7rem;width: 120px;line-height: 0.7rem;"
@@ -65,14 +69,14 @@
       <div>
         <!-- :disabled="ifChoic?true:false" -->
         <input
-        style="margin-top:5%;"
+          style="margin-top:5%;"
           type="text"
           class="recharge_input_b2 margin_top_div8"
           placeholder="输入其他金额"
           v-model="amount"
-          @blur ="onBlur"
+          @blur="onBlur"
           @focus="otherFocus"
-        >
+        />
       </div>
       <div class="div_display_flex margin_top_div8 flex-around" style="padding:0.1rem;">
         <div class="div_width_43 backgroun_color_4A bt_d_c" @click="rechargeq('2')">支付宝充值</div>
@@ -119,8 +123,8 @@ export default {
     };
   },
   methods: {
-    onBlur(){
-      window.scroll(0,0)
+    onBlur() {
+      window.scroll(0, 0);
     },
     // 选择金额
     moneyXz(falge, index, topup) {
@@ -167,7 +171,7 @@ export default {
         });
         return;
       }
-      if (this.ifHas) {
+      if (e == 1) {
         this.$router.push({
           name: "rechargeList",
           params: {
@@ -180,9 +184,12 @@ export default {
             })
           }
         });
-      } else {
-        this.$vux.toast.text("请输入正确的手机号");
       }
+      // if (this.ifHas) {
+
+      // } else {
+      //   this.$vux.toast.text("请输入正确的手机号");
+      // }
     },
     //获取充值金额
     getCount() {
@@ -195,13 +202,13 @@ export default {
         })
         .then(res => {
           this.$vux.loading.hide();
-          if(res.obj.length){
-             res.obj.forEach(item => {
-            item.log = false;
-            this.countList.push(item);
+          if (res.obj.length) {
+            res.obj.forEach(item => {
+              item.log = false;
+              this.countList.push(item);
             });
-          }else{
-            this.$vux.toast.text('暂无数据')
+          } else {
+            this.$vux.toast.text("暂无数据");
           }
         });
     },
@@ -220,7 +227,7 @@ export default {
               this.$vux.toast.text("押金不足");
               return;
             }
-             if (res.msg == "user_has_frozen") {
+            if (res.msg == "user_has_frozen") {
               this.$vux.toast.text("用户已冻结");
               return;
             }
@@ -304,12 +311,12 @@ export default {
             weiXinPay(
               obj,
               function(val) {
-                console.log(val)
+                console.log(val);
                 // alert(val);
               },
               function(err) {}
             );
-             this.amountMoney = ''
+            this.amountMoney = "";
           } else {
           }
         });
@@ -333,7 +340,7 @@ export default {
 </style>
 
 <style scoped>
-.moneyWeight{
+.moneyWeight {
   font-weight: 700;
 }
 .recharge_div_b {
@@ -354,7 +361,7 @@ export default {
   color: #000;
   height: 48px;
   /* padding-left: 2%; */
-  text-indent:0.2rem;
+  text-indent: 0.2rem;
 }
 .recharge_input_b2 {
   width: 87%;
@@ -367,7 +374,7 @@ export default {
   /* padding-left: 2%; */
   background-color: #ffffff;
   border: 1px solid #4a7b67;
-  text-indent:0.2rem;
+  text-indent: 0.2rem;
 }
 .recharge_button_b {
   text-align: center;
