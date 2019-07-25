@@ -144,6 +144,7 @@ export default {
                 // margin-left: 1.5rem;
                 // margin-top: -0.55rem;
                 text-align: left;
+                word-break: break-word;
             }
         }
 }
