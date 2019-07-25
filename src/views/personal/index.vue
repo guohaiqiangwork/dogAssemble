@@ -50,7 +50,7 @@
               style="width:60%;margin-top:-5%;text-indent:1em;"
             >
               押金：{{personalMsg.deposit.toFixed(2)}}元
-              <div class="money_falg_y" v-if="personalMsg.deposit.toFixed(2) < '600' ">押金不足</div>
+              <div class="money_falg_y" v-if="personalMsg.deposit.toFixed(2) < 600 ">押金不足</div>
             </div>
             <div v-if="personalMsg.deposit == null"
               class="font_color_E8 font_size_15"
