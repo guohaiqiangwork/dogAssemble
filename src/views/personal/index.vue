@@ -14,7 +14,7 @@
           <div class="div_width_75 div_display_flex" style="margin-left:-3%">
             <div
               class="font_color_ff font_size_15 margin_top_div8"
-              style="width:75%;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;text-indent:5%;margin-top:5%;"
+              style="width:75%;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;text-indent:1em;margin-top:5%;"
             >{{personalMsg.storeName}}</div>
             <div class="personal_falg_member">
               <img
@@ -47,14 +47,14 @@
           >
             <div v-if="personalMsg.deposit != null"
               class="font_color_E8 font_size_15"
-              style="width:60%;margin-top:-5%;text-indent:5%;"
+              style="width:60%;margin-top:-5%;text-indent:1em;"
             >
               押金：{{personalMsg.deposit.toFixed(2)}}元
               <div class="money_falg_y" v-if="personalMsg.deposit.toFixed(2) < '600' ">押金不足</div>
             </div>
             <div v-if="personalMsg.deposit == null"
               class="font_color_E8 font_size_15"
-              style="width:60%;margin-top:-5%;text-indent:5%;"
+              style="width:60%;margin-top:-5%;text-indent:1em;"
             >
               押金：0.00元
               <div class="money_falg_y" >押金不足</div>
@@ -818,7 +818,9 @@ a:link {
 .personal_falg_m {
   color: #ffffff;
   font-size: 13px;
-  margin-left: 3%;
+  margin-left: 10%;
+  width: 30%;
+  text-align: center;
 }
 .personal_font_m {
   margin-left: 13px;
@@ -929,7 +931,7 @@ a:link {
 }
 .money_falg_y {
   margin-top: -20%;
-  width: 32%;
+  /* width: 32%; */
   color: red;
   border: 1px solid #e6435a;
   border-radius: 15px;
