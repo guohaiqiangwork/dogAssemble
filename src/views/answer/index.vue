@@ -1,69 +1,71 @@
 <template>
   <div>
     <div id="target"></div>
-    <!-- 题目 A-->
-    <div v-if="AFaly">
-      <div class="answer_B_T">
-        <div>
-          <img
-            src="../../assets/images/answerTITB@2x.png"
-            style="margin-top: 36%; width: 90%; margin-left: 5%;"
-            alt
-          />
-        </div>
-        <div class="answer_T_n">
-          <div v-for="(item,index) in TiMONe" :key="index">
-            <div class="answer_T">
-              <div class="hot_tit"></div>
-              <div class="font_size_16 font_color_10" style="font-weight: 900;">{{item.names}}</div>
-            </div>
-            <div
-              class="answer_an"
-              v-for="(itm ,index) in item.daAn"
-              :key="index"
-              @click="getDN(itm.id,item.id,index)"
-            >
-              <div
-                :style="{ backgroundColor:(itm.checked ? '#E9EFEC' : ''),fontWeight:(itm.checked ? '500' : '')}"
-                class="answer_D_N font_size_14"
-              >{{itm.name}}</div>
-            </div>
+    <div v-if="loginFalge">
+      <!-- 题目 A-->
+      <div v-if="AFaly">
+        <div class="answer_B_T">
+          <div>
+            <img
+              src="../../assets/images/answerTITB@2x.png"
+              style="margin-top: 36%; width: 90%; margin-left: 5%;"
+              alt
+            />
           </div>
-          <!-- <button @click="getSubmit" style="float:left;background-color:red;width:50%">分值</button> -->
-          <div class="answer_bt" @click="goToB">下一步</div>
+          <div class="answer_T_n">
+            <div v-for="(item,index) in TiMONe" :key="index">
+              <div class="answer_T">
+                <div class="hot_tit"></div>
+                <div class="font_size_16 font_color_10" style="font-weight: 900;">{{item.names}}</div>
+              </div>
+              <div
+                class="answer_an"
+                v-for="(itm ,index) in item.daAn"
+                :key="index"
+                @click="getDN(itm.id,item.id,index)"
+              >
+                <div
+                  :style="{ backgroundColor:(itm.checked ? '#E9EFEC' : ''),fontWeight:(itm.checked ? '500' : '')}"
+                  class="answer_D_N font_size_14"
+                >{{itm.name}}</div>
+              </div>
+            </div>
+            <!-- <button @click="getSubmit" style="float:left;background-color:red;width:50%">分值</button> -->
+            <div class="answer_bt" @click="goToB">下一步</div>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- 题目B -->
-    <div v-if="!AFaly">
-      <div class="answer_B_T">
-        <div>
-          <img
-            src="../../assets/images/answerTIT@2x(1).png"
-            style="margin-top: 36%; width: 90%; margin-left: 5%;"
-            alt
-          />
-        </div>
-        <div class="answer_T_n">
-          <div v-for="(item,index) in TiMTwo" :key="index">
-            <div class="answer_T">
-              <div class="hot_tit"></div>
-              <div class="font_size_16 font_color_10" style="font-weight: 900;">{{item.names}}</div>
-            </div>
-            <div
-              class="answer_an"
-              v-for="(itm ,index) in item.daAn"
-              :key="index"
-              @click="getDNB(itm.id,item.id,index)"
-            >
-              <div
-                :style="{ backgroundColor:(itm.checked ? '#E9EFEC' : ''),fontWeight:(itm.checked ? '500' : '')}"
-                class="answer_D_N font_size_14"
-              >{{itm.name}}</div>
-            </div>
+      <!-- 题目B -->
+      <div v-if="!AFaly">
+        <div class="answer_B_T">
+          <div>
+            <img
+              src="../../assets/images/answerTIT@2x(1).png"
+              style="margin-top: 36%; width: 90%; margin-left: 5%;"
+              alt
+            />
           </div>
-          <!-- <button @click="getSubmit" style="float:left;background-color:red;width:50%">分值</button> -->
-          <div class="answer_bt" @click="getSubmitB">提交</div>
+          <div class="answer_T_n">
+            <div v-for="(item,index) in TiMTwo" :key="index">
+              <div class="answer_T">
+                <div class="hot_tit"></div>
+                <div class="font_size_16 font_color_10" style="font-weight: 900;">{{item.names}}</div>
+              </div>
+              <div
+                class="answer_an"
+                v-for="(itm ,index) in item.daAn"
+                :key="index"
+                @click="getDNB(itm.id,item.id,index)"
+              >
+                <div
+                  :style="{ backgroundColor:(itm.checked ? '#E9EFEC' : ''),fontWeight:(itm.checked ? '500' : '')}"
+                  class="answer_D_N font_size_14"
+                >{{itm.name}}</div>
+              </div>
+            </div>
+            <!-- <button @click="getSubmit" style="float:left;background-color:red;width:50%">分值</button> -->
+            <div class="answer_bt" @click="getSubmitB">提交</div>
+          </div>
         </div>
       </div>
     </div>
@@ -416,7 +418,9 @@ export default {
       titleFalgB: "",
       titleFalgC: false,
       titleFalgA10: "",
-      titleFalgA11: ""
+      titleFalgA11: "",
+      loginFalge: false,
+      resultH: ""
     };
   },
   // A 寒 B热
@@ -511,25 +515,42 @@ export default {
     getSaveDetection() {
       this.resultFalg =
         eval(this.dnListB.join("+")) + eval(this.dnListA.join("+"));
+      if (this.resultFalg < -2) {
+        this.resultH = 1;
+      } else if (this.resultFalg > 2) {
+        this.resultH = 2;
+      } else if (
+        (0 <= this.resultH && this.resultH <= 2) ||
+        (-2 <= this.resultH && this.resultH < 0)
+      ) {
+        this.resultH = 3;
+      } else if (
+        eval(this.dnListB.join("+")) > 15 &&
+        eval(this.dnListA.join("+")) < -15
+      ) {
+        this.resultH = 4;
+      }
       let _obj = {
         openId: localStorage.getItem("openId"),
-        phone: localStorage.getItem("phone"),
+        userId: localStorage.getItem("appUserId"),
         coldScore: eval(this.dnListA.join("+")),
-        thermalScore: eval(this.dnListB.join("+"))
+        thermalScore: eval(this.dnListB.join("+")),
+        grade: this.resultFalg,
+        result: this.resultH 
       };
       console.log(_obj);
       this.goToResult();
-      // this.$fetch.post("fruits/app/blank/saveDetection", _obj).then(
-      //   data => {
-      //     if (data.code == 0) {
-      //     } else {
-      //       alert(data.msg);
-      //     }
-      //   },
-      //   err => {
-      //     alert("网络缓慢。。");
-      //   }
-      // );
+      this.$fetch.post("fruits/app/blank/saveDetection", _obj).then(
+        data => {
+          if (data.code == 0) {
+          } else {
+            // alert(data.msg);
+          }
+        },
+        err => {
+          alert("网络缓慢。。");
+        }
+      );
     },
     // 去答题结果页面
     // 推荐信息
@@ -571,7 +592,16 @@ export default {
     settitle("答题");
   },
 
-  mounted() {}
+  mounted() {
+    this.$fetch
+      .post("fruits/app/personal/getPersonalInfo", {
+        openId: localStorage.getItem("openId")
+      })
+      .then(res => {
+        this.loginFalge = true;
+        console.log(res);
+      });
+  }
 };
 </script>
 <style scoped>

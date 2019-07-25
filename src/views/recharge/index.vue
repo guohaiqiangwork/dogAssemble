@@ -27,7 +27,7 @@
       </div>
       <div>
         <div class="pass_list_w">
-          <div class="search_box" style="border-radius:none">
+          <div class="search_box12" style="border-radius:none">
             <img src="../../assets/images/phone@2x.png" class="width_16">
             <input
               type="text"
@@ -249,7 +249,6 @@ export default {
       this.cashMethod();
     },
     showMember(value) {
-      console.log(1212);
       this.$fetch
         .post("fruits/app/personal/checkCustomer", {
           openId: localStorage.getItem("openId"),
@@ -302,14 +301,15 @@ export default {
         .then(res => {
           if (res.msg == "success") {
             var obj = JSON.parse(res.obj);
-            console.log(obj)
             weiXinPay(
               obj,
               function(val) {
-                alert(val);
+                console.log(val)
+                // alert(val);
               },
               function(err) {}
             );
+             this.amountMoney = ''
           } else {
           }
         });
@@ -383,7 +383,7 @@ export default {
   width: 95%;
   margin-left: 2%;
 }
-.search_box {
+.search_box12 {
   height: 0.7rem;
   position: relative;
   box-sizing: border-box;
