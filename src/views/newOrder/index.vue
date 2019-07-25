@@ -3,7 +3,7 @@
     <div>
       <div class="pass_list_w">
         <!-- <p v-if="transferFlag" class="red font_size_14">当前用户为跨店会员</p> -->
-        <div class="search_box">
+        <div class="search_box_newOrder">
           <img src="../../assets/images/phone@2x.png" class="width_16">
           <input
             type="text"
@@ -63,8 +63,8 @@
           <option v-for="(option,index) in recipeList" :key="index" :value="option">{{ option.recipe }}</option>
         </select>
       </div>
-      <div class="margin_top_div5 font_size_11 div_display_flex">
-        <span class="font_size_14 font_color_1A margin_left_div6">开始时间：</span>
+      <div class="margin_top_div5 font_size_14 div_display_flex">
+        <span class=" font_color_1A margin_left_div6">开始时间：</span>
         <datetime
           v-model="value7"
           @on-change="change"
@@ -465,7 +465,7 @@ export default {
   width: 95%;
   margin-left: 2%;
 }
-.search_box {
+.search_box_newOrder {
   height: 0.7rem;
   position: relative;
   padding: 0;
