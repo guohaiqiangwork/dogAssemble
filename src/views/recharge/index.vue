@@ -304,7 +304,8 @@ export default {
             weiXinPay(
               obj,
               function(val) {
-                alert(val);
+                console.log(val)
+                // alert(val);
               },
               function(err) {}
             );
