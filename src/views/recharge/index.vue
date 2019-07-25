@@ -249,7 +249,6 @@ export default {
       this.cashMethod();
     },
     showMember(value) {
-      console.log(1212);
       this.$fetch
         .post("fruits/app/personal/checkCustomer", {
           openId: localStorage.getItem("openId"),
@@ -302,7 +301,6 @@ export default {
         .then(res => {
           if (res.msg == "success") {
             var obj = JSON.parse(res.obj);
-            console.log(obj)
             weiXinPay(
               obj,
               function(val) {
@@ -310,6 +308,7 @@ export default {
               },
               function(err) {}
             );
+             this.amountMoney = ''
           } else {
           }
         });

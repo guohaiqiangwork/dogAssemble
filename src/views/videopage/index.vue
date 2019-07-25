@@ -112,7 +112,9 @@ export default {
             this.videoIdPay = this.videoListObj[0].id;
             this.openBuy(this.videoListObj[0]);
           } else {
-            alert(data.msg);
+            if (data.msg == no_login) {
+              alert("请先进行登录");
+            }
           }
         },
         err => {
@@ -172,7 +174,7 @@ export default {
             wexinPay(obj);
             this.redirect();
           } else {
-            alert(data.msg);
+            // alert(data.msg);
           }
         },
         err => {

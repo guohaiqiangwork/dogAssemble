@@ -88,13 +88,14 @@
           <div class="div_display_flex margin_top_div3">
             <div
               class="div_width_70 margin_left_div2"
-            >{{recommendStoreList[0].province}}{{recommendStoreList[0].city}}{{recommendStoreList[0].area}}</div>
+            > {{recommendStoreList[0].name}}
+           </div>
             <div
               class="div_width_30 margin_right_div2 text_right"
-            >{{recommendStoreList[0].distance}}km</div>
+            > {{recommendStoreList[0].distance}}km</div>
           </div>
           <div class="div_display_flex margin_top_div3">
-            <div class="div_width_70 margin_left_div2">{{recommendStoreList[0].address}}</div>
+            <div class="div_width_70 margin_left_div2">{{recommendStoreList[0].province}}{{recommendStoreList[0].city}}{{recommendStoreList[0].area}}{{recommendStoreList[0].address}}</div>
             <div
               class="div_width_30 margin_right_div2 text_right"
               @click="goToMap(recommendStoreList[0])"
@@ -106,7 +107,7 @@
             <div class="div_width_70 margin_left_div2">营业时间</div>
             <div
               class="div_width_30 margin_right_div2 text_right"
-            >{{recommendStoreList[0].startTime}}</div>
+            >{{recommendStoreList[0].startTime}}-{{recommendStoreList[0].endTime}}</div>
           </div>
           <div class="div_display_flex margin_top_div3 padding_bottom_4">
             <div class="div_width_70 margin_left_div2">门店电话</div>

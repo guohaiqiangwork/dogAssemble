@@ -143,7 +143,6 @@ export default {
               'the_user_has_no_order':'该用户当前无进行中订单'
             }
             this.$vux.toast.text(err[data.msg]||'未知的错误')
-             alert(data.msg)
           }
         },
         err => {
