@@ -23,7 +23,7 @@
       ref="loadmore"
       :auto-fill="false"
     >
-      <div class="nut-vert-list-panel" style="width:100%;height:100%;background: #f3f4f5;">
+      <div class="nut-vert-list-panel" style="width:100%;height:100%;background: #f3f5f8;">
         <!-- overflow-x:hidden; -->
         <!-- 全部订单  margin-bottom: 20px;-->
         <div v-if="switchFlage == '0'" style="width:100%;">
@@ -92,7 +92,7 @@
                     <div class="font_color_00 font_size_14">{{items.name}}</div>
                     <div class="div_display_flex margin_top_div3">
                       <div class="order_price_font" style="width:80%">¥{{items.price}}</div>
-                      <div class="text_right">x{{items.count}}</div>
+                      <div class="text_right" style="width:20%">x{{items.count}}</div>
                       <!-- order_price_bt -->
                     </div>
                     <div v-for="(itemsg,index) in items.goodsSpecs" :key="index" class="GG_list">
@@ -192,7 +192,7 @@
                     <div class="font_color_00 font_size_14">{{items.name}}</div>
                     <div class="div_display_flex margin_top_div3">
                       <div class="order_price_font" style="width:80%">¥{{items.price}}</div>
-                      <div class="text_right">x{{items.count}}</div>
+                      <div class="text_right" style="width:20%">x{{items.count}}</div>
                       <!-- order_price_bt -->
                     </div>
                     <div v-for="(itemsg,index) in items.goodsSpecs" :key="index" class="GG_list">
@@ -292,7 +292,7 @@
                     <div class="font_color_00 font_size_14">{{items.name}}</div>
                     <div class="div_display_flex margin_top_div3">
                       <div class="order_price_font" style="width:80%">¥{{items.price}}</div>
-                      <div class="text_right">x{{items.count}}</div>
+                      <div class="text_right" style="width:20%">x{{items.count}}</div>
                       <!-- order_price_bt -->
                     </div>
                     <div v-for="(itemsg,index) in items.goodsSpecs" :key="index" class="GG_list">
@@ -395,7 +395,7 @@
                     <div class="font_color_00 font_size_14">{{items.name}}</div>
                     <div class="div_display_flex margin_top_div3">
                       <div class="order_price_font" style="width:80%">¥{{items.price}}</div>
-                      <div class="text_right">x{{items.count}}</div>
+                      <div class="text_right" style="width:20%">x{{items.count}}</div>
                       <!-- order_price_bt -->
                     </div>
                     <div v-for="(itemsg,index) in items.goodsSpecs" :key="index" class="GG_list">
@@ -495,7 +495,7 @@
                     <div class="font_color_00 font_size_14">{{items.name}}</div>
                     <div class="div_display_flex margin_top_div3">
                       <div class="order_price_font" style="width:80%">¥{{items.price}}</div>
-                      <div class="text_right">x{{items.count}}</div>
+                      <div class="text_right" style="width:20%">x{{items.count}}</div>
                       <!-- order_price_bt -->
                     </div>
                     <div v-for="(itemsg,index) in items.goodsSpecs" :key="index" class="GG_list">
@@ -789,7 +789,8 @@ export default {
   color: #ff3636;
 }
 .order_border {
-  border-top: 1px solid #f4f4f4;
+  overflow: hidden;
+  /* border-top: 1px solid #f4f4f4; */
 }
 .oreder_bt_pay {
   width: 24%;
