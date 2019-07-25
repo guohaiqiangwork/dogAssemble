@@ -110,7 +110,6 @@ export default {
       // this.$vux.loading.show({
       //   text: "Loading"
       // });
-      console.log(str)
       this.$fetch
         .post("fruits/app/recipe/getRecipeList", this.form)
         .then(res => {
@@ -120,7 +119,6 @@ export default {
             this.allLoaded = false;
             this.$refs.loadmore.onTopLoaded();
           }
-          console.log(res, 999);
           // this.$vux.loading.hide();
 
           if (res.obj.length == 0) {
@@ -178,9 +176,6 @@ export default {
 };
 </script>
 <style lang="less">
-.nut-scroller {
-  background: #f3f5f8;
-}
 .main-body {
   /* 加上这个才会有当数据充满整个屏幕，可以进行上拉加载更多的操作 */
   position: absolute;
@@ -188,8 +183,8 @@ export default {
   top: 48px;
   overflow: auto;
   width: 100%;
-  height: calc(100% - 0.9rem);
-  padding-bottom: 70px;
+  height: calc(100% - 1rem);
+  // padding-bottom: 70px;
   
     -webkit-overflow-scrolling: touch;
   // touch-action: none;
