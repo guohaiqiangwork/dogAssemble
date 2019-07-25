@@ -10,7 +10,7 @@
             <span>{{goodsMsg.phone}}</span>
           </div>
           <!-- <img class="icon_right" src="../../assets/images/right.png" alt="" > -->
-          <x-icon @click="goAddress" type="ios-arrow-right" size="30"></x-icon>
+          <x-icon @click="goAddress" type="ios-arrow-right" size="26"></x-icon>
         </div>
         <div class="address_msg">
           <div style="display:inline-block;" class="topic_box" v-if="goodsMsg.isDefault == 1">
@@ -48,7 +48,7 @@
 </div>
         <div class="flex-start align-center" @click="goList">
           <span style="white-space:nowrap;">共{{count}}件</span>
-          <x-icon type="ios-arrow-right" size="30"></x-icon>
+          <x-icon type="ios-arrow-right" size="26"></x-icon>
         </div>
       </div>
       <!-- 单行form -->
@@ -342,7 +342,7 @@ export default {
     display: flex;
     justify-content: space-between;
     padding: 0 0.52rem 0 0.46rem;
-    margin-top: 0.35rem;
+    margin-top: 0.07rem;
     font-size: 0.28rem;
     font-family: Arial;
     font-weight: 400;
