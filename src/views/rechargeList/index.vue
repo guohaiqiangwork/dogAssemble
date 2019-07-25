@@ -9,7 +9,6 @@
           >{{item.payType == 3?"现金充值":item.payType == 2?"支付宝充值":item.payType == 4?"微信充值":item.payType == 1?"线上充值":""}}</div>
           <div class="div_width_50 text_right">+ {{item.recharge}}</div>
         </div>
-        <!-- <div>1212423423</div> -->
         <div class="div_display_flex">
           <div  class="div_width_50 margin_top_div3">{{item.phone}}</div>
             <div
@@ -51,11 +50,7 @@ export default {
   data() {
     return {
       depositRecordList: [],
-      rechargeRecordList: [{
-              payType:1,
-              rechargeTime:'2012389123-231-132',
-              recharge:'342423'
-            }]
+      rechargeRecordList: []
     };
   },
   methods: {
@@ -109,7 +104,7 @@ export default {
     if (this.routeParams.data.type == 0) {
       this.getDepositRecord(); //获取押金充值记录
     } else {
-      // this.getList();
+      this.getList();
     }
   },
 
