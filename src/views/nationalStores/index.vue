@@ -17,7 +17,7 @@
 <div class="main-body" ref="wrapper">
   <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :auto-fill="false" :bottom-all-loaded="allLoaded" ref="loadmore" bottom-status-change="handelChange">
      <!-- 推荐门店列表 -->
-        <div class="div_display_flex margin_left_div3 padding_top_div3">
+        <div class="div_display_flex margin_left_div3 padding_top_div3" style="padding-top:6%;">
           <div class="national_flag_title" v-if="recommendStoreList.length"></div>
             <!-- v-if="recommendStoreList.length" -->
           <div
@@ -458,9 +458,9 @@ export default {
     pulldown() {
       this.recommendStoreList = [];
       console.log("klk");
-      this.isUnMore1 = false;
+      // this.isUnMore1 = false;
       this.page.current = 1;
-      this.getRecommendStoreList();
+      // this.getRecommendStoreList();
     },
 
     // 获取当前位置
@@ -512,8 +512,8 @@ export default {
  
   mounted() {
     this.addressDetail();
-     document.documentElement.clientHeight -
-      this.$refs.wrapper.getBoundingClientRect().top;
+    //  document.documentElement.clientHeight -
+    //   this.$refs.wrapper.getBoundingClientRect().top;
     // this.getRecommendStoreList(); //获取全国门店
   }
 };
