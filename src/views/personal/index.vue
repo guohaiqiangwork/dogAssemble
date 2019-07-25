@@ -313,7 +313,9 @@
           <div class="div_display_flex" @click="goToSOrderList">
             <div class="font_color_1A personal_order_font div_width_50">服务订单记录</div>
             <div class="div_width_50" style="width:26px;margin-left:38%;margin-top:18px">
-              <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%" />
+              <!-- <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%" /> -->
+            
+               <x-icon type="ios-arrow-right" size="20"></x-icon>
             </div>
           </div>
           <div
@@ -332,28 +334,32 @@
           <div class="div_display_flex" @click="goToOrder">
             <div class="div_width_50 font_color_1A personal_list_font">我的订单</div>
             <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
-              <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%" />
+              <!-- <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%" /> -->
+               <x-icon type="ios-arrow-right" size="20"></x-icon>
             </div>
           </div>
           <div class="personal_div_border"></div>
           <div class="div_display_flex" @click="goToExclusive">
             <div class="div_width_50 font_color_1A personal_list_font">专属门店</div>
             <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
-              <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%" />
+              <!-- <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%" /> -->
+               <x-icon type="ios-arrow-right" size="20"></x-icon>
             </div>
           </div>
           <div class="personal_div_border"></div>
           <div class="div_display_flex" @click="goToAddressment">
             <div class="div_width_50 font_color_1A personal_list_font">地址管理</div>
             <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
-              <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%" />
+              <!-- <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%" /> -->
+               <x-icon type="ios-arrow-right" size="20"></x-icon>
             </div>
           </div>
           <div class="personal_div_border"></div>
           <div class="div_display_flex" @click="falgQH" v-if="personalMsg.isChange  == 1">
             <div class="div_width_50 font_color_1A personal_list_font">切换身份</div>
             <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
-              <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%" />
+              <!-- <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%" /> -->
+               <x-icon type="ios-arrow-right" size="20"></x-icon>
             </div>
           </div>
 
@@ -361,7 +367,8 @@
           <div class="div_display_flex" @click="goToSetUp">
             <div class="div_width_50 font_color_1A personal_list_font">设置</div>
             <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
-              <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%" />
+              <!-- <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%" /> -->
+              <x-icon type="ios-arrow-right" size="20"></x-icon>
             </div>
           </div>
 
