@@ -177,6 +177,9 @@ export default {
 };
 </script>
 <style scoped>
+input:disabled{
+  background: #fff;
+}
 .pass_list_w {
   width: 95%;
   margin-left: 2%;

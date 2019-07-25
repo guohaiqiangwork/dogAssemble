@@ -112,13 +112,14 @@ export default {
         });
 
       this.timer = setInterval(() => {
-        if (count <= 1) {
+         count--;
+        if (count <= 1) { 
           clearInterval(this.timer);
           this.codeValue = "重新获取验证码";
           this.timer = "";
           return;
         }
-        count--;
+       
         this.codeValue = count;
       }, 1000);
     },
