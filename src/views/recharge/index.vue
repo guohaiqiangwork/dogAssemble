@@ -27,7 +27,7 @@
       </div>
       <div>
         <div class="pass_list_w">
-          <div class="search_box" style="border-radius:none">
+          <div class="search_box12" style="border-radius:none">
             <img src="../../assets/images/phone@2x.png" class="width_16">
             <input
               type="text"
@@ -383,7 +383,7 @@ export default {
   width: 95%;
   margin-left: 2%;
 }
-.search_box {
+.search_box12 {
   height: 0.7rem;
   position: relative;
   box-sizing: border-box;

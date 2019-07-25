@@ -121,7 +121,6 @@ export default {
     // },
     // 地址编辑新增
     addAddress(item) {
-      console.log(this.$route,98080);
       if (item != 'ent') {
         this.pathF = true;
       }
