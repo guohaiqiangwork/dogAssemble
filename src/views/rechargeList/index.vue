@@ -9,9 +9,14 @@
           >{{item.payType == 3?"现金充值":item.payType == 2?"支付宝充值":item.payType == 4?"微信充值":item.payType == 1?"线上充值":""}}</div>
           <div class="div_width_50 text_right">+ {{item.recharge}}</div>
         </div>
-        <div
-          class="font_size_13 font_color_A1 margin_top_div3 padding_bottom_4"
+        <!-- <div>1212423423</div> -->
+        <div class="div_display_flex">
+          <div  class="div_width_50 margin_top_div3">{{item.phone}}</div>
+            <div
+          class="font_size_13 font_color_A1 margin_top_div3 padding_bottom_4 div_width_50 text_right"
         >{{item.rechargeTime}}</div>
+        </div>
+      
       </div>
     </div>
     <!-- 押金记录 -->
@@ -46,7 +51,11 @@ export default {
   data() {
     return {
       depositRecordList: [],
-      rechargeRecordList: []
+      rechargeRecordList: [{
+              payType:1,
+              rechargeTime:'2012389123-231-132',
+              recharge:'342423'
+            }]
     };
   },
   methods: {
@@ -58,10 +67,9 @@ export default {
       this.$fetch
         .post("fruits/app/personal/rechargeRecord", {
           openId: localStorage.getItem("openId"),
-          phone: this.routeParams.data.phone
+          // phone: this.routeParams.data.phone
         })
         .then(res => {
-          console.log(res);
           if (res.msg == "success") {
             console.log(this.rechargeRecordList);
             this.rechargeRecordList = [...res.obj];
@@ -101,7 +109,7 @@ export default {
     if (this.routeParams.data.type == 0) {
       this.getDepositRecord(); //获取押金充值记录
     } else {
-      this.getList();
+      // this.getList();
     }
   },
 
