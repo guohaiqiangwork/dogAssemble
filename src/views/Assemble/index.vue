@@ -16,10 +16,10 @@
     </div>
 
     <itemes v-on:getList="goToList1"></itemes>
-    <div style="height:8px;background-color:#F6F6F6"></div>
+    <div style="height:8px;background-color:#F6F6F6" v-if="goodsList.length"></div>
     <!-- <div class="hot_tit">热门推荐</div> -->
     <hot v-on:goToDetail="goToDetail1"></hot>
-    <div class="bg_gray">
+    <div class="bg_gray" v-if="goodsList.length">
       <div class="hot_tit mt-space" @click="Test" v-if="goodsList.length" id="whole">全部商品</div>
       <div id="whole">
         <div class="flex-between wrap" style="margin-bottom: 0.9rem;">
@@ -231,6 +231,7 @@ export default {
 <style lang="less">
 #home {
   height: auto;
+  min-height: calc(100% - 1.8rem);
   .swiper-img{
     width: 100%;
     height:3.51rem;
