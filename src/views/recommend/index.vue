@@ -11,7 +11,7 @@
     <!-- 第一部分 -->
     <div>
       <div
-        class="margin_top_div4 margin_left_div3 font_size_16 font_color_1A"
+        class="margin_top_div6 margin_left_div3 font_size_16 font_color_1A"
         style="font-weight:700;"
       >基本信息</div>
       <div class="div_display_flex margin_left_div3 margin_top_div5">
@@ -65,7 +65,7 @@
     <!-- 第二部分 -->
     <div>
       <div
-        class="margin_top_div4 margin_left_div3 font_size_16 font_color_1A"
+        class=" margin_top_div6 margin_left_div3 font_size_16 font_color_1A"
         style="font-weight:700;"
       >账户信息</div>
       <div class="div_display_flex margin_left_div3 margin_top_div5">
@@ -107,7 +107,7 @@
       <div style="margin-top:1rem;">
         <div>
           <div
-            class="div_width_25 font_size_14 margin_left_div3 margin_top_div4 font_color_1A font_size_16 font_color_1A"
+            class="div_width_25 font_size_14 margin_left_div3 margin_top_div6 font_color_1A font_size_16 font_color_1A"
           >资质信息</div>
           <div class="div_width_70"></div>
         </div>
