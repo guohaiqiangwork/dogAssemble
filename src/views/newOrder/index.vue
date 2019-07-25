@@ -302,7 +302,13 @@ export default {
               }
             });
           } else {
-            // alert(data.msg);
+             var err ={
+              'find_none_user':"该用户不存在",
+              'user_has_frozen':"该账户已被冻结",
+              'the_user_has_no_order':'该用户当前无进行中订单',
+              'user_not_allow':'不允许跨店操作'
+            }
+            alert(err[data.msg]||'未知的错误');
           }
         },
         err => {
@@ -336,7 +342,16 @@ export default {
           if (data.code == 0) {
             alert("新建成功");
           } else {
-            alert(data.msg);
+            var err ={
+              'find_none_user':"该用户不存在",
+              'user_has_frozen':"该账户已被冻结",
+              'the_user_has_no_order':'该用户当前无进行中订单',
+              'user_not_allow':'不允许跨店操作',
+              'credit_is_running_low':'余额不足',
+              'password_error':'密码错误',
+              'the_recipe_is_none':'套餐内容未完善'
+            }
+            alert(err[data.msg]||'未知的错误');
           }
         },
         err => {
