@@ -93,7 +93,11 @@ export default {
             console.log(data.obj);
             this.videoOneList = data.obj;
           } else {
-            alert(data.msg);
+            if( data.msg== 'no_login'){
+               alert('请先进行登录');
+            }
+           
+          
           }
         },
         err => {

@@ -4,7 +4,7 @@
       <div class="pass_list_w">
         <!-- <p v-if="transferFlag" class="red font_size_14">当前用户为跨店会员</p> -->
         <div class="search_box_newOrder">
-          <img src="../../assets/images/phone@2x.png" class="width_16">
+          <img src="../../assets/images/phone@2x.png" class="width_16" />
           <input
             type="text"
             placeholder="请输入您的手机号充值"
@@ -12,8 +12,11 @@
             v-on:input="getCheckCustomer(phone)"
             maxlength="11"
             style="width:100%;height:100%;outline: none;border:none"
-          >
-          <span style="max-width: 80px;display: inline-block;height: 38px;flex: 1;white-space: nowrap;line-height: 38px;text-overflow: ellipsis;overflow:hidden;min-width: 80px;" v-if="checkCustomerName&&this.phone">{{checkCustomerName}}</span>
+          />
+          <span
+            style="max-width: 80px;display: inline-block;height: 38px;flex: 1;white-space: nowrap;line-height: 38px;text-overflow: ellipsis;overflow:hidden;min-width: 80px;"
+            v-if="checkCustomerName&&this.phone"
+          >{{checkCustomerName}}</span>
           <!-- <span style="width: 50%;" v-if='!checkCustomerName&&this.phone'>未查询到用户</span> -->
         </div>
       </div>
@@ -39,11 +42,10 @@
       <!-- 贴心提示 -->
       <div v-if="memberRecipe">
         <div class="font_color_4A margin_left_div6 margin_top_div5">
-          <img style="vertical-align: middle;" src="../../assets/images/tS@2x.png" class="width_16">
+          <img style="vertical-align: middle;" src="../../assets/images/tS@2x.png" class="width_16" />
           贴心小提示
         </div>
         <div class="t_S_b">
-   
           <div style="margin-top:0;" class="margin_top_div3">配方：{{memberRecipe.recipeName}}</div>
           <div style="margin-top:0.2rem;" class="margin_top_div3">食方说明：{{memberRecipe.notice}}</div>
           <div style="margin-top:0.2rem;" class="margin_top_div3">适宜人群：{{memberRecipe.crowd}}</div>
@@ -59,12 +61,16 @@
     <div v-if="classA == '1'">
       <div class="margin_top_div5">
         <span class="font_size_14 font_color_1A margin_left_div6">购买天数：</span>
-      <select v-model="selected" @change="getMemberRecipeDay">
-          <option v-for="(option,index) in recipeList" :key="index" :value="option">{{ option.recipe }}</option>
+        <select v-model="selected" @change="getMemberRecipeDay">
+          <option
+            v-for="(option,index) in recipeList"
+            :key="index"
+            :value="option"
+          >{{ option.recipe }}</option>
         </select>
       </div>
       <div class="margin_top_div5 font_size_14 div_display_flex">
-        <span class=" font_color_1A margin_left_div6">开始时间：</span>
+        <span class="font_color_1A margin_left_div6">开始时间：</span>
         <datetime
           v-model="value7"
           @on-change="change"
@@ -83,7 +89,8 @@
           金额：
           <span class="red">{{payMoney}}</span>
         </div>
-        <div style="line-height:3.5;"
+        <div
+          style="line-height:3.5;"
           class="div_width_30 text_center backgroun_color_4A font_color_ff font_size_14"
           @click="payPassW"
         >确认支付</div>
@@ -93,7 +100,7 @@
     <confirm v-model="newFalge" title @on-cancel="onCancel" @on-confirm="onConfirm">
       <div style="text-align:center;font-size:18px;">
         确认给{{checkCustomerName}}新建吗？
-        <br>
+        <br />
         {{phone}}
       </div>
     </confirm>
@@ -116,7 +123,7 @@
             maxlength="6"
             v-model="msgPAW"
             style="position: absolute;z-index: -1;left:-100%;opacity: 0"
-          >
+          />
           <ul class="pwd-wrap" @click="focus">
             <li>
               <i v-if="msgLength > 0"></i>
@@ -139,7 +146,7 @@
           </ul>
           <div class="div_display_flex margin_left_div8 margin_top_div3 padding_bottom_4">
             <div>
-              <img src="../../assets/images/til@2x.png" width="14px">
+              <img src="../../assets/images/til@2x.png" width="14px" />
             </div>
             <div class="font_color_4A margin_left_div2" style="line-height: 1;">密码为您登录时设置的密码</div>
           </div>
@@ -200,7 +207,6 @@ export default {
     };
   },
   watch: {
-  
     msgPAW(curVal) {
       console.log(curVal);
       if (/[^\d]/g.test(curVal)) {
@@ -210,36 +216,36 @@ export default {
         this.msg = curVal;
       }
       if (this.msgLength == 6) {
-          this.payShowD = false;
-          this.msgLength=0;
-          this.msgPAW = ''
-          this.curVal =''
+        this.payShowD = false;
+        this.msgLength = 0;
+        this.msgPAW = "";
+        this.curVal = "";
         this.payPassWGB();
       }
     }
   },
   methods: {
-      numChange(n){
-      console.log(n,'jlkjl')
+    numChange(n) {
+      console.log(n, "jlkjl");
     },
     focus() {
       this.$refs.pwd.focus();
     },
     // 日期选择
     change(value) {
-      console.log(this.memberIDNumber,132)
+      console.log(this.memberIDNumber, 132);
       this.startTime = value;
       console.log(this.memberID);
       var dateTemp = value;
       var dataTemp = dateTemp.replace(/\-/g, "/");
       // var nDate = new Date(dateTemp[1] + "-" + dateTemp[2] + "-" + dateTemp[0]); //转换为MM-DD-YYYY格式
       var nDate = new Date(dataTemp); //转换为MM-DD-YYYY格式
-   
+
       var millSeconds =
-        Math.abs(nDate) + (this.memberIDNumber/1-1) * 24 * 60 * 60 * 1000;
-      console.log(millSeconds)
+        Math.abs(nDate) + (this.memberIDNumber / 1 - 1) * 24 * 60 * 60 * 1000;
+      console.log(millSeconds);
       var rDate = new Date(millSeconds);
-      console.log(rDate)
+      console.log(rDate);
       var year = rDate.getFullYear();
       var month = rDate.getMonth() + 1;
       if (month < 10) month = "0" + month;
@@ -296,7 +302,7 @@ export default {
               }
             });
           } else {
-            alert(data.msg);
+            // alert(data.msg);
           }
         },
         err => {
@@ -328,9 +334,9 @@ export default {
       this.$fetch.post(url.saveInediaRecipe, _obj).then(
         data => {
           if (data.code == 0) {
-            alert('新建成功')
+            alert("新建成功");
           } else {
-            alert(data.msg);
+            // alert(data.msg);
           }
         },
         err => {
@@ -362,7 +368,7 @@ export default {
         openId: localStorage.getItem("openId"),
         phone: phone
       };
-      
+
       this.$fetch.post(url.checkCustomer, _obj).then(
         data => {
           if (data.code == 0) {
@@ -374,7 +380,11 @@ export default {
             //   this.transferFlag = true;
             // }
           } else {
-            alert(data.msg);
+            var err = {
+              find_none_user: "该用户不存在",
+              user_has_frozen: "该账户已被冻结",
+            };
+            alert(err[data.msg] || "未知的错误");
           }
         },
         err => {
@@ -415,7 +425,7 @@ export default {
           if (data.code == 0) {
             this.memberRecipe = data.obj;
           } else {
-            alert(data.msg);
+            // alert(data.msg);
           }
         },
         err => {
@@ -424,16 +434,15 @@ export default {
       );
     },
     // 辟谷天数
-    getMemberRecipeDay(item) {  
-      console.log(2232)
+    getMemberRecipeDay(item) {
+      console.log(2232);
       this.memberID = this.selected.id;
       this.memberIDNumber = this.selected.recipe;
       this.payMoney = this.selected.retail;
-      console.log(this.memberIDNumber,'dfs')
-      if(this.startTime !== "请选择"){
+      console.log(this.memberIDNumber, "dfs");
+      if (this.startTime !== "请选择") {
         this.change(this.startTime);
       }
-      
     },
     //订单保存
     newOrderq() {
@@ -441,9 +450,9 @@ export default {
         this.showPositionValue = true;
         return;
       }
-      if(this.transferFlag){
-        this.$vux.toast.text('该用户为跨店会员,不能新建套餐');
-        return
+      if (this.transferFlag) {
+        this.$vux.toast.text("该用户为跨店会员,不能新建套餐");
+        return;
       }
       this.newFalge = true;
     }
@@ -478,7 +487,7 @@ export default {
   margin: 5% auto;
   width: 90%;
   border: none;
-  border-bottom: 1px solid #E9E9E9;
+  border-bottom: 1px solid #e9e9e9;
   background: #fff;
 }
 .width_16 {
