@@ -17,17 +17,18 @@
       <i class></i>
    
       <hot class="mb-space" v-on:goToDetail="goDetail"></hot>
-      <div class="cart_btm" v-if="Object.keys(bottomMsge).length&&this.$parent.buyNum!=0">
-        <span>已选{{bottomMsge.checkcount}}</span>
+      <div class="cart_btm" >
+        <!-- v-if="Object.keys(bottomMsge).length&&this.$parent.buyNum!=0" -->
+        <span>已选{{bottomMsge.checkcount || 0}}</span>
         <div class="flex_countrow">
           <span class="count_box">
             <span>
               合计:
-              <span class="red final_price">{{bottomMsge.totalprice.toFixed(2)}}元</span>
+              <span class="red final_price">{{bottomMsge.totalprice?bottomMsge.totalprice.toFixed(2) : '0.00'}}元</span>
             </span>
             <span
-              v-if="freeState.isFree == 1 && freeState.free - bottomMsge.totalprice>0"
-            >还差{{(freeState.free - bottomMsge.totalprice).toFixed(2)}}元可享包邮</span>
+              v-if="!bottomMsge.totalprice ||freeState.isFree == 1 && freeState.free - bottomMsge.totalprice>0"
+            >还差{{ bottomMsge.totalprice?(freeState.free - bottomMsge.totalprice).toFixed(2):freeState.free}}元可享包邮</span>
           </span>
 
           <div class="deal_down" @click="payPage">去结算</div>
@@ -49,6 +50,7 @@ export default {
   },
   data() {
     return {
+
       key: "value",
       demo1: false,
       freeState: {},

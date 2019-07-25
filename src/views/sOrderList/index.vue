@@ -16,7 +16,7 @@
       </div>
     </div>
     <div v-if="list.length == 0 ">
-      <div class="text_center" style="margin-top16%">
+      <div class="text_center" style="margin-top:50%">
         <img src="../../assets/images/1581@2x.png" width="65%" alt />
       </div>
       <div class="text_center font_size_15 font_color_99">暂无订单</div>

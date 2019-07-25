@@ -176,7 +176,7 @@ export default {
   background: #efefef;
   line-height: 3.5rem;
   margin: 5% auto;
-  width: 94%;
+  width: calc(100% - 0.62rem);
 }
 .bt_m_o {
   line-height: 3;
