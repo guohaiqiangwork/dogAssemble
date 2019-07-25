@@ -17,7 +17,8 @@
       <i class></i>
    
       <hot class="mb-space" v-on:goToDetail="goDetail"></hot>
-      <div class="cart_btm" >
+      <div class="cart_btm" v-if="btmShow">
+ 
         <!-- v-if="Object.keys(bottomMsge).length&&this.$parent.buyNum!=0" -->
         <span>已选{{bottomMsge.checkcount || 0}}</span>
         <div class="flex_countrow">
@@ -28,7 +29,7 @@
             </span>
             <span
               v-if="!bottomMsge.totalprice ||freeState.isFree == 1 && freeState.free - bottomMsge.totalprice>0"
-            >还差{{ bottomMsge.totalprice?(freeState.free - bottomMsge.totalprice).toFixed(2):freeState.free}}元可享包邮</span>
+            >还差{{ bottomMsge.totalprice?(freeState.free - bottomMsge.totalprice).toFixed(2):freeState.free }}元可享包邮</span>
           </span>
 
           <div class="deal_down" @click="payPage">去结算</div>
@@ -50,12 +51,10 @@ export default {
   },
   data() {
     return {
-
-      key: "value",
-      demo1: false,
+      btmShow: false,
       freeState: {},
       bottomMsge: {},
-      arr: [],
+
       goodList: [],
       form: {
         openId: localStorage.getItem("openId"),
@@ -73,6 +72,11 @@ export default {
       handler(val) {
         this.bottomMsge = val;
       }
+    },
+  },
+  computed:{
+    cartnum(){
+      return localStorage.getItem('catnum');
     }
   },
   methods: {
@@ -168,9 +172,11 @@ export default {
     },
     //数量改变
     changeNum(e, arr) {
-      console.log(e);
       this.$parent.buyNum = e;
       localStorage.setItem('catnum',e);
+      if(e == 0){
+        this.btmShow = false;
+      }
     },
     // 底部信息栏
     getBottom(val) {
@@ -182,16 +188,14 @@ export default {
     },
     //购物车数据
     getArray(arr, n) {
-      console.log(arr,'777')
-      if (!arr.length) {
-        this.goodList = arr;
-        return;
-      }
+      // if (!arr.length) {
+      //   this.goodList = arr;
+      //   return;
+      // }
       this.goodList = arr;
     },
     // 去详情
     goDetail(item) {
-        console.log(item)
       this.$router.push("/goodsdetail?id=" + item.id);
     }
   },
@@ -200,7 +204,7 @@ export default {
     settitle("购物车");
   },
   mounted() {
-    // console.log()
+    this.btmShow = this.cartnum > 0 ? true : false; 
   }
 };
 </script>

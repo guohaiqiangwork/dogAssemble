@@ -177,13 +177,11 @@ export default {
     recommendStoreList: {
       handler(newVal) {
         this.recommendStoreList = newVal;
-        console.log(newVal, "kl");
       }
     }
   },
   methods: {
     handelChange(state){
-      console.log(state,'dfs')
     },
   loadTop(item){
       this.recommendStoreList = [];
@@ -208,9 +206,7 @@ export default {
           this.allLoaded = false;
           this.isLoading1 = false;
           this.timer = "";
-          if (data.code == 0) {
-            console.log(4546,data)
-            
+          if (data.code == 0) {     
          if(data.obj.length == 0){
            this.isUnMore1 = true;
            return
@@ -259,9 +255,7 @@ export default {
       // this.$refs.wrapper.getBoundingClientRect().top;
           this.isLoading1 = false;
           this.timer = "";
-          if (data.code == 0) {
-            console.log(4546,data)
-            
+          if (data.code == 0) { 
          if(data.obj.length == 0){
            this.allLoaded = true;
            this.page.current--;
@@ -272,18 +266,12 @@ export default {
          }else{
           this.$nextTick(() => {
            data.obj.forEach(e =>{
-              
               this.recommendStoreList.push(e);
-              
-              
-               console.log(this.allLoaded);
           })
           });
          // 若数据已全部获取完毕
         //  this.allLoaded = true;
          }
-      
-              console.log(this.recommendStoreList, "jlkjljkljl");
             } else {
               alert(data.msg);
             }
@@ -343,7 +331,6 @@ export default {
       this.radio = this.nationList[index].isDefault;
       // 设置值，以供传递
       this.nationList[index].isDefault = true;
-      console.log(this.radio);
       // this.$fetch
       //   .post(
       //     "weChat/order/updateIsDefault/" + id + "/" + this.token.employeeId
@@ -364,7 +351,6 @@ export default {
       this.radio = this.nationQList[index].isQDefault;
       // 设置值，以供传递
       this.nationQList[index].isQDefault = true;
-      console.log(this.radio);
       this.nationq();
     },
     //订单新建
@@ -402,8 +388,6 @@ export default {
           this.isLoading1 = false;
           this.timer = "";
           if (data.code == 0) {
-            console.log(_obj,4546,data)
-            
          if(data.obj.length == 0){
            this.isUnMore1 = true;
            return
@@ -435,7 +419,6 @@ export default {
               //   item.SFQY = data.obj.province
               // });
               // this.$set(this.recommendStoreList,this.recommendStoreList);
-              console.log(this.recommendStoreList, "jlkjljkljl");
             } else {
               alert(data.msg);
             }
@@ -446,23 +429,6 @@ export default {
         );
       }, 1000);
     },
-    // 上拉加载
-    selPullUp() {
-      this.page.current++;
-       this.$nextTick(() => {
-        this.getRecommendStoreList();
-      });
-      // this.getRecommendStoreList();
-    },
-    // 下拉刷新
-    pulldown() {
-      this.recommendStoreList = [];
-      console.log("klk");
-      // this.isUnMore1 = false;
-      this.page.current = 1;
-      // this.getRecommendStoreList();
-    },
-
     // 获取当前位置
     addressDetail() {
       //获取地理位置

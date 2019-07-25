@@ -12,11 +12,11 @@ import sha1 from "./bin/jquery.sha1"
 import qs from 'qs'
 import { ToastPlugin, LoadingPlugin } from 'vux'
 import { Toast } from 'vux'
-import { Scroller } from '@nutui/nutui';
+// import { Scroller } from '@nutui/nutui';
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 import { Loadmore } from 'mint-ui'
-Scroller.install(Vue);
+// Scroller.install(Vue);
 Vue.use(MintUI);
 Vue.component(Loadmore.name, Loadmore);
 Vue.use(ToastPlugin, { position: 'middle' })

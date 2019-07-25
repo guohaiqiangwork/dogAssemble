@@ -115,26 +115,22 @@ export default {
         },
         //传递购买数量
         change(item,n,arr){
-            console.log(111)
             this.cartDate.id = item.id;
             this.cartDate.num = item.count;
             this.postCart(n,item);
-            
             if(item.count <= 0){
                 this.chart(item,n);
                 this.cartDate.num = 0;
-                // this.postCart(n,item);
                 this.bottomMsg.checkcount--;
                 this.$emit('changeNum',this.goodsNum);
                 return
                 
             }else{
-               
                 this.chart(item,n);
             }
             if(item.ischeck){
                 item.money = (item.count * item.price).toFixed(2)/1;
-                 this.saveCart();
+                this.saveCart();
             }else{
                 // item.money = 0;
             }
@@ -148,7 +144,6 @@ export default {
         //获取购买商品的邮费
         getCart(arr = []){
             this.$fetch.post("fruits/app/cart/getCart",{openId:localStorage.getItem("openId")}).then(res =>{
-                console.log(res,'dfsf')
                 res.obj.forEach((e,i) => {
                     if(e.state ==1){
                         this.cartDate.num = 0;
@@ -188,7 +183,6 @@ export default {
         },
         //给后台存储购物车数量
         postCart(n,item){
-            console.log(n,9879);
             var arr =[];
             // arr = [...this.charList];
             this.charList.forEach(e =>{
@@ -215,13 +209,10 @@ export default {
             // })
             // {id:item.id,num:item.count,openId:localStorage.getItem('openId')}
             this.$fetch.post('fruits/app/cart/changeNum',this.cartDate).then(res =>{
-                console.log(res,'ppp');
                 this.getCart(arr);
             })
         },
         saveCart(){
-            console.log(this.cartDate,'kkk');
-            
             this.$fetch.post('fruits/app/cart/changeNum',this.cartDate).then(res =>{
                 if(res.code ==0){
                     // this.$router.go(0);
