@@ -17,7 +17,7 @@
 <div class="main-body" ref="wrapper">
   <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :auto-fill="false" :bottom-all-loaded="allLoaded" ref="loadmore" bottom-status-change="handelChange">
      <!-- 推荐门店列表 -->
-        <div class="div_display_flex margin_left_div3 padding_top_div3" style="padding-top:6%;">
+        <div class="div_display_flex margin_left_div3 padding_top_div3">
           <div class="national_flag_title" v-if="recommendStoreList.length"></div>
             <!-- v-if="recommendStoreList.length" -->
           <div
@@ -485,14 +485,19 @@ export default {
 };
 </script>
 
-
+<style lang="">
+#store  .mint-loadmore-top{
+  line-height: 20px;
+}
+</style>
 <style scoped>
+
 .main-body {
   /* 加上这个才会有当数据充满整个屏幕，可以进行上拉加载更多的操作 */
   position: absolute;
   left:0;
   top: 80px;
-  overflow: scroll;
+  overflow: auto;
   width: 100%;
   height: calc(100% - 0.9rem);
   /* padding-bottom: 70px; */
