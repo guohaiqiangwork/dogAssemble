@@ -9,7 +9,8 @@
           <div
             style="width:80%"
             class="font_size_16 font_color_10"
-          >{{myStoreData.province}}{{myStoreData.city}}{{myStoreData.area}}{{myStoreData.address}}</div>
+          >{{myStoreData.name}}</div>
+          <!-- {{myStoreData.province}}{{myStoreData.city}}{{myStoreData.area}}{{myStoreData.address}} -->
           <div
             style="width:20%"
             class="font_size_13 font_color_10 text_right"
@@ -22,7 +23,7 @@
           <div
             style="width:80%"
             class="font_size_13 font_color_10 margin_left_div2"
-          >{{myStoreData.address}}</div>        </div>
+          > {{myStoreData.province}}{{myStoreData.city}}{{myStoreData.area}}{{myStoreData.address}}</div>        </div>
         <div class="div_display_flex margin_top_div3">
           <div class="font_size_16 font_color_10 ex_img_b">
             <img src="../../assets/images/电话 (1)@2x.png" class="img_width_100">

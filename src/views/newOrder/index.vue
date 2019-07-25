@@ -7,7 +7,7 @@
           <img src="../../assets/images/phone@2x.png" class="width_16" />
           <input
             type="text"
-            placeholder="请输入您的手机号充值"
+            placeholder="请输入手机号码"
             v-model="phone"
             v-on:input="getCheckCustomer(phone)"
             maxlength="11"
@@ -169,7 +169,6 @@
 import url from "../../bin/url";
 import TabBar from "../../components/TabBar";
 import { Confirm, XDialog, Datetime } from "vux";
-
 export default {
   components: {
     TabBar,
@@ -467,7 +466,8 @@ export default {
     console.log("新建订单");
     this.timeNow(); //获取当前时间
     this.newOrderXZ("0");
-  }
+  },
+  
 };
 </script>
 <style scoped lang="less">
