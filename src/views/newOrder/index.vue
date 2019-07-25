@@ -72,6 +72,7 @@
       <div class="margin_top_div5 font_size_14 div_display_flex">
         <span class="font_color_1A margin_left_div6">开始时间：</span>
         <datetime
+          style="padding:0 !important"
           v-model="value7"
           @on-change="change"
           clear-text="today"
@@ -382,7 +383,7 @@ export default {
           } else {
             var err = {
               find_none_user: "该用户不存在",
-              user_has_frozen: "该账户已被冻结",
+              user_has_frozen: "该账户已被冻结"
             };
             alert(err[data.msg] || "未知的错误");
           }
