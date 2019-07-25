@@ -2,7 +2,7 @@
   <div>
     <div v-if="falgPassWD == 1">
       <div class="pass_list_w">
-        <div class="search_box">
+        <div class="search_box_passWord">
           <img src="../../assets/images/phone@2x.png" class="width_16" />
           <input
             type="text"
@@ -19,7 +19,7 @@
     </div>
     <div v-if="falgPassWD != 1">
       <div class="pass_list_w">
-        <div class="search_box">
+        <div class="search_box_passWord">
           <img src="../../assets/images/phone@2x.png" class="width_16" />
           <input
             type="text"
@@ -34,8 +34,8 @@
       </div>
     </div>
     <div class="pass_list_w">
-      <div class="search_box">
-        <img src="../../assets/images/验证码@2x.png" class="width_16" />
+      <div class="search_box_passWord">
+        <img src="../../assets/images/验证码@2x.png" class="width_18" />
         <input
           type="text"
           :show-clear="false"
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="pass_list_w">
-      <div class="search_box">
+      <div class="search_box_passWord">
         <img src="../../assets/images/密码@2x.png" class="width_16" />
         <input
           type="password"
@@ -185,7 +185,7 @@ input:disabled{
   margin-left: 2%;
   background: #fff;
 }
-.search_box {
+.search_box_passWord {
   background: #fff;
   height: 0.7rem;
   position: relative;
@@ -206,6 +206,11 @@ input:disabled{
   height: 16px;
   margin-right: 3%;
 }
+.width_18 {
+  width: 16px;
+  height: 18px;
+  margin-right: 3%;
+}
 .b_t_t {
   width: 96%;
   background-color: #4a7b67;
@@ -216,5 +221,8 @@ input:disabled{
   margin-left: 2%;
   position: fixed;
   bottom: 5%;
+}
+input{
+  font-size: 14px;
 }
 </style>
