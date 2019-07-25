@@ -45,12 +45,19 @@
             @click="goToRecharge"
             style="margin-left: -3%; margin-top: 2%;"
           >
-            <div
+            <div v-if="personalMsg.deposit != null"
               class="font_color_E8 font_size_15"
               style="width:60%;margin-top:-5%;text-indent:5%;"
             >
               押金：{{personalMsg.deposit.toFixed(2)}}元
               <div class="money_falg_y" v-if="personalMsg.deposit.toFixed(2) < '600' ">押金不足</div>
+            </div>
+            <div v-if="personalMsg.deposit == null"
+              class="font_color_E8 font_size_15"
+              style="width:60%;margin-top:-5%;text-indent:5%;"
+            >
+              押金：0.00元
+              <div class="money_falg_y" >押金不足</div>
             </div>
             <div class="personal_falg_m" style="margin-left:15%" v-if="personalMsg.storeState == 1">
               营业中
@@ -70,7 +77,11 @@
         <div class="personal_money text_center margin_top_div5">
           <!-- style="margin-top:-21%" -->
           <div class="font_color_76 font_size_13 padding_top_div3">总金额(元)</div>
-          <div
+          <div v-if='personalMsg.total == null'
+            class="font_color_76 font_size_25"
+            style="padding-bottom: 3%; padding-top: 2%;font-size:.5rem;"
+          >0.00</div>
+           <div  v-if='personalMsg.total != null'
             class="font_color_76 font_size_25"
             style="padding-bottom: 3%; padding-top: 2%;font-size:.5rem;"
           >{{personalMsg.total.toFixed(2)}}</div>
@@ -181,7 +192,11 @@
       <!-- 账户 -->
       <div class="personal_money text_center" style="margin-top:-29%">
         <div class="font_color_76 font_size_13 padding_top_div3">总金额(元)</div>
-        <div
+        <div  v-if="personalMsg.total == null"
+          class="font_color_76 font_size_25"
+          style="padding-bottom: 2%;"
+        >0.00</div>
+        <div v-if="personalMsg.total != null"
           class="font_color_76 font_size_25"
           style="padding-bottom: 2%;"
         >{{personalMsg.total.toFixed(2)}}</div>
@@ -273,7 +288,10 @@
           class="font_color_102 font_size_13 personal_money_m margin_left_div3 padding_top_div3"
         >账户余额（元）</div>
         <div class="div_display_flex personal_price_m padding_bottom_4">
-          <div
+          <div v-if="personalMsg.remain == null"
+            class="font_color_102 font_size_25 div_width_50 margin_left_div3"
+          >￥ 0.00</div>
+          <div v-if="personalMsg.remain != null"
             class="font_color_102 font_size_25 div_width_50 margin_left_div3"
           >￥ {{personalMsg.remain.toFixed(2)}}</div>
           <!-- -->
