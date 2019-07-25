@@ -35,8 +35,9 @@
       <div class="div_display_flex margin_left_div3 margin_top_div5">
         <div class="div_width_25 font_size_14 font_color_1A">门店类型：</div>
         <div class="div_width_70" @click="showAddress1 = true">
-          <input type="text" placeholder="请输入门店类型" v-model="shopType"  v-if="!shopType" disabled/>
-         <span v-if="shopType">{{shopType}}</span> 
+          <!-- <input type="text" placeholder="请输入门店类型" v-model="shopType"  v-if="!shopType" disabled/> -->
+          <span v-if="!shopType" style=" color: #767676;font-weight: 400;">请输入门店类型</span>
+          <span v-if="shopType">{{shopType}}</span>
           <img src="../../assets/images/1599@2x.png" class="img_left_jian" alt />
         </div>
       </div>
@@ -55,9 +56,10 @@
             inline-desc="可以设置placeholder"
             :show.sync="showAddress"
           ></x-address>
-         <input type="text" placeholder="请选择店铺所在地区 "  v-model="addressDP"  v-if="!addressDP"/>
-          <span  v-if="addressDP">{{addressDP}}</span>
+          <!-- <input type="text" placeholder="请选择店铺所在地区 "  v-model="addressDP"  v-if="!addressDP"/> -->
+          <span v-if="addressDP">{{addressDP}}</span>
           <!-- <span v-if="!addressDP">{{addressDP}}</span> -->
+          <span v-if="!addressDP" style=" color: #767676;font-weight: 400;">请选择店铺所在地区</span>
           <img src="../../assets/images/1599@2x.png" class="img_left_jian" alt />
         </div>
       </div>
@@ -65,7 +67,7 @@
     <!-- 第二部分 -->
     <div>
       <div
-        class=" margin_top_div6 margin_left_div3 font_size_16 font_color_1A"
+        class="margin_top_div6 margin_left_div3 font_size_16 font_color_1A"
         style="font-weight:700;"
       >账户信息</div>
       <div class="div_display_flex margin_left_div3 margin_top_div5">
@@ -423,7 +425,7 @@ export default {
 };
 </script>
 <style scoped>
-input{
+input {
   margin-top: -0.2%;
   font-size: 14px;
 }
