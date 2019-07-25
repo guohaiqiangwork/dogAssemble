@@ -6,8 +6,8 @@
         <div class="div_width_50 margin_left_div6 font_size_16 font_color_1A" style="font-weight:700;">押金充值</div>
         <div
           class="div_width_50 text_right margin_right_div6 font_size_14 font_color_4A"
-          @click="goToRechargeList(0)"
-        >  <span style="text-decoration:underline;">充值记录</span> </div>
+          
+        >  <span style="text-decoration:underline;"  @click="goToRechargeList(0)">充值记录</span> </div>
       </div>
       <div class="margin_top_div8">
         <input type="text" class="recharge_input_b" placeholder="输入您想充值的金额…" v-model="amountMoney">
@@ -22,8 +22,8 @@
         <div class="div_width_50 margin_left_div6 font_size_16 font_color_1A"  style="font-weight:700;">会员充值</div>
         <div
           class="div_width_50 text_right margin_right_div6 font_size_14 font_color_4A"
-          @click="goToRechargeList(1)"
-        ><span style="text-decoration:underline;">充值记录</span></div>
+         
+        ><span style="text-decoration:underline;"  @click="goToRechargeList(1)">充值记录</span></div>
       </div>
       <div>
         <div class="pass_list_w">
