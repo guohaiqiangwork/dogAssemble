@@ -182,7 +182,7 @@ export default {
   line-height: 3;
 }
 .service_list {
-  line-height: 3;
+  line-height: 2;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
 }
