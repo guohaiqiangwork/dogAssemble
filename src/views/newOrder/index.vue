@@ -410,7 +410,7 @@ export default {
               'credit_is_running_low':'余额不足',
               'password_error':'密码错误',
               'the_recipe_is_none':'套餐内容未完善',
-              'param_error':'请检查您填写的内容'
+              'param_error':'参数错误'
             }
             alert(err[data.msg]||'未知的错误');
           }
