@@ -199,6 +199,7 @@
 <script>
 import url from "../../bin/url";
 import { Confirm, XDialog } from "vux";
+
 export default {
   components: {
     Confirm,
@@ -293,6 +294,9 @@ export default {
     // 会员打开支付
     goPay() {
       this.payShowD = true;
+      setTimeout(() =>{
+        this.$refs.pwd.focus();
+      })
     },
     // 辟谷消费
     goPayB(id) {
@@ -313,6 +317,10 @@ export default {
             this.getInfo(this.parameter.item.id);
             // this.getInfo(this.parameter.item.id);
           } else {
+            if(data.msg == 'pash_pledge'){
+              alert('押金不足')
+              return
+            }
             alert(data.msg);
           }
         },
@@ -361,6 +369,7 @@ export default {
       this.$fetch.post(url.saveMember, _obj).then(
         data => {
           if (data.code == 0) {
+           
             alert("下单成功");
             this.infoList = data.obj;
             this.goToMemberOperation(); //去会员操作
@@ -382,7 +391,9 @@ export default {
               });
             } else if (data.msg == "credit_is_running_low") {
               alert("用户余额不足");
-            } else {
+            }else if(data.msg ==' the_othersetting_is_none'){
+              alert('请检查您的查询条件')
+            }else {
               alert(data.msg);
             }
           }

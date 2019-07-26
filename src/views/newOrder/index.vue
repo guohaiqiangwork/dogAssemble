@@ -67,7 +67,7 @@
     <div v-if="classA == '1'">
       <div class="margin_top_div5">
         <!-- <span class="font_size_14 font_color_1A margin_left_div6">购买天数：</span> -->
-           <popup-picker title="购买天数" :data="recipeList" v-model="relength"  :columns="1" placeholder="请选择" cancel-text="X"  @on-hide="onHide" @on-change="onChange"></popup-picker>
+           <popup-picker title="购买天数" :data="recipeList" v-model="relength"  :columns="1" placeholder="请选择" cancel-text="X"  @on-hide="onHideDay" @on-change="onChange"></popup-picker>
 
         <!-- <select v-model="selected" @change="getMemberRecipeDay" style="width:64%">
           <option>请选择</option>
@@ -252,6 +252,21 @@ export default {
           return e.name == this.selectVal;
         })
         this.memberID = obj.key;
+        this.getMemberRecipe();
+         console.log(this.memberID)
+      }
+    },
+    onHideDay(str){
+       if(str){
+       console.log(this.recipeList,this.selectVal,999)
+        let obj = this.recipeList.find(e =>{
+          return e.name == this.selectVal;
+        })
+        console.log(obj,666)
+        this.memberID = obj.key;
+        this.payMoney = obj.retail;
+        this.memberIDNumber = obj.value;
+        this.getMemberRecipeDay()
          console.log(this.memberID)
       }
     },
@@ -466,13 +481,15 @@ export default {
       this.recipeList =[];
       this.$fetch.post(url.getRecipe, _obj).then(
         data => {
+          console.log(data,'kjlj')
           if (data.code == 0) {
             // this.recipeList = data.obj;
             data.obj.forEach(el => {
               this.recipeList.push({
                 name:el.recipe,
                 value:el.recipe,
-                key:el.id
+                key:el.id,
+                retail:el.retail || ''
               });
             });
             if(data.obj.length ==1){
@@ -491,7 +508,7 @@ export default {
     },
     // 套餐详情配方
     getMemberRecipe(event) {
-      this.memberID = event.target.value;
+    
       let _obj = {
         openId: localStorage.getItem("openId"),
         id: this.memberID
@@ -511,11 +528,11 @@ export default {
     },
     // 辟谷天数
     getMemberRecipeDay(item) {
-      console.log(2232);
-      this.memberID = this.selected.id;
-      this.memberIDNumber = this.selected.recipe;
-      this.payMoney = this.selected.retail;
-      console.log(this.memberIDNumber, "dfs");
+      console.log(this.relength,2232);
+      // this.memberID = this.selected.id;
+      // this.memberIDNumber = this.selected.recipe;
+      // this.payMoney = this.selected.retail;
+      // console.log(this.memberIDNumber, "dfs");
       if (this.startTime !== "请选择") {
         this.change(this.startTime);
       }

@@ -102,8 +102,8 @@ export default {
   align-items: center;
   background: #efefef;
   line-height: 3.5rem;
-  margin: 5% auto;
-  width: 94%;
+  margin: 4% auto;
+  width: calc(90% - 0.62rem);
 }
 .bt_m_o {
   line-height: 3;

@@ -364,6 +364,7 @@ export default {
     },
     // 保存推荐信息
     getRegister() {
+     
       if (!this.recommendList.name) {
         this.$vux.toast.text("请输入商户名称");
         return;
@@ -409,6 +410,10 @@ export default {
             alert("提交成功");
             this.$router.push("/personal");
           } else {
+            if(res.message == 'recommenders_are_inconsistent'){
+              alert('推荐人不一致')
+              return
+            }
             alert(res.msg);
           }
         });
