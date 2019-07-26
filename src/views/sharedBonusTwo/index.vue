@@ -95,7 +95,7 @@ export default {
     this.routeParams = this.$route.params.obj.split("&");
     console.log(this.routeParams);
     this.imgUrl =
-      "//www.御见.com/fruits/app/blank/showPicture?attachmentId=" +
+      "//www.gsb.yuntunet.cn/fruits/app/blank/showPicture?attachmentId=" +
       this.routeParams[0].split("=")[1];
     // console.log(this.routeParams[0].split("=")[1]);
     // console.log(this.routeParams[1].split("=")[1]);

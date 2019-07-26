@@ -35,7 +35,7 @@
     </div>
     <div class="pass_list_w">
       <div class="search_box_passWord">
-        <img src="../../assets/images/验证码@2x.png" class="width_18" />
+        <img src="../../assets/images/验证码@2x.png" class="width_16" />
         <input
           type="text"
           :show-clear="false"
@@ -46,7 +46,7 @@
         <span
           v-show="sendAuthCode"
           class="margin_left_div3 font_color_4A"
-          style="font-size:12px"
+          style="font-size:12px;margin-left:16%;"
           @click="getAuthCode"
         >{{tip}}</span>
         <span

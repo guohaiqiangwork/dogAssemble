@@ -27,10 +27,10 @@
           <!-- <div class="service_width_25" >{{index + 1}}</div> -->
           <div class="service_width_50" @click="goToSOrderD('b',item,items.num)"> 第{{items.num}}天</div>
           <!-- <div class="service_width_25">{{items.time}}</div> -->
-          <div class="service_width_51" @click="goToSOrderD('b',item,items.num)" v-if="item.state == 0">未开始  <img src="../../assets/images/right.png" style="width:8px;height:13px;margin-left: 4%" alt=""></div>
-          <div class="service_width_51" @click="goToSOrderD('b',item,items.num)" style="color:#000000" v-if="item.state == 1">已消费  <img src="../../assets/images/right.png" style="width:8px;height:13px;margin-left: 4%" alt=""></div>
-          <div class="service_width_51" @click="goToSOrderD('b',item,items.num)" style="color:#E6435A" v-if="item.state == 2">已暂停  <img src="../../assets/images/right.png" style="width:8px;height:13px;margin-left: 4%" alt=""></div>
-          <div class="service_width_51" @click="goToSOrderD('b',item,items.num)" style="color:#4AB67" v-if="item.state == 3">已完成  <img src="../../assets/images/right.png" style="width:8px;height:13px;margin-left: 4%" alt=""></div>
+          <!-- <div class="service_width_51" @click="goToSOrderD('b',item,items.num)" v-if="item.state == 0">未开始  <img src="../../assets/images/right.png" style="width:8px;height:13px;margin-left: 4%" alt=""></div> -->
+          <div class="service_width_51" @click="goToSOrderD('b',item,items.num)" style="color:#000000" v-if="item.state == 1">已完成  <img src="../../assets/images/right.png" style="width:8px;height:13px;margin-left: 4%" alt=""></div>
+          <div class="service_width_51" @click="goToSOrderD('b',item,items.num)" style="color:#E6435A" v-if="item.state == 2">进行中  <img src="../../assets/images/right.png" style="width:8px;height:13px;margin-left: 4%" alt=""></div>
+          <div class="service_width_51" @click="goToSOrderD('b',item,items.num)" style="color:#4AB67" v-if="item.state == 3">待完成  <img src="../../assets/images/right.png" style="width:8px;height:13px;margin-left: 4%" alt=""></div>
         </div>
       </div>
     </div>
@@ -44,22 +44,22 @@
         <div @click="goToSOrderD('h',item)">
           <div class="div_display_flex margin_top_div5 padding_top_div3 font_size_16">
             <div class="div_width_80 margin_left_div3">{{item.recipe}}</div>
-            <div class="div_width_20">{{item.num}}</div>
+            <div class="div_width_20" style="text-align:center">{{item.num}}</div>
           </div>
           <div class="div_display_flex margin_top_div3 font_size_13">
             <div class="div_width_80 margin_left_div3">{{item.time}}</div>
-            <div class="div_width_20">已喝次数</div>
+            <div class="div_width_20" style="text-align:center">已喝次数</div>
           </div>
           <div class="div_display_flex margin_top_div3 font_size_13">
             <div class="div_width_80 margin_left_div3"></div>
-            <div class="div_width_20">{{item.price}}</div>
+            <div class="div_width_20" style="text-align:center">{{item.price}}</div>
           </div>
           <div class="div_display_flex margin_top_div8 padding_bottom_4 font_size_13">
             <div class="div_width_80 margin_left_div2">适应症：{{item.disease}}</div>
-            <div class="div_width_20" v-if="item.state == 0">未开始</div>
-            <div class="div_width_20" v-if="item.state == 1">已消费</div>
-            <div class="div_width_20" v-if="item.state == 2">已暂停</div>
-            <div class="div_width_20" v-if="item.state == 3">已完成</div>
+            <div class="div_width_20" style="text-align:center" v-if="item.state == 0">未开始</div>
+            <div class="div_width_20" style="text-align:center" v-if="item.state == 1">已消费</div>
+            <div class="div_width_20" style="text-align:center" v-if="item.state == 2">已暂停</div>
+            <div class="div_width_20" style="text-align:center" v-if="item.state == 3">已完成</div>
           </div>
         </div>
       </div>

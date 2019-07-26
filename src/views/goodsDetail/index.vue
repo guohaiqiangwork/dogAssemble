@@ -41,7 +41,7 @@
       <div v-for="(item,index) in goodsDetail.imgDetailsList" :key="index">
         <img
           class="detail_pic"
-          :src="'http://www.御见.com/fruits/app/blank/showPicture?attachmentId='+item"
+          :src="'http://www.gsb.yuntunet.cn/fruits/app/blank/showPicture?attachmentId='+item"
           alt
         />
       </div>
@@ -319,7 +319,7 @@ export default {
             this.imgList.push({
               url: "javascript:",
               img:
-                "http://www.御见.com/fruits/app/blank/showPicture?attachmentId=" +
+                "http://www.gsb.yuntunet.cn/fruits/app/blank/showPicture?attachmentId=" +
                 el
             });
             //   this.imgList[i].img = "//192.168.3.12:80/fruits/app/blank/showPicture?attachmentId="+el;

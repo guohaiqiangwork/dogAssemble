@@ -23,7 +23,7 @@
       ref="loadmore"
       :auto-fill="false"
     >
-      <div style="width:100%;height:100%;background: #f3f5f8;border:none">
+      <div style="width:100%;height:100%;background: #f3f5f8;border:none;overflow:hidden;">
         <!-- overflow-x:hidden; -->
         <!-- 全部订单  margin-bottom: 20px;-->
         <div v-if="switchFlage == '0'" style="width:100%;">
@@ -734,12 +734,8 @@ export default {
 };
 </script>
 <style>
-.nut-vert-list {
-  height: 100% !important;
-}
-.nut-scroller {
-  /* height: calc(100% - 48px);
-  overflow-x: hidden; */
+.mint-loadmore{
+  border: none;
 }
 </style>
 
@@ -809,7 +805,7 @@ export default {
   height: 26px;
   font-size: 12px;
   line-height: 2.1;
-  margin-left: 70%;
+  margin-left: 74%;
 }
 .order_bt_p {
   padding-bottom: 3%;

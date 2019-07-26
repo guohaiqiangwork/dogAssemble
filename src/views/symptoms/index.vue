@@ -356,7 +356,7 @@ export default {
   background: #efefef;
   line-height: 3.5rem;
   margin: 5% auto;
-  width: 94%;
+  width: calc(90% - 0.62rem);
 }
 .symptoms_border {
   width: 85%;
@@ -440,36 +440,36 @@ export default {
         line-height: 0.42rem;
       }
     }
-    .before-tag {
-      position: relative;
-    }
-    .before-tag::before {
-      content: "大杯";
-      display: inline-block;
-      position: absolute;
-      top: -0.2rem;
-      left: 0;
-      width: 0.72rem;
-      border: 1px solid;
-      height: 0.4rem;
-      color: #fff;
-      text-align: center;
-      background: rgb(74, 123, 103);
-      border-radius: 0 0.12rem;
-    }
-    .before-tag-sm::before {
-      content: "小杯";
-      display: inline-block;
-      position: absolute;
-      top: -0.2rem;
-      left: 0;
-      width: 0.72rem;
-      border: 1px solid;
-      height: 0.4rem;
-      text-align: center;
-      color: #fff;
-      background: rgb(74, 123, 103);
-    }
+    // .before-tag {
+    //   position: relative;
+    // }
+    // .before-tag::before {
+    //   content: "大杯";
+    //   display: inline-block;
+    //   position: absolute;
+    //   top: -0.2rem;
+    //   left: 0;
+    //   width: 0.72rem;
+    //   border: 1px solid;
+    //   height: 0.4rem;
+    //   color: #fff;
+    //   text-align: center;
+    //   background: rgb(74, 123, 103);
+    //   border-radius: 0 0.12rem;
+    // }
+    // .before-tag-sm::before {
+    //   content: "小杯";
+    //   display: inline-block;
+    //   position: absolute;
+    //   top: -0.2rem;
+    //   left: 0;
+    //   width: 0.72rem;
+    //   border: 1px solid;
+    //   height: 0.4rem;
+    //   text-align: center;
+    //   color: #fff;
+    //   background: rgb(74, 123, 103);
+    // }
   }
   .tip-footer {
     // text-indent: 1em;

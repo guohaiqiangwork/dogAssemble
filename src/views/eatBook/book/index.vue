@@ -88,6 +88,7 @@ export default {
             background: #E9EFEC;
             color:#4A7B67;
             border-radius: 0.04rem;
+            position: relative;
             .kind-item{
                 display: inline-block;
                 min-width: 33%;
@@ -99,16 +100,13 @@ export default {
                 text-overflow: ellipsis;
             }
     }
-      .before-tag{
-            position: relative;
-        }
-        .before-tag::before{
-            content:'大杯';
-            display: inline-block;
+      .before-tagone{
             position: absolute;
             top: -0.2rem;
             left: 0;
-            width:0.72rem;
+            padding: 0 2px;
+            min-width:0.72rem;
+            width: auto;
             border:1px solid;
             height: 0.4rem;
             color: #fff;
@@ -116,19 +114,33 @@ export default {
             background:rgb(74,123,103);
             border-radius: 0 0.12rem;
         }
-        .before-tag-sm::before{
-            content:'小杯';
-            display: inline-block;
-            position: absolute;
-            top: -0.2rem;
-            left: 0;
-            width:0.72rem;
-            border:1px solid;
-            height: 0.4rem;
-            text-align: center;
-            color: #fff;
-            background:rgb(74,123,103);
-        }
+        // .before-tag::before{
+        //     content:'';
+        //     display: inline-block;
+        //     position: absolute;
+        //     top: -0.2rem;
+        //     left: 0;
+        //     width:0.72rem;
+        //     border:1px solid;
+        //     height: 0.4rem;
+        //     color: #fff;
+        //     text-align: center;
+        //     background:rgb(74,123,103);
+        //     border-radius: 0 0.12rem;
+        // }
+        // .before-tag-sm::before{
+        //     content:'小杯';
+        //     display: inline-block;
+        //     position: absolute;
+        //     top: -0.2rem;
+        //     left: 0;
+        //     width:0.72rem;
+        //     border:1px solid;
+        //     height: 0.4rem;
+        //     text-align: center;
+        //     color: #fff;
+        //     background:rgb(74,123,103);
+        // }
       }
         .tip-footer{
             display: flex;

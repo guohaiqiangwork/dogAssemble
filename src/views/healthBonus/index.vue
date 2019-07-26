@@ -42,7 +42,7 @@
         <div class="div_display_flex padding_top_div3 backgroun_color_f3" style="position:relative">
           <div class="national_flag_title margin_left_div3"></div>
           <div class="font_color_00 font_size_14 margin_left_div2" style="margin-top: 0.8%;">推荐返佣</div>
-          <div class="font_size_13 font_color_00 margin_top_div1" @click="goToHealthDetail">全部返佣></div>
+          <div class="font_size_13 font_color_00 margin_top_div1" @click="goToHealthDetail">全部返佣<img style="width: 15px;vertical-align:middle;" src="../../assets/images/dingdan_weizhankai@3x.png" alt=""></div>
         </div>
         <div v-if="getRecommendBList.length !=  0">
           <div v-for="(item,index) in getRecommendBList" :key="index">
@@ -51,7 +51,7 @@
                 {{item.name}}
                 <span
                   v-if="item.state == 1"
-                  style="border: 1px solid #4A7B67; padding: 1%;font-size: 12px;color:#4A7B67;"
+                  style="border: 1px solid #4A7B67; padding: 1%;font-size: 12px;color:#4A7B67;border-radius:2px"
                 >开业</span>
                 <span
                   v-if="item.state == 0"
@@ -82,7 +82,7 @@
             class="font_size_14 font_color_00 margin_top_div1"
             style="margin-left: 60%;"
             @click="goToHealthDetail"
-          >全部返佣></div>
+          >全部返佣<img style="width: 15px;vertical-align:middle;" src="../../assets/images/dingdan_weizhankai@3x.png" alt=""></div>
         </div>
         <div v-if="getVideoDistriList.length !=  0">
           <div v-for="(item,index) in getVideoDistriList" :key="index">
@@ -122,7 +122,7 @@
             class="font_size_14 font_color_00 margin_top_div1"
             style="margin-left: 60%;"
             @click="goToHealthDetail"
-          >全部返佣></div>
+          >全部返佣<img style="width: 15px;vertical-align:middle;" src="../../assets/images/dingdan_weizhankai@3x.png" alt=""></div>
         </div>
         <div v-if="getOrderDistriList.length !=  0">
           <div v-for="(item,index) in getOrderDistriList" :key="index">

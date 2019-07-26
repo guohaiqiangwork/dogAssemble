@@ -32,11 +32,17 @@
     <!-- 未支付 -->
     <div v-if="classA == '0'">
       <div class="margin_top_div5">
-        <span class="font_size_14 font_color_1A margin_left_div6">配方名称：</span>
-        <Select style="width:70%" @change="getMemberRecipe($event)">
+        <!-- <span class="font_size_14 font_color_1A margin_left_div6">配方名称：</span> -->
+        <!-- <selector v-model="memberID" title="配方名称：" :options="recipeList" :value-map="['id','recipe']"></selector> -->
+        <!-- <popup-radio title="配方名称：" :options="recipeList" v-model="memberID" placeholder="placeholder"></popup-radio> -->
+        <group  label-width="5em">
+           <popup-picker title="配方名称" :data="recipeList" v-model="relength"  :columns="1" placeholder="请选择" cancel-text="X"  @on-hide="onHide" @on-change="onChange"></popup-picker>
+        </group>
+            <!-- <popup-picker :title="title1" :data="list1" v-model="value1" @on-show="onShow"  :placeholder="'please select'"></popup-picker> -->
+        <!-- <Select style="width:70%" @change="getMemberRecipe($event)">
           <option>请选择</option>
           <Option v-for="item in recipeList" :value="item.id" :key="item.id">{{item.recipe}}</Option>
-        </Select>
+        </Select> -->
       </div>
       <div class="background_color_F8 margin_top_div5" style="height:10px"></div>
       <!-- 贴心提示 -->
@@ -60,14 +66,17 @@
     <!-- 辟谷套餐 -->
     <div v-if="classA == '1'">
       <div class="margin_top_div5">
-        <span class="font_size_14 font_color_1A margin_left_div6">购买天数：</span>
-        <select v-model="selected" @change="getMemberRecipeDay" style="width:64%">
+        <!-- <span class="font_size_14 font_color_1A margin_left_div6">购买天数：</span> -->
+           <popup-picker title="购买天数" :data="recipeList" v-model="relength"  :columns="1" placeholder="请选择" cancel-text="X"  @on-hide="onHide" @on-change="onChange"></popup-picker>
+
+        <!-- <select v-model="selected" @change="getMemberRecipeDay" style="width:64%">
+          <option>请选择</option>
           <option
             v-for="(option,index) in recipeList"
             :key="index"
             :value="option"
           >{{ option.recipe }}</option>
-        </select>
+        </select> -->
       </div>
       <div class="margin_top_div5 font_size_14 div_display_flex">
         <span class="font_color_1A margin_left_div6">开始时间：</span>
@@ -119,7 +128,7 @@
             <input type="password" v-model="miMa" class="pass_input" maxlength="6">
           </div>-->
           <input
-            ref="password"
+            ref="pwd"
             type="password"
             maxlength="6"
             v-model="msgPAW"
@@ -168,17 +177,24 @@
 <script>
 import url from "../../bin/url";
 import TabBar from "../../components/TabBar";
-import { Confirm, XDialog, Datetime } from "vux";
+import { Confirm, XDialog, Datetime ,Selector,PopupPicker,Group   } from "vux";
+import { setTimeout } from 'timers';
 export default {
   components: {
     TabBar,
     Confirm,
     XDialog,
-    Datetime
+    Datetime,
+    Selector,
+    PopupPicker,
+    Group 
   },
   name: "newOrder",
   data() {
     return {
+       title1: '手机机型',
+      list1: [['小米', 'iPhone', '华为', '情怀', '三星', '其他', '不告诉你']],
+      value1:['iPhone'],
       item: 0,
       newFalge: false, //是否新建
       transferFlag: false,
@@ -186,7 +202,7 @@ export default {
       classA: 0, //选择标示
       payShowD: false, //支付
       miMa: "",
-      recipeList: [], //会员下拉框数据
+      recipeList: ['请选择'], //会员下拉框数据
       memberRecipe: "", //配方详情
       phone: "", //会员手机号
       memberID: "", //会员套餐id
@@ -203,7 +219,10 @@ export default {
       passwordNumber: "", //支付密码
       msgPAW: "",
       msgLength: 0,
-      msg: ""
+      msg: "",
+      relength:[],
+      memerState:null,
+      selectVal:''
     };
   },
   watch: {
@@ -225,6 +244,21 @@ export default {
     }
   },
   methods: {
+    onShow(){},
+    onHide(str,val){
+      if(str){
+       
+        let obj = this.recipeList.find(e =>{
+          return e.name == this.selectVal;
+        })
+        this.memberID = obj.key;
+         console.log(this.memberID)
+      }
+    },
+    onChange(val){
+      this.selectVal = val;
+      console.log(val)
+    },
     numChange(n) {
       console.log(n, "jlkjl");
     },
@@ -320,7 +354,15 @@ export default {
     },
     // 打开密码输入框
     payPassW() {
-      this.$refs['password'].focus();
+      console.log(123)
+       if (this.memerState == 3) {
+        this.$vux.toast.text("该用户为跨店会员,不能新建套餐");
+        return;
+      }
+      setTimeout(() =>{
+        this.$refs.pwd.focus();
+      })
+      
       this.payShowD = true;
     },
     // 关闭弹窗
@@ -341,16 +383,19 @@ export default {
       this.$fetch.post(url.saveInediaRecipe, _obj).then(
         data => {
           if (data.code == 0) {
+           
             alert("新建成功");
           } else {
             var err ={
+              
               'find_none_user':"该用户不存在",
               'user_has_frozen':"该账户已被冻结",
               'the_user_has_no_order':'该用户当前无进行中订单',
               'user_not_allow':'不允许跨店操作',
               'credit_is_running_low':'余额不足',
               'password_error':'密码错误',
-              'the_recipe_is_none':'套餐内容未完善'
+              'the_recipe_is_none':'套餐内容未完善',
+              'param_error':'请检查您填写的内容'
             }
             alert(err[data.msg]||'未知的错误');
           }
@@ -389,6 +434,7 @@ export default {
         data => {
           if (data.code == 0) {
             this.checkCustomerName = data.obj.name;
+            this.memerState = data.obj.type;
             if (!this.checkCustomerName && this.phone) {
               this.$vux.toast.text("未查询到用户");
             }
@@ -411,15 +457,29 @@ export default {
     // 选择套餐
     newOrderXZ(falge) {
       this.classA = falge;
+      this.relength = [];
       // 获取套餐内容
       let _obj = {
         openId: localStorage.getItem("openId"),
         type: falge
       };
+      this.recipeList =[];
       this.$fetch.post(url.getRecipe, _obj).then(
         data => {
           if (data.code == 0) {
-            this.recipeList = data.obj;
+            // this.recipeList = data.obj;
+            data.obj.forEach(el => {
+              this.recipeList.push({
+                name:el.recipe,
+                value:el.recipe,
+                key:el.id
+              });
+            });
+            if(data.obj.length ==1){
+              this.memberID = this.recipeList[0].key
+            }
+            
+            // this.relength = [this.recipeList[0]]
           } else {
             // alert(data.msg);
           }
@@ -466,7 +526,11 @@ export default {
         this.showPositionValue = true;
         return;
       }
-      if (this.transferFlag) {
+      // if (this.transferFlag) {
+      //   this.$vux.toast.text("该用户为跨店会员,不能新建套餐");
+      //   return;
+      // }
+       if (this.memerState == 3) {
         this.$vux.toast.text("该用户为跨店会员,不能新建套餐");
         return;
       }
@@ -486,11 +550,24 @@ export default {
   
 };
 </script>
+<style lang="">
+  .weui-cells:before{
+  border:none !important;
+}
+.weui-cells:after{
+  border:none !important;
+}
+</style>
 <style scoped lang="less">
 .pass_list_w {
   width: 95%;
   margin-left: 2%;
 }
+
+.weui-cells{
+  font-size: 16px;
+}
+
 .search_box_newOrder {
   height: 0.7rem;
   position: relative;

@@ -37,11 +37,11 @@
             :key="index"
           >
             <div class="div_width_70 font_size_14 boxer">
-              {{item.name}}
+              <span>{{item.name}}</span>
               <!-- <span class="font_size_12 font_color_A1" style="margin-left: 10px;">{{item.time}}</span> -->
               <span
                   v-if="item.state == 1"
-                  style="border: 1px solid #4A7B67; padding: 1%;font-size: 12px;color:#4A7B67;"
+                  style="border: 1px solid #4A7B67; padding: 1%;margin-left:5px;font-size: 12px;color:#4A7B67;border-radius:2px;"
                 >开业</span>
                 <span
                   v-if="item.state == 0"

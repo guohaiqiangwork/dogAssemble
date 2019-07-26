@@ -8,7 +8,7 @@
                     <i  :class="['weui-icon', 'weui_icon_success', 'weui-icon-success',item.ischeck?'checked' : 'normal']" ></i>
                </span>
                 <div style="min-width:70px;min-height:70px;width:70px;height:70px;margin-left: 0.28rem;">
-                    <img class="gooods_avatar" :src="'http://www.御见.com/fruits/app/blank/showPicture?attachmentId='+item.picId" alt="">
+                    <img class="gooods_avatar" :src="'http://www.gsb.yuntunet.cn/fruits/app/blank/showPicture?attachmentId='+item.picId" alt="">
                 </div>
                 <div class="goods_item">
                     <p class="goods_title">{{item.name}}</p>

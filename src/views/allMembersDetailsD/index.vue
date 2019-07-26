@@ -45,7 +45,7 @@
             style="font-weight: 400;"
           >{{item.num}}次|{{item.cupType}}|¥{{item.price}}</div>
           <div class="div_width_50 text_right">
-            <!-- <div class="z_fei" v-if="item.isCancel ">已作废</div> -->
+            <div class="z_fei" v-if="item.state == 2 ">已作废</div>
             <div class="w_fei" v-if="item.isCancel" @click="getCancel(item.id)">作废订单</div>
           </div>
         </div>

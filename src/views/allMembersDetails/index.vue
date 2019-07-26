@@ -115,7 +115,7 @@ export default {
   padding-left: 3%;
 }
 .me_d_n {
-  line-height: 3;
+  line-height: 2;
   width: 90%;
   margin-left: 4%;
   padding-left: 3%;

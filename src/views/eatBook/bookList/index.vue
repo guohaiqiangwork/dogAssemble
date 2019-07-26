@@ -33,9 +33,11 @@
         <book-list :item="item" v-if="bookList.length">
           <div slot="content">
             <div v-for="(iten,ind) in item.memberRecipes" :key="ind" v-show="item.type == 0">
+              <!-- iten.cupName == '大杯'?'before-tag':'before-tag before-tag-sm' -->
               <div
-                :class="['kind-list',iten.cupName == '大杯'?'before-tag':'before-tag before-tag-sm']"
+                :class="['kind-list']"
               >
+              <span class="before-tagone">{{iten.cupName}}</span>
                 <span
                   class="kind-item"
                   v-for="(info,inx) in iten.cupInfos"
