@@ -390,7 +390,7 @@ export default {
       //  辟谷套餐保存
       let _obj = {
         openId: localStorage.getItem("openId"),
-        id: this.selected.id,
+        id: this.memberID,
         phone: this.phone,
         password: this.passwordNumber,
         startDate: this.startTime
