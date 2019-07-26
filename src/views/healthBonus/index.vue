@@ -1,12 +1,12 @@
 <template>
   <div style="width:100%;height:100%;background:#F3F5F8;" id="jjjjd">
     <!-- 头部 -->
-    <div class="personal_img_bj">
+    <div class="personal_img_bj" style="overflow:hidden">
       <!-- <div
         class="font_size_12 font_color_ff text_right margin_right_div3 padding_top_div3"
         @click="goToActivityRules"
       >活动规则></div> -->
-      <div class="text_center font_size_12 font_color_ff margin_top_div3">交易总额</div>
+      <div class="text_center font_size_12 font_color_ff margin_top_div3" style='margin-top:8%'>交易总额</div>
       <div
         class="font_size_25 font_color_ff text_center margin_top_div5"
       >{{getHealthBonusD.totalBonus}}</div>
