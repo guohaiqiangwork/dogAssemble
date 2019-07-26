@@ -400,6 +400,17 @@ export default {
           if (data.code == 0) {
            
             alert("新建成功");
+              this.$router.push({
+                name: "memberOperation",
+                params: {
+                  obj: JSON.stringify({
+                    type: "profession",
+                    data: {
+                      id: "蚕丝"
+                    }
+                  })
+                }
+              });
           } else {
             var err ={
               
