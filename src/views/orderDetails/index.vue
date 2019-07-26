@@ -147,7 +147,18 @@ export default {
       this.$fetch.post(url.sureReceiving, _obj).then(
         data => {
           if (data.code == 0) {
-           alert('收货成功')
+           alert('收货成功');
+          this.$router.push({
+          name: "order",
+          params: {
+            obj: JSON.stringify({
+            type: "profession",
+            data: {
+              id: "参数"
+            }
+          })
+        }
+      });
           } else {
             alert(data.msg);
           }

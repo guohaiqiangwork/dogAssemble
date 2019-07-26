@@ -23,7 +23,7 @@
       ref="loadmore"
       :auto-fill="false"
     >
-      <div class="nut-vert-list-panel" style="width:100%;height:100%;background: #f3f5f8;">
+      <div style="width:100%;height:100%;background: #f3f5f8;border:none">
         <!-- overflow-x:hidden; -->
         <!-- 全部订单  margin-bottom: 20px;-->
         <div v-if="switchFlage == '0'" style="width:100%;">
@@ -75,6 +75,14 @@
                           src="../../assets/images/icon_dot.png"
                         />
                       </span>交易关闭
+                    </span>
+                      <span v-if="item.state == 7">
+                      <span class="order_red">
+                        <img
+                          style="vertical-align:middle;width:20px;height:20px;float:left;"
+                          src="../../assets/images/icon_dot.png"
+                        />
+                      </span>已失效
                     </span>
                   </div>
                 </div>
@@ -736,6 +744,7 @@ export default {
 </style>
 
 <style scoped>
+
 .personal_title {
   height: 48px;
   /* width: 100%; */
@@ -790,7 +799,7 @@ export default {
 }
 .order_border {
   overflow: hidden;
-  /* border-top: 1px solid #f4f4f4; */
+  border-top: 1px solid #f4f4f4;
 }
 .oreder_bt_pay {
   width: 24%;

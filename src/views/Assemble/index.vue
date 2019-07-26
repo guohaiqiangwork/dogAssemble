@@ -126,7 +126,7 @@ export default {
         {
           url: "javascript:",
           img:
-            "http://www.gsb.yuntunet.cn/fruits/app/blank/showPicture?attachmentId=" +
+            "http://www.御见.com/fruits/app/blank/showPicture?attachmentId=" +
             str
           // title: "送你一朵fua"
         },

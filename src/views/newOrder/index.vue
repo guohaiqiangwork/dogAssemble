@@ -119,7 +119,7 @@
             <input type="password" v-model="miMa" class="pass_input" maxlength="6">
           </div>-->
           <input
-            ref="pwd"
+            ref="password"
             type="password"
             maxlength="6"
             v-model="msgPAW"
@@ -320,6 +320,7 @@ export default {
     },
     // 打开密码输入框
     payPassW() {
+      this.$refs['password'].focus();
       this.payShowD = true;
     },
     // 关闭弹窗
@@ -396,8 +397,8 @@ export default {
             // }
           } else {
             var err = {
-              find_none_user: "该用户不存在",
-              user_has_frozen: "该账户已被冻结"
+              'find_none_user': "该用户不存在",
+              'user_has_frozen': "该账户已被冻结"
             };
             alert(err[data.msg] || "未知的错误");
           }

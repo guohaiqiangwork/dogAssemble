@@ -40,10 +40,10 @@
               @input="phoneSearch"
               v-model="phone"
             />
-            <i
+            <span
               v-if="phone"
               style="display: inline-block;height: 0.7rem;width: 120px;line-height: 0.7rem;"
-            >{{name}}</i>
+            >{{name}}</span>
           </div>
         </div>
       </div>
@@ -340,6 +340,9 @@ export default {
 </style>
 
 <style scoped>
+input{
+  font-size: 16px;
+}
 .moneyWeight {
   font-weight: 700;
 }
@@ -357,7 +360,7 @@ export default {
   background-color: #dee8e3;
   border-radius: 5px;
   border: none;
-  font-size: 13px;
+  font-size: 16px;
   color: #000;
   height: 48px;
   /* padding-left: 2%; */
@@ -368,7 +371,7 @@ export default {
   margin-left: 6%;
   border-radius: 5px;
   border: none;
-  font-size: 13px;
+  font-size: 16px;
   color: #000;
   height: 48px;
   /* padding-left: 2%; */
