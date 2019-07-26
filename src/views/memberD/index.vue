@@ -199,6 +199,7 @@
 <script>
 import url from "../../bin/url";
 import { Confirm, XDialog } from "vux";
+import { setTimeout } from 'timers';
 
 export default {
   components: {
@@ -314,7 +315,22 @@ export default {
       this.$fetch.post(url.sureBigu, _obj).then(
         data => {
           if (data.code == 0) {
-            this.getInfo(this.parameter.item.id);
+            // this.getInfo(this.parameter.item.id);
+           this.$vux.toast.text('操作成功')
+            setTimeout(()=>{
+                this.$router.push({
+              name: "memberOperation",
+              params: {
+                obj: JSON.stringify({
+                  type: "profession",
+                  data: {
+                    id: "蚕丝"
+                  }
+                })
+              }
+            });
+            },2000)
+            
             // this.getInfo(this.parameter.item.id);
           } else {
             if(data.msg == 'pash_pledge'){
@@ -336,6 +352,9 @@ export default {
         openId: localStorage.getItem("openId"),
         id: id
       };
+
+      console.log(id);
+      // return
       this.$fetch.post(url.getOrderInfo, _obj).then(
         data => {
           if (data.code == 0) {
