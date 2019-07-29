@@ -45,19 +45,21 @@
             @click="goToRecharge"
             style="margin-left: -3%; margin-top: 2%;"
           >
-            <div v-if="personalMsg.deposit != null"
+            <div
+              v-if="personalMsg.deposit != null"
               class="font_color_E8 font_size_15"
               style="width:60%;margin-top:-5%;text-indent:1em;"
             >
               押金：{{personalMsg.deposit.toFixed(2)}}元
               <div class="money_falg_y" v-if="personalMsg.deposit.toFixed(2) < 600 ">押金不足</div>
             </div>
-            <div v-if="personalMsg.deposit == null"
+            <div
+              v-if="personalMsg.deposit == null"
               class="font_color_E8 font_size_15"
               style="width:60%;margin-top:-5%;text-indent:1em;"
             >
               押金：0.00元
-              <div class="money_falg_y" >押金不足</div>
+              <div class="money_falg_y">押金不足</div>
             </div>
             <div class="personal_falg_m" style="margin-left:15%" v-if="personalMsg.storeState == 1">
               营业中
@@ -77,11 +79,13 @@
         <div class="personal_money text_center margin_top_div5">
           <!-- style="margin-top:-21%" -->
           <div class="font_color_76 font_size_13 padding_top_div3">总金额(元)</div>
-          <div v-if='personalMsg.total == null'
+          <div
+            v-if="personalMsg.total == null"
             class="font_color_76 font_size_25"
             style="padding-bottom: 3%; padding-top: 2%;font-size:.5rem;"
           >0.00</div>
-           <div  v-if='personalMsg.total != null'
+          <div
+            v-if="personalMsg.total != null"
             class="font_color_76 font_size_25"
             style="padding-bottom: 3%; padding-top: 2%;font-size:.5rem;"
           >{{personalMsg.total.toFixed(2)}}</div>
@@ -192,11 +196,13 @@
       <!-- 账户 -->
       <div class="personal_money text_center" style="margin-top:-29%">
         <div class="font_color_76 font_size_13 padding_top_div3">总金额(元)</div>
-        <div  v-if="personalMsg.total == null"
+        <div
+          v-if="personalMsg.total == null"
           class="font_color_76 font_size_25"
           style="padding-bottom: 2%;"
         >0.00</div>
-        <div v-if="personalMsg.total != null"
+        <div
+          v-if="personalMsg.total != null"
           class="font_color_76 font_size_25"
           style="padding-bottom: 2%;"
         >{{personalMsg.total.toFixed(2)}}</div>
@@ -288,10 +294,12 @@
           class="font_color_102 font_size_13 personal_money_m margin_left_div3 padding_top_div3"
         >账户余额（元）</div>
         <div class="div_display_flex personal_price_m padding_bottom_4">
-          <div v-if="personalMsg.remain == null"
+          <div
+            v-if="personalMsg.remain == null"
             class="font_color_102 font_size_25 div_width_50 margin_left_div3"
           >￥ 0.00</div>
-          <div v-if="personalMsg.remain != null"
+          <div
+            v-if="personalMsg.remain != null"
             class="font_color_102 font_size_25 div_width_50 margin_left_div3"
           >￥ {{personalMsg.remain.toFixed(2)}}</div>
           <!-- -->
@@ -314,8 +322,8 @@
             <div class="font_color_1A personal_order_font div_width_50">服务订单记录</div>
             <div class="div_width_50" style="width:26px;margin-left:38%;margin-top:18px">
               <!-- <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%" /> -->
-            
-               <x-icon type="ios-arrow-right" size="20"></x-icon>
+
+              <x-icon type="ios-arrow-right" size="20"></x-icon>
             </div>
           </div>
           <div
@@ -335,7 +343,7 @@
             <div class="div_width_50 font_color_1A personal_list_font">我的订单</div>
             <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
               <!-- <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%" /> -->
-               <x-icon type="ios-arrow-right" size="20"></x-icon>
+              <x-icon type="ios-arrow-right" size="20"></x-icon>
             </div>
           </div>
           <div class="personal_div_border"></div>
@@ -343,7 +351,7 @@
             <div class="div_width_50 font_color_1A personal_list_font">专属门店</div>
             <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
               <!-- <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%" /> -->
-               <x-icon type="ios-arrow-right" size="20"></x-icon>
+              <x-icon type="ios-arrow-right" size="20"></x-icon>
             </div>
           </div>
           <div class="personal_div_border"></div>
@@ -351,7 +359,7 @@
             <div class="div_width_50 font_color_1A personal_list_font">地址管理</div>
             <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
               <!-- <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%" /> -->
-               <x-icon type="ios-arrow-right" size="20"></x-icon>
+              <x-icon type="ios-arrow-right" size="20"></x-icon>
             </div>
           </div>
           <div class="personal_div_border"></div>
@@ -359,7 +367,7 @@
             <div class="div_width_50 font_color_1A personal_list_font">切换身份</div>
             <div class="div_width_50 width_26 personal_list_font" style="margin-left:45%">
               <!-- <img src="../../assets/images/dingdan_weizhankai@3x.png" width="100%" /> -->
-               <x-icon type="ios-arrow-right" size="20"></x-icon>
+              <x-icon type="ios-arrow-right" size="20"></x-icon>
             </div>
           </div>
 
@@ -423,6 +431,31 @@
     <confirm v-model="outPayFalge1" title @on-cancel="onCancel1" @on-confirm="onConfirm1">
       <div style="text-align:center;font-size:18px;">是否进行身份切换</div>
     </confirm>
+    <confirm
+      v-model="PayFalge"
+      :title="''"
+      style="font-size:18px;color:#1A202C"
+      :hide-on-blur="false"
+      :show-cancel-button="false"
+      :show-confirm-button="false"
+      confirm-text
+    >
+      <div style="text-align:center;font-size:18px;">
+        <div
+          @click="closeFrozen"
+          style="position: absolute;right: 5%;top: 5%;font-size:17px;color:#272737"
+        >X</div>
+        <div style="color:#1A202C;font-weight: 300;">您的帐户已被冻结</div>
+        <div style="color:#1A202C;font-weight: 300;margin-top: 3%;">请联系客服解冻帐户</div>
+        <div class="div_display_flex font_color_4A margin_top_div6" style="padding-bottom: 8%;">
+          <div class=" div_width_20 text_right"> <img src="../../assets/images/kf@2x.png" class="width_16"/></div>
+         
+          <div class=" div_width_80 text_left">
+            <a href="tel:4008382727" style="font-weight: 400;color:#4A7B67">4008382727</a>
+          </div>
+        </div>
+      </div>
+    </confirm>
   </div>
 </template>
 <script>
@@ -445,7 +478,8 @@ export default {
       auth_time: 0 /*倒计时 计数器*/,
       accountFalge: true, //账户冻结
       outPayFalge: false, //是否打烊
-      outPayFalge1: false //身份切换
+      outPayFalge1: false, //身份切换
+      PayFalge: false //冻结
     };
   },
   created() {
@@ -455,6 +489,9 @@ export default {
   },
   computed: {},
   methods: {
+    closeFrozen() {
+      this.PayFalge = false;
+    },
     //店铺打烊
     shopDY() {
       this.outPayFalge = true;
@@ -589,6 +626,11 @@ export default {
     },
     // 数据统计healthBonus
     goToStatistics: function() {
+       // 店铺账户冻结
+      if (this.personalMsg.state == 3) {
+        this.PayFalge = true;
+        return;
+      }
       this.$router.push({
         name: "dataStatistics"
         // params: {
@@ -603,6 +645,11 @@ export default {
     },
     // 健康奖金
     goToHealthBonus: function() {
+       // 店铺账户冻结
+      if (this.personalMsg.state == 3) {
+        this.PayFalge = true;
+        return;
+      }
       this.$router.push({
         name: "healthBonus",
         params: {
@@ -631,9 +678,13 @@ export default {
     },
     // 去配方
     goToTBook: function() {
-      console.log(1329)
       if (this.personalMsg.storeState != 1) {
         this.$vux.toast.text("店铺已打烊，该功能无法操作");
+        return;
+      }
+       // 店铺账户冻结
+      if (this.personalMsg.state == 3) {
+        this.PayFalge = true;
         return;
       }
       this.$router.push("/eatbook");
@@ -673,6 +724,11 @@ export default {
 
         return;
       }
+           // 店铺账户冻结
+      if (this.personalMsg.state == 3) {
+        this.PayFalge = true;
+        return;
+      }
       this.$router.push({
         name: "recharge",
         params: {
@@ -690,6 +746,11 @@ export default {
       if (this.personalMsg.storeState != 1) {
         this.$vux.toast.text("店铺已打烊，该功能无法操作");
 
+        return;
+      }
+           // 店铺账户冻结
+      if (this.personalMsg.state == 3) {
+        this.PayFalge = true;
         return;
       }
       this.$router.push({
@@ -710,6 +771,11 @@ export default {
         this.$vux.toast.text("店铺已打烊，该功能无法操作");
         return;
       }
+      // 店铺账户冻结
+      if (this.personalMsg.state == 3) {
+        this.PayFalge = true;
+        return;
+      }
       this.$router.push({
         name: "memberOperation",
         params: {
@@ -728,6 +794,11 @@ export default {
     },
     // 推荐信息
     goToRecommend() {
+       // 店铺账户冻结
+      if (this.personalMsg.state == 3) {
+        this.PayFalge = true;
+        return;
+      }
       this.$router.push({
         name: "recommend",
         params: {
