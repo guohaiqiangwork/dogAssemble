@@ -67,7 +67,7 @@
         :min="6"
         :max="6"
         :show-clear="false"
-        placeholder="请设置您的密码,用于套餐支付和登录"
+        placeholder="请设置6位密码,用于套餐支付和登录"
         @on-click-clear-icon="clear"
         required
       >
