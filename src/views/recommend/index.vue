@@ -414,7 +414,7 @@ export default {
               alert('推荐人不一致')
               return
             }
-            alert(res.msg);
+            // alert(res.msg);
           }
         });
     }
