@@ -515,16 +515,24 @@ export default {
     getSaveDetection() {
       this.resultFalg =
         eval(this.dnListB.join("+")) + eval(this.dnListA.join("+"));
+      console.log("999");
       if (this.resultFalg < -2) {
         this.resultH = 1;
-      } else if (this.resultFalg > 2) {
+      }
+      if (this.resultFalg > 2) {
         this.resultH = 2;
-      } else if (
-        (0 <= this.resultH && this.resultH <= 2) ||
-        (-2 <= this.resultH && this.resultH < 0)
-      ) {
-        this.resultH = 3;
-      } else if (
+      }
+      if (!this.resultH) {
+        if (
+          (0 <= eval(this.dnListB.join("+")) &&
+            eval(this.dnListB.join("+")) <= 2) ||
+          (-2 <= eval(this.dnListA.join("+")) &&
+            eval(this.dnListA.join("+")) < 0)
+        ) {
+          this.resultH = 3;
+        }
+      }
+      if (
         eval(this.dnListB.join("+")) > 15 &&
         eval(this.dnListA.join("+")) < -15
       ) {
@@ -536,7 +544,7 @@ export default {
         coldScore: eval(this.dnListA.join("+")),
         thermalScore: eval(this.dnListB.join("+")),
         grade: this.resultFalg,
-        result: this.resultH 
+        result: this.resultH
       };
       console.log(_obj);
       this.goToResult();
