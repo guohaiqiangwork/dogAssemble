@@ -61,7 +61,7 @@
               </div>
               <div class="div_display_flex margin_top_div3">
                 <div class="div_width_70 margin_left_div2">营业时间</div>
-                <div class="div_width_30 margin_right_div2 text_right">{{item.startTime}}</div>
+                <div class="div_width_30 margin_right_div2 text_right">{{item.startTime}}-{{item.endTime}}</div>
               </div>
               <div class="div_display_flex margin_top_div3 padding_bottom_4">
                 <div class="div_width_70 margin_left_div2">门店电话</div>
