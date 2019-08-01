@@ -414,7 +414,12 @@ export default {
               alert("推荐人不一致");
               return;
             }
-            // alert(res.msg);
+            if (res.msg == "store_is_registered") {
+              alert("该手机号已经申请过店铺了");
+              return;
+            }
+            
+            alert(res.msg);
           }
         });
     }
