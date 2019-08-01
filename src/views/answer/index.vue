@@ -524,10 +524,10 @@ export default {
       }
       if (!this.resultH) {
         if (
-          (0 <= eval(this.dnListB.join("+")) &&
-            eval(this.dnListB.join("+")) <= 2) ||
-          (-2 <= eval(this.dnListA.join("+")) &&
-            eval(this.dnListA.join("+")) < 0)
+          (0 <= this.resultFalg &&
+            this.resultFalg<= 2) ||
+          (-2 <= this.resultFalg &&
+           this.resultFalg< 0)
         ) {
           this.resultH = 3;
         }
