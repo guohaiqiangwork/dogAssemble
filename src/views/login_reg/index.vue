@@ -145,8 +145,8 @@ export default {
     haslogin() {
       return this.$route.params.id;
     },
-    shareId(){
-      return localStorage.getItem('shareId');
+    shareId() {
+      return localStorage.getItem("shareId");
     }
   },
   data() {
@@ -166,7 +166,7 @@ export default {
         code: "",
         headimgurl: "",
         nickname: "",
-        shareId:""
+        shareId: ""
       },
       Logform: {
         openId: "",
@@ -243,7 +243,7 @@ export default {
       this.form.openId = localStorage.getItem("openId");
       this.form.nickname = localStorage.getItem("nickname");
       this.form.headimgurl = localStorage.getItem("headimgurl");
-      this.form.shareId = this.shareId ||"";
+      this.form.shareId = this.shareId || "";
       this.$fetch.post("fruits/app/user/register", this.form).then(res => {
         if (res.msg == "registered") {
           this.$vux.toast.text("手机号已经被注册");
@@ -272,6 +272,7 @@ export default {
                 localStorage.setItem("user", res.attributes.sessionId);
                 localStorage.setItem("type", res.attributes.type);
                 localStorage.setItem("appUserId", res.attributes.appUserId); //登陆用户id
+                localStorage.setItem("phone", res.attributes.phone);
                 this.$router.push("/home");
               } else if (res.msg == "password_error") {
                 alert("密码错误");
@@ -388,14 +389,14 @@ export default {
         name: "privacyProtocol"
       });
     },
-    getShare(){
+    getShare() {
       // window.location.href
       var href = window.location.href;
       var reg = /shareId/g;
       // console.log(reg.test(href))
-      if(reg.test(href)){
-        var arr= /(\?shareId=)(\w*)/.exec(href);
-        localStorage.setItem('shareId',arr[2]);
+      if (reg.test(href)) {
+        var arr = /(\?shareId=)(\w*)/.exec(href);
+        localStorage.setItem("shareId", arr[2]);
       }
     }
   },
@@ -408,7 +409,7 @@ export default {
     settitle("注册与登录");
   },
   mounted() {
-    console.log(this.$route,'jlkjl')
+    console.log(this.$route, "jlkjl");
     this.getClassfications(); //获取用户open ID
     if (this.$route.query["parm"]) {
       var obj = JSON.parse(this.$route.query["parm"]);

@@ -36,7 +36,7 @@ window.settitle = settitle;
  router.beforeEach((to, from, next) => {
   // && to.name!="answer" && to.name!="result"&& to.name!="nearby" 答题和结果
   console.log(to.name )
-   if(!localStorage.getItem('user') && to.name !== "login" && to.name !== "shop" && to.name !=="home" && to.name!="changePassword" ){
+   if(!localStorage.getItem('user') && to.name !== "login" && to.name !== "shop" && to.name !=="home" && to.name!="changePassword" && to.name !=="introduce"&& to.name !=="sharedBonusTwo"){
      next("/login/1");
      return 
    }
