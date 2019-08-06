@@ -6,7 +6,7 @@
         <div
           class="div_width_50 margin_left_div6 font_size_16 font_color_1A"
           style="font-weight:700;"
-        >押金充值</div>
+        >通用结算金</div>
         <div class="div_width_50 text_right margin_right_div6 font_size_14 font_color_4A">
           <span style="text-decoration:underline;" @click="goToRechargeList(0)">充值记录</span>
         </div>
