@@ -126,10 +126,10 @@
       @click.native="LoginOrReg"
     >{{haslogin == 1 ? '登录' : '注册'}}</x-button>
     <!-- <div  @click="LoginOrReg"  >{{haslogin == 1 ? '登录'  : '注册'}}</div> -->
-    <p class="login_tit" @click="goToPrivacyProtocol">
+    <div class="login_tit" @click="goToPrivacyProtocol" style="height:40px">
       {{haslogin == 1 ? '登录' : '注册'}}即代表您已同意
       <span class="foot-color">《御康商贸用户隐私政策》</span>
-    </p>
+    </div>
   </div>
 </template>
 <script>
