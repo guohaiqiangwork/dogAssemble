@@ -198,9 +198,9 @@ export default {
       if(this.state ==3){
         this.PayFalge = true;
       }else{
-         this.outPayFalge = true;
+         this.outPayFalge = false;
       }
-     
+    this.onConfirm()
     },
     // 弹窗取消
     onCancel() {

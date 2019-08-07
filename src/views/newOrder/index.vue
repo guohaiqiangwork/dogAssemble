@@ -11,7 +11,7 @@
             v-model="phone"
             v-on:input="getCheckCustomer(phone)"
             maxlength="11"
-            style="width:100%;height:100%;outline: none;border:none"
+            style="width:100%;height:100%;outline: none;border:none;font-size:17px"
           />
           <span
             style="max-width: 80px;display: inline-block;height: 38px;flex: 1;white-space: nowrap;line-height: 38px;text-overflow: ellipsis;overflow:hidden;min-width: 80px;"
@@ -22,7 +22,7 @@
       </div>
     </div>
     <div>
-      <div class="font_color_1A font_size_14 margin_left_div6 margin_top_div5">选择套餐类型：</div>
+      <div class="font_color_1A  margin_left_div6 margin_top_div5" style="font-size:17px">选择套餐类型：</div>
       <div class="div_display_flex margin_top_div5">
         <div :class="classA  == '0'? 'new_order_b1' : 'new_order_b2' " @click="newOrderXZ('0')">会员套餐</div>
         <div :class="classA  == '1'? 'new_order_b1' : 'new_order_b2' " @click="newOrderXZ('1')">辟谷套餐</div>
@@ -36,7 +36,7 @@
         <!-- <selector v-model="memberID" title="配方名称：" :options="recipeList" :value-map="['id','recipe']"></selector> -->
         <!-- <popup-radio title="配方名称：" :options="recipeList" v-model="memberID" placeholder="placeholder"></popup-radio> -->
         <group  label-width="5em">
-           <popup-picker title="配方名称" :data="recipeList" v-model="relength"  :columns="1" placeholder="请选择" cancel-text="X"  @on-hide="onHide" @on-change="onChange"></popup-picker>
+           <popup-picker title="配方名称"  :data="recipeList" v-model="relength"  :columns="1" placeholder="请选择" cancel-text="X"  @on-hide="onHide" @on-change="onChange"></popup-picker>
         </group>
             <!-- <popup-picker :title="title1" :data="list1" v-model="value1" @on-show="onShow"  :placeholder="'please select'"></popup-picker> -->
         <!-- <Select style="width:70%" @change="getMemberRecipe($event)">
@@ -647,6 +647,7 @@ export default {
   border: 1px solid #e9e9e9;
   border-radius: 5px;
   padding: 2%;
+  font-weight: 400
 }
 .b_t_w {
   width: 90%;

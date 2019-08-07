@@ -19,7 +19,7 @@
     <div class="goods_picbox">
       <swiper @on-index-change="onIndexChange" v-model="swiperItemIndex" :show-dots="false" auto loop>
         <swiper-item class="swiper-demo-img" v-for="(item, index) in imgList" :key="index">
-          <img :src="item.img" />
+          <img :src="item.img"  width="100%"/>
         </swiper-item>
       </swiper>
       <div class="circle_num">
@@ -39,11 +39,14 @@
     <div class="img_box">
       <div class="goods_tit">商品详情图</div>
       <div v-for="(item,index) in goodsDetail.imgDetailsList" :key="index">
-        <img
-          class="detail_pic"
+        <div  class="detail_pic">
+ <img
+          width="100%"
           :src="'http://www.gsb.yuntunet.cn/fruits/app/blank/showPicture?attachmentId='+item"
           alt
         />
+        </div>
+       
       </div>
     </div>
     <!-- <div class="foryou">为您推荐</div> -->

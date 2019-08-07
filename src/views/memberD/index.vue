@@ -199,7 +199,7 @@
 <script>
 import url from "../../bin/url";
 import { Confirm, XDialog } from "vux";
-import { setTimeout } from 'timers';
+import { setTimeout } from "timers";
 
 export default {
   components: {
@@ -295,9 +295,9 @@ export default {
     // 会员打开支付
     goPay() {
       this.payShowD = true;
-      setTimeout(() =>{
+      setTimeout(() => {
         this.$refs.pwd.focus();
-      })
+      });
     },
     // 辟谷消费
     goPayB(id) {
@@ -316,28 +316,40 @@ export default {
         data => {
           if (data.code == 0) {
             // this.getInfo(this.parameter.item.id);
-           this.$vux.toast.text('操作成功')
-            setTimeout(()=>{
-                this.$router.push({
-              name: "memberOperation",
-              params: {
-                obj: JSON.stringify({
-                  type: "profession",
-                  data: {
-                    id: "蚕丝"
-                  }
-                })
-              }
-            });
-            },2000)
-            
+            this.$vux.toast.text("操作成功");
+            setTimeout(() => {
+              this.$router.push({
+                name: "memberOperation",
+                params: {
+                  obj: JSON.stringify({
+                    type: "profession",
+                    data: {
+                      id: "蚕丝"
+                    }
+                  })
+                }
+              });
+            }, 2000);
+
             // this.getInfo(this.parameter.item.id);
           } else {
-            if(data.msg == 'pash_pledge'){
-              alert('押金不足')
-              return
-            }
-            alert(data.msg);
+            // if (data.msg == "pash_pledge") {
+            //   alert("押金不足");
+            //   return;
+            // }
+            var err = {
+              find_none_user: "该用户不存在",
+              user_has_frozen: "该账户已被冻结",
+              pash_pledge: "押金不足",
+              cash_pledge: "跨店操作店铺押金不足",
+              the_othersetting_is_none: "后台设置未完善",
+              find_none_user: "该用户不存在",
+              the_recipe_is_none: "辟谷套餐未完善",
+              the_bigu_order_not_today: "当前不是辟谷日期",
+              store_none: "原店铺不存在"
+            };
+            alert(err[data.msg] || "未知的错误");
+            // alert(data.msg);
           }
         },
         err => {
@@ -388,7 +400,6 @@ export default {
       this.$fetch.post(url.saveMember, _obj).then(
         data => {
           if (data.code == 0) {
-           
             alert("下单成功");
             this.infoList = data.obj;
             this.goToMemberOperation(); //去会员操作
@@ -410,10 +421,12 @@ export default {
               });
             } else if (data.msg == "credit_is_running_low") {
               alert("用户余额不足");
-            }else if(data.msg ==' the_othersetting_is_none'){
-              alert('请检查您的查询条件')
-            }else {
-              alert(data.msg);
+            } else if (data.msg == " the_othersetting_is_none") {
+              alert("请检查您的查询条件");
+            } else if (data.msg == "user_has_frozen") {
+              alert("该账户已被冻结，无法消费");
+            } else if (data.msg == "cash_pledge") {
+              alert("跨店操作店铺押金不足");
             }
           }
         },

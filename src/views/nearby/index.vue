@@ -61,7 +61,7 @@
               </div>
               <div class="div_display_flex margin_top_div3">
                 <div class="div_width_70 margin_left_div2">营业时间</div>
-                <div class="div_width_30 margin_right_div2 text_right">{{item.startTime}}</div>
+                <div class="div_width_30 margin_right_div2 text_right">{{item.startTime}}-{{item.endTime}}</div>
               </div>
               <div class="div_display_flex margin_top_div3 padding_bottom_4">
                 <div class="div_width_70 margin_left_div2">门店电话</div>
@@ -98,6 +98,7 @@
 import url from "../../bin/url";
 import TabBar from "../../components/TabBar";
 import { TMap } from "../../bin/TMap";
+import wx from "weixin-jsapi";
 import { CheckIcon, Confirm } from "vux";
 export default {
   components: {
@@ -400,31 +401,90 @@ export default {
       this.page.current = 1;
       this.getRecommendStoreList();
     },
-
-    // 获取当前位置
-    addressDetail() {
-      //获取地理位置
-      var self = this;
-      //全局的this在方法中不能使用，需要重新定义一下
-      var geolocation = new BMap.Geolocation();
-      //调用百度地图api 中的获取当前位置接口
-      geolocation.getCurrentPosition(function(r) {
-        if (this.getStatus() == BMAP_STATUS_SUCCESS) {
-          //获取当前位置经纬度
-          var myGeo = new BMap.Geocoder();
-          myGeo.getLocation(new BMap.Point(r.point.lng, r.point.lat), function(
-            result
-          ) {
-            if (result) {
-              self.latitude = result.point.lat;
-              self.longitude = result.point.lng;
-              self.getRecommendStoreList(); //获取全国门店
-              // alert(result.point.lat + "获取都仅为度");
+ // 获取地理位置配置
+    getSharedBonus() {
+      this.$fetch
+        .post("/fruits/app/weChat/getWechatConfig", {
+          url: window.location.href.split("#")[0]
+        })
+        .then(
+          data => {
+            if (data.code == 0) {
+              this.wexinGetLog(data.obj);
+            } else {
+              alert(data.msg);
             }
-          });
+          },
+          err => {
+            alert("网络缓慢。。");
+          }
+        );
+    },
+    // 微信获取位置
+    wexinGetLog(data) {
+      let that = this;
+      wx.config({
+        debug: false,
+        appId: data.appId,
+        nonceStr: data.noncestr,
+        timestamp: data.timestamp,
+        signature: data.sign,
+        jsApiList: ["checkJsApi", "openLocation", "getLocation"]
+      });
+      wx.checkJsApi({
+        jsApiList: ["getLocation"],
+        success: function(res) {
+          if (res.checkResult.getLocation == false) {
+            alert(
+              "你的微信版本太低，不支持微信JS接口，请升级到最新的微信版本！"
+            );
+            return;
+          }
         }
       });
-    }
+      wx.ready(function() {
+        wx.getLocation({
+          success: function(res) {
+            console.log("微信获取" + JSON.stringify(res));
+            that.latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+            that.longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+            that.getRecommendStoreList(); //获取全国门店数据
+          },
+          cancel: function(res) {
+            alert("用户拒绝授权获取地理位置");
+            // that.getShopFjStudio()
+          }
+        });
+      });
+      wx.error(function(res) {
+        //                        console.log(res)
+        // that.getShopFjStudio()
+      });
+    },
+    // 获取当前位置
+    // addressDetail() {
+    //   //获取地理位置
+    //   var self = this;
+    //   //全局的this在方法中不能使用，需要重新定义一下
+    //   var geolocation = new BMap.Geolocation();
+    //   //调用百度地图api 中的获取当前位置接口
+    //   geolocation.getCurrentPosition(function(r) {
+    //     if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+    //       //获取当前位置经纬度
+    //       var myGeo = new BMap.Geocoder();
+    //       myGeo.getLocation(new BMap.Point(r.point.lng, r.point.lat), function(
+    //         result
+    //       ) {
+    //         if (result) {
+    //           self.latitude = result.point.lat;
+    //           self.longitude = result.point.lng;
+    //           self.getRecommendStoreList(); //获取全国门店
+    //           // alert(result.point.lat + "获取都仅为度");
+    //         }
+    //       });
+    //     }
+    //   });
+    // }
     //第一部分
     //定位获得当前位置信息
     // getMyLocation() {
@@ -449,7 +509,7 @@ export default {
   },
 
   mounted() {
-    this.addressDetail();
+    this.getSharedBonus();
     document.documentElement.clientHeight -
       this.$refs.wrapper.getBoundingClientRect().top;
     // this.getRecommendStoreList(); //获取全国门店

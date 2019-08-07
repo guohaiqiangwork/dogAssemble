@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 搜索 -->
-    <div class="search_box">
+    <div class="search_box_member">
       <i class="weui-icon-search search_icon"></i>
       <input
         type="text"
@@ -164,7 +164,7 @@ export default {
 </script>
 <style scoped>
 /* 搜索框 */
-.search_box {
+.search_box_member {
   height: 0.7rem;
   border-radius: 0.35rem;
   position: relative;

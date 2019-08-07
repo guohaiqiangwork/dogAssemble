@@ -46,13 +46,13 @@
         <span
           v-show="sendAuthCode"
           class="margin_left_div3 font_color_4A"
-          style="font-size:12px;margin-left:16%;"
+          style="font-size:12px;margin-left:16%;width:72px"
           @click="getAuthCode"
         >{{tip}}</span>
         <span
           v-show="!sendAuthCode"
           class="margin_left_div3 font_color_4A"
-          style="font-size:12px"
+          style="font-size:12px;margin-left: 29%;"
         >{{auth_time}}s</span>
       </div>
     </div>

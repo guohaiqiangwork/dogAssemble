@@ -28,9 +28,9 @@
           <div class="service_width_50" @click="goToSOrderD('b',item,items.num)"> 第{{items.num}}天</div>
           <!-- <div class="service_width_25">{{items.time}}</div> -->
           <!-- <div class="service_width_51" @click="goToSOrderD('b',item,items.num)" v-if="item.state == 0">未开始  <img src="../../assets/images/right.png" style="width:8px;height:13px;margin-left: 4%" alt=""></div> -->
-          <div class="service_width_51" @click="goToSOrderD('b',item,items.num)" style="color:#000000" v-if="item.state == 1">待完成  <img src="../../assets/images/right.png" style="width:8px;height:13px;margin-left: 4%" alt=""></div>
-          <div class="service_width_51" @click="goToSOrderD('b',item,items.num)" style="color:#E6435A" v-if="item.state == 2">已完成  <img src="../../assets/images/right.png" style="width:8px;height:13px;margin-left: 4%" alt=""></div>
-          <div class="service_width_51" @click="goToSOrderD('b',item,items.num)" style="color:#4AB67" v-if="item.state == 3">已作废  <img src="../../assets/images/right.png" style="width:8px;height:13px;margin-left: 4%" alt=""></div>
+          <div class="service_width_51" @click="goToSOrderD('b',item,items.num)" style="color:#000000" v-if="items.state == 1">已完成 <img src="../../assets/images/right.png" style="width:8px;height:13px;margin-left: 4%" alt=""></div>
+          <div class="service_width_51" @click="goToSOrderD('b',item,items.num)" style="color:#E6435A" v-if="items.state == 2">进行中 <img src="../../assets/images/right.png" style="width:8px;height:13px;margin-left: 4%" alt=""></div>
+          <div class="service_width_51" @click="goToSOrderD('b',item,items.num)" style="color:#4AB67" v-if="items.state == 3">待完成  <img src="../../assets/images/right.png" style="width:8px;height:13px;margin-left: 4%" alt=""></div>
         </div>
       </div>
     </div>
