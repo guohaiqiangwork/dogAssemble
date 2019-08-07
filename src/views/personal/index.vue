@@ -390,7 +390,7 @@
           style="font-size:8px"
         >
           <img src="../../assets/images/提醒 (3)@2x.png" class="per_img_width_18 margin_top_div8" />
-          <div class="margin_top_div3">您当前帐户已被冻结</div>
+          <div class="margin_top_div3">您当前账户已被冻结</div>
           <div class="margin_top_div3">需解冻才可以正常使用</div>
           <div class="margin_top_div3">1231313***33</div>
           <div class="pass_list_w">
@@ -445,8 +445,8 @@
           @click="closeFrozen"
           style="position: absolute;right: 5%;top: 5%;font-size:17px;color:#272737"
         >X</div>
-        <div style="color:#1A202C;font-weight: 300;">您的帐户已被冻结</div>
-        <div style="color:#1A202C;font-weight: 300;margin-top: 3%;">请联系客服解冻帐户</div>
+        <div style="color:#1A202C;font-weight: 300;">您的账户已被冻结</div>
+        <div style="color:#1A202C;font-weight: 300;margin-top: 3%;">请联系客服解冻账户</div>
         <div class="div_display_flex font_color_4A margin_top_div6" style="padding-bottom: 8%;">
           <div class=" div_width_20 text_right"> <img src="../../assets/images/kf@2x.png" class="width_16"/></div>
          
