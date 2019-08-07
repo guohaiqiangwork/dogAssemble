@@ -373,7 +373,7 @@ export default {
     timeNow() {
       var now = new Date(); //当前日期
       var nowDay = now.getDate(); //当前日
-      var nowMonth = now.getMonth(); //当前月
+      var nowMonth = now.getMonth()/1 + 1; //当前月
       var nowYear = now.getFullYear(); //当前年
       this.nowTime = nowYear + "." + nowMonth + "." + nowDay;
     },

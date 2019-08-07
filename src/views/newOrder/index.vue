@@ -374,6 +374,10 @@ export default {
         this.$vux.toast.text("该用户为跨店会员,不能新建套餐");
         return;
       }
+      if(!this.value7){
+        this.$vux.toast.text("请选择开始时间");
+        return
+      }
       setTimeout(() =>{
         this.$refs.pwd.focus();
       })
