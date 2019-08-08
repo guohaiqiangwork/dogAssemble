@@ -83,9 +83,9 @@
         </div>
       </div>
       <div class="div_display_flex margin_left_div3 margin_top_div5">
-        <div class="div_width_25 font_size_14 font_color_1A">银行帐户：</div>
+        <div class="div_width_25 font_size_14 font_color_1A">银行账户：</div>
         <div class="div_width_70">
-          <input type="text" placeholder="请输入银行帐户" maxlength="19" v-model="recommendList.bankNum" />
+          <input type="text" placeholder="请输入银行账户" maxlength="19" v-model="recommendList.bankNum" />
         </div>
       </div>
       <div class="div_display_flex margin_left_div3 margin_top_div5">
