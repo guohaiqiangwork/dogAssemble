@@ -43,9 +43,7 @@
             v-if="recommendStoreList.length"
           >
             <div class="div_display_flex margin_top_div3">
-              <div
-                class="div_width_70 margin_left_div2 over_hidde"
-              >{{recommendStoreList[0].province}}{{recommendStoreList[0].city}}{{recommendStoreList[0].area}}{{recommendStoreList[0].name}}</div>
+              <div class="div_width_70 margin_left_div2 over_hidde">{{recommendStoreList[0].name}}</div>
               <div v-if="recommendStoreList[0].state == 2" class="bt_close">已关店</div>
               <div
                 class="div_width_30 margin_right_div2 text_right"
@@ -96,9 +94,7 @@
               :class="classA  == '1'? 'national_list' : 'national_list_w' "
             >
               <div class="div_display_flex margin_top_div3" @click="goToMap(item)">
-                <div
-                  class="div_width_70 margin_left_div2 over_hidde"
-                >{{item.province}}{{item.city}}{{item.area}}{{item.name}}</div>
+                <div class="div_width_70 margin_left_div2 over_hidde">{{item.name}}</div>
                 <div v-if="item.state == 2" class="bt_close">已关店</div>
                 <div class="div_width_30 margin_right_div2 text_right">{{item.distance}}km</div>
               </div>
@@ -423,21 +419,24 @@ export default {
 
     //第一部分
     //定位获得当前位置信息
-    // getMyLocation() {
-    //   var geolocation = new qq.maps.Geolocation("JPCBZ-I3W64-FDNUH-XRWFO-MQRFZ-ERBWW", "opo");
-    //   geolocation.getIpLocation(this.showPosition, this.showErr);
-    // },
-    // showPosition(position) {
-    //   console.log(position);
-    //   this.latitude = position.lat;//唯独
-    //   this.longitude = position.lng;//进度
-    //   this.city = position.city;
-    //   this.getRecommendStoreList(); //获取全国门店
-    // },
-    // showErr() {
-    //   console.log("定位失败");
-    //   this.getMyLocation(); //定位失败再请求定位，测试使用
-    // },
+    getMyLocation() {
+      var geolocation = new qq.maps.Geolocation(
+        "JPCBZ-I3W64-FDNUH-XRWFO-MQRFZ-ERBWW",
+        "opo"
+      );
+      geolocation.getIpLocation(this.showPosition, this.showErr);
+    },
+    showPosition(position) {
+      console.log(position);
+      this.latitude = position.lat; //唯独
+      this.longitude = position.lng; //进度
+      this.city = position.city;
+      this.getRecommendStoreList(); //获取全国门店
+    },
+    showErr() {
+      console.log("定位失败");
+      this.getMyLocation(); //定位失败再请求定位，测试使用
+    },
     // 获取地理位置配置
     getSharedBonus() {
       this.$fetch

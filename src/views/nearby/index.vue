@@ -49,7 +49,7 @@
               <div class="div_display_flex margin_top_div3" @click="goToMap(item)">
                 <div
                   class="div_width_70 margin_left_div2 over_hidde"
-                >{{item.province}}{{item.city}}{{item.area}}{{item.name}}</div>
+                >{{item.name}}</div>
                 <div v-if="item.state == 2" class="bt_close">已关店</div>
                 <div class="div_width_30 margin_right_div2 text_right">{{item.distance}}km</div>
               </div>

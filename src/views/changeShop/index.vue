@@ -45,7 +45,7 @@
             <div class="div_display_flex margin_top_div3">
               <div
                 class="div_width_70 margin_left_div2 over_hidde"
-              >{{recommendStoreList[0].province}}{{recommendStoreList[0].city}}{{recommendStoreList[0].area}}{{recommendStoreList[0].name}}</div>
+              >{{recommendStoreList[0].name}}</div>
               <div v-if="recommendStoreList[0].state == 2" class="bt_close">已关店</div>
               <div
                 class="div_width_30 margin_right_div2 text_right"
@@ -94,7 +94,7 @@
               <div class="div_display_flex margin_top_div3">
                 <div
                   class="div_width_70 margin_left_div2 over_hidde"
-                >{{item.province}}{{item.city}}{{item.area}}{{item.name}}</div>
+                >{{item.name}}</div>
                 <div v-if="recommendStoreList[0].state == 2" class="bt_close">已关店</div>
                 <div class="div_width_30 margin_right_div2 text_right">{{item.distance}}km</div>
               </div>
