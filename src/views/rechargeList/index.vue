@@ -25,7 +25,7 @@
           <!-- <div
             class="div_width_50"
           >{{item.payType == 3?"现金充值":item.payType == 2?"支付宝充值":item.payType == 4?"微信充值":""}}</div>-->
-          <div class="div_width_50">通用结算金充值</div>
+          <div class="div_width_50">押金充值</div>
           <div class="div_width_50 text_right">+ {{item.recharge}}</div>
         </div>
         <div

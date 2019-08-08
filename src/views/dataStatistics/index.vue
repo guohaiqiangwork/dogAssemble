@@ -110,7 +110,7 @@
           @click="goTODataDetails('2')"
         >
           <div class="font_size_25 margin_top_div8">{{moneyList.expendCharge}}</div>
-          <div class="font_size_13 margin_top_div5">通用结算金支出(元)</div>
+          <div class="font_size_13 margin_top_div5">押金支出(元)</div>
         </div>
       </div>
     </div>

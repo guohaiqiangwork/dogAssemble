@@ -89,7 +89,7 @@ export default {
     if (this.routeParams.data.id == 1) {
       var title = "会员充值";
     } else if (this.routeParams.data.id == 2) {
-      var title = "通用结算金支出";
+      var title = "押金支出";
     } else if (this.routeParams.data.id == 3) {
       var title = "转店收入";
     } else if (this.routeParams.data.id == 4) {
