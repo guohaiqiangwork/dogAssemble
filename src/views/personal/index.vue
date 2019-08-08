@@ -50,16 +50,16 @@
               class="font_color_E8 font_size_15"
               style="width:60%;margin-top:-5%;text-indent:1em;"
             >
-              押金：{{personalMsg.deposit.toFixed(2)}}元
-              <div class="money_falg_y" v-if="personalMsg.deposit.toFixed(2) < 60000 ">押金不足</div>
+              通用结算金：{{personalMsg.deposit.toFixed(2)}}
+              <div class="money_falg_y" v-if="personalMsg.deposit.toFixed(2) < 600 "> 金额不足</div>
             </div>
             <div
               v-if="personalMsg.deposit == null"
               class="font_color_E8 font_size_15"
               style="width:80%;margin-top:-5%;text-indent:1em;"
             >
-              押金：0.00元
-              <div class="money_falg_y">押金不足</div>
+             通用结算金：0.00
+              <div class="money_falg_y">金额不足</div>
             </div>
             <div class="personal_falg_m" style="" v-if="personalMsg.storeState == 1">
               营业中

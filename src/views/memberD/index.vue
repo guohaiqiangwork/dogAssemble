@@ -340,8 +340,8 @@ export default {
             var err = {
               find_none_user: "该用户不存在",
               user_has_frozen: "该账户已被冻结",
-              pash_pledge: "押金不足",
-              cash_pledge: "跨店操作店铺押金不足",
+              pash_pledge: "通用结算金不足",
+              cash_pledge: "跨店操作店铺通用结算金不足",
               the_othersetting_is_none: "后台设置未完善",
               find_none_user: "该用户不存在",
               the_recipe_is_none: "辟谷套餐未完善",
@@ -426,7 +426,7 @@ export default {
             } else if (data.msg == "user_has_frozen") {
               alert("该账户已被冻结，无法消费");
             } else if (data.msg == "cash_pledge") {
-              alert("跨店操作店铺押金不足");
+              alert("跨店操作店铺通用结算金不足");
             }
           }
         },

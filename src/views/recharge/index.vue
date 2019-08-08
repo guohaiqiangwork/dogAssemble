@@ -224,7 +224,7 @@ export default {
             });
           } else {
             if (res.msg == "cash_pledge") {
-              this.$vux.toast.text("押金不足");
+              this.$vux.toast.text("通用结算金不足");
               return;
             }
             if (res.msg == "user_has_frozen") {
@@ -323,7 +323,7 @@ export default {
     }
   },
   created() {
-    settitle("押金充值");
+    settitle("通用结算金充值");
     this.routeParams = JSON.parse(this.$route.params.obj);
   },
 

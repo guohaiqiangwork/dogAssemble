@@ -231,7 +231,7 @@ export default {
             if (data.msg == "store_none") {
               alert("跨店店铺不存在");
             } else if (data.msg == "cash_pledge") {
-              alert("跨店店铺押金不足");
+              alert("跨店店铺通用结算金不足");
             } else {
               alert(data.msg);
             }
