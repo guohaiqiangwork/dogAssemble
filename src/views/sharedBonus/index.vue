@@ -30,6 +30,7 @@
 <script>
 import url from "../../bin/url";
 import wexinShare from "../../bin/weiXinShare";
+import 'weixin-jsapi'
 import { XDialog, XButton } from "vux";
 
 export default {
@@ -82,6 +83,7 @@ export default {
             if (data.code == 0) {
               console.log(data);
               wexinShare(data.obj);
+              this.menuReady();
             } else {
               alert(data.msg);
             }
@@ -90,7 +92,30 @@ export default {
             alert("网络缓慢。。");
           }
         );
-    }
+    },
+     wxpay(){
+        var vm= this;
+        if (typeof WeixinJSBridge == "undefined"){//微信浏览器内置对象。参考微信官方文档
+          if( document.addEventListener ){
+            document.addEventListener('WeixinJSBridgeReady', vm.onBridgeReady(), false);
+          }else if (document.attachEvent){
+            document.attachEvent('WeixinJSBridgeReady', vm.onBridgeReady());
+            document.attachEvent('onWeixinJSBridgeReady',vm.onBridgeReady());
+          }
+        }else{
+          vm.onBridgeReady();
+        }
+ 
+      },
+      // 隐藏
+      onBridgeReady(){
+        WeixinJSBridge.call('hideOptionMenu');
+      },
+      // 显示
+       menuReady(){
+        WeixinJSBridge.call('showOptionMenu');
+      },
+
   },
   created() {
     settitle("共享奖金");
@@ -102,6 +127,7 @@ export default {
     // console.log(this.routeParams[0].split("=")[1]);
     // console.log(this.routeParams[1].split("=")[1]);
     this.getEr();
+    this.wxpay()
   }
 };
 </script>
