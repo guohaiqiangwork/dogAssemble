@@ -71,19 +71,19 @@
           </div>
           <div
             class="div_display_flex text_center"
-            v-for="(item,index) in item.biguDateLists"
+            v-for="(items,index) in item.biguDateLists"
             :key="index"
           >
             <div class="div_width_25">{{index + 1}}</div>
-            <div class="div_width_25">{{item.recommTime}}</div>
-            <div class="div_width_25" style="color:#4A7B67" v-if="item.state == '1'">待完成</div>
-            <div class="div_width_25" style="color:#E9E9E9" v-if="item.state == '2'">已完成</div>
-            <div class="div_width_25" style="color:#E6435A" v-if="item.state == '3'">已作废</div>
-            <div class="div_width_25" v-if="item.state != '1'">/</div>
+            <div class="div_width_25">{{items.recommTime}}</div>
+            <div class="div_width_25" style="color:#4A7B67" v-if="items.state == '1'">待完成</div>
+            <div class="div_width_25" style="color:#E9E9E9" v-if="items.state == '2'">已完成</div>
+            <div class="div_width_25" style="color:#E6435A" v-if="items.state == '3'">已作废</div>
+            <div class="div_width_25" v-if="item.isOperation == '0'">/</div>
             <div
               class="div_width_25"
               style="color:#4A7B67"
-              v-if="item.state == '1'"
+              v-if="item.isOperation == '1'"
               @click="goPayB(item.id)"
             >确认</div>
           </div>
