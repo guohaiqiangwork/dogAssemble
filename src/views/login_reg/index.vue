@@ -127,16 +127,20 @@
       @click.native="LoginOrReg"
     >{{haslogin == 1 ? '登录' : '注册'}}</x-button>
 
-     <x-button
-     v-if="binding"
+    <x-button
+      v-if="binding"
       type="primary"
       class="login_btn"
       :show-loading="btnload"
       @click.native="LoginOrReg"
     >绑定</x-button>
     <!-- <div  @click="LoginOrReg"  >{{haslogin == 1 ? '登录'  : '注册'}}</div> -->
-    <div class="login_tit" @click="goToPrivacyProtocol" style="height:40px"  v-if="!binding">
+    <div class="login_tit" @click="goToPrivacyProtocol" style="height:40px" v-if="!binding">
       {{haslogin == 1 ? '登录' : '注册'}}即代表您已同意
+      <span class="foot-color">《御康商贸用户隐私政策》</span>
+    </div>
+     <div class="login_tit" @click="goToPrivacyProtocol" style="height:40px" v-if="binding">
+      绑定即代表您已同意
       <span class="foot-color">《御康商贸用户隐私政策》</span>
     </div>
   </div>
@@ -187,7 +191,7 @@ export default {
 
       validTel: false,
       getoptnId: "",
-      binding:false //绑定标示
+      binding: false //绑定标示
     };
   },
   methods: {
@@ -257,6 +261,10 @@ export default {
       this.$fetch.post("fruits/app/user/register", this.form).then(res => {
         if (res.msg == "registered") {
           this.$vux.toast.text("手机号已经被注册");
+          return;
+        }
+        if (res.msg == "has_recommed") {
+          this.$vux.toast.text("已有推荐关系，不可绑定");
           return;
         }
         if (res.msg == "success") {
@@ -409,8 +417,14 @@ export default {
         localStorage.setItem("shareId", arr[2]);
       }
     },
-     getUrlKey: function (name) {
-        return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [, ""])[1].replace(/\+/g, '%20')) || null
+    getUrlKey: function(name) {
+      return (
+        decodeURIComponent(
+          (new RegExp("[?|&]" + name + "=" + "([^&;]+?)(&|#|;|$)").exec(
+            location.href
+          ) || [, ""])[1].replace(/\+/g, "%20")
+        ) || null
+      );
     }
   },
   created() {
@@ -418,11 +432,11 @@ export default {
   },
   mounted() {
     // 判断是后是绑定进来
-    if( this.getUrlKey('shareId')){
+    if (this.getUrlKey("shareId")) {
       this.binding = true;
-        settitle("绑定");
-    }else{
-       settitle("注册与登录");
+      settitle("绑定");
+    } else {
+      settitle("注册与登录");
     }
     this.getClassfications(); //获取用户open ID
     if (this.$route.query["parm"]) {
