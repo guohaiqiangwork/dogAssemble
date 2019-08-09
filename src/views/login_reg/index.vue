@@ -139,7 +139,7 @@
       {{haslogin == 1 ? '登录' : '注册'}}即代表您已同意
       <span class="foot-color">《御康商贸用户隐私政策》</span>
     </div>
-     <div class="login_tit" @click="goToPrivacyProtocol" style="height:40px" v-if="binding">
+    <div class="login_tit" @click="goToPrivacyProtocol" style="height:40px" v-if="binding">
       绑定即代表您已同意
       <span class="foot-color">《御康商贸用户隐私政策》</span>
     </div>
@@ -259,6 +259,7 @@ export default {
       this.form.headimgurl = localStorage.getItem("headimgurl");
       this.form.shareId = this.shareId || "";
       this.$fetch.post("fruits/app/user/register", this.form).then(res => {
+        console.log(res);
         if (res.msg == "registered") {
           this.$vux.toast.text("手机号已经被注册");
           return;
@@ -268,36 +269,38 @@ export default {
           return;
         }
         if (res.msg == "success") {
-          this.$vux.toast.text("注册成功");
+          this.$vux.toast.text("成功");
           // setTimeout(() => {
           //   var form = JSON.stringify(this.form);
           //   this.$router.push("/login/1?parm=" + form);
           // }, 1000);
-          if (res.attributes.type == 1) {
-            let _obj = {
-              openId: localStorage.getItem("openId"),
-              password: DesUtils.encode(this.loginP, "fruits-app,yuntu,com"),
-              phone: this.form.phone,
-              nickname: localStorage.getItem("nickname"),
-              headimgurl:
-                localStorage.getItem("headimgurl") ||
-                "http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJrDNnAKic6SaKbPB5FGldToRvRnlEgQwjIT9xaNoh1gspSk3xgUUX5Myvl4Sz68wSTZCHEOKOZsiag/132"
-            };
-            this.$fetch.post("fruits/app/user/login", _obj).then(res => {
-              this.btnload = false;
-              if (res.msg == "success") {
-                this.$vux.toast.text("登录成功");
-                localStorage.setItem("user", res.attributes.sessionId);
-                localStorage.setItem("type", res.attributes.type);
-                localStorage.setItem("appUserId", res.attributes.appUserId); //登陆用户id
-                localStorage.setItem("phone", res.attributes.phone);
-                this.$router.push("/home");
-              } else if (res.msg == "password_error") {
-                alert("密码错误");
-              } else {
-                alert(res.msg);
-              }
-            });
+            if (res.attributes.type == 1) {
+              let _obj = {
+                openId: localStorage.getItem("openId"),
+                password: DesUtils.encode(this.loginP, "fruits-app,yuntu,com"),
+                phone: this.form.phone,
+                nickname: localStorage.getItem("nickname"),
+                headimgurl:
+                  localStorage.getItem("headimgurl") ||
+                  "http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJrDNnAKic6SaKbPB5FGldToRvRnlEgQwjIT9xaNoh1gspSk3xgUUX5Myvl4Sz68wSTZCHEOKOZsiag/132"
+              };
+              this.$fetch.post("fruits/app/user/login", _obj).then(res => {
+                this.btnload = false;
+                if (res.msg == "success") {
+                  this.$vux.toast.text("登录成功");
+                  localStorage.setItem("user", res.attributes.sessionId);
+                  localStorage.setItem("type", res.attributes.type);
+                  localStorage.setItem("appUserId", res.attributes.appUserId); //登陆用户id
+                  localStorage.setItem("phone", res.attributes.phone);
+                  this.$router.push("/home");
+                } else if (res.msg == "password_error") {
+                  alert("密码错误");
+                } else {
+                  alert(res.msg);
+                }
+              });
+            }else if(res.attributes.type == 2){
+                 this.$router.push("/home");
           }
         } else {
           alert(res.msg);
