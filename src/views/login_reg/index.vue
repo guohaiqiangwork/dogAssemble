@@ -120,13 +120,22 @@
       </p>
     </div>
     <x-button
+      v-if="!binding"
       type="primary"
       class="login_btn"
       :show-loading="btnload"
       @click.native="LoginOrReg"
     >{{haslogin == 1 ? '登录' : '注册'}}</x-button>
+
+     <x-button
+     v-if="binding"
+      type="primary"
+      class="login_btn"
+      :show-loading="btnload"
+      @click.native="LoginOrReg"
+    >绑定</x-button>
     <!-- <div  @click="LoginOrReg"  >{{haslogin == 1 ? '登录'  : '注册'}}</div> -->
-    <div class="login_tit" @click="goToPrivacyProtocol" style="height:40px">
+    <div class="login_tit" @click="goToPrivacyProtocol" style="height:40px"  v-if="!binding">
       {{haslogin == 1 ? '登录' : '注册'}}即代表您已同意
       <span class="foot-color">《御康商贸用户隐私政策》</span>
     </div>
@@ -177,7 +186,8 @@ export default {
       },
 
       validTel: false,
-      getoptnId: ""
+      getoptnId: "",
+      binding:false //绑定标示
     };
   },
   methods: {
@@ -398,18 +408,22 @@ export default {
         var arr = /(\?shareId=)(\w*)/.exec(href);
         localStorage.setItem("shareId", arr[2]);
       }
+    },
+     getUrlKey: function (name) {
+        return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [, ""])[1].replace(/\+/g, '%20')) || null
     }
   },
   created() {
-    settitle("登录页面");
-    // this.routeParams = JSON.parse(this.$route.params.obj);
-  },
-  created() {
     this.getShare();
-    settitle("注册与登录");
   },
   mounted() {
-    console.log(this.$route, "jlkjl");
+    // 判断是后是绑定进来
+    if( this.getUrlKey('shareId')){
+      this.binding = true;
+        settitle("绑定");
+    }else{
+       settitle("注册与登录");
+    }
     this.getClassfications(); //获取用户open ID
     if (this.$route.query["parm"]) {
       var obj = JSON.parse(this.$route.query["parm"]);
