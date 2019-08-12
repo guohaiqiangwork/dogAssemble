@@ -37,6 +37,7 @@ service
   .interceptors
   .response
   .use(response => {
+    console.log(response.msg)
     /**
      * code为非200是错误的请求
      */
