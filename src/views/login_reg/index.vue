@@ -257,6 +257,7 @@ export default {
       this.form.openId = localStorage.getItem("openId");
       this.form.nickname = localStorage.getItem("nickname");
       this.form.headimgurl = localStorage.getItem("headimgurl");
+       localStorage.setItem("phone",this.form.phone);
       this.form.shareId = this.shareId || "";
       this.$fetch.post("fruits/app/user/register", this.form).then(res => {
         console.log(res);
@@ -291,7 +292,7 @@ export default {
                   localStorage.setItem("user", res.attributes.sessionId);
                   localStorage.setItem("type", res.attributes.type);
                   localStorage.setItem("appUserId", res.attributes.appUserId); //登陆用户id
-                  localStorage.setItem("phone", res.attributes.phone);
+                  // localStorage.setItem("phone", res.attributes.phone);
                   this.$router.push("/home");
                 } else if (res.msg == "password_error") {
                   alert("密码错误");
