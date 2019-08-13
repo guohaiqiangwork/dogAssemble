@@ -148,7 +148,7 @@ export default {
         openId: localStorage.getItem("openId"),
         id: this.listId2 || "",
         name:val,
-        size: "10",
+        size: "100",
         current: "1"
       };
       if(val){
@@ -160,7 +160,6 @@ export default {
       }
       this.$fetch.post(url.getGoodsList, _obj).then(
         data => {
-          console.log(data,'kjljlk');
           if (data.code == 0) {
             this.goodsList = data.obj;
             this.goodsList.forEach(item => {
@@ -182,7 +181,7 @@ export default {
       let _obj = {
         openId: localStorage.getItem("openId"),
         id: this.listId2 || "",
-        size: "10",
+        size: "100",
         current: "1"
       };
       this.$fetch.post(url.getGoodsList, _obj).then(
