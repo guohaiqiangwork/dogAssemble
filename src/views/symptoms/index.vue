@@ -198,7 +198,10 @@ export default {
             this.recommendStoreList = data.obj;
             console.log(this.recommendStoreList);
           } else {
-            alert(data.msg);
+            if(data.msg == 'openId_none!'){
+              alert('请进行登录')
+            }
+            // alert(data.msg);
           }
         },
         err => {
