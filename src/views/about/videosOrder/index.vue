@@ -54,6 +54,7 @@ export default {
     }
   },
   mounted() {
+      settitle("视频订单");
     this.getVideoOrder();
   }
 };

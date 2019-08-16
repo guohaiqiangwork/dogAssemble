@@ -108,6 +108,7 @@ export default {
   },
 
   mounted() {
+     settitle("案例视频");
     this.getVideoOne(); //获取视频
   }
 };

@@ -106,6 +106,7 @@ export default {
     }
   },
   mounted() {
+     settitle('食养配方');
     this.getOrder();
   }
 };

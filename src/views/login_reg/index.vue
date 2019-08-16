@@ -158,9 +158,9 @@ export default {
     haslogin() {
       return this.$route.params.id;
     },
-    shareId() {
-      return localStorage.getItem("shareId");
-    }
+    // shareId() {
+    //   return localStorage.getItem("shareId");
+    // }
   },
   data() {
     return {
@@ -258,7 +258,7 @@ export default {
       this.form.nickname = localStorage.getItem("nickname");
       this.form.headimgurl = localStorage.getItem("headimgurl");
        localStorage.setItem("phone",this.form.phone);
-      this.form.shareId = this.shareId || "";
+      this.form.shareId = this.shareId;
       this.$fetch.post("fruits/app/user/register", this.form).then(res => {
         console.log(res);
         if (res.msg == "registered") {
@@ -287,6 +287,7 @@ export default {
               };
               this.$fetch.post("fruits/app/user/login", _obj).then(res => {
                 this.btnload = false;
+                console.log( '注册数据' + JSON.stringify(res))
                 if (res.msg == "success") {
                   this.$vux.toast.text("登录成功");
                   localStorage.setItem("user", res.attributes.sessionId);
@@ -418,7 +419,8 @@ export default {
       // console.log(reg.test(href))
       if (reg.test(href)) {
         var arr = /(\?shareId=)(\w*)/.exec(href);
-        localStorage.setItem("shareId", arr[2]);
+        // localStorage.setItem("shareId", arr[2]);
+        this.shareId = arr[2]
       }
     },
     getUrlKey: function(name) {

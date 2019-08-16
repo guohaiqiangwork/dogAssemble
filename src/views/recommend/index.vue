@@ -425,7 +425,7 @@ export default {
     }
   },
   created() {
-    settitle("我是推荐信息");
+    settitle("推荐信息");
     this.routeParams = JSON.parse(this.$route.params.obj);
   },
 
