@@ -14,7 +14,7 @@
       <i></i>
     </div>
     <!-- 列表 -->
-    <div>
+    <div style="padding-bottom:80px">
       <div style="height:25px;line-height:25px;"
         class="div_display_flex margin_top_div5 font_size_14 font_color_1A"
         v-for="(item,index) in memberList"
@@ -24,8 +24,8 @@
       <!-- <div  @click="goToMemberD(item)"> -->
         <div style="text-align:left;margin-left:5%;float:left;" class="margin_left_div3 overflow_word" @click="goToMemberD(item)">{{item.name}}</div>
         <div style="margin-left:2%;" class="div_width_25"  @click="goToMemberD(item)">{{item.phone}}</div>
-        <div style="text-align:right;position:absolute;right:5%;" class="div_width_45 text_right overflow_word" v-if="item.type == 0"  @click="goToMemberD(item)">会员{{item.recipe}}</div>
-        <div style="text-align:right;position:absolute;right:5%;" class="div_width_45 text_right overflow_word" v-if="item.type == 1"  @click="goToMemberD(item)">辟谷套餐</div>
+        <div style="text-align:right;" class="div_width_50 text_right overflow_word" v-if="item.type == 0"  @click="goToMemberD(item)">会员{{item.recipe}}</div>
+        <div style="text-align:right;" class="div_width_50 text_right overflow_word" v-if="item.type == 1"  @click="goToMemberD(item)">辟谷套餐</div>
       <!-- </div> -->
       </div>
     </div>
@@ -35,7 +35,7 @@
       该用户不存在
     </div>
     <!-- 按钮 -->
-    <div class="div_display_flex">
+    <div class="div_display_flex" style="position: fixed;bottom: 0; width: 100%;height: 70px;background-color:#ffffff">
       <div
         class="font_color_ff font_size_16 backgroun_color_4A text_center bt_m_o"
         @click="goToNewOrder"
@@ -184,7 +184,7 @@ export default {
   width: 40%;
   margin-left: 7.5%;
   position: fixed;
-  bottom: 8%;
+  /* bottom: 8%; */
 }
 .bt_m_q {
   line-height: 3;
@@ -192,7 +192,7 @@ export default {
   width: 40%;
   margin-left: 52.5%;
   position: fixed;
-  bottom: 8%;
+  /* bottom: 8%; */
 }
 .overflow_word{
   overflow: hidden;
