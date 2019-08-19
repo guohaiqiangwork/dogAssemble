@@ -308,7 +308,8 @@ export default {
             type: "profession",
             data: {
               latitude: item.lat,
-              longitude: item.lng
+              longitude: item.lng,
+              address:item.address
             }
           })
         }

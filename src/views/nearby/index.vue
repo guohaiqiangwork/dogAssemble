@@ -267,8 +267,9 @@ export default {
           obj: JSON.stringify({
             type: "profession",
             data: {
-              latitude: item.lat,
-              longitude: item.lng
+               latitude: item.lat,
+              longitude: item.lng,
+              address:item.address
             }
           })
         }

@@ -296,6 +296,7 @@ export default {
         alert("该数据不存在坐标");
         return;
       }
+      console.log(item)
       this.$router.push({
         name: "Tmap",
         params: {
@@ -303,7 +304,8 @@ export default {
             type: "profession",
             data: {
               latitude: item.lat,
-              longitude: item.lng
+              longitude: item.lng,
+              address:item.address
             }
           })
         }
@@ -496,52 +498,53 @@ export default {
         //                        console.log(res)
         // that.getShopFjStudio()
       });
-    }
+    },
     // 腾讯定位
-    // getMyLocation() {
-    //         var geolocation = new qq.maps.Geolocation("SI5BZ-RTZRQ-2YD52-GAIRP-Z2CBK-7SFIC", "打卡");
-    //         geolocation.getIpLocation(this.showPosition, this.showErr);
-    //     },
-    //     showPosition(position) {
-    //       console.log('腾讯' + JSON.stringify(position) );
-    //       this.latitude = position.lat;
-    //       this.longitude = position.lng;
-    //       this.city = position.city;
-    //       this.mapTX();
-    //     },
-    //     showErr() {
-    //         console.log(
-    //              '定位失败，请稍后重试！'
-    //         );
-    //         // this.$router.back(-1);
-    //         this.getMyLocation();//定位失败再请求定位，测试使用
-    //     },
-    //     mapTX() {
-    //         let that = this;
-    //         // 根据地理位置坐标，展示地图
-    //         TMap().then(qq => {
-    //             var map = new qq.maps.Map(document.getElementById('container'), {
-    //                 //这里经纬度代表进入地图显示的中心区域
-    //                 center: new qq.maps.LatLng(that.latitude,that.longitude),
-    //                 zoom: 15
-    //             });
-    //             var marker = new qq.maps.Marker({
-    //                 map : map,
-    //                 position : new qq.maps.LatLng(that.latitude,that.longitude),
-    //             });
+    getMyLocation() {
+            var geolocation = new qq.maps.Geolocation("SI5BZ-RTZRQ-2YD52-GAIRP-Z2CBK-7SFIC", "打卡");
+            geolocation.getIpLocation(this.showPosition, this.showErr);
+        },
+        showPosition(position) {
+          console.log('腾讯' + JSON.stringify(position) );
+          this.latitude = position.lat;
+          this.longitude = position.lng;
+          this.city = position.city;
+          // this.mapTX();
+           this.getRecommendStoreList(); //获取全国门店数据
+        },
+        showErr() {
+            console.log(
+                 '定位失败，请稍后重试！'
+            );
+            // this.$router.back(-1);
+            this.getMyLocation();//定位失败再请求定位，测试使用
+        },
+        mapTX() {
+            let that = this;
+            // 根据地理位置坐标，展示地图
+            TMap().then(qq => {
+                var map = new qq.maps.Map(document.getElementById('container'), {
+                    //这里经纬度代表进入地图显示的中心区域
+                    center: new qq.maps.LatLng(that.latitude,that.longitude),
+                    zoom: 15
+                });
+                var marker = new qq.maps.Marker({
+                    map : map,
+                    position : new qq.maps.LatLng(that.latitude,that.longitude),
+                });
 
-    //             // 获取当前经纬度对应的地址
-    //             var getAdd = new qq.maps.Geocoder({
-    //                     complete : function(result){
-    //                         console.log('腾讯' + JSON.stringify(result));
-    //                         alert('腾讯' + JSON.stringify(result) )
-    //                         that.address = result.detail.address;
-    //                     }
-    //                 });
-    //             var latLng = new qq.maps.LatLng(that.latitude, that.longitude);
-    //             getAdd.getAddress(latLng);
-    //         })
-    //     }
+                // 获取当前经纬度对应的地址
+                var getAdd = new qq.maps.Geocoder({
+                        complete : function(result){
+                            console.log('腾讯' + JSON.stringify(result));
+                            alert('腾讯' + JSON.stringify(result) )
+                            that.address = result.detail.address;
+                        }
+                    });
+                var latLng = new qq.maps.LatLng(that.latitude, that.longitude);
+                getAdd.getAddress(latLng);
+            })
+        }
   },
   created() {
     settitle("全国门店");
@@ -553,9 +556,9 @@ export default {
 
     // }, timeout);
     // 腾讯地图
-    // this.getMyLocation();
+    this.getMyLocation();
     // 微信
-    this.getSharedBonus();
+    // this.getSharedBonus();
     // 百度
     // this.addressDetail()
     //  document.documentElement.clientHeight -

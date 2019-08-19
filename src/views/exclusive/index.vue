@@ -17,7 +17,7 @@
           >{{myStoreData.distance}}km</div>
         </div>
 	<div class="div_display_flex margin_top_div3">
-          <div class="font_size_16 font_color_10 ex_img_b">
+          <div class="font_size_16 font_color_10 ex_img_b" @click="goToMap(myStoreData)">
             <img src="../../assets/images/1440@2x.png" class="img_width_100">
           </div>
           <div
@@ -115,6 +115,27 @@ export default {
               // alert(result.point.lat + "获取都仅为度");
             }
           });
+        }
+      });
+    },
+    goToMap(item) {
+      console.log(item)
+      if (!item.lat) {
+        alert("该数据不存在坐标");
+        return;
+      }
+      console.log(item)
+      this.$router.push({
+        name: "Tmap",
+        params: {
+          obj: JSON.stringify({
+            type: "profession",
+            data: {
+              latitude: item.lat,
+              longitude: item.lng,
+              address:item.address
+            }
+          })
         }
       });
     },
