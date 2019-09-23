@@ -58,7 +58,7 @@
                   style="border: 1px solid #E6435A; padding: 1%;font-size: 12px;color:#E6435A;"
                 >未开店</span>
               </div>
-              <div class="div_with_30" style="margin-left:10%" v-if="item.type == 1">家庭版</div>
+              <div class="div_with_30" style="margin-left:10%" v-if="item.type == 1">食养家</div>
               <div class="div_with_30" style="margin-left:10%" v-if="item.type == 0">店铺版</div>
             </div>
             <div class="margin_left_div3 margin_top_div2 font_color_A1 font_size_13">{{item.time}}</div>
@@ -98,7 +98,7 @@
                   style="border: 1px solid #E6435A; padding: 1%;font-size: 12px;color:#E6435A;"
                 >未开店</span>
               </div>
-              <div class="div_with_30" style="margin-left:10%" v-if="item.type == 1">家庭版</div>
+              <div class="div_with_30" style="margin-left:10%" v-if="item.type == 1">食养家</div>
               <div class="div_with_30" style="margin-left:10%" v-if="item.type == 0">店铺版</div>
             </div>
             <div class="margin_left_div3 margin_top_div2 font_color_A1 font_size_13">{{item.time}}</div>
@@ -138,7 +138,7 @@
                   style="border: 1px solid #E6435A; padding: 1%;font-size: 12px;color:#E6435A;"
                 >未开店</span>
               </div>
-              <div class="div_with_30" style="margin-left:10%" v-if="item.type == 1">家庭版</div>
+              <div class="div_with_30" style="margin-left:10%" v-if="item.type == 1">食养家</div>
               <div class="div_with_30" style="margin-left:10%" v-if="item.type == 0">店铺版</div>
             </div>
             <div class="margin_left_div3 margin_top_div2 font_color_A1 font_size_13">{{item.time}}</div>

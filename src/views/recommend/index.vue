@@ -202,7 +202,7 @@ export default {
       tempImgs: [],
       recommendList: {
         name: "", //商户名称
-        type: "", //0：店铺果蔬吧，1：家庭果蔬吧）
+        type: "", //0：店铺果蔬吧，1：食养家）
         linkman: "", //联系人
         linkPhone: "", //手机号
         province: "", //省
@@ -226,7 +226,7 @@ export default {
       addressDP: "",
       menu7: {
         menu1: "店铺果蔬吧",
-        menu2: "家庭果蔬吧"
+        menu2: "食养家"
       },
       shopType: ""
     };
@@ -249,7 +249,7 @@ export default {
         this.shopType = "店铺果蔬吧";
       } else {
         this.recommendList.type = 1;
-        this.shopType = "家庭果蔬吧";
+        this.shopType = "食养家";
       }
       console.log(key);
       // console.log('7979')
