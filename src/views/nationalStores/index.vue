@@ -47,7 +47,7 @@
               <div v-if="recommendStoreList[0].state == 2" class="bt_close">已关店</div>
               <div
                 class="div_width_30 margin_right_div2 text_right"
-              >{{recommendStoreList[0].distance}}km</div>
+              >{{recommendStoreList[0].distance}}<span v-if="recommendStoreList[0].distance != '未知'">km</span></div>
             </div>
             <div class="div_display_flex margin_top_div3">
               <div class="div_width_70 margin_left_div2">{{recommendStoreList[0].address}}</div>
@@ -96,7 +96,7 @@
               <div class="div_display_flex margin_top_div3" @click="goToMap(item)">
                 <div class="div_width_70 margin_left_div2 over_hidde">{{item.name}}</div>
                 <div v-if="item.state == 2" class="bt_close">已关店</div>
-                <div class="div_width_30 margin_right_div2 text_right">{{item.distance}}km</div>
+                <div class="div_width_30 margin_right_div2 text_right">{{item.distance}} <span v-if="item.distance != '未知'">km</span> </div>
               </div>
               <div class="div_display_flex margin_top_div3">
                 <div class="div_width_70 margin_left_div2">{{item.address}}</div>
@@ -184,7 +184,8 @@ export default {
       isUnMore1: false,
       isLoading1: false,
       longitude: 0, //经度
-      latitude: 0 //纬度
+      latitude: 0 ,//纬度
+      openIdGet:''
     };
   },
   watch: {
@@ -199,8 +200,13 @@ export default {
     loadTop(item) {
       this.recommendStoreList = [];
       this.page.current = 1;
+      // if(localStorage.getItem("openId") == null){
+      //       this.openIdGet = ''
+      // }else{
+      //   this.openIdGet = localStorage.getItem("openId")  
+      // }
       let _obj = {
-        openId: localStorage.getItem("openId"),
+        openId:  'o5jKe1KIVBQmRKHmuRWYzimVIsoc',
         name: item || "",
         size: this.page.size,
         current: this.page.current,
@@ -226,7 +232,11 @@ export default {
               } else {
                 this.$nextTick(() => {
                   data.obj.forEach(e => {
-                    this.recommendStoreList.push(e);
+                    if(e.distance == null || e.distance == ''){
+                      e.distance = '未知'
+                    }
+                     this.recommendStoreList.push(e);  
+                   
                   });
                 });
               }
@@ -244,8 +254,13 @@ export default {
     },
     loadBottom(item) {
       this.page.current++;
+      // if(localStorage.getItem("openId") == null){
+      //       this.openIdGet = ''
+      // }else{
+      //   this.openIdGet = localStorage.getItem("openId")  
+      // }
       let _obj = {
-        openId: localStorage.getItem("openId"),
+        openId:  'o5jKe1KIVBQmRKHmuRWYzimVIsoc',
         name: item || "",
         size: this.page.size,
         current: this.page.current,
@@ -273,6 +288,9 @@ export default {
               } else {
                 this.$nextTick(() => {
                   data.obj.forEach(e => {
+                     if(e.distance == null || e.distance == ''){
+                      e.distance = '未知'
+                    } 
                     this.recommendStoreList.push(e);
                   });
                 });
@@ -296,7 +314,7 @@ export default {
         alert("该数据不存在坐标");
         return;
       }
-      console.log(item)
+      // alert(JSON.stringify(item))
       this.$router.push({
         name: "Tmap",
         params: {
@@ -358,14 +376,22 @@ export default {
     //获取数据
     getRecommendStoreList(item) {
       //  this.recommendStoreList=[];
+      // this.openIdGet =localStorage.getItem("openId");
+      // if( this.openIdGet  == null){
+      //       this.openIdGet = ''
+      // }else{
+      //   this.openIdGet = localStorage.getItem("openId")  
+      // }
+      
       let _obj = {
-        openId: localStorage.getItem("openId"),
+        openId:'o5jKe1KIVBQmRKHmuRWYzimVIsoc',
         name: item || "",
         size: this.page.size,
         current: this.page.current,
         latitude: this.latitude,
         longitude: this.longitude
       };
+     
       if (this.timer) {
         clearTimeout(this.timer);
       }
@@ -388,6 +414,9 @@ export default {
                   }
 
                   data.obj.forEach(e => {
+                     if(e.distance == null || e.distance == ''){
+                      e.distance = '未知'
+                    } 
                     this.recommendStoreList.push(e);
                   });
                 });
@@ -506,6 +535,7 @@ export default {
         },
         showPosition(position) {
           console.log('腾讯' + JSON.stringify(position) );
+          // alert('腾讯' + JSON.stringify(position) )
           this.latitude = position.lat;
           this.longitude = position.lng;
           this.city = position.city;
@@ -517,6 +547,7 @@ export default {
                  '定位失败，请稍后重试！'
             );
             // this.$router.back(-1);
+            // alert('失败后回调')
             this.getMyLocation();//定位失败再请求定位，测试使用
         },
         mapTX() {
@@ -537,14 +568,41 @@ export default {
                 var getAdd = new qq.maps.Geocoder({
                         complete : function(result){
                             console.log('腾讯' + JSON.stringify(result));
-                            alert('腾讯' + JSON.stringify(result) )
+                            // alert('腾讯' + JSON.stringify(result) )
                             that.address = result.detail.address;
                         }
                     });
                 var latLng = new qq.maps.LatLng(that.latitude, that.longitude);
                 getAdd.getAddress(latLng);
             })
+        },
+        //第一部分
+         // 获取当前位置
+    addressDetail() {
+      //获取地理位置
+
+      var self = this;
+      //全局的this在方法中不能使用，需要重新定义一下
+      var geolocation = new BMap.Geolocation();
+      //调用百度地图api 中的获取当前位置接口
+      geolocation.getCurrentPosition(function(r) {
+        if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+          //获取当前位置经纬度
+          var myGeo = new BMap.Geocoder();
+          myGeo.getLocation(new BMap.Point(r.point.lng, r.point.lat), function(
+            result
+          ) {
+            if (result) {
+              // alert(JSON.stringify(result))
+              self.latitude =  result.point.lat;
+          self.longitude =  result.point.lng;
+          self.city = result.point.city;
+           self.getRecommendStoreList(); //获取全国门店数据
+            }
+          });
         }
+      });
+    }
   },
   created() {
     settitle("全国门店");
@@ -556,11 +614,11 @@ export default {
 
     // }, timeout);
     // 腾讯地图
-    this.getMyLocation();
+    // this.getMyLocation();
     // 微信
     // this.getSharedBonus();
     // 百度
-    // this.addressDetail()
+    this.addressDetail()
     //  document.documentElement.clientHeight -
     //   this.$refs.wrapper.getBoundingClientRect().top;
     // this.getRecommendStoreList(); //获取全国门店
