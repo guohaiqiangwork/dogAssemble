@@ -259,6 +259,10 @@ export default {
       if (this.code == null) {
         this.code = "";
       }
+      if(!this.code){
+       this.$router.push("/login/1");
+        return
+      }
       var data = {
         code: this.code,
         state: ""
@@ -285,7 +289,7 @@ export default {
     this.code = this.getQueryString("code");
     setTimeout(() => {
       this.getOpenId();
-    }, 1000);
+    }, 2000);
   }
 };
 </script>

@@ -450,97 +450,48 @@ export default {
 
     //第一部分
     //定位获得当前位置信息
-    getMyLocation() {
-      var geolocation = new qq.maps.Geolocation(
-        "JPCBZ-I3W64-FDNUH-XRWFO-MQRFZ-ERBWW",
-        "opo"
-      );
-      geolocation.getIpLocation(this.showPosition, this.showErr);
-    },
-    showPosition(position) {
-      console.log(position);
-      this.latitude = position.lat; //唯独
-      this.longitude = position.lng; //进度
-      this.city = position.city;
-      this.getRecommendStoreList(); //获取全国门店
-    },
-    showErr() {
-      console.log("定位失败");
-      this.getMyLocation(); //定位失败再请求定位，测试使用
-    },
-    // 获取地理位置配置
-    getSharedBonus() {
-      this.$fetch
-        .post("/fruits/app/weChat/getWechatConfig", {
-          url: window.location.href.split("#")[0]
-        })
-        .then(
-          data => {
-            if (data.code == 0) {
-              this.wexinGetLog(data.obj);
-            } else {
-              alert(data.msg);
-            }
-          },
-          err => {
-            alert("网络缓慢。。");
-          }
-        );
-    },
-    // 微信获取位置
-    wexinGetLog(data) {
-      let that = this;
-      wx.config({
-        debug: false,
-        appId: data.appId,
-        nonceStr: data.noncestr,
-        timestamp: data.timestamp,
-        signature: data.sign,
-        jsApiList: ["checkJsApi", "openLocation", "getLocation"]
-      });
-      wx.checkJsApi({
-        jsApiList: ["getLocation"],
-        success: function(res) {
-          if (res.checkResult.getLocation == false) {
-            alert(
-              "你的微信版本太低，不支持微信JS接口，请升级到最新的微信版本！"
-            );
-            return;
-          }
-        }
-      });
-      wx.ready(function() {
-        wx.getLocation({
-          success: function(res) {
-            console.log("微信获取" + JSON.stringify(res));
-            that.latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
-            that.longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
-            that.getRecommendStoreList(); //获取全国门店数据
-          },
-          cancel: function(res) {
-            alert("用户拒绝授权获取地理位置");
-            // that.getShopFjStudio()
-          }
-        });
-      });
-      wx.error(function(res) {
-        //                        console.log(res)
-        // that.getShopFjStudio()
-      });
-    },
+    // getMyLocation() {
+    //   var geolocation = new qq.maps.Geolocation(
+    //     "JPCBZ-I3W64-FDNUH-XRWFO-MQRFZ-ERBWW",
+    //     "opo"
+    //   );
+    //   geolocation.getIpLocation(this.showPosition, this.showErr);
+    // },
+    // showPosition(position) {
+    //   alert(position + '看接口接口');
+    //   this.latitude = position.lat; //唯独
+    //   this.longitude = position.lng; //进度
+    //   this.city = position.city;
+    //   this.getRecommendStoreList(); //获取全国门店
+    // },
+    // showErr() {
+    //   console.log("定位失败");
+    //   this.getMyLocation(); //定位失败再请求定位，测试使用
+    // },
     // 腾讯定位
     getMyLocation() {
             var geolocation = new qq.maps.Geolocation("SI5BZ-RTZRQ-2YD52-GAIRP-Z2CBK-7SFIC", "打卡");
+            alert('8797')
             geolocation.getIpLocation(this.showPosition, this.showErr);
         },
         showPosition(position) {
-          console.log('腾讯' + JSON.stringify(position) );
+          alert('腾讯' + JSON.stringify(position) );
           // alert('腾讯' + JSON.stringify(position) )
-          this.latitude = position.lat;
-          this.longitude = position.lng;
-          this.city = position.city;
+          var that = this;
+            var gps = [position.lng, position.lat];
+      AMap.convertFrom(gps, 'gps', function (status, result) {
+        if (result.info === 'ok') {
+          alert(JSON.stringify(result) + '加厚宽松大方很愧疚')
+         var lnglats = result.locations; // Array.<LngLat>
+          that.latitude = lnglats[0].lat;
+          that.longitude = lnglats[0].lng;
+           that.getRecommendStoreList(); //获取全国门店数据
+        }
+        });
+         
+          that.city = position.city;
           // this.mapTX();
-           this.getRecommendStoreList(); //获取全国门店数据
+  
         },
         showErr() {
             console.log(
@@ -602,7 +553,77 @@ export default {
           });
         }
       });
-    }
+    },
+    // 获取地理位置配置
+    getSharedBonus() {
+      this.$fetch
+        .post("/fruits/app/weChat/getWechatConfig", {
+          url: window.location.href.split("#")[0]
+        })
+        .then(
+          data => {
+            if (data.code == 0) {
+              this.wexinGetLog(data.obj);
+            } else {
+              alert(data.msg);
+            }
+          },
+          err => {
+            alert("网络缓慢。。");
+          }
+        );
+    },
+    // 微信获取位置
+    wexinGetLog(data) {
+      let that = this;
+      wx.config({
+        debug: false,
+        appId: data.appId,
+        nonceStr: data.noncestr,
+        timestamp: data.timestamp,
+        signature: data.sign,
+        jsApiList: ["checkJsApi", "openLocation", "getLocation"]
+      });
+      wx.checkJsApi({
+        jsApiList: ["getLocation"],
+        success: function(res) {
+          if (res.checkResult.getLocation == false) {
+            alert(
+              "你的微信版本太低，不支持微信JS接口，请升级到最新的微信版本！"
+            );
+            return;
+          }
+        }
+      });
+      wx.ready(function() {
+        wx.getLocation({
+          success: function(res) {
+          // alert("微信获取" + JSON.stringify(res));
+                var gps = [res.longitude, res.latitude];
+      AMap.convertFrom(gps, 'gps', function (status, result) {
+        if (result.info === 'ok') {
+          // alert(JSON.stringify(result) + '加厚宽松大方很愧疚')
+         var lnglats = result.locations; // Array.<LngLat>
+          that.latitude = lnglats[0].lat;
+          that.longitude = lnglats[0].lng;
+           that.getRecommendStoreList(); //获取全国门店数据
+        }
+        });
+            // that.latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+            // that.longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+            // that.getRecommendStoreList(); //获取全国门店数据
+          },
+          cancel: function(res) {
+            alert("用户拒绝授权获取地理位置");
+            // that.getShopFjStudio()
+          }
+        });
+      });
+      wx.error(function(res) {
+        //                        console.log(res)
+        // that.getShopFjStudio()
+      });
+    },
   },
   created() {
     settitle("全国门店");
@@ -616,9 +637,9 @@ export default {
     // 腾讯地图
     // this.getMyLocation();
     // 微信
-    // this.getSharedBonus();
+    this.getSharedBonus();
     // 百度
-    this.addressDetail()
+    // this.addressDetail()
     //  document.documentElement.clientHeight -
     //   this.$refs.wrapper.getBoundingClientRect().top;
     // this.getRecommendStoreList(); //获取全国门店
